@@ -1,0 +1,43 @@
+.login-form #accounts-container {
+	overflow: hidden;border: 1px solid rgba(204, 204, 204,.4);width: 100%;
+}
+
+.login-form #accounts-container select{
+	width: 100%;border: none;padding: 10px 5px;
+}
+
+.login-form input[type='password'] {
+	box-sizing: border-box;
+}
+
+
+.Login {
+	transition: opacity 2s;
+}
+
+.hideSection{
+	display:none !important;
+}
+
+.highlightNodeGreen {
+    background-color: rgba(123, 255, 0, 0.4) !important;
+    color: #444444 !important;
+}
+
+.welcomeBlock h2 {
+    font-size: 28px;
+    font-weight: 100;
+    margin-bottom: 0px;
+}
+
+.login-main, .login-main h3 {
+	font-weight: 0;
+}
+
+#adminLogin, .primaryButton, .forgotUID{
+	font-weight: bold;
+}
+
+.login-form #accounts-container select {
+    color: grey;
+}

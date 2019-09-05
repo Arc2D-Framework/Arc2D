@@ -1,0 +1,75 @@
+{
+	"table" : "weather-days",
+	"items" : [
+		{
+			"id" : 100,
+			"title" : "Airplane",
+			"genre" : "Comedy",
+			"stock" : "5",
+			"rating" : "3.5"
+        },
+        {
+			"id" : 110,
+			"title" : "Lord Of the Rings",
+			"genre" : "Action",
+			"stock" : "1",
+			"rating" : "5.0"
+        },
+        {
+			"id" : 120,
+			"title" : "Gladiator",
+			"genre" : "Action",
+			"stock" : "4",
+			"rating" : "4.5"
+        },
+        {
+			"id" : 130,
+			"title" : "Grown Ups",
+			"genre" : "Comedy",
+			"stock" : "5",
+			"rating" : "4.1"
+        },
+        {
+			"id" : 140,
+			"title" : "Get Out",
+			"genre" : "Thriller",
+			"stock" : "8",
+			"rating" : "2.5"
+        },
+        {
+			"id" : 150,
+			"title" : "Gone Girl",
+			"genre" : "Thriller",
+			"stock" : "2",
+			"rating" : "1.5"
+        },
+        {
+			"id" : 160,
+			"title" : "Die Hard",
+			"genre" : "Action",
+			"stock" : "5",
+			"rating" : "4.3"
+        },
+        {
+			"id" : 170,
+			"title" : "Blacksheep",
+			"genre" : "Comedy",
+			"stock" : "8",
+			"rating" : "3.0"
+        },
+        {
+			"id" : 180,
+			"title" : "Shallows",
+			"genre" : "Thriller",
+			"stock" : "3",
+			"rating" : "4.5"
+        },
+        {
+			"id" : 190,
+			"title" : "300",
+			"genre" : "Action",
+			"stock" : "6",
+			"rating" : "4.8"
+		}
+	]
+}

@@ -1,0 +1,18 @@
+<template>
+    <style>
+        /* @import url('src/./index.css'); */
+        li.active {
+            background-color:yellow;
+        }
+    </style>
+    <ul>
+        <slot name="generes-label">
+            <li data-genre="All" test="ok">All Genres</li>
+        </slot>
+        ${
+            this.items.map(genre => {
+                return `<li data-genre="${genre}"><x-test attach-shadow="false"><span slot="test">${genre}</span></x-test></li>`
+            }).join('')
+        }
+    </ul>
+</template>

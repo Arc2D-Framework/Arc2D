@@ -1,0 +1,12 @@
+<template>
+    <style>
+        li.active {
+            background-color:yellow;
+        }
+    </style>
+    <div>
+        <H1>DEFAULT TEMPLATE: templates/index.html</H1>
+        <div style="display: inline-block;"><slot name="menu"></slot></div>
+        <div><slot name="screen"></slot></div>
+    </div>
+</template>

@@ -1,0 +1,36 @@
+.SplashScreen{
+	
+}
+
+
+.SplashScreen > #splash-container{
+	display: inline-block;
+	overflow: hidden;
+	position: absolute;
+	-webkit-transform: translate3d(-50%,-50%,0);
+	-ms-transform: translate3d(-50%,-50%,0);
+	-moz-transform: translate3d(-50%,-50%,0);
+	-o-transform: translate3d(-50%,-50%,0);
+	transform: translate3d(-50%,-50%,0);
+	top: 50%;
+	left: 50%;
+	opacity:1;
+	transition: opacity 2.5s;
+}
+
+.SplashScreen > #splash-container #label{
+	font-size: 12px;
+	text-align: center;
+	line-height: 18px;
+	font-weight: normal;
+	display: none;
+}
+
+
+.SplashScreen > #splash-container #splash-logo{
+	background: url(logo.gif);
+	width: 333px;
+	height: 186px;
+	background-size: contain;
+	background-repeat: no-repeat;
+}

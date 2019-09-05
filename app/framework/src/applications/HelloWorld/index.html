@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+        <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
+    	<title>COCOON</title>
+
+
+
+
+
+
+        <!--====================== WEBCOMPONENTS POLYFILL ===================-->
+            <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js"></script>
+        <!--=========================== END INSTALL =========================-->
+
+        <!--====================== COCOON INSTALL ===================-->
+            <!-- <link rel="stylesheet" type="text/css" href="../../../resources/css/font-awesome.min.css"/> -->
+            <!-- <link rel="stylesheet" type="text/css" href="../../../resources/css/fonts.css"/> -->
+      
+            <!-- <script src="../../../resources/constants.js"></script> -->
+            <!-- <script src="../../../resources/session.js" charset="utf-8"></script> -->
+            <!-- <script> Session = top.Session||{State:{}}; </script> -->
+            <!-- <script src="../../../-appconfig.js"></script> -->
+           <!--  <script id="config">
+                // Config.NAMESPACE = "applications.HelloWorld"; 
+                // Config.FILENAME = "bindings.js";//optional - defaults to index.js
+                // Config.DYNAMICLOAD = false;
+            </script> -->
+            <!-- <script src="../../../resources/routes.js"></script> -->
+            <!-- <script src="../../../resources/labels.js"></script> -->
+            <script src="../../../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script> 
+            <!-- <script src="bindings.js" type="module"></script> -->
+        <!--========================= END INSTALL =======================-->
+
+
+    </head>
+
+
+    <body>
+        <application-view src="/src/./templates/sample.html">
+            <movie-menu src="/src/./index.html" slot="menu"></movie-menu>
+            <div slot="screen">screen</div>            
+        </application-view>
+    </body>
+
+</html>

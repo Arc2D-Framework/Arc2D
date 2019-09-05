@@ -1,0 +1,20 @@
+/* Effective stylesheet produced by snapshot save */
+.bwTidWarning { display: none; width: 450px; top: 10px; right: 10px; margin-bottom: 10px; }
+.bwTidContent { background-color: rgb(255, 248, 185); position: relative; padding: 10px; }
+.bwTidIconCell { vertical-align: top; width: 28px; }
+.bwTidIcon { margin: 0px 6px; vertical-align: top; }
+.bwTidIcon img { background-image: url("warning16.png"); height: 16px; width: 16px; background-position: center center; background-repeat: no-repeat; }
+.bwTidMessage a { position: relative; text-decoration: none; color: rgb(0, 102, 153); }
+#warning-block-wfn { background-color: rgb(255, 248, 185); width: 793px; float: right; }
+#warning-block-wfn a:link, #warning-block-wfn a:visited { color: red; text-decoration: none; }
+#warning-title-wfn { padding: 5px; background-color: rgb(192, 192, 192); }
+#browser_warning { background-color: rgb(255, 248, 185); float: right; }
+.bwFxBorderPieceTL { height: 4px; left: -4px; top: -4px; width: 4px; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningTL.gif"); background-position: left top; background-repeat: no-repeat; }
+.bwFxBorderPieceT { height: 4px; left: 0px; top: -4px; width: 100%; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningT.gif"); background-position: center center; background-repeat: repeat-x; }
+.bwFxBorderPieceTR { height: 4px; right: -4px; top: -4px; width: 4px; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningTR.gif"); background-position: right top; background-repeat: no-repeat; }
+.bwFxBorderPieceR { height: 100%; right: -4px; top: 0px; width: 4px; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningR.gif"); background-position: center center; background-repeat: repeat-y; }
+.bwFxBorderPieceBR { bottom: -4px; height: 4px; right: -4px; width: 4px; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningBR.gif"); background-position: right bottom; background-repeat: no-repeat; }
+.bwFxBorderPieceB { bottom: -4px; height: 4px; left: 0px; width: 100%; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningB.gif"); background-position: center center; background-repeat: repeat-x; }
+.bwFxBorderPieceBL { bottom: -4px; height: 4px; left: -4px; width: 4px; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningBL.gif"); background-position: left bottom; background-repeat: no-repeat; }
+.bwFxBorderPieceL { height: 100%; left: -4px; top: 0px; width: 4px; background-image: url("urn:not-loaded:https://workforcenow.adp.com/public/img/warningL.gif"); background-position: center center; background-repeat: repeat-y; }
+.bwFxBorderPiece { display: block; position: absolute; }
