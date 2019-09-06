@@ -37,8 +37,8 @@ Config.ALLOW_RUN_FROM_DISK = false;
 //Shortcuts
 Config.Applications = {
 	SPLASH: "src/applications/SplashScreen/index.html",
-	LOGIN: "src/applications/Login/index.html",
+	// LOGIN: "src/applications/Login/index.html",
 	// MAIN: "src/applications/Home/index.html"
-	MAIN: "src/applications/HelloWorld1/index.html"
+	MAIN: "src/applications/MyApp/index.html"
 };
 

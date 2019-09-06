@@ -142,7 +142,7 @@ namespace("w3c.ui.WebComponent", class extends HTMLElement {
             
             if(/\/*\.html$/.test(tem)){
                 // if(!this.src){this.src=tem}
-                var src=this.src||tem;
+                var src=this.src||tem;//TODO: bug here?
                 var opts = { cache: "force-cache" };
                 src = src.replace("/./", "/" + this.namespace.replace(/\./gim, "/") + "/");
                 this._template = await imports(src, opts);

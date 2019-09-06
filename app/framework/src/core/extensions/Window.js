@@ -1,4 +1,4 @@
-if ("logging" in Config && Config.LOGGING != true) {
+if ("LOGGING" in Config && Config.LOGGING != true) {
     for (var k in console) {
         console[k] = function () { };
     }

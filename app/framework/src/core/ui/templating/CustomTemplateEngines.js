@@ -12,6 +12,10 @@ namespace("core.ui.templating.CustomTemplateEngines", class {
         }
     }
 
+    getEngineByMimeType(mime){
+        return this.engines[mimeType];
+    }
+
     get default (){
         return this.engines[this.defaultMimetype];
     }
