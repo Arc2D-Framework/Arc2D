@@ -4,24 +4,66 @@ namespace("applications.Login", class extends w3c.ui.Application {
     constructor(element){
         super(element);
         window.auth0 = null;
-        this.configureClient();
+        this.start();
+        // window.requireAuth = this.requireAuth;
+        
 
-        window.requireAuth = this.requireAuth;
+        
         // const isAuthenticated = (async ()=> await window.auth0.isAuthenticated())();
+    }
+
+    updateUI(){
+    	alert("updateUI() called")
+    }
+
+    async start(){
+    	debugger;
+    	await this.configureClient();
+    	const isAuthenticated = await window.auth0.isAuthenticated();
+
+    	if (isAuthenticated) {
+    		debugger;
+		    console.log("> User is authenticated");
+		    // window.history.replaceState({}, document.title, window.location.pathname);
+		    this.updateUI();
+		}
+
+		console.log("> User not authenticated");
+		debugger;
+		const query = window.location.search;
+		const shouldParseResult = query.includes("code=") && query.includes("state=");
+
+		if (shouldParseResult) {
+			console.log("> Parsing redirect");
+			try {
+			  const result = await window.auth0.handleRedirectCallback();
+
+			  // if (result.appState && result.appState.targetUrl) {
+			  //   showContentFromUrl(result.appState.targetUrl);
+			  // }
+
+			  console.log("Logged in!");
+			} catch (err) {
+			  console.log("Error parsing redirect:", err);
+			}
+
+			// window.history.replaceState({}, document.title, "/");
+		}
+		this.updateUI();
     }
 
 
 
-    async requireAuth (fn, targetUrl) {
-	  debugger;
-	  const isAuthenticated = await this.auth0.isAuthenticated();
+ //    async requireAuth (fn, targetUrl) {
+	//   debugger;
+	//   const isAuthenticated = await window.auth0.isAuthenticated();
 
-	  if (isAuthenticated) {
-	    return fn();
-	  }
+	//   if (isAuthenticated) {
+	//     return fn();
+	//   }
 
-	  return this.login(targetUrl);
-	}
+	//   return this.login(targetUrl);
+	// }
 
     fetchAuthConfig () {return fetch("/auth_config.json")}
 
