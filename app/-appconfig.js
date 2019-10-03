@@ -17,6 +17,10 @@ Config = {
 	}
 };
 
+
+Config.ENABLE_LOGIN = false;
+Config.ENABLE_SPLASH = false;
+Config.PERSIST_SESSION = false;
 Config.USE_COMPRESSED_BUILD = false;
 Config.FILENAME = "index.*js"
 Config.DYNAMICLOAD = true;
