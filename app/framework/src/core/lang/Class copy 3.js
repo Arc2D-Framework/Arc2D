@@ -19,13 +19,22 @@ import 'src/core/decorators/es7.js';
         return scope[classname];
     };
 
-    var createClass = function(func){
-        try {
-            var proto  = func.prototype;
-                proto.ancestor = proto.__proto__.constructor;
-                try{  func.define(proto) }catch(e){};
-                return func;
-        } catch(e){ return func }
-        return func
+
+    var createClass = function(properties){
+        if(typeof properties == "function"){
+            var proto = properties.prototype;
+            proto.ancestor = proto.__proto__.constructor;
+            if(proto instanceof HTMLElement){
+                properties.define(proto);
+                // var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
+                // if(tag&&/\-/.test(tag)){
+                //     proto["ns-tagname"] = tag;
+                //     window.customElements && window.customElements.define(tag, properties);
+                // }
+                
+            }
+            return properties
+        }
+        return properties
     };
 })(window);

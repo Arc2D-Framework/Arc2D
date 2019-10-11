@@ -6,7 +6,6 @@ Config = window.Config||{
     DYNAMICLOAD:true,
     FILENAME:"index.*js",
     ENABLE_TRANSPILER : true
-
 };
 
 
@@ -26,6 +25,7 @@ import 'src/core/lang/Class.js';
 
 //------------UI-------------
 import 'src/w3c/ui/WebComponent.js';
+import 'src/patches/3.0.1.js';
 import 'src/w3c/ui/Application.js';
 
 //--------BOOTLOADER---------

@@ -1,5 +1,5 @@
 @stylesheets(["/src/./index.css"]);
-@tag("flyout-button");
+// tag("flyout-button");
 namespace("core.ui.FlyoutButton", class extends w3c.ui.WebComponent {
     constructor(){
         super();
@@ -11,13 +11,15 @@ namespace("core.ui.FlyoutButton", class extends w3c.ui.WebComponent {
     }
 
     onClick(e){
-        var isListItem = this.getRealTargetFromEvent(e,"li",".flyout");
-        var isButton   = this.getRealTargetFromEvent(e,"button",".FlyoutButton");
+        var isListItem = this.querySelector("li",e);
+        var isButton   = this.querySelector("button",e);
 
         if(isButton){
+            alert("button clicked")
             this.toggle();
         }
         else if(isListItem){
+            alert("li clicked")
             //alert("You clicked: " + isListItem.innerHTML);
             this.hide();
         } 
@@ -37,7 +39,7 @@ namespace("core.ui.FlyoutButton", class extends w3c.ui.WebComponent {
 
     toggle(){
         this.classList.toggle("open");
-        this.setAttribute("data-name","Jay");
+        this.setAttribute("data-name","test");
         this.dispatchEvent("toggled")
     }
 });

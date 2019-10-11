@@ -22,7 +22,7 @@ namespace('applications.ApplicationContainer', class {
         // Session.StorageManager = core.data.StorageManager;
 
         // this.session = new core.controllers.StorageController;
-debugger;
+
         Session.user = {};//this.session.get("user");
         Session.State.currentLanguage = {};//this.session.get("currentLanguage");
         Cookies.remove('sessionId');
@@ -56,7 +56,7 @@ debugger;
                 this.loadPage(url)
             }
         } else {
-            debugger;
+
             // this.setDefaultSession(); //bypass login step
             this.loadPage(url);
         }

@@ -4,13 +4,13 @@ function stylesheets (target, paths){
 	target.prototype['@stylesheets'] = paths
 }
 
-function css (target, paths){
-	target.prototype['@stylesheets'] = paths
-}
+// function css (target, paths){
+// 	target.prototype['@stylesheets'] = paths
+// }
 
-function html (target, path){
-	target.prototype['@template-uri'] = path
-}
+// function html (target, path){
+// 	target.prototype['@template-uri'] = path
+// }
 
 function traits(target, __traits){
     // Object.assign(target.prototype,args);
@@ -45,11 +45,12 @@ function prop(target,key,val){
 	target.prototype[key] = val;
 }
 
-function loggable(target, params){
+// function loggable(target, params){
 	
-}
+// }
 
 function tag(target, name){
+    if(target.prototype["ns-tagname"]){return}
     window.customElements.define(name, target);
     return;
     /*if(name !=='application-view'){
@@ -69,17 +70,17 @@ function field(target, type, key, val){
 }
 
 
-function matchmedia(target, queryStr, templatePath){
-    console.log("matchmedia target", target)
-    var mql = window.matchMedia(queryStr);
-        mql.addListener(()=>{
-            if(mql.matches){
-                target.prototype.onMediaQueryChanged(mql, templatePath);
-                // target.prototype.onGetTemplatePath = () => templatePath;
-            }
-        });
-        if(mql.matches){
-            target.prototype.onMediaQueryChanged(mql,templatePath);
-        }
+// function matchmedia(target, queryStr, templatePath){
+//     console.log("matchmedia target", target)
+//     var mql = window.matchMedia(queryStr);
+//         mql.addListener(()=>{
+//             if(mql.matches){
+//                 target.prototype.onMediaQueryChanged(mql, templatePath);
+//                 // target.prototype.onGetTemplatePath = () => templatePath;
+//             }
+//         });
+//         if(mql.matches){
+//             target.prototype.onMediaQueryChanged(mql,templatePath);
+//         }
     
-};
+// };

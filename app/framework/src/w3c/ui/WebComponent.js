@@ -2,15 +2,21 @@ import 'src/core/traits/ResourcePathTransformer.js';
 import 'src/core/ui/templating/CustomTemplateEngines.js';
 import 'src/core/ui/templating/TemplateLiterals.js';
 
-@transpile("es7");
-@cascade(true);
 namespace("w3c.ui.WebComponent", class extends HTMLElement {
-
     constructor() {
         super();
         this.__proto = this.constructor.prototype;
         this.root = this.onEnableShadow() ? 
             this.attachShadow({ mode: 'open' }) : this;
+    }
+
+    static define(proto){
+        var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
+        if(/\-/.test(tag)){
+            proto["ns-tagname"] = tag;
+            try{window.customElements && window.customElements.define(tag, this);}
+            catch(e){console.error(e)}
+        }       
     }
 
     setStylesheet () {    
@@ -23,14 +29,18 @@ namespace("w3c.ui.WebComponent", class extends HTMLElement {
     }
 
     //TODO: Revisit how to make it work wihout passing deep flag
-    querySelector(cssSel, deep){
-        return deep ?
+    querySelector(cssSel, e){
+        if(e){
+            return this.getParentNodeFromEvent(e,cssSel)
+        } else {
+        return this.onEnableShadow() ?
             this.root.querySelector(cssSel):
             super.querySelector(cssSel)
+        }
     }
 
     querySelectorAll(cssSel, deep){
-        return deep ?
+        return this.onEnableShadow() ?
             this.root.querySelectorAll(cssSel):
             super.querySelectorAll(cssSel)
     }
@@ -44,13 +54,6 @@ namespace("w3c.ui.WebComponent", class extends HTMLElement {
             var configscript = application.configscript;
             headNode.insertBefore(stylesheet, configscript);
         }
-    }
-
-    animate(className) {
-        this.classList.add("animated", className);
-        setTimeout(() => {
-            this.classList.remove("animated", className);
-        }, 1000)
     }
 
     adopts(orphan) {
@@ -74,7 +77,7 @@ namespace("w3c.ui.WebComponent", class extends HTMLElement {
         var self = this;
         if (typeof el == "string") {
             this.addEventListener(evtName, (e) => {
-                var t = this.getRealTargetFromEvent(e, el);
+                var t = this.getParentNodeFromEvent(e, el);
                 if (t) {
                     handler({
                         target: t,
@@ -90,7 +93,7 @@ namespace("w3c.ui.WebComponent", class extends HTMLElement {
         }
     }
 
-    getParentBySelectorUntil(elem, terminator, selector) {
+    getParentBySelectorUntil(elem, terminator="html", selector) {
         elem = elem || this;
         terminator = terminator||"body";
         var parent_node = null;
@@ -108,7 +111,11 @@ namespace("w3c.ui.WebComponent", class extends HTMLElement {
         return parent_node;
     }
 
-    getRealTargetFromEvent(e, selector, terminator) {
+    // getRealTargetFromEvent(e, selector, terminator) {
+    //     return this.getParentNodeFromEvent(e, selector, terminator)
+    // }
+
+    getParentNodeFromEvent(e, selector, terminator) {
         var el = e.composedPath()[0];
         return this.getParentBySelectorUntil(el, terminator, selector);
     }

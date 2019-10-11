@@ -35,7 +35,7 @@ Config.ENABLE_TRANSPILER = true;
 Config.DEFAULT_TEMPLATE_ENGINE_MIMETYPE = "template/literals";
 Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION = false;//ex: "index.kruntch.html"
 Config.IMPORTS_CACHE_POLICY = "no-store"; //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
-Config.ALLOW_RUN_FROM_DISK = false;
+Config.ALLOW_RUN_FROM_DISK = true;
 
 
 //Shortcuts
