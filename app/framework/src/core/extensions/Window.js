@@ -11,17 +11,21 @@ window.getParameterByName = function (name, url) {
     return match && decodeURIComponent(match[1].replace(/\+/g, " "));
 };
 
+window.toAbsoluteURL = function(url) {
+    const a = document.createElement("a");
+    a.setAttribute("href", url);
+    return a.cloneNode(false).href; 
+}
+
 window.imported_classes = window.imported_classes || {};
 window.imports = async function (x, opts, isError) {
     opts = opts || { cache: Config.IMPORTS_CACHE_POLICY || "no-store" };
     return new Promise(async (resolve, reject) => {
-        // var path = /^https?:/.test(x)? x : Config.ROOTPATH + x;
         var path = x;
         path = path.replace(/^\/+/, Config.ROOTPATH);
-        var error = "Unable to load: " + path;
+        var error = "404 import: " + toAbsoluteURL(path)||path;
 
         if (window.imported_classes[x]) {
-            console.warn("redundant imports to : " + x + " detected");
             resolve(window.imported_classes[x]);
             return;
         }
@@ -36,7 +40,7 @@ window.imports = async function (x, opts, isError) {
             } else {
                 //then()-else{} when ran from server. catch() block never runs
                 var src = await response.text();
-                console.error(error, src);
+                console.error(error);
                 resolve(null);
             }
         } catch (e) {

@@ -1,3 +1,7 @@
-namespace("core.http.ResourceLoader", class {
-    constructor (){ return this; }
-});
+namespace `core.http` (
+	class ResourceLoader {
+    	constructor (){ return this; }
+	}
+);
+
+

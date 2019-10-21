@@ -4,8 +4,9 @@ import '/node_modules/od-storagemanager/storagemanager.js';
 
 
 namespace `applications` (
-    class ApplicationContainer {
-        constructor(element){
+    class AppEnvironment extends w3c.ui.Application{
+        constructor(){
+            super();
             // window.application  = this;
             // this.head           = document.getElementsByTagName("head")[0];
             // this.configscript   = document.querySelector("script[id='config']")||
@@ -24,6 +25,51 @@ namespace `applications` (
 
             // this.session = new core.controllers.StorageController;
 
+            // Session.user = {};//this.session.get("user");
+            // Session.State.currentLanguage = {};//this.session.get("currentLanguage");
+            // Cookies.remove('sessionId');
+
+
+            // this.mainFrame = this.getMainFrame();
+            // this.mainFrame.addEventListener("load", this.onMainFrameLoaded.bind(this), false);
+
+            // // debugger;
+
+            // var url = window.getParameterByName("apppath"); 
+            //     url = (url)?url:Config.Applications.MAIN;
+                
+            // var showLogin = (typeof Config.ENABLE_LOGIN == "boolean") ?
+            //     Config.ENABLE_LOGIN:true;
+            // var showSplash = (typeof Config.ENABLE_SPLASH == "boolean") ?
+            //     Config.ENABLE_SPLASH:true;
+            // var persistSession = (typeof Config.PERSIST_SESSION == "boolean") ?
+            //     Config.PERSIST_SESSION:true;
+
+            
+            // if(showLogin) {
+            //     if(!this.isUserSessionValid() || !persistSession){
+            //         if(showSplash) {
+            //             //redirects to login
+            //             this.loadPage(Config.Applications.SPLASH);
+            //         } else {
+            //             this.loadPage(Config.Applications.LOGIN);
+            //         }
+            //     } else {
+            //         this.loadPage(url)
+            //     }
+            // } else {
+
+            //     // this.setDefaultSession(); //bypass login step
+            //     this.loadPage(url);
+            // }
+        }
+
+        onEnableShadow(){
+            return false
+        }
+
+        onConnected() {
+            this.render();
             Session.user = {};//this.session.get("user");
             Session.State.currentLanguage = {};//this.session.get("currentLanguage");
             Cookies.remove('sessionId');
@@ -82,11 +128,19 @@ namespace `applications` (
             var self=this;
             var win = self.getMainFrame().contentWindow;
             // console.log("win",win)
-            Session.Application = win;
-            Session.Interceptor.setTargetWindow(win);
-            Session.Interceptor.interceptClicks();
+            // Session.Application = win;
+            // Session.Interceptor.setTargetWindow(win);
+            // Session.Interceptor.interceptClicks();
             console.log("Loaded Application: " + win.location.href)
             win.addEventListener("message", self.onPostMessageReceived.bind(self), false);
+
+            window.addEventListener("popstate", function(){
+                console.log("back:",window.location.hash)
+            }, false);
+
+            window.addEventListener("hashchange", function(){
+                alert("hash: " + window.location.hash)
+            }, false);
         }
 
         onPostMessageReceived(){
@@ -95,7 +149,7 @@ namespace `applications` (
 
         getMainFrame(){
             if(Config.ALLOW_RUN_FROM_DISK) {
-                return document.getElementById("mainFrame");
+                return this.querySelector("#mainFrame");
             } else {
                 return window;
             }
@@ -104,7 +158,6 @@ namespace `applications` (
         loadPage  (page){
             var self = this;
             page = this.evalUrl(page);
-
             if(Config.ALLOW_RUN_FROM_DISK) {
                 document.getElementById("mainFrame").src = page; 
             } else {
@@ -120,3 +173,4 @@ namespace `applications` (
         }
     }
 );
+

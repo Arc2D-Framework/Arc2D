@@ -23,6 +23,7 @@ import 'src/core/extensions/Window.js';
 //-----------LIBS------------
 import 'src/core/lang/Class.js';
 
+
 //------------UI-------------
 import 'src/w3c/ui/WebComponent.js';
 import 'src/patches/3.0.1.js';
@@ -30,3 +31,5 @@ import 'src/w3c/ui/Application.js';
 
 //--------BOOTLOADER---------
 import 'src/bootloader.js';
+
+console.log(`🦏 Oros Engine - v${$framework.current}`)

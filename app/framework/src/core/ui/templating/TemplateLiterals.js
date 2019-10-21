@@ -14,7 +14,7 @@
         },
 
         install : function(){
-            console.log("TemplateLiterals template engine installed successfully.")
+            // console.log("TemplateLiterals template engine installed successfully.")
         }
     };
 

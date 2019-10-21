@@ -3,17 +3,9 @@ function transpile(target, level){}
 function stylesheets (target, paths){
 	target.prototype['@stylesheets'] = paths
 }
-
-// function css (target, paths){
-// 	target.prototype['@stylesheets'] = paths
-// }
-
-// function html (target, path){
-// 	target.prototype['@template-uri'] = path
-// }
+window.stylesheets = stylesheets;
 
 function traits(target, __traits){
-    // Object.assign(target.prototype,args);
 	var inheritTraits = function(klass, properties){
         properties = properties.reverse();
         properties.forEach(trait => {
@@ -35,32 +27,28 @@ function traits(target, __traits){
     }
     
 	inheritTraits(target.prototype, __traits);
-}
+};
+window.traits = traits;
 
 function cascade(target,shouldCascade){
 	target.prototype['@cascade'] = shouldCascade;
 }
+window.cascade = cascade;
 
 function prop(target,key,val){
 	target.prototype[key] = val;
 }
+window.prop = prop;
 
-// function loggable(target, params){
-	
-// }
+
 
 function tag(target, name){
-    if(target.prototype["ns-tagname"]){return}
-    window.customElements.define(name, target);
+    target.prototype["ns-tagname"]=name;
+    try{window.customElements.define(name, target);}catch(e){}
     return;
-    /*if(name !=='application-view'){
-        customElements.whenDefined("application-view").then(_=>{
-            window.customElements.define(name, target)
-        })
-    } else {
-        window.customElements.define(name, target)
-    }*/
 }
+window.tag = tag;
+
 
 function field(target, type, key, val){
     target = (type=="static") ? 
@@ -68,19 +56,4 @@ function field(target, type, key, val){
         target.prototype;
     target[key] = val;
 }
-
-
-// function matchmedia(target, queryStr, templatePath){
-//     console.log("matchmedia target", target)
-//     var mql = window.matchMedia(queryStr);
-//         mql.addListener(()=>{
-//             if(mql.matches){
-//                 target.prototype.onMediaQueryChanged(mql, templatePath);
-//                 // target.prototype.onGetTemplatePath = () => templatePath;
-//             }
-//         });
-//         if(mql.matches){
-//             target.prototype.onMediaQueryChanged(mql,templatePath);
-//         }
-    
-// };
+window.field = field;
