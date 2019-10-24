@@ -179,8 +179,12 @@ namespace `w3c.ui` (
                         var slotName = slot.getAttribute('slot');
                         var placeholder = temNode.querySelector(`slot[name="${slotName}"]`);
                         if(placeholder){
-                            placeholder.innerHTML="";
+                            if(!placeholder.getAttribute("append")){
+                                placeholder.innerHTML="";
+                            }
                             placeholder.appendChild(slot)
+                        } else {
+                            temNode.appendChild(slot)
                         }
                     })
                     this.root.innerHTML = "";
@@ -246,9 +250,7 @@ namespace `w3c.ui` (
         getSlots() {
             var nodes = [];
             this.childNodes.forEach(node => {
-                node.nodeType == 1 &&
-                    node.getAttribute("slot") &&
-                    nodes.push(node)
+                node.nodeType == 1 && nodes.push(node)
             })
             return nodes;
         }
