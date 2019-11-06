@@ -4,6 +4,7 @@ import '/node_modules/od-storagemanager/storagemanager.js';
 
 
 namespace `applications` (
+    @stylesheets(["/src/./index.css"]);
     class AppEnvironment extends w3c.ui.Application{
         constructor(){
             super();
@@ -70,8 +71,8 @@ namespace `applications` (
 
         onConnected() {
             this.render();
-            Session.user = {};//this.session.get("user");
-            Session.State.currentLanguage = {};//this.session.get("currentLanguage");
+            // Session.user = {};//this.session.get("user");
+            // Session.State.currentLanguage = {};//this.session.get("currentLanguage");
             Cookies.remove('sessionId');
 
 
@@ -83,42 +84,43 @@ namespace `applications` (
             var url = window.getParameterByName("apppath"); 
                 url = (url)?url:Config.Applications.MAIN;
                 
-            var showLogin = (typeof Config.ENABLE_LOGIN == "boolean") ?
-                Config.ENABLE_LOGIN:true;
-            var showSplash = (typeof Config.ENABLE_SPLASH == "boolean") ?
-                Config.ENABLE_SPLASH:true;
-            var persistSession = (typeof Config.PERSIST_SESSION == "boolean") ?
-                Config.PERSIST_SESSION:true;
+            // var showLogin = (typeof Config.ENABLE_LOGIN == "boolean") ?
+            //     Config.ENABLE_LOGIN:true;
+            // var showSplash = (typeof Config.ENABLE_SPLASH == "boolean") ?
+            //     Config.ENABLE_SPLASH:true;
+            // var persistSession = (typeof Config.PERSIST_SESSION == "boolean") ?
+            //     Config.PERSIST_SESSION:true;
 
             
-            if(showLogin) {
-                if(!this.isUserSessionValid() || !persistSession){
-                    if(showSplash) {
-                        //redirects to login
-                        this.loadPage(Config.Applications.SPLASH);
-                    } else {
-                        this.loadPage(Config.Applications.LOGIN);
-                    }
-                } else {
-                    this.loadPage(url)
-                }
-            } else {
+            // if(showLogin) {
+            //     if(!this.isUserSessionValid() || !persistSession){
+            //         if(showSplash) {
+            //             //redirects to login
+            //             this.loadPage(Config.Applications.SPLASH);
+            //         } else {
+            //             this.loadPage(Config.Applications.LOGIN);
+            //         }
+            //     } else {
+            //         this.loadPage(url)
+            //     }
+            // } else {
 
-                // this.setDefaultSession(); //bypass login step
-                this.loadPage(url);
-            }
+            //     // this.setDefaultSession(); //bypass login step
+            //     this.loadPage(url);
+            // }
+            this.loadPage(url);
         }
 
-        setDefaultSession (){
-            var a = new core.controllers.AccountDataController;//TODO: replace AccountDataController with new Accounts collection
-            var user = a.getUserByRole(Config.DEFAULT_ROLE);
-            Session.user = user;
-            Session.State.currentLanguage = Config.DEFAULT_LANG;//Constants.Languages.EN_US;
-            if(Config.PERSIST_SESSION){
-                this.session.set("currentLanguage", Session.State.currentLanguage);
-                this.session.set("user", Session.user);
-            }
-        }
+        // setDefaultSession (){
+        //     var a = new core.controllers.AccountDataController;//TODO: replace AccountDataController with new Accounts collection
+        //     var user = a.getUserByRole(Config.DEFAULT_ROLE);
+        //     Session.user = user;
+        //     Session.State.currentLanguage = Config.DEFAULT_LANG;//Constants.Languages.EN_US;
+        //     if(Config.PERSIST_SESSION){
+        //         this.session.set("currentLanguage", Session.State.currentLanguage);
+        //         this.session.set("user", Session.user);
+        //     }
+        // }
 
         isUserSessionValid(){
             return true;
@@ -134,13 +136,13 @@ namespace `applications` (
             console.log("Loaded Application: " + win.location.href)
             win.addEventListener("message", self.onPostMessageReceived.bind(self), false);
 
-            window.addEventListener("popstate", function(){
-                console.log("back:",window.location.hash)
-            }, false);
+            // window.addEventListener("popstate", function(){
+            //     console.log("back:",window.location.hash)
+            // }, false);
 
-            window.addEventListener("hashchange", function(){
-                alert("hash: " + window.location.hash)
-            }, false);
+            // window.addEventListener("hashchange", function(){
+            //     alert("hash: " + window.location.hash)
+            // }, false);
         }
 
         onPostMessageReceived(){

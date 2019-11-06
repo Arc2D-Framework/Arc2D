@@ -3,10 +3,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta http-equiv="Content-Security-Policy" content="
-            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
-            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
-            style-src   'self' 'unsafe-inline' *">
+        <meta http-equiv="Content-Security-Policy" content="default-src https://codepush.azurewebsites.net 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,17 +15,16 @@
         <script src="-appconfig.js" charset="utf-8"></script>
         <script id="config">
             Config.ROOTPATH = "./";
-            Config.NAMESPACE = "applications.MainApp"
+            Config.NAMESPACE = "applications.LoginApp"
         </script>    
-        <script src="https://cdn.auth0.com/js/lock/11.18.1/lock.min.js"></script>
+        <script src="https://cdn.auth0.com/js/auth0-spa-js/1.0/auth0-spa-js.production.js"></script>
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
     </head>
 
     <body>
-        <main-app>
-            <movie-menu src="/src/./index.html"></movie-menu>
-            <movies-list src="/src/./index.html"></movies-list>
-        </main-app>
+        <login-app>
+            <button id="login-btn">Login</button>
+        </login-app>
     </body>
 
     <!-- <body>

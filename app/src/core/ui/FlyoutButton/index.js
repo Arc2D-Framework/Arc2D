@@ -1,6 +1,5 @@
 
 namespace `core.ui` (
-    @tag("flyout-button");
     @stylesheets(["/src/./index.css"]);
     class FlyoutButton extends w3c.ui.WebComponent {
         constructor(){

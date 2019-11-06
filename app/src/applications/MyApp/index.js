@@ -2,7 +2,7 @@ import '/src/core/ui/FlyoutButton/index.js';
 import '/node_modules/od-import-polyfill/import.js';
 import '/src/core/ui/Test/index.js';
 import {myExport} from "/src/modules/test.mjs";
-
+import '/framework/src/core/http/Router.js'
 
 namespace `applications` (
     class MyApp extends w3c.ui.Application {
@@ -11,9 +11,9 @@ namespace `applications` (
             this.mutations = [];
             // myExport()
             // require("/src/modules/test.mjs").then(res => res.myExport());
-            // this.router = new core.http.Router(this,window);
-            document.addEventListener("keyup", (e) => this.onKeyUp(e), false);
-            this.setupMutationObserver();
+            this.router = new core.http.Router(this,window);
+            // document.addEventListener("keyup", (e) => this.onKeyUp(e), false);
+            // this.setupMutationObserver();
         }
 
 
@@ -70,11 +70,11 @@ namespace `applications` (
             }
         }
 
-        // onDisplayActivity(c){
-        //     var slot = this.querySelector('div[slot="screen"]');
-        //     slot.innerHTML="";
-        //     slot.appendChild(c);
-        // }
+        onDisplayActivity(c){
+            var slot = this.querySelector('div[slot="screen"]');
+            slot.innerHTML="";
+            slot.appendChild(c);
+        }
 
         onEnableShadow(){
             return false
@@ -85,5 +85,3 @@ namespace `applications` (
         }
     }
 );
-
-alert("asd")

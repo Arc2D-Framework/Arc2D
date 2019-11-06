@@ -1,22 +1,25 @@
 
-@stylesheets(["/src/./index.css"]);
-@tag("activity-service");
-namespace('activities.Services', class extends w3c.ui.WebComponent {
-    constructor() {
-        super();
-        this.src = "/src/./index.html";
-    }
 
-    onConnected() {
-        this.render();
-        this.addEventListener("click", (e)=> this.onClick(e), false)
-    }
+namespace `activities` (
+    @stylesheets(["/src/./index.css"]);
+    @tag("activity-service");
+    class Services extends w3c.ui.WebComponent {
+        constructor() {
+            super();
+            this.src = "/src/./index.html";
+        }
 
-    onClick (e){
-        alert(e)
-    }
+        onConnected() {
+            this.render();
+            // this.addEventListener("click", (e)=> this.onClick(e), false)
+        }
 
-    onEnableShadow() {
-        return false;
+        onClick (e){
+            alert(e)
+        }
+
+        onEnableShadow() {
+            return false;
+        }
     }
-});
+);
