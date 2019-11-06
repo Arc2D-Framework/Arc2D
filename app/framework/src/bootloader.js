@@ -3,7 +3,7 @@ import 'src/core/http/ModuleLoader.js';
 
 document.addEventListener("DOMContentLoaded", e => {
   async function bootup() {
-    var ns = Config.NAMESPACE||resolveNs();
+    var ns = Config.NAMESPACE||resolveNs()||'applications.AppEnvironment';
     if (Config.DYNAMICLOAD) {
       var filename_path = (
         Config.SRC_PATH + (ns.replace(/\./g, "/"))  + "/" + Config.FILENAME
@@ -20,8 +20,9 @@ document.addEventListener("DOMContentLoaded", e => {
 
   function  resolveNs() {
     var nsPath = location.href.split(Config.SRC_PATH)[1];
-    var parts = nsPath.split("/");
-    return `${parts[0]}.${parts[1]}`
+    var parts  = nsPath?nsPath.split("/"):null;;
+        parts  = !parts||parts.length <=0?null:`${parts[0]}.${parts[1]}`;
+    return parts;
   }
 
   function init(ns) {

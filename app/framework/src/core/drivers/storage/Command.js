@@ -4,9 +4,11 @@
  * mongo or local storage because of common api. This 
  * device is handy during testing.
  */
-namespace('core.drivers.storage.Command', class {
-    constructor (){
-        
-    }
-});
+namespace `core.drivers.storage` (
+	class Command {
+	    constructor (){
+	        
+	    }
+	}
+);
  

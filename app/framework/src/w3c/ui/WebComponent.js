@@ -47,7 +47,12 @@ namespace `w3c.ui` (
 
         appendStyleSheet(stylesheet) {
             if(this.onEnableShadow()){
-                this.root.host.appendChild(stylesheet)
+                var style = new CSSStyleSheet();
+                debugger;
+                style.replace(stylesheet.innerText);
+                // document.adoptedStyleSheets = [style];
+                // this.root.host.appendChild(stylesheet);
+                this.root.adoptedStyleSheets = [style]
             }
             else {
                 var headNode = application.head;
@@ -191,11 +196,14 @@ namespace `w3c.ui` (
                 }
                 this.root.innerHTML = "";
                 this.root.appendChild(temNode);
-                this.dispatchEvent("rendered")
+                // this.dispatchEvent("rendered");
+                this.onTemplateRendered();
             }
         }
 
 
+        onTemplateRendered(){}
+        
         static get observedAttributes() {
             return ['src'];
         }
@@ -243,16 +251,17 @@ namespace `w3c.ui` (
             this.setPrototypeInstance();
             this.setStyleDocuments();
             this.onConnected();
-            this.dispatchEvent("connected")
+            // this.dispatchEvent("connected")
         }
 
 
         getSlots() {
-            var nodes = [];
+            /*var nodes = [];
             this.childNodes.forEach(node => {
                 node.nodeType == 1 && nodes.push(node)
             })
-            return nodes;
+            return nodes;*/
+            return Array.from(this.children)
         }
 
 
@@ -315,12 +324,13 @@ namespace `w3c.ui` (
                         tag.setAttribute("rel",  'stylesheet');
                         tag.setAttribute("href",  path);
                         tag.setAttribute("component", this.namespace);
-                        this.appendStyleSheet(tag);
+                        // this.appendStyleSheet(tag);
                         stylesheets[path] = tag;
                         if(tagName == "style"){
                             var _cssText = await window.imports(path);
                                 _cssText = self.cssTransform(_cssText);
                                 self.setCssTextAttribute(_cssText, tag);
+                                self.appendStyleSheet(tag);
                                 self.onStylesheetLoaded(tag);
                         }
                 }

@@ -1,7 +1,5 @@
-
-
-
-namespace("applications.LoginOauth2", class extends core.Application {
+namespace `applications` (
+  class LoginOauth extends core.Application {
     constructor(model,element){
         super(model,element);
         // Session.Interceptor.disable();
@@ -125,4 +123,5 @@ namespace("applications.LoginOauth2", class extends core.Application {
         this.loginStatus.innerHTML = "Welcome back: " + userProfile.nickname;
         this.loginStatus.style.backgroundImage = "url(" + userProfile.picture + ")"
       }
-})
+  }
+)

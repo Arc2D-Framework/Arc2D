@@ -23,88 +23,88 @@
  * and handle synchronization when the app comes on line
  * again.
  */
-namespace('core.drivers.storage.StorageInterface', class {
-    // '@traits' : [new Observer],
+namespace `core.drivers.storage` (
+    class StorageInterface {
+        constructor (collection, storage_device){
+            storage_device = storage_device||collection.device_driver
+            console.log("storage device",[collection,storage_device])
+            if(NSRegistry[storage_device]){
+                this.device = new NSRegistry[storage_device];
+                this.device.setCollection(collection.classname);
+            } else {
+                console.error(this.namespace+" - storage device: " + storage_device + " is not defined")
+            }
 
-    constructor (collection, storage_device){
-        storage_device = storage_device||collection.device_driver
-        console.log("storage_device",storage_device)
-        if(NSRegistry[storage_device]){
-            this.device = new NSRegistry[storage_device];
-            this.device.setCollection(collection.classname);
-        } else {
-            console.error(this.namespace+" - storage_device: " + storage_device + " is not defined")
+            this.collection = collection;
+            // collection.add = this.add.bind(this);
+            // collection.find = this.find.bind(this);
+            // collection.remove = this.remove.bind(this);
+            // collection.push = this.push.bind(this);
+            // collection.all = this.all.bind(this);
+            // collection.sort = collection.sort||this.sort.bind(this);
         }
 
-        this.collection = collection;
-        collection.add = this.add.bind(this);
-        collection.find = this.find.bind(this);
-        collection.remove = this.remove.bind(this);
-        // collection.push = this.push.bind(this);
-        collection.all = this.all.bind(this);
-        // collection.sort = collection.sort||this.sort.bind(this);
-    }
-
-    // sort: function(attrb, order, cb){
-    //     var self=this;
-    //     this.device.sort(attrb, order, cb);
-    // },
+        // sort: function(attrb, order, cb){
+        //     var self=this;
+        //     this.device.sort(attrb, order, cb);
+        // },
 
 
-    // push: function(obj,cb){
-    //     var self=this;
-    //     this.device.add(obj, (result, error)=>{
-    //         self.collection.dispatchEvent("changed", result, self);
-    //         cb(result, error);
-    //     })
-    // },
+        // push: function(obj,cb){
+        //     var self=this;
+        //     this.device.add(obj, (result, error)=>{
+        //         self.collection.dispatchEvent("changed", result, self);
+        //         cb(result, error);
+        //     })
+        // },
 
 
-    add(obj,cb){
-        var self=this;
-        this.device.add(obj, (result, error)=>{
-            self.collection.dispatchEvent("changed", result, self);
-            cb(result, error);
-        })
-    }
-
-    async remove(obj,cb){
-        var self=this;
-        return new Promise((resolve,reject) =>{
-            self.device.remove(obj, (result, error)=>{
-                // result = new self.collection.constructor(...result);
-                // self.collection.splice(0);
-                // self.collection.push(...result);
-                // self.collection.dispatchEvent("find", result, self);
-                cb && cb(result, error);
-                resolve(result, error)
+        add(obj,cb){
+            var self=this;
+            this.device.add(obj, (result, error)=>{
+                self.collection.dispatchEvent("changed", result, self);
+                cb(result, error);
             })
-        })
-    }
+        }
 
-    async find(cb,query){
-        var self=this;
-        return new Promise((resolve,reject) =>{
-            self.device.find((result, error)=>{
-                // result = new self.collection.constructor(...result);
-                // self.collection.splice(0);
-                // self.collection.push(...result);
-                // self.collection.dispatchEvent("find", result, self);
-                cb && cb(result, error);
-                resolve(result, error)
-            },query)
-        })
-    }
-
-    async all(cb){
-        var self=this;
-        return new Promise((resolve,reject) =>{
-            self.device.find((result, error)=>{
-                self.collection.dispatchEvent("all", result, self);
-                cb && cb(result, error);
-                resolve(result, error)
+        async remove(obj,cb){
+            var self=this;
+            return new Promise((resolve,reject) =>{
+                self.device.remove(obj, (result, error)=>{
+                    // result = new self.collection.constructor(...result);
+                    // self.collection.splice(0);
+                    // self.collection.push(...result);
+                    // self.collection.dispatchEvent("find", result, self);
+                    cb && cb(result, error);
+                    resolve(result, error)
+                })
             })
-        })
-    }
+        }
 
-});
+        async find(cb,query){
+            var self=this;
+            return new Promise((resolve,reject) =>{
+                self.device.find((result, error)=>{
+                    // result = new self.collection.constructor(...result);
+                    // self.collection.splice(0);
+                    // self.collection.push(...result);
+                    // self.collection.dispatchEvent("find", result, self);
+                    cb && cb(result, error);
+                    resolve(result, error)
+                },query)
+            })
+        }
+
+        async all(cb){
+            var self=this;
+            return new Promise((resolve,reject) =>{
+                self.device.find((result, error)=>{
+                    self.collection.dispatchEvent("all", result, self);
+                    cb && cb(result, error);
+                    resolve(result, error)
+                })
+            })
+        }
+
+    }
+);
