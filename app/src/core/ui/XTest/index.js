@@ -1,9 +1,8 @@
 
 namespace `core.ui` (
-    @tag("x-test");
     @cascade(true);
     @stylesheets(["/src/./index.css"]);
-    class Sample extends w3c.ui.WebComponent{
+    class XTest extends w3c.ui.WebComponent{
         constructor() {
             super();
 
@@ -37,7 +36,7 @@ namespace `core.ui` (
 
         template(){ return `
             <template>
-                <b>slot: <slot name="test"></slot></b>
+                <b><slot name="test"></slot></b>
             </template>
         `}
 

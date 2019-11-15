@@ -10,10 +10,12 @@ namespace `w3c.ui` (
                 this.attachShadow({ mode: 'open' }) : this;
         }
 
-        static define(proto){
+        static define(proto,bool){
             var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
             if(/\-/.test(tag)){
                 proto["ns-tagname"] = tag;
+                this.defineAncestors();
+                this.defineAncestralClassList();
                 try{window.customElements && window.customElements.define(tag, this);}
                 catch(e){console.error(e)}
             }       
@@ -47,12 +49,16 @@ namespace `w3c.ui` (
 
         appendStyleSheet(stylesheet) {
             if(this.onEnableShadow()){
-                var style = new CSSStyleSheet();
-                debugger;
-                style.replace(stylesheet.innerText);
-                // document.adoptedStyleSheets = [style];
-                // this.root.host.appendChild(stylesheet);
-                this.root.adoptedStyleSheets = [style]
+                try{
+                    var style = new CSSStyleSheet();
+                    style.replace(stylesheet.innerText);
+                    this.root.adoptedStyleSheets = [stylesheet]
+                } catch(e){
+                    console.error(`${e.message} Unable to adopt stylesheet 
+                        into shadow dom -- ${this.namespace}#appendStyleSheet(), 
+                        see: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690.
+                        As a workaround, @import the css from within <template>`)
+                }
             }
             else {
                 var headNode = application.head;
@@ -78,10 +84,10 @@ namespace `w3c.ui` (
 
 
         //TODO: refactor to return a Binding that can be enabled/disabled.
-        bind(el, evtName, handler, bool=false) {//previously bool not accepted
+        bind(el, evtName, handler, bool=false) {
             var self = this;
             if (typeof el == "string") {
-                this.addEventListener(evtName, (e) => {
+                this.addEventListener(evtName, e => {
                     var t = this.getParentNodeFromEvent(e, el);
                     if (t) {
                         handler({
@@ -92,9 +98,9 @@ namespace `w3c.ui` (
                             stopPropagation: () => e.stopPropagation
                         });
                     }
-                }, bool);//previously bool=true
+                }, bool);
             } else {
-                el.addEventListener(evtName, handler, bool);//previously bool=false
+                el.addEventListener(evtName, handler, bool);
             }
         }
 
@@ -149,10 +155,9 @@ namespace `w3c.ui` (
                 var tem  =  this.querySelector("template")||    //node
                             this.src||                          //uri
                             this.template()||                   //string
-                            "/src/./templates/index.html"       //default
+                            "/src/./index.html"                 //default
                 
                 if(/\/*\.html$/.test(tem)){
-                    // if(!this.src){this.src=tem}
                     var src=this.src||tem;//TODO: bug here?
                     var opts = { cache: "force-cache" };
                     src = src.replace("/./", "/" + this.namespace.replace(/\./gim, "/") + "/");
@@ -183,26 +188,45 @@ namespace `w3c.ui` (
                     this.slots.forEach(slot => {
                         var slotName = slot.getAttribute('slot');
                         var placeholder = temNode.querySelector(`slot[name="${slotName}"]`);
-                        if(placeholder){
-                            if(!placeholder.getAttribute("append")){
+                        if( placeholder){
+                            if(!placeholder.hasAttribute("append")){
                                 placeholder.innerHTML="";
                             }
-                            placeholder.appendChild(slot)
-                        } else {
-                            temNode.appendChild(slot)
                         }
+                        (placeholder||temNode).appendChild(slot)
                     })
-                    this.root.innerHTML = "";
                 }
                 this.root.innerHTML = "";
                 this.root.appendChild(temNode);
-                // this.dispatchEvent("rendered");
-                this.onTemplateRendered();
+                this.onTemplateRendered(temNode);
             }
         }
 
+        async connectedCallback() {
+            if( this._is_connected){return;}
+            this._is_connected=true;
+            var html = await this.loadTemplate();
+            this.onTemplateLoaded();
 
-        onTemplateRendered(){}
+        }
+
+        onTemplateLoaded() {
+            this.slots = this.getSlots();
+            this.setClassList();
+            this.setPrototypeInstance();
+            this.setStyleDocuments();
+            this.onConnected();
+        }
+
+
+        getSlots() {
+            return Array.from(this.children)
+        }
+
+
+        onTemplateRendered(){
+            this.initializeChildComponents();
+        }
         
         static get observedAttributes() {
             return ['src'];
@@ -217,7 +241,7 @@ namespace `w3c.ui` (
         }
 
         onEnableShadow() {
-            return this.getAttribute('attach-shadow') != 'false';
+            return this.hasAttribute('shadow');
         }
 
         attachShadow(options) {
@@ -237,34 +261,6 @@ namespace `w3c.ui` (
         }
 
 
-        async connectedCallback() {
-            if( this._is_connected){return;}
-            this._is_connected=true;
-            var html = await this.loadTemplate();
-            this.onTemplateLoaded();
-
-        }
-
-        onTemplateLoaded() {
-            this.slots = this.getSlots();
-            this.setClassList();
-            this.setPrototypeInstance();
-            this.setStyleDocuments();
-            this.onConnected();
-            // this.dispatchEvent("connected")
-        }
-
-
-        getSlots() {
-            /*var nodes = [];
-            this.childNodes.forEach(node => {
-                node.nodeType == 1 && nodes.push(node)
-            })
-            return nodes;*/
-            return Array.from(this.children)
-        }
-
-
         cssStyle(){return ""}
 
         setStyleDocuments() {
@@ -272,75 +268,58 @@ namespace `w3c.ui` (
             this.setStylesheet();
         }
 
+        static defineAncestors(){
+            this.ancestors=[];
+            var a=this;
+            while(a && this.ancestors.push(a)){
+                a = a.prototype.ancestor;
+            }
+        }
+
+        static defineAncestralClassList(){
+            this.prototype.classes = [];
+            for(let ancestor of this.ancestors){
+                var proto = ancestor.prototype;
+                if( proto['@cascade']||ancestor==this){
+                    this.prototype.classes.unshift(proto.classname)
+                } else { break }
+            }
+        }
+
+        setClassList() {
+            this.className += this.className + (" " + this.constructor.prototype.classes.join(" ")).trim()
+        }
+
         getStyleSheets() {
-            var ancestor = this.ancestor;
-            var classes = [];
-            var ancestors = [];
-            var stylesheets = [];
-
-            if (this["@cascade"]) {
-                while (ancestor) {
-                    var p = ancestor.prototype;
-                    var styles = p["@stylesheets"] || [];
-                    ancestors.unshift(ancestor);
-                    for (var i = 0; i <= styles.length - 1; i++) {
-                        stylesheets.push(this.relativeToAbsoluteFilePath(styles[i], p.namespace, false));
-                    }
-                    ancestor = p["@cascade"] ?
-                        p.ancestor : null;
-                };
-            }
-
-            var this_styles = this["@stylesheets"] || [];
-            for (var i = 0; i <= this_styles.length - 1; i++) {
-                stylesheets.unshift(this.relativeToAbsoluteFilePath(this_styles[i], this.namespace, false));
-            }
-            return stylesheets;
+            return (this["@stylesheets"]||[]).reverse();
         }
 
 
 
 
-
-        async loadcss(url) {
-            var self = this;
-            var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets || {};
-            if (stylesheets[url]) {
-                self.onStylesheetLoaded(stylesheets[url]);
-                return;
-            }
-            var styles = (url || this["@stylesheets"]);
-
-            if (styles) {
-                if (styles instanceof Array) {
-                    styles = styles.reverse();
-                    styles.forEach(path => this.loadcss(path))
-                }
-                else if (typeof styles === "string"){
-                    var path = styles;
+        async loadcss(urls) {
+            urls=urls.reverse();
+            var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
+            for(let path of urls){
+                if(!stylesheets[path]){
                     var tagName = /^http/.test(path) ? "link" : "style";
                     var tag = document.createElement(tagName);
                         tag.setAttribute("type", 'text/css');
                         tag.setAttribute("rel",  'stylesheet');
                         tag.setAttribute("href",  path);
                         tag.setAttribute("component", this.namespace);
-                        // this.appendStyleSheet(tag);
                         stylesheets[path] = tag;
-                        if(tagName == "style"){
+                        if(tagName.toLowerCase() == "style"){
                             var _cssText = await window.imports(path);
-                                _cssText = self.cssTransform(_cssText);
-                                self.setCssTextAttribute(_cssText, tag);
-                                self.appendStyleSheet(tag);
-                                self.onStylesheetLoaded(tag);
+                                _cssText = this.cssTransform(_cssText);
+                                this.setCssTextAttribute(_cssText, tag);
+                                this.onStylesheetLoaded(tag);
                         }
-                }
-                else {
-                    try { console.warn("Unable to resolve path to stylesheet. Invalid uri: '" + styles + "'") } catch (e) { }
+                        this.appendStyleSheet(tag);
                 }
             }
-            else { }
-
         }
+
 
         template(){return null}
 
@@ -359,60 +338,24 @@ namespace `w3c.ui` (
             this.prototype = this;
         }
 
-        setClassList() {
-            var classes = [];
-            if (this['@cascade'] == true) {
-                var ancestor = this.ancestor;
-                while (ancestor && ancestor.prototype['@cascade'] == true) {
-                    var proto = ancestor.prototype;
-                    classes.unshift(proto.classname)
-                    ancestor = proto.ancestor;
-                    if (!ancestor || ancestor == HTMLElement) {
-                        break;
-                    }
-                }
-            }
-            classes.push(this.classname);
-            var newClsName = this.className + (" " + classes.join(" "));
-            this.className = newClsName.trim();
-        }
-
 
         resourcepath(url, ns){
             url = url.replace(/\$\{ns\}/gm, ns.replace(/\./gim,"/"));
             return Config.ROOTPATH + url;
         }
-        
-        relativeToAbsoluteFilePath(path, ns, appendRoot){
-            ns = ns||this.namespace;
-            ns = ns.replace(/\./gim,"/");
-            if(path.indexOf("/./") >= 0){
-                path = path.replace("./", ns+"/");
-            } 
-            path = /http:/.test(path)? path : path.replace("//","/");
-            return path;
+
+        initializeChildComponents (el){
+            el = el||this;
+            var self=this;
+            var nodes = this.querySelectorAll("*");
+                nodes = [].slice.call(nodes);
+                nodes.forEach(n => {
+                    if(n && n.nodeType == 1) { 
+                        var tag = n.tagName.toLowerCase();
+                        var c = window.registered_tags[tag];
+                        c&&c.define(c.prototype,true);
+                    }
+                })
         }
-
-        // initializeChildComponents (el){
-        //     el = el||this;
-        // 	var self=this;
-        //     var nodes = this.querySelectorAll("*[namespace]");
-        //         nodes = [].slice.call(nodes);
-        //         nodes.forEach(n => {
-        //             if(n && n.nodeType == 1) { 
-        //                 var ns = n.getAttribute("namespace");
-        //                 var c = NSRegistry[ns];
-        //                 c && new c(n);
-        //             }
-        //         })
-        // }
-
-
     }
 );
-
-
-transpile(w3c.ui.WebComponent, 'es7');
-// traits(w3c.ui.WebComponent, [
-//     core.traits.ResourcePathTransformer
-// ]);

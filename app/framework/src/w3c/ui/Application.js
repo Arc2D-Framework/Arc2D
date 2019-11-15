@@ -10,5 +10,11 @@ namespace `w3c.ui` (
 	        this.configscript   = document.querySelector("script[id='config']")||
 	                              document.querySelector("script");
 	    }
+
+
+	    static define(proto, bool=true){
+            super.define(proto,bool);      
+        }
+
 	}
 );

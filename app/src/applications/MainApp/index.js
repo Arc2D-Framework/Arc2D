@@ -1,14 +1,13 @@
 import '/src/applications/ProtectedApplication/index.js';
 
 import '/src/core/data/Movies.js';
-import '/src/core/ui/Menu/index.js';
+import '/src/core/ui/MovieMenu/index.js';
 import '/src/core/ui/MoviesList/index.js';
 import '/src/core/ui/AuthoAvatar/index.js';
 
 namespace `applications` (
 	@cascade(true);
-    @tag("main-app");
-    class MainApp extends applications.ProtectedApplication {
+    class MainApp extends w3c.ui.Application {
         constructor(element){
             super(element);
 
@@ -19,14 +18,9 @@ namespace `applications` (
             this.addEventListener("moviedeleted", (e)=>this.onMovieDeleted(e), false);
         }
 
-        onEnableShadow(){
-            return false;
-        }
-
+        
         onConnected() {
-        	super.onConnected();
             this.render();
-
         }
 
         async onGenreChanged(e){

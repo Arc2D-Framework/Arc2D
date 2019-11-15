@@ -10,20 +10,31 @@
         <title>Cocoon Framework</title>
 
        
-        <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js"></script>
+        
         <script type="text/javascript" src="cordova.js"></script>
         <script src="-appconfig.js" charset="utf-8"></script>
         <script id="config">
             Config.ROOTPATH = "./";
             Config.NAMESPACE = "applications.LoginApp"
         </script>    
-        <script src="https://cdn.auth0.com/js/auth0-spa-js/1.0/auth0-spa-js.production.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth.css" />
+
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
     </head>
 
     <body>
         <login-app>
+            <test-protected namespace="core.ui.TestProtected"></test-protected>
             <button id="login-btn">Login</button>
+            <button id="logout-btn">Log Out</button>
+
+            <div id="firebaseui-auth-container"></div>
+            <div id="sign-in-status"></div>
+            <div id="sign-in"></div>
+            <div id="account-details"></div>
         </login-app>
     </body>
 

@@ -23,9 +23,6 @@ namespace `core.ui` (
 			}
 		}
 
-		onEnableShadow() {
-            return false
-        }
 
         onConnected(){
             // this.render({items:[]})

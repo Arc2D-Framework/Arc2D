@@ -13,29 +13,23 @@
         <title>Cocoon Framework</title>
 
        
-        <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js"></script>
+        <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.3.0/webcomponents-loader.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script src="-appconfig.js" charset="utf-8"></script>
         <script id="config">
             Config.ROOTPATH = "./";
             Config.NAMESPACE = "applications.MainApp"
         </script>    
-        <script src="https://cdn.auth0.com/js/lock/11.18.1/lock.min.js"></script>
+        
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
     </head>
 
     <body>
         <main-app>
-            <movie-menu src="/src/./index.html"></movie-menu>
-            <movies-list src="/src/./index.html"></movies-list>
+            <movie-menu  slot="menu">
+                <li slot="generes-label" data-genre="All">All Categories</li>
+            </movie-menu>
+            <movies-list slot="listings"></movies-list>
         </main-app>
     </body>
-
-    <!-- <body>
-        <app-environment>
-            <template>
-                <iframe id="mainFrame"></iframe>
-            </template>
-        </app-environment>
-    </body> -->
 </html>

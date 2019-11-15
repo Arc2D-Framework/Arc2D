@@ -3,14 +3,6 @@ import 'src/core/decorators/es7.js';
 ; (function(env) {
     env.NSRegistry = env.NSRegistry||{};
     
-    // env.namespace = function(ns, def={}){
-    //     var k = def.prototype||def;
-    //         k.namespace = ns;
-    //         k.classname = ns.match(/\.?([a-zA-Z0-9\_]*)$/)[1];
-    //     env.NSRegistry[ns] = createNS(ns,createClass(def||{}));
-    //     return env.NSRegistry[ns]
-    // };
-
     env.namespace = function(ns){
         ns = ns[0];
         return function(...defs){

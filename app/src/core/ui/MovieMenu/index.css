@@ -1,11 +1,15 @@
-.Menu {
+.MovieMenu{
+	background:blue;
+}
+
+.MovieMenu {
     float: left;
     padding-right: 30px;
 }
 
-.Menu ul {
+.MovieMenu ul {
     margin: 0;
 }
-.Menu li.active {
+.MovieMenu li.active {
     background-color:yellow;
 }

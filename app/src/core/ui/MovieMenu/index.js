@@ -1,25 +1,26 @@
 import '/src/core/data/Movies.js';
-
+import '/src/core/ui/XTest/index.js';
+import '/src/core/ui/ManagedComponent/index.js';
 
 namespace `core.ui` (
-    @stylesheets(["/src/./index.css"]);
-    @tag("movie-menu");
-    class Menu extends w3c.ui.WebComponent{
+    @stylesheets(["http://localhost:3000/src/core/ui/MovieMenu/index.css"]);
+    class MovieMenu extends core.ui.ManagedComponent{
         constructor (element){
             super(element);
+            // alert("MovieMenu: "+ application.namespace)
         }
 
         onConnected(){
             this.bind("li", "click", (e) => this.onClick(e), false);
-            this.movies = new core.data.Movies;
             this.onRenderGenres();
         }
 
         async onRenderGenres(){
+            this.movies = new core.data.Movies;
             var cursor = await this.movies.find();
             var all_genres = cursor.map(movie => movie.genre);
             var only_unique_genres = [...new Set(all_genres)];//Set() filters out duplicates.
-            this.render({items : only_unique_genres})
+            this.render({items : only_unique_genres});
         }
 
         onEnableShadow() {

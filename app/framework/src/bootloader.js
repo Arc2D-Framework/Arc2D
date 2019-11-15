@@ -30,39 +30,6 @@ document.addEventListener("DOMContentLoaded", e => {
     (/\bApplicationContainer\b/.test(ns) && ac) ? new ac(document) : void(null)
   }
 
-  // async function importPolyfill(){
-  //   // var configSrc = await window.imports("../../../-appconfig.js");//.then(res => console.log(res))
-  //   /*var head   = document.querySelector("#config");
-  //   head.innerText = configSrc + "\n" + head.innerText;
-  //   console.log(head);
-  //   return true;*/
-  //   var head   = document.querySelector("title");
-  //   var script = document.createElement("script");
-  //   // script.setAttribute("type", "text/javascript");
-  //   script.src = "https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js";
-  //   head.insertAdjacentElement("afterend",script);
-  //   console.log(script);
-  //   return script;
-  // }
-
-  // async function importConfig(){
-  //   var configSrc = await window.imports("../../../-appconfig.js");//.then(res => console.log(res))
-  //   /*var head   = document.querySelector("#config");
-  //   head.innerText = configSrc + "\n" + head.innerText;
-  //   console.log(head);
-  //   return true;*/
-  //   var head   = document.querySelector("title");
-  //   var script = document.createElement("script");
-  //   script.setAttribute("type", "text/javascript");
-  //   script.setAttribute("id", "config");
-  //   script.setAttribute("charset", (Config.CHARSET || "utf-8"));
-  //   script.text = configSrc;
-  //   head.insertAdjacentElement("afterend",script);
-  //   console.log(script);
-  //   return script;
-  // }
-
-
   ("cordova" in window) ? 
     document.addEventListener('deviceready', ()=>{
       AndroidFullScreen.immersiveMode(function () { }, function () { });

@@ -80,31 +80,3 @@ Ecmascript6ClassTranspiler.prototype.transipleClassFields = function (ns, src) {
     }
     return fullsrc;
 }
-// Ecmascript6ClassTranspiler.prototype.Build = async function (_code, cb) {
-//     _code = this.transpile(_code);
-//     var self = this;
-//     var finished = false;
-//     var reg = /^(?:\/\/\=\s*require|import\W|\#+include\W)\s*[\'\"]{1}([^\'\"]*)[\'\"]{1}\;/im;
-
-//     while (reg.test(_code)) {
-//         var s = "";
-//         var ns_or_path = _code.match(reg)[1];
-
-//         if (/\.js|\.mjs$/.test(ns_or_path)) {
-//             if (/\.mjs$/.test(ns_or_path)) {
-//                 _code = `(()=>{ ${_code} })()`;
-//             }
-//             if (window.imported_classes[ns_or_path]) {
-//                 s = /\.mjs$/.test(ns_or_path)
-//                     ? window.imported_classes[ns_or_path]
-//                     : ";";
-//             } else {
-//                 s = await this.imports(ns_or_path);
-//             }
-//         } 
-//         s = s ? this.transpile(s) : "";
-//         _code = _code.replace(reg, s);
-//     }
-//     cb(_code);
-// }
-
