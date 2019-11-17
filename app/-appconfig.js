@@ -17,10 +17,10 @@ Config = {
 	}
 };
 
-
-Config.ENABLE_LOGIN = false;
-Config.ENABLE_SPLASH = false;
-Config.PERSIST_SESSION = false;
+Config.NAMESPACE = "applications.MainApp";
+// Config.ENABLE_LOGIN = false;
+// Config.ENABLE_SPLASH = false;
+// Config.PERSIST_SESSION = false;
 Config.USE_COMPRESSED_BUILD = false;
 Config.FILENAME = "index.*js"
 Config.DYNAMICLOAD = true;
@@ -35,8 +35,8 @@ Config.ENABLE_TRANSPILER = true;
 Config.DEFAULT_TEMPLATE_ENGINE_MIMETYPE = "template/literals";
 Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION = false;//ex: "index.kruntch.html"
 Config.IMPORTS_CACHE_POLICY = "no-store"; //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
-Config.ALLOW_RUN_FROM_DISK = true;
-Config.RUN_IN_IFRAME_SANBOX = true;
+// Config.ALLOW_RUN_FROM_DISK = true;
+// Config.RUN_IN_IFRAME_SANBOX = true;
 
 //Shortcuts
 Config.Applications = {

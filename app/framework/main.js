@@ -1,11 +1,12 @@
 Session = top.Session||{State:{}};
 Config = window.Config||{
     SRC_PATH:"src/",
-    ROOTPATH : "../../../",
+    ROOTPATH : "./",
     LOGGING:true,
     DYNAMICLOAD:true,
     FILENAME:"index.*js",
-    ENABLE_TRANSPILER : true
+    ENABLE_TRANSPILER : true,
+    NAMESPACE : "applications.MainApp"
 };
 
 
