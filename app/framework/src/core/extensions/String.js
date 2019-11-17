@@ -2,7 +2,7 @@
 if(!String.prototype.toDomElement){
     String.prototype.toDomElement = function(){
       var n = document.createRange().createContextualFragment(this.toString())
-      if(!n) {console.error("#toDomElement() - Error parsing html",this.toString())}
+      // if(!n) {console.error("#toDomElement() - Error parsing html",this.toString())}
       return n.firstElementChild;
     }
 };
