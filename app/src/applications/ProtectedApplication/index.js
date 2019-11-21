@@ -1,6 +1,5 @@
 
 namespace `applications` (
-	@cascade(true);
     class ProtectedApplication extends w3c.ui.Application {
         constructor(element){
             super(element);

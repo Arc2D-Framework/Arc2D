@@ -3,7 +3,7 @@ import '/src/core/ui/XTest/index.js';
 import '/src/core/ui/ManagedComponent/index.js';
 
 namespace `core.ui` (
-    @stylesheets(["http://localhost:3000/src/core/ui/MovieMenu/index.css"]);
+    @stylesheets(["/src/./index.css"]);
     class MovieMenu extends core.ui.ManagedComponent{
         constructor (element){
             super(element);

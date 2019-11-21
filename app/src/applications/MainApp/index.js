@@ -5,7 +5,6 @@ import '/src/core/ui/MoviesList/index.js';
 import '/src/core/ui/AuthoAvatar/index.js';
 
 namespace `applications` (
-	@cascade(true);
     class MainApp extends w3c.ui.Application {
         constructor(element){
             super(element);
