@@ -7,29 +7,47 @@ namespace `core.http` (
         constructor (){
             super();
             this.es6Transpiler = new Ecmascript6ClassTranspiler();
+            window.run=this.run.bind(this);
             return this;
+        }
+
+        run(src,_namespace,output,filepath){
+            this.build(src, output => {
+                var head   = document.getElementsByTagName("head").item(0);
+                var script = document.createElement("script");
+                script.setAttribute("type", "text/javascript");
+                script.setAttribute("charset", (Config.CHARSET || "utf-8"));
+                script.text = output;
+                head.appendChild(script);
+                // if(NSRegistry[_namespace]) {
+                //     var data = {Class: NSRegistry[_namespace], source: output, path: filepath};
+                //     cb?cb(data):null;
+                // } else {
+                //     console.error("core.http.ClassLoader#cbSuccess() - Problem while checking loaded namespace: ", [_namespace,filepath,output])
+                // }
+            });
         }
 
         async load (_namespace,filepath, cb) {
             var self=this;
             var self = this;
             var src;
-            var cbSuccess = function(src){
-                self.build(src, output => {
-                    var head   = document.getElementsByTagName("head").item(0);
-                    var script = document.createElement("script");
-                    script.setAttribute("type", "text/javascript");
-                    script.setAttribute("charset", (Config.CHARSET || "utf-8"));
-                    script.text = output;
-                    head.appendChild(script);
-                    if(NSRegistry[_namespace]) {
-                        var data = {Class: NSRegistry[_namespace], source: output, path: filepath};
-                        cb?cb(data):null;
-                    } else {
-                        console.error("core.http.ClassLoader#cbSuccess() - Problem while checking loaded namespace: ", [_namespace,filepath,output])
-                    }
-                });
-            };
+            // var cbSuccess = function(src){
+            //     self.build(src, output => {
+            //         var head   = document.getElementsByTagName("head").item(0);
+            //         var script = document.createElement("script");
+            //         script.setAttribute("type", "text/javascript");
+            //         script.setAttribute("charset", (Config.CHARSET || "utf-8"));
+            //         script.text = output;
+            //         head.appendChild(script);
+            //         if(NSRegistry[_namespace]) {
+            //             var data = {Class: NSRegistry[_namespace], source: output, path: filepath};
+            //             cb?cb(data):null;
+            //         } else {
+            //             console.error("core.http.ClassLoader#cbSuccess() - Problem while checking loaded namespace: ", [_namespace,filepath,output])
+            //         }
+            //     });
+            // };
 
             var cfFailure = function(src, xhr){
                 cb?cb(xhr):null;
@@ -45,7 +63,7 @@ namespace `core.http` (
             //           await es6Transpiler.imports(paths_to_try[1],false);
             // }
 
-            src?cbSuccess(src):cfFailure(src,"no xhr");   
+            src?this.run(src):cfFailure(src,"no xhr");   
         }
 
 
