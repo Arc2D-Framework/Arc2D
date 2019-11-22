@@ -7,12 +7,14 @@ import '/node_modules/od-mingo/dist/mingo.min.js';
  * device is handy during testing.
  */
 namespace `core.drivers.storage` (
-    class Memory {
-        constructor (){
+    class Memory extends core.drivers.storage.StorageInterface {
+        constructor (collection, storage_device){
+            super(collection, storage_device);
             if(!('mingo' in window)) { 
                 console.error(this.namespace + " requires npm mingo to be installed. The storage device will still work but mongo-style queries will be ignored.");
             }
             Session.State.db = Session.State.db||{};
+            this.setCollection(collection.classname);
         }
 
         setCollection (name){
@@ -39,7 +41,6 @@ namespace `core.drivers.storage` (
         }
 
         remove(query, cb){
-            debugger;
             query = new mingo.Query(query||{});
             let cursor = query.find(this.collection);
             // var res = this.collection;//just hand back all

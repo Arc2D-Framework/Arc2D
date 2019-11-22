@@ -9,17 +9,16 @@ namespace `core.data` (
     class Collection extends Array {
         @public subscribers   = {};
         @public observations  = [];
-        // public device_driver = "core.drivers.storage.LocalStorage";
 
         constructor (driver,...items){
             super(...items);
-            this.device_driver=driver||"core.drivers.storage.Memory";
-            this.addEventListener("changed", (e)=> this.onStorageChanged(e), false);
-            try{
-                (async () => await this.setStorageDevice())()
-            } catch(e){
-                console.log("Error in " +this.namespace +"#setStorageDevice() - " + e.message,e)
-            }
+            (async _ => await this.setStorage(driver) )();
+        }
+
+        async setStorage(driverNS){
+            this.device_driver=driverNS;
+            this.interface = new NSRegistry[driverNS](this)
+            await this.seed(this.seeds);
         }
 
         async remove(obj,cb){
@@ -33,8 +32,12 @@ namespace `core.data` (
         }
 
         async find(cb,query){
-            var results = await this.interface.find(cb,query);
-            return results;
+            return new Promise((resolve,reject) =>{
+                this.interface.find((result, error)=>{
+                    cb && cb(result, error);
+                    resolve(result, error)
+                },query)
+            })
         }
 
         async all(cb){
@@ -42,14 +45,9 @@ namespace `core.data` (
             return results;
         }
 
-        async setStorageDevice(){
-            this.interface = this.storage;
-            await this.seed(this.seeds);
-        }
-
-        get storage(){
-            return new core.drivers.storage.StorageInterface(this);
-        }
+        // get storage(){
+        //     return new core.drivers.storage.StorageInterface(this);
+        // }
 
         skip(num){
             this._skip = num;
@@ -95,10 +93,8 @@ namespace `core.data` (
         }
 
 
-        onStorageChanged(e){
-            // alert("storage changed");
-            // console.log("storage changed",e)
-        }
+        onStorageChanged(e){}
+
 
         setData (name,data){
             if(data && data.items){
@@ -107,8 +103,6 @@ namespace `core.data` (
                     // this.constructor.prototype.push(obj)
                 }
             }
-            // this.table = name;
-            // application.db[name] = data;
         }
 
         isSeedable(){
@@ -124,7 +118,7 @@ namespace `core.data` (
             uri = uri || this.CONFIG;
             if(!this.constructor.prototype.loaded || force){
                 this.constructor.prototype.loaded=true;
-                var self=this;
+                /*var self=this;
                     params=params||{};
                     var oReq = new XMLHttpRequest();
                     oReq.overrideMimeType("text/plain");
@@ -134,44 +128,30 @@ namespace `core.data` (
                             }
                         });
                         oReq.open("GET", uri.dev, false);
-                        oReq.send();
-                    // await fetch(uri.dev)
-                    //     .then(async response => this.onDataReceived(await response.json(), null))
-                    //     .catch(error => console.log("Error in " +this.namespace +"#seed():\n",error))
+                        oReq.send();*/
+
+
+                //TODO:
+                //fetch vs. xhr(above snippet)...why wasn't this just fetch in 1st place?
+                await fetch(uri[Config.ENVIRONMENT]) 
+                    .then(async res => this.onDataReceived(await res.json(), null))
+                    .catch(e => console.log("Error in " +this.namespace +"#seed():\n", e))
+                    .finally(_ => this.dispatchEvent("loaded", {controller: this}, this))
             } else {
                 this.dispatchEvent("loaded", {controller: this}, this);
             }
         }
 
-        // onDownloaded (r, responseText){
-        //     try{
-        //         try{
-        //             var _data = JSON.parse(responseText);
-        //         }
-        //         catch(e) {
-        //             console.error(e.message, e);
-        //         }
-        //         if(_data){
-        //             this.onDataReceived(_data, r);
-        //         }
-        //     }
-        //     catch(e){
-        //         console.error(e.message,responseText)
-        //     }
-        // }
-
         onDataReceived (_data, xhr){
             var self=this;
             _data = this.onInitializeModelDataObjects(_data);
             this.setData(_data.table, _data);
-            this.find((res) => {
-                // this.paginator = new core.traits.Paginator({
-                //     data : res,
-                //     pageSize : 3,
-                //     currentPage:0
-                // });
+
+            //TODO: 
+            //why was below snippet finding for no reason? commented.
+            /*this.find((res) => {
                 this.dispatchEvent("loaded", {controller: this}, this);
-            });
+            });*/
         }
 
         getPaginator (size,cpage){
@@ -199,9 +179,7 @@ namespace `core.data` (
         }
 
         onDownloadFailure (r, responseText){
-            //alert("error downloading " + this.namespace + " data");
             console.error("onDownloadFailure(): ", responseText)
         }
-
     }
 );

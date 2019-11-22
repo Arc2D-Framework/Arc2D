@@ -1,6 +1,7 @@
 Session = top.Session||{State:{}};
 Config = window.Config||{
     SRC_PATH:"src/",
+    ENVIRONMENT:"prod",
     ROOTPATH : "./",
     LOGGING:true,
     DYNAMICLOAD:true,

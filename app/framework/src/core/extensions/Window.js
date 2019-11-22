@@ -17,6 +17,12 @@ window.toAbsoluteURL = function(url) {
     return a.cloneNode(false).href; 
 }
 
+//ex, classof `core.drivers.storage.Memory`;
+window.classof = function(ns){
+    return NSRegistry[ns];
+}
+
+
 window.imported_classes = window.imported_classes || {};
 window.imports = async function (x, opts, isError) {
     opts = opts || { cache: Config.IMPORTS_CACHE_POLICY || "no-store" };
