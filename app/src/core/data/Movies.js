@@ -1,4 +1,4 @@
-import '/resources/routes.js';
+import '/resources/repositories.js';
 import '/framework/src/core/data/Repository.js';
 
 
@@ -6,7 +6,7 @@ import '/framework/src/core/data/Repository.js';
 namespace `core.data` (
 	class Movies extends core.data.Repository {
 		@public device_driver = "core.drivers.storage.LocalStorage";
-		@public seeds = ROUTES.DATA.MOVIES;
+		@public seeds = REPOSITORIES.MOVIES; /*see: app/resources/repositories.js*/
 	}
 );
 
