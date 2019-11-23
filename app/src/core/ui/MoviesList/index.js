@@ -6,8 +6,7 @@ namespace `core.ui` (
 	class MoviesList extends w3c.ui.WebComponent {
 		constructor(el){
 			super(el);
-			//the application -> fires 'movieschanged' with cursor
-			this.movies = new core.data.Movies;
+			//the application -> fires 'movieschanged' with db cursor
 			document.addEventListener("movieschanged", (e)=>this.onMoviesChanged(e), false);
 			this.bind("th", "click", (e)=> this.onColumClicked(e), false);
 			this.bind("#previous", "click", (e)=> this.onPrevious(e), false);
@@ -17,16 +16,14 @@ namespace `core.ui` (
 
 		async onDelete(e){
 			var id = e.target.getAttribute("data-id");
-			var o = await this.movies.remove({_id:id});
+			var o = await core.data.Movies.remove({_id:id});
 			if(o){
 				this.dispatchEvent("moviedeleted", o);
 			}
 		}
 
 
-        onConnected(){
-            // this.render({items:[]})
-        }
+        onConnected(){}
 
 		onColumClicked(e){
 			var col = e.target.getAttribute("name");

@@ -7,7 +7,6 @@ namespace `core.ui` (
     class MovieMenu extends core.ui.ManagedComponent{
         constructor (element){
             super(element);
-            // alert("MovieMenu: "+ application.namespace)
         }
 
         onConnected(){
@@ -16,8 +15,7 @@ namespace `core.ui` (
         }
 
         async onRenderGenres(){
-            this.movies = new core.data.Movies;
-            var cursor = await this.movies.find();
+            var cursor = await core.data.Movies.find();
             var all_genres = cursor.map(movie => movie.genre);
             var only_unique_genres = [...new Set(all_genres)];//Set() filters out duplicates.
             this.render({items : only_unique_genres});

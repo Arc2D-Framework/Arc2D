@@ -16,27 +16,6 @@ namespace `core.drivers.storage` (
         }
 
         remove(query, cb) {
-            /*this.find(res => {
-                if(res){
-                    res.forEach(item => {
-                        var xhr = new XMLHttpRequest();
-                        xhr.addEventListener("readystatechange", function () {
-                        if (this.readyState === 4) {
-                            if(this.status == 200){
-                                cb(item);
-                            } else{
-                                console.error("unable to remove", this)
-                            }
-                        }
-                        });
-                        xhr.open("DELETE", "https://testing-a837.restdb.io/rest/"+this.collection_name + "/${item._id}", false);
-                        xhr.setRequestHeader("content-type", "application/json");
-                        xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
-                        xhr.setRequestHeader("cache-control", "no-cache");
-                        xhr.send(data);
-                    });
-                }
-            }, query)*/
             var xhr = new XMLHttpRequest();
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {

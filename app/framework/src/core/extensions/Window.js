@@ -16,7 +16,7 @@ window.toAbsoluteURL = function(url) {
     a.setAttribute("href", url);
     return a.cloneNode(false).href; 
 }
-
+//TDOD: Not returning what i expected, a class ref
 //ex, classof `core.drivers.storage.Memory`;
 window.classof = function(ns){
     return NSRegistry[ns];

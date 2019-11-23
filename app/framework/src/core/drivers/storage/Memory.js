@@ -2,17 +2,18 @@ import '/framework/src/core/drivers/storage/Cursor.js';
 import '/node_modules/od-mingo/dist/mingo.min.js';
 
 /**
- * @desc Device for simulating a NoSQL database such as
- * mongo or local storage because of common api. This 
- * device is handy during testing.
+ * @desc Device for simulating a NoSQL database using
+   local memory. Good for development/testing, not for
+   use in prod env.
  */
 namespace `core.drivers.storage` (
-    class Memory extends core.drivers.storage.StorageInterface {
+    class Memory extends core.drivers.storage.IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
             if(!('mingo' in window)) { 
                 console.error(this.namespace + " requires npm mingo to be installed. The storage device will still work but mongo-style queries will be ignored.");
             }
+            console.log(`${this.namespace} created`)
             Session.State.db = Session.State.db||{};
             this.setCollection(collection.classname);
         }
@@ -37,7 +38,7 @@ namespace `core.drivers.storage` (
             var c = new core.drivers.storage.Cursor(cursor)
             // cb(c,null);
             cb(c,null)
-            console.log("Memory#find cursor", cursor)
+            // console.log("Memory#find cursor", cursor)
         }
 
         remove(query, cb){

@@ -19,6 +19,7 @@ namespace `core.data` (
             this.device_driver=driverNS;
             this.interface = new NSRegistry[driverNS](this)
             await this.seed(this.seeds);
+            console.log(this.namespace + " using ", this.interface)
         }
 
         async remove(obj,cb){

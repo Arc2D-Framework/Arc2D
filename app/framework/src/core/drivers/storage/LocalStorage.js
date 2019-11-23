@@ -7,9 +7,11 @@ import '/node_modules/od-mingo/dist/mingo.min.js';
  * a mongodb-like api interface.
  */
 namespace `core.drivers.storage`(
-    class LocalStorage {
-        constructor (){
+    class LocalStorage extends core.drivers.storage.IStorageInterface {
+        constructor (collection, storage_device){
+            super(collection, storage_device);
             this.constructor.prototype.pocket = this.constructor.prototype.pocket||new Pocket();
+            this.setCollection(collection.classname);
         }
 
         setCollection (name){
