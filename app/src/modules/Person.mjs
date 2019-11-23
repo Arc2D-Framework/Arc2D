@@ -1,23 +1,23 @@
-/*export let Person = namespace("Person", class {
-    constructor(){
-        alert("new person created")
-    }
-});*/
-
-/*namespace("Person", class {
-    constructor(){
-        alert("new person created")
-    }
-});*/
-
+/*
+THIS IS POSSIBLE:
+export let Person = namespace `core.things` (
+	class Person {
+	    constructor(){
+	        alert("new person created")
+	    }
+	}
+)
+*/
 
 
-// Default export
+
+
+// THIS TOO
 export default () => {
   console.log('Hi from the default export!');
 };
 
-// Named export `doStuff`
+// AND THIS, named export `doStuff`
 export const doStuff = () => {
   console.log('Doing stuff…');
 };
