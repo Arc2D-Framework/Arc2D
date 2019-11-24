@@ -16,7 +16,8 @@ namespace `core.ui` (
 
 		async onDelete(e){
 			var id = e.target.getAttribute("data-id");
-			var o = await core.data.Movies.remove({_id:id});
+			var rev_id = e.target.getAttribute("data-rev-id");
+			var o = await core.data.Movies.remove({_id:id, _rev:rev_id});
 			if(o){
 				this.dispatchEvent("moviedeleted", o);
 			}

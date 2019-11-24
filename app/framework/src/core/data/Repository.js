@@ -3,6 +3,7 @@ import '/framework/src/core/drivers/storage/IStorageInterface.js';
 import '/framework/src/core/drivers/storage/RestDB.js';
 import '/framework/src/core/drivers/storage/LocalStorage.js';
 import '/framework/src/core/drivers/storage/Memory.js';
+import '/framework/src/core/drivers/storage/CouchDB.js';
 
 
 namespace `core.data` (
@@ -25,6 +26,18 @@ namespace `core.data` (
             return results;
         }
 
+        static async remove(query,cb){
+            return new Promise((resolve,reject) =>{
+                this.IRequestStorage.remove((result, error)=>{
+                    cb && cb(result, error);
+                    resolve(result, error)
+                },query)
+            })
+            return
+            // var results = await this.IRequestStorage.remove(query);
+            // return results;
+        }
+
 
         static async find(cb,query){
             return new Promise((resolve,reject) =>{
@@ -40,16 +53,10 @@ namespace `core.data` (
         }
 
 
-        static onDataReceived (_data, xhr){
+        static onDataReceived (data, xhr){
             var self=this;
-            _data = this.onInitializeModelDataObjects(_data);
-            this.setData(_data.table, _data);
-
-            //TODO: 
-            //why was below snippet finding for no reason? commented.
-            /*this.find((res) => {
-                this.dispatchEvent("loaded", {controller: this}, this);
-            });*/
+            data = this.onInitializeModelDataObjects(data);
+            this.setData(data.table, data);
         }
 
         static setData (name,data){

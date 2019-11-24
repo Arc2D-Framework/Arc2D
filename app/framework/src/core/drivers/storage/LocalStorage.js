@@ -14,6 +14,10 @@ namespace `core.drivers.storage`(
             this.setCollection(collection.classname);
         }
 
+        isSeedingEnabled(){
+            return true;
+        }
+
         setCollection (name){
             this.collection = this.pocket.collection(name)
         }

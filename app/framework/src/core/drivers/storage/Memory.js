@@ -13,9 +13,12 @@ namespace `core.drivers.storage` (
             if(!('mingo' in window)) { 
                 console.error(this.namespace + " requires npm mingo to be installed. The storage device will still work but mongo-style queries will be ignored.");
             }
-            console.log(`${this.namespace} created`)
             Session.State.db = Session.State.db||{};
             this.setCollection(collection.classname);
+        }
+
+        isSeedingEnabled(){
+            return true;
         }
 
         setCollection (name){
