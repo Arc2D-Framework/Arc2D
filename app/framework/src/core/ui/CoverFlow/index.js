@@ -21,7 +21,6 @@ namespace("core.ui.CoverFlow", class extends w3c.ui.WebComponent {
         this.rotation = 0;
         this.rotation = Math.round( this.rotation / this.theta ) * this.theta;
 
-        // this.rotateFaces.bind(this).delay(.3);
         this.rotateFaces()
 
         this.btnLeft = this.querySelector("#move-left-btn");
@@ -54,8 +53,7 @@ namespace("core.ui.CoverFlow", class extends w3c.ui.WebComponent {
 
         for(var i=0; i<=this.faces.length-1; i++){
             var face = this.faces[i];
-            face.style[this.transform] = this.rotateFn + "(" + (i*this.theta) + "deg) translateZ(" + this.tz + "px)";
-            //face.setAttribute("angle", (i*this.theta).toFixed(0))            
+            face.style[this.transform] = this.rotateFn + "(" + (i*this.theta) + "deg) translateZ(" + this.tz + "px)";           
         }
         
         this.rotateCarousel();

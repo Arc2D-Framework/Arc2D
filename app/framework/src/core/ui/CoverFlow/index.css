@@ -79,21 +79,34 @@
 } 
 
 .CoverFlow #carousel .tile .item {
-  display: flex;
+    display: flex;
     flex-direction: column;
     text-align: center;
+    height: 100%;
 }
 .CoverFlow #carousel div .item .photo {
     display: block;
-    /*height: 100%;*/
+    height: 100%;
     margin: auto;
-    width: 75%;
+    position: absolute;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
   }
 
 .CoverFlow #carousel div .item .emp-info {
     font-size: 10px;
     margin: 7px auto auto;
-    /*width: 100px;*/
+    z-index: 10;
+    background: white;
+    position: absolute;
+    margin: 2px;
+    bottom: 0;
+    border-radius: 1px;
+    right: 26px;
+    left: 0;
+    min-height: 26px;
+    right: 0;
 }
 
 .CoverFlow #carousel div .item .emp-position {

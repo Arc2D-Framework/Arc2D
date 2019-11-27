@@ -1,9 +1,7 @@
-//mport '/src/core/drivers/storage/HttpCursor.js';
-import '/framework/src/core/drivers/storage/Command.js';
 import '/framework/src/core/drivers/storage/Cursor.js';
 
 /**
- * @desc Device for interfacing with (http://restdb.io) NoSQL database.
+ * @desc Driver for interfacing with CouchDB NoSQL database.
  */
 namespace `core.drivers.storage` (
     class CouchDB extends core.drivers.storage.IStorageInterface{
@@ -22,12 +20,10 @@ namespace `core.drivers.storage` (
         }
 
         remove(cb,query) {
-            // query = JSON.stringify(query);
             var xhr = new XMLHttpRequest();
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
                     if (this.status == 200) {
-                        debugger;
                         var obj = JSON.parse(this.responseText);
                         cb&&cb(obj);
                     } else {
@@ -46,10 +42,6 @@ namespace `core.drivers.storage` (
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
                     var obj = JSON.parse(this.responseText);
-                    // cb(JSON.parse(this.responseText),null);
-                    // var cmd = new core.drivers.storage.Command;
-                    // cmd.undo = self.remove;
-                    // cmd.data = obj;
                     cb(obj, null);
                 }
             });
