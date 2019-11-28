@@ -1,0 +1,7 @@
+# Cordova
+framework/node_modules/
+framework/package-lock.json
+framework/backup/
+.vscode/
+.DS_Store
+*.DS_Store
