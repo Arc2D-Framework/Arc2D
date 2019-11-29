@@ -1,6 +1,7 @@
 # Cordova
-app/.DS_Store
+framework/node_modules/
+framework/package-lock.json
+framework/backup/
+.vscode/
 .DS_Store
-*/.DS_Store
-app/auth_config.json
-app/framework/.DS_Store
+*.DS_Store
