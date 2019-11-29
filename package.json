@@ -1,0 +1,19 @@
+{
+    "name": "cocoon",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "author": "jaysmith024 <jaysmith024@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "node node_modules/od-server/main.js",
+        "seam": "node node_modules/od-toolset/tools/seam.js",
+        "add:framework": "git subtree add --prefix=app/framework/ --squash framework 1.0.0",
+        "pull:framework": "git subtree pull --prefix=app/framework --squash framework 1.0.0",
+        "setup": "npm run add:framework && npm run pull:framework"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}
