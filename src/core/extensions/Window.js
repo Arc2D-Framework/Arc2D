@@ -1,3 +1,5 @@
+window.registered_tags=window.registered_tags||{};//see: core.ui.ManagedComponent and initializeChildComponents for usage
+
 if ("LOGGING" in Config && Config.LOGGING != true) {
     for (var k in console) {
         console[k] = function () { };
