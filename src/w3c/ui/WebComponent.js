@@ -363,3 +363,5 @@ namespace `w3c.ui` (
         }
     }
 );
+
+cascade(w3c.ui.WebComponent,true);
