@@ -1,5 +1,7 @@
 import 'src/core/http/ClassLoader.js';
 import 'src/core/http/ModuleLoader.js';
+import 'src/mainloop.js';
+
 
 document.addEventListener("DOMContentLoaded", e => {
   async function bootup() {
@@ -12,7 +14,15 @@ document.addEventListener("DOMContentLoaded", e => {
       var c = (Config.ENABLE_TRANSPILER) ?
         new core.http.ClassLoader :
         new core.http.ModuleLoader;
-          c.load(ns, Config.ROOTPATH + path, data => {});
+          c.load(ns, Config.ROOTPATH + path, data => {
+            var klass = NSRegistry[ns];
+            if(!window.application){alert("no app")}
+            MainLoop
+              .setUpdate(window.application.onUpdate.bind(window.application))
+              .setDraw(window.application.onDraw.bind(window.application))
+              .setEnd(window.application.onEnd.bind(window.application))
+              .start();
+          });
     }
   };
 

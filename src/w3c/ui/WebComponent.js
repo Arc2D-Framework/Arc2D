@@ -294,9 +294,6 @@ namespace `w3c.ui` (
             return (this["@stylesheets"]||[]).reverse();
         }
 
-
-
-
         async loadcss(urls) {
             urls=urls.reverse();
             var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
@@ -353,9 +350,16 @@ namespace `w3c.ui` (
                     if(n && n.nodeType == 1) { 
                         var tag = n.tagName.toLowerCase();
                         var c = window.registered_tags[tag];
-                        c&&c.define(c.prototype,true);
+                        c && c.define(c.prototype,true);
                     }
                 })
+        }
+
+        isAnyPartOfElementInViewport(el=this) {
+            var rect = el.getBoundingClientRect();
+            var v = (rect.top  <= window.innerHeight) && ((rect.bottom) >= 0);
+            var h = (rect.left <= window.innerWidth)  && ((rect.right)  >= 0);
+            return (v && h);
         }
     }
 );
