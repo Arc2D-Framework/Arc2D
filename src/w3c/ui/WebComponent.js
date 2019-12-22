@@ -175,6 +175,10 @@ namespace `w3c.ui` (
 
 
         onConnected() { }
+        
+        onPreConnected() { 
+            this.onConnected()
+        }
 
         render(data) {
             data = data || {};
@@ -215,7 +219,7 @@ namespace `w3c.ui` (
             this.setClassList();
             this.setPrototypeInstance();
             this.setStyleDocuments();
-            this.onConnected();
+            this.onPreConnected();
         }
 
 
@@ -255,7 +259,7 @@ namespace `w3c.ui` (
                 if(!this._is_connected){return;}
                 else {
                     var html = await this.loadTemplate();
-                    this.onConnected()
+                    this.onPreConnected()
                 }
             }
         }

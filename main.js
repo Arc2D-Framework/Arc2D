@@ -28,7 +28,6 @@ import 'src/core/lang/Class.js';
 
 //------------UI-------------
 import 'src/w3c/ui/WebComponent.js';
-import 'src/w3c/ui/ProtectedComponent.js';
 import 'src/patches/3.0.1.js';
 import 'src/w3c/ui/Application.js';
 
