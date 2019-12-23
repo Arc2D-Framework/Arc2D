@@ -33,6 +33,9 @@ namespace `core.http` (
             // alert("WOW WOW: " + window.location.hash)
             var ns = this.window.location.hash.split("#")[1];
             if(!NSRegistry[ns]){
+                this.application.onLoadingActivity &&
+                this.application.onLoadingActivity(ns);
+
                 var filename_path = (
                     Config.SRC_PATH         + 
                     ns.replace(/\./g, "/")  + 
@@ -43,6 +46,8 @@ namespace `core.http` (
                 var cl = new core.http.ClassLoader;
                 cl.load(ns, Config.ROOTPATH + path, data => this.onActivityLoaded(ns,NSRegistry[ns]));
             } else {    
+                this.application.onResumeActivity && 
+                this.application.onResumeActivity(NSRegistry[ns]);
                 this.onActivityLoaded(ns,NSRegistry[ns])
             }
         }
@@ -52,9 +57,13 @@ namespace `core.http` (
             this.activities = this.activities||{};
             // console.log("loaded: ", _class)
             var c = this.activities[ns]||new _class;
-            
+            if(this.current_activity){
+                this.application.onExitCurrentActivity && 
+                this.application.onExitCurrentActivity(this.current_activity)
+            }
             this.application.onDisplayActivity(c);
             this.activities[ns] = c;
+            this.current_activity=c;
             // var slot = this.querySelector('div[slot="screen"]');
             // slot.innerHTML="";
             // slot.appendChild(c);

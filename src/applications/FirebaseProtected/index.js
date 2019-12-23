@@ -71,8 +71,8 @@ namespace `applications` (
 	    }
 
 
-	    onAuthenticated(){
-		
+	    onAuthenticated(user){
+			this.user=user
 		}
 
 

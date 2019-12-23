@@ -152,10 +152,7 @@ namespace `w3c.ui` (
 
         async loadTemplate() {
             return new Promise(async (resolve, reject) => {
-                var tem  =  this.querySelector("template")||    //node
-                            this.src||                          //uri
-                            this.template()||                   //string
-                            "/src/./index.html"                 //default
+                var tem  =  this.getTemplateToLoad();
                 
                 if(/\/*\.html$/.test(tem)){
                     var src=this.src||tem;//TODO: bug here?
@@ -171,6 +168,13 @@ namespace `w3c.ui` (
                 }
                 resolve(this._template);
             })
+        }
+
+        getTemplateToLoad(){
+            return  this.querySelector("template")||    //node
+                    this.src||                          //uri
+                    this.template()||                   //string
+                    "/src/./index.html"                 //default
         }
 
 
