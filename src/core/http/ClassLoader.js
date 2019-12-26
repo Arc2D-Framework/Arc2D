@@ -35,12 +35,6 @@ namespace `core.http` (
             if(filepath) {
                 src = await window.imports(filepath)
             }
-            // else {
-            //     var paths_to_try = es6Transpiler.pathsToTry(_namespace);
-            //     src = await es6Transpiler.imports(paths_to_try[0],false)||
-            //           await es6Transpiler.imports(paths_to_try[1],false);
-            // }
-
             src?this.run(src,cb):cfFailure(src,"no xhr");   
         }
 
@@ -60,5 +54,19 @@ namespace `core.http` (
             src = `(()=>{ ${src} })()`;
             cb(src);
         }
+
+        // nsOrPath(ns){
+        //     var paths_to_try = this.pathsToTry(ns)
+        //     //     src = await es6Transpiler.imports(paths_to_try[0],false)||
+        //     //           await es6Transpiler.imports(paths_to_try[1],false);
+        // }
+
+        // pathsToTry(ns){
+        //     var paths=[];
+        //     if(ns.indexOf(".js")>=0){paths.push(ns)}
+        //     paths.push("src/"+ns.replace(/\//gm,".") + "/index.js")
+        //     paths.push("src/"+ns.replace(/\//gm,".") + ".js")
+        //     return paths;
+        // }
     }
 );
