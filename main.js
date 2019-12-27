@@ -1,4 +1,4 @@
-var Session = top.Session||{State:{}};
+var Session = Session||{State:{}};
 var Config = window.Config||{
     SRC_PATH:"src/",
     ENVIRONMENT:"prod",
