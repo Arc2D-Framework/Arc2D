@@ -9,28 +9,13 @@ namespace `core.http` (
                 this.application.onHashChange.bind(this.application):
                 this.onHashChange.bind(this);
 
-            // if(this.application.onHashChange){
-            //     this.window.addEventListener("hashchange", (e)=> hashchangeCb(e), false)
-            // } else {
-            //     this.window.addEventListener("hashchange", (e)=> hashchangeCb(e), false)
-            // }
             this.window.addEventListener("hashchange", (e)=> hashchangeCb(e), false)
-            // this.window.addEventListener("popstate", function(e){
-            //     console.log("pop state:",e)
-            // }, false);
-
-            // this.window.addEventListener("hashchange", function(){
-            //     alert("hash: " + window.location.hash)
-            // }, false);
-
             if(this.window.location.hash.length > 0){
-            	// this.application.onHashChange()
                 hashchangeCb()
             }
         }
 
         onHashChange (e){
-            // alert("WOW WOW: " + window.location.hash)
             var ns = this.window.location.hash.split("#")[1];
             var scrollTo = ns.split("/");
             ns=scrollTo[0];
@@ -59,7 +44,6 @@ namespace `core.http` (
 
         onActivityLoaded(ns,_class,scrollTo){
             this.activities = this.activities||{};
-            // console.log("loaded: ", _class)
             var c = this.activities[ns]||new _class;
             if(this.current_activity){
                 this.application.onExitCurrentActivity && 
@@ -68,11 +52,6 @@ namespace `core.http` (
             this.application.onDisplayActivity(c,scrollTo);
             this.activities[ns] = c;
             this.current_activity=c;
-            // var slot = this.querySelector('div[slot="screen"]');
-            // slot.innerHTML="";
-            // slot.appendChild(c);
-            // this.activities[ns] = c;
-
         }
     }
 );
