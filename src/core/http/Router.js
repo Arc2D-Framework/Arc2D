@@ -32,6 +32,10 @@ namespace `core.http` (
         onHashChange (e){
             // alert("WOW WOW: " + window.location.hash)
             var ns = this.window.location.hash.split("#")[1];
+            var scrollTo = ns.split("/");
+            ns=scrollTo[0];
+            scrollTo = scrollTo[1];
+
             if(!NSRegistry[ns]){
                 this.application.onLoadingActivity &&
                 this.application.onLoadingActivity(ns);
@@ -44,16 +48,16 @@ namespace `core.http` (
                   );
                 var path = filename_path.replace("*", Config.USE_COMPRESSED_BUILD ? "min.":"");
                 var cl = new core.http.ClassLoader;
-                cl.load(ns, Config.ROOTPATH + path, data => this.onActivityLoaded(ns,NSRegistry[ns]));
+                cl.load(ns, Config.ROOTPATH + path, data => this.onActivityLoaded(ns,NSRegistry[ns],scrollTo));
             } else {    
                 this.application.onResumeActivity && 
-                this.application.onResumeActivity(NSRegistry[ns]);
-                this.onActivityLoaded(ns,NSRegistry[ns])
+                this.application.onResumeActivity(NSRegistry[ns],scrollTo);
+                this.onActivityLoaded(ns,NSRegistry[ns],scrollTo)
             }
         }
 
 
-        onActivityLoaded(ns,_class){
+        onActivityLoaded(ns,_class,scrollTo){
             this.activities = this.activities||{};
             // console.log("loaded: ", _class)
             var c = this.activities[ns]||new _class;
@@ -61,7 +65,7 @@ namespace `core.http` (
                 this.application.onExitCurrentActivity && 
                 this.application.onExitCurrentActivity(this.current_activity)
             }
-            this.application.onDisplayActivity(c);
+            this.application.onDisplayActivity(c,scrollTo);
             this.activities[ns] = c;
             this.current_activity=c;
             // var slot = this.querySelector('div[slot="screen"]');
