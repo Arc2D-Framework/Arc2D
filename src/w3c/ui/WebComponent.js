@@ -302,7 +302,7 @@ namespace `w3c.ui` (
             return (this["@stylesheets"]||[]).reverse();
         }
 
-        async loadcss(urls) {
+        async loadcss(urls) {//TODO:rename to onLoadStyle()
             urls=urls.reverse();
             var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
             for(let path of urls){
@@ -316,11 +316,11 @@ namespace `w3c.ui` (
                         stylesheets[path] = tag;
                         if(tagName.toLowerCase() == "style"){
                             var _cssText = await window.imports(path);
-                                _cssText = this.cssTransform(_cssText);
+                                _cssText = this.cssTransform(_cssText);//TODO: rename to onTransformStyle()
                                 this.setCssTextAttribute(_cssText, tag);
                                 this.onStylesheetLoaded(tag);
                         }
-                        this.appendStyleSheet(tag);
+                        this.appendStyleSheet(tag);//TODO: rename to onAppendStyle
                 }
             }
         }
