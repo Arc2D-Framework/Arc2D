@@ -1,0 +1,247 @@
+<template>
+  <div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Hello World Application</h1>
+        <p>
+          <img src="src/docs/images/app_is_w3c_component.png" style="width: 190px;float:right;"/>
+          An application assembles and manages multiple web components on screen. In the
+          previous lesson, "web components", we built a rather simple web component, placed it
+          in the page and it was done! While that works, it's not practical, 
+          you still have a static "web page". You will not be able to build much of anything
+          in this manner. At most, it might be a good way to view and test a component in isolation
+          while crafting it, and might actually be a great idea.
+        </p>
+        <p>
+          What we want is a true web application. An Application in Oros represents
+          a world on screen <i>(sometimes called a view)</i>, it inherits from WebComponents. Just like web components, applications are composed of the same 3 files:
+        </p>
+        <!-- <p>
+          <b>You'll discover that applications are just like web components.</b> In fact, they are web components, just a bigger and wider world.
+        </p> -->
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <p>
+          <table>
+            <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>index.js</td>
+              <td>The <em><i>js</i> class</em> of your component or application</td>
+            </tr>
+            <tr>
+              <td>index.html</td>
+              <td>The <em><i>html</i> layout/template</em> of the component or application.</td>
+            </tr>
+            <tr>
+              <td>index.css</td>
+              <td>The <em><i>css</i> styling</em> of the component or application</td>
+            </tr>
+          </tbody>
+        </table>
+        </p>
+        <p>
+          <h1>Application Folder Structure</h1>
+          Create these 3 files:
+            <ul>
+              <li>index.html</li>
+              <li>index.js</li>
+              <li>index.css</li>
+            </ul>
+          You'll want to group them in a folder. <b>Create a HelloWorld folder</b> for your application in the <em>[src/applications/]</em> directory. Put the 3 files in there. It should look like this:
+          <img src="src/docs/images/first_app_folder_setup.png" style="width: 250px;margin-top: 20px;"/>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>index.js</b><br/>
+            At minimum, this class definition represents an application, <em style="color:black;">&#x3C;hello-world&#x3E;</em>
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`applications\` (
+    class HelloWorld extends w3c.ui.Application { 
+        
+    }
+);
+        </code></pre>
+        </div>
+        <div class="html lang">
+          <blockquote class="html" style="display:block;width: 100%;">
+            <b>index.html</b><br/>
+            The template for your application/component is used to craft a layout -- user interface (UI). For now we will only display the word "Hello World" in the template:
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;template&#x3E;
+    &#x3C;span&#x3E;Hello World&#x3C;/span&#x3E;
+&#x3C;/template&#x3E;
+        </code></pre>
+        </div>
+        <div class="css lang">
+          <blockquote class="css" style="display:block;width: 100%;">
+            <b>index.css</b><br/>
+            A component/application is styled by it's class name:
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+.HelloWorld {}
+        </code></pre>
+        <blockquote class="css" style="display:block;width: 100%;">
+            <b>Styling the span</b>
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+.HelloWorld span {
+  border:1px solid red;
+  font-size:13px;
+}
+        </code></pre>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Applications and Components</h1>
+        <p>
+          Notice the striking similarity between Applications and Components. Their
+          directory/file structures are mirrored. Class syntax, html and css also
+          mirror each other.
+        </p>
+        <p>
+          The only structural differences are in namespace and their inheritance.
+          A web component generally have a 'core.ui' namespace, while applications use an 'applications'
+          namespace. We'll cover namespaces in depth in the lesson "Namespaces".
+        </p>
+        <p>
+          The other difference is the ancestor. Web components have a parent class of w3c.ui.WebComponent while an applications ancestor is a w3c.ui.Application. Other than these surface level differences, Applications are just Web Components.
+        </p>
+        <!-- <p>
+          <b>You'll discover that applications are just like web components.</b> In fact, they are web components, just a bigger and wider world.
+        </p> -->
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Loading Applications</h1>
+        <p>
+          When you have defined the 3 files for an application, it's
+          time to load it.
+        </p>
+        <p>
+          All components and applications run in a webpage. Reopen the helloworld.html
+          that we created earlier in this chapter (see topic: "Hello World"). We'll keep
+          everything the same, but this time we configure it to point to the applications/HelloWorld
+          namespace. See HTML on right.<br/>
+
+          <code>
+&#x3C;script&#x3E;
+    Config.NAMESPACE = <em>&#x22;applications.HelloWorld&#x22;</em>
+&#x3C;/script&#x3E;
+          </code>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang">
+          <blockquote class="html" style="display:block;width: 100%;">
+            <b>helloworld.html</b><br/>
+            Add a configuration, point it to HelloWorld in the applications folder:
+          </blockquote>
+          <pre class="html javascript" style="display:block;width: 100%;"><code>
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html lang=&#x22;en&#x22;&#x3E;
+    &#x3C;head&#x3E;
+        &#x3C;title&#x3E;Hello World&#x3C;/title&#x3E;
+        &#x3C;script src=&#x22;node_modules/od-cocoon/framework.src.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
+        &#x3C;script&#x3E;
+            Config.NAMESPACE = &#x22;applications.HelloWorld&#x22;
+        &#x3C;/script&#x3E;
+    &#x3C;/head&#x3E;
+
+    &#x3C;body&#x3E;
+        &#x3C;hello-world&#x3E;&#x3C;/hello-world&#x3E;
+    &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+        </code></pre>
+        </div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">How it works</h1>
+        <p>
+          Don't over think this. The helloworld.html page we created earlier in
+          this chapter remains the same here. We've only specified a
+          namespaced for our <em>&#x3C;hello-world&#x3E;</em> tag that points to 
+          the HelloWorld class in the applications folder.
+        </p>
+        <p>
+          By default, if no namespace is listed, the framework will assume that
+          the <em>&#x3C;hello-world&#x3E;</em> tag that you have in the body resides in the core/ui/ directory and will load it as a one-off ui component.
+        </p>
+        <p>
+          So what you are seeing in the browser is not a <em>&#x3C;hello-world&#x3E;</em> component, but a true <em>&#x3C;hello-world&#x3E;</em> application.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Let's build another</h1>
+        <p>
+          To solidify your understanding, let's build another example application.
+          Go to the next topic, <a href="#docs.topics.HelloApplication2">Applications pt. 2</a>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>

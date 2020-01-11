@@ -1,0 +1,66 @@
+<template>
+  <div>
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">SDK Install from GIT</h1>
+        <p>
+          <br/>Visit:
+          <br/>
+          <a href="https://github.com/Nashorn/Cocoon.git">https://github.com/Nashorn/Cocoon.git</a><br/>
+          <ol>
+            <li><em>Fork the repo</em> so you own it on github.</li> 
+            <li>Next, clone your repo -- (or download zip)</li>
+          </ol>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <blockquote class="shell" style="display:block;width: 100%;">
+          Fork the repo on github first. Next, clone it (or download)
+        </blockquote>
+        <pre class="highlight shell" style="display:block;width: 100%;"><code>git clone <span class="s1">'https://github.com/[USER_NAME]/[PROJECT_NAME].git'</span> MyProject</code>
+      </pre>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Boot a local server</h1>
+        <p>
+          There is an <b>"app/"</b> directory in the SDK project. <em>You'll need to
+          boot a server on <b>this</b> folder</em>. The SDK ships with a simple dev server, let's use it for now.
+          <ol>
+            <li>cd.. into the app/ folder at the terminal</li>
+            <li>run npm start 3000</li>
+          </ol>
+          <strong>Alternatively</strong> you may use any server. See shell commands (right-side). If you downloaded or cloned the SDK as "MyProject" for example.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <blockquote class="shell" style="display:block;width: 100%;">
+          cd.. into the SDK projects app/ folder
+        </blockquote>
+        <pre class="highlight shell" style="display:block;width: 100%;"><code>> cd.. <span class="s1">MyProject/app</span></code>
+      </pre>
+      <blockquote class="shell" style="display:block;width: 100%;">
+          boot server at port 3000
+        </blockquote>
+        <pre class="highlight shell" style="display:block;width: 100%;"><code><span class="s1">MyProject/app > </span>npm start 3000</code>
+      </pre>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Open sample index.html</h1>
+        <p>
+          You can now access the sample index.html. Open your browser to:<br/>
+          <a href="http://localhost:3000" target="_new">http://localhost:3000</a>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+</template>

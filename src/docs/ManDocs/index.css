@@ -1,0 +1,20 @@
+html,body,man-docs,.wrapper{
+	height:100%;
+	padding:0;
+	margin:0;
+	font-family:Helvetica, Arial, sans-serif;
+}
+
+
+man-docs .content {
+	padding:13px 0;
+}
+
+
+man-docs nav.sidebar{
+	width: 260px;
+}
+
+man-docs article.article .lang-selector{
+	box-shadow: 0px 2px 10px 0px rgba(0,0,0,.5);
+}

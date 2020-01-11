@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.1" orientation="isometric" renderorder="right-down" compressionlevel="0" width="7" height="7" tilewidth="256" tileheight="128" infinite="0" nextlayerid="5" nextobjectid="1">
+ <editorsettings>
+  <export target="ShiningWars.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../TilesetPack - Grass.tsx"/>
+ <tileset firstgid="50" source="../../../../../TilesetPack - Trees.tsx"/>
+ <layer id="1" name="Ground" width="7" height="7">
+  <data encoding="csv">
+7,1,1,1,1,1,48,
+1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,
+1,1,1,9,1,1,1,
+1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,
+1,1,1,1,1,1,7
+</data>
+ </layer>
+ <layer id="4" name="Trees" width="7" height="7" offsetx="-1" offsety="-33">
+  <data encoding="csv">
+0,0,0,0,0,0,0,
+0,0,55,55,0,0,0,
+0,0,55,0,0,0,0,
+52,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

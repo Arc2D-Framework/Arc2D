@@ -1,0 +1,79 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Using Components</h1>
+        <p>
+          After having designed a component, there are 2 ways it can be used:
+          <ul>
+            <li>Declaratively in HTML</li>
+            <li>Programmatically in Javascript</li>
+          </ul>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Using components declaratively in HTML</h1>
+        <p>
+          A component can be embedded in normal HTML markup the same way you would use a div tag. There are no pros or cons between this approach and programmatic use.
+        </p>
+        <p>
+          Component use in html makes sense in the layout of screens, to assemble a user interface when the design (look-n-feel) is known ahead of time. This is declaritive markup. The tag causes the component to be defined and connected to the DOM immediately. At that very moment, the component life-cycle begins.
+        </p>
+        <p>
+          Be sure that you declare and assemble components on an Applications surface, never directly in the body. To the right is an example of the hello-world application and a more realistic product-catalog application.
+        </p>
+        <p>TODO: Provide html examples</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Using components programmatically in Javascript</h1>
+        <p>
+          What if the screen dynamically changed based on user action or intelligent state driven decisions? Imagine a case where you wrote logic to spawn new Enemies in your game or destroyed Enemies that took significant damage. Enemies could be used a tags, but in this case, things are happening in real-time.
+        </p>
+        <p>
+          From JavsScript, you are able to create new instances of Enemies (or Products, Photos, Recipes) and add them into the world in 1 of 2 ways:
+          <pre class="inline javascript lang"><code>var goblin = document.createElement("goblin-enemy");
+document.appendChild(goblin)</code></pre>
+          OR
+          <pre class="inline javascript lang"><code>var goblin = new core.ui.game.Goblin;
+document.appendChild(goblin)</code></pre>
+        </p>
+        <img src="src/docs/images/troll_idle.png"/>
+        <p>
+          In a later chapter (2D Gaming), we'll bring this character to life and control him using the keypad.
+        </p>
+        <p>
+          TODO: add more examples to right
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>

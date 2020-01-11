@@ -1,0 +1,97 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">JavaScript Namespaces</h1>
+        <p>
+          <img src="src/docs/images/namespaces_memory.png" style="float:right;width:260px;"/>
+          Oros offers proprietary namespaces, it is our trademark signature since 2007. Carefully crafted to work much like Java and C# namespaces. Namespaces usually mirror a folder structure. In essence, it is a way to group classes into categories much like organizing a folder of music by genres.
+        </p>
+        <p>
+          The namespace definition to the right produces an internal tree.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            The namespace keyword takes a dot(.) separated token string and builds
+            a memory pointer that resembles a tree (like folders inside of folders).
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`music.soundtracks\`
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Fully-Qualified Namespaces</h1>
+        <p>
+          The <code style="display:inline;">namespace</code> keyword allocates a Class to that namespace. The Class is then assigned a <em>fully-qualified namespace</em> equivelent to it's namespace plus it's Class name.
+        </p>
+
+        <p>
+          In the AudioPlayer Javascript example (see right). The following are true:
+          <ul>
+            <li>AudioPlayer is the Class name</li>
+            <li>\`music.soundtracks\` is the namespace (<b>\`back-ticks\`</b>, not 'quotes')</li>
+            <li><code>music.soundtracks.AudioPlayer</code> is the fully-qualified namespace</li>
+            <li><code>music.soundtracks.AudioPlayer</code> is accessible in code and console</li>
+          </ul>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            Assign class AudioPlayer to a namespace 
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`music.soundtracks\` (
+  class AudioPlayer {
+
+  }
+)
+        </code></pre>
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            Also works with importing other namespaces for extension
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import '/src/core/io/MediaPlayer.js';
+
+namespace \`music.soundtracks\` (
+  class AudioPlayer extends core.io.MediaPlayer {
+
+  }
+)
+        </code></pre>
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+Coming soon in v3.3, you'll be able to <em style="color:black;">import the namespace token </em> directly.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import 'core.io.MediaPlayer';
+
+namespace \`music.soundtracks\` (
+  class AudioPlayer extends core.io.MediaPlayer {
+
+  }
+)
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>

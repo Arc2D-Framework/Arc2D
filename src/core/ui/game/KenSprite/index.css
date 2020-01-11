@@ -1,0 +1,185 @@
+.KenSprite{
+	/*transition:left 8s;*/
+	left:20px;
+}
+.KenSprite, .fireball {
+  transform:scale(3);
+  position: absolute;
+  bottom: 112px;
+  margin-left: 0;
+  width: 70px;
+  height: 80px;
+  background-image: url("/resources/images/ken.png");
+  /*background:red;*/
+  /* other sprites preloading */
+}
+.KenSprite:before, .fireball:before {
+  content: '';
+  background: url("https://raw.githubusercontent.com/jkneb/street-fighter-css/master/images/ken-tatsumaki-senpuu-kyaku.png") no-repeat;
+}
+.KenSprite:after, .fireball:after {
+  content: '';
+  background: url("https://raw.githubusercontent.com/jkneb/street-fighter-css/master/images/ken-shoryuken.png") no-repeat;
+}
+
+
+/* stance */
+.stance {
+  -webkit-animation: stance steps(4) 0.5s infinite;
+          animation: stance steps(4) 0.5s infinite;
+}
+
+
+/* walking */
+.walk {
+  -webkit-animation: walk steps(5) 0.5s infinite;
+          animation: walk steps(5) 0.5s infinite;
+}
+
+
+/* kneel down */
+.kneel {
+  -webkit-animation: kneel steps(1) 0.2s infinite;
+          animation: kneel steps(1) 0.2s infinite;
+}
+
+
+
+
+/* jump */
+.jump {
+  -webkit-animation: jump steps(7) 1s;
+          animation: jump steps(7) 1s;
+}
+
+
+/* hadoken - must be declared AFTER .stance */
+.hadoken {
+  -webkit-animation: hadoken steps(4) 0.5s;
+          animation: hadoken steps(4) 0.5s;
+}
+
+
+
+/* shoryuken */
+.shoryuken {
+  height: 110px;
+  background-image: url("/resources/images/ken-shoryuken.png");
+  -webkit-animation: shoryuken steps(7) .9s;
+          animation: shoryuken steps(7) .9s;
+}
+
+
+@-webkit-keyframes shoryuken {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -490px 0px;
+  }
+}
+
+@keyframes shoryuken {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -490px 0px;
+  }
+}
+
+@-webkit-keyframes hadoken {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -280px 0px;
+  }
+}
+
+@keyframes hadoken {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -280px 0px;
+  }
+}
+
+
+
+
+@-webkit-keyframes jump {
+  from {
+    background-position: 0px -640px;
+  }
+  to {
+    background-position: -490px -640px;
+  }
+}
+
+@keyframes jump {
+  from {
+    background-position: 0px -640px;
+  }
+  to {
+    background-position: -490px -640px;
+  }
+}
+
+
+
+@-webkit-keyframes kneel {
+  from {
+    background-position: 0px -720px;
+  }
+  to {
+    background-position: -70px -720px;
+  }
+}
+
+@keyframes kneel {
+  from {
+    background-position: 0px -720px;
+  }
+  to {
+    background-position: -70px -720px;
+  }
+}
+
+@-webkit-keyframes walk {
+  from {
+    background-position: 0px -240px;
+  }
+  to {
+    background-position: -350px -240px;
+  }
+}
+
+@keyframes walk {
+  from {
+    background-position: 0px -240px;
+  }
+  to {
+    background-position: -350px -240px;
+  }
+}
+
+
+@-webkit-keyframes stance {
+  from {
+    background-position: 0px -80px;
+  }
+  to {
+    background-position: -280px -80px;
+  }
+}
+
+@keyframes stance {
+  from {
+    background-position: 0px -80px;
+  }
+  to {
+    background-position: -280px -80px;
+  }
+}

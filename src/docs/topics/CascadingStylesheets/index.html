@@ -1,0 +1,102 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Cascading StyleSheets</h1>
+        <p>
+          Oros supports cascade styling at the component level, allowing components to inherit base class styling organically through ES6 class hierarchies. Never fight with specificity rules again, css import ordering, and overriding !important flags. 
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Unprecedented Cascading Architecture</h1>
+        <p>
+          Another signature milestone in architecture, we've crafted richness and flexibility into the engine for CSS inheritance unseen anywhere else. Let's look at the conceptual diagram and javascript snippets.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <p style="text-align:center;">
+          <img src="src/docs/images/css_cascading_components.png" style="width:80%;"/>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>Panel</b><br/>
+            Defines <em style="color:black;">@cascade</em> and base styling for all sub-classes.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+    @cascade(true);
+    @stylesheets(["/src/./index.css"]);
+    class Panel extends w3c.ui.WebComponent {
+        
+    }
+);
+        </code></pre>
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>Window</b><br/>
+            Will inherit Panels rules. Must <em style="color:black;">@cascade</em> down as well for others.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import "/src/core/ui/Panel/index.js";
+
+namespace \`core.ui\` (
+    @cascade(true);
+    class Window extends core.ui.Panel {
+        
+    }
+);
+        </code></pre>
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>Modal</b><br/>
+            Will inherit Window and Panel rules and intrinsically. Should <em style="color:black;">@cascade</em> down as well for others in class hierarchy.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import "/src/core/ui/Window/index.js";
+
+namespace \`core.ui\` (
+    @cascade(true);
+    class Modal extends core.ui.Window {
+        
+    }
+);
+        </code></pre>
+
+
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>NOTE:</b><br/>
+            With @cascade enabled, the Modal will organically look-n-feel like it's ancestors, Window 1st, then Panel. Never worry about what css file to load in what order.
+          </blockquote>
+
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+  </div>
+</template>

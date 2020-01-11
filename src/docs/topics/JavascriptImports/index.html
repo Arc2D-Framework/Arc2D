@@ -1,0 +1,44 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">JavaScript Imports</h1>
+        <p>
+          Oros supports the native <code style="display:inline;">import</code> rule. Use it for loading classes that your code will depend on.
+        </p>
+        
+        <p>
+          <b>General best practices:</b>
+          <ul>
+            <li>When importing classes, use a string path</li>
+            <li>Destructuring supported for one-off modules, but are discouraged. Write classes.</li>
+          </ul>
+          See Javascript Class examples on the right.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            import Sprite and Weapon before extending.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import "src/game/Bullet.js";
+import "src/game/Weapon.js";
+
+class ProjectileWeapon extends Weapon {
+  //use Bullet
+}
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+  </div>
+</template>

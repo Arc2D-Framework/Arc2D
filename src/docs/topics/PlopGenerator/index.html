@@ -1,0 +1,98 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Generate Components Easily (optional)</h1>
+        <p><em style="color:black;">You may skip this topic</em> if you rather create files & folders manually.</p>
+        <p>
+          The SDK supports <a href="https://plopjs.com/" target="_new">Plop</a>, a file generator.
+          With it, you can easily generate your components & folders to match your class namespaces. 100% optional and there are no scripts or generators to write. We'll see how it works shortly.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Install Plop globally with -g flag:</h1>
+        <p>
+        	See shell tab.
+          <ul>
+          	<li>npm install -g plop</li>
+          </ul>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang">
+        	<blockquote class="shell" style="display:block;width: 100%;">
+            Open a terminal anywhere, run:
+          </blockquote>
+          <pre class="highlight shell" style="display:block;width: 100%;"><code>> npm install -g plop</code></pre>
+        	<blockquote class="shell" style="display:block;width: 100%;">
+            Plop is now installed. Close your terminal</code>
+          </blockquote>
+        </div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Why generate files?</h1>
+        <p>
+          Oros is a component-driven architecture. Every component you create will usually require 3 asset files at minimum:
+        </p>
+        <p>
+          <table>
+            <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Description</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>index.js</td>
+              <td>The <em><i>js</i> class</em> of your component</td>
+              <td><b style="color:red;">Required*</b></td>
+            </tr>
+            <tr>
+              <td>index.html</td>
+              <td>The <em><i>html</i> layout/template</em> of the component</td>
+              <td>Optional</td>
+            </tr>
+            <tr>
+              <td>index.css</td>
+              <td>The <em><i>css</i> styling</em> of the component</td>
+              <td>Optional</td>
+            </tr>
+          </tbody>
+        </table>
+        </p>
+        <p>
+        	You'll then need to create a folder setup inside the src/ that matches the components namespace. See [topic here]. So, if you rather create these files manually, then follow along and do not bother with Plop. Besides, <b>all topics assume you are not generating anything</b> but Shell commands for plop users are still provided.
+        </p>
+        
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>
