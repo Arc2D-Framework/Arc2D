@@ -10,6 +10,10 @@ namespace `w3c.ui` (
                 this.attachShadow({ mode: 'open' }) : this;
         }
 
+        getDefaultStyleSheet(){
+            return relativeToAbsoluteFilePath("/src/./index.css",this.namespace);
+        }
+
         static define(proto,bool){
             var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
             if(/\-/.test(tag)){
@@ -120,11 +124,6 @@ namespace `w3c.ui` (
             return parent_node;
         }
 
-        getRealTargetFromEvent(e,selector, terminator) {
-            console.warn(`DEPRECATED: ${this.namespace}.getRealTargetFromEvent() - use getParentNodeFromEvent()`);
-            return this.getParentNodeFromEvent(e, selector, terminator)
-        }
-
         getParentNodeFromEvent(e, selector, terminator) {
             var el = e.composedPath()[0];
             return this.getParentBySelectorUntil(el, terminator, selector);
@@ -132,13 +131,7 @@ namespace `w3c.ui` (
 
         onStylesheetLoaded(style) { }
 
-        cssTransform(css) {
-            var ns = this.namespace;
-            css = css.replace(/resource\([\'\"]?([^\'\"]*)[\'\"]?\)/mg,
-                (full, m1) => "url(" + this.resourcepath(m1, ns) + ")"
-            );
-            return css;
-        }
+        cssTransform(css) {return css}
 
         setCssTextAttribute(_cssText, stylenode) {
             if (stylenode && stylenode.styleSheet) {
@@ -268,12 +261,16 @@ namespace `w3c.ui` (
             }
         }
 
-
         cssStyle(){return ""}
 
         setStyleDocuments() {
             this.loadcss(this.getStyleSheets());
+            if(this.onLoadInstanceStylesheet()){this.loadcss([this.getDefaultStyleSheet()])}
             this.setStylesheet();
+        }
+
+        onLoadInstanceStylesheet(){
+            return true;
         }
 
         static defineAncestors(){
@@ -299,7 +296,8 @@ namespace `w3c.ui` (
         }
 
         getStyleSheets() {
-            return (this["@stylesheets"]||[]).reverse();
+            var styles = this["@stylesheets"]||[];
+            return styles.reverse();
         }
 
         async loadcss(urls) {//TODO:rename to onLoadStyle()

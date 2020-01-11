@@ -7,7 +7,7 @@ namespace `core.http` (
         constructor (){
             super();
             this.es6Transpiler = new Ecmascript6ClassTranspiler();
-            window.run=this.run.bind(this);
+            window.run=this.run.bind(this);//TODO:check dynamic transpilation
             return this;
         }
 
@@ -47,7 +47,7 @@ namespace `core.http` (
             while (reg.test(src)) {
                 var ns_or_path = src.match(reg)[1];
                 var s = (window.imported_classes[ns_or_path] ?
-                        ";" : await window.imports(ns_or_path))||"";
+                        ";" : await this.imports(ns_or_path))||""; //window.imports(ns_or_path))||"";
                 s = s ? this.es6Transpiler.transpile(s) : "";
                 src = src.replace(reg, s);
             }
@@ -55,18 +55,26 @@ namespace `core.http` (
             cb(src);
         }
 
-        // nsOrPath(ns){
-        //     var paths_to_try = this.pathsToTry(ns)
-        //     //     src = await es6Transpiler.imports(paths_to_try[0],false)||
-        //     //           await es6Transpiler.imports(paths_to_try[1],false);
-        // }
+        async imports(ns){
+            var paths_to_try = this.pathsToTry(ns);
+            for(let path of paths_to_try){
+                var code = await window.imports(path);
+                if(code){
+                    return code;
+                } 
+            }
+        }
 
-        // pathsToTry(ns){
-        //     var paths=[];
-        //     if(ns.indexOf(".js")>=0){paths.push(ns)}
-        //     paths.push("src/"+ns.replace(/\//gm,".") + "/index.js")
-        //     paths.push("src/"+ns.replace(/\//gm,".") + ".js")
-        //     return paths;
-        // }
+        pathsToTry(ns){
+            if(/\.m?js$/.test(ns)){
+                return [ns]
+            }
+            var srcpath = Config.SRC_PATH;
+            var paths   = [];
+            paths.push(srcpath+ns.replace(/\./gm,"/") + "/index.js")
+            paths.push(srcpath+ns.replace(/\./gm,"/") + "/index.min.js")
+            paths.push(srcpath+ns.replace(/\./gm,"/") + ".js")
+            return paths;
+        }
     }
 );
