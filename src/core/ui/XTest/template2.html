@@ -1,0 +1,19 @@
+<template>
+    <style>
+        :host(.Sample) li, .Sample li {
+            background: yellow;
+            contain: content;
+        }
+    </style>
+    <div style="border:1px solid black;">
+        Hello, your name is ${this.name}:
+        <ul>
+            ${
+                this.items.map(item => `
+                    <li><x-test><b slot="test">${item.label}</b></x-test></li>
+                `).join("")
+            }
+        </ul>
+        <b style="color:red;"><slot name="test">Hello Earth</slot></b>
+    </div>
+</template>

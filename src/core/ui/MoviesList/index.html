@@ -1,0 +1,35 @@
+<template>
+    <!-- <style>
+        @import "http://localhost:3000/src/core/ui/MoviesList/index.css";
+    </style> -->
+    <table>
+        <thead style="background: gray;">
+            <th name="title"><x-test><span slot="test">Title</span></x-test> <span class="fa fa-caret-down"></span></th>
+            <th name="genre">
+                <x-test><i slot="test">Genre</i></x-test>
+            </th>
+            <th name="stock">Stock</th>
+            <th name="rating">Rating</th>
+        </thead>
+        <tbody>
+            ${
+                this.items.map(
+                    movie => 
+                        `<tr> 
+                            <td>${movie.title}</td>
+                            <td>${movie.genre}</td>
+                            <td>${movie.stock}</td>
+                            <td>${movie.rating}</td>
+                            <td><span class="far fa-heart"></span></td>
+                            <td><button class="del-button" data-rev-id=${movie._rev} data-id=${movie._id}>Delete</button></td>
+                        </tr>`
+                ).join("")
+            }
+        </tbody>
+    </table>
+    <div id="pagination">
+        <button id="previous">Previous</button>
+        page <span id="currentpage"></span> of <span id="totalpages"></span>
+        <button id="next">Next</button>
+    </div>
+</template>

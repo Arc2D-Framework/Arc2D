@@ -1,0 +1,16 @@
+.MovieMenu{
+	background:blue;
+	display:block;
+}
+
+.MovieMenu {
+    float: left;
+    padding-right: 30px;
+}
+
+.MovieMenu ul {
+    margin: 0;
+}
+.MovieMenu li.active {
+    background-color:yellow;
+}
