@@ -1,4 +1,3 @@
-
 namespace("core.http.NetDetect", {
 	MODES : {
         OFFLINE : "offline",

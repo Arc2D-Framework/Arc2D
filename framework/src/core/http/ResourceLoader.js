@@ -3,5 +3,3 @@ namespace `core.http` (
     	constructor (){ return this; }
 	}
 );
-
-

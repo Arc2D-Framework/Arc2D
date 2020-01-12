@@ -61,4 +61,4 @@ window.field = function field(target, type, key, val){
         target:
         target.prototype;
     target[key] = val;
-}
+};

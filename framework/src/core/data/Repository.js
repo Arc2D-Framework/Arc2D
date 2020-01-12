@@ -1,9 +1,6 @@
 import '/node_modules/od-paginator/paginator.js';
 import '/framework/src/core/drivers/storage/IStorageInterface.js';
-// mport '/framework/src/core/drivers/storage/RestDB.js';
-// mport '/framework/src/core/drivers/storage/LocalStorage.js';
-// mport '/framework/src/core/drivers/storage/Memory.js';
-import '/framework/src/core/drivers/storage/CouchDB.js';
+import '/framework/src/core/drivers/storage/Memory.js';
 
 
 namespace `core.data` (
