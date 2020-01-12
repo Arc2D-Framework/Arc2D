@@ -1,6 +1,6 @@
-window.registered_tags=window.registered_tags||{};//see: core.ui.ManagedComponent and initializeChildComponents for usage
+window.registered_tags=window.registered_tags||{};
 
-if ("LOGGING" in Config && Config.LOGGING != true) {
+if (Config.LOGGING==false) {
     for (var k in console) {
         console[k] = function () { };
     }
@@ -18,11 +18,8 @@ window.toAbsoluteURL = function(url) {
     a.setAttribute("href", url);
     return a.cloneNode(false).href; 
 }
-//TDOD: Not returning what i expected, a class ref
-//ex, classof `core.drivers.storage.Memory`;
-window.classof = function(ns){
-    return NSRegistry[ns];
-}
+
+window.classof = function(ns){ return NSRegistry[ns] }
 
 
 window.imported_classes = window.imported_classes || {};
@@ -52,10 +49,14 @@ window.imports = async function (x, opts, isError) {
                 resolve(null);
             }
         } catch (e) {
-            var request = new XMLHttpRequest();
-            request.open('GET', path, false);
-            request.send(null);
-
+            try{
+              var request = new XMLHttpRequest();
+              request.open('GET', path, false);
+              request.send(null);
+            } catch(xe){
+              console.error("404 import: " + toAbsoluteURL(path), xe);
+              resolve("")
+            }
             if (request.status == 0 || request.status == 200) {
                 src = request.responseText;
                 window.imported_classes[x] = src;
@@ -65,12 +66,8 @@ window.imports = async function (x, opts, isError) {
     });
 };
 
-
-
-
 window.Key = {
   _pressed: {},
-
   LEFT: "ArrowLeft",
   UP: "ArrowUp",
   RIGHT: "ArrowRight",

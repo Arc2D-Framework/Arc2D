@@ -6,20 +6,8 @@
         <h1 id="api-reference">Hello World Application</h1>
         <p>
           <img src="src/docs/images/app_is_w3c_component.png" style="width: 190px;float:right;"/>
-          An application assembles and manages multiple web components on screen. In the
-          previous lesson, "web components", we built a rather simple web component, placed it
-          in the page and it was done! While that works, it's not practical, 
-          you still have a static "web page". You will not be able to build much of anything
-          in this manner. At most, it might be a good way to view and test a component in isolation
-          while crafting it, and might actually be a great idea.
+          An Application in Oros represents a world on screen, it inherits from WebComponent. Just like web components which we'll cover shortly, applications are composed of 3 files:
         </p>
-        <p>
-          What we want is a true web application. An Application in Oros represents
-          a world on screen <i>(sometimes called a view)</i>, it inherits from WebComponents. Just like web components, applications are composed of the same 3 files:
-        </p>
-        <!-- <p>
-          <b>You'll discover that applications are just like web components.</b> In fact, they are web components, just a bigger and wider world.
-        </p> -->
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -59,7 +47,7 @@
         </p>
         <p>
           <h1>Application Folder Structure</h1>
-          Create these 3 files:
+          Create these 3 files, the snippets for each are on the right:
             <ul>
               <li>index.html</li>
               <li>index.js</li>
@@ -98,15 +86,20 @@ namespace \`applications\` (
         <div class="css lang">
           <blockquote class="css" style="display:block;width: 100%;">
             <b>index.css</b><br/>
-            A component/application is styled by it's class name:
+            A component/application is scoped/styled by it's class name:
           </blockquote>
           <pre class="highlight css" style="display:block;width: 100%;"><code>
-.HelloWorld {}
-        </code></pre>
-        <blockquote class="css" style="display:block;width: 100%;">
-            <b>Styling the span</b>
-          </blockquote>
-          <pre class="highlight css" style="display:block;width: 100%;"><code>
+body, html {
+  width:100%;
+  height:100%;
+}
+
+.HelloWorld {
+  display:block;
+  width:100%;
+  height:100%;
+}
+
 .HelloWorld span {
   border:1px solid red;
   font-size:13px;
@@ -118,7 +111,7 @@ namespace \`applications\` (
 
 
 
-
+<!-- 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Applications and Components</h1>
@@ -135,9 +128,6 @@ namespace \`applications\` (
         <p>
           The other difference is the ancestor. Web components have a parent class of w3c.ui.WebComponent while an applications ancestor is a w3c.ui.Application. Other than these surface level differences, Applications are just Web Components.
         </p>
-        <!-- <p>
-          <b>You'll discover that applications are just like web components.</b> In fact, they are web components, just a bigger and wider world.
-        </p> -->
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -145,7 +135,7 @@ namespace \`applications\` (
         <div class="html lang"></div>
         <div class="css lang"></div>
       </div>
-    </div>
+    </div> -->
 
 
 

@@ -1,3 +1,5 @@
+
+//TODO: Revisit paths. Will change since this is in framework folder now.
 module.exports = function (plop) {
 	plop.addHelper('NSToPath', function (ns) {
 		return ns.replace(/\./gm,"/");
