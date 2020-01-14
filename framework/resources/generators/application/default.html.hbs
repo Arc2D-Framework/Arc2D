@@ -18,12 +18,9 @@
 
         
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
-        <script id="config">
-            Config.NAMESPACE = "{{namespace}}.{{class}}"
-        </script> 
     </head>
 
-    <body>
+    <body namespace="{{namespace}}.{{class}}">
         <{{ClassToTagName class}}></{{ClassToTagName class}}>
     </body>
 </html>
