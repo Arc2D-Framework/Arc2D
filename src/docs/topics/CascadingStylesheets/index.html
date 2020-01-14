@@ -37,8 +37,12 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
+        <p>Here, a base class component, <code>Panel,</code> specifies the following css in its default index.css stylesheet. The Panel class also specifies the <code>@cascade</code> decorator. See the JavaScript snippet to the right.</p>
         <p style="text-align:center;">
           <img src="src/docs/images/css_cascading_components.png" style="width:80%;"/>
+        </p>
+        <p>
+          Because Panel is decorated with <code>@cascade,</code> any class that inherits from it will have it's base styling inherited from Panel automatically. Subsequent sub-classes will also have their style cascade down until a class in the hierarchy disables <code>@cascade</code> for subsequent sub-classes.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -51,7 +55,6 @@
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
     @cascade(true);
-    @stylesheets(["/src/./index.css"]);
     class Panel extends w3c.ui.WebComponent {
         
     }
@@ -62,7 +65,7 @@ namespace \`core.ui\` (
             Will inherit Panels rules. Must <em style="color:black;">@cascade</em> down as well for others.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import "/src/core/ui/Panel/index.js";
+import 'core.ui.Panel';
 
 namespace \`core.ui\` (
     @cascade(true);
@@ -77,7 +80,7 @@ namespace \`core.ui\` (
             Will inherit Window and Panel rules and intrinsically. Should <em style="color:black;">@cascade</em> down as well for others in class hierarchy.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import "/src/core/ui/Window/index.js";
+import 'core.ui.Window';
 
 namespace \`core.ui\` (
     @cascade(true);
@@ -95,7 +98,18 @@ namespace \`core.ui\` (
 
         </div>
         <div class="html lang"></div>
-        <div class="css lang"></div>
+        <div class="css lang">
+          <blockquote class="css" style="display:block;width: 100%;">
+            The index.css belonging to <b>Panel</b>
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+.Panel {
+  border:1px solid black;
+  border-radius:4px;
+  background:white;
+}
+        </code></pre>
+        </div>
       </div>
     </div>
   </div>

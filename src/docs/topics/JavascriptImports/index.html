@@ -1,32 +1,90 @@
 <template>
   <div>
 
-    
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">JavaScript Imports</h1>
         <p>
-          Oros supports the native <code style="display:inline;">import</code> rule. Use it for loading classes that your code will depend on.
+          Oros supports the native <code style="display:inline;">import</code> rule. Use it for loading dependencies.
         </p>
         
         <p>
-          <b>General best practices:</b>
-          <ul>
-            <li>When importing classes, use a string path</li>
-            <li>Destructuring supported for one-off modules, but are discouraged. Write classes.</li>
-          </ul>
-          See Javascript Class examples on the right.
+          You may import by filepath or namespace, both are string references.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Import by filepath</h1>
+        <p>
+          ES6 - Import by file path. For the best compatibility when running an app from file://disk (Cordova and iOS builds or Firefox Dev Edition with disabled security), root your paths (making it an absolute path). This ensures that the path is not relative but read from the root of the site.
+        </p>
+        <p>
+          Rooting the path would mostly benefit in mobile device builds.
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
         <div class="javascript lang">
-        <blockquote class="javascript" style="display:block;width: 100%;">
-            import Sprite and Weapon before extending.
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            import by file path (note the rooted path starts with a / slash).
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import "src/game/Bullet.js";
-import "src/game/Weapon.js";
+import "/src/game/Bullet.js";
+import "/src/game/Weapon.js";
+
+class ProjectileWeapon extends Weapon {
+  //use Bullet
+}
+        </code></pre>
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            You can also import from folders outside of src/
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import "/framework/core/http/ResourceLoader.js";
+
+class ModuleLoader extends core.http.ModuleLoader {
+
+}
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Import by namespaces (recommended)</h1>
+        <p>
+          Specific to Oros namespaces and another key milestone in our engine. It is recommended to import Classes by their namespace. Works like a filepath but:
+          <ul>
+            <li>Clean Syntax</ul>
+            <li>Cognitively makes sense</ul>
+            <li>Will be able to use Prefab. Faster loading, no paths to modify.</ul>
+          </ul>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            import by namespace (NOTE: The use of semicolons; to end the statement). Namespace must be a string token.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import 'game.Bullet';
+import 'game.Weapon';
+
 
 class ProjectileWeapon extends Weapon {
   //use Bullet
@@ -37,7 +95,6 @@ class ProjectileWeapon extends Weapon {
         <div class="css lang"></div>
       </div>
     </div>
-
 
 
   </div>

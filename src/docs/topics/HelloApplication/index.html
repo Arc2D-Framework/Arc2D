@@ -53,7 +53,7 @@
               <li>index.js</li>
               <li>index.css</li>
             </ul>
-          You'll want to group them in a folder. <b>Create a HelloWorld folder</b> for your application in the <em>[src/applications/]</em> directory. Put the 3 files in there. It should look like this:
+          You'll want to group them in a folder. Create a <b>HelloWorld</b> folder for your application in the <em>[src/applications/]</em> directory. Put the 3 files in there. It should look like this:
           <img src="src/docs/images/first_app_folder_setup.png" style="width: 250px;margin-top: 20px;"/>
         </p>
       </div>
@@ -143,19 +143,21 @@ body, html {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Loading Applications</h1>
         <p>
-          When you have defined the 3 files for an application, it's
-          time to load it.
+          When you have defined the 3 files, open hello-world.html, add a <code>namespace</code> attribute
+          to the body tag. It should be the <em>fully-qualified namespace (FQNS)</em> to the <code>HelloWorld</code> class:
         </p>
         <p>
-          All components and applications run in a webpage. Reopen the helloworld.html
-          that we created earlier in this chapter (see topic: "Hello World"). We'll keep
-          everything the same, but this time we configure it to point to the applications/HelloWorld
-          namespace. See HTML on right.<br/>
-
           <code>
-&#x3C;script&#x3E;
-    Config.NAMESPACE = <em>&#x22;applications.HelloWorld&#x22;</em>
-&#x3C;/script&#x3E;
+&#x3C;body namespace="applications.HelloWorld"&#x3E;
+&#x3C;/body&#x3E;
+          </code>
+        </p>
+        <p>
+          Next, use the &#x3C;hello-world"&#x3E; tag that is created for you.
+          <code>
+&#x3C;body namespace="applications.HelloWorld"&#x3E;
+  &#x3C;hello-world"&#x3E;&#x3C;/hello-world&#x3E;
+&#x3C;/body&#x3E;
           </code>
         </p>
       </div>
@@ -164,21 +166,18 @@ body, html {
         <div class="javascript lang"></div>
         <div class="html lang">
           <blockquote class="html" style="display:block;width: 100%;">
-            <b>helloworld.html</b><br/>
+            <b>hello-world.html</b><br/>
             Add a configuration, point it to HelloWorld in the applications folder:
           </blockquote>
-          <pre class="html javascript" style="display:block;width: 100%;"><code>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
 &#x3C;!DOCTYPE html&#x3E;
 &#x3C;html lang=&#x22;en&#x22;&#x3E;
     &#x3C;head&#x3E;
         &#x3C;title&#x3E;Hello World&#x3C;/title&#x3E;
         &#x3C;script src=&#x22;node_modules/od-cocoon/framework.src.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
-        &#x3C;script&#x3E;
-            Config.NAMESPACE = &#x22;applications.HelloWorld&#x22;
-        &#x3C;/script&#x3E;
     &#x3C;/head&#x3E;
 
-    &#x3C;body&#x3E;
+    &#x3C;body namespace="applications.HelloWorld"&#x3E;
         &#x3C;hello-world&#x3E;&#x3C;/hello-world&#x3E;
     &#x3C;/body&#x3E;
 &#x3C;/html&#x3E;
@@ -194,17 +193,7 @@ body, html {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">How it works</h1>
         <p>
-          Don't over think this. The helloworld.html page we created earlier in
-          this chapter remains the same here. We've only specified a
-          namespaced for our <em>&#x3C;hello-world&#x3E;</em> tag that points to 
-          the HelloWorld class in the applications folder.
-        </p>
-        <p>
-          By default, if no namespace is listed, the framework will assume that
-          the <em>&#x3C;hello-world&#x3E;</em> tag that you have in the body resides in the core/ui/ directory and will load it as a one-off ui component.
-        </p>
-        <p>
-          So what you are seeing in the browser is not a <em>&#x3C;hello-world&#x3E;</em> component, but a true <em>&#x3C;hello-world&#x3E;</em> application.
+          The namespace <code>"applications.HelloWorld"</code>, is a hint to the engine about what Class to use for this application. The <code>&#x3C;hello-world&#x3E;</code> tag was generated for you based on the CamelCase name taken from the <code>HelloWorld</code> class.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -219,10 +208,63 @@ body, html {
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Let's build another</h1>
+        <h1 id="api-reference">Namespaces, folders and tags</h1>
         <p>
-          To solidify your understanding, let's build another example application.
-          Go to the next topic, <a href="#docs.topics.HelloApplication2">Applications pt. 2</a>
+          The namespace, folder structure and tags are highly cohesive and related to each other.
+          <ul>
+            <li>Namespaces are always lower case</li>
+            <li>Class names are 2 words in CamelCase</li>
+            <li>The folders should always mirror the namespaces</li>
+          </ul>
+        </p>
+        <p>
+          Further examples:
+          <table>
+            <thead>
+            <tr>
+              <th>Namespace</th>
+              <th>Class</th>
+              <th>FQNS</th>
+              <th>Folder</th>
+              <th>Tag</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>applications</td>
+              <td>HelloWorld</td>
+              <td>applications.HelloWorld</td>
+              <td>
+                src/applications/HelloWorld/index.js<br/><br/>
+                src/applications/HelloWorld/index.html<br/><br/>
+                src/applications/HelloWorld/index.css<br/>
+              </td>
+              <td>&#x3C;hello-world&#x3E;</td>
+            </tr>
+            <tr>
+              <td>applications</td>
+              <td>MyReports</td>
+              <td>applications.MyReports</td>
+              <td>
+                src/applications/MyReports/index.js<br/><br/>
+                src/applications/MyReports/index.html<br/><br/>
+                src/applications/MyReports/index.css<br/>
+              </td>
+              <td>&#x3C;my-reports&#x3E;</td>
+            </tr>
+            <tr>
+              <td>core.ui</td>
+              <td>ToggleSwitch</td>
+              <td>core.ui.ToggleSwitch</td>
+              <td>
+                src/core/ui/ToggleSwitch/index.js<br/><br/>
+                src/core/ui/ToggleSwitch/index.html<br/><br/>
+                src/core/ui/ToggleSwitch/index.css<br/>
+              </td>
+              <td>&#x3C;toggle-switch&#x3E;</td>
+            </tr>
+          </tbody>
+        </table>
         </p>
       </div>
       <div style="width: 50%;display: block;">

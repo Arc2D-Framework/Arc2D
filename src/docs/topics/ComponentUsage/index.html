@@ -31,9 +31,11 @@
           Component use in html makes sense in the layout of screens, to assemble a user interface when the design (look-n-feel) is known ahead of time. This is declaritive markup. The tag causes the component to be defined and connected to the DOM immediately. At that very moment, the component life-cycle begins.
         </p>
         <p>
-          Be sure that you declare and assemble components on an Applications surface, never directly in the body. To the right is an example of the hello-world application and a more realistic product-catalog application.
+          To use a component by it's tag name in HTML, just declare it in your markup:
         </p>
-        <p>TODO: Provide html examples</p>
+        <p>
+          <pre class="inline html lang"><code>&#x3C;goblin-enemy&#x3E;&#x3C;/goblin-enemy&#x3E;</code></pre>
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -52,11 +54,11 @@
           What if the screen dynamically changed based on user action or intelligent state driven decisions? Imagine a case where you wrote logic to spawn new Enemies in your game or destroyed Enemies that took significant damage. Enemies could be used a tags, but in this case, things are happening in real-time.
         </p>
         <p>
-          From JavsScript, you are able to create new instances of Enemies (or Products, Photos, Recipes) and add them into the world in 1 of 2 ways:
+          From JavsScript, you are able to create new instances of Enemies (or Products, Photos, Recipes) and add them into the world in 1 of 3 ways:
           <pre class="inline javascript lang"><code>var goblin = document.createElement("goblin-enemy");
-document.appendChild(goblin)</code></pre>
+document.appendChild(goblin)</code></pre><br/>
           OR
-          <pre class="inline javascript lang"><code>var goblin = new core.ui.game.Goblin;
+          <pre class="inline javascript lang"><code>var goblin = new core.ui.game.GoblinEnemy;
 document.appendChild(goblin)</code></pre>
         </p>
         <img src="src/docs/images/troll_idle.png"/>

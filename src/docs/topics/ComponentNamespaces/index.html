@@ -28,15 +28,10 @@
           reside in the same folder structure. Said differently, aim to mirror the folder
           structure to namespaced javascript class files.
           <img src="src/docs/images/cover_flow_dir_structure.png" style="float:right; width:200px;margin-top: 34px;"/>
-          <ul>
-            <li>1 class per javascript file</li>
-            <li>name javascript file after class, ex: "CoverFlow.js"</li>
-            <li>mirror the folder structure to namespaces</li>
-          </ul>
         </p>
         <p>
-          <em>Again, if you have a component class, "CoverFlow" defined in the namespace, "core.ui". Then
-          CoverFlow.js should be saved in the folder structure: core/ui/CoverFlow.js</em>
+          <em>Again, if you have a component, "CoverFlow" defined in the namespace, "core.ui". Then
+          the directory structure should mirror the fully-qualified namespace (FQNS): /core/ui/CoverFlow/</em>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -52,10 +47,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Folder structure revisited. Component Packaging</h1>
         <p>
-          See CoverFlow component on right. Notice that earlier, it was said
-          that the javascript file should be named after the class. But in the
-          folder pictured above and right, the class was defined in a folder
-          and named "CoverFlow" and the javascript named "index.js". This is also possible, and leads us to the next discussion, <a href="#docs.topics.ComponentPackaging">Component Packaging</a>.
+          The topic, <a href="#docs.topics.ComponentPackaging">Component Packaging</a> discusses folder structure in depth.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -72,8 +64,26 @@ namespace \`core.ui\` (
 )
         </code></pre>
         </div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
+        <div class="html lang">
+          <blockquote class="html" style="display:block;width: 100%;">
+            src/core/ui/CoverFlow/index.html:
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;template&#x3E;
+    &#x3C;div&#x3E;cover flow ui&#x3C;/div&#x3E;
+&#x3C;/template&#x3E;
+        </code></pre>
+        </div>
+        <div class="css lang">
+          <blockquote class="css" style="display:block;width: 100%;">
+            src/core/ui/CoverFlow/index.css:
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+.CoverFlow {
+  display:block;
+}
+        </code></pre>
+        </div>
       </div>
     </div>
 

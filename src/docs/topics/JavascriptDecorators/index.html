@@ -146,7 +146,7 @@ namespace \`core.ui\` (
             prototype. Also called mixins.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import '/src/utilities/Logger.js';
+import 'utilities.Logger';
 
 namespace \`core.ui\` (
   @traits([utilities.Logger]);
@@ -163,7 +163,7 @@ namespace \`core.ui\` (
             @public() usage. Creates a publicly shared property on the prototype chain of Class. Hundreds and thousnds of instances can share a single property reference.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import '/src/core/ui/StateMachine.js';
+import 'core.ui.StateMachine';
 
 namespace \`core.ui\` (
   class FireBall extends Particle {
