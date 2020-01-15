@@ -28,7 +28,7 @@ namespace `w3c.ui` (
         setStylesheet () {    
             var css = this.cssStyle();
             !!css && !this.__proto._style_defined ? 
-                (this.appendStyleSheet(
+                (this.onAppendStyle(
                     `<style type="text/css" rel="stylsheet">\n${css}\n</style>`.toDomElement()), 
                     this.__proto._style_defined=true
                 ) : null;
@@ -51,7 +51,7 @@ namespace `w3c.ui` (
                 super.querySelectorAll(cssSel)
         }
 
-        appendStyleSheet(stylesheet) {
+        onAppendStyle(stylesheet) {
             if(this.onEnableShadow()){
                 try{
                     var style = new CSSStyleSheet();
@@ -59,7 +59,7 @@ namespace `w3c.ui` (
                     this.root.adoptedStyleSheets = [stylesheet]
                 } catch(e){
                     console.error(`${e.message} Unable to adopt stylesheet 
-                        into shadow dom -- ${this.namespace}#appendStyleSheet(), 
+                        into shadow dom -- ${this.namespace}#onAppendStyle(), 
                         see: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690.
                         As a workaround, @import the css from within <template>`)
                 }
@@ -131,7 +131,7 @@ namespace `w3c.ui` (
 
         onStylesheetLoaded(style) { }
 
-        cssTransform(css) {return css}
+        onTransformStyle(css) {return css}
 
         setCssTextAttribute(_cssText, stylenode) {
             if (stylenode && stylenode.styleSheet) {
@@ -300,7 +300,7 @@ namespace `w3c.ui` (
             return styles.reverse();
         }
 
-        async loadcss(urls) {//TODO:rename to onLoadStyle()
+        async loadcss(urls) {
             urls=urls.reverse();
             var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
             for(let path of urls){
@@ -315,11 +315,15 @@ namespace `w3c.ui` (
                         stylesheets[path] = tag;
                         if(tagName.toLowerCase() == "style"){
                             var _cssText = await window.imports(path);
-                                _cssText = this.cssTransform(_cssText);//TODO: rename to onTransformStyle()
-                                this.setCssTextAttribute(_cssText, tag);
+                            if(_cssText){
+                                _cssText = this.onTransformStyle(_cssText);
+                                _cssText && this.setCssTextAttribute(_cssText, tag);
                                 this.onStylesheetLoaded(tag);
+                                this.onAppendStyle(tag);
+                            }
+                        } else {
+                            this.onAppendStyle(tag);//link
                         }
-                        this.appendStyleSheet(tag);//TODO: rename to onAppendStyle
                 }
             }
         }
