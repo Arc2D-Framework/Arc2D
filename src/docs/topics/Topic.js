@@ -31,5 +31,13 @@ namespace `docs.topics` (
             var code = Array.from(this.querySelectorAll(".lang code"));
             code.forEach(block => hljs.highlightBlock(block))
         }
+
+        getExampleSnippets(){
+            var shell = this.querySelectorAll(".shell.lang pre code");
+            var javascript = this.querySelectorAll(".javascript.lang pre code");
+            var html = this.querySelectorAll(".html.lang pre code");
+            var css = this.querySelectorAll(".css.lang pre code");
+            return {shell,javascript,html,css}
+        }
     }
 );

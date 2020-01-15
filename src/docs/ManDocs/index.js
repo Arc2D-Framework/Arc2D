@@ -33,6 +33,7 @@ namespace `docs` (
                     el && el.scrollIntoView({behavior:"smooth",block:"start"})
                 },100)
             }
+            this.dispatchEvent("onactivityshown",c)
         }
 
         onExitCurrentActivity(c){
