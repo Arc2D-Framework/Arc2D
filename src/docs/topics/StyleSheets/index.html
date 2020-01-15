@@ -23,23 +23,23 @@
             <tbody>
               <tr>
                 <td>onLoadStyle</td>
-                <td>url of the style sheet</td>
-                <td>Possibly alter/remap url or terminate load</td>
+                <td>String: url of the style src</td>
+                <td>Possible to alter url or return false to stop loading of this url</td>
               </tr>
               <tr>
                 <td>onTransformStyle</td>
-                <td>css text</td>
-                <td>Possibly parse, transform the css in this step (i.e: LESS) </td>
+                <td>String: css src text</td>
+                <td>Possibly parse, transform the css in this step (i.e: LESS-to-CSS) </td>
               </tr>
               <tr>
                 <td>onStylesheetLoaded</td>
-                <td>style tag</td>
+                <td>HTMLStyleElement</td>
                 <td>Notifies that load is complete. Last step to make changes</td>
               </tr>
               <tr>
                 <td>onAppendStyle</td>
-                <td>style tag</td>
-                <td>Final step, injection into head tag or not.</td>
+                <td>HTMLStyleElement</td>
+                <td>Final step, injection into &#x3C;head&#x3E;.</td>
               </tr>
             </tbody>
           </table>
