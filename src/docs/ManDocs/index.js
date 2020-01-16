@@ -9,7 +9,7 @@ namespace `docs` (
     class ManDocs extends w3c.ui.Application {
         constructor(element){
             super(element);
-            this.addEventListener("lang-selected", e=>this.onLanguageChange(e), false);
+            this.addEventListener("lang-selected", e => this.onLanguageChange(e));
         }
 
         onLanguageChange(e){
@@ -26,7 +26,7 @@ namespace `docs` (
             var slot = this.querySelector('.content');
 	            slot.innerHTML="";
 	            slot.appendChild(c);
-                console.log("scrollTo",scrollTo);
+                // console.log("scrollTo",scrollTo);
             if(scrollTo){
                 setTimeout(_=>{
                     var el = c.querySelector("#"+scrollTo);

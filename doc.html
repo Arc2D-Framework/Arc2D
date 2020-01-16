@@ -7,58 +7,34 @@
             script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
             style-src   'self' 'unsafe-inline' *">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title>Cocoon Framework: Documentation</title>
-
-  
-        <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
-        <script id="config">
-            Config.NAMESPACE = "docs.ManDocs"
-        </script> 
+        <script src="node_modules/od-cocoon/framework.min.js" charset="utf-8"></script>
 
 
+
+        <!--SYNTAX HIGHLIGHT STUFF -->
         <link rel="stylesheet" type="text/css" media="screen" href="src/docs/assets/docs.css">
-
         <link rel="stylesheet" href="src/docs/libs/agate.css">
         <script src="src/docs/libs/highlight.js"></script>
+        <!--END-->
     </head>
-    <body>
-        <!-- <loader-activity></loader-activity> -->
+
+
+
+
+    <body namespace="docs.ManDocs">
+        <!-- <loader-activity></loader-activity>-->
         <man-docs>
             <template>
-                
-                <style>
-                    .brand-logo{
-                        width: auto !important;
-                    }
-                    .brand-logo .logo {
-                        height: 44px;
-                        color: #ffffff;
-                        background-repeat: no-repeat;
-                        background-position: left center;
-                        line-height: 30px;
-                        background-image: url("src/docs/assets/rhino-logo.png");
-                        font-size: 34px;
-                        padding-left: 95px;
-                        filter:invert(100%);
-                        width: auto;
-                        display: block;
-                        background-size: contain;
-                    }
-
-                    .brand-logo .logo > #frameworkname {
-                        letter-spacing: 2px;
-                    }
-                </style>
                 <div class="wrapper">
                     <nav class="sidebar">
                         <div class="navigation-brand">
                             <div class="brand-logo">
                                 <span href="index.html" class="logo">
-                                        <div id="frameworkname">OROS</div>
-                                        <div style="width: 100%;display: block;font-size: 9px;line-height: 11px;text-align: left;padding-left: 3px;">A DHTML FRAMEWORK</div>
-                                    </span>
+                                    <div id="frameworkname">OROS</div>
+                                    <div id="frameworkcaption">A DHTML FRAMEWORK</div>
+                                </span>
                             </div>
                         </div>
                         <toc-menu></toc-menu>
@@ -78,9 +54,6 @@
                         </div>
                     </article>
                 </div>
-        
-        
-        
             </template>
         </man-docs>
     </body>

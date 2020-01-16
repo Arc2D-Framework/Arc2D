@@ -25,8 +25,6 @@ namespace `core.ui.templating` (
             this.defaultMimetype = mimeType;
         }
     }
-)
+);
 
 window.customTemplateEngines = new core.ui.templating.CustomTemplateEngines;
-
-
