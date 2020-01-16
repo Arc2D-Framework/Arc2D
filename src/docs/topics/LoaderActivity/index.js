@@ -1,6 +1,5 @@
 
 namespace `docs.topics` (
-    @cascade(true);
     class LoaderActivity extends w3c.ui.WebComponent {
         constructor() {
             super();

@@ -1,7 +1,6 @@
 import '/src/docs/topics/Topic.js';
 
 namespace `docs.topics` (
-    @cascade(true);
     class ComponentUsage extends docs.topics.Topic {
         applyHighlighting(){
         	super.applyHighlighting();
