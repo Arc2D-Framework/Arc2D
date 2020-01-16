@@ -171,7 +171,7 @@ namespace `w3c.ui` (
         }
 
 
-        onConnected() { }
+        onConnected(data) { this.render(data);}
         
         onPreConnected() { 
             this.onConnected()

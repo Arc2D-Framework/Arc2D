@@ -26,7 +26,6 @@ namespace `docs` (
             var slot = this.querySelector('.content');
 	            slot.innerHTML="";
 	            slot.appendChild(c);
-                // console.log("scrollTo",scrollTo);
             if(scrollTo){
                 setTimeout(_=>{
                     var el = c.querySelector("#"+scrollTo);

@@ -31,7 +31,7 @@ namespace `docs.components` (
                 this.expand(li);
 
                 activeHref.classList.add("active");
-                // this.last_active_a=activeHref;
+                activeHref.scrollIntoView({behavior:"smooth",block:"start"})
                 this.onLinkClicked({target:activeHref})
             }
         }

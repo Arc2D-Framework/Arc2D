@@ -22,7 +22,7 @@ namespace `docs.topics` (
         }
 
         onConnected() {
-            this.render();
+            super.onConnected()
             setTimeout(_=>this.applyHighlighting(),1000);
             this.onLanguageChange()
         }
