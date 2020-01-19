@@ -11,3 +11,7 @@
 	opacity:.3;
 	pointer-events:none;
 }
+
+.TocMenu .toc li.expand ol {
+    max-height: 1000px !important;
+}
