@@ -56,8 +56,8 @@
 	padding: 0;
 	display: block;
 	width: 100%;
-	margin-bottom: 8px;
 	box-sizing: border-box;
 	border-radius: 4px;
 	margin-top: 8px;
+	margin-bottom: 24px !important;
 }

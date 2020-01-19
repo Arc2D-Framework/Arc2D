@@ -42,7 +42,7 @@ namespace \`core.ui\` (
         <p>
           onConnected(), in most cases will be overridden in your custom 
           components to wire-up listeners and manipulate the components
-          local DOM - a W3C recommendation.
+          local DOM - a W3C recommendation, not from the constructor.
         </p>
         <p>
           When implementing onConnected() in your components, it is advisable to invoke super.onConnected() before any DOM manipulations so that the base-class handles the .render() call for generating the DOM before you can manipulate it as seen in the JavaScript example (right-pane).
@@ -86,7 +86,7 @@ namespace \`core.ui\` (
 
           <blockquote class="javascript" style="display:block;width: 100%;">
             super.onConnected() does just one thing, it calls .render() for you. So alternatively,
-            you could just .render() yourself, but why? Maybe intended for clarity. But in the future, if the engine handles more/required implementation, you'll have to change your call.
+            you could just .render() yourself.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
@@ -143,7 +143,7 @@ namespace \`core.ui\` (
     }
 );</code></pre>
 <blockquote class="javascript" style="display:block;width: 100%;">
-            Shown here is a custom component, &#x3C;my-custom-element&#x3E;, being used with document.createElement(), having an inline &#x3C;template&#x3E;. In the same way, a loop can be used to generate tables. But there's a a better way.
+            Shown here is a custom component, &#x3C;my-custom-element&#x3E;, being used with document.createElement(), having an inline &#x3C;template&#x3E;. In the same way, a loop can be used to generate tables. But there's a a better way using a template-engine, as we'll soon see.
           </blockquote>
         </div>
         <div class="html lang"></div>

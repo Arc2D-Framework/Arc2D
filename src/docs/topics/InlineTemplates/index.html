@@ -1,0 +1,160 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">WebComponent Templates: Inline</h1>
+        <p>
+          In a previous chapter, we briefly covered <a href="#docs.topics.ComponentTemplates">template</a> specificity. There are 3 ways to declare templates for a component, each having weight of importance. 
+        </p>
+        <p>Inline JavaScript templates supplied by a components template() method overries everything else followed by inline HTML and external loading.</p>
+        <p>
+        	The order is from <b>grestest (3)</b> specificity to <b>least (1)</b>.
+	        <table>
+	            <thead>
+	            <tr>
+	              <th>Specificity</th>
+	              <th>Type</th>
+	              <th>Description</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	            <tr>
+	              <td>3</td>
+	              <td>Inline (Javascript)</td>
+	              <td>template() method supplies &#x3C;template&#x3E; string from Class</td>
+	            </tr>
+	            <tr>
+	              <td>2</td>
+	              <td>Inline (HTML)</td>
+	              <td>Declare the &#x3C;template&#x3E; inline when using the component tag</td>
+	            </tr>
+	            <tr>
+	              <td>1</td>
+	              <td>External (src= attribute)</td>
+	              <td>If none of above, Component loads its default index.html </td>
+	            </tr>
+	          </tbody>
+	        </table>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+        	<blockquote class="javascript" style="display:block;width: 100%;">
+            <b>Specificity 3 (highest): JavaScript inline template()</b><br/>
+            Inline template supplied by template() method has the greatest weight. This
+            template will always be used.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+    class ModalDialog extends w3c.ui.WebComponent {
+        template() {
+            return \`
+                &#x3C;template&#x3E;
+                    &#x3C;div&#x3E;
+                        &#x3C;b&#x3E;I am a Modal Dialog&#x3C;/b&#x3E;
+                    &#x3C;/div&#x3E;
+                &#x3C;/template&#x3E;
+        	\`
+    	}
+    }
+);</code>
+      </pre>
+        </div>
+        <div class="html lang">
+        	<blockquote class="html" style="display:block;width: 100%;">
+            <b>Specificity 2: HTML inline &#x3C;template&#x3E;</b><br/>
+            Second choice made by component if  Javascript template() was empty/null. Here,
+            a &#x3C;template&#x3E; can be declared inline when using the tag.
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;body&#x3E;
+    &#x3C;my-application&#x3E;
+        &#x3C;modal-dialog&#x3E;
+            &#x3C;template&#x3E;
+                &#x3C;h3&#x3E;Hello World&#x3C;/h3&#x3E;
+            &#x3C;/template&#x3E;
+        &#x3C;/modal-dialog&#x3E;
+    &#x3C;/my-application&#x3E;
+&#x3C;/body&#x3E;</code>
+      </pre>
+
+
+      <blockquote class="html" style="display:block;width: 100%;">
+            <b>Specificity 1 (lowest precedence): Components external index.html &#x3C;template&#x3E;</b><br/>
+            As the default, and final fallback, if no JavaScript template() or inline HTML
+            template was found, the Component loads it's default index.html &#x3C;template&#x3E;.
+          </blockquote>
+
+          <blockquote class="html" style="display:block;width: 100%;">Template in src/core/ui/ModalDialog/index.html</blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;template&#x3E;
+    &#x3C;h3&#x3E;modal dialog template here&#x3C;/h3&#x3E;
+&#x3C;/template&#x3E;</code>
+      </pre>
+        </div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Load performance side-effect</h1>
+        <p>
+          The order of precedence lends to an interesting performance side-effect. A prefab component can be baked with it's template inlined in the Javascript, decreasing load time significantly. Since a JavaScript supplied inline template() carries the highest precedence, the external template src file is never loaded. See <a href="#docs.topics.ComponentPrefabs">Prefab Components</a>.
+        </p>
+        <p>
+          In the <a href="docs.topics.ComponentTemplatingDetails">Templating</a> chapter, further execution details are covered including JSON-to-HTML generation.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Put HTML fragments in &#x3C;template&#x3E; tag</h1>
+        <p>
+          Regardless of what strategy is used, the HTML fragment that defines a template must be within an HTML5 &#x3C;template&#x3E; tag as seen in the snippets above. This is mostly a standard convention and is required by the engines parser.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Use backticks\` around inline JavaScript template()'s</h1>
+        <p>
+          The use of backticks\` around templates is recommended for multi-line
+          HTML strings and will allow for template value replacement using the built-in TemplateLiteral parser.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+  </div>
+</template>
