@@ -50,8 +50,8 @@ namespace `applications` (
 
 			// Tell AssetManager to load the resources for each model, including the exported .skel file, the .atlas file and the .png
 			// file for the atlas. We then wait until all resources are loaded in the load() method.
-			this.assetManager.loadBinary("resources/assets/spineboy-pro.skel");
-			this.assetManager.loadTextureAtlas("resources/assets/spineboy-pma.atlas");
+			this.assetManager.loadBinary("resources/spine/stickman.skel");
+			this.assetManager.loadTextureAtlas("resources/spine/stickman.atlas");
 			// assetManager.loadBinary("assets/raptor-pro.skel");
 			// assetManager.loadTextureAtlas("assets/raptor-pma.atlas");
 			// assetManager.loadBinary("assets/tank-pro.skel");
@@ -95,11 +95,6 @@ namespace `applications` (
 	        			this.idle=true;
 	        		}
 	        	}
-	        	
-	        	// if (Key.isDown(Key.UP)) {
-	        	// 	this.animationState.setAnimation(0, "jump", false);
-	        	// 	// this.animationState.setAnimation(0, "idle", true);
-	        	// }
 	        }
         }
 
@@ -140,7 +135,7 @@ namespace `applications` (
         load () {
 			// Wait until the AssetManager has loaded all resources, then load the skeletons.
 			if (this.assetManager.isLoadingComplete()) {
-				this.skeletons["spineboy"] = this.loadSkeleton("spineboy-pro", "idle", true);
+				this.skeletons["spineboy"] = this.loadSkeleton("stickman fighter", "idle", true);
 				this.skeletons["spineboy"].skeleton.velocity=6;
 				this.loading_complete=true;
 				this.resize()
@@ -157,7 +152,7 @@ namespace `applications` (
 			if (skin === undefined) skin = "default";
 
 			// Load the texture atlas using name.atlas from the AssetManager.
-			this.atlas = this.assetManager.get("resources/assets/" + name.replace("-ess", "").replace("-pro", "") + (premultipliedAlpha ? "-pma": "") + ".atlas");
+			this.atlas = this.assetManager.get("resources/spine/stickman.atlas");
 
 			// Create a AtlasAttachmentLoader that resolves region, mesh, boundingbox and path attachments
 			this.atlasLoader = new spine.AtlasAttachmentLoader(this.atlas);
@@ -166,7 +161,8 @@ namespace `applications` (
 			var skeletonBinary = new spine.SkeletonBinary(this.atlasLoader);
 
 			// Set the scale to apply during parsing, parse the file, and create a new skeleton.
-			var skeletonData = skeletonBinary.readSkeletonData(this.assetManager.get("resources/assets/" + name + ".skel"));
+			var skeletonData = skeletonBinary.readSkeletonData(this.assetManager.get("resources/spine/stickman.skel"));
+			debugger;
 			var skeleton = new spine.Skeleton(skeletonData);
 			skeleton.setSkinByName(skin);
 			var bounds = this.calculateBounds(skeleton);

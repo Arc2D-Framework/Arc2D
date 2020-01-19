@@ -57,9 +57,75 @@ this.render(person)</code></pre><br/>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
-        <div class="javascript lang"></div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            index.js:<br/>Demo 'HealthCarePackage' component defined as a demo for showing template parsing.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+<b>namespace</b> \`docs.demos.templates\` (
+    class HealthCarePackage extends w3c.ui.WebComponent  {
+        onConnected(){
+            var family = {
+                husband: "Joe",
+                spouse : "Anna",
+                children : [
+                    {name : "Jordan", age: 10},
+                    {name : "Sally", age: 5}
+                ],
+                coverage: {
+                    type : "PPO",
+                    effective : "03/23/2020",
+                    end : "03/23/2021",
+                    dental : false,
+                    cost : "$800.45"
+                }
+            };
+
+            this.render(family)
+        }
+    }
+);
+        </code></pre>
+        </div>
+        <div class="html lang">
+            <blockquote class="html" style="display:block;width: 100%;">
+            index.html:
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;template&#x3E;
+    &#x3C;h3&#x3E;Family Health Care: \${this.coverage.type}&#x3C;/h3&#x3E;
+    &#x3C;div&#x3E;Married: \${this.spouse? &#x22;Yes&#x22;: &#x22;No&#x22;}&#x3C;/div&#x3E;
+    &#x3C;div&#x3E;Children: \${this.children.length||&#x22;None&#x22;}&#x3C;/div&#x3E;
+    &#x3C;table&#x3E;
+        &#x3C;thead style=&#x22;background: gray;&#x22;&#x3E;
+            &#x3C;th&#x3E;Child Name&#x3C;/th&#x3E;
+            &#x3C;th&#x3E;Age&#x3C;/th&#x3E;
+        &#x3C;/thead&#x3E;
+        &#x3C;tbody&#x3E;
+            \${
+                this.children.map(
+                    child =&#x3E; 
+                        &#x60;&#x3C;tr&#x3E; 
+                            &#x3C;td&#x3E;\${child.name}&#x3C;/td&#x3E;
+                            &#x3C;td&#x3E;\${child.age}&#x3C;/td&#x3E;
+                        &#x3C;/tr&#x3E;&#x60;
+                ).join(&#x22;&#x22;)
+            }
+        &#x3C;/tbody&#x3E;
+    &#x3C;/table&#x3E;
+&#x3C;/template&#x3E;
+        </code></pre>
+        </div>
+        <div class="css lang">
+            <blockquote class="css" style="display:block;width: 100%;">
+            index.html:
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+.HealthCarePackage {
+    display:block;
+}
+        </code></pre>
+        </div>
       </div>
     </div>
 

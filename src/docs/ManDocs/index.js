@@ -45,7 +45,7 @@ namespace `docs` (
         }
 
         onLoadingActivity(c){
-            application.dispatchEvent("showsplash")
+            // application.dispatchEvent("showsplash")
             console.log("new activity loading first time assets", c);
             this.dispatchEvent("topichanged",{});
         }
