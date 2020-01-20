@@ -8,7 +8,7 @@ namespace `docs.topics` (
 
 		onLaunch(){
 			var loader = new docs.topics.LoaderActivity;
-			application.appendChild(loader)
+			application.appendChild(loader)//TODO: Keeps adding new instances
 		}
 	}
 )
