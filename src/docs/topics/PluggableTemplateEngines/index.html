@@ -1,0 +1,95 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Pluggable Template Engines</h1>
+        <p>
+          So you hate JSX, but love Mustache. You like Template Literals and can't stand Handlebars. Some prefer ASP-style &#x3C;%= %&#x3E; syntax. Maybe you rather roll your own template engine. Oros allows custom template engines to be defined and "plugged". 
+        </p>
+        <p>
+            Oros ships with a native ES6/7 template literals parser that is down-right
+            fast, simple to use and powerful. But if you like to use Mustache for example, a driver should be created, which delegates to Mustache for parsing. At minimum, a driver must implement:
+        </p>
+        <p>
+            <table>
+                <thead>
+                <tr>
+                  <th>Method/Attribute</th>
+                  <th>Arguments</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>parse(tempStr, data, self)</code></td>
+                  <td>
+                      <ul style="margin: 0;padding: 0;">
+                          <li><code>tempStr</code> - template input src</li>
+                          <li><code>data</code> - JSON data</li>
+                          <li><code>self</code> - ref to the component</li>
+                      </ul>
+                  </td>
+                  <td>parse() is called with 3 args, should return valid HTML</td>
+                </tr>
+                <tr>
+                    <td><code>name</code></td>
+                    <td></td>
+                    <td>A friendly name for the engine. Ex: "MustacheDriver"</td>
+                </tr>
+                <tr>
+                    <td><code>ext</code></td>
+                    <td></td>
+                    <td>A custom file extension if applicable. Ex: ".mus"</td>
+                </tr>
+              </tbody>
+            </table>
+        </p>
+      </div>
+    </div>
+      
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Exmple Driver</h1>
+        <p>
+          As an example, here is the driver for the built-in TemplateLiteral engine
+        </p>
+        <pre class="inline javascript lang"><code>
+var TemplateLiterals = {
+    name : "TemplateLiterals",
+    ext : ".es6",
+    eval : function(tempStr, data, self){
+        var parse = (tempStr, templateVars) => {
+            return new Function("return \`"+tempStr +"\`;").call(templateVars);
+        }
+        return parse(tempStr, data)
+    },
+    isAvailable : function(){
+        return true
+    },
+
+    install : function(){}
+};
+
+
+
+//register with a custom mime-type
+window.customTemplateEngines.define("template/literals", TemplateLiterals);
+            </code></pre>
+        <p>....In progress</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+  </div>
+</template>
