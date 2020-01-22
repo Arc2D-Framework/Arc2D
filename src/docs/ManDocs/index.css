@@ -6,6 +6,12 @@ html,body,man-docs,.wrapper{
 }
 
 
+@font-face {
+    font-family: "JetBrainsMono-Regular";
+    src: url("src/docs/assets/fonts/JetBrainsMono-Regular.ttf");
+}
+
+
 man-docs .content {
 	padding:13px 0;
 }
@@ -46,4 +52,11 @@ man-docs .brand-logo .logo > #frameworkname {
 
 man-docs .brand-logo #frameworkcaption{
     width: 100%;display: block;font-size: 9px;line-height: 11px;text-align: left;padding-left: 3px;
+}
+
+
+.content code,
+.content pre code {
+    font-family: JetBrainsMono-Regular !important;
+    font-size:14px !important;
 }
