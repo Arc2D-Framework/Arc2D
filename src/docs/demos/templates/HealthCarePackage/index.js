@@ -1,5 +1,12 @@
+import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
+
 namespace `docs.demos.templates` (
 	class HealthCarePackage  extends w3c.ui.WebComponent  {
+
+		getTemplateEngine() {
+            return window.customTemplateEngines.getEngineByMimeType("template/nunjucks")
+        }
+        
 		onConnected(){
 			var family = {
 		        husband: "Joe",

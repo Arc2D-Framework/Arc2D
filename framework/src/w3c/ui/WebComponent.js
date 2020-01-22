@@ -164,10 +164,11 @@ namespace `w3c.ui` (
         }
 
         getTemplateToLoad(){
+            var engine = this.getTemplateEngine();
             return  this.querySelector("template")||    //node
                     this.src||                          //uri
                     this.template()||                   //string
-                    "/src/./index.html"                 //default
+                    "/src/./index" + (engine.ext||"") + ".html" //default
         }
 
 

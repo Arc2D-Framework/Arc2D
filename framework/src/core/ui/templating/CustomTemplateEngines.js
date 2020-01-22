@@ -14,7 +14,7 @@ namespace `core.ui.templating` (
         }
 
         getEngineByMimeType(mime){
-            return this.engines[mimeType];
+            return this.engines[mime];
         }
 
         get default (){
