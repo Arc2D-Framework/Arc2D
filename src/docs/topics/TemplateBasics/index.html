@@ -111,10 +111,10 @@ namespace \`core.ui\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Rendering Custom DOM</h1>
         <p>
-          It's possible that you may never want to invoke super.onConnected() for template rendering because you intend to generate the components DOM with some sort of algorithm or dynamic html generation aspects. This is necessary if you plan to loop over a JSON data-set and manually create table rows for example. 
+          It's possible that you may never want to invoke super.onConnected() for template rendering because you intend to generate the components DOM with some sort of algorithm or dynamic html generation aspects (see Javascript snippet tab). This is necessary if you plan to loop over a JSON data-set and manually create table rows for example using the DOM api. 
         </p>
         <p>
-        	<em>Alternatively</em>, JSON data could be injected into .render(data) or super.onConnected(data), to generate HTML using any open-source templating engine available (Mustache, Handlebars, ES6 Template Literals) - we'll cover this strategy shortly.
+        	<em>Alternatively</em>, JSON data could be injected into .render(data) or super.onConnected(data), to generate HTML using any open-source templating engine available (Mustache, Handlebars, ES6 Template Literals) - we'll cover this strategy in <a href="#docs.topics.PluggableTemplateEngines">Pluggable Engines</a>.
         </p>
       </div>
       <div style="width: 50%;display: block;">

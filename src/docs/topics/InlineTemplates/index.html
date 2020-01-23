@@ -6,11 +6,12 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">WebComponent Templates: Inline</h1>
         <p>
-          In a previous chapter, we briefly covered <a href="#docs.topics.ComponentTemplates">template</a> specificity. There are 3 ways to declare templates for a component, each having weight of importance. 
+          In a previous chapter, we briefly covered <a href="#docs.topics.ComponentTemplates">template</a> specificity. There are 3 ways to declare templates for a component, each having weight of importance -- inline JavaScript template()s having the highest influence on template load
+          order.
         </p>
-        <p>Inline JavaScript templates supplied by a components template() method overries everything else followed by inline HTML and external loading.</p>
+
         <p>
-        	The order is from <b>grestest (3)</b> specificity to <b>least (1)</b>.
+        	The order is from <b>greatest (3)</b> specificity to <b>least (1)</b>.
 	        <table>
 	            <thead>
 	            <tr>
