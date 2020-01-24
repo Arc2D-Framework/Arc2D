@@ -1,0 +1,11 @@
+.generate-step-num {
+    background: #a18dcc;
+    border-radius: 50px;
+    padding: 3px;
+    width: 30px;
+    display: inline-block;
+    height: 30px;
+    text-align: center;
+    line-height: 27px;
+    color: white;
+}

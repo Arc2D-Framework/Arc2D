@@ -2,19 +2,19 @@
   <div>
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Hello World</h1>
+        <h1 id="api-reference">Generate apps/components in 3 steps</h1>
         <p>
-          Open a terminal on your project folder. Use the <code>plop</code> command to see a list of generators.
+          Open a terminal on your project folder. Use the <code>plop</code> command to see a list of generators. We'll generate an application, but the same process applies to components.
           <!-- <a href="http://localhost:3000/helloworld.html" target="_new">localhost:3000/helloworld.html</a> -->
         </p>
         <p>
-          <!-- <img src="src/docs/images/helloworld_file_in_dir_structure.png" style="width: 264px;"/> -->
+          <em>Enable the "Shell" tab to the right</em> for commands.
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang">
           <blockquote class="shell" style="display:block;width: 100%;">
-            Run <code style="display:inline;">plop</code>
+            Run <code style="display:inline;">plop</code> on your project folder
           </blockquote>
           <pre class="highlight shell" style="display:block;width: 100%;"><code>MyProject > plop</code>
         </pre>
@@ -28,9 +28,9 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Select the "app" generator</h1>
+        <h1 id="api-reference"><span class="generate-step-num">1</span> Select the "app" generator</h1>
         <p>
-          From the list of generators, select <code>app</code>
+          From the list of generators, select <code>app</code> to generate a HelloWorld app.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -52,9 +52,9 @@ component - Generates a UI Component
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Accept the default namespace (applications)</h1>
+        <h1 id="api-reference"><span class="generate-step-num">2</span> Accept the default namespace</h1>
         <p>
-          Hit <code>ENTER</code> key to accept the default namespace of "applications".
+          Hit <code>ENTER</code> key to accept the default namespace of <code>applications.HelloWorld</code>.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -63,7 +63,7 @@ component - Generates a UI Component
             Hit <code style="display:inline;">ENTER</code>:
           </blockquote>
           <pre class="highlight shell" style="display:block;width: 100%;"><code>? <span style="color:#8e6dd4;">[PLOP]</span> Please choose a generator. <span style="color:aqua;">app</span> - <span style="color:gray;">Generates an Application</span>
-? Application Namespace (applications) : </code>
+? Application Namespace (applications.HelloWorld) : </code>
         </pre>
         </div>
         <div class="javascript lang"></div>
@@ -75,31 +75,7 @@ component - Generates a UI Component
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Your applications class name</h1>
-        <p>
-          Give your application a class name of "HelloWorld":
-        </p>
-      </div>
-      <div style="width: 50%;display: block;">
-        <div class="shell lang">
-          <blockquote class="shell" style="display:block;width: 100%;">
-            Class names should be 2 words in CamelCase format:
-          </blockquote>
-          <pre class="highlight shell" style="display:block;width: 100%;"><code>? <span style="color:#8e6dd4;">[PLOP]</span> Please choose a generator. <span style="color:aqua;">app</span> - <span style="color:gray;">Generates an Application</span>
-? Application Namespace (applications) : applications
-? Application Namespace (applications) : <span style="color:aqua;">HelloWorld</span></code>
-        </pre>
-        </div>
-        <div class="javascript lang"></div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
-      </div>
-    </div>
-
-
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
-      <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Open the application in the browser</h1>
+        <h1 id="api-reference"><span class="generate-step-num">3</span> Open the application in the browser</h1>
         <p>
           You should now be able to access your hello world app in the browser:<br/>
           <a href="localhost:3000/hello-world.html" target="new">localhost:3000/hello-world.html</a>
@@ -111,13 +87,16 @@ component - Generates a UI Component
             All files for your applcation are generated:
           </blockquote>
           <pre class="highlight shell" style="display:block;width: 100%;"><code>? <span style="color:#8e6dd4;">[PLOP]</span> Please choose a generator. <span style="color:aqua;">app</span> - <span style="color:gray;">Generates an Application</span>
-? Application Namespace (applications) : applications
-? Application Namespace (applications) : <span style="color:aqua;">HelloWorld</span>
+? Application Namespace (applications.HelloWorld) : <span style="color:aqua;">HelloWorld</span>
 <span style="color:limegreen;">✔  ++</span> /src/applications/HelloWorld/index.js
 <span style="color:limegreen;">✔  ++</span> /src/applications/HelloWorld/index.css
 <span style="color:limegreen;">✔  ++</span> /src/applications/HelloWorld/index.html
 <span style="color:limegreen;">✔  ++</span> /hello-world.html</code>
         </pre>
+        <blockquote class="shell" style="display:block;width: 100%;">
+            Repeat steps with a different namespace to generate your own app. Ex namespace:
+            applications.MyStore or a ui component like <code style="display:inline;">core.ui.CoolButton</code>
+          </blockquote>
         </div>
         <div class="javascript lang"></div>
         <div class="html lang"></div>
