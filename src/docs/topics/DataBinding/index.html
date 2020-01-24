@@ -79,43 +79,7 @@ user.firstname = "xyz";
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
-        <div class="javascript lang">
-            <blockquote class="javascript" style="display:block;width: 100%;">
-            Example 1: 1-way binding from source to destination elements.
-          </blockquote>
-          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-var source = this.querySelector("#input1");
-var dest = this.querySelector("#input2");
-//bind it
-this.watch(source, 'value', (prop, prev, val) => dest.value = val);
-        </code></pre>
-
-
-        <blockquote class="javascript" style="display:block;width: 100%;">
-            Example 2: 2-way binding from/to source and destination.
-          </blockquote>
-          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-var source = this.querySelector("#input1");
-var dest = this.querySelector("#input2");
-//bind them
-this.watch(source,'value', (prop, prev, val) => dest.value   = val);
-this.watch(dest,  'value', (prop, prev, val) => source.value = val);
-        </code></pre>
-
-
-        <blockquote class="javascript" style="display:block;width: 100%;">
-            Example 3: 1-way binding from data model to element(view).
-          </blockquote>
-          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-var user = {firstname:""};
-var dest = this.querySelector("#input5");
-//bind them
-this.watch(user, 'firstname', (prop, old, val) => dest.value = val);
-
-//later, we update model (try it in console)
-user.firstname = "xyz";
-        </code></pre>
-        </div>
+        <div class="javascript lang"></div>
         <div class="html lang"></div>
         <div class="css lang"></div>
       </div>
