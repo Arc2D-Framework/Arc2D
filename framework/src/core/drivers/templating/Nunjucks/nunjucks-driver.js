@@ -4,15 +4,10 @@ import "/framework/src/core/drivers/templating/Nunjucks/nunjucks.js";
     var NunjucksDriver = {
         name : "Nunjucks",
         ext : ".nunj",
-        eval : function(tempStr, data, self){
-            debugger;
+        parse : function(tempStr, data, self){
             var res = nunjucks.renderString(tempStr, data);
             return res;
         },
-        isAvailable : function(){
-            return true
-        },
-
         install : function(){
             nunjucks.configure({ autoescape: true });
         }

@@ -339,7 +339,7 @@ namespace `w3c.ui` (
         //TODO: new proposal for simpler use and DIP
         evalTemplate(template, data) {
             var eng = this.getTemplateEngine();
-            return eng.eval(template, data, this);
+            return eng.parse(template, data, this);
         }
 
         getTemplateEngine() {
