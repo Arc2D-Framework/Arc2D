@@ -1,0 +1,126 @@
+<template>
+  <div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Data Binding, and why it sucks</h1>
+        <p>
+          You pretty much didn't expect that. Oros supports bi-directional data binding so that an element in view is bound to a property of a model, synchronizing what is seen and what is stored in memory automagically. Welcome to cheap, almost free MVC. If one side of the relationship changes it's value, the other side will reflect the value. Data binding is suitable for whimsical or very simple use cases, better suited for input fields on a form at a simple level or to setup a one-off wire-up quick and dirty. Anything else would be inefficient and non-deterministic. It's childs play at best. But it warrants some coverage and why we chose to make binding an optinal "feature" and not baked into the core from start.
+        </p>
+        <p>
+            You're not limited to binding view <-> model. Oros supports binding model <-> model, view <-> view, and view <-> model bi-directionally. Here are some examples:
+
+            <view-view-binding></view-view-binding>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 1: 1-way binding from source to destination elements.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var source = this.querySelector("#input1");
+var dest = this.querySelector("#input2");
+//bind it
+this.watch(source, 'value', (prop, prev, val) => dest.value = val);
+        </code></pre>
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 2: 2-way binding from/to source and destination.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var source = this.querySelector("#input1");
+var dest = this.querySelector("#input2");
+//bind them
+this.watch(source,'value', (prop, prev, val) => dest.value   = val);
+this.watch(dest,  'value', (prop, prev, val) => source.value = val);
+        </code></pre>
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 3: 1-way binding from data model to element(view).
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var user = {firstname:""};
+var dest = this.querySelector("#input5");
+//bind them
+this.watch(user, 'firstname', (prop, old, val) => dest.value = val);
+
+//later, we update model (try it in console)
+user.firstname = "xyz";
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Back to why it sucks</h1>
+        <p>
+          Of all the frameworks in existence, the clarity, speed and flexibility of data binding in Oros puts a cloud over scortched land, raining down:
+          <ul>
+              <li><b>Transparency:</b> You see what you are wiring up. No unknowns</li>
+              <li><b>Control:</b> Grandular ability to transform/format in|output</li>
+              <li><b>Programmatic:</b> Logic in JavaScript controller, not in view/HTML (angular)</li>
+              <li><b>Fast:</b> Purely direct, no mapping, no interpolation, no polling, no magicbox</li>
+              <li><b>Affordance:</b> .unwatch() and .watch() at anytime</li>
+          </ul>
+        </p>
+        <p>
+            The best part is, you won't need it. Frameworks like (...nevermind), make extensive use of binding, forcing <code>ng-</code> attributes and horrible inline HTML declarations like <code>OnClick={}, ...props</code> and <code>setState-hell</code> all over your once supple HTML. If the ugly attributes was'nt enough, here' render() all your HTML together inside your Javascript and throw in CSS too, mesh it all in one lump and declare global function helpers here and there. "It's not bad, we have a Virtual..."(i won't say it) that handles discrepencies.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 1: 1-way binding from source to destination elements.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var source = this.querySelector("#input1");
+var dest = this.querySelector("#input2");
+//bind it
+this.watch(source, 'value', (prop, prev, val) => dest.value = val);
+        </code></pre>
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 2: 2-way binding from/to source and destination.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var source = this.querySelector("#input1");
+var dest = this.querySelector("#input2");
+//bind them
+this.watch(source,'value', (prop, prev, val) => dest.value   = val);
+this.watch(dest,  'value', (prop, prev, val) => source.value = val);
+        </code></pre>
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 3: 1-way binding from data model to element(view).
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var user = {firstname:""};
+var dest = this.querySelector("#input5");
+//bind them
+this.watch(user, 'firstname', (prop, old, val) => dest.value = val);
+
+//later, we update model (try it in console)
+user.firstname = "xyz";
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+  </div>
+</template>

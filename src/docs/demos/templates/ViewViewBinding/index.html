@@ -1,0 +1,23 @@
+<template>
+	<div>
+        <h3>Example 1: View -> View (1-way)</h3>
+		<span style="width:130px;display: inline-block;">SOURCE:</span> <input id="input1"/>
+        <br/>
+        <span style="width:130px;display: inline-block;">DESTINATION:</span> <input id="input2" disabled/>
+	</div>
+
+    <div>
+        <h3>Example 2: View <-> View (2-way)</h3>
+        <span style="width:130px;display: inline-block;">SOURCE:</span> <input id="input3"/>
+        <br/>
+        <span style="width:130px;display: inline-block;">DESTINATION:</span> <input id="input4"/>
+    </div>
+
+    <div>
+        <h3>Example 3: Model -> View (1-way)</h3>
+        <span style="width:130px;display: inline-block;">MODEL:</span> <code>var user = {name: "xyz"};</code>
+        <br/>
+        <span style="width:130px;display: inline-block;">DESTINATION:</span> <input id="input5" disabled/>
+        <div><em>HINT:</em> try to change <code>user.name=</code> in dev console to see view update</div>
+    </div>
+</template>
