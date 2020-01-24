@@ -141,7 +141,7 @@ var NunjucksDriver = {
 
         ext : ".nunj",
 
-        eval : function(tempStr, data, self){
+        parse : function(tempStr, data, self){
             return nunjucks.renderString(tempStr, data);
         },
 
