@@ -3,15 +3,94 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Data Binding, and why it sucks</h1>
+        <h1 id="api-reference">MVC Data Binding</h1>
         <p>
-          You pretty much didn't expect that. Oros supports bi-directional data binding so that an element in view is bound to a property of a model, synchronizing what is seen and what is stored in memory automagically. Welcome to cheap, almost free MVC. If one side of the relationship changes it's value, the other side will reflect the value. Data binding is suitable for whimsical or very simple use cases, better suited for input fields on a form at a simple level or to setup a one-off wire-up quick and dirty. Anything else would be inefficient and non-deterministic. It's childs play at best. But it warrants some coverage and why we chose to make binding an optinal "feature" and not baked into the core from start.
+            MVC is an structural pattern and a concept for representing a component in 3 parts. The View
+            represents what the user interacts with, usually a visual interface. The component Controller sits between
+            the View and the Model. It watches changes on both sides, its main responsibility is to keep
+            the View and Model in sync with each other. The Model represents some kind of state the component
+            is in. Models can be as simple as a set of variables and flags defined in the Controller, an object or a more complex process that models a real world entity such as a Model of a clock. In the case of clock, the Model would simulate how time passes every second, updating its minutes and incrementing hours mathamatically. This Model is never seen by the user because it is generally a concept, "process" or data structure in raw form. The Controller watches the Model and projects its state unto the View graphically. If the View had controls to set the time, the controller watches the view and keeps the Model in synch with what the user is attempting. This is MVC.
         </p>
         <p>
-            You're not limited to binding view <-> model. Oros supports binding model <-> model, view <-> view, and view <-> model bi-directionally. Here are some examples:
+            In this triad, logic has to be written in the Controller to synchronize both sides so that the user can experience the idea visually with knobs, buttons and graphics. This "wire-up" code in a Controller is usually done in a combination of 1 of 3 ways:
+            <ul>
+                <li>Event-driven</li>
+                <li>Environment Loop (games)</li>
+                <li>Data Binding</li>
+            </ul>
+        </p>
+        <p>
+            We'll cover Data Binding here. First let's conceptually show, from a front and side view what a Component might look like in an MVC structure:
+            <img src="src/docs/images/mvc.png"/>
+            A side view shows it clearly, the user only ever sees and interacts with a visual projection, never having to touch a Controller or Model. Think of it as the side view of the screen. The drawing shows the controller behind the scheme.
+        </p>
+        <p>
+            In the case of the Model of a Clock again, as seconds and minutes pass by in real-time, the controller watches the changes and sends it to it's View, rendering a visual representation on a canvas or with HTML. The benefit of all of this is being able to change out views so that the Clock can be experienced as an analog (minute hands) or digital clock. If the View has a toggle to switch between representations, the Controller swaps out the view for another.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
 
-            <view-view-binding></view-view-binding>
+
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Programming the controller</h1>
+        <p>
+          Data Binding is one way to program a controller to watch and synchronize the view with its model. Data binding can go both directions. 1 way and 2-way (bi directional). Essentically:
+          <ul>
+              <li>model -> view</li>
+              <li>model <- view</li>
+              <li>model <-> view</li>
+          </ul>
+          Unlike "data binding" implemented in most modern frameworks, binding in Oros is a bit more sophisticated on quite a few aspects:
+          <ul>
+              <li><b>Transparency:</b> You see what you are wiring up.</li>
+              <li><b>Control:</b> Grandular ability to bind, unbind and transform  in | output</li>
+              <li><b>Programmatic:</b> Logic in Controller, *never* in the View</li>
+              <li><b>Fast:</b> Direct, no mapping, no polling/timers, no magicbox</li>
+              <li><b>Affordance:</b> .watch() and .unwatch() anyhting in the View, Model or both</li>
+              <li><b>Live:</b> Bindings can be dynamically generated at runtime. No compilation or build process. </li>
+          </ul>
+          Let's look at a simple case of binding 2 input boxes on a view with each other, 1-way and bi-directional. We're not forced to bind to a model, in Oros, anything can be bound to each other for synchronization.
         </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">1-Way Binding</h1>
+        <p>
+            Our View has 2 input fields in this example. Since we are able to bind any 2 things together,
+            let's bind these in 1-direction, so that when source changes in value, destination will reflect the source and stay i nsync. Code example to the right.
+            <view-view-binding bind-type="single">
+                <template>
+                    <div>
+                        <h3>Example 1: View -> View (1-way)</h3>
+                        <span style="width:130px;display: inline-block;">SOURCE:</span> <input id="input1"/>
+                        <br/>
+                        <span style="width:130px;display: inline-block;">DESTINATION:</span> <input id="input2" disabled/>
+                    </div>
+                </template>
+            </view-view-binding>
+        </p>
+        
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -25,31 +104,47 @@ var dest = this.querySelector("#input2");
 //bind it
 this.watch(source, 'value', (prop, prev, val) => dest.value = val);
         </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
 
 
-        <blockquote class="javascript" style="display:block;width: 100%;">
-            Example 2: 2-way binding from/to source and destination.
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">2-Way Binding</h1>
+        <p>
+            Here are the same 2 input elements in the View. Let's bind them bi-directionaly so that either one will reflect it's value in the other, synchronizing their values.
+            <view-view-binding bind-type="both">
+                <template>
+                    <div>
+                        <h3>Example 1: View -> View (1-way)</h3>
+                        <span style="width:130px;display: inline-block;">SOURCE:</span> <input id="input1"/>
+                        <br/>
+                        <span style="width:130px;display: inline-block;">DESTINATION:</span> <input id="input2"/>
+                    </div>
+                </template>
+            </view-view-binding>
+        </p>
+        
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 2: 2-way binding from and to source and destination.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 var source = this.querySelector("#input1");
 var dest = this.querySelector("#input2");
-//bind them
+//bind them to each other
 this.watch(source,'value', (prop, prev, val) => dest.value   = val);
 this.watch(dest,  'value', (prop, prev, val) => source.value = val);
-        </code></pre>
-
-
-        <blockquote class="javascript" style="display:block;width: 100%;">
-            Example 3: 1-way binding from data model to element(view).
-          </blockquote>
-          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-var user = {firstname:""};
-var dest = this.querySelector("#input5");
-//bind them
-this.watch(user, 'firstname', (prop, old, val) => dest.value = val);
-
-//later, we update model (try it in console)
-user.firstname = "xyz";
         </code></pre>
         </div>
         <div class="html lang"></div>
@@ -59,22 +154,80 @@ user.firstname = "xyz";
 
 
 
-    
+
+
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Back to why it sucks</h1>
+        <h1 id="api-reference">1-Way Binding to a Model</h1>
         <p>
-          Of all the frameworks in existence, the clarity, speed and flexibility of data binding in Oros puts a cloud over scortched land, raining down:
-          <ul>
-              <li><b>Transparency:</b> You see what you are wiring up. No unknowns</li>
-              <li><b>Control:</b> Grandular ability to transform/format in|output</li>
-              <li><b>Programmatic:</b> Logic in JavaScript controller, not in view/HTML (angular)</li>
-              <li><b>Fast:</b> Purely direct, no mapping, no interpolation, no polling, no magicbox</li>
-              <li><b>Affordance:</b> .unwatch() and .watch() at anytime</li>
-          </ul>
+            Let's say we have a simple object{} having a firstname property, it's in our Controller. We can bind from this model to the input box in the View the same way.
+            <view-view-binding bind-type="both">
+                <template>
+                    <div>
+                    <h3>Example 3: Model -> View (1-way)</h3>
+                    <span style="width:130px;display: inline-block;">MODEL:</span> <code>var user = {firstname: "Bill"};</code>
+                    <br/>
+                    <span style="width:130px;display: inline-block;">DESTINATION:</span> <input id="input1" disabled/>
+                    <div><em>HINT:</em> try to change <code>user.firstname=</code> in dev console to see view update</div>
+                </div>
+                </template>
+            </view-view-binding>
+        </p>
+        
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            Example 3: 1-way binding from data model to element(view).
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var user = {firstname:""};
+var dest = this.querySelector("#input1");
+//bind them
+this.watch(user, 'firstname', (prop, old, val) => dest.value = val);
+</code></pre>
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            At a later time, we update model (try it in console)
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>//in console
+user.firstname = "Ted";</code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Data Binding is a convenience, but not in todays modern frameworks</h1>
+        <p>
+            Data Binding is just 1 strategy for a Controller to synchronize it's state with it's view. With just 1 line of code:
+          <pre class="inline javascript lang"><code>
+this.watch(source, 'value', (prop, prev, val) => dest.value = val);
+        </code></pre>
         </p>
         <p>
-            The best part is, you won't need it. Frameworks like (...nevermind), make extensive use of binding, forcing <code>ng-</code> attributes and horrible inline HTML declarations like <code>OnClick={}, ...props</code> and <code>setState-hell</code> all over your once supple HTML. If the ugly attributes was'nt enough, here' render() all your HTML together inside your Javascript and throw in CSS too, mesh it all in one lump and declare global function helpers here and there. "It's not bad, we have a Virtual..."(i won't say it) that handles discrepencies.
+            We are able to dynamically, and automatically synchronize in real-time, the state (values) of 2 things. It's merely a convenience that can easily be abused because of it's simplicity. You don't have this option in most modern frameworks. The frameworks today make binding a fully integrated and central part of it's architecture. This leads to all sorts of problems.
+        </p>
+        <p>
+            <ul>
+                <li><b>Separation of Concerns:</b> Violated. Frameworks today force bindings to be declared in HTML with faux JavaScript fragments littering the View</li>
+                <li><b>Readability:</b> The HTML goes from supple and lean to messy, complex multi-line wrap-arounds in an editor makes it hard to read, hard to understand.</li>
+                <li><b>OCP Violation:</b> Most frameworks today lump html, javascript and css into 1 Class or "Higher Order Funciton". A small edit might span a few areas, touching all areas at times.</li>
+                <li><b>Performance:</b> Binding is magic. There is a good amount of listeners and polling running on the CPU to check "dirty flags" and keep things mirrored</li>
+                <li><b>No Flexibility:</b> Because binding in most frameworks are based on having a model or "props" types, DOM manipulation isn't easily possible unless you alter the models, a strict form of MVC.</li>
+                <li><b>Performance:</b> Due to frameworks constantly monitoring state to render it's view, it leads one to believe that this kind of "loop" runs at some interval, thereby simulating a poor-mans game loop at deadly poor, non-deterministic behavior</li>
+                <li><b>Compilation:</b> It's not live. These "faux" bindings in HTML are not native, or semantically meaningful to browsers and must be pre-compiled to generate parsable syntax for the browser.</li>
+                <li><b>Debugging:</b> good luck!</li>
+            </ul>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -84,7 +237,5 @@ user.firstname = "xyz";
         <div class="css lang"></div>
       </div>
     </div>
-
-
   </div>
 </template>

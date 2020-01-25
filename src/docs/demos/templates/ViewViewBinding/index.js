@@ -6,18 +6,20 @@ namespace `docs.demos.templates` (
             super.onConnected();
             var input1 = this.querySelector("#input1");
             var input2 = this.querySelector("#input2");
-            wrist.watch(input1, 'value', (prop, prev, curr) => input2.value = curr);
-            
-            var input3 = this.querySelector("#input3");
-            var input4 = this.querySelector("#input4");
-            wrist.watch(input3, 'value', (prop, prev, curr) => input4.value = curr);
-            wrist.watch(input4, 'value', (prop, prev, curr) => input3.value = curr);
-
-            var user = {name:""};
-            window.user = user;
-            var input5 = this.querySelector("#input5");
-            wrist.watch(user, 'name', (prop, old, val) => input5.value = val);
-            user.name = "xyz"
+            var type = this.getAttribute("bind-type")||"single";
+            if(input1 && input2 && type == "single"){
+                wrist.watch(input1, 'value', (prop, prev, curr) => input2.value = curr);
+            }
+            else if(input1 && input2 && type == "both"){
+                wrist.watch(input1, 'value', (prop, prev, curr) => input2.value = curr);
+                wrist.watch(input2, 'value', (prop, prev, curr) => input1.value = curr);
+            }
+            else {
+                var user = {firstname:""};
+                window.user = user;
+                wrist.watch(user, 'firstname', (prop, old, val) => input1.value = val);
+                user.firstname = "Bill"
+            }
         }
 	}
 )
