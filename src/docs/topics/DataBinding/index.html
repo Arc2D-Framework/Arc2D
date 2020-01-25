@@ -5,11 +5,11 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">MVC Data Binding</h1>
         <p>
-            MVC is an structural pattern and a concept for representing a component in 3 parts. The View
+            MVC is a structural pattern and a concept for representing a component in three(3) parts. The View
             represents what the user interacts with, usually a visual interface. The component Controller sits between
-            the View and the Model. It watches changes on both sides, its main responsibility is to keep
+            the View and the Model. It watches changes on both sides, its core responsibility is to keep
             the View and Model in sync with each other. The Model represents some kind of state the component
-            is in. Models can be as simple as a set of variables and flags defined in the Controller, an object or a more complex process that models a real world entity such as a Model of a clock. In the case of clock, the Model would simulate how time passes every second, updating its minutes and incrementing hours mathamatically. This Model is never seen by the user because it is generally a concept, "process" or data structure in raw form. The Controller watches the Model and projects its state unto the View graphically. If the View had controls to set the time, the controller watches the view and keeps the Model in synch with what the user is attempting. This is MVC.
+            is in. Models can be as simple as a set of variables and flags defined in the Controller, an object or a more complex process that models a real world entity such as a Model of a clock. In the case of a clock, the Model would simulate how time passes every second, updating its minutes and incrementing hours mathamatically. This Model is never seen by the user because it is generally a concept, a "process" or data structure in raw logical form. The Controller watches the Model and projects its state unto the View graphically. If the View had controls to set the time, the controller watches the view and keeps the Model in synch with what the user is attempting. This is MVC.
         </p>
         <p>
             In this triad, logic has to be written in the Controller to synchronize both sides so that the user can experience the idea visually with knobs, buttons and graphics. This "wire-up" code in a Controller is usually done in a combination of 1 of 3 ways:
@@ -43,13 +43,13 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Programming the controller</h1>
         <p>
-          Data Binding is one way to program a controller to watch and synchronize the view with its model. Data binding can go both directions. 1 way and 2-way (bi directional). Essentically:
+          Data Binding is one way to program a controller to watch and synchronize the view with its model. Data binding can go both directions. 1 way and 2-way (bi directional). Essentially:
           <ul>
               <li>model -> view</li>
               <li>model <- view</li>
               <li>model <-> view</li>
           </ul>
-          Unlike "data binding" implemented in most modern frameworks, binding in Oros is a bit more sophisticated on quite a few aspects:
+          Unlike "data binding" implemented in most modern frameworks, bindings in Oros are a bit more sophisticated on quite a few aspects:
           <ul>
               <li><b>Transparency:</b> You see what you are wiring up.</li>
               <li><b>Control:</b> Grandular ability to bind, unbind and transform  in | output</li>
@@ -119,7 +119,7 @@ this.watch(source, 'value', (prop, prev, val) => dest.value = val);
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">2-Way Binding</h1>
         <p>
-            Here are the same 2 input elements in the View. Let's bind them bi-directionaly so that either one will reflect it's value in the other, synchronizing their values.
+            Here are the same 2 input elements in the View. Let's bind them bi-directionaly so that either one will reflect its value in the other, synchronizing their values.
             <view-view-binding bind-type="both">
                 <template>
                     <div>
@@ -209,13 +209,13 @@ user.firstname = "Ted";</code></pre>
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Data Binding is a convenience, but not in todays modern frameworks</h1>
         <p>
-            Data Binding is just 1 strategy for a Controller to synchronize it's state with it's view. With just 1 line of code:
+            Data Binding is just one strategy for a Controller to synchronize its state with its view. With just one line of code:
           <pre class="inline javascript lang"><code>
 this.watch(source, 'value', (prop, prev, val) => dest.value = val);
         </code></pre>
         </p>
         <p>
-            We are able to dynamically, and automatically synchronize in real-time, the state (values) of 2 things. It's merely a convenience that can easily be abused because of it's simplicity. You don't have this option in most modern frameworks. The frameworks today make binding a fully integrated and central part of it's architecture. This leads to all sorts of problems.
+            We are able to dynamically, and automatically synchronize in real-time, the state (values) of 2 things. Its merely a convenience that can easily be abused because of its simplicity. You don't have this option in most modern frameworks. The frameworks today make binding a fully integrated and central part of it's architecture. This leads to all sorts of problems.
         </p>
         <p>
             <ul>
