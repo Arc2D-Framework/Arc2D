@@ -102,7 +102,7 @@
 var source = this.querySelector("#input1");
 var dest = this.querySelector("#input2");
 //bind it
-this.watch(source, 'value', (prop, prev, val) => dest.value = val);
+this.watch(source, 'value', e => dest.value = e.val);
         </code></pre>
         </div>
         <div class="html lang"></div>
@@ -143,8 +143,8 @@ this.watch(source, 'value', (prop, prev, val) => dest.value = val);
 var source = this.querySelector("#input1");
 var dest = this.querySelector("#input2");
 //bind them to each other
-this.watch(source,'value', (prop, prev, val) => dest.value   = val);
-this.watch(dest,  'value', (prop, prev, val) => source.value = val);
+this.watch(source,'value', e => dest.value   = e.val);
+this.watch(dest,  'value', e => source.value = e.val);
         </code></pre>
         </div>
         <div class="html lang"></div>
@@ -186,7 +186,7 @@ this.watch(dest,  'value', (prop, prev, val) => source.value = val);
 var user = {firstname:""};
 var dest = this.querySelector("#input1");
 //bind them
-this.watch(user, 'firstname', (prop, old, val) => dest.value = val);
+this.watch(user, 'firstname', e => dest.value = e.val);
 </code></pre>
 
         <blockquote class="javascript" style="display:block;width: 100%;">
@@ -211,7 +211,7 @@ user.firstname = "Ted";</code></pre>
         <p>
             Data Binding is just one strategy for a Controller to synchronize its state with its view. With just one line of code:
           <pre class="inline javascript lang"><code>
-this.watch(source, 'value', (prop, prev, val) => dest.value = val);
+this.watch(source, 'value', e => dest.value = e.val);
         </code></pre>
         </p>
         <p>

@@ -73,7 +73,7 @@ var wrist = (function (O) {'use strict';
             i = 0;
             length = callbacks.length;
             while (i < length)
-              callbacks[i++].call(object, prop, old, value);
+              callbacks[i++].call(object, {prop, old, val:value});
           }
         } else {
           setter.call(this, $);
