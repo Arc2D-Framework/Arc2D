@@ -1,47 +1,14 @@
 <template>
   <div>
 
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
-      <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">MVC Data Binding</h1>
-        <p>
-            MVC is a structural pattern and a concept for representing a component in three(3) parts. The View
-            represents what the user interacts with, usually a visual interface. The component Controller sits between
-            the View and the Model. It watches changes on both sides, its core responsibility is to keep
-            the View and Model in sync with each other. The Model represents some kind of state the component
-            is in. Models can be as simple as a set of variables and flags defined in the Controller, an object or a more complex process that models a real world entity such as a Model of a clock. In the case of a clock, the Model would simulate how time passes every second, updating its minutes and incrementing hours mathamatically. This Model is never seen by the user because it is generally a concept, a "process" or data structure in raw logical form. The Controller watches the Model and projects its state unto the View graphically. If the View had controls to set the time, the controller watches the view and keeps the Model in synch with what the user is attempting. This is MVC.
-        </p>
-        <p>
-            In this triad, logic has to be written in the Controller to synchronize both sides so that the user can experience the idea visually with knobs, buttons and graphics. This "wire-up" code in a Controller is usually done in a combination of 1 of 3 ways:
-            <ul>
-                <li>Event-driven</li>
-                <li>Environment Loop (games)</li>
-                <li>Data Binding</li>
-            </ul>
-        </p>
-        <p>
-            We'll cover Data Binding here. First let's conceptually show, from a front and side view what a Component might look like in an MVC structure:
-            <img src="src/docs/images/mvc.png"/>
-            A side view shows it clearly, the user only ever sees and interacts with a visual projection, never having to touch a Controller or Model. Think of it as the side view of the screen. The drawing shows the controller behind the scheme.
-        </p>
-        <p>
-            In the case of the Model of a Clock again, as seconds and minutes pass by in real-time, the controller watches the changes and sends it to it's View, rendering a visual representation on a canvas or with HTML. The benefit of all of this is being able to change out views so that the Clock can be experienced as an analog (minute hands) or digital clock. If the View has a toggle to switch between representations, the Controller swaps out the view for another.
-        </p>
-      </div>
-      <div style="width: 50%;display: block;">
-        <div class="shell lang"></div>
-        <div class="javascript lang"></div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
-      </div>
-    </div>
+    
 
 
 
     
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Programming the controller</h1>
+        <h1 id="api-reference">Live, reflective Data Binding</h1>
         <p>
           Data Binding is one way to program a controller to watch and synchronize the view with its model. Data binding can go both directions. 1 way and 2-way (bi directional). Essentially:
           <ul>
@@ -54,10 +21,12 @@
               <li><b>Transparency:</b> You see what you are wiring up.</li>
               <li><b>Control:</b> Grandular ability to bind, unbind and transform  in | output</li>
               <li><b>Logic:</b> Logic in Controller, *never* in the View</li>
-              <li><b>Speed:</b> Direct, no mapping, no polling/timers, no magicbox</li>
+              <li><b>Speed:</b> More direct, no hidden fuzzy logic mapping</li>
               <li><b>Affordance:</b> .watch() and .unwatch() anything in the View, Model or both</li>
               <li><b>Dynamics:</b> Bindings can be dynamically generated at runtime. No compilation or build process. </li>
           </ul>
+        </p>
+        <p>
           Let's look at a simple case of binding 2 input boxes on a view with each other, 1-way and bi-directional. We're not forced to bind to a model, in Oros, anything can be bound to each other for synchronization.
         </p>
       </div>
@@ -75,7 +44,7 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Data binding Syntax/API</h1>
+        <h1 id="api-reference">Data binding syntax</h1>
         <p>
             Data Binding is integrated into WebComponents via a <code>.watch()</code> method with the
             following syntax:
@@ -103,7 +72,7 @@ this.watch(person, 'firstname', e => console.log(e.val));
             </ul>
         </p>
         <p>
-            The above snippet simply logs the new value of <code>person.firstname</code> whenever changes are detected. A slightly
+            The above snippet simply logs the new value of <code>person.firstname</code> whenever changes are detected at the member level. A slightly
             more realistic use-case would be to render the changes unto the View in a <code>div</code> tag or a text box:
             <pre class="inline javascript lang"><code>
 this.watch(person, 'firstname', e => aDiv.innerHTML = e.val);
@@ -116,7 +85,7 @@ this.watch(person, 'firstname', function(e) { aDiv.innerHTML = e.val});
 
 
         <pre class="inline javascript lang"><code>
-//As well as Class methods for advanced handling
+//As well as Class methods for advanced handling / formatting
 this.watch(person, 'firstname', e => this.onFirstNameChanged(e));
         </code></pre>
         </p>
@@ -278,16 +247,16 @@ this.watch(source, 'value', e => dest.value = e.val);
         </code></pre>
         </p>
         <p>
-            We are able to dynamically, and automatically synchronize in real-time, the state (values) of 2 things. Its merely a convenience that can easily be abused because of its simplicity. You don't have this option in most modern frameworks. The frameworks today make binding a fully integrated and central part of it's architecture. This leads to all sorts of problems.
+            We are able to dynamically, and automatically synchronize in real-time, the state (values) of 2 things. Its merely a convenience that can easily be abused because of its simplicity. You don't have this option in most modern frameworks. The frameworks today make binding a fully integrated and central part of it's architecture. This leads to problems.
         </p>
         <p>
             <ul>
                 <li><b>Separation of Concerns:</b> Violated. Frameworks today force bindings to be declared in HTML with faux JavaScript fragments littering the View</li>
-                <li><b>Readability:</b> The HTML goes from supple and lean to messy, complex multi-line wrap-arounds in an editor makes it hard to read, hard to understand.</li>
-                <li><b>OCP Violation:</b> Most frameworks today lump html, javascript and css into one file or a "Higher Order Function". A small edit might span a few areas, touching all areas at times.</li>
+                <li><b>Readability:</b> The HTML goes from supple and lean, to messy, complex multi-line wrap-arounds, hard to read, hard to understand.</li>
+                <li><b>OCP Violation:</b> Most frameworks today lump html, javascript and css into one file or a "Higher Order Function". A small edit might span a few areas, or touching all areas at times.</li>
                 <li><b>Performance:</b> Binding is magic. There is a good amount of listeners and polling running on the CPU to check "dirty flags" and keep things mirrored</li>
-                <li><b>No Flexibility:</b> Because binding in most frameworks are based on having a model or "props" types, DOM manipulation isn't easily possible unless you alter the models, a strict form of MVC.</li>
-                <li><b>Performance:</b> Due to frameworks constantly monitoring state to render it's view, it leads one to believe that this kind of "loop" runs at some interval, thereby simulating a poor-mans game loop at deadly poor, non-deterministic behavior</li>
+                <li><b>No Flexibility:</b> Because binding in most frameworks are based on having a model or "prop" types, DOM manipulation isn't easily possible unless you alter the models, a strict form of MVC.</li>
+                <li><b>Performance:</b> Due to frameworks constantly monitoring state to render it's view, it leads one to believe that this kind of "loop" runs at some interval, thereby simulating a poor-mans game loop with non-deterministic behavior</li>
                 <li><b>Compilation:</b> It's not live. These "faux" bindings in HTML are not native, or semantically meaningful to browsers and must be pre-compiled to generate parsable syntax for the browser.</li>
                 <li><b>Debugging:</b> good luck!</li>
             </ul>
