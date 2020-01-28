@@ -56,7 +56,8 @@ namespace `w3c.ui` (
                 try{
                     var style = new CSSStyleSheet();
                     style.replace(stylesheet.innerText);
-                    this.root.adoptedStyleSheets = [stylesheet]
+                    this.root.adoptedStyleSheets = [stylesheet];
+                    this.onStyleComputed(stylesheet);
                 } catch(e){
                     console.error(`${e.message} Unable to adopt stylesheet 
                         into shadow dom -- ${this.namespace}#onAppendStyle(), 
@@ -68,8 +69,11 @@ namespace `w3c.ui` (
                 var headNode = application.head;
                 var configscript = application.configscript;
                 headNode.insertBefore(stylesheet, configscript);
+                this.onStyleComputed(stylesheet);
             }
         }
+
+        onStyleComputed(stylesheet){}
 
         adopts(orphan) {
             orphan && orphan.parentNode.replaceChild(this, orphan)

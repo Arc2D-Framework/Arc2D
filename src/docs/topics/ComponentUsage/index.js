@@ -1,4 +1,6 @@
 import '/src/docs/topics/Topic.js';
+import 'docs.demos.sprites.GoblinEnemy';
+import 'docs.demos.ui.ToggleButton';
 
 namespace `docs.topics` (
     class ComponentUsage extends docs.topics.Topic {

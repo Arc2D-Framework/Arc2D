@@ -81,16 +81,16 @@ person.addEventListener('change', e => console.log(e.data.value));
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Elegance</h1>
         <p>
-            What makes Data Binding elegant? It's supple, lean syntax gurantees awareness of state changes in real-time, accurately, promising tight synchronization indefinitely and cheap to use. But taxing.
+            What makes Data Binding elegant? It's supple, lean syntax guarantees awareness of state changes in real-time, accurately, promising tight synchronization indefinitely and cheap to use. But taxing.
         </p>
         <p>
-            You see, event wire-up registers to be notified and rests, it waits, no polling or checking. The EventTarget (the person in this example), may have a method such as setName(), that after setting the attribute value, may emit a "change" event if it wants to immediately, maybe queues it, or debounces it. Maybe delays. But eventually, the event handler will be notified and code can be written to reflect that state unto the View, or perhaps congratualte the person on finally changing his/her name. 
+            You see, event wire-up registers to be notified and rests, it waits, no polling or checking. The EventTarget (the person in this example), may have a method such as setName(), that after setting the attribute value, may emit a "change" event if it wants to immediately, maybe queues it, or debounces it. Maybe delays. But eventually, the event handler will be notified and code can be written to reflect that state unto the View, or perhaps congratulate the person on finally changing his/her name. 
         </p>
         <p>
-            In addition, event-driven style does not gurantee that an object fires a certain event. Every Emmitter will have code in most cases, logically deciding when and if to fire events, especially custom domain-driven events, so it's not for free, you have to program objects to fire events and consume them.
+            In addition, event-driven style does not guarantee that an object fires a certain event. Every Emmitter will have code in most cases, logically deciding when and if to fire events, especially custom domain-driven events, so it's not for free, you have to program objects to fire events and consume them.
         </p>
         <p>
-            The elegance of Data Binding alludes us through laziness or unknowingly, to use it almost free but at a cost. It's promise to keep pieces informed reveals what really takes place "under the hood" to gurantee this kind of beauty. Since it watches an attribute at the property/member level without having to program anything in the emitter to notify bindings, it can be taxing due to the level of scrutinity. So be cautious and aware of it's use.
+            The elegance of Data Binding alludes us through laziness or unknowingly, to use it almost free but at a cost. It's promise to keep pieces informed reveals what really takes place "under the hood" to guarantee this kind of beauty. Since it watches an attribute at the property/member level without having to program anything in the emitter to notify bindings, it can be taxing due to the level of scrutinity. So be cautious and aware of it's use.
         </p>
         <p>
             Lets have a look at dynamic and live <a href="#docs.topics.DataBindingReflection">Data Binding</a>.

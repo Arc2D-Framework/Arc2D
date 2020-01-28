@@ -1,0 +1,97 @@
+/*.ToggleButton {
+	
+}
+
+
+.ToggleButton .tgl {
+    display: none;
+}
+
+
+.ToggleButton .tgl + .tgl-btn {
+    outline: 0;
+    display: block;
+    width: 4em;
+    height: 2em;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.ToggleButton .tgl-ios + .tgl-btn {
+    background: #fbfbfb;
+    border-radius: 2em;
+    padding: 2px;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+    border: 1px solid #e8eae9;
+}
+
+.ToggleButton .tgl + .tgl-btn:after{
+    position: relative;
+    display: block;
+    content: "";
+    width: 50%;
+    height: 100%;
+}
+
+.ToggleButton .tgl + .tgl-btn:after {
+    left: 0;
+}
+
+.ToggleButton .tgl-ios + .tgl-btn:after {
+    border-radius: 2em;
+    background: #fbfbfb;
+    -webkit-transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+
+.ToggleButton .tgl-ios:checked + .tgl-btn {
+    background: #86d993;
+}
+
+
+
+.ToggleButton .tgl:checked + .tgl-btn::after {
+
+    left: 50%;
+
+}*/
+
+
+
+
+
+.ToggleButton {
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    bottom: 11px;
+    background: lightgray;
+    border-radius: 30px;
+    box-sizing: content-box;
+    padding: 3px;
+}
+
+.ToggleButton div {
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 30px;
+    background: white;
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.ToggleButton.on div {
+    transform: translate3d(0px,0px,0px);
+}
+
+
+

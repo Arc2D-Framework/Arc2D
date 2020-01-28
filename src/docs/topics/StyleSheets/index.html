@@ -37,9 +37,9 @@
                 <td>Notifies that load is complete. Last step to make changes</td>
               </tr>
               <tr>
-                <td>onAppendStyle</td>
+                <td>onStyleComputed</td>
                 <td>HTMLStyleElement</td>
-                <td>Final step, injection into &#x3C;head&#x3E;.</td>
+                <td>styling properties applied, bounds avaliable. Best time to use <code>getBoundingClientRect()</code> for getting computed box dimensions/positioning.</td>
               </tr>
             </tbody>
           </table>
@@ -47,7 +47,70 @@
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
-        <div class="javascript lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            <code style="display:inline;">onLoadStyle(url)</code> - Notifies the component that this http <code style="display:inline;">url</code> is about to load. Return false prevent loading or, alter the path before it is fetched (idea: maybe randomize cdn sources ?)
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`docs.demos.ui\` (
+  class ToggleButton  extends w3c.ui.WebComponent  {
+     <b>onLoadStyle</b> (url) {
+       console.log("Loading stylesheet path", url);
+     }
+  }
+)
+        </code></pre>
+
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            <code style="display:inline;">onTransformStyle(url)</code> - Notifies the component of the raw css source (String). Here, you can apply string replacement or transpilation of css source (an idea).
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`docs.demos.ui\` (
+  class ToggleButton  extends w3c.ui.WebComponent  {
+     <b>onTransformStyle</b> (cssText) {
+       console.log("css raw source is", cssText);
+     }
+  }
+)
+        </code></pre>
+
+
+
+
+
+
+<blockquote class="javascript" style="display:block;width: 100%;">
+            <code style="display:inline;">onStylesheetLoaded(style)</code> - Notifies the component that the css was loaded, transformed and the StyleSheet object is ready. Not yet applied to the DOM.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`docs.demos.ui\` (
+  class ToggleButton  extends w3c.ui.WebComponent  {
+     <b>onStylesheetLoaded</b> (styleSheet) {
+       console.log("styleSheet ready", styleSheet);
+     }
+  }
+)
+        </code></pre>
+
+
+
+
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            <code style="display:inline;">onStyleComputed()</code> - StyleSheet applied. Best time to call getBoundingClientRect() for getting computed box dimensions/positioning defined in .css.:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`docs.demos.ui\` (
+  class ToggleButton  extends w3c.ui.WebComponent  {
+     <b>onStyleComputed</b> (style) {
+       this.bounds = this.getBoundingClientRect();
+       console.log(this.bounds)
+     }
+  }
+)
+        </code></pre>
+        </div>
         <div class="html lang"></div>
         <div class="css lang"></div>
       </div>
