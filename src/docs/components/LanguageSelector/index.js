@@ -27,6 +27,7 @@ namespace `docs.components` (
         }
 
         updateSnippetCounters(currentActivity){
+
             setTimeout(_=> this.setSnippetCounters(currentActivity),200)
         }
 

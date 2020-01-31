@@ -5,6 +5,8 @@ namespace `docs.demos.ui` (
             this.addEventListener("click", e => this.onClick(e));
             this.knob = this.querySelector("div");
             this.direction = -1;
+            //REACT COMPARISON: https://codesandbox.io/s/wn479wmorl
+            //https://www.youtube.com/watch?v=RENGNzZ0dIs
         }
 
         onStyleComputed(style){//wait for styles

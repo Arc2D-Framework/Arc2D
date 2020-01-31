@@ -30,7 +30,7 @@ namespace `applications` (
 				return;
 			}
 			this.mvp = new spine.webgl.Matrix4();
-			this.activeSkeleton = "spineboy";
+			this.activeSkeleton = "stickman";
 			this.skeletons = {};
 
 			this.shader = spine.webgl.Shader.newTwoColoredTextured(this.gl);
@@ -50,7 +50,7 @@ namespace `applications` (
 
 			// Tell AssetManager to load the resources for each model, including the exported .skel file, the .atlas file and the .png
 			// file for the atlas. We then wait until all resources are loaded in the load() method.
-			this.assetManager.loadBinary("resources/spine/stickman.skel");
+			this.assetManager.loadText("resources/spine/stickman.json");
 			this.assetManager.loadTextureAtlas("resources/spine/stickman.atlas");
 			// assetManager.loadBinary("assets/raptor-pro.skel");
 			// assetManager.loadTextureAtlas("assets/raptor-pma.atlas");
@@ -74,13 +74,13 @@ namespace `applications` (
 	        	if (Key.isDown(Key.RIGHT)) {
 	        		if(!this.isWalking){
 	        			this.idle=false;
-	        			this.animationState.setAnimation(0, "walk", true);
+	        			this.animationState.setAnimation(0, "1_/walk normal", true);
 	        			this.isWalking=true;
 	        		}
-	        		var sprite = this.skeletons["spineboy"];
+	        		var sprite = this.skeletons["stickman"];
 	        		var skeleton 	= sprite.skeleton;
-	        			skeleton.velocity += .0001 * delta;
-	        		skeleton.x += skeleton.velocity;
+	        			skeleton.velocity += .0005;
+	        		// skeleton.x += skeleton.velocity;
 	        		console.log("x",skeleton.x)
 
 	        	}
@@ -91,7 +91,7 @@ namespace `applications` (
 
 	        	if(!this.isWalking){
 	        		if(!this.idle){
-	        			this.animationState.setAnimation(0, "idle", true);
+	        			this.animationState.setAnimation(0, "1_/idle", true);
 	        			this.idle=true;
 	        		}
 	        	}
@@ -104,12 +104,12 @@ namespace `applications` (
 				this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 
 				// Apply the animation state based on the delta time.
-				var sprite = this.skeletons["spineboy"];
+				var sprite = this.skeletons["stickman"];
 				var state 		= sprite.state;
 				var skeleton 	= sprite.skeleton;
 				var bounds 		= sprite.bounds;
 				var premultipliedAlpha = sprite.premultipliedAlpha;
-				state.update(0.016);
+				state.update(0.022);
 				state.apply(skeleton);
 				skeleton.updateWorldTransform();
 
@@ -127,7 +127,6 @@ namespace `applications` (
 				this.batcher.end();
 
 				this.shader.unbind();
-				// this.resize()
         	}
         }
 
@@ -135,11 +134,11 @@ namespace `applications` (
         load () {
 			// Wait until the AssetManager has loaded all resources, then load the skeletons.
 			if (this.assetManager.isLoadingComplete()) {
-				this.skeletons["spineboy"] = this.loadSkeleton("stickman fighter", "idle", true);
-				this.skeletons["spineboy"].skeleton.velocity=6;
+				this.skeletons["stickman"] = this.loadSkeleton("stickman", "1_/__jump attack", true);
+				this.skeletons["stickman"].skeleton.velocity=6;
 				this.loading_complete=true;
 				this.resize()
-				console.log("spine boy", this.skeletons["spineboy"]);
+				console.log("stickman", this.skeletons["stickman"]);
 				// this.skeletons["spineboy"].skeleton.x=300;
 
 			} else {
@@ -149,19 +148,19 @@ namespace `applications` (
 
 
 		loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
-			if (skin === undefined) skin = "default";
+			if (skin === undefined) skin = "black";
 
 			// Load the texture atlas using name.atlas from the AssetManager.
 			this.atlas = this.assetManager.get("resources/spine/stickman.atlas");
-
+			debugger;
 			// Create a AtlasAttachmentLoader that resolves region, mesh, boundingbox and path attachments
 			this.atlasLoader = new spine.AtlasAttachmentLoader(this.atlas);
 
 			// Create a SkeletonBinary instance for parsing the .skel file.
-			var skeletonBinary = new spine.SkeletonBinary(this.atlasLoader);
+			var skeletonBinary = new spine.SkeletonJson(this.atlasLoader);
 
 			// Set the scale to apply during parsing, parse the file, and create a new skeleton.
-			var skeletonData = skeletonBinary.readSkeletonData(this.assetManager.get("resources/spine/stickman.skel"));
+			var skeletonData = skeletonBinary.readSkeletonData(this.assetManager.get("resources/spine/stickman.json"));
 			debugger;
 			var skeleton = new spine.Skeleton(skeletonData);
 			skeleton.setSkinByName(skin);
@@ -170,21 +169,23 @@ namespace `applications` (
 			// Create an AnimationState, and set the initial animation in looping mode.
 			var animationStateData = new spine.AnimationStateData(skeleton.data);
 			var animationState = new spine.AnimationState(animationStateData);
-			if (name == "spineboy") {
-				// animationStateData.setMix("walk", "jump", 0.4)
-				// animationStateData.setMix("jump", "run", 0.4);
-				// animationState.setAnimation(0, "walk", true);
-				// var jumpEntry = animationState.addAnimation(0, "jump", false, 3);
-				// animationState.addAnimation(0, "run", true, 0);
-			} else {
-				// animationStateData.setDefaultMix(0.1);
-				animationStateData.setMix("idle", "walk", 0.05);
-				animationStateData.setMix("walk", "idle", 0.5);
+			if (name == "stickman") {
+				animationStateData.setMix("1_/idle", "1_/walk normal", 0.05);
+				animationStateData.setMix("1_/walk normal", "1_/idle", 0.5);
 				// animationStateData.setMix("jump", "run", 0.25);
 				// animationStateData.setMix("walk", "shoot", 0);
 				this.animationState=animationState;
 				this.animationStateData = animationStateData;
-				animationState.setAnimation(0, "idle", true);
+				animationState.setAnimation(0, "1_/idle", true);
+			} else {
+				// animationStateData.setDefaultMix(0.1);
+				animationStateData.setMix("1_/idle", "1_/walk normal", 0.05);
+				animationStateData.setMix("1_/walk normal", "1_/idle", 0.5);
+				// animationStateData.setMix("jump", "run", 0.25);
+				// animationStateData.setMix("walk", "shoot", 0);
+				this.animationState=animationState;
+				this.animationStateData = animationStateData;
+				animationState.setAnimation(0, "1_/idle", true);
 			}
 			animationState.addListener({
 				start: function(track) {

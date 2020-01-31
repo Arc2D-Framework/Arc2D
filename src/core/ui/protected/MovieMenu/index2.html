@@ -7,7 +7,7 @@
             this.items.map(genre => 
                 `<li data-genre="${genre}">
                     <x-test defer attach-shadow="false">
-                        <span slot="test">${genre} XXX</span>
+                        <span slot="test">${genre} [secured]</span>
                     </x-test>
                 </li>`
             ).join('')

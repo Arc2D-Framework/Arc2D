@@ -1,4 +1,4 @@
-var Session = top.Session||{State:{}};
+var Session = Session||{State:{}};
 var Config = {};
 Config.NAMESPACE = null;//"applications.MainApp";
 Config.USE_COMPRESSED_BUILD = false;

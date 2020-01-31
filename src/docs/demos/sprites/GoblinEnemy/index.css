@@ -1,6 +1,7 @@
 
 .GoblinEnemy {
     display:block;
+    left: -22px;
   /*left:20px;*/
   transform: scale(.3);
   position: absolute;
@@ -10,15 +11,6 @@
   height: 532px;
   background-image: url("/resources/images/goblin.png");
 }
-/*.KenSprite:before, .fireball:before {
-  content: '';
-  background: url("https://raw.githubusercontent.com/jkneb/street-fighter-css/master/images/ken-tatsumaki-senpuu-kyaku.png") no-repeat;
-}
-.KenSprite:after, .fireball:after {
-  content: '';
-  background: url("https://raw.githubusercontent.com/jkneb/street-fighter-css/master/images/ken-shoryuken.png") no-repeat;
-}*/
-
 
 /* stance */
 .stance {

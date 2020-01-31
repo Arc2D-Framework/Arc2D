@@ -1,0 +1,43 @@
+.VikingHero {
+	
+}
+
+
+.VikingHero {
+    display:block;
+    left: -22px;
+  /*left:20px;*/
+  transform: scale(1);
+  position: absolute;
+  bottom: 112px;
+  /*margin-left: 0;*/
+  width: 128px;
+  height: 128px;
+  background-image: url("/resources/images/viking.png");
+}
+
+/* stance */
+.stance {
+  -webkit-animation: stance steps(5) 1s infinite;
+          animation: stance steps(5) 1s infinite;
+}
+
+
+
+/*@-webkit-keyframes stance {
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -768px;
+  }
+}
+*/
+@keyframes stance {
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -896px;
+  }
+}

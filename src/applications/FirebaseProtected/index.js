@@ -29,27 +29,22 @@ namespace `applications` (
 		}
 
 		onLoggedOut(){
-			alert("Logged Out: Implement onLoggedOut() at app level to do something")
+			alert("Logged Out")
 		}
 
 
 		logout(){
-			firebase.auth().signOut().then(_=> {
-			  this.onLoggedOut()
-			}).catch(e => console.error(e));
+			firebase.auth().signOut().
+                then(_  => this.onLoggedOut()).
+                catch(e => console.error(e));
 		}
 
 
 	    initApp() {
-	        firebase.auth().onAuthStateChanged(user => {
-	          if (user) {
-	          	this.onAuthenticated(user);
-	          } else {
-	            this.onAuthenticated(null)
-	          }
-	        }, function(error) {
-	          console.log(error);
-	        });
+	        firebase.auth().onAuthStateChanged(
+                user  => this.onAuthenticated(user||null), 
+                error => console.log(error)
+            );
 	    }
 	}
 );

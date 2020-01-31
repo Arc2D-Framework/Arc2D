@@ -5,7 +5,7 @@ import {myExport} from "/src/modules/test.mjs";
 import '/framework/src/core/http/Router.js'
 
 namespace `applications` (
-    class MyApp extends w3c.ui.Application {
+    class DomMutations extends w3c.ui.Application {
         constructor(element){
             super(element);
             this.mutations = [];
