@@ -31,8 +31,6 @@ namespace `core.data` (
                 },query)
             })
             return
-            // var results = await this.IRequestStorage.remove(query);
-            // return results;
         }
 
 
@@ -53,7 +51,7 @@ namespace `core.data` (
         static onDataReceived (data, xhr){
             var self=this;
             data = this.onInitializeModelDataObjects(data);
-            this.setData(data.table, data);
+            this.setData(data.table||data.name, data);
         }
 
         static setData (name,data){
@@ -87,21 +85,6 @@ namespace `core.data` (
             uri = uri || this.prototype.seeds;
             if(!this.loaded || force){
                 this.loaded=true;
-                /*var self=this;
-                    params=params||{};
-                    var oReq = new XMLHttpRequest();
-                    oReq.overrideMimeType("text/plain");
-                        oReq.addEventListener("load", function(){
-                            if (this.readyState == 4 && (this.status == 200 || this.status == 0)) {
-                                self.onDataReceived(JSON.parse(this.responseText))
-                            }
-                        });
-                        oReq.open("GET", uri.dev, false);
-                        oReq.send();*/
-
-
-                //TODO:
-                //fetch vs. xhr(above snippet)...why wasn't this just fetch in 1st place?
                 await fetch(uri[Config.ENVIRONMENT]) 
                     .then(async res => this.onDataReceived(await res.json(), null))
                     .catch(e => console.log("Error in " +this.namespace +"#seed():\n", e))

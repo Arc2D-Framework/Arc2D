@@ -1,543 +1,544 @@
+
 stickman.png
-size: 700,1008
+size: 398,1647
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 stickman/arm_L
   rotate: false
-  xy: 337, 683
+  xy: 2, 1100
   size: 218, 42
   orig: 218, 42
   offset: 0, 0
   index: -1
 stickman/arm_R
-  rotate: true
-  xy: 270, 13
+  rotate: false
+  xy: 2, 1057
   size: 217, 41
   orig: 217, 41
   offset: 0, 0
   index: -1
 stickman/arm_stroke_L
   rotate: false
-  xy: 375, 535
+  xy: 2, 1324
   size: 235, 58
   orig: 235, 58
   offset: 0, 0
   index: -1
 stickman/arm_stroke_R
   rotate: false
-  xy: 455, 896
+  xy: 2, 1384
   size: 236, 57
   orig: 236, 57
   offset: 0, 0
   index: -1
 stickman/body
   rotate: false
-  xy: 102, 27
+  xy: 232, 1117
   size: 35, 192
   orig: 35, 192
   offset: 0, 0
   index: -1
 stickman/body_stroke
   rotate: true
-  xy: 455, 955
+  xy: 2, 1004
   size: 51, 198
   orig: 51, 207
   offset: 0, 4
   index: -1
 stickman/eyes-A
-  rotate: true
-  xy: 471, 596
+  rotate: false
+  xy: 235, 222
   size: 85, 25
   orig: 85, 25
   offset: 0, 0
   index: -1
 stickman/eyes-B
-  rotate: false
-  xy: 145, 596
+  rotate: true
+  xy: 202, 1003
   size: 52, 16
   orig: 52, 16
   offset: 0, 0
   index: -1
 stickman/head
   rotate: false
-  xy: 209, 682
+  xy: 269, 1378
   size: 126, 126
   orig: 126, 126
   offset: 0, 0
   index: -1
 stickman/head_stroke
   rotate: false
-  xy: 2, 865
+  xy: 2, 239
   size: 141, 141
   orig: 141, 141
   offset: 0, 0
   index: -1
 stickman/leg_L
   rotate: true
-  xy: 314, 227
+  xy: 2, 1275
   size: 47, 228
   orig: 47, 228
   offset: 0, 0
   index: -1
 stickman/leg_R
-  rotate: false
-  xy: 222, 2
+  rotate: true
+  xy: 2, 1227
   size: 46, 228
   orig: 46, 228
   offset: 0, 0
   index: -1
 stickman/leg_stroke_L
   rotate: true
-  xy: 209, 944
+  xy: 2, 1443
   size: 62, 244
   orig: 62, 244
   offset: 0, 0
   index: -1
 stickman/leg_stroke_R
   rotate: true
-  xy: 2, 529
+  xy: 2, 1507
   size: 63, 244
   orig: 63, 244
   offset: 0, 0
   index: -1
 stickman/mouth
-  rotate: false
-  xy: 557, 604
+  rotate: true
+  xy: 248, 1509
   size: 61, 23
   orig: 61, 23
   offset: 0, 0
   index: -1
 stickman/shadow
-  rotate: true
-  xy: 2, 594
+  rotate: false
+  xy: 2, 1572
   size: 269, 17
   orig: 269, 17
   offset: 0, 0
   index: -1
-vfx/energy radial/energy radial
-  rotate: true
-  xy: 314, 276
-  size: 81, 80
-  orig: 167, 167
-  offset: 43, 45
-  index: 0
-vfx/energy radial/energy radial
-  rotate: true
-  xy: 139, 23
-  size: 81, 80
-  orig: 167, 167
-  offset: 43, 42
-  index: 2
-vfx/energy radial/energy radial
+vfx/energy radial/energy radial_00000
   rotate: false
-  xy: 503, 347
-  size: 81, 80
+  xy: 315, 137
+  size: 78, 77
   orig: 167, 167
-  offset: 44, 45
-  index: 3
-vfx/energy radial/energy radial
-  rotate: true
-  xy: 404, 144
-  size: 81, 80
-  orig: 167, 167
-  offset: 44, 44
-  index: 4
-vfx/energy radial/energy radial
-  rotate: true
-  xy: 486, 87
-  size: 81, 80
-  orig: 167, 167
-  offset: 42, 44
-  index: 5
-vfx/energy radial/energy radial
+  offset: 45, 46
+  index: -1
+vfx/energy radial/energy radial_00001
   rotate: false
-  xy: 568, 11
-  size: 80, 80
+  xy: 2, 160
+  size: 78, 77
   orig: 167, 167
-  offset: 43, 44
-  index: 1
-vfx/energy radial/energy radial
+  offset: 44, 46
+  index: -1
+vfx/energy radial/energy radial_00002
   rotate: false
-  xy: 400, 62
-  size: 80, 80
+  xy: 2, 81
+  size: 77, 77
   orig: 167, 167
-  offset: 41, 46
-  index: 7
-vfx/energy radial/energy radial
+  offset: 45, 44
+  index: -1
+vfx/energy radial/energy radial_00003
+  rotate: false
+  xy: 140, 112
+  size: 78, 77
+  orig: 167, 167
+  offset: 45, 46
+  index: -1
+vfx/energy radial/energy radial_00004
+  rotate: false
+  xy: 220, 63
+  size: 77, 77
+  orig: 167, 167
+  offset: 46, 46
+  index: -1
+vfx/energy radial/energy radial_00005
+  rotate: false
+  xy: 135, 33
+  size: 77, 77
+  orig: 167, 167
+  offset: 44, 46
+  index: -1
+vfx/energy radial/energy radial_00006
+  rotate: false
+  xy: 2, 2
+  size: 77, 77
+  orig: 167, 167
+  offset: 45, 47
+  index: -1
+vfx/energy radial/energy radial_00007
+  rotate: false
+  xy: 235, 142
+  size: 78, 78
+  orig: 167, 167
+  offset: 42, 47
+  index: -1
+vfx/energy ray/energy ray_00000
+  rotate: false
+  xy: 165, 784
+  size: 40, 40
+  orig: 167, 167
+  offset: 2, 66
+  index: -1
+vfx/energy ray/energy ray_00001
+  rotate: false
+  xy: 220, 782
+  size: 47, 60
+  orig: 167, 167
+  offset: 2, 57
+  index: -1
+vfx/energy ray/energy ray_00002
+  rotate: false
+  xy: 82, 102
+  size: 51, 74
+  orig: 167, 167
+  offset: 2, 50
+  index: -1
+vfx/energy ray/energy ray_00003
+  rotate: false
+  xy: 222, 922
+  size: 45, 71
+  orig: 167, 167
+  offset: 2, 52
+  index: -1
+vfx/energy ray/energy ray_00004
   rotate: true
-  xy: 482, 4
-  size: 81, 79
+  xy: 82, 195
+  size: 42, 56
   orig: 167, 167
-  offset: 43, 46
-  index: 6
-vfx/energy ray/energy ray
+  offset: 0, 57
+  index: -1
+vfx/energy ray/energy ray_00005
   rotate: false
-  xy: 21, 665
-  size: 117, 41
+  xy: 264, 582
+  size: 130, 49
   orig: 167, 167
-  offset: 12, 61
-  index: 15
-vfx/energy ray/energy ray
+  offset: 2, 61
+  index: -1
+vfx/energy ray/energy ray_00006
   rotate: false
-  xy: 98, 601
-  size: 45, 62
+  xy: 2, 465
+  size: 146, 92
   orig: 167, 167
-  offset: 0, 54
-  index: 4
-vfx/energy ray/energy ray
+  offset: 3, 38
+  index: -1
+vfx/energy ray/energy ray_00007
   rotate: false
-  xy: 209, 595
-  size: 167, 85
+  xy: 2, 732
+  size: 161, 92
   orig: 167, 167
-  offset: 0, 46
-  index: 8
-vfx/energy ray/energy ray
+  offset: 3, 44
+  index: -1
+vfx/energy ray/energy ray_00008
   rotate: false
-  xy: 500, 813
-  size: 166, 81
+  xy: 2, 826
+  size: 162, 81
   orig: 167, 167
-  offset: 0, 47
-  index: 9
-vfx/energy ray/energy ray
+  offset: 2, 48
+  index: -1
+vfx/energy ray/energy ray_00009
   rotate: false
-  xy: 236, 359
-  size: 167, 100
+  xy: 2, 654
+  size: 161, 76
   orig: 167, 167
-  offset: 0, 33
-  index: 10
-vfx/energy ray/energy ray
+  offset: 2, 49
+  index: -1
+vfx/energy ray/energy ray_00010
+  rotate: false
+  xy: 2, 909
+  size: 163, 93
+  orig: 167, 167
+  offset: 2, 37
+  index: -1
+vfx/energy ray/energy ray_00011
+  rotate: false
+  xy: 2, 602
+  size: 161, 50
+  orig: 167, 167
+  offset: 4, 58
+  index: -1
+vfx/energy ray/energy ray_00012
+  rotate: false
+  xy: 2, 559
+  size: 149, 41
+  orig: 167, 167
+  offset: 4, 62
+  index: -1
+vfx/energy ray/energy ray_00013
+  rotate: false
+  xy: 246, 372
+  size: 136, 37
+  orig: 167, 167
+  offset: 5, 63
+  index: -1
+vfx/energy ray/energy ray_00014
+  rotate: false
+  xy: 269, 845
+  size: 116, 36
+  orig: 167, 167
+  offset: 9, 63
+  index: -1
+vfx/energy ray/energy ray_00015
+  rotate: false
+  xy: 150, 447
+  size: 103, 30
+  orig: 167, 167
+  offset: 18, 66
+  index: -1
+vfx/energy ray/energy ray_00016
   rotate: true
-  xy: 122, 221
-  size: 167, 98
+  xy: 248, 1412
+  size: 95, 19
   orig: 167, 167
-  offset: 0, 41
-  index: 7
-vfx/energy ray/energy ray
-  rotate: true
-  xy: 2, 133
-  size: 152, 98
-  orig: 167, 167
-  offset: 0, 36
-  index: 6
-vfx/energy ray/energy ray
-  rotate: true
-  xy: 491, 477
-  size: 56, 80
-  orig: 167, 167
-  offset: 0, 47
-  index: 2
-vfx/energy ray/energy ray
-  rotate: true
-  xy: 2, 3
-  size: 128, 44
-  orig: 167, 167
-  offset: 3, 59
-  index: 14
-vfx/energy ray/energy ray
+  offset: 22, 73
+  index: -1
+vfx/muzzle flash pistol/muzzle flash pistol_00000
   rotate: false
-  xy: 48, 65
-  size: 52, 66
+  xy: 166, 826
+  size: 52, 46
   orig: 167, 167
-  offset: 0, 54
-  index: 1
-vfx/energy ray/energy ray
+  offset: 5, 62
+  index: -1
+vfx/muzzle flash pistol/muzzle flash pistol_00001
+  rotate: true
+  xy: 222, 995
+  size: 120, 45
+  orig: 167, 167
+  offset: 13, 62
+  index: -1
+vfx/muzzle flash pistol/muzzle flash pistol_00002
   rotate: false
-  xy: 396, 282
-  size: 166, 54
+  xy: 264, 506
+  size: 129, 74
   orig: 167, 167
-  offset: 1, 56
-  index: 11
-vfx/energy ray/energy ray
+  offset: 13, 50
+  index: -1
+vfx/muzzle flash pistol/muzzle flash pistol_00003
   rotate: false
-  xy: 503, 429
-  size: 155, 46
+  xy: 262, 411
+  size: 133, 93
   orig: 167, 167
-  offset: 1, 59
-  index: 12
-vfx/energy ray/energy ray
-  rotate: true
-  xy: 586, 282
-  size: 145, 44
-  orig: 167, 167
-  offset: 0, 59
-  index: 13
-vfx/energy ray/energy ray
-  rotate: true
-  xy: 632, 291
-  size: 136, 54
-  orig: 167, 167
-  offset: 0, 58
-  index: 5
-vfx/energy ray/energy ray
-  rotate: true
-  xy: 636, 177
-  size: 112, 36
-  orig: 167, 167
-  offset: 14, 64
-  index: 16
-vfx/energy ray/energy ray
-  rotate: true
-  xy: 388, 10
-  size: 50, 76
-  orig: 167, 167
-  offset: 0, 49
-  index: 3
-vfx/energy ray/energy ray
+  offset: 20, 39
+  index: -1
+vfx/muzzle flash pistol/muzzle flash pistol_00004
   rotate: false
-  xy: 650, 45
-  size: 45, 46
+  xy: 269, 1170
+  size: 125, 92
   orig: 167, 167
-  offset: 0, 63
-  index: 0
-vfx/muzzle flash pistol/muzzle flash pistol
+  offset: 29, 41
+  index: -1
+vfx/muzzle flash pistol/muzzle flash pistol_00005
   rotate: false
-  xy: 557, 629
-  size: 138, 96
+  xy: 273, 1506
+  size: 122, 83
   orig: 167, 167
-  offset: 17, 38
-  index: 3
-vfx/muzzle flash pistol/muzzle flash pistol
+  offset: 31, 46
+  index: -1
+vfx/muzzle flash pistol/muzzle flash pistol_00006
   rotate: false
-  xy: 564, 735
-  size: 133, 76
+  xy: 167, 923
+  size: 53, 78
   orig: 167, 167
-  offset: 11, 49
-  index: 2
-vfx/muzzle flash pistol/muzzle flash pistol
-  rotate: true
-  xy: 405, 338
-  size: 133, 96
-  orig: 167, 167
-  offset: 25, 39
-  index: 4
-vfx/muzzle flash pistol/muzzle flash pistol
-  rotate: true
-  xy: 222, 232
-  size: 125, 90
-  orig: 167, 167
-  offset: 29, 42
-  index: 5
-vfx/muzzle flash pistol/muzzle flash pistol
-  rotate: true
-  xy: 48, 9
-  size: 54, 48
-  orig: 167, 167
-  offset: 4, 61
-  index: 0
-vfx/muzzle flash pistol/muzzle flash pistol
+  offset: 50, 47
+  index: -1
+vfx/muzzle flash rifle/muzzle flash rifle_00000
   rotate: false
-  xy: 573, 486
-  size: 125, 47
+  xy: 268, 633
+  size: 128, 132
   orig: 167, 167
-  offset: 11, 61
-  index: 1
-vfx/muzzle flash pistol/muzzle flash pistol
-  rotate: false
-  xy: 636, 93
-  size: 55, 82
-  orig: 167, 167
-  offset: 49, 46
-  index: 6
-vfx/muzzle flash rifle/muzzle flash rifle
+  offset: 1, 29
+  index: -1
+vfx/muzzle flash rifle/muzzle flash rifle_00001
   rotate: true
-  xy: 209, 810
-  size: 132, 136
+  xy: 165, 648
+  size: 132, 101
   orig: 167, 167
-  offset: 0, 26
-  index: 0
-vfx/muzzle flash rifle/muzzle flash rifle
+  offset: 3, 25
+  index: -1
+vfx/muzzle flash rifle/muzzle flash rifle_00002
   rotate: true
-  xy: 347, 810
-  size: 84, 151
+  xy: 2, 382
+  size: 81, 145
   orig: 167, 167
-  offset: 1, 8
-  index: 2
-vfx/muzzle flash rifle/muzzle flash rifle
+  offset: 2, 11
+  index: -1
+vfx/muzzle flash uzi/muzzle flash uzi_00000
+  rotate: false
+  xy: 299, 71
+  size: 73, 64
+  orig: 167, 167
+  offset: 0, 52
+  index: -1
+vfx/muzzle flash uzi/muzzle flash uzi_00001
+  rotate: false
+  xy: 327, 216
+  size: 68, 75
+  orig: 167, 167
+  offset: 3, 47
+  index: -1
+vfx/muzzle flash uzi/muzzle flash uzi_00002
+  rotate: false
+  xy: 150, 479
+  size: 110, 57
+  orig: 167, 167
+  offset: 4, 58
+  index: -1
+vfx/muzzle flash uzi/muzzle flash uzi_00003
   rotate: true
-  xy: 129, 390
-  size: 137, 105
+  xy: 145, 191
+  size: 82, 88
   orig: 167, 167
-  offset: 2, 23
-  index: 1
-vfx/muzzle flash uzi/muzzle flash uzi
-  rotate: false
-  xy: 21, 596
-  size: 75, 67
-  orig: 167, 167
-  offset: 0, 50
-  index: 0
-vfx/muzzle flash uzi/muzzle flash uzi
+  offset: 5, 53
+  index: -1
+vfx/muzzle flash uzi/muzzle flash uzi_00004
   rotate: true
-  xy: 2, 287
-  size: 112, 101
+  xy: 165, 538
+  size: 108, 97
   orig: 167, 167
-  offset: 5, 44
-  index: 4
-vfx/muzzle flash uzi/muzzle flash uzi
-  rotate: true
-  xy: 378, 596
-  size: 85, 91
-  orig: 167, 167
-  offset: 4, 52
-  index: 3
-vfx/muzzle flash uzi/muzzle flash uzi
+  offset: 6, 46
+  index: -1
+vfx/slash/slash_0
   rotate: false
-  xy: 375, 473
-  size: 114, 60
-  orig: 167, 167
-  offset: 3, 56
-  index: 2
-vfx/muzzle flash uzi/muzzle flash uzi
-  rotate: false
-  xy: 313, 10
-  size: 73, 78
-  orig: 167, 167
-  offset: 1, 45
-  index: 1
-vfx/slash/slash
-  rotate: false
-  xy: 248, 461
-  size: 125, 132
+  xy: 269, 1040
+  size: 120, 128
   orig: 130, 132
   offset: 5, 0
-  index: 0
-vfx/slash/slash
-  rotate: false
-  xy: 2, 401
-  size: 125, 126
-  orig: 130, 132
-  offset: 2, 0
-  index: 1
-vfx/slash/slash
+  index: -1
+vfx/slash/slash_1
   rotate: true
-  xy: 498, 604
+  xy: 269, 1264
+  size: 112, 126
+  orig: 130, 132
+  offset: 10, 0
+  index: -1
+vfx/slash/slash_2
+  rotate: false
+  xy: 149, 364
+  size: 95, 81
+  orig: 130, 132
+  offset: 19, 0
+  index: -1
+vfx/slash/slash_3
+  rotate: true
+  xy: 338, 293
   size: 77, 57
   orig: 130, 132
   offset: 26, 17
-  index: 3
-vfx/slash/slash
-  rotate: true
-  xy: 544, 170
-  size: 110, 90
-  orig: 130, 132
-  offset: 9, 0
-  index: 2
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 655, 958
-  size: 48, 43
-  orig: 167, 167
-  offset: 80, 70
-  index: 10
-vfx/smoke right/smoke right
+  index: -1
+vfx/smoke right/smoke right_00000
   rotate: false
-  xy: 347, 896
-  size: 76, 46
-  orig: 167, 167
-  offset: 48, 71
-  index: 7
-vfx/smoke right/smoke right
-  rotate: false
-  xy: 425, 914
-  size: 16, 28
-  orig: 167, 167
-  offset: 112, 69
-  index: 12
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 105, 343
+  xy: 82, 178
   size: 56, 15
   orig: 167, 167
   offset: 16, 80
-  index: 0
-vfx/smoke right/smoke right
+  index: -1
+vfx/smoke right/smoke right_00001
   rotate: true
-  xy: 668, 813
+  xy: 240, 1329
   size: 81, 27
   orig: 167, 167
   offset: 19, 76
-  index: 1
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 620, 537
+  index: -1
+vfx/smoke right/smoke right_00002
+  rotate: false
+  xy: 246, 334
   size: 90, 36
   orig: 167, 167
   offset: 23, 76
-  index: 2
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 658, 538
+  index: -1
+vfx/smoke right/smoke right_00003
+  rotate: false
+  xy: 236, 249
   size: 89, 39
   orig: 167, 167
   offset: 27, 75
-  index: 3
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 660, 438
-  size: 46, 36
-  orig: 167, 167
-  offset: 82, 69
-  index: 11
-vfx/smoke right/smoke right
+  index: -1
+vfx/smoke right/smoke right_00004
   rotate: false
-  xy: 313, 181
-  size: 89, 44
-  orig: 167, 167
-  offset: 33, 73
-  index: 6
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 313, 90
-  size: 89, 42
-  orig: 167, 167
-  offset: 32, 74
-  index: 5
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 357, 90
+  xy: 145, 275
   size: 89, 41
   orig: 167, 167
   offset: 30, 74
-  index: 4
-vfx/smoke right/smoke right
+  index: -1
+vfx/smoke right/smoke right_00005
   rotate: false
-  xy: 486, 178
+  xy: 236, 290
+  size: 89, 42
+  orig: 167, 167
+  offset: 32, 74
+  index: -1
+vfx/smoke right/smoke right_00006
+  rotate: false
+  xy: 145, 318
+  size: 89, 44
+  orig: 167, 167
+  offset: 33, 73
+  index: -1
+vfx/smoke right/smoke right_00007
+  rotate: true
+  xy: 221, 844
+  size: 76, 46
+  orig: 167, 167
+  offset: 48, 71
+  index: -1
+vfx/smoke right/smoke right_00008
+  rotate: false
+  xy: 167, 874
   size: 52, 47
   orig: 167, 167
   offset: 74, 70
-  index: 8
-vfx/smoke right/smoke right
-  rotate: true
-  xy: 568, 117
+  index: -1
+vfx/smoke right/smoke right_00009
+  rotate: false
+  xy: 81, 54
   size: 51, 46
   orig: 167, 167
   offset: 76, 70
-  index: 9
-weapon/pistol
+  index: -1
+vfx/smoke right/smoke right_00010
+  rotate: false
+  xy: 81, 9
+  size: 47, 43
+  orig: 167, 167
+  offset: 81, 70
+  index: -1
+vfx/smoke right/smoke right_00011
+  rotate: false
+  xy: 299, 33
+  size: 46, 36
+  orig: 167, 167
+  offset: 82, 69
+  index: -1
+vfx/smoke right/smoke right_00012
   rotate: true
-  xy: 139, 106
+  xy: 239, 1311
+  size: 16, 28
+  orig: 167, 167
+  offset: 112, 69
+  index: -1
+weapon/pistol
+  rotate: false
+  xy: 269, 767
   size: 113, 76
   orig: 113, 76
   offset: 0, 0
   index: -1
 weapon/rifle
   rotate: false
-  xy: 337, 727
+  xy: 2, 1144
   size: 225, 81
   orig: 225, 81
   offset: 0, 0
   index: -1
 weapon/sword
-  rotate: false
-  xy: 145, 614
-  size: 62, 392
+  rotate: true
+  xy: 2, 1591
+  size: 54, 388
   orig: 68, 397
-  offset: 4, 0
+  offset: 8, 0
   index: -1
 weapon/uzi
   rotate: true
-  xy: 21, 708
+  xy: 269, 883
   size: 155, 118
   orig: 155, 118
   offset: 0, 0

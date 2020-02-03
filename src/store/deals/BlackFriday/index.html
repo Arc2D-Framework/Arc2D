@@ -1,0 +1,21 @@
+<template>
+    <h3>Here's our Black Friday specials</h3>
+    <table>
+        <thead style="background: gray;">
+            <th>Product</th>
+            <th>Price</th>
+        </thead>
+        <tbody>
+            {% for product in deals %}
+              <tr> 
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+              </tr>
+            {% else %}
+              <tr> 
+                <td colspan="2">No deals, sorry</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</template>

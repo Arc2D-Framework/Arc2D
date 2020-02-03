@@ -16,10 +16,6 @@ namespace `applications` (
 			// };
    //          thread.postMessage("123");
 
-            // alert(this.render.toString())
-            // this.lastFrameTime = Date.now() / 1000;
-            // MainLoop.setBegin(this.render)
-            // window.addEventListener("resize", e=>this.resize(e),false);
             this.canvas = document.getElementById("canvas");
 			this.canvas.width = window.innerWidth;
 			this.canvas.height = window.innerHeight;
@@ -52,19 +48,6 @@ namespace `applications` (
 			// file for the atlas. We then wait until all resources are loaded in the load() method.
 			this.assetManager.loadText("resources/spine/stickman.json");
 			this.assetManager.loadTextureAtlas("resources/spine/stickman.atlas");
-			// assetManager.loadBinary("assets/raptor-pro.skel");
-			// assetManager.loadTextureAtlas("assets/raptor-pma.atlas");
-			// assetManager.loadBinary("assets/tank-pro.skel");
-			// assetManager.loadTextureAtlas("assets/tank-pma.atlas");
-			// assetManager.loadBinary("assets/goblins-pro.skel");
-			// assetManager.loadTextureAtlas("assets/goblins-pma.atlas");
-			// assetManager.loadBinary("assets/vine-pro.skel");
-			// assetManager.loadTextureAtlas("assets/vine-pma.atlas");
-			// assetManager.loadBinary("assets/stretchyman-pro.skel");
-			// assetManager.loadTextureAtlas("assets/stretchyman-pma.atlas");
-			// assetManager.loadBinary("assets/coin-pro.skel");
-			// assetManager.loadTextureAtlas("assets/coin-pma.atlas");
-			//requestAnimationFrame(load);
 			this.load();
         }
 
@@ -74,18 +57,17 @@ namespace `applications` (
 	        	if (Key.isDown(Key.RIGHT)) {
 	        		if(!this.isWalking){
 	        			this.idle=false;
-	        			this.animationState.setAnimation(0, "1_/walk normal", true);
+	        			this.animationState.setAnimation(0, "2_Sword/run", true);
 	        			this.isWalking=true;
 	        		}
 	        		var sprite = this.skeletons["stickman"];
 	        		var skeleton 	= sprite.skeleton;
 	        			skeleton.velocity += .0005;
-	        		// skeleton.x += skeleton.velocity;
+	        		skeleton.x += skeleton.velocity;
 	        		console.log("x",skeleton.x)
 
 	        	}
 	        	else  {
-	        		// this.animationState.setAnimation(0, "idle", true);
 	        		this.isWalking=false;
 	        	}
 
@@ -99,6 +81,7 @@ namespace `applications` (
         }
 
         onDraw(interpolation){
+
         	if(this.loading_complete){
         		this.gl.clearColor(0.3, 0.3, 0.3, 1);
 				this.gl.clear(this.gl.COLOR_BUFFER_BIT);
@@ -109,7 +92,7 @@ namespace `applications` (
 				var skeleton 	= sprite.skeleton;
 				var bounds 		= sprite.bounds;
 				var premultipliedAlpha = sprite.premultipliedAlpha;
-				state.update(0.022);
+				state.update(0.033);
 				state.apply(skeleton);
 				skeleton.updateWorldTransform();
 
@@ -139,7 +122,6 @@ namespace `applications` (
 				this.loading_complete=true;
 				this.resize()
 				console.log("stickman", this.skeletons["stickman"]);
-				// this.skeletons["spineboy"].skeleton.x=300;
 
 			} else {
 				setTimeout(_=>this.load(),100);
@@ -152,7 +134,6 @@ namespace `applications` (
 
 			// Load the texture atlas using name.atlas from the AssetManager.
 			this.atlas = this.assetManager.get("resources/spine/stickman.atlas");
-			debugger;
 			// Create a AtlasAttachmentLoader that resolves region, mesh, boundingbox and path attachments
 			this.atlasLoader = new spine.AtlasAttachmentLoader(this.atlas);
 
@@ -161,7 +142,6 @@ namespace `applications` (
 
 			// Set the scale to apply during parsing, parse the file, and create a new skeleton.
 			var skeletonData = skeletonBinary.readSkeletonData(this.assetManager.get("resources/spine/stickman.json"));
-			debugger;
 			var skeleton = new spine.Skeleton(skeletonData);
 			skeleton.setSkinByName(skin);
 			var bounds = this.calculateBounds(skeleton);
@@ -170,8 +150,8 @@ namespace `applications` (
 			var animationStateData = new spine.AnimationStateData(skeleton.data);
 			var animationState = new spine.AnimationState(animationStateData);
 			if (name == "stickman") {
-				animationStateData.setMix("1_/idle", "1_/walk normal", 0.05);
-				animationStateData.setMix("1_/walk normal", "1_/idle", 0.5);
+				animationStateData.setMix("1_/idle", "1_/run", 0.05);
+				animationStateData.setMix("1_/run", "1_/idle", 0.5);
 				// animationStateData.setMix("jump", "run", 0.25);
 				// animationStateData.setMix("walk", "shoot", 0);
 				this.animationState=animationState;
@@ -179,13 +159,13 @@ namespace `applications` (
 				animationState.setAnimation(0, "1_/idle", true);
 			} else {
 				// animationStateData.setDefaultMix(0.1);
-				animationStateData.setMix("1_/idle", "1_/walk normal", 0.05);
-				animationStateData.setMix("1_/walk normal", "1_/idle", 0.5);
-				// animationStateData.setMix("jump", "run", 0.25);
-				// animationStateData.setMix("walk", "shoot", 0);
-				this.animationState=animationState;
-				this.animationStateData = animationStateData;
-				animationState.setAnimation(0, "1_/idle", true);
+				// animationStateData.setMix("1_/idle", "1_/run", 0.05);
+				// animationStateData.setMix("1_/run", "1_/idle", 0.5);
+				// // animationStateData.setMix("jump", "run", 0.25);
+				// // animationStateData.setMix("walk", "shoot", 0);
+				// this.animationState=animationState;
+				// this.animationStateData = animationStateData;
+				// animationState.setAnimation(0, "1_/idle", true);
 			}
 			animationState.addListener({
 				start: function(track) {
