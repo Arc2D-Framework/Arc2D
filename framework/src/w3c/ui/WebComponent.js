@@ -3,11 +3,17 @@ import 'src/core/ui/templating/TemplateLiterals.js';
 
 namespace `w3c.ui` (
     class WebComponent extends HTMLElement {
-        constructor() {
+        constructor(el) {
             super();
+            this.element = el;
             this.__proto = this.constructor.prototype;
             this.root = this.onEnableShadow() ? 
-                this.attachShadow({ mode: 'open' }) : this;
+                this.attachShadow({ mode: 'open' }) : 
+                (this.element||this);
+
+            if(this.element){
+                this.decorate();
+            }
         }
 
         getDefaultStyleSheet(){
@@ -39,14 +45,14 @@ namespace `w3c.ui` (
             if(e){
                 return this.getParentNodeFromEvent(e,cssSel)
             } else {
-            return this.onEnableShadow() ?
+            return (this.onEnableShadow()||this.element) ?
                 this.root.querySelector(cssSel):
                 super.querySelector(cssSel)
             }
         }
 
         querySelectorAll(cssSel, deep){
-            return this.onEnableShadow() ?
+            return (this.onEnableShadow()||this.element) ?
                 this.root.querySelectorAll(cssSel):
                 super.querySelectorAll(cssSel)
         }
@@ -183,6 +189,7 @@ namespace `w3c.ui` (
         }
 
         render(data) {
+            if(this.element){return}
             data = data || {};
             data.component = this;
             var t = this._template;
@@ -208,12 +215,24 @@ namespace `w3c.ui` (
             }
         }
 
+        //never runs when decorating nodes in place
         async connectedCallback() {
             if( this._is_connected){return;}
             this._is_connected=true;
             var html = await this.loadTemplate();
             this.onTemplateLoaded();
 
+        }
+
+        decorate(){
+            this.setClassList();
+            // this.element.className += this.className + (" " + this.constructor.prototype.classes.join(" ")).trim()
+
+            this.setPrototypeInstance();
+            // this.element.setAttribute("namespace", this.namespace);
+            
+            this.setStyleDocuments();
+            this.onPreConnected();
         }
 
         onTemplateLoaded() {
@@ -297,8 +316,12 @@ namespace `w3c.ui` (
         }
 
         setClassList() {
-            this.className += this.className + (" " + this.constructor.prototype.classes.join(" ")).trim()
+            this.root.className += this.className + (" " + this.constructor.prototype.classes.join(" ")).trim()
         }
+
+        // getRoot(){
+        //     return
+        // }
 
         getStyleSheets() {
             var styles = this["@stylesheets"]||[];
@@ -351,10 +374,9 @@ namespace `w3c.ui` (
         }
 
         setPrototypeInstance() {
-            this.setAttribute("namespace", this.namespace);
+            this.root.setAttribute("namespace", this.namespace);
             this.prototype = this;
         }
-
 
         resourcepath(url, ns){
             url = url.replace(/\$\{ns\}/gm, ns.replace(/\./gim,"/"));
