@@ -3,6 +3,7 @@ import 'docs.topics.LoaderActivity';
 import 'docs.components.TocMenu';
 import 'docs.components.LanguageSelector';
 import 'docs.topics.DocHome';
+import 'docs.components.ReadingProgress';
 
 namespace `docs` (
     @stylesheets(["/src/./index.css"]);
