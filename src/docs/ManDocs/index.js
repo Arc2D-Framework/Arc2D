@@ -18,13 +18,14 @@ namespace `docs` (
     
 
         onConnected() {
-            this.render();
+            super.onConnected();
             this.router = new core.http.Router(this,window);// <-- onConnected, best place
         }
 
-        onDisplayActivity(c,scrollTo){
+        onEnterActivity(c,scrollTo){
+            console.log("onEnterActivity", c);
             var slot = this.querySelector('.content');
-	            slot.innerHTML="";
+	            // slot.innerHTML="";
 	            slot.appendChild(c);
             if(scrollTo){
                 setTimeout(_=>{
@@ -36,17 +37,19 @@ namespace `docs` (
         }
 
         onExitCurrentActivity(c){
-            console.log("activity unloading", c)
+            console.log("onExitCurrentActivity", c);
+            var slot = this.querySelector('.content');
+                slot.innerHTML="";
         }
 
         onResumeActivity(c){
-            console.log("resuming activity from memory unloading", c);
+            console.log("onResumeActivity", c);
             this.dispatchEvent("topichanged",{});
         }
 
         onLoadingActivity(c){
             // application.dispatchEvent("showsplash")
-            console.log("new activity loading first time assets", c);
+            console.log("onLoadingActivity", c);
             this.dispatchEvent("topichanged",{});
         }
     }
