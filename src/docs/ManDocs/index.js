@@ -54,8 +54,8 @@ namespace `docs` (
             console.log("onEnterActivity", c);
             var slot = this.querySelector('.content');
 	            slot.appendChild(c);
-                this.currentActivity = c;
-                this.onEnterActivityRestoreScroll(scrollToElement)
+            this.currentActivity = c;
+            this.onEnterActivityRestoreScroll(scrollToElement)
             this.dispatchEvent("onactivityshown",c);
         }
 
@@ -64,7 +64,6 @@ namespace `docs` (
             console.log("onExitCurrentActivity", c);
             var slot = this.querySelector('.content');
                 slot.innerHTML="";
-            
         }
 
         onResumeActivity(c){

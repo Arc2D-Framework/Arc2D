@@ -11,7 +11,6 @@ namespace `docs.topics` (
 
         }
 
-        
 
         onLanguageChange(){
         	var lang = application.current_language;;
@@ -28,7 +27,7 @@ namespace `docs.topics` (
             super.onConnected()
             setTimeout(_=>this.applyHighlighting(),1000);
             this.onLanguageChange();
-            
+
         }
 
         applyHighlighting(){
