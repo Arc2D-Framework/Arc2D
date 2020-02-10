@@ -6,7 +6,6 @@ import 'docs.topics.DocHome';
 import 'docs.components.ReadingProgress';
 
 namespace `docs` (
-    @stylesheets(["/src/./index.css"]);
     class ManDocs extends w3c.ui.Application {
         constructor(element){
             super(element);
@@ -15,7 +14,7 @@ namespace `docs` (
 
         onConnected() {
             super.onConnected();
-            this.router = new core.http.Router(this,window);// <-- onConnected, best place
+            this.router = new core.http.Router(this,window);// <- onConnected, best place
             this.article_content = this.querySelector(".article-content");
         }
 
@@ -38,11 +37,12 @@ namespace `docs` (
                 if(scrollToElement){
                     wait(100).then(_=> {
                         var el = this.currentActivity.querySelector("#"+scrollToElement);
-                            el && 
+                        if (el)
                             el.scrollIntoView({
                                 behavior : "smooth",
                                 block : "start"
                             })
+
                     })
                 } else {//scroll to last y-axis
                     this.article_content.scrollTop = this.currentActivity._scrollpos||0;
@@ -50,12 +50,12 @@ namespace `docs` (
             }
         }
 
-        onEnterActivity(c,scrollIntoView){
+        onEnterActivity(c,scrollToElement){
             console.log("onEnterActivity", c);
             var slot = this.querySelector('.content');
 	            slot.appendChild(c);
                 this.currentActivity = c;
-                this.onEnterActivityRestoreScroll(scrollIntoView)
+                this.onEnterActivityRestoreScroll(scrollToElement)
             this.dispatchEvent("onactivityshown",c);
         }
 
