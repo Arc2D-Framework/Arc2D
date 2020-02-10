@@ -47,8 +47,8 @@ import 'core.ui.DatePicker';
 namespace \`applications\` (
     class PaymentsScreen extends w3c.ui.Application {
         onConnected(){
-            var d = this.querySelector("#some-existing-module");
-            var datepicker = new core.ui.DatePicker(d);
+            var dateEl = this.querySelector("#date-picker");
+            var datepicker = new core.ui.DatePicker(dateEl);
         }
     }
 );

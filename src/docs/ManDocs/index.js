@@ -13,34 +13,58 @@ namespace `docs` (
             this.addEventListener("lang-selected", e => this.onLanguageChange(e));
         }
 
+        onConnected() {
+            super.onConnected();
+            this.router = new core.http.Router(this,window);// <-- onConnected, best place
+            this.article_content = this.querySelector(".article-content");
+        }
+
+
         onLanguageChange(e){
             this.current_language = e.data;
         }
     
-
-        onConnected() {
-            super.onConnected();
-            this.router = new core.http.Router(this,window);// <-- onConnected, best place
+        //When activity exits view
+        onExitActivitySaveScroll(){
+            if(this.currentActivity){
+                this.currentActivity._scrollpos = this.article_content.scrollTop;
+            }
         }
 
-        onEnterActivity(c,scrollTo){
+        //When activity enters view
+        onEnterActivityRestoreScroll(scrollToElement=null){
+            if(this.currentActivity){
+                //like an achor
+                if(scrollToElement){
+                    wait(100).then(_=> {
+                        var el = this.currentActivity.querySelector("#"+scrollToElement);
+                            el && 
+                            el.scrollIntoView({
+                                behavior : "smooth",
+                                block : "start"
+                            })
+                    })
+                } else {//scroll to last y-axis
+                    this.article_content.scrollTop = this.currentActivity._scrollpos||0;
+                }
+            }
+        }
+
+        onEnterActivity(c,scrollIntoView){
             console.log("onEnterActivity", c);
             var slot = this.querySelector('.content');
-	            // slot.innerHTML="";
 	            slot.appendChild(c);
-            if(scrollTo){
-                setTimeout(_=>{
-                    var el = c.querySelector("#"+scrollTo);
-                    el && el.scrollIntoView({behavior:"smooth",block:"start"})
-                },100)
-            }
-            this.dispatchEvent("onactivityshown",c)
+                this.currentActivity = c;
+                this.onEnterActivityRestoreScroll(scrollIntoView)
+            this.dispatchEvent("onactivityshown",c);
         }
 
         onExitCurrentActivity(c){
+            this.onExitActivitySaveScroll()
             console.log("onExitCurrentActivity", c);
             var slot = this.querySelector('.content');
                 slot.innerHTML="";
+            
         }
 
         onResumeActivity(c){

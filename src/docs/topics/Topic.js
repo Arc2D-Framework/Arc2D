@@ -7,8 +7,11 @@ namespace `docs.topics` (
             super();
             application.addEventListener("lang-selected", e=>this.onLanguageChange(e), false);
             hljs.getLanguage('javascript').keywords += ' namespace'; // note the leading space
+            
 
         }
+
+        
 
         onLanguageChange(){
         	var lang = application.current_language;;
@@ -24,7 +27,8 @@ namespace `docs.topics` (
         onConnected() {
             super.onConnected()
             setTimeout(_=>this.applyHighlighting(),1000);
-            this.onLanguageChange()
+            this.onLanguageChange();
+            
         }
 
         applyHighlighting(){
