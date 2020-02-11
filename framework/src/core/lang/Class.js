@@ -37,4 +37,4 @@ import 'src/core/decorators/es7.js';
         } catch(e){ return func }
         return func
     };
-})(typeof global !="undefined" ? global:window);
+})(typeof global !="undefined" ? global : window);

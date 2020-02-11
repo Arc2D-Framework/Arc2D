@@ -14,8 +14,9 @@ namespace `docs` (
 
         onConnected() {
             super.onConnected();
-            this.router = new core.http.Router(this,window);// <- onConnected, best place
+            debugger;
             this.article_content = this.querySelector(".article-content");
+            this.router = new core.http.Router(this,window);// <- onConnected, best place
         }
 
 
@@ -32,6 +33,7 @@ namespace `docs` (
 
         //When activity enters view
         onEnterActivityRestoreScroll(scrollToElement=null){
+            debugger;
             if(this.currentActivity){
                 //like an achor
                 if(scrollToElement){
