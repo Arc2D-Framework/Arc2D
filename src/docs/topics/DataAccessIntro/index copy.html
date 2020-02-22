@@ -1,0 +1,371 @@
+<template>
+  <div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Introduction</h1>
+        <p>
+            I'd like to take a slightly different approach to this topic by moving through a real-world scenario you're bound to encounter, reading abd writing to a data source, most commonly a database, usually via REST services exposed by a middle-ware server or perhaps accessing a datasource through a javascript api.
+        </p>
+        <p>
+            Firebase, Mongo, CouchDB and Arango are all examples of No-SQL technologies that allow data storage and retrieval using a REST end-points. REST end-points are URL's that act as services that can be connected to for create, read, update, delete functionality. 
+        </p>
+        <p>
+            The task was on myself. I started by making a <code>MovieList</code> component that we
+            can place on screen:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+    class MovieList extends w3c.ui.WebComponent {
+        
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            The html template for this component is mostly empty, i'll have to revisit with a loop to generate <code>LI</code> tags for each movie. It's ugly, but this is prototyping :) Let's get some data ready.
+            <pre class="inline html lang">
+                <code>
+&#x3C;template&#x3E;
+    &#x3C;h2&#x3E;List of Movies&#x3C;/h2&#x3E;
+    &#x3C;ul&#x3E;
+        &#x3C;!-- show LI items here --&#x3E;
+    &#x3C;/ul&#x3E;
+&#x3C;/template&#x3E;
+                </code>
+            </pre>
+            In my architecture diagram, the UI layer depicts just this component for brevity:
+            <img src="src/docs/images/data_access_ui.png"/>
+        </p>
+        <p>
+            To start prototyping quickly (while backend guys prepared the db), I created a
+            JSON file to read a list of sample movies, i'll think of it as connecting to the database. (See: <a href="resources/data/movies.json" target="_new">movies.json</a>)
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+    class MovieList extends w3c.ui.WebComponent {
+        onConnected(){
+            var movies = fetch("/resources/movies.json");
+            this.render(movies)             
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            My Design on paper now resembles this:
+            <img src="src/docs/images/data_access_ui_jsonfile.png"/>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Connecting to Database</h1>
+        <p>
+            Soon after, the database side was ready, I was able to connect
+            via a REST api to get that same list of movies. Had to modify
+            slightly.
+        </p>
+        <p>
+            My Design on paper now resembles this:
+            <img src="src/docs/images/data_access_ui_rest.png"/>
+        </p>
+        <p>
+            Just want 10 movies for now, i'll worry about pagination later:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+    class MovieList extends w3c.ui.WebComponent {
+        onConnected(){
+            var movies = fetch("http://www.xyz123.com/rest/movies?category=Action&limit=10");
+            this.render(movies)             
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            It was all good until my team lead says I should be using the movies api he's
+            been working on and not directly fetch calls. Still, minor change, no issues.
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+    class MovieList extends w3c.ui.WebComponent {
+        onConnected(){
+            var db = moviesApi.client.db;
+            var movies = db.collection("movies").filter("category","Action");
+            this.render(movies)             
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            With the change:
+            <img src="src/docs/images/data_access_ui_rest_client.png"/>
+        </p>
+        <p>
+            There were some talks that the staging server will be moving to
+            from MySQL to CouchDB in the coming days to weeks, something about storing objects. I had
+            to prepare for that now, otherwise this might break when deployed to that environment. Back to supporting that low-level fetch(), and if the lead writes a new api, i'll circle back with a patch.
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+    class MovieList extends w3c.ui.WebComponent {
+        onConnected(){
+        var movies = [];
+
+            if(Confi.ENV == "dev"){
+                var db = moviesApi.client.db;
+                movies = db
+                    .collection("movies")
+                    .filter("category","Action").
+                    .limit(10);
+            }
+            else {
+                movies = fetch("http://www.xyz123.com/couchdb/db/movies?category=Action&limit=10");
+            }
+            this.render(movies)             
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Running Offline</h1>
+        <p>
+            It was not bad, but it works. The problem is, on my commute home, I could 
+            not work on the train, there's no internet. Besides I should be able to
+            run this app offline and still see something.
+        </p>
+        <p>
+            I decided that maybe I can have a <code>Debug</code> flag. If in debug mode,
+            i can resort to loading that original JSON file from disk that have some samples movies.
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+    class MovieList extends w3c.ui.WebComponent {
+        onConnected(){
+        var movies = [];
+
+            if(Confi.ENV == "dev"){
+                var db = moviesApi.client.db;
+                movies = db
+                    .collection("movies")
+                    .filter("category","Action").
+                    .limit(10);
+            }
+            else if(Confi.ENV == "debug"){
+                movies = fetch("http://www.xyz123.com/couchdb/db/movies?category=Action&limit=10");
+            }
+            else {
+                movies = fetch("http://www.xyz123.com/couchdb/db/movies?category=Action&limit=10");
+            }
+            this.render(movies)             
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            It's turning out to be a bit messy. I'll refactor, take the low level data access calls and move it
+            out to it's own Movies.js, something like a Data Layer call. 
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.data\` (
+    class Movies {
+        list(){
+            var res = [];
+
+            if(Confi.ENV == "dev"){
+                var db = moviesApi.client.db;
+                res = db
+                    .collection("movies")
+                    .filter("category","Action").
+                    .limit(10);
+            }
+            else if(Confi.ENV == "debug"){
+                res = fetch("http://www.xyz123.com/couchdb/db/movies?category=Action&limit=10");
+            }
+            else {
+                res = fetch("http://www.xyz123.com/couchdb/db/movies?category=Action&limit=10");
+            }
+            return res            
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            Now, this is much cleaner:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+    class MovieList extends w3c.ui.WebComponent {
+        onConnected(){
+            this.render({items: Movies.list()})       
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            But all the ugly conditional statements and various ways to get data was still present, just not in my UI.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Code Review</h1>
+        <p>
+            Code review day was not so good but i learned a few things. My lead says
+            that I have no unit tests, there is
+            no concept of a Movie entity, and Movies.js was just some module implementing too many dependencies 
+            upon low-level infastructure calls, what happens when he releases the new CouchDB api client he's been working on? Also, I'll have to dupe the low-level connection details everwhere else. We have multiple features coming soon, like seeing a list of movie reviews, searching, reservations, actors and so on. A copy+paste nightmare, with hard-coded REST end-points and repeated api calls through-out the "data layer". Worst part is, there are still no unit tests, and besides, can't keep connecting to the database for tests, mock data would be better. Should I add yet another check for "test" environment with more hard-coded paths? Still, test what? I could test the data/properties itself. Overall, although it started off clean, it's about to snoball out of order.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">A better data-access solution for front-ends</h1>
+        <p>
+            He recommended I enforce a clean domain model using Repositories; remove all low-level database calls 
+            out of the domain, treating each low-level technology (mongo, disk, rest, sql) as a data source 
+            and write drivers for each.
+        </p>
+        <p>What? Writing drivers? I don't get it.</p>
+        <p>
+            He draws up this picture
+            <img src="src/docs/images/data_access_repositories.png"/>
+        </p>
+        <p>
+            He says each low-level device driver will implement an interface specified by Respositories in the Domain, this will allow us swap out drivers and never affect the Domain or UI aspects. Repositories are configured with a driver that implicitly points to some data source (Mongo, CouchDB, Local Storage...). As to what driver? Should not matter, our UI will and should not be affected or care where that data resides. Drivers here all work the same, with a unified spec, supplying the same data.
+        </p>
+        <p>
+            Low-level details are handled by drivers, this allows drivers to enforce data-source policies, throttling, queuing, security, caching and data transformations, all of the techcnology specific criteria. Drivers don't have to be tied to a particular data source, a "smart" driver could watch internet connectivity, can delegate internally to a LocalStorage driver, or when testing, a Memory driver or to a Buffer, that batches and synchs data that was collected while offline and when online, push the changes back to the relevant source.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Domain Models and Repositories</h1>
+        <p>
+            The above scenario does not have to be fables. This happens all the time. Fast pace environments, junior programmers or careless developers are all ripe ingredients for train wrecks. Fortunately, Arc makes working with data as simple as working with an Array, a concept familiar to us.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+</template>

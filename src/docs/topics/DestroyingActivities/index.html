@@ -6,13 +6,29 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Destroying Activities</h1>
         <p>
-          We've been using the terms, Activity and Views interchangeably. "Views" were mentioned abstractly to mean a UI component appearing in an applications view-port. But how views transition in and out of a view-port is a design pattern in Arc called Activities.
+          During the <code>onExitActivity()</code>, you can perform any cleanup, such as clearing out the view-port for the next activity to enter in. If the view needs to be destroyed, simply tear it down but calling <code>.destroy()</code>
         </p>
         <p>
-            Navigating to views by links:
-            <pre class="inline html lang"><code>&#x3C;a href=&#x22;#screens.BlackFridayDeals&#x22;&#x3E;Shop Black Friday Specials&#x3C;/a&#x3E;</code></pre><br/>
-
-            is a design decision that required an intelligent, real-time routing mechanism that limits any pre-configured "wire-ups". Developers leverage existing knowledge of simple anchros to achieve graceful navigation between views.
+            Destroy the view (activity):
+            <pre class="inline javascript lang">
+              <code>
+onExitCurrentActivity(current_activity){
+    //code to clear view-port here
+    current_activity.destroy();
+}
+              </code>
+            </pre>
+        </p>
+        <p>
+            Additionally, the router should be 
+            <pre class="inline javascript lang">
+              <code>
+onExitCurrentActivity(current_activity){
+    //code to clear view-port here
+    current_activity.destroy();
+}
+              </code>
+            </pre>
         </p>
        
       </div>

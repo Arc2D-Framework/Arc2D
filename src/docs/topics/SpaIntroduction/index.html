@@ -6,7 +6,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">SPA Introduction</h1>
         <p>
-          Single page applications (SPA), equate to having a single page that loads just once with views that transition and out without causing a browser reload. This is the "rough" idea of what and SPA is all about.
+          Single page applications (SPA), equate to having a single page that loads just once, having views that transition in and out without causing a browser reload. This is a "rough" idea of what an SPA is.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -23,7 +23,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Application Redirects (reloadable)</h1>
         <p>
-          Arc allows many SPA applications to co-exist with redirects between each other. For example, in an eCommerce front-end, it makes sense to have separate products catalog and user dashboard applications as distinct screens, since they may present different contexts and features, but existing within the same system. Redirecting to applications within the same front-end is simple:
+          Arc allows many SPA applications to co-exist with redirects between each other. For example, in an eCommerce front-end, it makes sense to have a separate <code>ProductsCatalog</code> and <code>UserAccount</code> applications as distinct screens, since they may present different contexts and features, but existing within the same system. Redirecting to applications within the same front-end is simple:
             <!-- Every application in Arc is a single application. There can be
             many applications in the system, each isolated but may share resources. You never cram
             it all into 1 "spa". It makes sense to have a store-front application for example and
@@ -31,11 +31,11 @@
         </p>
         <p>
             To redirect from 1 application to another, use an href:
-            <pre class="inline html lang"><code>&#x3C;a href=&#x22;dahsboard.html&#x22;&#x3E;Dashboard&#x3C;/a&#x3E;</code></pre><br/>
+            <pre class="inline html lang"><code>&#x3C;a href=&#x22;user-account.html&#x22;&#x3E;My Account&#x3C;/a&#x3E;</code></pre><br/>
         </p>
         <p>
             Maybe there is a link back to shopping:
-            <pre class="inline html lang"><code>&#x3C;a href=&#x22;products.html&#x22;&#x3E;Shop Catalog&#x3C;/a&#x3E;</code></pre><br/>
+            <pre class="inline html lang"><code>&#x3C;a href=&#x22;products-catalog.html&#x22;&#x3E;Shop Catalog&#x3C;/a&#x3E;</code></pre><br/>
         </p>
 
         <p>
@@ -65,10 +65,10 @@
         </p>
         <p>
             To navigate between views in an application, simply setup a #hash link:
-            <pre class="inline html lang"><code>&#x3C;a href=&#x22;#screens.BlackFridayDeals&#x22;&#x3E;Shop Black Friday Specials&#x3C;/a&#x3E;</code></pre><br/>
+            <pre class="inline html lang"><code>&#x3C;a href=&#x22;#store.deals.BlackFriday&#x22;&#x3E;Shop Black Friday Specials&#x3C;/a&#x3E;</code></pre><br/>
         </p>
         <p>
-            Place the link anywhere within the app. When clicked, the <code>BlackFridayDeals</code> component will load into the applications designated view-port, (a <code>&#x3C;slot&#x3E;&#x3C;/slot&#x3E;</code>) that you specify as the "area" for views to transition in and out. The <code>#screens.BlackFridayDeals</code> is a fully qualified namespace to any component that serves as a view.
+            Place the link anywhere within the app. When clicked, the <code>BlackFriday</code> component will load into the applications designated view-port, (a <code>&#x3C;slot&#x3E;&#x3C;/slot&#x3E;</code>) that you specify as the "area" for views to transition in and out. The <code>#store.deals.BlackFriday</code> is a fully qualified namespace to any component.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -86,7 +86,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Component Views</h1>
         <p>
-            The BlackFriday activity view is just another component setup no different. Snippets on the right.
+            The BlackFriday activity view is just another component. Snippets on the right.
             <pre class="inline javascript lang"><code>
 namespace \`store.deals\` (
     class BlackFriday extends w3c.ui.WebComponent  {
@@ -98,7 +98,7 @@ namespace \`store.deals\` (
         <p>
             So a #hash link to this component (fully-qualified namespace) will cause the application to
             display it in the view-port.
-            <pre class="inline html lang"><code>&#x3C;a href=&#x22;#screens.BlackFridayDeals&#x22;&#x3E;Shop Black Friday Specials&#x3C;/a&#x3E;</code></pre><br/>
+            <pre class="inline html lang"><code>&#x3C;a href=&#x22;#store.deals.BlackFriday&#x22;&#x3E;Shop Black Friday Specials&#x3C;/a&#x3E;</code></pre><br/>
         </p>
       </div>
       <div style="width: 50%;display: block;">

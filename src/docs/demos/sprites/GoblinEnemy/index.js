@@ -1,5 +1,5 @@
 import 'core.ui.game.Sprite';
-import 'core.ui.game.animations.Animation';
+import '/src/core/ui/game/animations/Animation.js';
 
 namespace `docs.demos.sprites` (
 	class GoblinEnemy  extends core.ui.game.Sprite  {
