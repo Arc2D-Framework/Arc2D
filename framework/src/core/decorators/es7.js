@@ -20,6 +20,7 @@ window.stylesheets = function stylesheets (target, paths){
 }
 
 window.traits = function traits(target, __traits){
+    /*debugger;
 	var inheritTraits = function(klass, properties){
         properties = properties.reverse();
         properties.forEach(trait => {
@@ -31,7 +32,7 @@ window.traits = function traits(target, __traits){
     
     var defineProps = function(proto, trait){
         for (var prop in trait) {
-            if(!proto[prop]){
+            if(!proto[prop] && proto.hasOwnProperty(prop)){
                 Object.defineProperty(proto,prop,{
                     value : trait[prop],
                     writable:true
@@ -39,7 +40,19 @@ window.traits = function traits(target, __traits){
             }
         }
     }
-	inheritTraits(target.prototype, __traits);
+	inheritTraits(target.prototype, __traits);*/
+
+    for (let mixin of __traits) copy(target.prototype, mixin.prototype);
+    
+
+    ;function copy(target, source) {
+        for (let key of Reflect.ownKeys(source)) {
+            if(!/constructor|namespace|ancestor|classname|prototype|name/.test(key)){
+                let desc = Object.getOwnPropertyDescriptor(source, key);
+                Object.defineProperty(target, key, desc);
+            }
+        }
+    }
 };
 
 window.cascade = function cascade(target,shouldCascade){

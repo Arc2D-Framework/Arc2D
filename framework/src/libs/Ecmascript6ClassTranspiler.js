@@ -12,7 +12,8 @@ Ecmascript6ClassTranspiler.prototype.transpile = function (src, doc) {
 
 Ecmascript6ClassTranspiler.prototype.transpileToLevel = function (src) {
     var nsReg = /namespace\s?`([^\s`]*)/;
-    var clsReg = /class\s+([^\s]*)\s+[\{|extends]/;
+    // var clsReg = /class\s+([^\s]*)\s+[\{|extends]/;  //unable to find class name if no space between name and {
+    var clsReg = /class\s+([^\s]*)[\s\n\t]?[\{|extends]/;
 
     var nsMatch = src.match(nsReg);
     var classMatch = src.match(clsReg);
