@@ -1,4 +1,3 @@
-
 namespace `core.http` (
     class Router {
         constructor(app,hostWindow){

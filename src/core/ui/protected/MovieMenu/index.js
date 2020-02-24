@@ -3,7 +3,6 @@ import '/src/core/ui/XTest/index.js';
 
 
 namespace `core.ui.protected` (
-    @stylesheets(["/src/./index.css"]);
     class MovieMenu extends core.ui.ProtectedChildComponent {
         constructor (element){
             super(element);

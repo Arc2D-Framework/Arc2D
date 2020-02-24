@@ -2,7 +2,6 @@ import '/src/core/data/Movies.js';
 
 
 namespace `core.ui` (
-	@stylesheets(['/src/./index.css']);
 	class MoviesList extends w3c.ui.WebComponent {
 		constructor(el){
 			super(el);

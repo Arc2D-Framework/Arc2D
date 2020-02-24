@@ -1,6 +1,5 @@
 
 namespace `core.ui.protected` (
-    @stylesheets(["/src/./index.css"]);
     class UserLoginBar extends core.ui.ProtectedChildComponent {
         constructor(){
             super();

@@ -1,5 +1,5 @@
-import '/src/core/ui/game/Point.js';
-import '/src/core/ui/game/Tileset.js';
+import! 'core.ui.game.Point';
+import! 'core.ui.game.Tileset';
 
 namespace `applications` (
     @stylesheets(["src/./index.css"]);
@@ -32,6 +32,7 @@ namespace `applications` (
                           ? 0
                           : (a.dist > b.dist ? 1 : -1);
                 });
+            console.log("objects beneath", tilenodes)
             var target = tilenodes.shift();
             console.log(mx,my)
             console.log("sorted nodes", target);
