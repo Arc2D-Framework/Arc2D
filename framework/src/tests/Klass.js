@@ -24,7 +24,7 @@ namespace `tests` (
                 if(com.Employee) {
                     resolve(true)
                 } else {
-                    reject("a is small")
+                    reject("is not a class")
                 }
                 
             });

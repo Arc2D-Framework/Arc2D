@@ -2,7 +2,6 @@ import! 'core.ui.game.Point';
 import! 'core.ui.game.Tileset';
 
 namespace `applications` (
-    @stylesheets(["src/./index.css"]);
     class IsoMap extends w3c.ui.Application {
         constructor(element){
             super(element);
