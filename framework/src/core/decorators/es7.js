@@ -1,6 +1,5 @@
 function transpile(target, level){}
 
-//helper
 function relativeToAbsoluteFilePath(path, ns, appendRoot){
     ns = ns||this.namespace;
     ns = ns.replace(/\./gim,"/");
@@ -20,31 +19,8 @@ window.stylesheets = function stylesheets (target, paths){
 }
 
 window.traits = function traits(target, __traits){
-    /*debugger;
-	var inheritTraits = function(klass, properties){
-        properties = properties.reverse();
-        properties.forEach(trait => {
-            if (typeof trait == "object") {
-                defineProps(klass, trait)
-            }
-        });
-    };
-    
-    var defineProps = function(proto, trait){
-        for (var prop in trait) {
-            if(!proto[prop] && proto.hasOwnProperty(prop)){
-                Object.defineProperty(proto,prop,{
-                    value : trait[prop],
-                    writable:true
-                })
-            }
-        }
-    }
-	inheritTraits(target.prototype, __traits);*/
-
     for (let mixin of __traits) copy(target.prototype, mixin.prototype);
     
-
     ;function copy(target, source) {
         for (let key of Reflect.ownKeys(source)) {
             if(!/constructor|namespace|ancestor|classname|prototype|name/.test(key)){

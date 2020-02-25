@@ -40,7 +40,6 @@ namespace `w3c.ui` (
                 ) : null;
         }
 
-        //TODO: Revisit how to make it work wihout passing deep flag
         querySelector(cssSel, e){
             if(e){
                 return this.getParentNodeFromEvent(e,cssSel)
@@ -96,8 +95,6 @@ namespace `w3c.ui` (
             return super.dispatchEvent(evt);
         }
 
-
-        //TODO: refactor to return a Binding that can be enabled/disabled.
         //TODO: Deprecate. Overload addEventListener() instead to streamline it.
         bind(el, evtName, handler, bool=false) {
             var self = this;
@@ -216,7 +213,6 @@ namespace `w3c.ui` (
             }
         }
 
-        //never runs when decorating nodes in place
         async connectedCallback() {
             if( this._is_connected){return;}
             this._is_connected=true;
@@ -227,11 +223,7 @@ namespace `w3c.ui` (
 
         decorate(){
             this.setClassList();
-            // this.element.className += this.className + (" " + this.constructor.prototype.classes.join(" ")).trim()
-
             this.setPrototypeInstance();
-            // this.element.setAttribute("namespace", this.namespace);
-            
             this.setStyleDocuments();
             this.onPreConnected();
         }
@@ -244,10 +236,7 @@ namespace `w3c.ui` (
             this.onPreConnected();
         }
 
-
-        getSlots() {
-            return Array.from(this.children)
-        }
+        getSlots() { return Array.from(this.children) }
 
 
         onTemplateRendered(){
@@ -320,10 +309,6 @@ namespace `w3c.ui` (
             this.root.className += this.className + (" " + this.constructor.prototype.classes.join(" ")).trim()
         }
 
-        // getRoot(){
-        //     return
-        // }
-
         getStyleSheets() {
             var styles = this["@stylesheets"]||[];
             return styles.reverse();
@@ -357,14 +342,11 @@ namespace `w3c.ui` (
             }
         }
 
-        onLoadStyle(url){
-            return url;
-        }
+        onLoadStyle(url){ return url }
 
 
         template(){return null}
 
-        //TODO: new proposal for simpler use and DIP
         evalTemplate(template, data) {
             var eng = this.getTemplateEngine();
             return eng.parse(template, data, this);

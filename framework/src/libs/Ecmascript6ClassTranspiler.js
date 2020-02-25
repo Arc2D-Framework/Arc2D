@@ -12,7 +12,6 @@ Ecmascript6ClassTranspiler.prototype.transpile = function (src, doc) {
 
 Ecmascript6ClassTranspiler.prototype.transpileToLevel = function (src) {
     var nsReg = /namespace\s?`([^\s`]*)/;
-    // var clsReg = /class\s+([^\s]*)\s+[\{|extends]/;  //unable to find class name if no space between name and {
     var clsReg = /class\s+([^\s]*)[\s\n\t]?[\{|extends]/;
 
     var nsMatch = src.match(nsReg);
@@ -32,7 +31,6 @@ Ecmascript6ClassTranspiler.prototype.transpileToLevel = function (src) {
 }
 
 Ecmascript6ClassTranspiler.prototype.transipleDecoratorFields = function (ns,src) {
-    //   var regex = /@([^\s]*)\({1}([^\;]*)\){1};{1}/gm; //<--works but not for @matchmedia
     var regex = /@([^\W]*)\({1}([^\;]*)\){1};{1}/gm; //Feb 7 2019 - to support @matchmedia queries having ('s)
     var props = [];
     if (ns) {
@@ -80,4 +78,4 @@ Ecmascript6ClassTranspiler.prototype.transipleClassFields = function (ns, src) {
         fullsrc = src;
     }
     return fullsrc;
-}
+};

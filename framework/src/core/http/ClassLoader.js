@@ -7,11 +7,11 @@ namespace `core.http` (
         constructor (){
             super();
             this.es6Transpiler = new Ecmascript6ClassTranspiler();
-            window.run=this.run.bind(this);//TODO:check dynamic transpilation
+            window.run = this.run.bind(this);//TODO:check dynamic transpilation
             return this;
         }
 
-        run(src,cb){
+        run(src, cb){
             this.build(src, output => {
                 var head   = document.getElementsByTagName("head").item(0);
                 var script = document.createElement("script");
@@ -29,31 +29,24 @@ namespace `core.http` (
                 src ? this.run(src,cb) : cfFailure(src,"no xhr"); 
         }
 
-
-
         async build(src, cb) {
             src = this.es6Transpiler.transpile(src);
             var reg = /^import\!?\s+[\'\"]{1}([^\'\"]*)[\'\"]{1}\;?/m;
 
             while (reg.test(src)) {
                 var match = src.match(reg);
-                var ns_or_path = match[1];
-                var s =  this.es6Transpiler.transpile(
-                            (window.imported_classes[ns_or_path] ?
-                            ";" : await this.imports(match))||""
-                        );
-                src = src.replace(reg, s);
+                var ns = match[1];
+                src = src.replace(reg, this.es6Transpiler.transpile(
+                    (window.imported_classes[ns] ? ";" : await this.imports(match))||""
+                ))
             }
             cb(`(()=>{ ${src} })()`);
         }
 
         async imports(match){
-            var paths_to_try = this.pathsToTry(match);
-            for(let path of paths_to_try){
-                var code = await window.imports(path);
-                if(code){
-                    return code;
-                } 
+            var paths = this.pathsToTry(match);
+            for(let path of paths){
+                return await window.imports(path);
             }
         }
 
@@ -62,12 +55,13 @@ namespace `core.http` (
             if(/\.m?js$/.test(ns)){
                 return [ns]
             }
-            var srcpath = Config.SRC_PATH;
+            ns=ns.replace(/\./gm,"/");
+            var root = Config.SRC_PATH;
             var paths   = [];
             match[0].includes("!") ? 
-                paths.push(srcpath+ns.replace(/\./gm,"/") + ".js"):null;
-            paths.push(srcpath+ns.replace(/\./gm,"/") + "/index.js")
-            paths.push(srcpath+ns.replace(/\./gm,"/") + "/index.min.js");
+            paths.push(root+ns + ".js"):null;
+            paths.push(root+ns + "/index.js")
+            paths.push(root+ns + "/index.min.js");
             return paths;
         }
     }

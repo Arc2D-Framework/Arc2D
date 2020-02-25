@@ -2,7 +2,6 @@ import 'src/core/http/ClassLoader.js';
 import 'src/core/http/ModuleLoader.js';
 import 'src/mainloop.js';
 
-
 document.addEventListener("DOMContentLoaded", e => {
   async function bootup() {
     var ns = document.body.getAttribute("namespace");
