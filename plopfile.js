@@ -16,7 +16,6 @@ module.exports = function (plop) {
 	});
 
 	plop.addHelper('FQNS_to_NS', function (fqns) {
-		debugger;
 		var parts = fqns.split(".");
 		var className = parts.pop();
 		var namespace = parts.join(".");
@@ -24,8 +23,6 @@ module.exports = function (plop) {
 	});
 
 	plop.addHelper('FQNS_to_NS_Path', function (fqns) {
-		debugger;
-		console.log("fqns",fqns.split("."))
 		var parts = fqns.split(".");
 		var className = parts.pop();
 		var namespace = parts.join("/");
@@ -33,7 +30,6 @@ module.exports = function (plop) {
 	});
 
 	plop.addHelper('FQNS_to_Class', function (fqns) {
-		debugger;
 		var parts = fqns.split(".");
 		var className = parts.pop();
 		return className
