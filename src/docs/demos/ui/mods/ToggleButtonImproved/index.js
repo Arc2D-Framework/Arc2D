@@ -1,5 +1,6 @@
-namespace `docs.demos.ui` (
-	class ToggleButton  extends w3c.ui.WebComponent  {
+
+namespace `docs.demos.ui.mods` (
+	class ToggleButtonImproved  extends w3c.ui.WebComponent  {
 		onConnected(){
             super.onConnected();
             this.addEventListener("click", e => this.onClick(e));
@@ -15,7 +16,15 @@ namespace `docs.demos.ui` (
 
         onClick(){
             this.direction *= -1;
+            this.onUpdate();
             this.onRender();
+        }
+
+        onUpdate(){
+            (this.direction > 0) ?
+                this.classList.add("on"):
+                this.classList.remove("on")
+            
         }
 
         get x() {

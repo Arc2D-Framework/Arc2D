@@ -1,0 +1,141 @@
+<template>
+    <div>
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Events &amp; Signals</h1>
+            <p>Here's a minimalistic toggle-button created with html, css and native javascript. It slides left to right
+            but gives no indication of being "on" or "off". In this exercise, we'll leverage the signals being emitted by
+        components to demonstrate how components on screen can inter-communicate with themselves, siblings and parents.</p>
+            <toggle-button></toggle-button>
+            <!-- <simple-calculator style="margin-top:30px;"></simple-calculator> -->
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Inter-communication</h1>
+            <p>Or, components that communicate with themselves internally. They listen to events being fired
+            from within and respond. The first problem with this toggle-button is that it should set an attribute
+            on itself when it is on/off. Perferrably a className. Inspect the button, toggle it, the only state
+            that changes is a 3D translation along the x-axis. The full source of the class reveals that it
+            already is listening to click events from within itself, firing tthe <code>onClick()</code> handler
+            each time.
+            <pre class="inline javascript lang"><code>
+onConnected(){
+    super.onConnected();
+    this.addEventListener("click", e => this.onClick(e));
+    ...
+}
+            </code></pre>
+            </p>
+            <p>It's important to note, that events are wired by the toggle button itself (<code>this</code>), via
+                the w3c native api <code>addEventListener()</code>. <code>onClick()</code> is now bound to this event/signal
+            and is all scoped and insolated within this component.</p>
+            <p>
+ <pre class="inline javascript lang"><code>
+onClick(){
+    this.direction *= -1;
+    this.onRender();
+}
+            </code></pre>               
+            </p>
+            <p>
+                <code>onClick()</code>, does 1 core thing. It flips the direction flag positive or negative each time by a multiplication of -1. Meaning, the next time, -1*-1 will be a positive +1. The next time, +1*-1 will result in -1, thereby inverting the integer 1 each click.
+                <code>onRender()</code> follows, drawing the knob in whatever direction plus travel distance (out of scope).
+            </p>
+            <p>Simply observing the sign (+/-) of direction can tell us implicitly what state this button is in. Since +positive moves to the right and - is a move to the left on a cartesian coordinatte plane, we can use the direction to set a
+            custom attribute, like a className such as "on", "off" on the component itself, let's do that.</p>
+
+            <p>
+                We'll modify the <code>onClick()</code>, to call <code>onUpdate()</code> which updates this new state.
+                 <pre class="inline javascript lang"><code>
+onClick(){
+    this.direction *= -1;
+    this.onUpdate();
+    this.onRender();
+}
+            </code></pre>   
+            </p>
+            <p>
+                <code>onUpdate()</code> will check the direction and add a custom class attributte to the toggle itself:
+                  <pre class="inline javascript lang"><code>
+onUpdate(){
+    (this.direction > 0) ?
+        this.classList.add("on"):
+        this.classList.remove("on")
+    
+}
+            </code></pre> 
+            <p>
+                We'll assume that if "on" is not present in the classList, that it is off.
+            </p>                 
+            </p>
+            <!-- <simple-calculator style="margin-top:30px;"></simple-calculator> -->
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h3 id="api-reference">Styling "on" state</h3>
+        <p>
+          Here's the improved toggle button, inspect it from dev console. Flip it right to left and
+          notice the "on" className is being added and removed. We now have a way to style the toggle
+          button when it is "on", from it's css declarations:
+            <pre class="inline css lang"><code>
+toggle-button.on {
+    background:limegreen;
+}
+            </code></pre> 
+        </p>
+        <p>
+            Here's the new improved toggle buttto working:
+            <toggle-button-improved></toggle-button-improved>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Inter-Sibling Communication</h1>
+        <p>doc..in progress</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+    </div>
+</template>
