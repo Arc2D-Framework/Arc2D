@@ -9,13 +9,100 @@
             but gives no indication of being "on" or "off". In this exercise, we'll leverage the signals being emitted by
         components to demonstrate how components on screen can inter-communicate with themselves, siblings and parents.</p>
             <toggle-button></toggle-button>
+            <p>
+                Events are like signals fired in the environment. Any component, including the component closest to, or responsible for the signal can listen for it. Arc leverages native event-bubbling, a mechanism recommended by w3c for loose coupling and communication. First look at this diagram:
+                <img src="Src/docs/images/event_bubbling.png"/>
+            </p>
+            <p>
+                It depicts the 'click' signal bubbling from the target (the knob), to all parents, ultimately ending at the Application (the body). The signal hops from parent to parent, giving each parent a chance to listen for it and/or stop it from further piercing up through the DOM. Its a "chain of responsibility".
+            </p>
+            <p>
+                Based on the diagram, it shows that the <code>toggle-button</code> component itself can listen for this click, as seen in the code snippet to the right, and let it pierce the environment for others who are interested. Meaning, your Application could wire a 'click' listener and eventually be notified that some target (a knob), fired this 'click' signal, which, might not be so valuable. But imagine if the signals had more data in the payload as it traveled? Application could intelligently chart metrics and logs of things being used on the screen, send this info to the backend for to building usage metrics.
+            </p>
             <!-- <simple-calculator style="margin-top:30px;"></simple-calculator> -->
           </div>
           <div style="width: 50%;display: block;">
             <div class="shell lang"></div>
-            <div class="javascript lang"></div>
-            <div class="html lang"></div>
-            <div class="css lang"></div>
+            <div class="javascript lang">
+                <blockquote class="javascript" style="display:block;width: 100%;">
+            From any JavaScript class:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`docs.demos.ui\` (
+  class ToggleButton extends w3c.ui.WebComponent  {
+    onConnected(){
+            super.onConnected();
+            this.addEventListener("click", e => this.onClick(e));
+            this.knob = this.querySelector("div");
+            this.direction = -1;
+        }
+
+        onStyleComputed(style){//wait for styles
+            this.bounds = this.getBoundingClientRect();
+            this.knob_bounds = this.knob.getBoundingClientRect();
+        }
+
+
+        onClick(){
+            this.direction *= -1;
+            this.onRender();
+        }
+
+        get x() {
+            return this.direction > 0 ?
+                this.bounds.width-this.knob_bounds.width-6 : 0;
+        }
+
+        onRender(){
+            var vector = {x: this.x, y:0, z:0 }
+            this.knob.style.transform = \`
+                translate3d(\${vector.x}px, 0px, 0px)
+            \`;
+        }
+  }
+)
+        </code></pre>
+            </div>
+            <div class="html lang">
+                <blockquote class="html" style="display:block;width: 100%;">
+            Toggle buttons template:
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;template&#x3E;
+    &#x3C;div&#x3E;&#x3C;/div&#x3E;
+&#x3C;/template&#x3E;
+          </code></pre>
+            </div>
+            <div class="css lang">
+                <blockquote class="css" style="display:block;width: 100%;">
+            Toggle buttons css:
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+
+toggle-button {
+    width: 70px;
+    height: 30px;
+    display: block;
+    background: lightgray;
+    border-radius: 30px;
+    box-sizing: content-box;
+    padding: 3px;
+}
+
+toggle-button div {
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 30px;
+    background: white;
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+}
+
+toggle-button.on div {
+    transform: translate3d(0px,0px,0px);
+}
+          </code></pre>
+            </div>
           </div>
         </div>
 
@@ -28,7 +115,7 @@
             from within and respond. The first problem with this toggle-button is that it should set an attribute
             on itself when it is on/off. Perferrably a className. Inspect the button, toggle it, the only state
             that changes is a 3D translation along the x-axis. The full source of the class reveals that it
-            already is listening to click events from within itself, firing tthe <code>onClick()</code> handler
+            already is listening to click events from within itself, firing the <code>onClick()</code> handler
             each time.
             <pre class="inline javascript lang"><code>
 onConnected(){
@@ -114,9 +201,65 @@ toggle-button.on {
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
-        <div class="javascript lang"></div>
+        <div class="javascript lang">
+<blockquote class="javascript" style="display:block;width: 100%;">
+            From any JavaScript class:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+
+namespace \`docs.demos.ui.mods\` (
+    class ToggleButtonImproved  extends w3c.ui.WebComponent  {
+        onConnected(){
+            super.onConnected();
+            this.addEventListener("click", e => this.onClick(e));
+            this.knob = this.querySelector("div");
+            this.direction = -1;
+        }
+
+        onStyleComputed(style){//wait for styles
+            this.bounds = this.getBoundingClientRect();
+            this.knob_bounds = this.knob.getBoundingClientRect();
+        }
+
+
+        onClick(){
+            this.direction *= -1;
+            this.onUpdate();
+            this.onRender();
+        }
+
+        onUpdate(){
+            (this.direction > 0) ?
+                this.classList.add("on"):
+                this.classList.remove("on")
+        }
+
+        get x() {
+            return this.direction > 0 ?
+                this.bounds.width-this.knob_bounds.width-6 : 0;
+        }
+
+        onRender(){
+            var vector = {x: this.x, y:0, z:0 }
+            this.knob.style.transform = \`
+                translate3d(\${vector.x||0}px, 0px, 0px)
+            \`;
+        }
+    }
+)
+        </code></pre>
+        </div>
         <div class="html lang"></div>
-        <div class="css lang"></div>
+        <div class="css lang">
+            <blockquote class="css" style="display:block;width: 100%;">
+            From any JavaScript class:
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+toggle-button-improved.on {
+    background: limegreen;
+}         
+          </code></pre>
+        </div>
       </div>
     </div>
 

@@ -24,7 +24,6 @@ namespace `docs.demos.ui.mods` (
             (this.direction > 0) ?
                 this.classList.add("on"):
                 this.classList.remove("on")
-            
         }
 
         get x() {
@@ -35,7 +34,7 @@ namespace `docs.demos.ui.mods` (
         onRender(){
             var vector = {x: this.x, y:0, z:0 }
             this.knob.style.transform = `
-                translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||0}px)
+                translate3d(${vector.x||0}px, 0px, 0px)
             `;
         }
 	}
