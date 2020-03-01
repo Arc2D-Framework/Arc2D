@@ -6,7 +6,7 @@ namespace `docs.components` (
         }
         
         async onConnected() {
-            await this.render();
+            await super.onConnected();
             this.bind("a", "click", e => this.onSelect(e), false);
             this.last_active = this.querySelector("a.active");
             this.lang = this.getLanguage(this.last_active);

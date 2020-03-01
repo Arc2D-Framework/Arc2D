@@ -181,7 +181,7 @@ namespace `w3c.ui` (
         }
 
 
-        onConnected(data) { this.render(data);}
+        async onConnected(data) { await this.render(data);}
         
         onPreConnected() { 
             this.onConnected()
@@ -190,7 +190,7 @@ namespace `w3c.ui` (
         async render(data) {
             if(this.element){return}
             data = data || {};
-            // data.component = this;//TODO: why was i attaching this?
+            // data.component = this;//TODO: why was i attaching this? Breaks in worker threads
             var t = this._template;
             if (t) {
                 var html = await this.evalTemplate(t, data || {});
