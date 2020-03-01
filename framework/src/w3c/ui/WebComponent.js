@@ -1,5 +1,6 @@
 import 'src/core/ui/templating/CustomTemplateEngines.js';
 import 'src/core/ui/templating/TemplateLiterals.js';
+import 'src/core/ui/templating/ThreadedTemplateLiterals.js';
 
 namespace `w3c.ui` (
     class WebComponent extends HTMLElement {
@@ -186,13 +187,13 @@ namespace `w3c.ui` (
             this.onConnected()
         }
 
-        render(data) {
+        async render(data) {
             if(this.element){return}
             data = data || {};
-            data.component = this;
+            // data.component = this;//TODO: why was i attaching this?
             var t = this._template;
             if (t) {
-                var html = this.evalTemplate(t, data || {});
+                var html = await this.evalTemplate(t, data || {});
                 var temNode = html.toDomElement();
                 temNode = temNode.content;
                 if (!this.onEnableShadow()) {
@@ -211,6 +212,18 @@ namespace `w3c.ui` (
                 this.root.appendChild(temNode);
                 this.onTemplateRendered(temNode);
             }
+        }
+
+
+        template(){return null}
+
+        async evalTemplate(template, data) {
+            var eng = this.getTemplateEngine();
+            return await eng.parse(template, data, this);
+        }
+
+        getTemplateEngine() {
+            return window.customTemplateEngines.default;
         }
 
         async connectedCallback() {
@@ -345,16 +358,7 @@ namespace `w3c.ui` (
         onLoadStyle(url){ return url }
 
 
-        template(){return null}
-
-        evalTemplate(template, data) {
-            var eng = this.getTemplateEngine();
-            return eng.parse(template, data, this);
-        }
-
-        getTemplateEngine() {
-            return window.customTemplateEngines.default;
-        }
+        
 
         setPrototypeInstance() {
             this.root.setAttribute("namespace", this.namespace);

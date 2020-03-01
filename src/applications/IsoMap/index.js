@@ -52,7 +52,8 @@ namespace `applications` (
 
 
         async onConnected() {
-            super.onConnected();
+            // super.onConnected();
+            await this.render();
             var response = await fetch('resources/maps/ShiningWars2.json');
             this.map = await response.json();
 

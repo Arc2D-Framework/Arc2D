@@ -1,7 +1,8 @@
 namespace `docs.components` (
 	class ReadingProgress  extends w3c.ui.WebComponent  {
-	   onConnected(){
-        super.onConnected();
+	   async onConnected(){
+        // super.onConnected();
+        await this.render();
             // variables for progress bar and post container elements
             const progressContainerEl = document.querySelector(".article-content");
             const progressBarEl = document.querySelector(".progress-bar-container__progress");

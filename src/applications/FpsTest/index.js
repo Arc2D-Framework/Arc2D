@@ -8,8 +8,9 @@ namespace `applications` (
             super(element);
         }
 
-        onConnected() {
-            super.onConnected();
+        async onConnected() {
+            // super.onConnected();
+            await this.render()
 
             this.canvas = document.getElementById('canvas');
 		    this.context = this.canvas.getContext('2d');

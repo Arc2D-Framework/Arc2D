@@ -1,13 +1,12 @@
 
 namespace `docs.components` (
-    @stylesheets(["/src/./index.css"]);
     class LanguageSelector extends w3c.ui.WebComponent {
         constructor(element){
             super(element);
         }
         
-        onConnected() {
-            this.render();
+        async onConnected() {
+            await this.render();
             this.bind("a", "click", e => this.onSelect(e), false);
             this.last_active = this.querySelector("a.active");
             this.lang = this.getLanguage(this.last_active);
@@ -18,6 +17,11 @@ namespace `docs.components` (
 
             application.addEventListener("onactivityshown", e => this.onActivityDisplayed(e), false);
         }
+
+
+        // getTemplateEngine() {
+        //     return window.customTemplateEngines.getEngineByMimeType("template/threadedliterals")
+        // }
 
         onActivityDisplayed(e){
             var currentActivity = e.data;

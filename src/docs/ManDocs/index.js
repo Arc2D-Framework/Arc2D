@@ -12,10 +12,12 @@ namespace `docs` (
             this.addEventListener("lang-selected", e => this.onLanguageChange(e));
         }
 
-        onConnected() {
-            super.onConnected();
+        async onConnected() {
+            await this.render();
             this.article_content = this.querySelector(".article-content");
             this.router = new core.http.Router(this,window);// <- onConnected, best place
+            // wait(300).then(_ => alert(this.querySelector(".LanguageSelector")))
+            // alert(this.querySelector(".LanguageSelector"))
         }
 
 
