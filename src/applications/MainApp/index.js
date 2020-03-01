@@ -36,9 +36,9 @@ namespace `applications` (
             alert("Goodbye");
         }
         
-        onConnected() {
+        async onConnected() {
             //supers authentication checks
-            super.onConnected();//triggers -> onAuthenticated
+            await super.onConnected();//triggers -> onAuthenticated
         }
 
         //triggered by super.onConnected()

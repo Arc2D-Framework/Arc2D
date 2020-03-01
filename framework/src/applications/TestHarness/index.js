@@ -9,8 +9,8 @@ namespace `applications` (
             // alert(core.traits.UnitTest)
         }
 
-        onConnected() {
-            super.onConnected();
+        async onConnected() {
+            await super.onConnected();
             var t = new tests.Klass;
             t.test()
         }
