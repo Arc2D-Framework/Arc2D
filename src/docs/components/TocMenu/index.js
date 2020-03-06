@@ -6,8 +6,8 @@ namespace `docs.components` (
             super(element);
         }
         
-        onConnected() {
-            this.render();
+        async onConnected() {
+            await this.render();
             application.addEventListener("topichanged",e=> this.onTopicChanged(e),false);
             this.bind("ol > li.expandable", "click", e => this.onToggleExpandable(e), false);
             this.bind("ol > li > a", "click", e => this.onLinkClicked(e), false);

@@ -1,6 +1,9 @@
 .TocMenu {
 	overflow: auto;
+    scrollbar-width: none;
 }
+
+.TocMenu::-webkit-scrollbar { display: none; }
 
 .TocMenu ol > li > a.active {
 	background:#d2cbe2;

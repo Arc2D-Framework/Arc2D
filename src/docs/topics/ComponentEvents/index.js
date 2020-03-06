@@ -1,6 +1,4 @@
-import 'docs.demos.SimpleCalculator';
-import 'docs.demos.ui.ToggleButton';
-import 'docs.demos.ui.mods.ToggleButtonImproved';
+import 'docs.demos.EventPhaseDiagram';
 
 namespace `docs.topics` (
 	class ComponentEvents  extends docs.topics.Topic  {

@@ -1,7 +1,7 @@
 namespace `docs.demos.ui` (
 	class ToggleButton  extends w3c.ui.WebComponent  {
-		onConnected(){
-            super.onConnected();
+		async onConnected(){
+            await super.onConnected();
             this.addEventListener("click", e => this.onClick(e));
             this.knob = this.querySelector("div");
             this.direction = -1;
