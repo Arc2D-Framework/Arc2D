@@ -96,8 +96,18 @@ namespace `w3c.ui` (
             return super.dispatchEvent(evt);
         }
 
+        on(evtName, handler, bool=false, el) {
+            this.addEventListener(evtName, handler, bool, el)
+        }
+
         //TODO: Deprecate. Overload addEventListener() instead to streamline it.
         bind(el, evtName, handler, bool=false) {
+            console.warn(this.namespace+"#bind() - is deprecated",this);
+            this.on(evtName, handler, bool, el);
+        }
+
+
+        addEventListener(evtName, handler, bool=false, el) {
             var self = this;
             if (typeof el == "string") {
                 this.addEventListener(evtName, e => {
@@ -113,7 +123,7 @@ namespace `w3c.ui` (
                     }
                 }, bool);
             } else {
-                el.addEventListener(evtName, handler, bool);
+                super.addEventListener(evtName, handler, bool);
             }
         }
 
@@ -319,7 +329,7 @@ namespace `w3c.ui` (
         }
 
         setClassList() {
-            this.root.className += this.className + (" " + this.constructor.prototype.classes.join(" ")).trim()
+            this.root.className = this.root.className + " " + (this.constructor.prototype.classes.join(" ")).trim()
         }
 
         getStyleSheets() {

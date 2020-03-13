@@ -20,9 +20,7 @@
 var file_path = "/src/core/utilities/Logger.js";
 
 var c = new core.http.ClassLoader;
-    c.load(file_path, res => {
-      console.log("Logger ready", core.utilities.Logger)
-    })
+    c.load(file_path, res => console.log(core.utilities.Logger))
         </code></pre>
         </div>
         <div class="html lang"></div>

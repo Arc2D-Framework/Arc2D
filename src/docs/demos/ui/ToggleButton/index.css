@@ -7,9 +7,10 @@ toggle-button {
     border-radius: 30px;
     box-sizing: content-box;
     padding: 3px;
+    perspective: 3000px;
 }
 
-toggle-button div {
+toggle-button .knob {
     transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     width: 30px;
     background: white;
@@ -18,9 +19,8 @@ toggle-button div {
     border-radius: 50%;
 }
 
-toggle-button.on div {
+toggle-button.on .knob {
     transform: translate3d(0px,0px,0px);
 }
-
 
 

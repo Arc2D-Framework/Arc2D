@@ -9,8 +9,8 @@ namespace `docs.components` (
         async onConnected() {
             await this.render();
             application.addEventListener("topichanged",e=> this.onTopicChanged(e),false);
-            this.bind("ol > li.expandable", "click", e => this.onToggleExpandable(e), false);
-            this.bind("ol > li > a", "click", e => this.onLinkClicked(e), false);
+            this.on("click", e => this.onToggleExpandable(e), false, "ol > li.expandable");
+            this.on("click", e => this.onLinkClicked(e), false, "ol > li > a");
             this.last_active = this.querySelector("ol > li.active");
             var activeHref = this.querySelector(`a[href = "${location.hash}"]`);
             if(activeHref){

@@ -7,7 +7,7 @@ namespace `docs.components` (
         
         async onConnected() {
             await super.onConnected();
-            this.bind("a", "click", e => this.onSelect(e), false);
+            this.on("click", e => this.onSelect(e), false, "a");
             this.last_active = this.querySelector("a.active");
             this.lang = this.getLanguage(this.last_active);
             this["shell"] = this.querySelector("[data-language-name='shell'] .snippet-count");
@@ -32,7 +32,7 @@ namespace `docs.components` (
 
         updateSnippetCounters(currentActivity){
 
-            setTimeout(_=> this.setSnippetCounters(currentActivity),200)
+            setTimeout(_=> this.setSnippetCounters(currentActivity),300)
         }
 
         setSnippetCounters(currentActivity){

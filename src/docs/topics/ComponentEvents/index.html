@@ -2,25 +2,41 @@
     <div>
 
 
+
+
         <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="intro">
           <div style="width: 50%;padding: 22px;">
             <h1 id="api-reference">Events</h1>
             <p>
-              Events are like signals that bounce and reflect within an environment. Any component in the World can become a satellitle for intercepting, passing along and/or canceling out signals. Event emmitters are considered Event Targets, the idea being the source component that dispatched the event. 
-            </p>
-            <h3>Component Communications</h3>
-            <p>
-              These event/signals travel within the environment with payloads of data. Any component listening for events can intercept and unpack the signal. The very purpose behind events in UI programming is communications. Events allow components on screen to communicate, passing along data, without having to know about each other, a design that eliminates components being dependent on each other -- signals can be exchanged almost anonymously. 
-              <img src="src/docs/images/event_signals.png"/>
-            </p>
-            <p class="sidenote" id="skywave">
-              <b>Have you heard of Skywave?</b>: <br/>"In radio communication, skywave or skip refers to the propagation of radio waves reflected or refracted back toward Earth from the ionosphere, an electrically charged layer of the upper atmosphere." .... "Consequently, even signals of only a few Watts can sometimes be received many thousands of miles away. This is what enables shortwave broadcasts to travel all over the world."<br/>
-              Excerpt from Wikipedia.com: <a href="https://en.wikipedia.org/wiki/Skywave" target="_new">https://en.wikipedia.org/wiki/Skywave</a>
+              Arc uses an event-driven programming model for allowing components to communicate
+              with each other without components having to know about the other. Arc relies on
+              the event architecture proposed by W3C which every browser today supports,
+              <a href="https://www.w3.org/TR/DOM-Level-3-Events/#dom-event-architecture" target="_new">W3C DOM Event Architecture</a>
             </p>
             <p>
-              Imagine an "Add to Cart" button. Clicking it adds an item to your cart. You typically see a Shopping Cart banner or module at the top-right for an online store. There are notifications to the user that their cart was updated. This is an example where <em> a Product and Cart needs to communicate, but NOT directly with each other, ever.</em> You'll soon see that your application works like the ionosphere in Skywave. For now, just to convey the idea of communicating with each other, we'll draw a line across.
-              <img src="src/docs/images/event_signals_example.png"/>
+              The knowledge of W3C's DOM Event Architecture is almost completely lost since the
+              prolifiration of new-age frameworks, that rely on reinventions of their own kind, none
+              of which are as supple as the event dispatch mechanisms that W3C have labored in design.
             </p>
+            <p>
+              Arc adheres closely to specs so a good understanding of this topic is necessary
+              when building decoupled, modular graphical-interfaces, wether app or game. 
+            </p>
+              <!-- <dom-view>
+                <toggle-button slot="component" class="transformed screen"></toggle-button>
+              </dom-view> -->
+              <!-- <dom-tree-view>
+                <toggle-button slot="component"></toggle-button>
+                <div slot="component">
+                  <h1>sad</h1>
+                  <div>
+                    <span>asd</span>
+                    <span>asd</span>
+                    <span>asd</span>
+                    <span><span>asd</span></span>
+                  </div>
+                </div>
+              </dom-tree-view> -->
           </div>
           <div style="width: 50%;display: block;">
             <div class="shell lang"></div>
@@ -33,105 +49,6 @@
 
 
 
-
-
-
-        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
-          <div style="width: 50%;padding: 22px;">
-            <p>
-              Let's arrange a Product (just 1 for demonstration) and Shopping Cart module on-screen showing where they might be placed in relation to each other. The drawing also shows the signal emitted, reaching the ionosphere (You application) and being intercepted.
-              <img src="src/docs/images/events_shopping_cart.png" style="margin-top:20px;"/>
-
-               <code>Products</code> have an "Add to Cart" button, it fires an <code>"addcart"</code> signal, packed with a payload of data about the product (like SKU). The <code>ShoppingCart</code>, listens and waits. When a signal is detected in the environment, it intercepts and handles it. An extremely robust and dynamic communications system.
-            </p>
-            <p>
-              <em>Take note of a subtle idea in the drawing at the red circle.</em> Events are broadcasted in the environment which are ultimately captured by your application and deflected back to any other components who may be interested in the signal (See <a href="#docs.topics.ComponentEvents/skywave">Skywave</a> idea above). Other components can subscribe to signals at the application boundry without having to know the sender of the signals. See <code>ShoppingCart</code> snippet on right. In essence, the application works like a central "bus" or a reflective dome, kind of like the Skywave concept, using the ionosphere (<code>application</code> for us) for decoupled communications between entities.
-            </p>
-            <p>
-              It is important that we understand the concept well. Events and communication between entities will be a core part of building any application or game. You'll be relying on this concept over and again. Now let's understand Propagation, how and where event signals travel.
-            <p>
-          </div>
-          <div style="width: 50%;display: block;">
-            <div class="shell lang"></div>
-            <div class="javascript lang">
-              <blockquote class="javascript" style="display:block;width: 100%;">The ShoppingCart class:</blockquote>
-              <pre class="highlight javascript" style="display:block;width: 100%;">
-                <code>
-namespace \`core.ui\` (
-  class ShoppingCart extends w3c.ui.WebComponent {
-    constructor() {
-      super();
-      var app = application; //think of ionosphere
-      
-      app.addEventListener("addcart", e => this.onAddProduct(e));
-      app.addEventListener("cartchanged", e => this.onCartUpdated(e))
-    }
-
-    onAddProduct(e){
-      var signal_data = e.data;
-      //Dont worry about db details
-      Cart.add(signal_data.sku);
-    }
-
-    onCartUpdated(e){
-      var countElement = this.querySelector("#cart_count");
-      var notificationElement = this.querySelector("#msg");
-      countElement.innerHTML = Cart.count() + " items in cart";
-      notificationElement.innerHTML = "Successfully added to cart"
-    }
-
-    //other code
-  }
-)
-                </code>
-              </pre>
-
-
-
-              <blockquote class="javascript" style="display:block;width: 100%;">The Product class:</blockquote>
-              <pre class="highlight javascript" style="display:block;width: 100%;">
-                <code>
-namespace \`core.ui\` (
-  class Product extends core.ui.StoreItem {
-    constructor() {
-      super();
-    }
-
-    onConnected(){
-      var app = application;
-      var addBtn = this.querySelector("#add-btn");
-
-      addBtn.addEventListener("click", e => this.onSendToCart(e));
-      app.addEventListener("cartupdated", e => this.onCartSuccess(e));
-    }
-
-    onSendToCart(e){
-      if(!this.disabled) {
-        this.dispatchEvent("addcart", {sku: this.sku});
-        this.disable();
-      }
-    }
-
-    disable() {
-      this.disabled = true;
-    }
-
-    enable(){
-      this.disabled = false;
-    }
-
-    onCartSuccess(){
-      this.enable();
-    }
-  }
-)
-                </code>
-              </pre>
-            </div>
-            <div class="html lang"></div>
-            <div class="css lang"></div>
-          </div>
-        </div>
 
 
 
@@ -139,84 +56,49 @@ namespace \`core.ui\` (
 
         <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="propagation">
           <div style="width: 50%;padding: 22px;">
-            <h1>Propagation</h1>
+            <h1 id="api-reference">Event Propagation</h1>
             <p>
-              When events are emmitted from components, they propagate upwards, passing through many
-              layers of material and boundaries on screen, until the signal reaches the application boundary. What an interesting design by the W3C, consciously or not, it brilliantly models the way signals work in our physical world, propagating and penetrating outwards/inwards until a transciever can pick it up. Signals pass through boundaries, at some boundaries, like walls and floors, a wi-fi signal may degrade, be amplified or just stopped from further propagation.<br/>
-              <img src="src/docs/images/event_signals_through_walls.png" style="width:100%;"/>
+              <b>Propagate:</b><br/>
+              "...transmit or be transmitted in a particular direction or through a medium."
             </p>
             <p>
-              This WI-FI diagram is wonderful for explaining event-signal propagation because signal spread is closely related to enclosing structure. Have you ever seen a physical blue-print of a house? It resembles an HTML wireframe, with borders, square and rectangular shapes sometimes having shapes inside of shapes, being children to parent shapes. In a blue-print, every Floor groups Rooms, the rooms are child to the Floor they are on, the House is the ultimate parent, holding it all in and being a realized Application of the blue print. Can we replicate this Floor/Room structure as an HTML wireframe? Sure:
+              There is an ordered path of "Phases" whereby events travel (propagate) in a user interface:
+              <ul>
+                <li>Capture Phase</li>
+                <li>Target Phase</li>
+                <li>Bubble Phase</li>
+              </ul>
+            </p>
+            <p>
+              The 3 phases of the event moves along the <code>child <-> parent(s)</code> path in the
+              DOM tree. Each Phase is a starting point in it's direction. Let's first visualize a DOM tree of an
+              HTML <code>Table</code>. Tap-n-hold a child node to see the path that the event travels:
+            </p>
 
-              <pre class="inline html lang">
-                <code>
-&#x3C;div id=&#x22;house&#x22;&#x3E;
-  &#x3C;div class=&#x22;attic floor&#x22;&#x3E;
-    &#x3C;div class=&#x22;unheated room&#x22;&#x3E;&#x3C;/div&#x3E;
-  &#x3C;/div&#x3E;
-  &#x3C;div class=&#x22;second floor&#x22;&#x3E;
-    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
-    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
-    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
-  &#x3C;/div&#x3E;
-  &#x3C;div class=&#x22;first floor&#x22;&#x3E;
-    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
-    &#x3C;div class=&#x22;living room&#x22;&#x3E;&#x3C;/div&#x3E;
-  &#x3C;/div&#x3E;
-&#x3C;/div&#x3E;
-                </code>
-              </pre>
+            <dom-tree-view style="margin-top: 20px;margin-bottom: 25px;">
+              <div slot="component" tag="table">
+                <div tag="thead"></div>
+                <div tag="tbody">
+                  <div tag="tr">
+                    <div tag="td"></div>
+                    <div tag="td"></div>
+                    <div tag="td"></div>
+                  </div>
+                </div>
+              </div>
+            </dom-tree-view>
+            <p>
+              As you can see, clicking on a <code>TD</code>, generates a <code>"click"</code> event-signal that propagates from child to parents when the event bubbles up:
+              <br/> 
+              <code>TD -> TR -> TBODY -> TABLE</code>
             </p>
             <p>
-                Now here's the difference between real world signals and simulated event signals in terms of HTML: Event signals in HTML cannot pass from sibling-to-sibling, or from room-to-room, on the same floor, as shown in the wi-fi diagram for a house. Event signals only pass from child-to-parent floors in HTML, ultimately reaching the application, the parent of all. So if the HTML version of the living room had a router dispatching a signal when the user clicks on the simulated Router icon in a room:
-                <pre class="inline html lang">
-                  <code>
-&#x3C;div class=&#x22;living room&#x22;&#x3E;
-  &#x3C;div class=&#x22;router&#x22;&#x3E;&#x3C;!-- click router to send signal --&#x3E;&#x3C;/div&#x3E;
-&#x3C;/div&#x3E;
-                  </code>
-                </pre>
+              But also travels from parent back to child during the Capture phase:
+              <br/> 
+              <code>TABLE -> TBODY -> TR -> TD</code>
             </p>
             <p>
-                What propagation path do you think the event will travel? It will never go into the sibling bedroom, nor the 2nd floor. But will take this path:<br/><br/>
-                <code>Router -> Living Room -> First Floor -> House</code>
-            </p>
-            <p>
-              What if the bedroom on 1st floor wanted to listen for the signal from it's adjacent sibling? Well, the bedroom has 3 options:
-              <ol>
-                <li>Listen to next door Living Room</li>
-                <li>Listen at the Floor level</li>
-                <li>Listen at the application boundary</li>
-              </ol>
-            </p>
-            <p>
-              I recommend going with the latter approach, as we've discussed, by letting the Bedroom subscribe to the signal at the application level. The ShoppingCart example does just that. The flow will then be:<br/><br/>
-              <code>Router -> Living Room -> First Floor -> House <- Bedroom (1st floor)</code><br/><br/>
-
-              The code for the bedroom to accomplish this would look like:<br/>
-              <pre class="inline javascript lang">
-                  <code>
-namespace \`core.ui\` (
-  class Bedroom extends core.ui.Room {
-    constructor(){
-      super();
-      application.addEventListener("wifi", e => this.onSignalReceived(e));
-    }
-
-    onSignalReceived(e){
-      //check strength
-    }
-  }
-)
-                  </code>
-              </pre>
-            </p>
-            <p class="sidenote">
-              Realize, programming is not a science, but an art. It is art expressed. Stop thinking about programming as some hard and brute force or mathemitically sound algorithms, and start seeing it as a tool for expressing thought from the real world.
-            </p>
-            <h3>Propagation Phases</h3>
-            <p>
-              Events bubble up from child to parent, upwards from the Event Target, moving through all boundaries until it deflects off the application and begins its decent downwards, passing through the layers until it arrives back at the source. This travel, is called the bubble and capture phases of W3C DOM events. Let's examine it a bit more.
+              The diagram simulates a pathway the event will travel for all 3 phases: capturing, targeting and bubbling. It does not show in what order the phases occur in over time. For that, we should now look at the life-cycle of the event along the travel path to understand the sequence of directional movements, or propagation of the signal.
             </p>
           </div>
           <div style="width: 50%;display: block;">
@@ -226,28 +108,6 @@ namespace \`core.ui\` (
             <div class="css lang"></div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="bubble">
-          <div style="width: 50%;padding: 22px;">
-            <h1 id="api-reference">Bubble Phase</h1>
-            <event-phase-diagram phase="bubble_phase"></event-phase-diagram>
-          </div>
-          <div style="width: 50%;display: block;">
-            <div class="shell lang"></div>
-            <div class="javascript lang"></div>
-            <div class="html lang"></div>
-            <div class="css lang"></div>
-          </div>
-        </div>
-
-
 
 
 
@@ -256,8 +116,16 @@ namespace \`core.ui\` (
 
         <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="capture">
           <div style="width: 50%;padding: 22px;">
-            <h1 id="api-reference">Capture Phase</h1>
-            <p>doc..in progress</p>
+            <h1 id="api-reference">Event Propagation: Capture Phase</h1>
+            <p>
+              The Capture phase occurs 1st along the travel path. This static diagram from W3C, shows a
+              more complete DOM tree where the window (the ultimate parent) is notified first, then down
+              to each child in the pathway making a quick stop at the child (the Event Target) that spawned the event.
+            </p>
+            <event-phase-diagram phase="capture_phase"></event-phase-diagram>
+            <p>
+              The capture phase allows a parent to intercept and process or stop the event before any other child is allowed to handle it. The next phase of the event is the Target Phase.
+            </p>
           </div>
           <div style="width: 50%;display: block;">
             <div class="shell lang"></div>
@@ -266,6 +134,280 @@ namespace \`core.ui\` (
             <div class="css lang"></div>
           </div>
         </div>
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="target">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Event Propagation: Target Phase</h1>
+            <p>
+              When the event travels down and makes a quick stop at the child that generated the event, it is called
+              the Target Phase, the 2nd step of the event propagation life-cycle. At this point, the child itself is able
+              to listen for and handle the event before it begins the next phase of travel, the Bubbling Phase.
+            </p>
+            <event-phase-diagram phase="target_phase"></event-phase-diagram>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="bubble">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Event Propagation: Bubble Phase</h1>
+            <p>
+              After the event is processed by the child that spawned it's own event at the Target Phase, the event
+              makes its way back up the DOM tree to the ultimate parent (window), this is known as the Bubbling Phase.
+            </p>
+            <event-phase-diagram phase="bubble_phase"></event-phase-diagram>
+            <p>
+              We've covered all 3 phases of the event life-cycle.
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="target_phase_registration">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Real World Usage: Target Phase Registration</h1>
+            <p>
+              Imagine we had a Product component with an "Add to Cart" button. The
+              html for our component is defined in the Products html <code>template</code>:
+              <pre class="inline html lang">
+                <code>
+&#x3C;template&#x3E;
+    &#x3C;div&#x3E;Egyptian Wool Blanket&#x3C;/div&#x3E;
+    &#x3C;div&#x3E;..desc here&#x3C;/div&#x3E;
+    &#x3C;button id=&#x22;add-to-cart&#x22;&#x3E;&#x3C;/button&#x3E;
+&#x3C;/template&#x3E;
+                </code>
+              </pre>
+            </p>
+            <p>
+              Since the button is clicked and dispatches the event right at the source (the Event Target),
+              we are able to register a listener on the event target phase explicitly:
+              <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+  class Product extends core.ui.StoreItem {
+    onConnected(){
+      var addBtn = this.querySelector("#add-to-cart");
+      addBtn.addEventListener("click", e => this.onSendToCart(e));
+    }
+
+    onSendToCart(e){
+      //Add item to cart
+    }
+  }
+)
+                </code>
+              </pre>
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="bubble_phase_registration">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Real World Usage: Bubble Phase Registration</h1>
+            <p>
+              Alternatively, since the button is a child inside the Product component,
+              and Product is one of the parents that own the button, we could register a listener on the Product itself, since the event will eventually bubble up from the button (child).
+              <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+  class Product extends core.ui.StoreItem {
+    onConnected(){
+      this.addEventListener("click", e => this.onSendToCart(e));
+    }
+
+    onSendToCart(e){
+      //Add item to cart
+    }
+  }
+)
+                </code>
+              </pre>
+            </p>
+            <h3>Event Filtering</h3>
+            <p>
+              The only concern with bubbling of events, is that the parent will have to know what Event Target
+              actually triggered the "click". The click signal could of originated from the button, or from click/tapping on the description text or even the price label.
+            </p>
+            <p>
+              So how do we determine where the event bubbled up from at the parent level? Arc allows the parent to
+              filter out events based on a css selector as a 4th argument to <code>addEventListener()</code>. This
+              means you'll have to pass the full method-signature if using the 4th argument:
+              <pre class="inline javascript lang">
+                <code>
+addEventListener(eventname, callback, capture, css);
+                </code>
+              </pre>
+
+              <p>For Example:</p>
+              <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+  class Product extends core.ui.StoreItem {
+    onConnected(){
+      this.addEventListener("click", e => this.onSendToCart(e), false, "#add-to-cart");
+    }
+
+    onSendToCart(e){
+      //Add item to cart
+    }
+  }
+)
+                </code>
+              </pre>
+              That filters clicks on the <code>#add-to-cart</code> button, which runs our handler, <code>onSendToCart()</code>, only for clicks on that particular node. 
+            </p>
+            <p>
+              Alternatively, you may use the alias, <code>on()</code>
+              <pre class="inline javascript lang">
+                <code>
+on(eventname, callback, capture, css);
+                </code>
+              </pre>
+            </p>
+            <p>
+              The same idea, can be used to intelligently wire-up events that are bubbling from multiple child nodes for event filtering using the alias <code>on()</code>
+              <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+  class Product extends core.ui.StoreItem {
+    onConnected(){
+      this.on("click", e => this.onSendToCart(e), false, "#add-to-cart");
+      this.on("click", e => this.onDescriptionClicked(e), false, "#desc");
+      this.on("click", e => this.onPriceClicked(e), false, "#price");
+    }
+
+    //... handlers here
+  }
+)
+                </code>
+              </pre>
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="capture_phase_registration">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Real World Usage: Capture Phase Registration</h1>
+            
+            <p>
+              In an Arc application, there is an actual <code>Application</code> that
+              represents the screen being seen. It roughly acts as the body of the application,
+              and being the ultimate managed parent of everything assembled on screen, it 
+              may participate in the Capture Phase of the event life cycle.
+            </p>
+      
+            <p>
+              So given, we have a <code>Catalog</code> application that has a list of Products assembled
+              on screen:
+              <pre class="inline javascript lang">
+                <code>
+namespace \`core.applications\` (
+  class Catalog extends core.ui.Application {
+
+  }
+)
+                </code>
+              </pre>
+            </p>
+            <p>
+              We could let the Catalog, being the parent of the screen, capture clicks from any add-to-cart button during the 1st phase of the event life-cycle by passing <code>true</code> as the 3rd argument to <code>addEventListener()</code>:
+              <pre class="inline javascript lang">
+                <code>
+namespace \`core.applications\` (
+  class Catalog extends core.ui.Application {
+    onConnected(){
+      this.addEventListener("click", e => this.onAddToCartRequested(e), true, "#add-to-cart");
+    }
+
+    onAddToCartRequested(e){
+      //captured user trying to add a product to cart
+    }
+  }
+)
+                </code>
+              </pre>
+            </p>
+            <p>
+              If we were to conceptually represent this hierarchy, you'll see a Catalog app, having many Products, each having their own buttons for adding to cart. Tap-n-hold the add to cart <code>button</code> in any Product.
+              The event propagation path lights up, and we are able to intercept and capture the event as priority from the Catalog level.
+            </p>
+            <dom-tree-view style="margin-top: 20px;margin-bottom: 25px;">
+              <div slot="component" tag="catalog">
+                <div tag="product">
+                  <div tag="name"></div>
+                  <div tag="desc"></div>
+                  <div tag="price"></div>
+                  <div tag="button"></div>
+                </div>
+                <div tag="product">
+                  <div tag="name"></div>
+                  <div tag="desc"></div>
+                  <div tag="price"></div>
+                  <div tag="button"></div>
+                </div>
+                <div tag="product">
+                  <div tag="name"></div>
+                  <div tag="desc"></div>
+                  <div tag="price"></div>
+                  <div tag="button"></div>
+                </div>
+              </div>
+            </dom-tree-view>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
 
 
 
@@ -275,16 +417,162 @@ namespace \`core.ui\` (
 
         <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="example">
           <div style="width: 50%;padding: 22px;">
-            <h1 id="api-reference">Example</h1>
-            <p>doc..in progress</p>
+            <h1 id="api-reference">Example: Toggle Button</h1>
+            <p>Let's build a toggle button. The HTML for this component will be simple. The JavaScript
+              involves a 2D Vector/Matrix transformation that can be ignored. What we're interested
+              in here is how components can rely on events bubbling up from their child nodes as well
+              as being able to filter events emitted from certain child nodes.
+              <pre class="inline html lang">
+                <code>
+&#x3C;template&#x3E;
+    &#x3C;div class="knob"&#x3E;&#x3C;/div&#x3E;
+&#x3C;/template&#x3E;
+                </code>
+              </pre>
+              The custom tag will be used declaratively this way in markup:
+              <pre class="inline html lang">
+                <code>
+&#x3C;toggle-button&#x3E;&#x3C;/toggle-button&#x3E;
+                </code>
+              </pre>
+            </p>
+            <p>The DOM tree that is generated resembles:</p>
+            
+            <dom-tree-view style="margin-top: 20px;margin-bottom: 25px;height: 160px;">
+                <toggle-button slot="component"></toggle-button>
+            </dom-tree-view>
+
+            <p>
+              Here's what our button will look like:
+            </p>
+            <toggle-button></toggle-button>
+            <p>
+              And here's a 3D view of the DOM tree, click-n-drag to see the parts that make-up the toggle button
+              from different angles:
+            </p>
+            <dom-view style="margin-bottom: 30px;">
+                <toggle-button slot="component" class="transformed screen"></toggle-button>
+            </dom-view>
+            <p>
+              The code snippets on the right shows the full srource. Related to this chapter is
+              the <code>addEventListener()</code> registration. Notice that we are using a filtered
+              listener for clicks only emitted from the knob.
+            </p>
+            <pre class="inline javascript lang">
+                <code>
+this.addEventListener("click", e => this.onClick(e), false, ".knob");
+                </code>
+              </pre>
+              <p>
+                Of course, the alias <code>on()</code> could of very well be used for 
+                more compact code:
+              </p>
+              <pre class="inline javascript lang">
+                <code>
+this.on("click", e => this.onClick(e), false, ".knob");
+                </code>
+              </pre>
+              <p>
+                Try removing the 4th argument in the event registration. This removes the filter for knob, meaning
+                a click on the toggle-button within any of its child parts will still work because the logic has no interest
+                in any particular childNode to drive the functionality.
+              </p>
+              <p>
+                It gives the effect of a wider finger hot-spot, touching anywhere on the button triggers a directional toggle. This is a demonstration of how events can be wired and filtered to narrow down the target that is emitting the event. With the filter removed, the event simply bubbles up from the knob to the toggle-button element (parent).
+              </p>
           </div>
           <div style="width: 50%;display: block;">
             <div class="shell lang"></div>
-            <div class="javascript lang"></div>
-            <div class="html lang"></div>
-            <div class="css lang"></div>
+            <div class="javascript lang">
+              <blockquote class="javascript" style="display:block;width: 100%;">
+            See: docs/demos/ui/ToggleButton/index.js
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`docs.demos.ui\` (
+  class ToggleButton  extends w3c.ui.WebComponent  {
+    async onConnected(){
+            await super.onConnected();
+            this.addEventListener("click", e => this.onClick(e), false, ".knob");
+            this.addEventListener("transitionend", e => this.onStyleComputed(e));
+            this.knob = this.querySelector("div");
+            this.direction = -1;
+        }
+
+        onStyleComputed(style){
+            this.bounds = this.getBoundingClientRect();
+            this.knob_bounds = this.knob.getBoundingClientRect();
+
+            var style = window.getComputedStyle(this.knob);
+            var matrix = new DOMMatrix(style.transform);
+            this.matrix = matrix;
+        }
+
+        onClick(){
+            this.direction *= -1;
+            this.onRender();
+        }
+
+        get x() {
+            return this.direction > 0 ?
+                this.bounds.width-this.knob_bounds.width-6 : 0;
+        }
+
+        onRender(){
+            var vector = {x: this.x, y:0, z:0 }
+            this.knob.style.transform = \`
+                translate3d(\${vector.x||0}px,\${vector.y||0}px,\${vector.z||this.matrix.m43}px)
+            \`;
+        }
+  }
+)
+        </code></pre>
+            </div>
+            <div class="html lang">
+              <blockquote class="html" style="display:block;width: 100%;">
+            See: docs/demos/ui/ToggleButton/index.html
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;template&#x3E;
+    &#x3C;div class=&#x22;knob&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;/template&#x3E;
+        </code></pre>
+            </div>
+            <div class="css lang">
+              <blockquote class="css" style="display:block;width: 100%;">
+            See: docs/demos/ui/ToggleButton/index.css
+          </blockquote>
+          <pre class="highlight css" style="display:block;width: 100%;"><code>
+
+toggle-button {
+    width: 70px;
+    height: 30px;
+    display: block;
+    background: lightgray;
+    border-radius: 30px;
+    box-sizing: content-box;
+    padding: 3px;
+    perspective: 3000px;
+}
+
+toggle-button div {
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 30px;
+    background: white;
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+}
+
+toggle-button.on div {
+    transform: translate3d(0px,0px,0px);
+}
+
+        </code></pre>
+            </div>
           </div>
         </div>
+
+
 
     </div>
 </template>

@@ -4,6 +4,8 @@ import 'docs.components.TocMenu';
 import 'docs.components.LanguageSelector';
 import 'docs.topics.DocHome';
 import 'docs.components.ReadingProgress';
+import 'docs.components.DomView';
+import 'docs.components.DomTreeView';
 
 namespace `docs` (
     class ManDocs extends w3c.ui.Application {
