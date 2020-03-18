@@ -1,0 +1,32 @@
+- TODO: Support WASM modules (C++/Rust)
+    https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running
+
+- TODO: Deprecate bind(). 
+    src/w3c/ui/WebComponent.js
+    Line 103
+
+- TODO: Why force-cache in loadTemplate()
+    src/w3c/ui/WebComponent.js
+    Line 165
+
+- TODO: loadTemplate()- Possible bug with external .html?
+    src/w3c/ui/WebComponent.js
+    Line 170
+
+
+- TODO: window.Key for gaming should be in Mana, not Arc
+    src/core/extensions/Window.js
+    Line 69
+
+
+- TODO: toDomElement(), refactor to use template literal function i.e:   dom `<b>hello</b>`
+    src/core/extensions/String.js
+    Line 1
+
+- getParameterByName assumes local window, should be paramatized
+    src/core/extensions/Window.js
+    Line 9
+
+- TODO: relativeToAbsoluteFilePath() a dupe of toAbsoluteUrl() ?
+    src/core/decorators/es7.js
+    src/core/extensions/Window.js

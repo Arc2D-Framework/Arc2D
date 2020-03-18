@@ -39,11 +39,12 @@ namespace `docs` (
                 if(scrollToElement){
                     wait(100).then(_=> {
                         var el = this.currentActivity.querySelector("#"+scrollToElement);
-                        if (el)
+                        if (el) {
                             el.scrollIntoView({
                                 behavior : "smooth",
                                 block : "start"
-                            })
+                            });
+                        }
 
                     })
                 } else {//scroll to last y-axis

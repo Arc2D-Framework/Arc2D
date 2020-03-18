@@ -1,0 +1,422 @@
+<template>
+  <div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Repositories</h1>
+        <p>
+            From <a href="https://martinfowler.com/books/eaa.html" target="_new">Patterns of Enterprise Application Architecture</a>, regarding Repositories, Fowler states:
+            <p class="sidenote"><i>"..Mediates between the domain and data mapping layers using a collection-like interface for accessing domain objects." -- Martin Fowler</i></p>
+        </p>
+        <p>
+            <h3>Some facts about the Repository:</h3>
+            <ul>
+                <li>Increases Testability</li>
+                <li>Encapsulates persistance technology</li>
+                <li>Works on aggregate root objects</li>
+                <li>queries are centralized</li>
+                <li>logic is centralized</li>
+                <li>provides an in-memory like collection</li>
+            </ul>
+        </p>
+        <p>
+            So as far as the consuming component is concerned, it uses the repository just like a collection or array when working with Domain objects.
+        </p>        
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="create">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Creating a Repository</h1>
+        <p>
+            Let's build a Movies repository. It supplies a collection of movies, we are able to
+            query, sort and add/update/delete movies from this collection.
+        </p>
+
+        <p>
+            We'll need to import 3 framework-level parts for defining a new repository. We'll cover them later.
+            <pre class="inline javascript lang">
+                <code>
+import '/resources/repositories.js';
+import '/framework/src/core/data/Repository.js';
+import '/framework/src/core/drivers/storage/Memory.js';
+                </code>
+            </pre>
+        </p>
+        
+        <p>
+            Movies will extend the base class, <code>Repository</code> (one of the framework-level imports).
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.data\` (
+    class Movies extends core.data.Repository {
+        
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            Next, we configure a device driver that the repository will use. The driver is responsible for communicating with the the raw data source (JSON, Firebase, CSV, MySql, Mongo, localStorage, and so on).
+
+            <p>Let's use the built-in <code>core.drivers.storage.Memory</code> framework driver (imported earlier):</p>
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.data\` (
+    class Movies extends core.data.Repository {
+        @public device_driver = "core.drivers.storage.Memory";
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <h3>Finished</h3>
+        <p>
+            And thats all there is to defining a Repository. The memory driver, one of the simplest, uses a temporary hash-table as the data source. It lasts as long as the browser-tab session (unless refreshed) and is meant for unit tests and rapid prototyping, you'd never use this driver in a production environment.
+        </p>
+        <p>
+            With the repository in place and a device driver attached. You can now begin using the repository, try running the following lines in console:
+        </p>
+        <pre class="inline javascript lang">
+            <code>
+var movie = {
+    "_id" : "123",
+    "title" : "Lord Of the Rings",
+    "genre" : "Action",
+    "stock" : "1",
+    "rating" : "5.0"
+};
+
+core.data.Movies.add(movie);
+            </code>
+        </pre>
+
+        <p>
+            It is promised-based. <CODE>add()</CODE> accepts a callback:
+            <pre class="inline javascript lang">
+                <code>
+core.data.Movies.add(movie, e=> console.log(movie));
+                </code>
+            </pre>
+        </p>
+        <p>
+           Or a thenable chained: 
+           <pre class="inline javascript lang">
+                <code>
+core.data.Movies.add(movie).then(r => console.log(r));
+                </code>
+            </pre>
+        </p>
+        <p>
+           Or awaited (if called inside an async function)
+           <pre class="inline javascript lang">
+                <code>
+var movie = await core.data.Movies.add(movie)
+                </code>
+            </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="seeding">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Seeding a Repository</h1>
+        <p>
+            Repositories can be seeded with sample data. In ther words, prepopulating the storage device with a small dataset. <em>A crucial feature when Unit Testing</em> but not practical in a real world application, nor
+            recommended for anything other than running offline development tests.
+        </p>
+
+        <p>
+            Configure the <code>seeds</code> property:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.data\` (
+    class Movies extends core.data.Repository {
+        @public device_driver = "core.drivers.storage.Memory";
+        @public seeds = REPOSITORIES.MOVIES;
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            <code>REPOSITORIES.MOVIES</code> is avaliable and defined in a previous import (above):
+            <pre class="inline javascript lang">
+                <code>
+import '/resources/repositories.js';
+                </code>
+            </pre>
+        </p>
+        <p>This file (repositories.js) defines a set of seedlings (json data paths) and looks like this</p>
+        <pre class="inline javascript lang">
+                <code>
+REPOSITORIES = {  
+    MOVIES: {
+        config : {
+            table: "movies"
+        },
+        dev: Config.ROOTPATH + "resources/data/movies.json",
+        staging: Config.ROOTPATH + "resources/data/movies.json",
+        test : Config.ROOTPATH + "resources/data/movies.json",
+        prod : Config.ROOTPATH + "resources/data/movies.json"
+    }
+}
+                </code>
+            </pre>
+        <p>You'll notice the seed files are URI paths. The environment path is chosen based on what environment
+            our app is running in (defaults to "dev", see: -appconfig settings). Here's a snippet of what the movies.json holds:</p>
+        <pre class="inline json lang">
+                <code>
+{
+    "table" : "movies",
+        "items" : [
+            {
+                "_id" : "100a",
+                "title" : "Airplane",
+                "genre" : "Comedy",
+                "stock" : "5",
+                "rating" : "3.5"
+            },
+            {
+                "_id" : "110b",
+                "title" : "Lord Of the Rings",
+                "genre" : "Action",
+                "stock" : "1",
+                "rating" : "5.0"
+            },
+            {
+                "_id" : "120c",
+                "title" : "Gladiator",
+                "genre" : "Action",
+                "stock" : "4",
+                "rating" : "4.5"
+            },
+            ...
+            ...
+        ]
+}
+                </code>
+            </pre>
+            <p>
+                You can very well point the URI path to an external json service, but that defeats the purpose
+                of the simple Memory storage device in this case, especially for testing. Later we'll look at a RESTFul driver (maybe mongo?) and how that idea then comes into play.
+            </p> 
+
+            <h3>SEEDING IS NOT AUTOMATIC</h3>
+            <p>
+                The steps above, will configure a Repository to support pre-population (seeding). It will not auto-seed. The developer should know when/if to seed. For example, when writing tests, it makes sense to seed. When
+                developing an app offline, you may not want the app seeded with any data for full regression testing at
+                the UI level. So here's how to explicitly seed the Repository.
+            </p>  
+             <pre class="inline javascript lang">
+                <code>
+core.data.Movies.seed(); //returns promise
+
+//so use a thenable
+core.data.Movies.seed().then(seeds => console.log("done"))
+
+//hence, chain the promises
+core.data.Movies.seed().then(res1 => {
+    core.data.Movies.find().then(res2 => {
+        console.log("cursor",res2) 
+    })
+})
+                </code>
+            </pre> 
+            <p>Versus, async/await syntax:</p>
+            <pre class="inline javascript lang">
+                <code>
+//150% better, using await
+await core.data.Movies.seed();
+var res = await core.data.Movies.find();
+                </code>
+            </pre>    
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="using">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Using a Repository</h1>
+        <p>
+            You can now import the Movies repository from any component:
+            <pre class="inline javascript lang">
+                <code>
+import! 'core.data.Movies';
+                </code>
+            </pre>
+        </p>
+        <p>
+            And begin playing with it as soon as seeding is completed.
+        </p>
+
+        <pre class="inline javascript lang">
+            <code>
+await core.data.Movies.seed();
+var res = await core.data.Movies.find()
+
+//log results
+console.log("results",res)
+            </code>
+        </pre>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="customize">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Extending a Repository</h1>
+        <p>
+            Repositories inherit a set of base class methods from <code>core.data.Repository</code>:
+        </p>
+        <p>
+          <table>
+            <thead>
+            <tr>
+              <th>Method</th>
+              <th>Type/Arguments</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>add(obj,cb)</td>
+              <td>
+                obj - an object to add<br/>
+                cb - a callback (optional)
+              </td>
+              <td>Adds an item to the repository</td>
+            </tr>
+            <tr>
+              <td>remove(query,cb)</td>
+              <td>
+                query - mongo query<br/>
+                cb - a callback with results (optional)
+              </td>
+              <td>Removes matches. Returns array of removed items.</td>
+            </tr>
+            <tr>
+              <td>find(query,cb)</td>
+              <td>
+                query - mongo query<br/>
+                cb - a callback with results (optional)
+              </td>
+              <td>Returns an array of matches.</td>
+            </tr>
+            <tr>
+              <td>update(obj,cb)</td>
+              <td>
+                obj - an object to update<br/>
+                cb - success callback (optional)
+              </td>
+              <td>Returns an array of matches.</td>
+            </tr>
+            <tr>
+              <td>all(cb)</td>
+              <td>
+                cb - a callback with results (optional)
+              </td>
+              <td>Returns all repository items.</td>
+            </tr>
+            <tr>
+              <td>isSeedable()</td>
+              <td>N/A</td>
+              <td>Returns a boolean if repository supports seeding.</td>
+            </tr>
+            <tr>
+              <td>onInitializeModelDataObjects(data[])</td>
+              <td>data - an array of items that was seeded</td>
+              <td>Does nothing by default. Override to transform each JSON object into a Model instance.</td>
+            </tr>
+            <tr>
+              <td>IRequestStorage</td>
+              <td>Returns the device storage drver</td>
+              <td>Returns the prototype.device_driver configured for ths repository by default.</td>
+            </tr>
+          </tbody>
+        </table>
+        </p>
+        <p>
+            Any of the base class methods can be customized or overrdden in concrete repository classes. For example, the <code>find()</code> method relies on a mongo-style query. If you are not fimilar with mongo query syntax, see: <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" target="_new">Mongo Queries</a>. Executing the following mongo query:
+            <pre class="inline javascript lang">
+                <code>
+var result = core.data.Movies.find({title : "Gladiator"});
+                </code>
+            </pre>
+
+            <p>Is analogous to a SQL query</p>
+            <pre class="inline sql lang">
+                <code>
+SELECT * FROM Movies WHERE title = "Gladiator"
+                </code>
+            </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+</template>

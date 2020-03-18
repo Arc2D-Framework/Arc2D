@@ -2,8 +2,8 @@ import '/framework/node_modules/od-watcher/wrist.js';
 
 namespace `docs.demos.templates` (
 	class ViewViewBinding  extends w3c.ui.WebComponent  {
-		onConnected(){
-            super.onConnected();
+		async onConnected(){
+            await super.onConnected();
             var input1 = this.querySelector("#input1");
             var input2 = this.querySelector("#input2");
             var type = this.getAttribute("bind-type")||"single";

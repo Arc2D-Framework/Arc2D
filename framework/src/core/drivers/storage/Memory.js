@@ -30,8 +30,8 @@ namespace `core.drivers.storage` (
 
         add(obj, cb){
             this.collection.push(obj);
-            cb(obj,null);
-            // console.log("Memory#add", obj)
+            cb&&cb(obj,null);
+            return obj;
         }
         
         find(cb,query){
@@ -40,8 +40,8 @@ namespace `core.drivers.storage` (
             // var res = this.collection;//just hand back all
             var c = new core.drivers.storage.Cursor(cursor)
             // cb(c,null);
-            cb(c,null)
-            // console.log("Memory#find cursor", cursor)
+            cb&&cb(c,null);
+            return c;
         }
 
         remove(query, cb){
@@ -60,7 +60,8 @@ namespace `core.drivers.storage` (
                     }
                 }
             });
-            cb(removed,null)
+            cb && cb(removed,null);
+            return removed;
         }
     }
 );

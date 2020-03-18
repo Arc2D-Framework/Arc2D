@@ -161,7 +161,6 @@ namespace `w3c.ui` (
             }
         }
 
-
         async loadTemplate() {
             return new Promise(async (resolve, reject) => {
                 var tem  =  this.getTemplateToLoad();
@@ -224,7 +223,6 @@ namespace `w3c.ui` (
             }
         }
 
-
         template(){return null}
 
         async evalTemplate(template, data) {
@@ -286,7 +284,6 @@ namespace `w3c.ui` (
             this._usesShadow = true;
             return super.attachShadow(options);
         }
-
 
         async attributeChangedCallback(name, oldValue, newValue) {
             if (name == "src"){
@@ -367,8 +364,6 @@ namespace `w3c.ui` (
 
         onLoadStyle(url){ return url }
 
-
-        
 
         setPrototypeInstance() {
             this.root.setAttribute("namespace", this.namespace);
