@@ -38,6 +38,126 @@
 
 
 
+<div style="display: flex;flex-direction: row;flex-wrap: nowrap;"></div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="how">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">How it works</h1>
+        <h3>Repositories are collections of Aggregrate Roots</h3>
+        <p>
+            A Repository represents a collection of aggregrate root things. For example,
+            a Recipes repository manages a collection of root objects, know as, recipes.
+            They are aggregrate roots because each recipe manages it's ingredients, they are
+            parts of the root object. Individual Recipes become the domain object of interest,
+            having continuity and core meaning. Repositories can also manage parts of
+            an aggregrate root such as ingredients. By introductoin of UnitOfWork and UseCases with
+            Repositories, a well-defined Domain Driven Model emerges.
+            <img src="src/docs/images/black-grapes-aggregrate-root.jpg"/>
+        </p>
+        
+        <p>
+            <h3>Some facts about the Repository:</h3>
+            <ul>
+                <li>Increases Testability</li>
+                <li>Encapsulates persistance technology</li>
+                <li>Works on aggregate root objects</li>
+                <li>queries are centralized</li>
+                <li>logic is centralized</li>
+                <li>provides an in-memory like collection</li>
+            </ul>
+        </p>
+        <p>
+            So as far as the consuming component is concerned, it uses the repository just like a collection or array when working with Domain objects.
+        </p> 
+        <h3>Repositories delegate to Drivers</h3>  
+        <p>
+            <img src="src/docs/images/data_access_repositories2.png"/>
+        </p>     
+        <p>
+            Arc's base class Repository forwards CRUD operation calls to it's storage driver intrface, whatever
+            driver that may be. From the developers point of view, working with a concrete Movies repository
+            is similar to working with an array or a collection-like api. All of the device specific calls to query and store data is encapsulated away and hidden in eacg Driver.
+        </p>
+        <p>
+            Each Driver implements the <code>IStorageInterface</code> contract.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>LocalStorage Driver</b>
+            Implements the contractual methods/api defined by <code>IStorageInterface</code>
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import '/framework/src/core/drivers/storage/pocket.js';
+import '/framework/src/core/drivers/storage/Cursor.js';
+import '/node_modules/od-mingo/dist/mingo.min.js';
+
+/**
+ * @desc Device for working with localStorage using
+ * a mongodb-like api interface.
+ */
+namespace \`core.drivers.storage\`(
+    class LocalStorage extends core.drivers.storage.IStorageInterface {
+        constructor (collection, storage_device){
+            super(collection, storage_device);
+            this.constructor.prototype.pocket = this.constructor.prototype.pocket||new Pocket();
+            this.setCollection(collection.classname);
+        }
+
+        isSeedingEnabled(){
+            return true;
+        }
+
+        setCollection (name){
+            this.collection = this.pocket.collection(name)
+        }
+
+        add(obj, cb){
+            this.collection.insert(obj);
+            cb(obj,null);
+        }
+
+        remove(query, cb){
+            query = new mingo.Query(query);
+            var res = query.remove(this.collection.documents);
+            this.collection.documents = res;
+            cb(res,null)
+        }
+
+        find(cb,query){
+            query = new mingo.Query(query||{});
+            let cursor = query.find(this.collection.documents);
+            var c = new core.drivers.storage.Cursor(cursor)
+            cb(c,null)
+        }
+    }
+);
+</code>
+      </pre>
+
+      <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>Movies Repository</b>
+           configures itself to use the LocalStorage driver.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import '/framework/src/core/data/Repository.js';
+
+namespace \`core.data\` (
+    class Movies extends core.data.Repository {
+        @public device_driver = "core.drivers.storage.LocalStorage";
+    }
+);
+</code>
+      </pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
 
 
 
@@ -45,7 +165,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Creating a Repository</h1>
         <p>
-            Let's build a Movies repository. It supplies a collection of movies, we are able to
+            Let's build a repository to represent a collection of movies, we are able to
             query, sort and add/update/delete movies from this collection.
         </p>
 
@@ -333,7 +453,7 @@ console.log("results",res)
           </thead>
           <tbody>
             <tr>
-              <td>add(obj,cb)</td>
+              <td><code>add(obj,cb)</code></td>
               <td>
                 obj - an object to add<br/>
                 cb - a callback (optional)
@@ -341,7 +461,7 @@ console.log("results",res)
               <td>Adds an item to the repository</td>
             </tr>
             <tr>
-              <td>remove(query,cb)</td>
+              <td><code>remove(query,cb)</code></td>
               <td>
                 query - mongo query<br/>
                 cb - a callback with results (optional)
@@ -349,7 +469,7 @@ console.log("results",res)
               <td>Removes matches. Returns array of removed items.</td>
             </tr>
             <tr>
-              <td>find(query,cb)</td>
+              <td><code>find(query,cb)</code></td>
               <td>
                 query - mongo query<br/>
                 cb - a callback with results (optional)
@@ -357,7 +477,7 @@ console.log("results",res)
               <td>Returns an array of matches.</td>
             </tr>
             <tr>
-              <td>update(obj,cb)</td>
+              <td><code>update(obj,cb)</code></td>
               <td>
                 obj - an object to update<br/>
                 cb - success callback (optional)
@@ -365,24 +485,24 @@ console.log("results",res)
               <td>Returns an array of matches.</td>
             </tr>
             <tr>
-              <td>all(cb)</td>
+              <td><code>all(cb)</code></td>
               <td>
                 cb - a callback with results (optional)
               </td>
               <td>Returns all repository items.</td>
             </tr>
             <tr>
-              <td>isSeedable()</td>
+              <td><code>isSeedable()</code></td>
               <td>N/A</td>
               <td>Returns a boolean if repository supports seeding.</td>
             </tr>
             <tr>
-              <td>onInitializeModelDataObjects(data[])</td>
+              <td><code>transform(data[])</code></td>
               <td>data - an array of items that was seeded</td>
               <td>Does nothing by default. Override to transform each JSON object into a Model instance.</td>
             </tr>
             <tr>
-              <td>IRequestStorage</td>
+              <td><code>IRequestStorage</code></td>
               <td>Returns the device storage drver</td>
               <td>Returns the prototype.device_driver configured for ths repository by default.</td>
             </tr>
@@ -404,6 +524,25 @@ SELECT * FROM Movies WHERE title = "Gladiator"
                 </code>
             </pre>
         </p>
+        <p>But the Memory driver we've discussed above, does not rely on SQL or translates to SQL. It literally accepts mongo queries and performs matches against it's simple hash-table of objects.
+        </p>
+        <p>
+            Any method of the base class may be overridden in the concrete repository:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.data\` (
+    class Movies extends core.data.Repository {
+        @public device_driver = "core.drivers.storage.Memory";
+
+        static async push(obj,cb){
+            //override baseclass method.
+            console.log("dumping obj", obj);
+        }
+    }
+);
+                </code>
+            </pre>
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -415,6 +554,12 @@ SELECT * FROM Movies WHERE title = "Gladiator"
 
 
 
+
+
+
+
+
+    
 
 
 
