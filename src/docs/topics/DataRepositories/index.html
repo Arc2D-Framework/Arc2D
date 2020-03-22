@@ -74,12 +74,13 @@
             <img src="src/docs/images/data_access_repositories2.png"/>
         </p>     
         <p>
-            Arc's base class Repository forwards CRUD operation calls to it's storage driver intrface, whatever
+            Arc's base class Repository forwards CRUD operation calls to it's storage driver interface, whatever
             driver that may be. From the developers point of view, working with a concrete Movies repository
-            is similar to working with an array or a collection-like api. All of the device specific calls to query and store data is encapsulated away and hidden in eacg Driver.
+            is similar to working with an array or a collection-like api. All of the device specific calls to query and store data is encapsulated away and hidden in each Driver.
         </p>
         <p>
-            Each Driver implements the <code>IStorageInterface</code> contract.
+            Each Driver implements the <code>IStorageInterface</code> contract. See <a href="#docs.topics.DataRepositoryDrivers">Drivers</a> for
+            more details.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -270,7 +271,7 @@ var movie = await core.data.Movies.add(movie)
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="seeding">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Seeding a Repository</h1>
+        <h1 id="api-reference">Seeding a Repository (for testing)</h1>
         <p>
             Repositories can be seeded with sample data. In ther words, prepopulating the storage device with a small dataset. <em>A crucial feature when Unit Testing</em> but not practical in a real world application, nor
             recommended for anything other than running offline development tests.
@@ -358,6 +359,15 @@ REPOSITORIES = {
                 developing an app offline, you may not want the app seeded with any data for full regression testing at
                 the UI level. So here's how to explicitly seed the Repository.
             </p>  
+            <p>Seed and use a Repository with async/await syntax:</p>
+            <pre class="inline javascript lang">
+                <code>
+await core.data.Movies.seed();
+var res = await core.data.Movies.find();
+                </code>
+            </pre>
+
+            <p>Versus a thennable pattern:</p>
              <pre class="inline javascript lang">
                 <code>
 core.data.Movies.seed(); //returns promise
@@ -373,14 +383,7 @@ core.data.Movies.seed().then(res1 => {
 })
                 </code>
             </pre> 
-            <p>Versus, async/await syntax:</p>
-            <pre class="inline javascript lang">
-                <code>
-//150% better, using await
-await core.data.Movies.seed();
-var res = await core.data.Movies.find();
-                </code>
-            </pre>    
+                
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>

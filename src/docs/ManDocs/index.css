@@ -44,20 +44,13 @@ man-docs .brand-logo .logo {
     display: block;
     background-size: contain;*/
     height: 44px;
-
-background-repeat: no-repeat;
-
-background-position: left center;
-
-line-height: 30px;
-
-font-size: 34px;
-
-padding-left: 95px;
-
-width: auto;
-
-background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    line-height: 30px;
+    font-size: 34px;
+    padding:0px;
+    width: auto;
+    background-size: contain;
 }
 
 man-docs .brand-logo .logo > #frameworkname {
