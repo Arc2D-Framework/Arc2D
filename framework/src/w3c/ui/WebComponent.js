@@ -29,6 +29,8 @@ namespace `w3c.ui` (
                 this.defineAncestralClassList();
                 try{window.customElements && window.customElements.define(tag, this);}
                 catch(e){console.error(e)}
+            }else {
+                console.error(`${proto.namespace}#define() - invalid tag name. Dashes required for`, tag)
             }       
         }
 
