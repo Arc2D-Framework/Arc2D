@@ -1,9 +1,8 @@
-import 'core.ui.SampleC';
+import 'core.ui.SampleX';
 
 @cascade(true);
-@stylesheets(["/src/./test.css"]);
 namespace `core.ui` (
-    class SampleX extends core.ui.SampleC {
+    class SampleZ extends core.ui.SampleX {
         async onConnected (){
             await super.onConnected();
             // this.addEventListener('click', e => {

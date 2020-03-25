@@ -13,8 +13,8 @@ function relativeToAbsoluteFilePath(path, ns, appendRoot){
 window.stylesheets = function stylesheets (target, paths){
     paths && paths.forEach(p => {//TODO: Shorten code here
         var filepath = relativeToAbsoluteFilePath(p,target.prototype.namespace,false);
-        target.prototype['@stylesheets'] = target.prototype['@stylesheets']||[];
-        target.prototype['@stylesheets'].push(filepath)
+        // target.prototype['stylesheets'] = target.prototype['stylesheets']||[];
+        target.prototype['stylesheets'].push(filepath)
     })
 }
 

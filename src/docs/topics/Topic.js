@@ -1,16 +1,14 @@
 
 namespace `docs.topics` (
     @cascade(true);
-    @stylesheets(["/src/docs/topics/index.css"]);
     class Topic extends w3c.ui.WebComponent {
         constructor() {
             super();
             application.addEventListener("lang-selected", e=>this.onLanguageChange(e), false);
             hljs.getLanguage('javascript').keywords += ' namespace'; // note the leading space
-            
-
         }
 
+        onLoadStyle(url){ return "/src/docs/topics/index.css" }
 
         onLanguageChange(){
         	var lang = application.current_language;;
