@@ -18,9 +18,3 @@ toggle-button .knob {
     height: 100%;
     border-radius: 50%;
 }
-
-toggle-button.on .knob {
-    transform: translate3d(0px,0px,0px);
-}
-
-

@@ -1,6 +1,5 @@
 
 namespace `docs.components` (
-    @stylesheets(["/src/./index.css"]);
     class TocMenu extends w3c.ui.WebComponent {
         constructor(element){
             super(element);

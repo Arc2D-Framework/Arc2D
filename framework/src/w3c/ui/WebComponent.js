@@ -27,7 +27,7 @@ namespace `w3c.ui` (
                 proto["ns-tagname"] = tag;
                 this.defineAncestors();
                 this.defineAncestralClassList();
-                this.defineAncestralStyleList();
+                // this.defineAncestralStyleList();
                 try{window.customElements && window.customElements.define(tag, this);}
                 catch(e){console.error(e)}
             }else {
@@ -39,7 +39,7 @@ namespace `w3c.ui` (
             var css = this.cssStyle();
             !!css && !this.__proto._style_defined ? 
                 (this.onAppendStyle(
-                    `<style type="text/css" rel="stylsheet">\n${css}\n</style>`.toDomElement()), //TODO:do i really need text/css attrbs?
+                    `<style>\n${css}\n</style>`.toDomElement()), //TODO:do i really need text/css attrbs?
                     this.__proto._style_defined=true
                 ) : null;
         }
@@ -66,7 +66,7 @@ namespace `w3c.ui` (
                     var style = new CSSStyleSheet();
                     style.replace(stylesheet.innerText);
                     this.root.adoptedStyleSheets = [stylesheet];
-                    this.onStyleComputed(stylesheet);
+                    // this.onStyleComputed(stylesheet);
                 } catch(e){
                     console.error(`${e.message} Unable to adopt stylesheet 
                         into shadow dom -- ${this.namespace}#onAppendStyle(), 
@@ -78,7 +78,7 @@ namespace `w3c.ui` (
                 var headNode = application.head;
                 var configscript = application.configscript;
                 headNode.insertBefore(stylesheet, configscript);
-                this.onStyleComputed(stylesheet);
+                // this.onStyleComputed(stylesheet);
             }
         }
 
@@ -195,6 +195,7 @@ namespace `w3c.ui` (
 
         async onConnected(data) { await this.render(data);}
         
+        //TODO:Don't ever use await in here!!
         onPreConnected() { 
             this.onConnected()
         }
@@ -248,16 +249,19 @@ namespace `w3c.ui` (
         decorate(){
             this.setClassList();
             this.setPrototypeInstance();
+            this.defineAncestralStyleList();
             this.setStyleDocuments();
             this.onPreConnected();
         }
 
-        onTemplateLoaded() {
+        async onTemplateLoaded() {
             this.slots = this.getSlots();
             this.setClassList();
             this.setPrototypeInstance();
-            this.setStyleDocuments();
-            this.onPreConnected();
+            this.defineAncestralStyleList();
+            
+            await this.onPreConnected();
+            await this.setStyleDocuments();
         }
 
         getSlots() { return Array.from(this.children) }
@@ -330,93 +334,121 @@ namespace `w3c.ui` (
 
 
 
-        static defineAncestralStyleList(){
-            var stylesheets = this.prototype["stylesheets"]=[];
-                stylesheets.push(this.getNSStyleSheet(this.prototype.namespace));
-            var ancestor = this.prototype.ancestor;
+        // static defineAncestralStyleList(){
+        //     var stylesheets = this.prototype["stylesheets"]=[];
+        //         stylesheets.push(this.getNSStyleSheet(this.prototype.namespace));
+        //         if(!this.prototype['@cascade']){return}
+        //     var ancestor = this.prototype.ancestor;
+
+        //     while(ancestor) {
+        //         if( ancestor != w3c.ui.WebComponent && 
+        //             ancestor != w3c.ui.Application){
+        //             stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
+        //             ancestor = ancestor.prototype.ancestor;
+        //         } else { break }
+        //     }
+        //     wait(20).then(_=>console.log(this.prototype.namespace,stylesheets))
+        // }
+
+        // defineAncestralStyleList(){
+        //     // return;
+        //     var stylesheets = this["stylesheets"]=this["stylesheets"]||[];
+        //         stylesheets.push(this.getNSStyleSheet(this.namespace));
+        //         if(!this['@cascade']){return}
+        //     var ancestor = this.constructor.prototype.ancestor;
+
+        //     while(ancestor) {
+        //         if( ancestor != w3c.ui.WebComponent && 
+        //             ancestor != w3c.ui.Application){
+        //             stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
+        //             stylesheets.unshift(...ancestor.prototype["stylesheets"]||[]);
+        //             ancestor = ancestor.prototype.ancestor;
+        //         } else { break }
+        //     }
+        // }
+
+
+
+        defineAncestralStyleList(){
+            // debugger;
+            var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
+                stylesheets.push(this.getNSStyleSheet(this.namespace));
+                stylesheets.push(...this.prototype["@stylesheets"]||[]);
+            if(!this['@cascade']){return}
+            var ancestor = this.constructor.prototype.ancestor;
 
             while(ancestor) {
-                if( ancestor.prototype['@cascade']  && 
-                    ancestor != w3c.ui.WebComponent && 
+                if( ancestor != w3c.ui.WebComponent && 
                     ancestor != w3c.ui.Application){
+                    
+                    stylesheets.unshift(...ancestor.prototype["@stylesheets"]||[]);
                     stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
                     ancestor = ancestor.prototype.ancestor;
                 } else { break }
             }
-            // wait(20).then(_=>console.log(this.prototype.namespace,stylesheets))
         }
 
-        // static defineAncestralStyleList(){
-        //     debugger;
-        //     var stylesheets = this.prototype["stylesheets"]=[];
-        //     for(let ancestor of this.ancestors){
-        //         if( ancestor.prototype['@cascade']  && 
-        //             ancestor != w3c.ui.WebComponent && 
-        //             ancestor != w3c.ui.Application){
-        //             stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
-        //         } else { break }
-        //     }
-        //     // stylesheets.push(this.getNSStyleSheet(this.prototype.namespace));
-        //     wait(20).then(_=>console.log(this.prototype.namespace,stylesheets))
-        // }
-        
-        // static defineAncestralStyleList(){
-        //     var stylesheets = this.prototype["stylesheets"]=[];
-        //     var ancestor    = this.prototype.ancestor;
-        //     if( ancestor && 
-        //         ancestor.prototype['@cascade']  &&
-        //         ancestor != w3c.ui.WebComponent && 
-        //         ancestor != w3c.ui.Application){
-        //         stylesheets.push(this.getNSStyleSheet(ancestor.prototype.namespace));
-        //     } 
-        //     stylesheets.push(this.getNSStyleSheet(this.prototype.namespace));
-        //     wait(20).then(_=>console.log(this.prototype.namespace,stylesheets))
-        // }
 
-        static getNSStyleSheet(ns){
+        getNSStyleSheet(ns){
             return relativeToAbsoluteFilePath("/src/./index.css",ns);
         }
 
         setClassList() {
-            this.root.className = this.root.className + " " + (this.constructor.prototype.classes.join(" ")).trim()
+            this.root.className = this.root.className + (this["@cascade"]? 
+                " " + (this.constructor.prototype.classes.join(" ")).trim():
+                " " + this.classname);
         }
 
         getStyleSheets() {
             var styles = this["stylesheets"]||[];
+            if(styles.length<=0){styles.push(this.getNSStyleSheet(this.namespace))}
             return styles.reverse();
         }
 
-        setStyleDocuments() {
-            this.loadcss(this.getStyleSheets());
+        async setStyleDocuments() {
+            await this.loadcss(this.getStyleSheets());
             this.setStylesheet();
+            this.onStyleComputed(this.stylesheets);
         }
 
         async loadcss(urls) {
-            urls=urls.reverse();
-            var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
-            for(let path of urls){
-                path = this.onLoadStyle(path);
-                if(path && !stylesheets[path]){
-                    var tagName = /^http/.test(path) ? "link" : "style";
-                    var tag = document.createElement(tagName);
-                        tag.setAttribute("type", 'text/css');
-                        tag.setAttribute("rel",  'stylesheet');
-                        tag.setAttribute("href",  path);
-                        tag.setAttribute("component", this.namespace);
-                        stylesheets[path] = tag;
-                        if(tagName.toLowerCase() == "style"){
-                            var _cssText = await window.imports(path);
-                            if(_cssText){
-                                _cssText = this.onTransformStyle(_cssText);
-                                _cssText && this.setCssTextAttribute(_cssText, tag);
-                                this.onStylesheetLoaded(tag);
-                                this.onAppendStyle(tag);
-                            }
-                        } else {
-                            this.onAppendStyle(tag);//link
-                        }
+            return new Promise(async (resolve,reject) => {
+                if(this.constructor.prototype._css_loaded){
+                    resolve(true);
+                    return
                 }
-            }
+                else {
+                    console.log(this.namespace + " loading", urls)
+                }
+                this.constructor.prototype._css_loaded=true;
+
+                urls=urls.reverse();
+                // console.log(this.namespace,urls)
+                var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
+                for(let path of urls){
+                    path = this.onLoadStyle(path);
+                    if(path && !stylesheets[path]){
+                        var tagName = /^http/.test(path) ? "link" : "style";
+                        var tag = document.createElement(tagName);
+                        this.onAppendStyle(tag);
+                            tag.setAttribute("type", 'text/css');
+                            tag.setAttribute("rel",  'stylesheet');
+                            tag.setAttribute("href",  path);
+                            tag.setAttribute("component", this.namespace);
+                            stylesheets[path] = tag;
+                            if(tagName.toLowerCase() == "style"){
+                                var _cssText = await window.imports(path);
+                                if(_cssText){
+                                    _cssText = this.onTransformStyle(_cssText);
+                                    _cssText && this.setCssTextAttribute(_cssText, tag);
+                                    this.onStylesheetLoaded(tag);
+                                    // this.onAppendStyle(tag);
+                                }
+                            }
+                    }
+                }
+                resolve(true);
+            })
         }
 
         onLoadStyle(url){ return url }

@@ -1,6 +1,5 @@
-
+@cascade(true);
 namespace `docs.topics` (
-    @cascade(true);
     class Topic extends w3c.ui.WebComponent {
         constructor() {
             super();

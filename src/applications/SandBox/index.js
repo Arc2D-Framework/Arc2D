@@ -1,4 +1,5 @@
 import 'core.ui.SampleZ';
+import 'docs.demos.ui.ToggleButton';
 
 namespace `applications` (
     class SandBox extends w3c.ui.Application {

@@ -11,11 +11,17 @@ function relativeToAbsoluteFilePath(path, ns, appendRoot){
 }
 
 window.stylesheets = function stylesheets (target, paths){
+    // debugger;
+    target.prototype['@stylesheets'] = []
+    // target.prototype['stylesheets'].push(...target.prototype.ancestor.prototype["stylesheets"]||[]);
+    // target.prototype['stylesheets'].push(target.prototype.getNSStyleSheet(target.prototype.namespace));
     paths && paths.forEach(p => {//TODO: Shorten code here
         var filepath = relativeToAbsoluteFilePath(p,target.prototype.namespace,false);
         // target.prototype['stylesheets'] = target.prototype['stylesheets']||[];
-        target.prototype['stylesheets'].push(filepath)
-    })
+        target.prototype['@stylesheets'].unshift(filepath)
+    });
+
+    // console.log(target.prototype.namespace,target.prototype['stylesheets'])
 }
 
 // window.traits = function traits(target, __traits){

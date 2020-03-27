@@ -1,6 +1,7 @@
 import 'core.ui.SampleX';
 
 @cascade(true);
+@stylesheets(["src/./xxx.css"]);
 namespace `core.ui` (
     class SampleZ extends core.ui.SampleX {
         async onConnected (){
