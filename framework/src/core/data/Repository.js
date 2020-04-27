@@ -4,11 +4,12 @@ import '/framework/src/core/drivers/storage/Memory.js';
 
 
 namespace `core.data` (
-	@traits([new Observer]);
-	class Repository {
+    @traits([new Observer]);
+    class Repository {
         static get IRequestStorage(){
+            debugger;
             var driver = this.prototype.device_driver;
-            this.interface = this.interface||new NSRegistry[driver](this.prototype);
+            this.interface = this.interface||new NSRegistry[driver](this);
             this.device_driver=driver; 
             return this.interface;
         }
@@ -36,6 +37,7 @@ namespace `core.data` (
 
         static async find(cb,query){
             return new Promise((resolve,reject) =>{
+                debugger;
                 this.IRequestStorage.find((result, error)=>{
                     cb && cb(result, error);
                     resolve(result, error)
@@ -93,5 +95,5 @@ namespace `core.data` (
                 this.prototype.dispatchEvent("loaded", {controller: this}, this);
             }
         }
-	}
+    }
 );

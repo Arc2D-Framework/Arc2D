@@ -1,6 +1,5 @@
-
+@traits([core.traits.UnitTest]);
 namespace `tests` (
-    @traits([core.traits.UnitTest]);
     class Klass {
         constructor(){
             // alert(this.getNs())

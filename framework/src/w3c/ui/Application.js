@@ -3,8 +3,8 @@ import 'w3c.ui.WebComponent';
 
 namespace `w3c.ui` (
 	class Application extends w3c.ui.WebComponent {
-	    constructor() {
-	        super();
+	    constructor(el) {
+	        super(el);
 	        window.application = this;
 	        window.sprites = [];
 	        this.head           = document.getElementsByTagName("head")[0];
@@ -34,8 +34,8 @@ namespace `w3c.ui` (
             super.define(proto,bool);      
         }
 
-        onConnected() {
-            this.render();
+        async onConnected() {
+            await this.render();
         }
 	}
 );

@@ -5,7 +5,7 @@ namespace `applications` (
     class IsoMap extends w3c.ui.Application {
         constructor(element){
             super(element);
-            this.bind(".tile", "click", e => this.onTileClicked(e), false);
+            this.addEventListener("click", e => this.onTileClicked(e), false, ".tile");
         }
 
         onTileClicked(e){

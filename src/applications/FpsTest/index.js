@@ -2,15 +2,14 @@ import '/src/applications/FpsTest/sprites/circle.js';
 import '/src/applications/FpsTest/sprites/Planet.js';
 
 namespace `applications` (
-    @stylesheets(["src/./index.css"]);
     class FpsTest extends w3c.ui.Application {
         constructor(element){
             super(element);
         }
 
         async onConnected() {
-            // super.onConnected();
-            await this.render()
+            await super.onConnected();
+            // await this.render()
 
             this.canvas = document.getElementById('canvas');
 		    this.context = this.canvas.getContext('2d');

@@ -17,8 +17,6 @@ namespace `w3c.ui` (
             }
         }
 
-        
-
         static define(proto,bool){
             var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
             if(/\-/.test(tag)){
@@ -103,13 +101,6 @@ namespace `w3c.ui` (
             this.addEventListener(evtName, handler, bool, el)
         }
 
-        //TODO: Deprecate. Overload addEventListener() instead to streamline it.
-        bind(el, evtName, handler, bool=false) {
-            console.warn(this.namespace+"#bind() - is deprecated",this);
-            this.on(evtName, handler, bool, el);
-        }
-
-
         addEventListener(evtName, handler, bool=false, el) {
             var self = this;
             if (typeof el == "string") {
@@ -120,8 +111,8 @@ namespace `w3c.ui` (
                             target: t,
                             realtarget: e.target,
                             src: e,
-                            preventDefault: () => e.preventDefault,
-                            stopPropagation: () => e.stopPropagation
+                            preventDefault: () => e.preventDefault(),
+                            stopPropagation: () => e.stopPropagation()
                         });
                     }
                 }, bool);
@@ -193,17 +184,20 @@ namespace `w3c.ui` (
         }
 
 
-        async onConnected(data) { await this.render(data);}
+        async onConnected(data) { 
+            // debugger; 
+            await this.render(data);
+        }
         
         //TODO:Don't ever use await in here!!
-        onPreConnected() { 
-            this.onConnected()
-        }
+        // onPreConnected() { 
+        //     debugger; 
+        //     this.onConnected()
+        // }
 
         async render(data) {
             if(this.element){return}
             data = data || {};
-            // data.component = this;//TODO: why was i attaching this? Breaks in worker threads
             var t = this._template;
             if (t) {
                 var html = await this.evalTemplate(t, data || {});
@@ -243,7 +237,6 @@ namespace `w3c.ui` (
             this._is_connected=true;
             var html = await this.loadTemplate();
             this.onTemplateLoaded();
-
         }
 
         decorate(){
@@ -251,7 +244,7 @@ namespace `w3c.ui` (
             this.setPrototypeInstance();
             this.defineAncestralStyleList();
             this.setStyleDocuments();
-            this.onPreConnected();
+            this.onConnected();
         }
 
         async onTemplateLoaded() {
@@ -260,7 +253,7 @@ namespace `w3c.ui` (
             this.setPrototypeInstance();
             this.defineAncestralStyleList();
             
-            await this.onPreConnected();
+            await this.onConnected();
             await this.setStyleDocuments();
         }
 
@@ -297,23 +290,14 @@ namespace `w3c.ui` (
                 if(!this._is_connected){return;}
                 else {
                     var html = await this.loadTemplate();
-                    this.onPreConnected()
+                    await this.onConnected()
                 }
             }
         }
 
-        cssStyle(){return ""}
+        cssStyle(){ return "" }
 
-        // setStyleDocuments() {
-        //     this.loadcss(this.getStyleSheets());
-        //     if(this.onLoadInstanceStylesheet()){this.loadcss([this.getDefaultStyleSheet()])}
-        //     this.setStylesheet();
-        // }
-        
-
-        onLoadInstanceStylesheet(){
-            return true;
-        }
+        onLoadInstanceStylesheet(){ return true }
 
         static defineAncestors(){
             this.ancestors=[];
@@ -333,46 +317,9 @@ namespace `w3c.ui` (
         }
 
 
-
-        // static defineAncestralStyleList(){
-        //     var stylesheets = this.prototype["stylesheets"]=[];
-        //         stylesheets.push(this.getNSStyleSheet(this.prototype.namespace));
-        //         if(!this.prototype['@cascade']){return}
-        //     var ancestor = this.prototype.ancestor;
-
-        //     while(ancestor) {
-        //         if( ancestor != w3c.ui.WebComponent && 
-        //             ancestor != w3c.ui.Application){
-        //             stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
-        //             ancestor = ancestor.prototype.ancestor;
-        //         } else { break }
-        //     }
-        //     wait(20).then(_=>console.log(this.prototype.namespace,stylesheets))
-        // }
-
-        // defineAncestralStyleList(){
-        //     // return;
-        //     var stylesheets = this["stylesheets"]=this["stylesheets"]||[];
-        //         stylesheets.push(this.getNSStyleSheet(this.namespace));
-        //         if(!this['@cascade']){return}
-        //     var ancestor = this.constructor.prototype.ancestor;
-
-        //     while(ancestor) {
-        //         if( ancestor != w3c.ui.WebComponent && 
-        //             ancestor != w3c.ui.Application){
-        //             stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
-        //             stylesheets.unshift(...ancestor.prototype["stylesheets"]||[]);
-        //             ancestor = ancestor.prototype.ancestor;
-        //         } else { break }
-        //     }
-        // }
-
-
-
         defineAncestralStyleList(){
-            // debugger;
             var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
-                stylesheets.push(this.getNSStyleSheet(this.namespace));
+            if(this.onLoadInstanceStylesheet()){stylesheets.push(this.getNSStyleSheet(this.namespace));}
                 stylesheets.push(...this.prototype["@stylesheets"]||[]);
             if(!this['@cascade']){return}
             var ancestor = this.constructor.prototype.ancestor;
@@ -388,7 +335,6 @@ namespace `w3c.ui` (
             }
         }
 
-
         getNSStyleSheet(ns){
             return relativeToAbsoluteFilePath("/src/./index.css",ns);
         }
@@ -401,7 +347,7 @@ namespace `w3c.ui` (
 
         getStyleSheets() {
             var styles = this["stylesheets"]||[];
-            if(styles.length<=0){styles.push(this.getNSStyleSheet(this.namespace))}
+            if(styles.length<=0 && this.onLoadInstanceStylesheet()){styles.push(this.getNSStyleSheet(this.namespace))}
             return styles.reverse();
         }
 
@@ -423,7 +369,6 @@ namespace `w3c.ui` (
                 this.constructor.prototype._css_loaded=true;
 
                 urls=urls.reverse();
-                // console.log(this.namespace,urls)
                 var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
                 for(let path of urls){
                     path = this.onLoadStyle(path);
@@ -442,7 +387,6 @@ namespace `w3c.ui` (
                                     _cssText = this.onTransformStyle(_cssText);
                                     _cssText && this.setCssTextAttribute(_cssText, tag);
                                     this.onStylesheetLoaded(tag);
-                                    // this.onAppendStyle(tag);
                                 }
                             }
                     }

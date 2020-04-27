@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", e => {
         new core.http.ModuleLoader;
         c.load(ns, Config.ROOTPATH + path, res => {
           var app = window.application;
+          if(!app) {
+            app = new NSRegistry[ns](document.body);
+          }
           MainLoop
             .setUpdate(app.onUpdate.bind(app))
             .setDraw(app.onDraw.bind(app))

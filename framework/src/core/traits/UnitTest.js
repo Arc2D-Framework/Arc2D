@@ -1,7 +1,6 @@
 namespace `core.traits` (
     class UnitTest {
         expected (description, promise){
-            debugger;
             var self=this;
             new Promise(promise).then(
                 function(){ console.log("%c Passed: "  + self.classname + " - " + arguments[0] + " -- expected " + description, 'background: green; color: white; display: block;')  },
