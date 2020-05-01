@@ -21,6 +21,7 @@ namespace `docs.demos.ui` (
         onClick(){
             this.direction *= -1;
             this.onRender();
+            console.log("this.matrix",this.matrix)
         }
 
         get x() {
