@@ -4,7 +4,7 @@ namespace `docs.topics` (
 	class DecoratingNodes  extends docs.topics.Topic  {
 		onConnected(){
             super.onConnected()
-            this.bind("#decorate", "click", e => this.onDecorate(e))
+            this.on("click", e => this.onDecorate(e), false, "#decorate")
         }
 
         onDecorate(e){

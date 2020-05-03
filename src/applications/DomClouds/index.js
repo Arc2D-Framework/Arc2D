@@ -1,6 +1,6 @@
 
 namespace `applications` (
-    class DomClouds extends w3c.ui.Application {
+    class DomClouds extends core.ui.World {
         constructor(element){
             super(element);
             this.layers = [];
@@ -8,7 +8,7 @@ namespace `applications` (
         }
 
         async onConnected() {
-            await this.render();
+            await super.onConnected();
             this.world = this.querySelector( '#world' );
             this.viewport = this.querySelector( '#viewport1' );
             this.fpsCounter = this.querySelector("#fpscounter");
@@ -18,9 +18,10 @@ namespace `applications` (
             this.worldXAngle = 0;
             this.worldYAngle = 0;
 
-            this.viewport.style.webkitPerspective = this.p;
-            this.viewport.style.MozPerspective = this.p;
-            this.viewport.style.oPerspective = this.p;
+            // this.viewport.style.webkitPerspective = this.p;
+            // this.viewport.style.MozPerspective = this.p;
+            // this.viewport.style.oPerspective = this.p;
+            this.viewport.style.perspective
 
             window.addEventListener( 'mousewheel', e=>this.onContainerMouseWheel(e) );
             window.addEventListener( 'DOMMouseScroll', e=>this.onContainerMouseWheel(e) );

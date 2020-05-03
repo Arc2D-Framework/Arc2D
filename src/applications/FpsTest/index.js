@@ -2,7 +2,7 @@ import '/src/applications/FpsTest/sprites/circle.js';
 import '/src/applications/FpsTest/sprites/Planet.js';
 
 namespace `applications` (
-    class FpsTest extends w3c.ui.Application {
+    class FpsTest extends core.ui.World {
         constructor(element){
             super(element);
         }

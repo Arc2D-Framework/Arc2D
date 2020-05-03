@@ -13,15 +13,15 @@ document.addEventListener("DOMContentLoaded", e => {
         new core.http.ClassLoader :
         new core.http.ModuleLoader;
         c.load(ns, Config.ROOTPATH + path, res => {
-          var app = window.application;
-          if(!app) {
-            app = new NSRegistry[ns](document.body);
-          }
-          MainLoop
-            .setUpdate(app.onUpdate.bind(app))
-            .setDraw(app.onDraw.bind(app))
-            .setEnd(app.onEnd.bind(app))
-            .start();
+          var app = window.application = (
+            window.application||new NSRegistry[ns](document.body)
+          );
+          (app instanceof core.ui.World) ? 
+            MainLoop
+              .setUpdate(app.onUpdate.bind(app))
+              .setDraw(app.onDraw.bind(app))
+              .setEnd(app.onEnd.bind(app))
+              .start() : null;
         });
     }
   };

@@ -22,9 +22,9 @@ body {
     overflow: hidden;
 }
 #viewport1 {
-    -webkit-perspective: 1000px;
+    /*-webkit-perspective: 1000px;
     -moz-perspective: 1000px;
-    -o-perspective: 1000px;
+    -o-perspective: 1000px;*/
     perspective:1000px;
     position: absolute;
     left: 0;
@@ -55,15 +55,17 @@ body {
     margin-top: -256px;
     height: 512px;
     width: 512px;
-    -webkit-transform-style: preserve-3d;
+    /*-webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
-    -o-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;*/
+    transform-style: preserve-3d;
 }
 
 #world div {
-    -webkit-transform-style: preserve-3d;
+    /*-webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
-    -o-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;*/
+    transform-style: preserve-3d;
 }
 
 .cloudBase {
@@ -84,9 +86,10 @@ body {
     height: 256px;
     margin-left: -128px;
     margin-top: -128px;
-    -webkit-transition: opacity .5s ease-out;
+    /*-webkit-transition: opacity .5s ease-out;
     -moz-transition: opacity .5s ease-out;
-    -o-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;*/
+    transition: opacity .5s ease-out;
 }
 
 #fpscounter{color:black;z-index:200;position:absolute;}

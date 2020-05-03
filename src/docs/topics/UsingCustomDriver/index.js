@@ -4,7 +4,7 @@ namespace `docs.topics` (
 	class UsingCustomDriver  extends docs.topics.Topic  {
 		onConnected(){
             super.onConnected();
-            this.bind("#render-mustache-component", "click", e => this.runDemo(e))
+            this.on("click", e => this.runDemo(e), false, "#render-mustache-component")
         }
 
         runDemo(){
