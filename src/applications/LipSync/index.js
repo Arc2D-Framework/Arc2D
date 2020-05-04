@@ -1,6 +1,7 @@
+import 'core.ui.LipSyncAvatar';
 
-namespace `{{FQNS_to_NS namespace}}` (
-    class {{FQNS_to_Class namespace}} extends w3c.ui.Application {
+namespace `applications` (
+    class LipSync extends w3c.ui.Application {
         constructor(element){
             super(element);
         }

@@ -3,7 +3,7 @@ import '/framework/src/core/lang/Thread.js';
 
 namespace `applications` (
     @stylesheets(["/src/./index.css"]);
-    class StickMan extends w3c.ui.Application {
+    class StickMan extends core.ui.World {
         onConnected() {
             this.render();
    //          var thread = new core.lang.Thread(function(e){

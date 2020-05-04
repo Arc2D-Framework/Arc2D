@@ -2,7 +2,7 @@ import '/src/core/ui/game/KenSprite/index.js';
 
 namespace `applications` (
     @stylesheets(["src/./index.css"]);
-    class StreetFighter extends w3c.ui.Application {
+    class StreetFighter extends core.ui.World {
         constructor(element){
             super(element);
         }
