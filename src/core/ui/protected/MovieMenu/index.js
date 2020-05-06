@@ -19,7 +19,7 @@ namespace `core.ui.protected` (
         // }
 
         onConnected(){
-            this.bind("li", "click", (e) => this.onClick(e), false);
+            this.addEventListener("click", (e) => this.onClick(e), false,"li");
             this.onRenderGenres();
         }
 

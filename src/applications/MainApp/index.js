@@ -19,7 +19,7 @@ namespace `applications` (
             //listen to core.ui.MovieList -> 'moviedeleted' event
             this.addEventListener("moviedeleted", (e)=>this.onMovieDeleted(e), false);
             //listen to MainApp -> 'click', only from div#nowhere
-            this.bind("#nowhere", "click", (e)=> this.onShowErrorScreen(e), false);
+            this.addEventListener("click", (e)=> this.onShowErrorScreen(e), false, "#nowhere");
         }
 
 
