@@ -1,7 +1,7 @@
 
 
 namespace `applications`(
-    class MyTest extends w3c.ui.RoutableApplication {
+    class MainRoot extends w3c.ui.RoutableApplication {
 
         async onConnected() {
             await super.onConnected();

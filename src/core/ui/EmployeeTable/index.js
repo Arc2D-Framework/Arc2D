@@ -1,7 +1,7 @@
 namespace `core.ui` (
-	class EmployeeTable  extends w3c.ui.WebComponent  {
+	class EmployeeTable extends w3c.ui.WebComponent  {
 		async onConnected() {
-			await super.onConnected(this.empData());			
+			await super.onConnected(this.empData());		
 		}
 		
 		empData() {
