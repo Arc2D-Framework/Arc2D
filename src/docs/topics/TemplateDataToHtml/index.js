@@ -4,7 +4,7 @@ namespace `docs.topics` (
 	class TemplateDataToHtml  extends docs.topics.Topic  {
 		onConnected(){
 			super.onConnected();
-			this.bind("#json-to-html-demo1", "click", e => this.runDemo(e))
+			this.addEventListener("click", e => this.runDemo(e),false,"#json-to-html-demo1");
 		}
 
 		runDemo(){

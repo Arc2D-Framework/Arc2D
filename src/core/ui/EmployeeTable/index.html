@@ -1,0 +1,23 @@
+<template>
+	<div>
+		<table>
+			<thead>
+				<th>Name</th>
+				<th>Active</th>
+				<th>Department</th>
+			</thead>
+			<tbody>
+				${
+					this.employees.map(emp =>
+						`<tr>
+							<td>${emp.name}</td>
+							<td>${emp.active}</td>
+							<td>${emp.department}</td>
+						</tr>
+						`
+					).join("")
+				}
+			</tbody>
+		</table>
+	</div>
+</template>

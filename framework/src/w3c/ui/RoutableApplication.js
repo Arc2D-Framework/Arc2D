@@ -1,10 +1,11 @@
+import '/src/core/http/Router.js';
 
+namespace `w3c.ui` (
+	class RoutableApplication extends w3c.ui.Application {
 
-namespace `applications`(
-    class MyTest extends w3c.ui.RoutableApplication {
-
-        async onConnected() {
-            await super.onConnected();
+        async onConnected(data){
+            await this.render(data);
+            this.router = new core.http.Router(this,window);// <- onConnected, best place
         }
 
         onEnterActivity(c) {
@@ -33,5 +34,5 @@ namespace `applications`(
             console.log("onLoadingActivity", c);
             this.dispatchEvent("topichanged", {});
         }
-    }
+	}
 );
