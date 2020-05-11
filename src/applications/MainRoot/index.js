@@ -1,4 +1,4 @@
-
+import 'core.ui.NavBar';
 
 namespace `applications`(
     class MainRoot extends w3c.ui.RoutableApplication {
