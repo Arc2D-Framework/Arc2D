@@ -5,12 +5,16 @@ namespace `core.ui` (
 
             this.knob = this.querySelector(".knob");
             this.direction = -1;
-            this.addEventListener("click", e => this.onClick(e), false, this);
+            this.addEventListener("click", e => this.onClick(e), false);
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
             this.nameSlot = this.querySelector("span#nameSlot");
-            this.element = this.knob.parentNode;
+            this.element = this;
 
             this.setSlotText();
+        }
+
+        onfireEvt(){
+            this.dispatchEvent("toggleclick",{bubbles:true,cancelable: true,toggleState:true});
         }
 
         setSlotText(){
@@ -20,7 +24,6 @@ namespace `core.ui` (
         onStyleComputed(style){
             this.bounds = this.getBoundingClientRect();
             this.knob_bounds = this.knob.getBoundingClientRect();
-
             var style = window.getComputedStyle(this.knob);
             var matrix = new DOMMatrix(style.transform);
             this.matrix = matrix;
@@ -29,10 +32,11 @@ namespace `core.ui` (
         onClick(){
             this.direction *= -1;
             this.onRender();
+            this.onfireEvt();
         }
 
         toggleActive(){
-            this.element.classList.toggle("active");
+            this.classList.toggle("active");
             this.nameSlot.classList.toggle("active-color");
         }
 
@@ -47,7 +51,6 @@ namespace `core.ui` (
                 translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||this.matrix.m43}px)
             `;
             this.toggleActive();
-            this.dispatchEvent("toggleclick");
         }
 	}
 )

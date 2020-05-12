@@ -17,12 +17,14 @@ html, body, .NotificationsApp {
     height: 100%;
     align-items: center;
     padding: 20px 40px 0 40px;
-    transition: all .2s ease-out;
 }
 
 .NotificationsApp #container #bottom-content{
     height: auto;
     font-family: 'Inter', sans-serif;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .5s;
 }
 
 .NotificationsApp #container #bottom-content notifications-toggle-switch{
@@ -39,7 +41,12 @@ html, body, .NotificationsApp {
     font-size: 13px !important;
     margin:0 !important;
     left: 55px !important;
-    width: 100%;
-    min-width: 130px;
+    width: max-content;
     top:2px !important;
+}
+
+.show{
+    visibility: visible !important;
+    opacity: 1 !important;
+    /* transition: all .5s; */
 }
