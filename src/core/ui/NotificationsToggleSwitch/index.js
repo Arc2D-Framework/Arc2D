@@ -1,5 +1,5 @@
 namespace `core.ui` (
-	class ToggleButton  extends w3c.ui.WebComponent  {
+	class NotificationsToggleSwitch  extends w3c.ui.WebComponent  {
 		async onConnected(){
             await super.onConnected();
 
@@ -7,8 +7,14 @@ namespace `core.ui` (
             this.direction = -1;
             this.addEventListener("click", e => this.onClick(e), false, this);
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
+            this.nameSlot = this.querySelector("span#nameSlot");
             this.element = this.knob.parentNode;
-            this.span = this.nextElementSibling;
+
+            this.setSlotText();
+        }
+
+        setSlotText(){
+            this.nameSlot.innerHTML = this.name || this.getAttribute("name");
         }
 
         onStyleComputed(style){
@@ -27,7 +33,7 @@ namespace `core.ui` (
 
         toggleActive(){
             this.element.classList.toggle("active");
-            this.span.classList.toggle("active-color");
+            this.nameSlot.classList.toggle("active-color");
         }
 
         get x() {
@@ -41,6 +47,7 @@ namespace `core.ui` (
                 translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||this.matrix.m43}px)
             `;
             this.toggleActive();
+            this.dispatchEvent("toggleclick");
         }
 	}
 )

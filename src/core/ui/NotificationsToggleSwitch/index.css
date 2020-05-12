@@ -1,0 +1,42 @@
+
+notifications-toggle-switch {
+    width: 60px;
+    height: 30px;
+    display: block;
+    background: lightgray;
+    border-radius: 30px;
+    box-sizing: content-box;
+    padding: 3px;
+    perspective: 3000px;
+    transition: all .3s ease-out;
+    transition-delay: .2s;
+    position: relative;
+}
+
+notifications-toggle-switch .knob {
+    transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 30px;
+    background: white;
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+}
+
+notifications-toggle-switch span{
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    margin-left: 15px;
+    transition: all .2s ease-out;
+    color: #828181;
+    position: absolute;
+    top: -3px;
+    left: 70px;
+}
+
+.active{
+    background: #55b982 !important;
+}
+
+.active-color{
+    color: #333 !important;
+}

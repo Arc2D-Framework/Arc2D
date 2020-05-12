@@ -1,4 +1,4 @@
-import 'core.ui.ToggleButton';
+import 'core.ui.NotificationsToggleSwitch';
 
 namespace `applications` (
     class NotificationsApp extends w3c.ui.Application {
@@ -8,6 +8,11 @@ namespace `applications` (
 
         async onConnected() {
             await super.onConnected();
+            this.addEventListener("toggleclick", (e) => this.toggleContent(e),false);
+        }
+
+        toggleContent(e){
+            console.log(e)
         }
     }
 );
