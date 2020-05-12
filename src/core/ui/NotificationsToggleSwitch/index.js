@@ -8,13 +8,8 @@ namespace `core.ui` (
             this.addEventListener("click", e => this.onClick(e), false);
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
             this.nameSlot = this.querySelector("span#nameSlot");
-            this.element = this;
 
             this.setSlotText();
-        }
-
-        onfireEvt(){
-            this.dispatchEvent("toggleclick",{bubbles:true,cancelable: true,toggleState:true});
         }
 
         setSlotText(){
@@ -32,7 +27,6 @@ namespace `core.ui` (
         onClick(){
             this.direction *= -1;
             this.onRender();
-            this.onfireEvt();
         }
 
         toggleActive(){

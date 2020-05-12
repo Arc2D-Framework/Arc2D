@@ -8,26 +8,30 @@ namespace `applications` (
 
         async onConnected() {
             await super.onConnected();
-            // this.on("click", (e) => this.onfireEvt(e),false,"#main-toggle");
-            this.on("toggleclick", (e) => this.toggleContent(e),false);
+            this.on("click", (e) => this.onfireEvt(e),false,"#main-toggle");
+            this.addEventListener("toggleclick", (e) => this.toggleContent(e),false);
             this.mainToggle = this.querySelector("#main-toggle");
+            this.isActive = this.mainToggle.classList.contains("active");
             this.bottomContent = this.querySelector("#bottom-content");
             this.allToggleSwitches = Array.from(this.querySelectorAll("notifications-toggle-switch"));
-            this.allToggleSwitches.shift();
-
+            this.allToggleSwitches.shift(); // excludes main toggle switch
         }
 
-        // onfireEvt(e){
-        //     this.dispatchEvent("toggleclick",{bubbles:true,cancelable: true,toggleState:true});
-        // }
+        onfireEvt(){
+            this.isActive || !this.isActive ?
+            this.dispatchEvent("toggleclick",{toggleState:this.isActive}) : null;
+        }
 
         toggleContent(e){
-            debugger;
+            console.log("e.data.toggleState",e.data.toggleState);
             this.bottomContent.classList.toggle("show");
-            if(this.mainToggle.classList.contains("active") && e.data.toggleState){
-                this.allToggleSwitches.forEach(node => node.onClick())
+            if(!e.data.toggleState){
+                this.allToggleSwitches.forEach(node => {
+                    if(node.classList.contains("active")){
+                        node.onClick();
+                    }
+                })
             }
-            // console.log(e.data.toggleState);
         }
     }
 );
