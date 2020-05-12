@@ -4,11 +4,11 @@ namespace `core.ui` (
             await super.onConnected();
 
             this.knob = this.querySelector(".knob");
-           
             this.direction = -1;
             this.addEventListener("click", e => this.onClick(e), false, this);
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
             this.element = this.knob.parentNode;
+            this.span = this.nextElementSibling;
         }
 
         onStyleComputed(style){
@@ -23,9 +23,11 @@ namespace `core.ui` (
         onClick(){
             this.direction *= -1;
             this.onRender();
+        }
+
+        toggleActive(){
             this.element.classList.toggle("active");
-            console.log(this.knob.parentNode);
-            console.log("this.matrix",this.matrix)
+            this.span.classList.toggle("active-color");
         }
 
         get x() {
@@ -38,6 +40,7 @@ namespace `core.ui` (
             this.knob.style.transform = `
                 translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||this.matrix.m43}px)
             `;
+            this.toggleActive();
         }
 	}
 )

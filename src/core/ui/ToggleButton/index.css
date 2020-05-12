@@ -9,6 +9,7 @@ toggle-button {
     padding: 3px;
     perspective: 3000px;
     transition: all .2s ease-out;
+    transition-delay: .1s;
 }
 
 toggle-button .knob {
@@ -22,4 +23,8 @@ toggle-button .knob {
 
 .active{
     background: #55b982 !important;
+}
+
+.active-color{
+    color: #333 !important;
 }
