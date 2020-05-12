@@ -21,6 +21,7 @@ import 'src/core/extensions/Window.js';
 import 'src/core/lang/Class.js';
 import 'src/w3c/ui/WebComponent.js';
 import 'src/w3c/ui/Application.js';
+import 'src/w3c/ui/RoutableApplication.js';
 import 'src/core/ui/World.js';
 
 //--------BOOTLOADER---------

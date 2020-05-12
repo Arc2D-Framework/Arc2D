@@ -1,0 +1,45 @@
+
+html, body, .NotificationsApp {
+    height: 100%;
+    padding: 0;
+    display: block;
+    box-sizing:border-box;
+    width: 600px;
+    margin: auto;
+}
+
+.NotificationsApp{
+    background: #fff;
+}
+
+.NotificationsApp #container{
+    width: auto;
+    height: 100%;
+    align-items: center;
+    padding: 20px 40px 0 40px;
+    transition: all .2s ease-out;
+}
+
+.NotificationsApp #container #bottom-content{
+    height: auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.NotificationsApp #container #bottom-content notifications-toggle-switch{
+    width: 40px !important;
+    height: 20px !important;
+}
+
+.NotificationsApp #container #bottom-content notifications-toggle-switch div.knob{
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.NotificationsApp #container #bottom-content notifications-toggle-switch span#nameSlot{
+    font-size: 13px !important;
+    margin:0 !important;
+    left: 55px !important;
+    width: 100%;
+    min-width: 130px;
+    top:2px !important;
+}

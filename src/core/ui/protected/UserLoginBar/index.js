@@ -9,6 +9,7 @@ namespace `core.ui.protected` (
 
         async onConnected(user){//protected components get user session when connected to DOM
             await this.render(user)//renders template
+            console.log("USER", user);
         }
 
         onRequestLogin(){
