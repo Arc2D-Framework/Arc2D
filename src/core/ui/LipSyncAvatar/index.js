@@ -29,7 +29,7 @@ namespace `core.ui` (
                     utterThis.voice = voices[i];
                 }
             }
-            utterThis.lang = "zh-CN"
+            utterThis.lang = "en-US";
             utterThis.pitch = 2.9;// * (text.length * 0.3);
             utterThis.rate = 1;
             this.synth.speak(utterThis);

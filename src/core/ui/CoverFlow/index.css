@@ -62,6 +62,7 @@
     width: 10px;
     color: black;
     font-size: 41px;
+    z-index:1000;
 }
 
 .CoverFlow #move-right-btn{

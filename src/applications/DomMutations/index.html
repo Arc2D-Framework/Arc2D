@@ -12,18 +12,20 @@
 
 
         <!--====================== WEBCOMPONENTS POLYFILL ===================-->
-            <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js"></script>
-            <script src="../../../-appconfig.js" charset="utf-8"></script> 
+           <!--  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-loader.js"></script> -->
+            <!-- <script src="../../../-appconfig.js" charset="utf-8"></script>  -->
             <script src="../../../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <!--=========================== END INSTALL =========================-->
     </head>
 
 
-    <body>
-        <my-app>
-            <div slot="screen">tt <div>test</div></div>
-            <div slot="screen" class="flyout">screend 2</div>
-        </my-app>
+    <body namespace="applications.DomMutations">
+        <dom-mutations>
+            <template>
+                <div slot="screen">tt <div>test</div></div>
+                <div slot="screen" class="flyout">screend 2</div>
+            </template>
+        </dom-mutations>
     </body>
 
 </html>

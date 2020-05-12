@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
+            style-src   'self' 'unsafe-inline' *">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Cocoon Framework</title>
+
+       
+        <!-- <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.3.0/webcomponents-loader.js"></script> -->
+        <!-- <script src="-appconfig.js" charset="utf-8"></script> -->
+
+        <script src="src/libs/game/two/two.min.js"></script>
+        <!-- <script src="src/libs/game/sat/Collisions.mjs" type="module"></script> -->
+        <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+    </head>
+
+    <body namespace="applications.SatCollision">
+        <sat-collision>
+            <template>
+                <div>
+                    <div><b>W, S</b> - Accelerate/Decelerate</div>
+                    <div><b>A, D</b> - Turn</div>
+                    <div><label><input id="bvh" type="checkbox"/> Show Bounding Volume Hierarchy</label></div>
+                    <canvas id="canvas1" width="800" height="600"></canvas>
+                </div>
+            </template>
+        </sat-collision>
+    </body>
+</html>

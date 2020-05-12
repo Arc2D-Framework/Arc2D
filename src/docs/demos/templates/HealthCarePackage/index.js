@@ -7,7 +7,7 @@ namespace `docs.demos.templates` (
             return window.customTemplateEngines.getEngineByMimeType("template/nunjucks")
         }
         
-		onConnected(){
+		async onConnected(){
 			var family = {
 		        husband: "Joe",
 		        spouse : "Anna",
@@ -24,7 +24,7 @@ namespace `docs.demos.templates` (
 		        }
 		    };
 
-			this.render(family)
+			await this.render(family)
 		}
 	}
 )

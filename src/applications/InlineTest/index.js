@@ -1,3 +1,4 @@
+import 'core.ui.CoverFlow';
 
 namespace `applications` (
     class InlineTest extends w3c.ui.Application {
