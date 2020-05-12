@@ -32,6 +32,7 @@ namespace `core.ui` (
         toggleActive(){
             this.classList.toggle("active");
             this.nameSlot.classList.toggle("active-color");
+            this.dispatchEvent("toggleit",{toggleState:this.classList.contains("active")})
         }
 
         get x() {
