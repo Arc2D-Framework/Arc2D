@@ -1,0 +1,32 @@
+
+html, body, .NotificationsApp {
+    height: 100%;
+    padding: 0;
+    display: block;
+    box-sizing:border-box;
+    width: 600px;
+    margin: auto;
+}
+
+.NotificationsApp{
+    background: #fff;
+}
+
+.NotificationsApp #container{
+	width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0 0 10px;
+}
+
+.NotificationsApp #container toggle-button,
+.NotificationsApp #container span{
+    flex: 0 1 auto;
+}
+
+.NotificationsApp #container span{
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    margin-left: 15px;
+}
