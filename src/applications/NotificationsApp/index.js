@@ -19,7 +19,7 @@ namespace `applications` (
             if(!e.data.toggleState){
                 this.allToggleSwitches.forEach(node => {
                     if(node.classList.contains("active")){
-                        node.toggleOff();
+                        node.onReset();
                     }
                 })
             }

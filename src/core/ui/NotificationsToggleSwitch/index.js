@@ -5,11 +5,12 @@ namespace `core.ui` (
             
             this.knob = this.querySelector(".knob");
             this.direction = -1;
-            this.addEventListener("click", e => this.toggleOn(e), false, "notifications-toggle-switch");
+            this.addEventListener("click", e => this.onHandleToggleClick(e), false, "notifications-toggle-switch");
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
             this.nameSlot = this.querySelector("span#nameSlot");
 
             this.setSlotText();
+            this.onReset = this.onHandleToggleClick;
         }
 
         setSlotText(){
@@ -24,19 +25,15 @@ namespace `core.ui` (
             this.matrix = matrix;
         }
 
-        toggleOn(){
-            if(this.direction == 1){
-                this.toggleOff();
-            }else{
-                this.direction = 1;
-                this.onRender();
-            }
-        }
-
-        toggleOff(){
-            this.direction = 1 - 1;
+        onHandleToggleClick(){
+            this.direction == 1 ? this.direction = 1 - 1 : this.direction = 1;
             this.onRender();
         }
+
+        // toggleOff(){
+        //     this.direction = 1 - 1;
+        //     this.onRender();
+        // }
 
         toggleActive(){
             this.classList.toggle("active");
