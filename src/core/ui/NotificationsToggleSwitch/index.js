@@ -2,10 +2,10 @@ namespace `core.ui` (
 	class NotificationsToggleSwitch  extends w3c.ui.WebComponent  {
 		async onConnected(){
             await super.onConnected();
-
+            
             this.knob = this.querySelector(".knob");
             this.direction = -1;
-            this.addEventListener("click", e => this.onClick(e), false);
+            this.addEventListener("click", e => this.toggleOn(e), false, "notifications-toggle-switch");
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
             this.nameSlot = this.querySelector("span#nameSlot");
 
@@ -24,8 +24,17 @@ namespace `core.ui` (
             this.matrix = matrix;
         }
 
-        onClick(){
-            this.direction *= -1;
+        toggleOn(){
+            if(this.direction == 1){
+                this.toggleOff();
+            }else{
+                this.direction = 1;
+                this.onRender();
+            }
+        }
+
+        toggleOff(){
+            this.direction = 1 - 1;
             this.onRender();
         }
 

@@ -11,7 +11,6 @@ namespace `applications` (
             this.addEventListener("toggleit", (e) => this.toggleContent(e), false, "#main-toggle");
             this.bottomContent = this.querySelector("#bottom-content");
             this.allToggleSwitches = Array.from(this.querySelectorAll("notifications-toggle-switch"));
-            this.allToggleSwitches.shift(); // excludes main toggle
         }
 
         toggleContent(e){
@@ -20,7 +19,7 @@ namespace `applications` (
             if(!e.data.toggleState){
                 this.allToggleSwitches.forEach(node => {
                     if(node.classList.contains("active")){
-                        node.onClick();
+                        node.toggleOff();
                     }
                 })
             }

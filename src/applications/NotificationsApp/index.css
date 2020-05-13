@@ -1,10 +1,9 @@
-
 html, body, .NotificationsApp {
     height: 100%;
     padding: 0;
     display: block;
     box-sizing:border-box;
-    width: 600px;
+    max-width: 600px;
     margin: auto;
 }
 
@@ -17,6 +16,9 @@ html, body, .NotificationsApp {
     height: 100%;
     align-items: center;
     padding: 20px 40px 0 40px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #d3d3d3 #fff;
 }
 
 .NotificationsApp #container #bottom-content{
@@ -48,5 +50,26 @@ html, body, .NotificationsApp {
 .show{
     visibility: visible !important;
     opacity: 1 !important;
-    /* transition: all .5s; */
+}
+
+@media screen and (min-width:360px) and (max-width:414px){
+    .NotificationsApp #container #bottom-content .row{
+        margin-right: -45px;
+    }
+
+    .NotificationsApp #container #bottom-content notifications-toggle-switch{
+        width: 30px !important;
+        height: 10px !important;
+    }
+
+    .NotificationsApp #container #bottom-content notifications-toggle-switch div.knob{
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    .NotificationsApp #container #bottom-content notifications-toggle-switch span#nameSlot{
+        font-size: 11px !important;
+        left: 45px !important;
+        top: 0px !important;
+    }
 }
