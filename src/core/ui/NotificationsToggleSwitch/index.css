@@ -11,6 +11,7 @@ notifications-toggle-switch {
     transition: all .3s ease-out;
     transition-delay: .2s;
     position: relative;
+    cursor: pointer;
 }
 
 notifications-toggle-switch .knob {

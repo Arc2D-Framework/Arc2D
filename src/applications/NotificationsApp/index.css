@@ -58,18 +58,19 @@ html, body, .NotificationsApp {
     }
 
     .NotificationsApp #container #bottom-content notifications-toggle-switch{
-        width: 30px !important;
-        height: 10px !important;
+        width: 35px !important;
+        height: 15px !important;
     }
 
     .NotificationsApp #container #bottom-content notifications-toggle-switch div.knob{
-        width: 10px !important;
-        height: 10px !important;
+        width: 15px !important;
+        height: 15px !important;
     }
 
     .NotificationsApp #container #bottom-content notifications-toggle-switch span#nameSlot{
-        font-size: 11px !important;
-        left: 45px !important;
-        top: 0px !important;
+        font-size: 12px !important;
+        left: 48px !important;
+        top: 1px !important;
+        letter-spacing: -0.5px;
     }
 }
