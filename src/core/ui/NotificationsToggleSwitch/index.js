@@ -26,14 +26,9 @@ namespace `core.ui` (
         }
 
         onHandleToggleClick(){
-            this.direction == 1 ? this.direction = 1 - 1 : this.direction = 1;
+            this.direction == 1 ? this.direction = 0 : this.direction = 1;
             this.onRender();
         }
-
-        // toggleOff(){
-        //     this.direction = 1 - 1;
-        //     this.onRender();
-        // }
 
         toggleActive(){
             this.classList.toggle("active");

@@ -21,7 +21,7 @@ namespace `applications` (
                     if(node.classList.contains("active")){
                         node.onReset();
                     }
-                })
+                });
             }
         }
     }
