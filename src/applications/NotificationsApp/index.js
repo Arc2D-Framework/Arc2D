@@ -1,3 +1,4 @@
+import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
 import 'core.ui.NotificationsToggleSwitch';
 
 namespace `applications` (
@@ -6,8 +7,12 @@ namespace `applications` (
             super(element);
         }
 
+        getTemplateEngine() {
+            return window.customTemplateEngines.getEngineByMimeType("template/nunjucks")
+        }
+
         async onConnected() {
-            await super.onConnected();
+            await super.onConnected({items: ["News Feeds", "Likes and Comments", "Live Stream", "Upcoming Events", "Friend Requests", "Nearby Friends", "Birthdays", "Account Sign-In"]});
             this.addEventListener("toggleit", (e) => this.toggleContent(e), false, "#main-toggle");
             this.bottomContent = this.querySelector("#bottom-content");
             this.allToggleSwitches = Array.from(this.querySelectorAll("notifications-toggle-switch"));
