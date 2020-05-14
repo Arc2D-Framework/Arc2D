@@ -1,0 +1,229 @@
+/* ----------------------------------------------------------------------------
+    Typography
+---------------------------------------------------------------------------- */
+
+
+* {
+    -webkit-font-smoothing: antialiased !important;
+}
+
+body {
+    font-family: @font-family-base;
+    font-size: @font-size-base;
+    font-weight: @normal-weight;
+    color: @text-color;
+    line-height: 1.5625;
+}
+
+.highlight {
+    &:extend(.base-clr-txt);
+}
+
+.thin {
+    font-weight: @thin-weight;
+}
+
+.base-font {
+    font-family: @font-family-base;
+}
+
+.heading-font {
+    font-family: @font-family-heading;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: @font-size-h1;
+}
+
+h2 {
+    font-size: @font-size-h2;
+}
+
+h3 {
+    font-size: @font-size-h3;
+}
+
+h4 {
+    font-size: @font-size-h4;
+}
+
+h5 {
+    font-size: @font-size-h5;
+}
+
+h6 {
+    font-size: @font-size-h6;
+}
+
+.heading {
+    font-size: @font-size-base;
+}
+
+h1, h2, h3, h4, h5, h6, .heading {
+    display: block;
+    font-family: @font-family-heading;
+    line-height: 1.1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 15px;
+    font-weight: @thin-weight;
+}
+
+h6 {
+    margin: 20px 0 10px;
+}
+
+.heading {
+    margin: 0 0 10px;
+    font-weight: @normal-weight;
+}
+
+.sub-title {
+    margin-bottom: 20px;
+    font-weight: @thin-weight;
+
+    &,
+    &.alt {
+        font-family: @font-family-base;
+        font-size: @font-size-base;
+        line-height: 25px;
+    }
+
+    &.alt {
+        color: @gray-light;
+    }
+
+    &.big {
+        font-family: @font-family-heading;
+        font-size: @font-size-h5 - 1px;
+        line-height: 30px;
+    }
+}
+
+p {
+    margin: 0 0 10px;
+    line-height: 25px;
+}
+
+.sub-header {
+    margin-bottom: 30px;
+}
+
+strong {
+    font-family: @font-family-heading;
+    font-weight: @bold-weight;
+}
+
+small {
+    font-weight: @thin-weight;
+    font-size: @font-size-small + 1px;
+}
+
+a {
+    &:extend(.base-clr-txt);
+
+    .transition(~"color 0.2s ease");
+
+    text-decoration: none;
+
+    &:hover,
+    &:active,
+    &:focus {
+        text-decoration: none;
+        outline: none;
+        color: darken(@text-base-color, 10%);
+    }
+}
+
+span {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.light-text {
+    color: @text-white;
+
+    .sub-heading {
+        color: @text-white;
+    }
+
+    .fa {
+        color: inherit;
+    }
+}
+
+.dark-text {
+    color: @text-black;
+
+    .fa {
+        color: inherit;
+    }
+}
+
+
+@media (max-width: @screen-sm-max) {
+    body {
+        font-size: @font-size-small;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    h1 {
+        font-size: @font-size-h1 * 0.5;
+    }
+
+    h2 {
+        font-size: @font-size-h2 * 0.6;
+    }
+
+    h3 {
+        font-size: @font-size-h3 * 0.7;
+    }
+
+    h4 {
+        font-size: @font-size-h4 * 0.7;
+    }
+
+    h5 {
+        font-size: @font-size-h5 * 0.8;
+    }
+
+    h6 {
+        font-size: @font-size-h6 * 0.9;
+    }
+
+    .heading {
+        font-size: @font-size-base * 0.8;
+    }
+
+    .sub-title,
+    .sub-title.alt {
+        font-size: @font-size-small;
+    }
+
+    .sub-title,
+    .sub-title.big {
+        font-size: @font-size-base;
+    }
+}
