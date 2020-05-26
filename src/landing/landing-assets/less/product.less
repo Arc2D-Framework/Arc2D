@@ -1,0 +1,221 @@
+/* ----------------------------------------------------------------------------
+    Product Page
+---------------------------------------------------------------------------- */
+
+
+.product-page .product {
+    .clearfix();
+
+    padding-bottom: 130px;
+
+    .product-buy {
+        padding-left: 25px;
+        padding-right: 25px;
+
+        .icon {
+            vertical-align: top;
+            margin: 1px 10px 0 0;
+            display: inline-block;
+            line-height: 14px;
+            color: inherit;
+        }
+    }
+}
+
+.product-slider {
+    padding-bottom: 40px;
+
+    .bx-wrapper {
+        position: relative;
+        padding-bottom: 17px;
+    }
+
+    .bx-controls {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin-top: -55px;
+        height: 0;
+    }
+
+    .bx-controls-direction a {
+        .transition(~"background 0.2s ease, opacity 0.2s ease");
+
+        display: block;
+        width: 90px;
+        height: 110px;
+        text-align: center;
+        background-color: fade(@white, 80%);
+
+        &:hover {
+            &:extend(.base-clr-bg);
+        }
+
+        &:hover i {
+            color: @text-white;
+        }
+
+        &.bx-prev {
+            float: left;
+            padding-right: 5px;
+        }
+
+        &.bx-next {
+            float: right;
+            padding-left: 5px;
+        }
+
+        i {
+            .transition(~"color 0.2s ease");
+
+            vertical-align: top;
+            display: inline-block;
+            line-height: 110px;
+            width: 100%;
+            font-size: 38px;
+            text-align: center;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+.product-slider .product-image-wrapper .bx-wrapper {
+    &:hover .bx-controls-direction a {
+        opacity: 1;
+    }
+
+    .bx-controls-direction a {
+        opacity: 0;
+    }
+}
+
+.product-slider .product-thumb-wrapper {
+    .bx-wrapper {
+        max-width: 100% !important;
+        padding: 0 60px;
+    }
+
+    .bx-viewport {
+        z-index: 1;
+    }
+
+    .bx-viewport .product-thumb {
+        .transition(~"opacity 0.2s ease");
+
+        padding: 0;
+        font-size: 0;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.6;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .bx-controls {
+        top: 0;
+        bottom: 0;
+        margin: 0;
+        height: auto;
+        z-index: 0;
+    }
+
+    .bx-controls-direction a {
+        float: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 51px;
+        height: 100%;
+
+        &.bx-prev {
+            left: 0;
+
+            i {
+                margin-left: -9px;
+            }
+        }
+
+        &.bx-next {
+            right: 0;
+
+            i {
+                margin-left: -5px;
+            }
+        }
+
+        i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -19px 0 0;
+            width: auto;
+            line-height: 1;
+        }
+    }
+}
+
+
+
+@media (max-width: @grid-float-breakpoint-max) {
+    .product-slider .product-image-wrapper .bx-wrapper .bx-controls-direction a {
+        opacity: 1;
+    }
+}
+
+
+// Small devices
+
+@media (max-width: @screen-sm-max) {
+    .product-page .product .product-buy {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+
+// Extra small devices
+
+@media (max-width: @screen-xs-max) {
+    .product-page .product .product-buy {
+        margin: 70px auto 0;
+        max-width: 300px;
+    }
+
+    .product-slider {
+        .bx-controls {
+            margin-top: -30px;
+        }
+
+        .bx-controls-direction a {
+            width: 40px;
+            height: 60px;
+
+            i {
+                line-height: 60px;
+            }
+        }
+
+        .product-thumb-wrapper {
+            .bx-wrapper {
+                padding: 0 30px;
+            }
+
+            .bx-viewport .product-thumb {
+                width: 60px !important;
+            }
+
+            .bx-controls-direction a {
+                width: 25px;
+            }
+        }
+    }
+}
