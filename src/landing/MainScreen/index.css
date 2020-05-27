@@ -53,6 +53,10 @@ html, body, .MainScreen {
     font-weight: 300 !important;
 }
 
+.MainScreen #first-tab-alt .section-content div:nth-of-type(1){
+    margin-top: 40px;
+}
+
 .MainScreen #newsletter .mailchimp-form div.form-group{
     display: flex;
 }
