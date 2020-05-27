@@ -29,13 +29,6 @@ namespace `applications` (
 
         createPlayer(x, y) {
             const size = 15;
-
-            // this.player = this.collisions.createPolygon(x, y, [
-            //     [-20, -10],
-            //     [20, -10],
-            //     [20, 10],
-            //     [-20, 10],
-            // ], 0.2);
             this.player = new Polygon(x, y, [
                 [-20, -10],
                 [20, -10],
@@ -44,7 +37,7 @@ namespace `applications` (
             ], 0.2);
 
             this.player.velocity = 0;
-            this.collisions.insert(this.player)
+            this.collisions.insert(this.player);
         }
 
         onUpdate(){

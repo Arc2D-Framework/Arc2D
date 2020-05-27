@@ -1,4 +1,4 @@
-import '/framework/src/core/http/Router.js'
+
 import 'docs.topics.LoaderActivity';
 import 'docs.components.TocMenu';
 import 'docs.components.LanguageSelector';

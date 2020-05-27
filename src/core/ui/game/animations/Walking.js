@@ -31,7 +31,7 @@ namespace `core.ui.game.animations` (
 				this.isAnimating=true;
 				this.walk(delta)
 			} 
-			else if (Key.isDown(Key.LEFT)) {
+			else if (Key.isDown(Key.LEFT) && this.sprite.canWalk()) {
 				this.dir=-1;
 				this.start()
 				this.isAnimating=true;

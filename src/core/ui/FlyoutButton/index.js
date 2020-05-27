@@ -23,17 +23,21 @@ namespace `core.ui` (
             else {
                 this.hide();
             }
+
         }
 
         hide(){
             this.classList.remove("open");
             this.removeAttribute("data-name");
+            this.style.backgroundColor = "transparent";
+            this.dispatchEvent("toggled")
         }
 
         toggle(){
             this.classList.toggle("open");
             this.setAttribute("data-name","test");
-            this.dispatchEvent("toggled")
+            this.dispatchEvent("toggled");
+            this.style.backgroundColor = "green";
         }
     }
 );

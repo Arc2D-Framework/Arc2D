@@ -1,0 +1,39 @@
+<template>
+    <div>
+        <div class="title">
+            Recordings
+          <span class="icons-try">
+            <i class="fa fa-pencil title-pane-icon"></i>
+            <i class="fa fa-refresh title-pane-icon"></i>
+          </span>
+        </div>
+        <div id="files" style="padding: 9px;">
+            <ul style="margin: 0;padding: 0;">
+                {% for item in items %}
+                    <li role="treeitem" data-id="{{item.recid}}" draggable="true">
+                      <!-- <span class="event-type">{{item.event_type}}</span> -->
+                      {% if item.global%}
+                        <span class="event-type share-level global">global<!-- :{{item.event_type}} --></span>
+                        {% else %}
+                        <span class="event-type share-level local">local<!-- :{{item.event_type}} --></span>
+                      {% endif %}
+                      <span class="fa fa-play-circle"></span>
+                      <span class="label">
+                        {{item.name}}
+                      </span>
+                      <i class="fa fa-close" style="float:right;"></i>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</template>
+
+
+<!-- 
+"wire_name" : "Do Search",
+            "trigger_id" : "trigger_test", 
+            "event_type" : "click", 
+            "command_type" : "function", 
+            "command" : "alert(e); e.preventDefault(); e.stopPropagation();", 
+            "args" : { "url" : "page2.html", "track":true }  -->

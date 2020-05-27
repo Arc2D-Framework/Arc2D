@@ -1,0 +1,22 @@
+.WiringExplorer [role="treeitem"]{
+    line-height: 20px;
+    padding: 3px;
+    border-bottom: 1px solid #3a3a3a;
+    padding-bottom: 5px;
+    width:auto;
+}
+.WiringExplorer [role="treeitem"]:hover {
+    background: #3a3a3a;
+    color:white;
+}
+
+.WiringExplorer [role="treeitem"] span{
+    display: inline-block;
+    width: auto;
+}
+
+.WiringExplorer [role="treeitem"] .fa{
+    margin-right: 0;
+    margin-top: 4px;
+}
+

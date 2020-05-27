@@ -6,6 +6,7 @@ namespace `applications` (
     class StickMan extends core.ui.World {
         onConnected() {
             this.render();
+            this.direction = 1;
    //          var thread = new core.lang.Thread(function(e){
    //          	console.log(e.data)
    //          	postMessage('msg from worker:' + e.data);
@@ -19,7 +20,7 @@ namespace `applications` (
             this.canvas = document.getElementById("canvas");
 			this.canvas.width = window.innerWidth;
 			this.canvas.height = window.innerHeight;
-			var config = { alpha: false };
+			var config = { alpha: true };
 			this.gl = this.canvas.getContext("webgl", config) || this.canvas.getContext("experimental-webgl", config);
 			if (!this.gl) {
 				alert('WebGL is unavailable.');
@@ -49,12 +50,14 @@ namespace `applications` (
 			this.assetManager.loadText("resources/spine/stickman.json");
 			this.assetManager.loadTextureAtlas("resources/spine/stickman.atlas");
 			this.load();
+
         }
 
 
-        onUpdate(delta){
+        async onUpdate(delta){
         	if(this.loading_complete){
 	        	if (Key.isDown(Key.RIGHT)) {
+	        		this.direction=1;
 	        		if(!this.isWalking){
 	        			this.idle=false;
 	        			this.animationState.setAnimation(0, "2_Sword/run", true);
@@ -62,14 +65,72 @@ namespace `applications` (
 	        		}
 	        		var sprite = this.skeletons["stickman"];
 	        		var skeleton 	= sprite.skeleton;
-	        			skeleton.velocity += .0005;
-	        		skeleton.x += skeleton.velocity;
+	        			// skeleton.velocity += .0005;
+	        		skeleton.x += skeleton.velocity * this.direction;
+	        		skeleton.scaleX = this.direction;
 	        		console.log("x",skeleton.x)
 
 	        	}
-	        	else  {
-	        		this.isWalking=false;
+	        	// else  {
+	        	// 	this.isWalking=false;
+	        	// 	this.animationState.setAnimation(0, "1_/idle", true);
+	        	// 		this.idle=true;
+
+	        	// }
+	        	
+	        	if (Key.isDown(Key.LEFT)) {
+	        		this.direction=-1;
+	        		if(!this.isWalking){
+	        			this.idle=false;
+	        			this.animationState.setAnimation(0, "2_Sword/run", true);
+	        			this.isWalking=true;
+	        		}
+	        		var sprite = this.skeletons["stickman"];
+	        		var skeleton 	= sprite.skeleton;
+	        			// skeleton.velocity += .0005;
+	        			skeleton.scaleX = this.direction;
+	        		skeleton.x += skeleton.velocity * this.direction;
+	        		console.log("x",skeleton.x)
+
 	        	}
+	        	if (Key.isDown(Key.UP)) {
+	        		if(this.isjumping){return}
+	        		// // this.direction=-1;
+	        		// if(!this.isWalking){
+	        			// this.idle=false;
+	        			// this.isWalking=false;
+	        		// 	this.animationState.setAnimation(0, "1_/jump A", true);
+	        		// 	this.isWalking=true;
+	        		// }
+	        		this.animationState.setAnimation(0, "2_Sword/jump B", true);
+	        		this.isjumping=true;
+	        		await wait(300);
+	        		this.isjumping=false;
+	        		this.animationState.setAnimation(0, "2_Sword/jump C", true);
+	        		await wait(300);
+	        		this.animationState.setAnimation(0, "2_Sword/jump D", true);
+	        		await wait(100);
+	        		this.animationState.setAnimation(0, "2_Sword/run", true);
+	        		// var sprite = this.skeletons["stickman"];
+	        		// var skeleton 	= sprite.skeleton;
+	        			// skeleton.velocity += .0005;
+	        			// skeleton.scaleX = this.direction;
+	        		// skeleton.x += skeleton.velocity * this.direction;
+	        		// console.log("x",skeleton.x)
+
+	        	}
+
+	        	if (Key.isDown(Key.D)) {
+	        		this.animationState.setAnimation(0, "2_Sword/slash", false);
+	        		await wait(300);
+	        		this.animationState.setAnimation(0, "2_Sword/idle fight pose", true);
+	        	}
+	        	// else  {
+	        	// 	this.isWalking=false;
+	        	// 	this.animationState.setAnimation(0, "1_/idle", true);
+	        	// 		this.idle=true;
+
+	        	// }
 
 	        	if(!this.isWalking){
 	        		if(!this.idle){
@@ -83,7 +144,7 @@ namespace `applications` (
         onDraw(interpolation){
 
         	if(this.loading_complete){
-        		this.gl.clearColor(0.3, 0.3, 0.3, 1);
+        		this.gl.clearColor(0, 0, 0, 0);
 				this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 
 				// Apply the animation state based on the delta time.
@@ -150,9 +211,16 @@ namespace `applications` (
 			var animationStateData = new spine.AnimationStateData(skeleton.data);
 			var animationState = new spine.AnimationState(animationStateData);
 			if (name == "stickman") {
-				animationStateData.setMix("1_/idle", "1_/run", 0.05);
-				animationStateData.setMix("1_/run", "1_/idle", 0.5);
-				// animationStateData.setMix("jump", "run", 0.25);
+				animationStateData.setMix("1_/idle", "2_Sword/run", 0.05);
+				animationStateData.setMix("2_Sword/run", "1_/idle", 0.5);
+				animationStateData.setMix("2_Sword/run", "2_Sword/jump B", 0.05);
+				animationStateData.setMix("2_Sword/jump B", "1_/idle", 0.25);
+				animationStateData.setMix("2_Sword/jump B", "2_Sword/jump C", 0.25);
+				animationStateData.setMix("2_Sword/jump C", "2_Sword/jump D", 0.25);
+				animationStateData.setMix("2_Sword/jump D", "1_/run", 0.25);
+				animationStateData.setMix("2_Sword/idle fight pose", "1_/run", 0.25);
+				animationStateData.setMix("2_Sword/idle fight pose", "2_Sword/run", 0.25);
+				animationStateData.setMix("1_/run", "2_Sword/idle fight pose", 0.25);
 				// animationStateData.setMix("walk", "shoot", 0);
 				this.animationState=animationState;
 				this.animationStateData = animationStateData;

@@ -6,7 +6,6 @@ namespace `applications` (
             await super.onConnected();
             this.addEventListener("click", e=> this.onClick(e))
             this.addEventListener("click", e=> this.onTestClick(e), false, "#test");
-            alert(this.querySelector("#test"))
         }
 
         onClick(e){

@@ -1,0 +1,27 @@
+<template>
+    <div>
+        <div class="form-row">
+            <!-- <div class="form-holder full">
+                <input oninput="this.setCustomValidity('')" validation-message="Enter namespace of screen" required="true" id="app_namespace" type="text" placeholder="Namespace" class="form-control"/>
+            </div> -->
+            <div class="form-holder" style="margin: auto;">
+                <select oninput="this.setCustomValidity('')" validation-message="A screen selection is required" required="true" id="screen_namespace" type="text" placeholder="Handler Type" class="form-control">
+                    {% for item in children %}
+                        <option value="{{item.name}}">{{item.name}}</option>
+                    {% endfor %}
+                    <!-- <option value="Function">Function</option>
+                    <option value="Recording">Recording</option>
+                    <option value="Redirect">Redirect</option>
+                    <option value="Show">Show</option>
+                    <option value="Hide">Hide</option>
+                    <option value="Guided Tour">Guided Tour</option>
+                    <option value="Notification">Notification</option>
+                    <option value="Audio">Audio</option>
+                    <option value="Video">Video</option>
+                    <option value="Logout">Logout</option>
+                    <option value="Login">Login</option> -->
+                </select>
+            </div>
+        </div>
+    </div>
+</template>

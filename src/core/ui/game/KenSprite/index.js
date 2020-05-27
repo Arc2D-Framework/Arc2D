@@ -46,6 +46,8 @@ namespace `core.ui.game` (
             this.walk.update(delta);
             this.kneel.update(delta);
             this.jump.update(delta);
+            this.hadoken.update(delta);
+            this.shoryuken.update();
             /*if (Key.isDown(Key.RIGHT)) {
                 Key.isDown(Key.DOWN) ? (
                     this.walk.stop(), 

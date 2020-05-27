@@ -8,11 +8,14 @@ document.addEventListener("DOMContentLoaded", e => {
         ns = ns||Config.NAMESPACE;
     if (Config.DYNAMICLOAD) {
       var filename_path = Config.SRC_PATH + (ns.replace(/\./g, "/"))  + "/" + Config.FILENAME;
-      var path = filename_path.replace("*", Config.USE_COMPRESSED_BUILD ? "min.":"");
+      var path = Config.USE_COMPRESSED_BUILD ? 
+        filename_path.replace("*", Config.DEBUG ? "src.":""):
+        filename_path.replace("*", "min.");
       var c = (Config.ENABLE_TRANSPILER) ?
         new core.http.ClassLoader :
         new core.http.ModuleLoader;
         c.load(ns, Config.ROOTPATH + path, res => {
+          Config.USE_COMPRESSED_BUILD=false;
           var app = window.application = (
             window.application||new NSRegistry[ns](document.body)
           );

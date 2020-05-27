@@ -7,7 +7,8 @@ var Config = window.Config||{
     DYNAMICLOAD:true,
     FILENAME:"index.*js",
     ENABLE_TRANSPILER : true,
-    NAMESPACE : null
+    NAMESPACE : null,
+    DEBUG:true
 };
 
 

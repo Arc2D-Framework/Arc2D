@@ -1,0 +1,273 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	display: block;
+	font-family: verdana;
+	position: relative;
+}
+
+body > .canvas {
+	width: 100%;
+	height: 100%;
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
+}
+
+object, embed { 
+  outline: 0;
+}
+a:hover, a:active, a:focus,
+select, select:focus, select:active {
+  outline:0;
+}
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+[draggable] {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+[draggable=true] {
+	-khtml-user-drag: element;
+}
+
+input {
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-o-user-select: text;
+	user-select: text;
+}
+
+.ModalOverlay {
+	opacity: .7;
+	z-index: 2000;
+	display: none;
+	background-color: black;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+}
+
+/*improved clearfix -> http://css-tricks.com/snippets/css/clear-fix/*/
+.group:before, .group:after {
+	content: "";
+	display: table;
+}
+.group:after {
+	clear: both;
+}
+.group {
+	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+/*end .group declaration*/
+
+
+
+#global-application-spinner {
+	font-size: 60px;
+	left: 50%;
+	position: fixed;
+	top: 50%;
+	margin-left: -26px;
+    margin-top: -26px;
+	display: none;
+	z-index:1000000;
+	opacity:.4;
+	cursor: wait;
+}
+
+#global-application-spinner.active {
+	transform-origin: 50% 50%;
+  	-o-transform-origin:50% 50%;
+  	-ms-transform-origin:50% 50%;
+  	-moz-transform-origin:50% 50%;
+  	-webkit-transform-origin:50% 50%;
+    
+    -webkit-animation: rotate 700ms infinite linear;
+    -moz-animation: rotate 700ms infinite linear;
+    -ms-animation: rotate 700ms infinite linear;
+    -o-animation: rotate 700ms infinite linear;
+    animation: rotate 700ms infinite linear;
+    display:block;
+}
+
+
+@-o-keyframes rotate {
+  from {-o-transform:rotate(0deg);}
+  to {-o-transform:rotate(360deg);}
+}
+@-moz-keyframes rotate {
+  from {-moz-transform:rotate(0deg);}
+  to {-moz-transform:rotate(360deg);}
+}
+@-ms-keyframes rotate {
+  from {-ms-transform:rotate(0deg);}
+  to {-ms-transform:rotate(360deg);}
+}
+@-webkit-keyframes rotate {
+  from {-webkit-transform:rotate(0deg);}
+  to {-webkit-transform:rotate(360deg);}
+}
+@-keyframes rotate {
+  from { transform:rotate(0deg);}
+  to { transform:rotate(360deg);}
+}
+
+
+.bubblingG {
+	text-align: center;
+	width: 80px;
+	height: 50px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -40px;
+	margin-top: -25px;
+	z-index: 1000;
+}
+
+.bubblingG span {
+	display: inline-block;
+	vertical-align: middle;
+	width: 10px;
+	height: 10px;
+	margin: 25px auto;
+	background: #000000;
+	-moz-border-radius: 50px;
+	-moz-animation: bubblingG 0.8s infinite alternate;
+	-webkit-border-radius: 50px;
+	-webkit-animation: bubblingG 0.8s infinite alternate;
+	-ms-border-radius: 50px;
+	-ms-animation: bubblingG 0.8s infinite alternate;
+	-o-border-radius: 50px;
+	-o-animation: bubblingG 0.8s infinite alternate;
+	border-radius: 50px;
+	animation: bubblingG 0.8s infinite alternate;
+}
+
+#bubblingG_1 {
+	-moz-animation-delay: 0s;
+	-webkit-animation-delay: 0s;
+	-ms-animation-delay: 0s;
+	-o-animation-delay: 0s;
+	animation-delay: 0s;
+}
+
+#bubblingG_2 {
+	-moz-animation-delay: 0.24s;
+	-webkit-animation-delay: 0.24s;
+	-ms-animation-delay: 0.24s;
+	-o-animation-delay: 0.24s;
+	animation-delay: 0.24s;
+}
+
+#bubblingG_3 {
+	-moz-animation-delay: 0.48s;
+	-webkit-animation-delay: 0.48s;
+	-ms-animation-delay: 0.48s;
+	-o-animation-delay: 0.48s;
+	animation-delay: 0.48s;
+}
+
+@-moz-keyframes bubblingG {
+0% {
+width: 10px;
+height: 10px;
+background-color:#000000;
+-moz-transform: translateY(0);
+}
+
+100% {
+width: 24px;
+height: 24px;
+background-color:#FFFFFF;
+-moz-transform: translateY(-21px);
+}
+
+}
+
+@-webkit-keyframes bubblingG {
+0% {
+width: 10px;
+height: 10px;
+background-color:#000000;
+-webkit-transform: translateY(0);
+}
+
+100% {
+width: 24px;
+height: 24px;
+background-color:#FFFFFF;
+-webkit-transform: translateY(-21px);
+}
+
+}
+
+@-ms-keyframes bubblingG {
+0% {
+width: 10px;
+height: 10px;
+background-color:#000000;
+-ms-transform: translateY(0);
+}
+
+100% {
+width: 24px;
+height: 24px;
+background-color:#FFFFFF;
+-ms-transform: translateY(-21px);
+}
+
+}
+
+@-o-keyframes bubblingG {
+0% {
+width: 10px;
+height: 10px;
+background-color:#000000;
+-o-transform: translateY(0);
+}
+
+100% {
+width: 24px;
+height: 24px;
+background-color:#FFFFFF;
+-o-transform: translateY(-21px);
+}
+
+}
+
+@keyframes bubblingG {
+0% {
+width: 10px;
+height: 10px;
+background-color:#000000;
+transform: translateY(0);
+}
+
+100% {
+width: 24px;
+height: 24px;
+background-color:#FFFFFF;
+transform: translateY(-21px);
+}
+
+}
