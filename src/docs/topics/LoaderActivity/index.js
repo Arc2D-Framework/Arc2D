@@ -5,6 +5,8 @@ namespace `docs.topics` (
             super();
         }
 
+        onLoadInstanceStylesheet(){return false}//no .css file to load
+
         fade(){
         	setTimeout(_=> this.classList.add("fade"), 2000);
         }

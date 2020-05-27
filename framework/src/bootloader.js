@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", e => {
     if (Config.DYNAMICLOAD) {
       var filename_path = Config.SRC_PATH + (ns.replace(/\./g, "/"))  + "/" + Config.FILENAME;
       var path = Config.USE_COMPRESSED_BUILD ? 
-        filename_path.replace("*", Config.DEBUG ? "src.":""):
-        filename_path.replace("*", "min.");
+        filename_path.replace("*", Config.DEBUG ? "src.":"min."):
+        filename_path.replace("*","");
       var c = (Config.ENABLE_TRANSPILER) ?
         new core.http.ClassLoader :
         new core.http.ModuleLoader;
