@@ -1,0 +1,35 @@
+/* ----------------------------------------------------------------------------
+    Thumbnails
+---------------------------------------------------------------------------- */
+
+
+.thumb-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+
+    .overlay {
+        &:extend(.base-clr-bg);
+
+        .transition(~"transform 0.3s ease");
+
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        padding: 15px;
+        font-size: @font-size-large;
+        font-weight: @thin-weight;
+        text-align: center;
+        vertical-align: middle;
+        color: @text-white;
+        opacity: 0.5;
+        z-index: 1;
+        cursor: url('@{img-path}/magnify-cur.png') 20 20, auto;
+    }
+
+    &:hover .overlay {
+        top: 0;
+    }
+}

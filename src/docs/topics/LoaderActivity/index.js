@@ -6,7 +6,7 @@ namespace `docs.topics` (
         }
 
         fade(){
-        	setTimeout(_=> this.classList.add("fade"), 2300);
+        	setTimeout(_=> this.classList.add("fade"), 2000);
         }
 
         onTransitionEnded(e){
@@ -158,6 +158,7 @@ namespace `docs.topics` (
 			/* Stage and link styles */
 
 			.LoaderActivity .container {
+			  width: auto !important;
 			  position: absolute;
 			  top: 50%;
 			  left: 50%;

@@ -1,0 +1,27 @@
+/* ----------------------------------------------------------------------------
+    Text with icon
+---------------------------------------------------------------------------- */
+
+
+.icon-text {
+    position: relative;
+
+    &.icon-block-left {
+        .icon-block-text {
+            padding-left: 50px;
+        }
+
+        .icon-block-icon {
+            position: absolute;
+            top: 50%;
+            left: 0;
+
+            & > i {
+                margin-top: -0.5em;
+                width: 1em;
+                height: 1em;
+                font-size: 35px;
+            }
+        }
+    }
+}

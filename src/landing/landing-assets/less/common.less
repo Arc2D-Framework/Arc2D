@@ -1,0 +1,176 @@
+/* ----------------------------------------------------------------------------
+    Common styles
+---------------------------------------------------------------------------- */
+
+
+// Micro ClearFix Mixin
+
+.clearfix {
+    zoom:1;
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+body {
+    overflow-x: hidden;
+    min-height: 100px;
+
+    & > .container {
+        padding-top: 65px;
+    }
+}
+
+.base-clr-bd {
+    border-color: @base-color;
+}
+
+.base-clr-bg {
+    background-color: @base-color;
+}
+
+.base-clr-txt {
+    color: @text-base-color;
+}
+
+::selection {
+    color: @text-white;
+    background-color: @base-color;
+}
+
+::-moz-selection {
+    color: @text-white;
+    background-color: @base-color;
+}
+
+.fa,
+.icon {
+    &:extend(.base-clr-txt);
+}
+
+.bg-low-poly,
+div.bg-low-poly,
+footer.bg-low-poly,
+section.bg-low-poly {
+    background-image: url("@{img-path}background/low_poly_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+hr {
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: @gray-lighter;
+
+    &.no-margin {
+        margin: 0;
+    }
+}
+
+.visible {
+    opacity: 1;
+}
+
+.section {
+    position: relative;
+    min-height: 50px;
+    padding: 30px 0;
+}
+
+.icon,
+.fa {
+    line-height: 1;
+}
+
+blockquote {
+    position: relative;
+    margin: 0 1px;
+    display: block;
+    padding: 0 100px;
+    font-family: @font-family-heading;
+    font-size: @font-size-h6;
+    font-weight: @thin-weight;
+    text-align: center;
+    line-height: 1.6;
+    border: none;
+
+    &:before,
+    &:after {
+        &:extend(.base-clr-txt);
+
+        font-family: @font-family-icons-alt;
+        position: absolute;
+        top: 25%;
+    }
+
+    &:before {
+        left: 0;
+        content: url('../img/icon/quotes-a.png');
+    }
+
+    &:after {
+        right: 0;
+        content: url('../img/icon/quotes-b.png');
+    }
+}
+
+.logo-placeholder {
+    margin: 20px 10px;
+    display: inline-block;
+    font-family: @font-family-impact;
+    font-size: @font-size-h2;
+    color: fade(@text-white, 60%);
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.home-image {
+    &.notebook {
+        margin-top: 20px;
+    }
+
+    &.iPhone {
+        margin-top: -30px;
+
+        @media (max-width:1024px) {
+            margin-top: 30px;
+        }
+    }
+}
+
+.section .section-header {
+    margin: 30px 0 80px;
+}
+
+
+
+@media (max-width: @screen-sm-max) {
+    .wrapper {
+        width: 90%;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .wrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width: @screen-xs-min) {
+    blockquote {
+        padding: 0 35px;
+        font-size: @font-size-small;
+        line-height: 1.8;
+    }
+}
