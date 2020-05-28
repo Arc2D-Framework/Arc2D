@@ -1,1 +1,1 @@
-import 'plugins.ProjectExplorer';
+import 'src/plugins/ProjectExplorer/index.prefab.js';

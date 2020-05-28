@@ -13,10 +13,17 @@ BUILDCONFIG = {
     },
 
     // Output : {
+    //     SourcePath:"src/applications/InlineTest/index.src.js",
+    //     CompressedPath: "src/applications/InlineTest/index.min.js"
+    // },
+
+    // Output : {
     //  SourcePath:"node_modules/od-cocoon/framework.src.js",
     //  CompressedPath: "node_modules/od-cocoon/framework.min.js"
     // },
     
-    Verbos:true
+    Verbos:true,
+
+    Prefabs : true
 };
 module.exports = BUILDCONFIG;

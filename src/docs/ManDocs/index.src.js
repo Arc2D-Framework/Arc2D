@@ -176,6 +176,8 @@ namespace `docs.topics` (
     }
 );
 
+;(()=> {
+                
 
 namespace `docs.components` (
     class TocMenu extends w3c.ui.WebComponent {
@@ -242,6 +244,249 @@ namespace `docs.components` (
     }
 );
 
+
+
+                docs.components.TocMenu.prototype.template = function(){
+                    return `<template>
+	<div class="toc" style="margin-top:0;">
+        <ol>
+            <li class="expandable active expand">
+              <a href="#docs.topics.DocHome">Home</a>
+            </li> 
+            <li class="expandable">
+              <a href="#docs.topics.InstallFramework">Installation</a>
+              <ol>
+                <li><a href="#docs.topics.UpstreamRepo">Upstream Repo</a></li>
+                <li><a href="#docs.topics.PlopGenerator">Generator</a></li>
+                <li><a href="#docs.topics.BootServer">Booting a server</a></li>
+                <li><a href="#docs.topics.FrameworkUsage">Usage</a></li>
+              </ol>
+            </li> 
+            <li class="expandable">
+              <a href="javascript:void(null)">Getting Started</a>
+              <ol>
+                <li><a href="#docs.topics.HelloWorldGenerated">Hello World (generator)</a></li>
+                <li><a href="#docs.topics.HelloApplication">Hello World (manually)</a></li>
+
+                <!-- <li><a href="#docs.topics.TheDiv">The div element</a></li> -->
+                <!-- <li><a href="#docs.topics.CustomTags">Custom elements</a></li> -->
+                <!-- <li><a href="#docs.topics.HelloApplication">Applications</a></li> -->
+                <!-- <li><a href="#docs.topics.HelloApplication2">Applications pt. 2</a></li>
+                <li><a href="#docs.topics.LinkingApplications">Linking Applications</a></li> -->
+              </ol>
+            </li>   
+            <li class="expandable">
+              <a href="javascript:void(null)">Language & Syntax</a>
+              <ol>
+                <li><a href="#docs.topics.AboutClasses">Classes</a></li>
+                <li><a href="#docs.topics.JavascriptImports">Imports</a></li>
+                <li>
+                  <a href="#docs.topics.JavascriptNamespaces">Namespaces</a>
+                  <ol>
+                    <li><a href="#docs.topics.NamespaceRegistry">NSRegistry</a></li>
+                  </ol>
+                </li>
+                <li><a href="#docs.topics.JavascriptDecorators">Decorators</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Custom Decorators</a></li>
+                <li><a href="#docs.topics.JavascriptDecorators/traits">Traits</a></li>
+                <li><a href="#docs.topics.ClassLoader">Class Loader</a></li>
+              </ol>
+            </li>
+            <li class="expandable">
+              <a href="javascript:void(null)">Components In Depth</a>
+              <ol>
+                <li><a href="#docs.topics.ComponentNamespaces">Namespaces</a></li>
+                <li><a href="#docs.topics.ComponentPackaging">Component Packaging</a></li>
+                <li><a href="#docs.topics.ComponentPrefabs">Component Prefabs</a></li>
+                <li><a href="#docs.topics.ComponentLifecycle">Component Life-Cycle</a></li>
+                <!-- <li class="disabled"><a href="#docs.topics.TheApplication">Class Syntax</a></li> -->
+                <li><a href="#docs.topics.ComponentUsage">Using Components</a></li>
+                <li>
+                  <a href="#docs.topics.ComponentEvents">Events</a>
+                  <ol>
+                    <li><a href="#docs.topics.ComponentEvents/intro">Introduction</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/propagation">Propagation</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/capture">Capturing Phase</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/target">Targeting Phase</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/bubble">Bubbling Phase</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/target_phase_registration">Target Phase Registration</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/bubble_phase_registration">Bubble Phase Registration</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/capture_phase_registration">Capture Phase Registration</a></li>
+                    <li><a href="#docs.topics.ComponentEvents/example">Examples</a></li>
+                  </ol>
+                </li>
+                <li><a href="#docs.topics.StyleSheets">Style Sheets</a></li>
+                <li><a href="#docs.topics.CascadingStylesheets">Cascade Styling</a></li>
+                <li><a href="#docs.topics.StylesheetTransformation">CSS Transformer</a></li>
+                <li><a href="#docs.topics.ComponentTemplates">Templates</a></li>
+                <li class="disabled"><a href="#docs.topics.TheApplication">Shadow DOM</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Child Components</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Protected Components (OAuth)</a></li>
+              </ol>
+            </li> 
+            <li class="expandable">
+              <a href="javascript:void(null)">Progressive Enhancement</a>
+              <ol>
+                <li><a href="#docs.topics.ProgressiveEnhancementIntro">Introduction</a></li>
+                <li><a href="#docs.topics.AdoptingNodes">Adopting Nodes</a></li>
+                <!-- <li><a href="#docs.topics.ReplacingNodes">Replacing Nodes</a></li> -->
+                <li><a href="#docs.topics.DecoratingNodes">Decorating Nodes</a></li>
+              </ol>
+            </li> 
+            <li class="expandable">
+              <a href="javascript:void(null)">2D Gaming</a>
+              <ol>
+                <li class="disabled"><a href="#docs.topics.TheDiv">The Game Loop</a></li>
+                <li class="disabled"><a href="#docs.topics.HelloWorld">Input</a></li>
+                <li class="disabled"><a href="#docs.topics.TheApplication">Update</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Render</a></li>
+                <li class="disabled"><a href="#docs.topics.CustomTags">Delta Time</a></li>
+                <li class="disabled"><a href="#docs.topics.TheApplication">Interpolation</a></li>
+                <li class="disabled"><a href="#docs.topics.TheApplication">Sprites</a></li>
+                <li class="disabled"><a href="#docs.topics.TheApplication">FPS</a></li>
+              </ol>
+            </li>
+            <li class="expandable">
+              <a href="javascript:void(null)">Templating</a>
+              <ol>
+                <li><a href="#docs.topics.TemplateBasics">Basic Templates</a></li>
+                <li><a href="#docs.topics.InlineTemplates">Inline</a></li>
+                <li><a href="#docs.topics.ExternalTemplates">External</a></li>
+                <li><a href="#docs.topics.BakedTemplates">Baked</a></li>
+                <li><a href="#docs.topics.TemplateData">Rendering Data</a></li>
+                <li><a href="#docs.topics.TemplateDataToHtml">Transform data to HTML</a></li>
+                <li><a href="#docs.topics.MultiTemplates">Dynamic Template Sources</a></li>
+                <li><a href="#docs.topics.TemplateSlots">Slots</a></li>
+                <li><a href="#docs.topics.CompositComponents">Composit Components</a></li>
+                <li><a href="#docs.topics.PluggableTemplateEngines">Pluggable Engines</a></li>
+                <li><a href="#docs.topics.UsingCustomDriver">Using a custom template drivers</a></li>
+              </ol>
+            </li>
+            <li class="expandable">
+              <a href="javascript:void(null)">Applications In Depth</a>
+              <ol>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Namespaces</a></li>
+                <li class="disabled"><a href="#docs.topics.HelloWorld">Application Life-Cycle</a></li>
+                <li class="disabled"><a href="#docs.topics.HelloWorld">Folder Structure/Setup</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Instantiation</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Redirects/Flow</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Protected Applications (OAuth)</a></li>
+              </ol>
+            </li> 
+            <li class="expandable">
+              <a href="javascript:void(null)">Importing Dependencies</a>
+              <ol>
+                <li class="disabled"><a href="#docs.topics.TheDiv">static imports</a></li>
+                <li class="disabled"><a href="#docs.topics.HelloWorld">dynamic imports</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">script imports</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Transpilation</a></li>
+              </ol>
+            </li>
+            <li class="expandable">
+              <a href="javascript:void(null)">Single Page Architecture</a>
+              <ol>
+                <li><a href="#docs.topics.SpaIntroduction">Introduction</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Activities</a></li>
+                <li><a href="#docs.topics.ActivityLifeCycle">Activity Life-Cycle</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Redirects/Flow</a></li>
+                <li><a href="#docs.topics.DestroyingActivities">Destroying Activities</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Activity Loaders (animation)</a></li>
+              </ol>
+            </li> 
+            <li class="expandable">
+              <a href="javascript:void(null)">Data Access</a>
+              <ol>
+                <li><a href="#docs.topics.DataAccessIntro">Introduction</a></li>
+                <li><a href="#docs.topics.DataRepositories">
+                  Repositories
+                  <ol>
+                    <li><a href="#docs.topics.DataRepositories/how">How it Works</a></li>
+                    <li><a href="#docs.topics.DataRepositories/create">Create Repositories</a></li>
+                    <li><a href="#docs.topics.DataRepositories/seeding">Seeding</a></li>
+                    <li><a href="#docs.topics.DataRepositories/using">Using Repositories</a></li>
+                    <li><a href="#docs.topics.DataRepositories/customize">Extending Repositories</a></li>
+                  </ol>
+                </a></li>
+                <li>
+                  <a href="#docs.topics.DataRepositoryDrivers/intro">Drivers</a>
+                  <ol>
+                    <li><a href="#docs.topics.DataRepositoryDrivers/what">What is a Driver?</a></li>
+                    <li><a href="#docs.topics.DataRepositoryDrivers/a-db-problem">A Database Problem</a></li>
+                    <li><a href="#docs.topics.DataRepositoryDrivers/memory-driver">The Memory Driver</a></li>
+                    <li><a href="#docs.topics.DataRepositoryDrivers/couch-db">Creating a CouchDB Driver</a></li>
+                  </ol>
+                </li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Seeding</a></li>
+              </ol>
+            </li>
+            <li class="expandable">
+              <a href="javascript:void(null)">Data Binding</a>
+              <ol>
+                <li><a href="#docs.topics.DataBindingIntroduction">Introduction</a></li>
+                <li><a href="#docs.topics.DataBindingEventDriven">Event-driven</a></li>
+                <li><a href="#docs.topics.DataBindingReflection">Live Data Binding</a></li>
+                <li><a href="#docs.topics.DataBindingLoop">Environment Loop</a></li>
+              </ol>
+            </li>
+            <li class="expandable disabled">
+              <a href="#docs.topics.InstallFramework">Advanced Configuration</a>
+            </li> 
+            <li class="expandable disabled">
+              <a href="#docs.topics.InstallFramework">Multi-threading</a>
+            </li> 
+            <li class="expandable disabled">
+              <a href="#docs.topics.InstallFramework">Modules & Libraries</a>
+            </li> 
+            <li class="expandable disabled">
+              <a href="#docs.topics.InstallFramework">Performance</a>
+            </li> 
+            <li class="expandable disabled">
+              <a href="#docs.topics.InstallFramework">Diagnostics</a>
+            </li> 
+            <li class="expandable disabled">
+              <a href="#docs.topics.InstallFramework">OAuth</a>
+              <ol>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Configuration</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Protected Applications</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">Protected Components</a></li>
+                <li class="disabled"><a href="#docs.topics.TheDiv">OAuth and the Backend</a></li>
+              </ol>
+            </li>
+        </ol>
+    </div>
+</template>
+`
+                };
+
+                docs.components.TocMenu.prototype.cssStyle = function(){
+                    return `.TocMenu {
+	overflow: auto;
+    scrollbar-width: none;
+}
+
+.TocMenu::-webkit-scrollbar { display: none; }
+
+.TocMenu ol > li > a.active {
+	background:#d2cbe2;
+}
+
+
+.TocMenu ol > li.disabled {
+	opacity:.3;
+	pointer-events:none;
+}
+
+.TocMenu .toc li.expand ol {
+    max-height: 1000px !important;
+}
+`
+                };
+
+                docs.components.TocMenu.prototype.onLoadInstanceStylesheet = function(){ return false }
+            })();
+
+;(()=> {
+                
 
 namespace `docs.components` (
     class LanguageSelector extends w3c.ui.WebComponent {
@@ -318,6 +563,67 @@ namespace `docs.components` (
     }
 );
 
+
+
+                docs.components.LanguageSelector.prototype.template = function(){
+                    return `<template>
+	<nav class="lang-selector">
+        <a data-language-name="shell" class="active">Shell<span class="snippet-count hidden"></span></a>
+        <a data-language-name="javascript">JavaScript<span class="snippet-count hidden"></span></a>
+        <a data-language-name="html">HTML<span class="snippet-count hidden"></span></a>
+        <a data-language-name="css">CSS<span class="snippet-count hidden"></span></a>
+    </nav>
+</template>
+`
+                };
+
+                docs.components.LanguageSelector.prototype.cssStyle = function(){
+                    return `.LanguageSelector a {
+	position:relative;
+}
+
+.LanguageSelector .snippet-count {
+	position: absolute;
+	right: 19px;
+	top: 17px;
+	font-size: 10px;
+	background:red;
+	display: block;
+	height: 18px;
+	width: 18px;
+	line-height: 19px;
+	text-align: center;
+	border-radius: 50px;
+}
+
+.LanguageSelector .snippet-count.hidden{
+	display:none;
+}
+
+
+.LanguageSelector [data-language-name='shell'] .snippet-count {
+	background:blue;
+}
+
+.LanguageSelector [data-language-name='html'] .snippet-count {
+	background:burlywood;
+}
+
+.LanguageSelector [data-language-name='javascript'] .snippet-count {
+	background:red;
+}
+
+.LanguageSelector [data-language-name='css'] .snippet-count {
+	background:#a18dcc;
+}
+`
+                };
+
+                docs.components.LanguageSelector.prototype.onLoadInstanceStylesheet = function(){ return false }
+            })();
+
+;(()=> {
+                
 import! 'docs.topics.Topic';
 
 namespace `docs.topics` (
@@ -326,6 +632,46 @@ namespace `docs.topics` (
     }
 );
 
+
+
+                docs.topics.DocHome.prototype.template = function(){
+                    return `<template>
+  <div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Welcome</h1>
+        <p>
+          <em>Oros is in incubation as a private repository on github. <b>You'll need to be added as a collaborator</b> in order to fork/install. Reach out to jaysmith024@gmail.com for access.</em>
+        </p>
+        <p>
+          Oros is an SDK for building customized framework architectures and apps. You'll want to
+          start with <a href="#docs.topics.InstallFramework">installation</a> and then <a href="#docs.topics.HelloWorld">getting started.</a>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>
+`
+                };
+
+                docs.topics.DocHome.prototype.cssStyle = function(){
+                    return `
+`
+                };
+
+                docs.topics.DocHome.prototype.onLoadInstanceStylesheet = function(){ return false }
+            })();
+
+;(()=> {
+                
 namespace `docs.components` (
 	class ReadingProgress  extends w3c.ui.WebComponent  {
 	   async onConnected(){
@@ -365,6 +711,52 @@ namespace `docs.components` (
         }
 	}
 )
+
+
+                docs.components.ReadingProgress.prototype.template = function(){
+                    return `<template>
+	<div class="progress-bar-container">
+        <div class="progress-bar-container__progress"></div>
+    </div>
+</template>
+`
+                };
+
+                docs.components.ReadingProgress.prototype.cssStyle = function(){
+                    return `.ReadingProgress {
+	display:block;
+    display: block;
+    z-index: 10000;
+    position: fixed;
+}
+
+
+
+/* progress bar container */
+.ReadingProgress .progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+/* progress bar */
+.ReadingProgress .progress-bar-container__progress {
+  height: 4px;
+  background-color: #a2fca2;
+  width: 0%;
+  float: left;
+  transform:translate3d(0px,0px,0px);
+}
+`
+                };
+
+                docs.components.ReadingProgress.prototype.onLoadInstanceStylesheet = function(){ return false }
+            })();
+
+;(()=> {
+                
 
 namespace `docs.components` (
     class DomView extends w3c.ui.WebComponent {
@@ -428,6 +820,72 @@ namespace `docs.components` (
     }
 );
 
+
+
+                docs.components.DomView.prototype.template = function(){
+                    return `<template>
+    <div id="canvas">
+        <slot name="component">Hello</slot>
+    </div>
+</template>
+`
+                };
+
+                docs.components.DomView.prototype.cssStyle = function(){
+                    return `dom-view {
+    width:100%;
+    display:block;
+    min-height:200px;
+    position:relative;
+    border:1px solid gray;
+    background-size: 10px 10px;
+    background-image:
+        linear-gradient(to right, rgba(0,0,0,.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,.1) 1px, transparent 1px);
+}
+
+dom-view #canvas {
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    background-image: url(src/docs/components/DomView/axis_icon.png);
+    background-size: 42px;
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+
+dom-view #canvas slot {
+    display: block;
+    height: 100%;
+}
+
+dom-view #canvas slot > .WebComponent {
+    position: absolute;
+}
+
+
+
+dom-view slot *{
+  background-color: rgba(0, 0, 0, 0.22) !important;
+  transform: translateZ(30px) scale(0.940);
+  border:1px solid red;
+  transform-style: preserve-3d;
+  box-shadow: 6px 6px 3px -3px rgba(0,0,0,.5);
+}
+`
+                };
+
+                docs.components.DomView.prototype.onLoadInstanceStylesheet = function(){ return false }
+            })();
+
+;(()=> {
+                
 
 namespace `docs.components` (
     class DomTreeView extends w3c.ui.WebComponent {
@@ -501,6 +959,159 @@ namespace `docs.components` (
         }
     }
 );
+
+
+
+                docs.components.DomTreeView.prototype.template = function(){
+                    return `<template>
+    <div id="canvas">
+        <slot name="component">Hello</slot>
+    </div>
+</template>
+`
+                };
+
+                docs.components.DomTreeView.prototype.cssStyle = function(){
+                    return `dom-tree-view {
+    /*width:100%;
+    display:block;
+    position:relative;
+    border:1px solid gray;*/
+    width: 100%;
+
+    display: block;
+
+    position: relative;
+
+    border: 1px solid gray;
+
+    background: white;
+
+    height: 300px;
+    clear: both;
+}
+
+dom-tree-view #canvas {
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+dom-tree-view #canvas slot {
+    display: block;
+    height: 100%;
+}
+
+
+
+dom-tree-view #canvas slot {
+  position: relative;
+}
+dom-tree-view #canvas slot * {
+    box-sizing: border-box;
+
+position: absolute;
+
+display: block;
+
+height: 2.5vw;
+
+-webkit-transform: translateX(5%);
+
+transform: translateX(5%);
+
+font-size: .95em;
+
+text-align: center;
+
+line-height: 40px;
+
+border: 1px solid transparent;
+
+border-radius: 3px;
+
+background: #999;
+
+color: #fff;
+
+-webkit-transition: all .3s;
+
+transition: all .3s;
+
+margin: 0;
+
+margin-top: 24px;
+  /*box-sizing: border-box;
+  position: absolute;
+  display: block;
+  height: 2.5vw;
+
+bottom: -4vw;
+  -webkit-transform: translateX(5%);
+          transform: translateX(5%);
+  font-size: .95em;
+  text-align: center;
+  line-height: 40px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: #999;
+  color: #fff;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  margin:0;*/
+}
+dom-tree-view #canvas slot *:active,
+dom-tree-view #canvas slot *:focus {
+  background: #27f;
+  border-color: black;
+}
+dom-tree-view #canvas slot *:hover::before {
+  background: black;
+}
+dom-tree-view #canvas slot *::before {
+  content: "";
+  position: absolute;
+  /*top: -4.5vw;*/
+  top: -1.5vw;
+  left: 50%;
+  -webkit-transform: translate(-5%);
+          transform: translate(-5%);
+  width: 2px;
+  /*height: calc(4.5vw - 1px);*/
+  height: 24px;
+  background: inherit;
+}
+
+@media (max-width: 500px) {
+  dom-tree-view #canvas slot {
+    width: 175%;
+  }
+  dom-tree-view #canvas slot * {
+    height: 30px;
+    bottom: -60px;
+    line-height: 30px;
+  }
+  dom-tree-view #canvas slot *::before {
+    top: -30px;
+    height: 29px;
+  }
+}
+@media (max-width: 300px) {
+  dom-tree-view #canvas slot {
+    width: 250%;
+  }
+}
+
+`
+                };
+
+                docs.components.DomTreeView.prototype.onLoadInstanceStylesheet = function(){ return false }
+            })();
 
 
 namespace `docs` (

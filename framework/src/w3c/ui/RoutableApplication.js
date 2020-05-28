@@ -13,7 +13,7 @@ namespace `w3c.ui` (
             var slot = this.querySelector('#activitySlot');
             slot.appendChild(c);
             this.currentActivity = c;
-            // this.onEnterActivityRestoreScroll(scrollToElement)
+            // this.onEnterActivityRestoreScroll(scrollToElement) //TODO: need to uncomment and support scroll
             this.dispatchEvent("onactivityshown", c);
         }
 

@@ -2,6 +2,8 @@ import 'src/core/http/ClassLoader.js';
 import 'src/core/http/ModuleLoader.js';
 import 'src/mainloop.js';
 
+//TODO: ModuleLoader? are we really going to need that?
+//Code and size could be shortened?
 document.addEventListener("DOMContentLoaded", e => {
   async function bootup() {
     var ns = document.body.getAttribute("namespace");

@@ -1,4 +1,4 @@
-import! 'plugins.*';
+import! 'plugins._';
 
 namespace `core.views` (
     class ScreenEditor extends w3c.ui.WebComponent {

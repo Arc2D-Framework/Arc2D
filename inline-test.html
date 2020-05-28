@@ -19,11 +19,14 @@
         
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
-            // Config.USE_COMPRESSED_BUILD = false;
+            Config.USE_COMPRESSED_BUILD = true;
+            Config.DEBUG = true;
         </script>
     </head>
 
     <body namespace="applications.InlineTest">
-        <div id="test">test div</div>
+        <div id="test">
+            <cover-flow></cover-flow>
+        </div>
     </body>
 </html>

@@ -27,6 +27,7 @@ namespace `w3c.ui` (
                 try{window.customElements && window.customElements.define(tag, this);}
                 catch(e){console.error(e)}
             }else {
+                //TODO: Use error codes
                 console.warn(`${proto.namespace}#define() - invalid tag name. Dashes required for`, tag)
             }       
         }
@@ -63,6 +64,7 @@ namespace `w3c.ui` (
                     style.replace(stylesheet.innerText);
                     this.root.adoptedStyleSheets = [stylesheet];
                 } catch(e){
+                    //TODO: use error code
                     console.error(`${e.message} Unable to adopt stylesheet 
                         into shadow dom -- ${this.namespace}#onAppendStyle(), 
                         see: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690.
@@ -108,7 +110,7 @@ namespace `w3c.ui` (
                             target: t,
                             realtarget: e.target,
                             src: e,
-                            preventDefault: () => e.preventDefault(),
+                            preventDefault:  () => e.preventDefault(),
                             stopPropagation: () => e.stopPropagation()
                         });
                     }
@@ -159,7 +161,7 @@ namespace `w3c.ui` (
                 
                 if(/\/*\.html$/.test(tem)){
                     var src=this.src||tem;//TODO: bug here?
-                    var opts = { cache: "force-cache" };
+                    var opts = { cache: "force-cache" };//TODO: use cache policy from appconfig.js
                     src = src.replace("/./", "/" + this.namespace.replace(/\./gim, "/") + "/");
                     this._template = await imports(src, opts);
                 }
@@ -178,7 +180,7 @@ namespace `w3c.ui` (
             return  this.querySelector("template")||    //node
                     this.src||                          //uri
                     this.template()||                   //string
-                    "/src/./index" + (engine.ext||"") + ".html" //default
+                    "/src/./index" + (engine.ext||"") + ".html" //TODO: default but ignores <Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION>
         }
 
 
@@ -218,7 +220,7 @@ namespace `w3c.ui` (
             return await eng.parse(template, data, this);
         }
 
-        getTemplateEngine() {
+        getTemplateEngine() {//TODO: Need to make it configurable, see <Config.DEFAULT_TEMPLATE_ENGINE_MIMETYPE>
             return window.customTemplateEngines.default;
         }
 
@@ -228,14 +230,6 @@ namespace `w3c.ui` (
             var html = await this.loadTemplate();
             this.onTemplateLoaded();
         }
-
-        // async decorate(){
-        //     this.setClassList();
-        //     this.setPrototypeInstance();
-        //     this.defineAncestralStyleList();
-        //     await this.onConnected();
-        //     await this.setStyleDocuments();
-        // }
 
         async onTemplateLoaded() {
             this.slots = this.getSlots();
@@ -292,8 +286,8 @@ namespace `w3c.ui` (
         static defineAncestors(){
             this.ancestors=[];
             var a=this;
-            while(a && this.ancestors.push(a))
-                  a = a.prototype.ancestor;
+            while(a && this.ancestors.push(a)){
+                  a = a.prototype.ancestor}
         }
 
         static defineAncestralClassList(){
@@ -308,7 +302,7 @@ namespace `w3c.ui` (
 
         defineAncestralStyleList(){
             var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
-            if(this.onLoadInstanceStylesheet()){stylesheets.push(this.getNSStyleSheet(this.namespace));}
+            if(this.onLoadInstanceStylesheet()){stylesheets.push(this.getNSStyleSheet(this.namespace))}
                 stylesheets.push(...this.prototype["@stylesheets"]||[]);
             if(!this['@cascade']){return}
             var ancestor = this.__proto.ancestor
@@ -368,7 +362,7 @@ namespace `w3c.ui` (
                             stylesheets[path] = tag;
                             if(tagName.toLowerCase() == "style"){
                                 var _cssText = await window.imports(path);
-                                if(_cssText){
+                                if( _cssText){
                                     _cssText = this.onTransformStyle(_cssText);
                                     _cssText && this.setCssTextAttribute(_cssText, tag);
                                     this.onStylesheetLoaded(tag);
@@ -388,17 +382,19 @@ namespace `w3c.ui` (
             this.prototype = this;
         }
 
-        resourcepath(url, ns){
-            url = url.replace(/\$\{ns\}/gm, ns.replace(/\./gim,"/"));
-            return Config.ROOTPATH + url;
-        }
+        // resourcepath(url, ns){
+        //     url = url.replace(/\$\{ns\}/gm, ns.replace(/\./gim,"/"));
+        //     return Config.ROOTPATH + url;
+        // }
 
-        initializeChildComponents (el){
+        initializeChildComponents (el){//TODO: called everytime for all components, need to optimize.
+            // console.log("initializeChildComponents",this.namespace)
             el = el||this.root;
             var nodes = this.querySelectorAll("*");
                 nodes = [].slice.call(nodes);
                 nodes.forEach(n => {
                     if(n && n.nodeType == 1) { 
+                        // console.log(n)
                         var tag = n.tagName.toLowerCase();
                         var c = window.registered_tags[tag];
                         c && c.define(c.prototype,true);
