@@ -72,3 +72,7 @@ html, body, .MainScreen {
 .MainScreen li.dropdown:nth-child(9){
     display: none !important;
 }
+
+.MainScreen #chartdiv a[href='http://www.amcharts.com']{
+    display: none !important;
+}
