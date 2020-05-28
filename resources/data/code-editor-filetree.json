@@ -1,11 +1,11 @@
 {
-    "path": "/Users/smithjv/Documents/Development/AdpWebsite",
+    "path": "/Users/smithjv/Documents/Development/MyProject",
     "name": "Demo",
     "children": [{
-        "path": "/Users/smithjv/Documents/Development/AdpWebsite/resources",
+        "path": "/Users/smithjv/Documents/Development/MyProject/resources",
         "name": "resources",
         "children": [{
-            "path": "/Users/smithjv/Documents/Development/AdpWebsite/resources/repositories.js",
+            "path": "/Users/smithjv/Documents/Development/MyProject/resources/repositories.js",
             "name": "repositories.js",
             "size": 353,
             "extension": ".js",
@@ -14,13 +14,13 @@
         "size": 353,
         "type": "directory"
     }, {
-        "path": "/Users/smithjv/Documents/Development/AdpWebsite/src",
+        "path": "/Users/smithjv/Documents/Development/MyProject/src",
         "name": "src",
         "children": [{
-            "path": "/Users/smithjv/Documents/Development/AdpWebsite/src/applications",
+            "path": "/Users/smithjv/Documents/Development/MyProject/src/applications",
             "name": "applications",
             "children": [{
-                "path": "/Users/smithjv/Documents/Development/AdpWebsite/src/applications/DomClouds",
+                "path": "/Users/smithjv/Documents/Development/MyProject/src/applications/DomClouds",
                 "name": "DomClouds",
                 "children": [{
                     "path": "/src/applications/DomClouds/index.css",
