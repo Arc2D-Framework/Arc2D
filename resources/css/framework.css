@@ -45,18 +45,6 @@ input {
 	user-select: text;
 }
 
-.ModalOverlay {
-	opacity: .7;
-	z-index: 2000;
-	display: none;
-	background-color: black;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-}
-
 .clearfix:before, .clearfix:after {
 	content: " ";
 	display: block;
@@ -81,7 +69,7 @@ input {
 
 
 
-#global-application-spinner {
+/*#global-application-spinner {
 	font-size: 60px;
 	left: 50%;
 	position: fixed;
@@ -107,7 +95,7 @@ input {
     -o-animation: rotate 700ms infinite linear;
     animation: rotate 700ms infinite linear;
     display:block;
-}
+}*/
 
 
 @-o-keyframes rotate {
@@ -132,7 +120,7 @@ input {
 }
 
 
-.bubblingG {
+/*.bubblingG {
 	text-align: center;
 	width: 80px;
 	height: 50px;
@@ -270,4 +258,4 @@ background-color:#FFFFFF;
 transform: translateY(-21px);
 }
 
-}
+}*/
