@@ -38,6 +38,9 @@
         <script type="text/javascript" src="resources/landing-assets/js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="resources/landing-assets/js/toastr.min.js"></script>
         <script type="text/javascript" src="resources/landing-assets/js/startuply.js"></script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+        <script type="text/javascript"> AmCharts.makeChart("chartdiv", { "type": "serial", "categoryField": "category", "maxSelectedTime": 0, "angle": 30, "depth3D": 30, "startDuration": 2, "theme": "default", "usePrefixes": true, "categoryAxis": { "gridPosition": "start", "centerLabels": true, "title": "" }, "trendLines": [], "graphs": [ { "balloonText": "[[title]] of [[category]]:[[value]]", "fillAlphas": 1, "id": "AmGraph-1", "title": "Minified", "type": "column", "valueField": "Minified" }, { "balloonText": "[[title]] of [[category]]:[[value]]", "fillAlphas": 1, "id": "AmGraph-2", "title": "Unminified", "type": "column", "valueField": "Unminified" } ], "guides": [], "valueAxes": [ { "id": "ValueAxis-1", "title": "Kilobytes" } ], "allLabels": [], "balloon": { "animationDuration": 0.4 }, "legend": { "enabled": true, "useGraphSettings": true }, "titles": [ { "id": "Title-1", "size": 15, "text": "Framework/Library Size Comparison Chart" } ], "dataProvider": [ { "category": "Arc2D", "Minified": "9", "Unminified": "30" }, { "category": "AngularJS", "Minified": "172.42", "Unminified": "1310" }, { "category": "ReactJS", "Minified": "128.05", "Unminified": "250.96" }, { "category": "VueJS", "Minified": "91.78", "Unminified": "334.44" } ] } ); </script>
         
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet" onload="this.media='all'">
@@ -167,7 +170,8 @@
                             <div class="tab-pane active" id="first-tab-alt">
                                 <div class="section-content row">
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
-                                        <img src="resources/images/chart.png" class="img-responsive" alt="process 3" />
+                                        <!-- <img src="resources/images/chart.png" class="img-responsive" alt="process 3" /> -->
+                                        <div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
                                         <br/>

@@ -8,6 +8,8 @@ namespace `landing` (
 
         async onConnected() {
             await super.onConnected();
+            var amChartLink = this.querySelector("a[href='http://www.amcharts.com']");
+                amChartLink.remove();
         }
     }
 );
