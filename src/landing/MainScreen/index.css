@@ -79,7 +79,8 @@ html, body, .MainScreen {
 
 
 .MainScreen .sub-title, .MainScreen .sub-title.alt{
-    color: #8d8d8d;
+    /* color: #8d8d8d; */
+    color: #646161;
     font-size: 27px;
     line-height: 38px;
 }
