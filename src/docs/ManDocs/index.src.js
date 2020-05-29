@@ -1,4 +1,4 @@
-
+(()=>{ 
 
 namespace `docs.topics` (
     class LoaderActivity extends w3c.ui.WebComponent {
@@ -175,6 +175,8 @@ namespace `docs.topics` (
         }
     }
 );
+
+
 
 ;(()=> {
                 
@@ -485,6 +487,8 @@ namespace `docs.components` (
                 docs.components.TocMenu.prototype.onLoadInstanceStylesheet = function(){ return false }
             })();
 
+
+
 ;(()=> {
                 
 
@@ -622,9 +626,56 @@ namespace `docs.components` (
                 docs.components.LanguageSelector.prototype.onLoadInstanceStylesheet = function(){ return false }
             })();
 
+
+
 ;(()=> {
                 
-import! 'docs.topics.Topic';
+
+namespace `docs.topics` (
+    class Topic extends w3c.ui.WebComponent {
+        constructor() {
+            super();
+            application.addEventListener("lang-selected", e=>this.onLanguageChange(e), false);
+            hljs.getLanguage('javascript').keywords += ' namespace'; // note the leading space
+        }
+
+        onLoadStyle(url){ return "/src/docs/topics/index.css" }
+
+        onLanguageChange(){
+        	var lang = application.current_language;;
+        	if(this.last_lang){
+        		this.classList.remove(this.last_lang)
+        	}
+        	if(lang){
+                this.classList.add(lang);
+                this.last_lang=lang;
+            }
+        }
+
+        onConnected() {
+            super.onConnected()
+            setTimeout(_=>this.applyHighlighting(),1000);
+            this.onLanguageChange();
+
+        }
+
+        applyHighlighting(){
+            var code = Array.from(this.querySelectorAll(".lang code"));
+            code.forEach(block => hljs.highlightBlock(block))
+        }
+
+        getExampleSnippets(){
+            var shell = this.querySelectorAll(".shell.lang pre code");
+            var javascript = this.querySelectorAll(".javascript.lang pre code");
+            var html = this.querySelectorAll(".html.lang pre code");
+            var css = this.querySelectorAll(".css.lang pre code");
+            return {shell,javascript,html,css}
+        }
+    }
+);
+
+cascade(docs.topics.Topic, true);
+
 
 namespace `docs.topics` (
     class DocHome extends docs.topics.Topic {
@@ -669,6 +720,8 @@ namespace `docs.topics` (
 
                 docs.topics.DocHome.prototype.onLoadInstanceStylesheet = function(){ return false }
             })();
+
+
 
 ;(()=> {
                 
@@ -754,6 +807,8 @@ namespace `docs.components` (
 
                 docs.components.ReadingProgress.prototype.onLoadInstanceStylesheet = function(){ return false }
             })();
+
+
 
 ;(()=> {
                 
@@ -883,6 +938,8 @@ dom-view slot *{
 
                 docs.components.DomView.prototype.onLoadInstanceStylesheet = function(){ return false }
             })();
+
+
 
 ;(()=> {
                 
@@ -1114,6 +1171,8 @@ dom-tree-view #canvas slot *::before {
             })();
 
 
+
+
 namespace `docs` (
     class ManDocs extends w3c.ui.Application {
         constructor(element){
@@ -1188,3 +1247,6 @@ namespace `docs` (
         }
     }
 );
+
+
+ })()
