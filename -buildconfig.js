@@ -1,9 +1,9 @@
 BUILDCONFIG = {
-    LoadPaths:[
-        "/", 
-        "src", 
-        "libs"
-    ],
+    // LoadPaths:[
+    //     "/", 
+    //     "src", 
+    //     "libs"
+    // ],
     
     Input : "src/docs/ManDocs/index.js",
     
@@ -24,6 +24,16 @@ BUILDCONFIG = {
     
     Verbos:true,
 
-    Prefabs : true
+    Prefabs : {
+        Enabled : true,
+        Components : [
+            "docs.components.TocMenu",
+            "docs.components.LanguageSelector",
+            "docs.topics.DocHome",
+            "docs.components.ReadingProgress",
+            "docs.components.DomView",
+            "docs.components.DomTreeView"
+        ]
+    }
 };
 module.exports = BUILDCONFIG;
