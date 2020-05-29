@@ -5,11 +5,11 @@ BUILDCONFIG = {
     //     "libs"
     // ],
     
-    Input : "src/docs/ManDocs/index.js",
+    Input : "src/applications/NotificationsApp/index.js",
     
     Output : {
-        SourcePath:"src/docs/ManDocs/index.src.js",
-        CompressedPath: "src/docs/ManDocs/index.min.js"
+        SourcePath:"src/applications/NotificationsApp/index.src.js",
+        CompressedPath: "src/applications/NotificationsApp/index.min.js"
     },
 
     // Output : {
@@ -27,12 +27,7 @@ BUILDCONFIG = {
     Prefabs : {
         Enabled : true,
         Components : [
-            "docs.components.TocMenu",
-            "docs.components.LanguageSelector",
-            "docs.topics.DocHome",
-            "docs.components.ReadingProgress",
-            "docs.components.DomView",
-            "docs.components.DomTreeView"
+            "core.ui.NotificationsToggleSwitch"
         ]
     }
 };
