@@ -10,8 +10,6 @@ var Config = window.Config||{
     NAMESPACE : null,
     DEBUG:true
 };
-
-
 import 'src/core/extensions/Math.js';
 import 'src/core/extensions/Object.js';
 import 'src/core/extensions/String.js';
@@ -24,6 +22,4 @@ import 'src/w3c/ui/WebComponent.js';
 import 'src/w3c/ui/Application.js';
 import 'src/w3c/ui/RoutableApplication.js';
 import 'src/core/ui/World.js';
-
-//--------BOOTLOADER---------
 import 'src/bootloader.js';

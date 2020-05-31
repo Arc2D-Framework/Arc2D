@@ -1,4 +1,5 @@
-import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
+import 'node_modules/od-import-polyfill/import.js';
+await require('/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js');
 import 'core.ui.NotificationsToggleSwitch';
 
 namespace `applications` (

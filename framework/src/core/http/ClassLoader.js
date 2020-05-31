@@ -1,11 +1,8 @@
 import 'src/libs/Ecmascript6ClassTranspiler.js';
-import 'src/core/http/ResourceLoader.js';
 
 namespace `core.http` ( 
-    class ClassLoader extends core.http.ResourceLoader {
-
+    class ClassLoader {
         constructor (){
-            super();
             this.es6Transpiler = new Ecmascript6ClassTranspiler();
             window.run = this.run.bind(this);//TODO:check dynamic transpilation
             return this;
@@ -39,8 +36,7 @@ namespace `core.http` (
                 src = src.replace(reg, this.es6Transpiler.transpile(
                     (window.imported_classes[ns] ? ";" : await this.imports(match))||""
                 ))
-            }
-            cb(`(()=>{ ${src} })()`);
+            } cb(`(()=>{ ${src} })()`);
         }
 
         async imports(match){

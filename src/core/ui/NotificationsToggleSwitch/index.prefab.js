@@ -1,4 +1,4 @@
-;(()=> {
+
                 
 namespace `core.ui` (
 	class NotificationsToggleSwitch  extends w3c.ui.WebComponent  {
@@ -111,4 +111,3 @@ notifications-toggle-switch span{
                 };
 
                 core.ui.NotificationsToggleSwitch.prototype.onLoadInstanceStylesheet = function(){ return false }
-            })();

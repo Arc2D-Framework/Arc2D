@@ -1,9 +1,6 @@
 import 'src/core/http/ClassLoader.js';
-import 'src/core/http/ModuleLoader.js';
 import 'src/mainloop.js';
 
-//TODO: ModuleLoader? are we really going to need that?
-//Code and size could be shortened?
 document.addEventListener("DOMContentLoaded", e => {
   async function bootup() {
     var ns = document.body.getAttribute("namespace");
@@ -15,9 +12,14 @@ document.addEventListener("DOMContentLoaded", e => {
         filename_path.replace("*","");
       var c = (Config.ENABLE_TRANSPILER) ?
         new core.http.ClassLoader :
-        new core.http.ModuleLoader;
-        c.load(ns, Config.ROOTPATH + path, res => {
+        null;
+        c.load(ns, Config.ROOTPATH + path, async function init(res) {
           Config.USE_COMPRESSED_BUILD=false;
+          if(!NSRegistry[ns]) {
+            await wait(1000/30);
+            init();
+            return;
+          }
           var app = window.application = (
             window.application||new NSRegistry[ns](document.body)
           );

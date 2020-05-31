@@ -1,4 +1,4 @@
-import {test} from '/modules/test2.mjs';
+import {test} from '/src/modules/test2.mjs';
 
 
 function myExport() {

@@ -2,7 +2,6 @@ import 'src/core/http/ResourceLoader.js';
 
 namespace `core.http` (
     class ModuleLoader extends core.http.ResourceLoader{
-
         constructor (){
             super()
             return this;

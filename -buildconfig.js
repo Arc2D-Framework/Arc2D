@@ -27,6 +27,7 @@ BUILDCONFIG = {
     Prefabs : {
         Enabled : true,
         Components : [
+            "applications.NotificationsApp",
             "core.ui.NotificationsToggleSwitch"
         ]
     }

@@ -1,6 +1,5 @@
 import 'src/core/ui/templating/CustomTemplateEngines.js';
 import 'src/core/ui/templating/TemplateLiterals.js';
-import 'src/core/ui/templating/ThreadedTemplateLiterals.js';
 
 namespace `w3c.ui` (
     class WebComponent extends HTMLElement {
@@ -382,19 +381,12 @@ namespace `w3c.ui` (
             this.prototype = this;
         }
 
-        // resourcepath(url, ns){
-        //     url = url.replace(/\$\{ns\}/gm, ns.replace(/\./gim,"/"));
-        //     return Config.ROOTPATH + url;
-        // }
-
         initializeChildComponents (el){//TODO: called everytime for all components, need to optimize.
-            // console.log("initializeChildComponents",this.namespace)
             el = el||this.root;
             var nodes = this.querySelectorAll("*");
                 nodes = [].slice.call(nodes);
                 nodes.forEach(n => {
-                    if(n && n.nodeType == 1) { 
-                        // console.log(n)
+                    if(n && n.nodeType == 1) {
                         var tag = n.tagName.toLowerCase();
                         var c = window.registered_tags[tag];
                         c && c.define(c.prototype,true);
