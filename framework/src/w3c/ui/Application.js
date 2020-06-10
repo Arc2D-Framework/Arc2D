@@ -8,3 +8,4 @@ namespace `w3c.ui` (
 	    }
 	}
 );
+window.Application = window.Application||w3c.ui.Application;

@@ -7,7 +7,6 @@ namespace `core.data` (
     @traits([new Observer]);
     class Repository {
         static get IRequestStorage(){
-            debugger;
             var driver = this.prototype.device_driver;
             this.interface = this.interface||new NSRegistry[driver](this);
             this.device_driver=driver; 
@@ -37,7 +36,6 @@ namespace `core.data` (
 
         static async find(cb,query){
             return new Promise((resolve,reject) =>{
-                debugger;
                 this.IRequestStorage.find((result, error)=>{
                     cb && cb(result, error);
                     resolve(result, error)

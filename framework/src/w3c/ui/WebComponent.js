@@ -402,5 +402,5 @@ namespace `w3c.ui` (
         }
     }
 );
-
+window.WebComponent = window.WebComponent||w3c.ui.WebComponent;
 cascade(w3c.ui.WebComponent,true);

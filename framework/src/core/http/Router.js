@@ -36,6 +36,10 @@ namespace `core.http` (
             }
         }
 
+        destroy(activityInstance){
+            this.activities = this.activities||{};
+            delete this.activities[activityInstance.namespace];
+        }
 
         onActivityLoaded(ns,_class,scrollTo){
             this.activities = this.activities||{};
