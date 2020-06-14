@@ -8,8 +8,17 @@
     "scripts": {
         "start": "http-server ./ -p 3001 -g -o doc.html",
         "seam": "node --inspect node_modules/od-seam/index.js",
-        "plop" : "plop framework/resources/generators/plopfile.js"
+        "plop": "plop framework/resources/generators/plopfile.js"
     },
-    "dependencies": { },
-    "devDependencies": { }
+    "dependencies": {
+        "od-cocoon": "github:Nashorn/od-cocoon#3.0.0",
+        "od-mingo": "github:Nashorn/od-mingo#2.2.4",
+        "od-observer": "github:Nashorn/od-observer#1.0.0",
+        "od-paginator": "github:Nashorn/od-paginator#1.0.0",
+        "od-watcher": "github:Nashorn/od-watcher#1.0.0"
+    },
+    "devDependencies": {
+        "od-toolset": "github:Nashorn/od-toolset#1.0.0",
+        "od-seam": "github:Nashorn/od-seam#1.0.0"
+    }
 }
