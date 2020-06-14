@@ -1,21 +1,23 @@
 {
     "name": "arc2d",
-    "version": "3.2.0",
+    "version": "3.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "framework/resources/generators/plopfile.js",
     "author": "jaysmith024 <jaysmith024@gmail.com>",
     "license": "MIT",
     "scripts": {
         "start": "http-server ./ -p 3001 -g -o doc.html",
         "seam": "node --inspect node_modules/od-seam/index.js",
-        "plop": "plop framework/resources/generators/plopfile.js"
+        "plop": "plop"
     },
     "dependencies": {
         "od-cocoon": "github:Nashorn/od-cocoon#3.0.0",
         "od-mingo": "github:Nashorn/od-mingo#2.2.4",
         "od-observer": "github:Nashorn/od-observer#1.0.0",
         "od-paginator": "github:Nashorn/od-paginator#1.0.0",
-        "od-watcher": "github:Nashorn/od-watcher#1.0.0"
+        "od-watcher": "github:Nashorn/od-watcher#1.0.0",
+        "od-import-polyfill": "github:Nashorn/od-import-polyfill#1.0.0",
+        "od-core-extensions": "github:Nashorn/od-core-extensions#1.0.0"
     },
     "devDependencies": {
         "od-toolset": "github:Nashorn/od-toolset#1.0.0",
