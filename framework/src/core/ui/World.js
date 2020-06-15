@@ -1,4 +1,4 @@
-import 'w3c.ui.WebComponent';
+import 'src/w3c/ui/WebComponent.js';
 
 namespace `core.ui` (
     class World extends w3c.ui.Application {

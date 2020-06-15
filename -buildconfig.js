@@ -12,6 +12,8 @@ BUILDCONFIG = {
         CompressedPath: "src/applications/NotificationsApp/index.min.js"
     },
 
+    LoadsAsync : true,
+
     // Output : {
     //     SourcePath:"src/applications/InlineTest/index.src.js",
     //     CompressedPath: "src/applications/InlineTest/index.min.js"

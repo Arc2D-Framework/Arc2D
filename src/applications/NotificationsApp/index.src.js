@@ -138,6 +138,7 @@ notifications-toggle-switch span{
 
 
 
+//mport 'core.ui.Test2';
 
 namespace `applications` (
     class NotificationsApp extends w3c.ui.Application {

@@ -36,14 +36,17 @@ namespace `core.http` (
                 src = src.replace(reg, this.es6Transpiler.transpile(
                     (window.imported_classes[ns] ? ";" : await this.imports(match))||""
                 ))
-            } cb(`(()=>{ ${src} })()`);
+            } cb(`(async ()=>{ ${src} })()`);
         }
 
         async imports(match){
+            var res=null;
             var paths = this.pathsToTry(match);
             for(let path of paths){
-                return await window.imports(path);
+                var res = await window.imports(path);
+                if(res){break}
             }
+            return res;
         }
 
         pathsToTry(match){

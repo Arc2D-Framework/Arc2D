@@ -1,6 +1,7 @@
 import 'node_modules/od-import-polyfill/import.js';
 await require('/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js');
 import 'core.ui.NotificationsToggleSwitch';
+//mport 'core.ui.Test2';
 
 namespace `applications` (
     class NotificationsApp extends w3c.ui.Application {

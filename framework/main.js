@@ -1,5 +1,5 @@
-var Session = Session||{State:{}};
-var Config = window.Config||{
+var Session = window.Session = window.Session||{State:{}};
+var Config = window.Config = window.Config||{
     SRC_PATH:"src/",
     ENVIRONMENT:"prod",
     ROOTPATH : "./",
