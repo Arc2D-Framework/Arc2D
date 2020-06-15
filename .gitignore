@@ -1,5 +1,5 @@
 # Cordova
-node_modules/
+node_modules
 framework/node_modules/
 framework/package-lock.json
 framework/backup/
