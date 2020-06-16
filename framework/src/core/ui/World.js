@@ -26,3 +26,4 @@ namespace `core.ui` (
         }
     }
 );
+window.World = window.World||core.ui.World;
