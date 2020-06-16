@@ -1,0 +1,102 @@
+
+
+html,body {
+	height: 100%;
+	width: 100%;
+	box-sizing:border-box;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+iso-map {
+	text-align: center;
+display: block;
+
+/*position: relative;
+left:50%;*/
+}
+
+
+
+
+.layer.Ground .tile {
+	background-image:url(resources/images/TilesetPack_Grass.png);
+	background-repeat: no-repeat;
+	/*background-position:center;*/
+	width:256px;
+	height:158px;
+	border:0px solid black;
+	position:absolute;
+	background-position:-512px;
+}
+
+.layer.Trees .tile {
+	background-image:url(resources/images/TilesetPack_Trees.png);
+	background-repeat: no-repeat;
+	/*background-position:center;*/
+	width:256px;
+	height:256px;
+	border:0px solid black;
+	position:absolute;
+	background-position:-512px;
+}
+
+.layer.Stumps .tile {
+	background-image:url(resources/images/TilesetPack_Trees.png);
+	background-repeat: no-repeat;
+	/*background-position:center;*/
+	width:256px;
+	height:256px;
+	border:0px solid black;
+	position:absolute;
+	background-position:-512px;
+}
+
+.layer.Rocks .tile {
+	background-image:url(resources/images/TilesetPack_RockSand.png);
+	background-repeat: no-repeat;
+	/*background-position:center;*/
+	width:256px;
+	height:158px;
+	border:0px solid black;
+	position:absolute;
+	background-position:-512px;
+}
+
+
+.layer.Buildings .tile {
+	background-image:url(resources/images/TilesetPack_Buildings.png);
+	background-repeat: no-repeat;
+	/*background-position:center;*/
+	width:256px;
+	height:256px;
+	border:0px solid black;
+	position:absolute;
+	background-position:-512px;
+}
+
+.layer.Boulders .tile {
+	background-image:url(resources/images/TilesetPack_Boulders.png);
+	background-repeat: no-repeat;
+	/*background-position:center;*/
+	width:256px;
+	height:158px;
+	border:0px solid black;
+	position:absolute;
+	background-position:-512px;
+}
+
+
+.layer.Character .tile {
+	background-image:url(resources/images/char_spritesheet.png);
+	background-repeat: no-repeat;
+	/*background-position:center;*/
+	width:76px;
+	height:140px;
+	border:0px solid black;
+	position:absolute;
+	background-position:-512px;
+}
+
+

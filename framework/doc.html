@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
+            style-src   'self' 'unsafe-inline' *">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Arc Engine: Documentation</title>
+        <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+        <script>
+            Config.USE_COMPRESSED_BUILD=false;
+            Config.DEBUG=true; //true loads .src.js, false loads .min.js
+        </script>
+
+
+        <!--SYNTAX HIGHLIGHT STUFF -->
+        <link rel="stylesheet" type="text/css" media="screen" href="src/docs/assets/docs.css">
+        <link rel="stylesheet" href="src/docs/libs/agate.css">
+        <script src="src/docs/libs/highlight.js"></script>
+        <!--END-->
+    </head>
+
+
+
+
+    <body namespace="docs.ManDocs">
+         <!-- <loader-activity></loader-activity> -->
+        <man-docs>
+            <template>
+                <reading-progress></reading-progress>
+                <div class="wrapper">
+                    <nav class="sidebar">
+                        <div class="navigation-brand">
+                            <div class="brand-logo">
+                                <span href="index.html" class="logo">
+                                    <div id="frameworkname" STYLE="background-size: 10px 10px;background-image: linear-gradient(to right, rgba(0, 0, 0, .1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, .1) 1px, transparent 1px);">
+                                        ARC
+                                        <span style="background: red;border-radius: 50px 0px 1px;/*! background-position: 0px -7px; *//*! padding-bottom: -12px; *//*! line-height: 25px; */color: floralwhite;text-shadow: 5px 0px 2px rgba(0,0,0,.3);">2D</span>
+                                    </div>
+                                    <div id="frameworkcaption">DYNAMIC HTML</div>
+                                </span>
+                            </div>
+                        </div>
+                        <toc-menu></toc-menu>
+                    </nav>
+                    <article class="article">
+                        <div class="article-content">
+                            <nav class="manage-nav">
+                                <a href="#docs.topics.DocHome" class="active">Docs</a>
+                           <!--      <a href="#docs.topics.ApiReference">Reference</a>
+                                <a href="#docs.topics.AssetStore">Asset Store</a> -->
+                                <a href="https://repl.it/@truelion/Arc2D-1" target="_new">Play Ground</a>
+                                <!-- <a href="#docs.topics.PlayGround">Known Issues</a>
+                                <a href="#docs.topics.PlayGround">Road Map</a> -->
+                            </nav>
+                            <div class="content">
+                              <doc-home></doc-home>
+                            </div>
+                        </div>
+                        <div class="examples">
+                            <language-selector></language-selector>
+                        </div>
+                    </article>
+                </div>
+            </template>
+        </man-docs>
+    </body>
+</html>

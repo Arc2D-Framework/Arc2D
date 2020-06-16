@@ -1,5 +1,7 @@
 
 namespace `core.ui` (
+    @cascade(true);
+    @stylesheets(["/src/./index.css"]);
     class XTest extends w3c.ui.WebComponent{
         constructor() {
             super();

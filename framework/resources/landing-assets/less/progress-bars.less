@@ -1,0 +1,24 @@
+/* ----------------------------------------------------------------------------
+    Progress bars
+---------------------------------------------------------------------------- */
+
+.progress-wrapper {
+    .progress-txt {
+        text-align: center;
+        color: @text-alt;
+    }
+
+    .progress {
+        .border-radius(20px);
+        .box-shadow(none);
+
+        height: 20px;
+        background-color: @white-alt;
+    }
+
+    .progress .progress-bar {
+        &:extend(.base-clr-bg);
+
+        .border-radius(20px);
+    }
+}

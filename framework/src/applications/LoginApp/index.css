@@ -1,0 +1,15 @@
+html,body,login-app{
+	height: 100%;
+	margin: 0;
+}
+login-app{
+	position: relative;
+	display: block;
+	height: 100%;
+}
+#firebaseui-auth-container{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate3d(-50%,-50%,0);
+}

@@ -1,0 +1,34 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">JavaScript ClassLoader</h1>
+        <p>
+          The ClassLoader is one of a few ways to import javascript classes at runtime, dynamically. This is
+          a low-level module. It will import source and it's full dependency graph handling cyclic dependencies. It resolves file:/// (mobile;Cordova) and http:// protocols. No webpack, babel, pre or post compilers. It's live.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            From any JavaScript class:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+var file_path = "/src/core/utilities/Logger.js";
+
+var c = new core.http.ClassLoader;
+    c.load(file_path, res => console.log(core.utilities.Logger))
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+  </div>
+</template>

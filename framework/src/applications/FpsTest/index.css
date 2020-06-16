@@ -1,0 +1,63 @@
+       
+/* Don't highlight anything on click-and-drag. */
+:not(input):not(textarea) {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html, body {
+    font-family: Arial,sans-serif;
+    font-size: 20px;
+    height: 100%;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+label {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+canvas {
+    background-color: #EEEEEE;
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#fpspicker,
+#fpscounter {
+    bottom: 20px;
+    display: block;
+    left: 20px;
+    position: absolute;
+}
+
+#fpscounter {
+    left: auto;
+    right: 20px;
+}
+
+#fps {
+    margin-bottom: -5px;
+}
+
+#forkme {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#forkme img {
+    border: 0;
+}

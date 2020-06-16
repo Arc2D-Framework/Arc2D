@@ -1,0 +1,97 @@
+/* ----------------------------------------------------------------------------
+    Preloader
+---------------------------------------------------------------------------- */
+
+
+.preloader-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: darken(@white, 3%);
+    z-index: 10000;
+    height: 100%;
+
+    .preloader {
+        .animation(container-rotate 1.4s linear infinite);
+
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -18px 0 0 -18px;
+        width: 36px;
+        height: 36px;
+
+        .spin {
+            &:extend(.base-clr-bd);
+            .animation(fill-unfill-rotate 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite both);
+
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .gap {
+            position: absolute;
+            top: 0;
+            left: 45%;
+            width: 10%;
+            height: 100%;
+            overflow: hidden;
+            border-color: inherit;
+
+            .circle {
+                width: 1000%;
+                left: -450%;
+            }
+        }
+
+        .clip {
+            position: relative;
+            display: inline-block;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            border-color: inherit;
+
+            .circle {
+                .animation(none);
+
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 200%;
+                height: 100%;
+                border-width: 3px;
+                border-style: solid;
+                border-color: inherit;
+                border-bottom-color: transparent;
+                border-radius: 50%;
+            }
+
+            &.left .circle {
+                .rotate(129deg);
+                .animation(left-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite both);
+
+                left: 0;
+                border-right-color: transparent;
+            }
+
+            &.right .circle {
+                .rotate(-129deg);
+                .animation(right-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite both);
+
+                left: -100%;
+                border-left-color: transparent;
+            }
+        }
+    }
+}

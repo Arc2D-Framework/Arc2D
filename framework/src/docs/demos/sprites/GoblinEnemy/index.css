@@ -1,0 +1,39 @@
+
+.GoblinEnemy {
+    display:block;
+    left: -22px;
+  /*left:20px;*/
+  transform: scale(.3);
+  position: absolute;
+  /*bottom: 112px;*/
+  /*margin-left: 0;*/
+  width: 767px;
+  height: 532px;
+  background-image: url("/resources/images/goblin.png");
+}
+
+/* stance */
+.stance {
+  -webkit-animation: stance steps(7) 1.4s infinite;
+          animation: stance steps(7) 1.4s infinite;
+}
+
+
+
+@-webkit-keyframes stance {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -5369px 0px;
+  }
+}
+
+@keyframes stance {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -5369px 0px;
+  }
+}

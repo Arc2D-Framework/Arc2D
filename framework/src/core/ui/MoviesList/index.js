@@ -2,16 +2,15 @@ import '/src/core/data/Movies.js';
 
 
 namespace `core.ui` (
-	@stylesheets(['/src/./index.css']);
 	class MoviesList extends w3c.ui.WebComponent {
 		constructor(el){
 			super(el);
 			//the application -> fires 'movieschanged' with db cursor
 			document.addEventListener("movieschanged", (e)=>this.onMoviesChanged(e), false);
-			this.bind("th", "click", (e)=> this.onColumClicked(e), false);
-			this.bind("#previous", "click", (e)=> this.onPrevious(e), false);
-			this.bind("#next", "click", (e)=> this.onNext(e), false);
-			this.bind(".del-button", "click", (e)=> this.onDelete(e), false);
+			this.addEventListener("click", (e)=> this.onColumClicked(e), false,"th");
+			this.addEventListener("click", (e)=> this.onPrevious(e), false, "#previous");
+			this.addEventListener("click", (e)=> this.onNext(e), false,"#next");
+			this.addEventListener("click", (e)=> this.onDelete(e), false,".del-button");
 		}
 
 		async onDelete(e){

@@ -1,0 +1,146 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Component Life-Cycle</h1>
+        <p>
+          The Components life-cycle is fashioned after the influential game loop used in 2D/3D game engines.
+          <div style="text-align: center;">
+            <img src="src/docs/images/component_life_cycle.png" style="width: 80%;text-align: center;"/>
+          </div>
+        </p>
+        <p>
+          <h2>STAGE 1: Connected State</h2>
+          When a component is used (see: <a href="#docs.topics.ComponentUsage">Using Components</a>), its onConnected() method is triggered notyfing the component that is has been connected to the DOM. During the connection stage, just before onConnected() is notified, three sub-processes occur:
+          <ul>
+            <li>Definition</li>
+            <li>Construction</li>
+            <li>Connected</li>
+          </ul>
+        </p>
+        <p>
+          <b>Definition:</b><br/>
+          An element is defined when its Javascript class is imported into memory. Immediately after being loaded, the Class is registered as a custom element and a tag-name is generated for the component using it's class name, replacing all UpperCase to dash-case.
+        </p>
+        <p>
+          <b>Construction:</b> <br/>
+          At this point the components class constructor() runs to setup a new instance of the component being used in your application. The constructor is appropriate for setting up basic state and event listeners. Never attempt to run any DOM related calls against the component at this stage, as the component is not yet in the DOM (not connected), it has not yet been rendered visually.
+        </p>
+        <p>
+          <b>Connected:</b> <br/>
+          Finally, just before <code>onConnected()</code> is triggered, the component auto-loads its default stylesheet (index.css) and any additional style-sheets specified by the <a href="#docs.topics.JavascriptDecorators/stylesheets"><code>@stylesheets</code></a>decorator. The component becomes connected to the DOM and onConnected() is fired. At this time, the component is visually rendered, it's DOM fully represented. You may override <code>onConnected()</code> in your component class to wire additional event listeners and any DOM manipulation needed. You also need to invoke <code>super.onConnected()</code> so that the base class handles the call to <code>.render()</code>. If render() needs to happen at your timing, or data needs to be sent into the template, call <code>this.render({data here})</code> with the JSON.
+        </p>
+        <p>
+          Calling <code>super.onConnected()</code> let's the base class handle simple template rendering when the template is not expecting any data to be passed into it.<br/>
+          <pre class="inline javascript lang">
+<code>namespace \`core.ui\` (
+  class CoverFlow extends w3c.ui.WebComponent {
+    onConnected(){
+      super.onConnected();
+      this.addEventListener("click", e => this.onClick(e), false);
+    }
+
+    onClick(e){
+      console.log(e.target)
+    }
+  }
+) </code></pre>
+        </p>
+        <p>
+          Alternatively, you may call <code>this.render()</code> at your own timing and even pass in JSON data that your template can itertate over to generate HTML<br/>
+          <pre class="inline javascript lang">
+<code>namespace \`core.ui\` (
+  class CoverFlow extends w3c.ui.WebComponent {
+    constructor(){
+      super();
+      this.coverFlowData = {
+        items:[...listOfItems]
+      };
+    }
+    onConnected(){
+      this.addEventListener("click", e => this.onClick(e), false);
+      this.render(this.coverFlowData);
+    }
+
+    onClick(e){
+      console.log(e.target)
+    }
+  }
+) </code></pre><br/>
+        </p>
+        <p>The component is now connected and in the DOM.</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h2 id="api-reference">STAGE 2: Input</h2>
+        <p>
+          <b>Event-Driven:</b><br/>
+          All input handling was registered during the <code>onConnected()</code> phase using standard <code>addEventListener()</code> wire-up based on w3c standards. Also known as event-driven programming, the events when detected, will delegate to handlers to update it's model/state and UI. In essence, the Component itself works like a controller in a traditional MVC design, but occuring all in a GUI world. In this traditional design, the Component being the "controller", mediates between it's View (it's DOM rendering) and a Model (simple data or complex Model/Collection).
+        </p>
+        <p>
+          <b>2D [ Input, Update, Render ] Loop:</b><br/>
+          Oros was architectured with 2D game development in mind. When building 2D Games such as RPG's, Side Scrollers, Menus, GUI's and HUDs(Heads Up Displays), an event-driven WebComponent design will not work. For cases like this, Oros uses 2D Sprites that each participate in the worlds input, update, render loop. The environment runs the update, render cycle at over 60FPS using a determinstic frame stepper with elapsed time and interpolation for skipped frames during lag. See <a href="#docs.topics.Sprite2D">Sprites</a> for more information. Like WebComponents, the onUpdate() is triggered over 60FPS where the Sprites state can be changed. onRender() also runs right after and is responsible for visual projection either unto cavas or DOM.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h2 id="api-reference">STAGE 3: Render</h2>
+        <p>
+          <b>Event-Driven Rendering:</b><br/>
+          In traditional WebComponent design, components will repaint/render themselves when events trigger callbacks (event-driven updates) to do so. The call to .render() will cause the component to re-evaluate it's HTML template and if fresh data is supplied to render(), the template will generate new/different HTML causing the view to change visually. When callbacks run, components may also choose to not .render() completely but cherry-pick what DOM nodes needs to change. This is the traditional model we are all use to.
+        </p>
+        <p>
+          <b>Sprite Input, Update, Render Loop:</b><br/>
+          When using Sprites, the environment runs the update, render frame stepper on every sprite in the world. A Sprites onUpdate() and onRender() cycles are closely related, where render depends on any state changes that occured during onUpdate() for visual projection. Unlike event-driven rendering which arbitarily occurs or may never occur, a Sprite will render continously at up to 60+ FPS and during lag, when FPS drops, onRender() will "catch up" by interpolating dropped frames to keep in step with elapsed time.
+        </p>
+        <p>Oros employs a robust and intelligent game loop. See the <a href="#docs.topics.Sprite2D">Sprites</a> topic for more.</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Destruction</h1>
+        <p>
+          When a component is no longer needed, it's onDestroy() method is invoked. Every component should perform clean-up in this call. Certain components will have it's onDestroy() called for you by the engine, at other times, it will not hurt to invoke it when you know an entity is no longer needed.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>

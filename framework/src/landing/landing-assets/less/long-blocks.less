@@ -1,0 +1,62 @@
+/* ----------------------------------------------------------------------------
+    Long blocks
+---------------------------------------------------------------------------- */
+
+.long-block {
+    &:extend(.base-clr-bg);
+
+    position: relative;
+    padding: 40px 0 25px;
+
+    h1, h2, h3, h4, h5, h6, .heading {
+        margin: -5px 0 0;
+        line-height: 1;
+    }
+
+    article {
+        text-align: inherit;
+    }
+
+    .icon {
+        margin-right: 15px;
+        font-size: 60px;
+        color: @text-white;
+    }
+}
+
+
+
+@media (max-width: @screen-md-max) {
+    .long-block {
+        padding: 15px 0 35px;
+        text-align: center;
+
+        article,
+        .icon {
+            float: none !important;
+        }
+
+        .icon {
+            top: 0;
+            margin: 0 0 20px;
+            display: block;
+        }
+
+        .btn.btn-default {
+            margin: 10px auto 0;
+        }
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .long-block {
+        h2 {
+            font-size: @font-size-h3 + 2px;
+        }
+    }
+}
+
+@media (max-width: @screen-xs-min) {
+    .long-block .btn,
+    .long-block input { margin-top: 20px; }
+}

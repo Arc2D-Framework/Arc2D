@@ -1,0 +1,48 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Destroying Activities</h1>
+        <p>
+          During the <code>onExitActivity()</code>, you can perform any cleanup, such as clearing out the view-port for the next activity to enter in. If the view needs to be destroyed, simply tear it down but calling <code>.destroy()</code>
+        </p>
+        <p>
+            Destroy the view (activity):
+            <pre class="inline javascript lang">
+              <code>
+onExitCurrentActivity(current_activity){
+    //code to clear view-port here
+    current_activity.destroy();
+}
+              </code>
+            </pre>
+        </p>
+        <p>
+            Additionally, the router should be 
+            <pre class="inline javascript lang">
+              <code>
+onExitCurrentActivity(current_activity){
+    //code to clear view-port here
+    current_activity.destroy();
+}
+              </code>
+            </pre>
+        </p>
+       
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</template>

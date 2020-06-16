@@ -1,0 +1,210 @@
+/* ----------------------------------------------------------------------------
+    Featured tabs
+---------------------------------------------------------------------------- */
+
+.featured-tab {
+    position: relative;
+    font-size: 0;
+
+    .tab-content .tab-pane {
+        border: none;
+        padding: 0;
+    }
+}
+
+.featured-tab li > a {
+    display: block;
+
+    .tab-info {
+        float: left;
+        position: relative;
+        display: block;
+        width: 346px;
+        padding: 25px 28px;
+        text-align: left;
+        z-index: 2;
+    }
+
+    .tab-title {
+        &:extend(.base-clr-txt);
+
+        padding-bottom: 10px;
+        font-size: @font-size-large;
+        font-weight: @bold-weight;
+        text-transform: uppercase;
+        line-height: 1.23;
+    }
+
+    .tab-desc {
+        display: block;
+        font-size: @font-size-base;
+        font-weight: @thin-weight;
+        line-height: 1.86;
+        color: @text-gray;
+    }
+
+    .tab-icon {
+        float: right;
+        position: relative;
+        display: block;
+        width: 113px;
+        text-align: right;
+        z-index: 2;
+    }
+
+    .icon {
+        display: block;
+        padding: 46px 28px;
+        font-size: 50px;
+    }
+}
+
+.featured-tab li {
+    &.active > a {
+        .tab-info,
+        .tab-icon {
+            &:extend(.base-clr-bg);
+
+            .border-radius(5px 0 0 5px);
+        }
+
+        .tab-info .tab-title,
+        .tab-info .tab-desc,
+        .icon {
+            color: @text-white;
+        }
+    }
+
+    &:last-child > a .tab-info:after,
+    &:last-child > a .tab-icon:after,
+    &.active > a .tab-info:after,
+    &.active > a .tab-icon:after {
+        display: none;
+    }
+}
+
+
+
+@media (min-width: @screen-lg-min) {
+    .featured-tab {
+        margin-top: 115px;
+
+        li > a {
+            .clearfix();
+
+            .tab-info:after,
+            .tab-icon:after {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                display: block;
+                width: 99%;
+                content: '';
+                border-bottom: 1px solid fade(@white, 20%);
+            }
+
+            .tab-icon:after {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        li.active > a .tab-icon {
+            .border-radius(0 5px 5px 0);
+        }
+
+        .tab-content {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            padding: 0;
+            border: none;
+            z-index: 2;
+        }
+    }
+}
+
+@media (max-width: @screen-md-max) {
+    .featured-tab li {
+        margin-bottom: 40px;
+        display: inline-block;
+        width: 33%;
+        border-bottom: 1px solid fade(@white, 20%);
+        opacity: 0.7;
+
+        &.active {
+            opacity: 1;
+        }
+
+        & > a,
+        &.active > a {
+            .tab-info {
+                .border-radius(0);
+
+                width: 100%;
+            }
+
+            .tab-icon {
+                display: none;
+            }
+        }
+    }
+
+    .featured-tab .tab-content .tab-pane {
+        text-align: center;
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+    .featured-tab li {
+        border-bottom: 1px solid lighten(@gray, 20%);
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .featured-tab li {
+        width: 32%;
+        margin-bottom: 20px;
+    }
+
+    .featured-tab li{
+        & > a .tab-info {
+            width: 100%;
+            padding: 15px;
+            line-heigh: 1.07;
+
+            .tab-desc {
+                line-height: 1.4;
+            }
+        }
+
+        &.active a .tab-info {
+            .border-radius(0 5px 0 0);
+        }
+    }
+}
+
+@media (max-width: @screen-xs-min) {
+    .featured-tab li > a .tab-info {
+        .tab-title {
+            font-size: @font-size-base - 1px;
+        }
+
+        .tab-desc {
+            font-size: @font-size-small;
+        }
+    }
+}
+
+@media (max-width: @screen-xs-middle) {
+    .featured-tab li {
+        width: 100%;
+        border: none;
+        margin-bottom: 0;
+    }
+
+    .featured-tab .tab-content {
+        margin-top: 20px;
+    }
+}

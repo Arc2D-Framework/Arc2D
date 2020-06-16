@@ -1,0 +1,284 @@
+/* ----------------------------------------------------------------------------
+    Forms
+---------------------------------------------------------------------------- */
+
+
+.form {
+    .clearfix();
+
+    display: block;
+    width: auto;
+    padding: 25px 0 0;
+
+    &.form-inline {
+        display: inline-block;
+    }
+
+    &.form-dark {
+        background-color: fade(@black, 20%);
+        border-radius: 3px;
+    }
+
+    &.form-light {
+        background-color: lighten(@blue-light, 5%);
+        border-radius: 3px;
+    }
+
+
+    &.lead-form {
+        .box-shadow(0 3px 10px fade(@black, 16%));
+
+        margin: 0;
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 3px;
+    }
+
+    .form-group {
+        .clearfix();
+
+        position: relative;
+        margin-bottom: 25px;
+
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        &[class*="col-"] {
+            .btn,
+            button,
+            input[type="submit"] {
+                margin: 0;
+                width: 100%;
+                min-width: 0;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            textarea,
+            input[type=text],
+            input[type=url],
+            input[type=tel],
+            input[type=number],
+            input[type=color],
+            input[type=email],
+            input[type=email],
+            input[type=password] {
+                display: inline-block;
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+            }
+        }
+
+        label {
+            text-align: right;
+            line-height: 46px;
+            margin-bottom: 0;
+        }
+
+        .btn {
+            margin: 0 auto;
+        }
+
+        label.error {
+            position: absolute;
+            margin-top: 5px;
+            display: block;
+            font-size: @font-size-thin;
+            text-align: left;
+            line-height: 1;
+            color: lighten(@text-red, 15%);
+        }
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: block;
+    }
+
+    .form-control {
+        &:extend(.base-clr-bd);
+
+        .border-radius(0);
+        .box-shadow(none);
+
+        height: auto;
+        font-size: @font-size-large;
+        font-weight: @thin-weight;
+        background-color: @white;
+        border-style: solid;
+        border-width: 1px 1px 1px 3px;
+        border-top-color: darken(@gray-lighter, 7%);
+        border-right-color: darken(@gray-lighter, 7%);
+        border-bottom-color: darken(@gray-lighter, 7%);
+    }
+}
+
+.form.form-outline {
+    textarea,
+    input[type=text],
+    input[type=url],
+    input[type=tel],
+    input[type=number],
+    input[type=color],
+    input[type=email],
+    input[type=email],
+    input[type=password] {
+        border-width: 1px;
+        background-color: transparent;
+        border-radius: 2px;
+    }
+
+    &.form-outline-black {
+        textarea,
+        input[type=text],
+        input[type=url],
+        input[type=tel],
+        input[type=number],
+        input[type=color],
+        input[type=email],
+        input[type=email],
+        input[type=password] {
+            border-color: fade(@black, 90%);
+        }
+
+        .btn.btn-outline {
+            font-weight: 300;
+            color: @black;
+            border-color: @black;
+
+            &:hover,
+            &:active {
+                &:extend(.base-clr-txt);
+                &:extend(.base-clr-bd);
+            }
+        }
+    }
+
+    &.form-outline-white {
+        textarea,
+        input[type=text],
+        input[type=url],
+        input[type=tel],
+        input[type=number],
+        input[type=color],
+        input[type=email],
+        input[type=email],
+        input[type=password] {
+            color: @text-white-alt;
+            border-color: fade(@white, 90%);
+        }
+
+        ::-webkit-input-placeholder { color: @text-white-alt; }
+        ::-moz-placeholder          { color: @text-white-alt; }
+        :-moz-placeholder           { color: @text-white-alt; }
+        :-ms-input-placeholder      { color: @text-white-alt; }
+    }
+}
+
+textarea,
+input[type=text],
+input[type=url],
+input[type=tel],
+input[type=number],
+input[type=color],
+input[type=email],
+input[type=email],
+input[type=password] {
+    &:extend(.base-clr-bd);
+
+    .transition(~"color 0.2s ease, background 0.3s ease");
+    .border-radius(0);
+    .box-shadow(none);
+
+    margin: 0;
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    font-size: @font-size-large;
+    color: @text-alt;
+    background-color: @white;
+    border-style: solid;
+    border-width: 1px 1px 1px 3px;
+    border-top-color: darken(@gray-lighter, 7%);
+    border-right-color: darken(@gray-lighter, 7%);
+    border-bottom-color: darken(@gray-lighter, 7%);
+    outline: none;
+
+    &:hover,
+    &:focus {
+        color: @text-black;
+    }
+
+    &:not(textarea) {
+        height: 46px;
+        padding: 0 10px 0 20px;
+        line-height: 44px;
+    }
+
+    &.error {
+        background-color: @red-light;
+    }
+}
+
+textarea {
+    padding: 15px;
+    resize: vertical;
+    line-height: 20px;
+    min-height: 200px;
+}
+
+select {
+    min-height: 46px;
+
+    option {
+        padding: 2px 10px 0 20px;
+        min-height: 23px;
+    }
+}
+
+
+input[type=checkbox] {
+    .border-radius(0);
+
+    margin: 4px 15px 0 0;
+    -webkit-appearance: button;
+    width: 19px;
+    height: 19px;
+    color: @text-black;
+    border: 1px solid @gray-lighter;
+    background-color: @white;
+    cursor: pointer;
+
+    &:checked {
+        color: @text-black;
+
+        &:before {
+            position: relative;
+            top: -2px;
+            left: 3px;
+            content: '\2713';
+            font-size: 17px;
+            text-align: center;
+            line-height: 15px;
+            color: @text-gray-dark;
+        }
+    }
+}
+
+input[type=file]:focus,
+input[type=radio]:focus,
+input[type=checkbox]:focus {
+    outline: none;
+}
+
+
+
+@media (max-width: @screen-xs-max) {
+    .form .form-group {
+        padding-bottom: 20px;
+    }
+}

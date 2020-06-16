@@ -1,0 +1,87 @@
+project-explorer{
+    display: block;
+    color: white;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+
+project-explorer .title{
+    padding: 16px;
+    color: #919191;
+    background:#333333;
+}
+
+project-explorer #files{
+    min-height: 200px;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+
+
+
+project-explorer ul[role="tree"] {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 120%;
+}
+
+[role="treeitem"] {
+    color:#919191;
+    font-size: 14px;
+}
+
+[role="treeitem"] .fa{
+    margin-right:6px;
+    min-width: 15px;
+}
+
+[role="treeitem"].doc .fa::before {
+  content: "\f1c9";
+}
+
+[role="treeitem"] > ul {
+  display: none;
+}
+
+[role="treeitem"].expanded > ul {
+  display: block;
+  padding-left:10px;
+}
+
+[role="treeitem"] > span .fa::before {
+  content: "\f07b";
+}
+
+[role="treeitem"].expanded > span .fa::before {
+  content: "\f07c";
+  color:burlywood;
+}
+
+[role="treeitem"],
+[role="treeitem"] span {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 2px transparent solid;
+  display: block;
+}
+
+/* disable default keyboard focus styling for treeitems
+   Keyboard focus is styled with the following CSS */
+[role="treeitem"]:focus {
+  outline: 0;
+}
+
+[role="treeitem"].focus,
+[role="treeitem"] span.focus {
+  border-color: black;
+  background-color: #eee;
+}
+
+[role="treeitem"].hover,
+[role="treeitem"] span:hover {
+  /*background-color: #ddd;*/
+}

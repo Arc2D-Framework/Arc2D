@@ -1,5 +1,6 @@
 .XTest {
     background: gray;
-    background-image : resource("src/${ns}/test.png")
+    background-image : resource("src/${ns}/test.png");
+    display:block;
 }
 

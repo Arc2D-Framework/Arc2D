@@ -1,29 +1,26 @@
-import '/src/core/ui/Sample/index.js';
+import 'core.ui.SampleC';
 
-@tag("x-sample");
-@stylesheets(["/src/./index.css"]);
 @cascade(true);
-namespace("core.ui.SampleX", class extends core.ui.Sample{
-    constructor(element) {
-        super(element);
-        this.addEventListener('click', e => {
-            alert(this.namespace + ": " + e.target.tagName, e)
-        });
-        this.dispatchEvent(new CustomEvent('ready', {bubbles: true }))
-        return this;
-    }
+@stylesheets(["src/./test.css"]);
+namespace `core.ui` (
+    class SampleX extends core.ui.SampleC {
+        async onConnected (){
+            await super.onConnected();
+            // this.addEventListener('click', e => {
+            //     alert(this.namespace + ": " + e.target.tagName, e)
+            // });
+            // this.dispatchEvent(new CustomEvent('ready', {bubbles: true }))
+            // return this;
+        }
 
-    onConnected (){
-        this.render();
-    }
+        setRed (){
+            this.classList.add("red")
+        }
 
-    setRed (){
-        this.classList.add("red")
+        template(){ return `
+            <template>
+                <b>asd</b>
+            </template>
+        `}
     }
-
-    template(){ return `
-        <template>
-            <b>x-slot: <slot name="x-sample"></slot></b>
-        </template>
-    `}
-});
+);

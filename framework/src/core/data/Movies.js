@@ -1,5 +1,7 @@
-import '/framework/resources/repositories.js';
+import '/resources/repositories.js';
 import '/framework/src/core/data/Repository.js';
+import '/framework/src/core/drivers/storage/Memory.js';
+
 
 namespace `core.data` (
 	class Movies extends core.data.Repository {
@@ -11,3 +13,5 @@ namespace `core.data` (
         }
 	}
 );
+
+

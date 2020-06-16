@@ -1,0 +1,20 @@
+.TocMenu {
+	overflow: auto;
+    scrollbar-width: none;
+}
+
+.TocMenu::-webkit-scrollbar { display: none; }
+
+.TocMenu ol > li > a.active {
+	background:#d2cbe2;
+}
+
+
+.TocMenu ol > li.disabled {
+	opacity:.3;
+	pointer-events:none;
+}
+
+.TocMenu .toc li.expand ol {
+    max-height: 1000px !important;
+}

@@ -1,0 +1,143 @@
+// ------------------------------------------------
+//  Variables
+// ------------------------------------------------
+
+
+//== Base Colors
+
+@black:                     #000;
+@black-alt:                 #1d1d1d;
+@white:                     #fff;
+@white-alt:                 #f0f0f0;
+@gray:                      #8d8d8d;
+@gray-dark:                 #606060;
+@gray-darker:               #303030;
+@gray-light:                #b5b5b5;
+@gray-lighter:              #e9e9e9;
+
+@green:                     #39c8b7;
+@blue:                      #1ac6ff;
+@pink:                      #ff5f9b;
+@berry:                     #fe6760;
+@orange:                    #ff7200;
+
+@red-light:                 #fae2e2;
+@green-light:               #d8f0e4;
+@blue-light:                #e2f6fa;
+@yellow-light:              #faf3e2;
+
+@red-dark:                  #ad5254;
+@green-dark:                #68a74c;
+@blue-dark:                 #4c95a4;
+@yellow-dark:               #a68128;
+
+@text-black:                @black;
+@text-black-alt:            @black-alt;
+@text-white:                @white;
+@text-white-alt:            @white-alt;
+@text-gray:                 @gray-dark;
+@text-gray-dark:            @gray-darker;
+@text-gray-light:           @gray-light;
+@text-alt:                  @gray;
+
+@text-red:                  @red-dark;
+@text-green:                @green-dark;
+@text-blue:                 @blue-dark;
+@text-yellow:               @yellow-dark;
+
+@body-color:                @white;
+@text-color:                @black-alt;
+@alt-color:                 @gray;
+@text-base-color:           @base-color;
+
+//== Typography
+
+// Font family
+@font-family-lato:          "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+@font-family-pt-sans:       "PT Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+@font-family-impact:        Impact, sans-serif;
+@font-family-fontawesome:   "Fontawesome";
+@font-family-line-icons:    "line-icons";
+
+@font-family-base:          @font-family-pt-sans;
+@font-family-heading:       @font-family-lato;
+@font-family-icons:         @font-family-fontawesome;
+@font-family-icons-alt:     @font-family-line-icons;
+
+// Font size
+@font-size-base:            16px;
+@font-size-large:           17px;
+@font-size-small:           14px;
+@font-size-thin:            12px;
+
+@font-size-h1:              58px;
+@font-size-h2:              45px;
+@font-size-h3:              34px;
+@font-size-h4:              28px;
+@font-size-h5:              24px;
+@font-size-h6:              @font-size-large;
+
+// Font weight
+@thin-weight:               300;
+@normal-weight:             400;
+@semibold-weight:           500;
+@bold-weight:               700;
+
+
+//== Media queries breakpoints
+
+// Extra small screen / phone
+@screen-2xs:                340px;
+@screen-xs:                 480px;
+@screen-xs-middle:          540px;
+@screen-xs-min:             @screen-xs;
+@screen-phone:              @screen-xs-min;
+
+// Small screen / tablet
+@screen-sm:                 768px;
+@screen-sm-min:             @screen-sm;
+@screen-tablet:             @screen-sm-min;
+
+// Medium screen / desktop
+@screen-md:                 992px;
+@screen-md-min:             @screen-md;
+@screen-desktop:            @screen-md-min;
+
+// Large screen / wide desktop
+@screen-lg:                 1200px;
+@screen-lg-min:             @screen-lg;
+@screen-lg-desktop:         @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:             (@screen-sm-min - 1);
+@screen-sm-max:             (@screen-md-min - 1);
+@screen-md-max:             (@screen-lg-min - 1);
+
+
+//== Grid system
+
+@grid-columns:              12; // Number of columns in the grid.
+@grid-gutter-width:         30px; // Padding between columns. Gets divided in half for the left and right.
+@grid-float-breakpoint:     @screen-sm-min; // Point at which the navbar becomes uncollapsed.
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1); // Point at which the navbar begins collapsing.
+
+
+//== Container sizes
+
+// Small screen / tablet
+@container-tablet:          (720px + @grid-gutter-width);
+@container-sm:              @container-tablet;
+
+// Medium screen / desktop
+@container-desktop:         (940px + @grid-gutter-width);
+@container-md:              @container-desktop;
+
+// Large screen / wide desktop
+@container-large-desktop:   (1140px + @grid-gutter-width);
+@container-lg:              @container-large-desktop;
+
+
+//== Paths
+
+// Images base path
+@img-path:                  '../img/';

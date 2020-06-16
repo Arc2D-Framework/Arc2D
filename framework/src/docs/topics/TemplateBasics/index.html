@@ -1,0 +1,154 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Templating Basics</h1>
+        <p>
+          A WebComponent template is parsed and rendered at onConnected() time. By default,
+          the base-class WebComponent implements onConnected() and dispatches a call to .render(),
+          which simply renders the template tag visually. The template fragment becomes the HTML view of the component.
+        </p>
+        <p>
+        	At minimum, a class (right-pane) that extends WebComponent will be rendered for you
+        	when the component is used (see: <a href="#docs.topics.ComponentUsage">Component Usage</a>).
+        	Essentially, your class could be mostly empty while you focus on the HTML/CSS skin.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+			<blockquote class="javascript" style="display:block;width: 100%;">
+            The minimum class with an empty body. It's all you need to render your component, given that you have a template file.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+    class ModalDialog extends w3c.ui.WebComponent {
+        
+    }
+);</code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Render manually</h1>
+        <p>
+          onConnected(), in most cases will be overridden in your custom 
+          components to wire-up listeners and manipulate the components
+          local DOM - a W3C recommendation, not from the constructor.
+        </p>
+        <p>
+          When implementing onConnected() in your components, it is advisable to invoke super.onConnected() before any DOM manipulations so that the base-class handles the .render() call for generating the DOM before you can manipulate it as seen in the JavaScript example (right-pane).
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            When overriding onConnected(), call super.onConnected() to render the components DOM
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+    class ModalDialog extends w3c.ui.WebComponent {
+        onConnected() {
+            super.onConnected();
+            this.addEventListener("click", e => this.onClick(e));
+    	}
+
+    	onClick(e){
+            console.log("got a click on ", e.target)
+    	}
+    }
+);</code></pre>
+
+
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            If super.onConnected() is never called, the components DOM never
+            renders. You will not be able to query child nodes.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+    class ModalDialog extends w3c.ui.WebComponent {
+        onConnected() {
+            var title = this.querySelector("span.title");
+            alert(title) //will not be found; null
+    	}
+    }
+);</code></pre>
+
+
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            super.onConnected() does just one thing, it calls .render() for you. So alternatively,
+            you could just .render() yourself.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+    class ModalDialog extends w3c.ui.WebComponent {
+        onConnected() {
+            this.render();//DOM is ready
+            var title = this.querySelector("span.title");
+            alert(title) //found it :)
+    	}
+    }
+);</code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Rendering Custom DOM</h1>
+        <p>
+          It's possible that you may never want to invoke super.onConnected() for template rendering because you intend to generate the components DOM with some sort of algorithm or dynamic html generation aspects (see Javascript snippet tab). This is necessary if you plan to loop over a JSON data-set and manually create table rows for example using the DOM api. 
+        </p>
+        <p>
+        	<em>Alternatively</em>, JSON data could be injected into .render(data) or super.onConnected(data), to generate HTML using any open-source templating engine available (Mustache, Handlebars, ES6 Template Literals) - we'll cover this strategy in <a href="#docs.topics.PluggableTemplateEngines">Pluggable Engines</a>.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+			<blockquote class="javascript" style="display:block;width: 100%;">
+            Not relying on super.onConnected(). Generating DOM the traditional way with document.createElement().
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+    class ModalDialog extends w3c.ui.WebComponent {
+        onConnected() {
+            var data = {firstname: 'Sam', age:32};
+            var name = document.createElement('my-custom-element');
+                name.innerHTML = &#x60;
+                &#x3C;template&#x3E;
+                    &#x3C;label&#x3E;&#36;{data.firstname}&#x3C;/label&#x3E;
+                &#x3C;/template&#x3E;&#x60;;
+            var age = document.createElement('span');
+                age.innerHTML = &#x60;&#36;{data.age}&#x60;;
+            
+            //add nodes to DOM
+            this.appendChild(name);
+            this.appendChild(age);
+        }
+    }
+);</code></pre>
+<blockquote class="javascript" style="display:block;width: 100%;">
+            Shown here is a custom component, &#x3C;my-custom-element&#x3E;, being used with document.createElement(), having an inline &#x3C;template&#x3E;. In the same way, a loop can be used to generate tables. But there's a a better way using a template-engine, as we'll soon see.
+          </blockquote>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+  </div>
+</template>
