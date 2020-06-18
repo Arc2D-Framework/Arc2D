@@ -6,7 +6,7 @@
     "author": "jaysmith024 <jaysmith024@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "http-server ./ -p 3001 -g -o doc.html",
+        "start": "http-server ./ -p 3001 -g -o framework/doc.html",
         "seam": "node --inspect node_modules/od-seam/index.js",
         "plop": "plop"
     },
@@ -21,6 +21,7 @@
     },
     "devDependencies": {
         "od-toolset": "github:Nashorn/od-toolset#1.0.0",
-        "od-seam": "github:Nashorn/od-seam#1.0.0"
+        "od-seam": "github:Nashorn/od-seam#1.0.0",
+        "od-plopgen-templates": "github:Nashorn/od-plopgen-templates#1.0.0"
     }
 }
