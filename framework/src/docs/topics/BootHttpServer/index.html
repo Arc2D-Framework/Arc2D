@@ -1,0 +1,85 @@
+<template>
+  <div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Using <code style="font-size: inherit !important;">http-server</code> Module?</h1>
+        <p>
+         Modify the <code>start</code> command in package.json to use <code>http-server</code>.
+         <pre class="inline json lang"><code>"scripts": {
+    "start": "http-server ./ -p 3000 -g -o index.html",
+    ...
+}</code></pre>
+        </p>
+        <p>
+            Read more about the <a href="https://www.npmjs.com/package/http-server" target="new"><code>http-server</code> module</a> to learn what
+            options are possible when booting. The above command will simply
+            boot the server on your current ./ Arc project folder, at port 3000 and opens
+            your browser to index.html for you.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+      </div>
+    </div>
+
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Booting a local server</h1>
+        <p>
+          The instructions for booting the <code>http-server</code> remains the same:
+          <ol>
+            <li><code>cd</code> into your project</li>
+            <li>run <code>npm start</code></li>
+          </ol>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <blockquote class="shell" style="display:block;width: 100%;">
+          <code>cd</code> into the your project folder
+        </blockquote>
+        <pre class="highlight shell" style="display:block;width: 100%;"><code>> cd Documents/Development/ArcEngine/</code>
+      </pre>
+      <blockquote class="shell" style="display:block;width: 100%;">
+          Then, run:
+        </blockquote>
+        <pre class="highlight shell" style="display:block;width: 100%;"><code>> npm start</code>
+      </pre>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Open in browser</h1>
+        <p>
+          You can now access the example index.html. Open your browser to:<br/>
+          <a href="http://localhost:3000" target="_new">http://localhost:3000</a>
+        </p>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Revert to the built-in lite server?</h1>
+        <p>
+         If you wish to revert to the built-in server that ships with the install of Arc, modify the <code>start</code> command in package.json to this:
+         <pre class="inline json lang"><code>"scripts": {
+    "start": "node node_modules/od-server/main.js 3000",
+    ...
+}</code></pre>
+        </p>
+        <p>
+            <em style="color:red;">Important</em>
+            The built-in server that ships with Arc is only for testing and is extremely lite-weight and never recommended for production use.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+      </div>
+    </div>
+  </div>
+</template>

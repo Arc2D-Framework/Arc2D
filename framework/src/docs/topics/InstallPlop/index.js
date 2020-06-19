@@ -1,5 +1,5 @@
 namespace `docs.topics` (
-	class PlopGenerator  extends docs.topics.Topic  {
+	class InstallPlop  extends docs.topics.Topic  {
 		applyHighlighting(){
         	super.applyHighlighting();
             var code = Array.from(this.querySelectorAll(".inline.javascript.lang"));
