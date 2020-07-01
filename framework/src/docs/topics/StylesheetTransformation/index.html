@@ -45,5 +45,149 @@
         <div class="css lang"></div>
       </div>
     </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">What Happens?</h1>
+        <p>
+          As mentioned in the StyleSheet life-cycle chapter, the onTransformStyle() can be implemented in your component classes to take as input (string), the components CSS text, you may then apply logic to process it somehow and return back valid css text from this function. 
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">How it works</h1>
+        <p>
+          Remember, all components have 3 files in their namespaced folders: the .css, .js and .html.
+          During the components StyleSheet life-cycle, the css is loaded and sent as an argument, to your
+          components onTransformStyle() method, IF you had implemented it in the Class of your component. 
+        </p>
+        <p>
+          So let's imagine a scenario of implementing onTransformStyle() method in a fictional HelloWorld
+          component. 
+          <pre class="inline javascript lang">
+            <code>
+namespace \`core.samples\` (
+    class HelloWorld extends WebComponent {
+        onTransformStyle(cssText){
+            return cssText.replace(/COMPONENT_PATH/gm, "/src/core/samples/HelloWorld/");
+        }
+    }
+);
+            </code>
+          </pre>
+        </p>
+        <p>
+          Self explanatory. What can we infer from the logic? Well, our HelloWorld's index.css file, stored in
+          the namespaced folder location at: <code>/src/core/samples/HelloWorld/index.css</code>, contains CSS
+          that has url() paths to images it seems.
+        </p>
+        <p>
+          Further, the paths have a token "COMPONENT_PATH" which means nothing to css. So, we replaced it with
+          a relative path to the HelloWorlds component folder. Now we are able to store images in our namespaced folders
+          and the paths should propaly resolve.
+        </p>
+        <p>
+          The fictional HelloWorld's index.css might resemble this on disk:
+          <pre class="inline css lang">
+            <code>
+.HelloWorld {
+  display:block;
+}
+
+.HelloWorld #logo {
+  background-image : url(COMPONENT_PATH/logo.png)
+}
+            </code>
+          </pre>
+        </p>
+        <p>
+          After being transformed, the component now sees this css
+          <pre class="inline css lang">
+            <code>
+.HelloWorld {
+  display:block;
+}
+
+.HelloWorld #logo {
+  background-image : url(/src/core/samples/HelloWorld/logo.png)
+}
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">When should css transformations be used?</h1>
+        <p>
+          Good cases are mentioned above in the introductory paragraph. Maybe you'd
+          like to code your css in LESS, then use the LESS api during onTransformStyle() to
+          parse and return valid css.
+        </p>
+        <p>
+          Other good cases, maybe your css needs aa dynamic px value that only your component
+          can compute at runtime. So similar to the "COMPONENT_PATH" token invented above, one
+          can invent a similar token for a DYNAMIC_LOGO_HEIGHT for example, then within transformation,
+          compute the Math height and replace the css token.
+          <pre class="inline css lang">
+            <code>
+.HelloWorld {
+  display:block;
+}
+
+.HelloWorld #logo {
+  background-image : url(/src/core/samples/HelloWorld/logo.png);
+  height: DYNAMIC_LOGO_HEIGHT;
+}
+            </code>
+          </pre>
+        </p>
+        <p>
+          And transform
+          <pre class="inline javascript lang">
+            <code>
+onTransformStyle(cssText){
+  var offset=3;
+  var logo_height = Math.round(120-offset/2) + "px"; //who knows :)
+
+  cssText = cssText.replace(/COMPONENT_PATH/gm, "/src/core/samples/HelloWorld/");
+  cssText = cssText.replace(/DYNAMIC_LOGO_HEIGHT/, logo_height);
+  return cssText;
+}
+            </code>
+          </pre>
+        </p>
+        <p>
+          See what you can imagine but remember there is an expense to it, that if used widely
+          could impact performance, but a few cases should not.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
   </div>
 </template>
