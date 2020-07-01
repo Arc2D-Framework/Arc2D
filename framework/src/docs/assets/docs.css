@@ -696,8 +696,9 @@ article.article .lang-selector:after {
   line-height: 1.5;
   font-size: 12px;
   font-family: "Monaco", "consolas", monospace;
-  white-space: pre-wrap;
   word-break: break-all;
+  white-space: pre;
+  overflow:auto;
 }
 .content blockquote {
   padding: 20px 28px;

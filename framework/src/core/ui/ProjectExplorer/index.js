@@ -1,4 +1,5 @@
 import 'core.ui.ExplorerPanel';
+import '/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
 
 namespace `core.ui` (
     class ProjectExplorer extends core.ui.ExplorerPanel {

@@ -1,0 +1,87 @@
+<template>
+  <div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">A simple Namespace points to a JavaScript file</h1>
+        <p>
+            A namespace is a unique identifier. It contains 2 parts:
+            <ul>
+              <li>A folder structure (using dots)</li>
+              <li>A Class (file)</li>
+            </ul>
+            Consider it "fully-qualified" when both parts come together. <em>Experiment</em> below.
+            Create a fully-qualified namespace and observe the equivelent JavaScript under the JavaScript tab.
+            Pay attention to where the .js file is saved. 
+            <!-- A social security number is a set of digits that uniquely identify an individual in the united states. Licenses plates numbers also identify drivers with their automobiles. Addresses also identify a geographic location semantically. Meaning, an address is composed of several parts:
+            A street name, street #, city, state and zip. -->
+            <namespace-explorer></namespace-explorer>
+            <!-- <pre class="inline javascript lang"><code>onConnected() {
+    this.render({items : await Movies.find()});
+}</code></pre> -->
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            The class declared below is fully-qualified and accessible
+            anytime using the namespace <strong><code id="msg-ns" style="display:inline;">core.ui.Dog</code></strong>
+            Edit the namespace on the left to see the code changes.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code id="ns-code-block">
+namespace \`core.ui\` (
+    class Dog {
+        
+    }
+);
+        </code></pre>
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            <em style="color:red;">Important:</em> The above code should be saved in the related folder structure:<br/>
+            <span id="where_to_save">src/core/ui/Dog.js</span>
+          </blockquote>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Simple Namespaces</h1>
+        <p>
+            Every new javascript file you create in the Arc platform will
+            have a unique address, or namespace, that points to a Class that
+            is saved as a single .js file. This is different from a <a href="#docs.topics.ComponentNamespaces">Component Namespace</a>, that points to a folder as we'll see in the <a href="#docs.topics.ComponentNamespaces">next section</a>.
+        </p>
+        <p>
+          In the above example, the fully-qualified namespace, <code><span id="why_fqns_1">XXX</span></code>, is saved in 
+          the matching folder structure at <span id="where_to_save_1">YYY</span>.
+
+          The Class <code><span id="classname_1">ZZZ</span></code>, is the only class definition in that JavaScript file.
+          Do not attempt to lump many classes into a .js file. The rule then is:
+          <em>One class per Javascript file on disk!</em>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</template>

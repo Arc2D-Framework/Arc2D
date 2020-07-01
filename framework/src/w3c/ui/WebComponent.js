@@ -299,21 +299,53 @@ namespace `w3c.ui` (
             }
         }
 
+        // defineAncestralStyleList(){
+        //     var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
+        //     if(this.onLoadInstanceStylesheet()){stylesheets.push(this.getNSStyleSheet(this.namespace))}
+        //         stylesheets.push(...this.prototype["@stylesheets"]||[]);
+        //     if(!this['@cascade']){return}
+        //     var ancestor = this.__proto.ancestor
+
+        //     while(ancestor) {
+        //         if( ancestor != w3c.ui.WebComponent && 
+        //             ancestor != w3c.ui.Application){
+                    
+        //             stylesheets.unshift(...ancestor.prototype["@stylesheets"]||[]);
+        //             stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
+        //             ancestor = ancestor.prototype.ancestor;
+        //         } else { break }
+        //     }
+        // }
+
         defineAncestralStyleList(){
             var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
-            if(this.onLoadInstanceStylesheet()){stylesheets.push(this.getNSStyleSheet(this.namespace))}
-                stylesheets.push(...this.prototype["@stylesheets"]||[]);
-            if(!this['@cascade']){return}
+            if(this.onLoadInstanceStylesheet()){
+                stylesheets.push(this.getNSStyleSheet(this.namespace))
+            }
+            stylesheets.push(...this.prototype["@stylesheets"]||[]);
+            if(!this['@cascade']){
+                return
+            }
             var ancestor = this.__proto.ancestor
 
             while(ancestor) {
                 if( ancestor != w3c.ui.WebComponent && 
-                    ancestor != w3c.ui.Application){
+                    ancestor != w3c.ui.Application  &&
+                    ancestor != core.ui.World       &&
+                    ancestor.prototype.onLoadInstanceStylesheet() ){
                     
                     stylesheets.unshift(...ancestor.prototype["@stylesheets"]||[]);
                     stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
                     ancestor = ancestor.prototype.ancestor;
-                } else { break }
+
+                    //TODO: What if current ancestor is not cascading?
+                    //TODO: What if the next ancestor is not cascading?
+                    // if(!ancestor.prototype['@cascade']){
+                    //     break;
+                    // }
+                } else { 
+                    break 
+                }
             }
         }
 

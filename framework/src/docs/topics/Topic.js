@@ -20,8 +20,8 @@ namespace `docs.topics` (
             }
         }
 
-        onConnected() {
-            super.onConnected()
+        async onConnected() {
+            await super.onConnected()
             setTimeout(_=>this.applyHighlighting(),1000);
             this.onLanguageChange();
 

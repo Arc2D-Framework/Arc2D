@@ -1,91 +1,96 @@
 <template>
   <div>
 
-    
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
-      <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Component Namespaces</h1>
-        <p>
-          We covered Namespaces earlier in the the "Language & Syntax" topic but
-          there is emphasis for using namespaces with your components classes.
-        </p>
-      </div>
-      <div style="width: 50%;display: block;">
-        <div class="shell lang"></div>
-        <div class="javascript lang"></div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
-      </div>
-    </div>
 
 
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Namespaces must match folder structure!</h1>
+        <h1 id="api-reference">Component Namespaces point to a folder</h1>
         <p>
-          You see this often in Java and even C# projects. Your class namespace should*
-          reside in the same folder structure. Said differently, aim to mirror the folder
-          structure to namespaced javascript class files.
-          <img src="src/docs/images/cover_flow_dir_structure.png" style="float:right; width:200px;margin-top: 34px;"/>
-        </p>
-        <p>
-          <em>Again, if you have a component, "CoverFlow" defined in the namespace, "core.ui". Then
-          the directory structure should mirror the fully-qualified namespace (FQNS): /core/ui/CoverFlow/</em>
-        </p>
-      </div>
-      <div style="width: 50%;display: block;">
-        <div class="shell lang"></div>
-        <div class="javascript lang"></div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
-      </div>
-    </div>
-
-
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
-      <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Folder structure revisited. Component Packaging</h1>
-        <p>
-          The topic, <a href="#docs.topics.ComponentPackaging">Component Packaging</a> discusses folder structure in depth.
+            A component namespace is an identifier no different from previous chapter on simple namespaces. It also contains the same 2 tokens (parts), that is fully-qualified when looked at as a whole:
+            <ul>
+              <li>A folder structure (using dots)</li>
+              <li>A Class (file)</li>
+            </ul>
+            <p>
+            Consider it "fully-qualified" when both parts come together. Experiment below.
+            Create a fully-qualified <strong>component namespace</strong> and observe the equivelent files that you would have created for your custom HTML Component: see the <em>JavaScript, HTML and CSS</em> tabs for matching files that should be saved in the components folder together as a bundle of 3 files.
+          </p>
+            <namespace-explorer>
+              <span slot="ns">core.ui</span>
+              <span slot="class">Calculator</span>
+            </namespace-explorer>
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
         <div class="javascript lang">
-          <blockquote class="javascript" style="display:block;width: 100%;">
-            src/core/ui/CoverFlow/index.js:
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            The web component declared below is fully-qualified and accessible
+            anytime using the namespace <strong><code id="msg-ns" style="display:inline;">core.ui.Dog</code></strong>
+            Edit the namespace on the left to see the code changes.
           </blockquote>
-          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code id="ns-code-block">
 namespace \`core.ui\` (
-  class CoverFlow extends w3c.ui.WebComponent {
-
-  }
-)
-        </code></pre>
+    class Dog {
+        
+    }
+);
+</code></pre>
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            <em style="color:red;">Important:</em> The above code should be saved in the related folder structure:<br/>
+            <span id="where_to_save">src/core/ui/Dog.js</span>
+          </blockquote>
         </div>
         <div class="html lang">
           <blockquote class="html" style="display:block;width: 100%;">
-            src/core/ui/CoverFlow/index.html:
+            index.html, the 2nd file of the component, bundled in the same folder along
+            with it's siblings, the Javascript (index.js) and CSS (index.css).
           </blockquote>
-          <pre class="highlight html" style="display:block;width: 100%;"><code>
+          <pre class="highlight html" style="display:block;width: 100%;"><code id="html-code-block">
 &#x3C;template&#x3E;
-    &#x3C;div&#x3E;cover flow ui&#x3C;/div&#x3E;
+  &#x3C;div&#x3E;
+    &#x3C;!-- HTML UI HERE --&#x3E;
+  &#x3C;/div&#x3E;
 &#x3C;/template&#x3E;
-        </code></pre>
+</code></pre>
+<blockquote class="html" style="display:block;width: 100%;">
+            index.html holds a template fragment that makes up the UI for this component only.
+          </blockquote>
         </div>
         <div class="css lang">
           <blockquote class="css" style="display:block;width: 100%;">
-            src/core/ui/CoverFlow/index.css:
+            index.css is the 3rd file of the component and is bundled in the same folder along
+            with it's siblings, the Javascript (index.js) and the HTML fragment (index.html).
           </blockquote>
-          <pre class="highlight css" style="display:block;width: 100%;"><code>
-.CoverFlow {
-  display:block;
-}
-        </code></pre>
+          <pre class="highlight css" style="display:block;width: 100%;"><code id="css-code-block">
+</code></pre>
         </div>
       </div>
     </div>
+
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Simple Namespaces</h1>
+        <project-explorer></project-explorer>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
 
   </div>
 </template>

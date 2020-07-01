@@ -1,4 +1,4 @@
-import "/framework/src/core/drivers/templating/Nunjucks/nunjucks.js";
+import "/src/core/drivers/templating/Nunjucks/nunjucks.js";
 
 (() => {
     var NunjucksDriver = {
