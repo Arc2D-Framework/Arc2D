@@ -56,7 +56,8 @@ namespace \`core.ui\` (
 &#x3C;/template&#x3E;
 </code></pre>
 <blockquote class="html" style="display:block;width: 100%;">
-            index.html holds a template fragment that makes up the UI for this component only.
+            <em style="color:red;">Important:</em> The above html template should be saved in the component's folder structure:<br/>
+            <span id="where_to_save_html">src/core/ui/index.html</span>
           </blockquote>
         </div>
         <div class="css lang">
@@ -66,6 +67,10 @@ namespace \`core.ui\` (
           </blockquote>
           <pre class="highlight css" style="display:block;width: 100%;"><code id="css-code-block">
 </code></pre>
+<blockquote class="css" style="display:block;width: 100%;">
+            <em style="color:red;">Important:</em> The above css fragment should be saved in the component's folder structure:<br/>
+            <span id="where_to_save_css">src/core/ui/index.css</span>
+          </blockquote>
         </div>
       </div>
     </div>
@@ -75,10 +80,46 @@ namespace \`core.ui\` (
 
 
 
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+    <!-- <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Simple Namespaces</h1>
         <project-explorer></project-explorer>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div> -->
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Importing a component namespaces</h1>
+        <p>
+          Importing a component can be done in 1 of 2 ways:
+          <ul>
+            <li>By it's file path</li>
+            <li>By it's fully-qualified namespace</li>
+          </ul>
+          Let's look at both, with the recommendation of using the latter approach.
+        </p>
+        <p>
+          By file path:
+          <pre class="inline javascript lang"><code>import '/src/core/ui/Dog/index.js';</code>
+          </pre>
+        </p>
+        <p>
+          By it's fully qualified namespace (fqns):
+          <pre class="inline javascript lang"><code>import 'core.ui.Dog';</code>
+          </pre>
+        </p>
+        <p>
+          Both equivelent, but the latter namespace-import approach is more elegant, intuitive and
+          resembles the syntax of Java and C++.
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -90,6 +131,87 @@ namespace \`core.ui\` (
 
 
 
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">When to import?</h1>
+        <p>
+          Import other components you've created from other locations in code at anytime you need to use it. Imports happen statically, different from dynamic importing.
+          It is considered static becaause it happens without conditions, without
+          logical branching, not a drawback at all, but works by design similar to Java and the nodejs
+          <code>require()</code> statement.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">What happens during an import?</h1>
+        <p>
+          Importing other components or classes that you've created are considered dependencies. During 
+          an import, Arc resolves the imported statement (path or fqns), temporaarily freezes code execution
+          at that line, downloads the file, then continues on with code execution.
+        </p>
+        <p>
+          It is guranteed that by the time your code is ready to use the dependency, it will be available in memory, just-in-time.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Won't imports slow down my app's load time?</h1>
+        <p>
+          Yes and no. If you find yourself importing 20 or more dependencies,
+          each pause in code execution to wait for download will hold up code execution.
+          But with a limited set of imports which is more common, the effects won't be much noticeable.
+        </p>
+        <p>
+          This development strategy is recommended during development and testing, but should be
+          prefabricated when releasing a production build.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Any way to optimize?</h1>
+        <p>
+          Yes. In the topic, "Prefabs", we'll examine a strategy for stitching together
+          every dependency into a single compiled file that will load in 1 step. No more
+          execution pausing. But should not be done until you're ready for a production
+          release.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
 
 
   </div>

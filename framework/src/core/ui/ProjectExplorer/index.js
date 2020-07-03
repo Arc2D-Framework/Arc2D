@@ -16,7 +16,7 @@ namespace `core.ui` (
             // var filetree = this.ft.build();
             //     filetree.expanded=true;
             // console.log("filetree",filetree);
-            var ft = await (await fetch("../../../resources/data/code-editor-filetree.json")).json()
+            var ft = await (await fetch("../../../framework/src/core/ui/ProjectExplorer/data/filetree.json")).json()
             await super.onConnected({item:ft});
             
             this.addEventListener("click", e=>this.onToggleExpand(e), false, "li[aria-expanded]")
@@ -30,8 +30,6 @@ namespace `core.ui` (
             var el = await new this;
             pane.appendChild(el)
         }
-
-
 
         async onRefresh(e){
             e.preventDefault();

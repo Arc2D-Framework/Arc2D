@@ -1,4 +1,7 @@
 <template>
+  <style>
+    /*@import url(./src/core/ui/ProjectExplorer/index.css);*/
+  </style>
     <div>
         <div class="title">Explorer
           <span class="icons-try">
@@ -11,7 +14,7 @@
                 {% if item.type == "directory" %}
                   <li role="treeitem" aria-expanded="false" path="{{item.path}}" class="{% if item.expanded %}expanded{% endif %}">
                       <span>
-                        <i class="fa"></i>{{item.name}}
+                        <img src="https://icons.iconarchive.com/icons/hopstarter/sleek-xp-basic/24/Folder-icon.png" style="height: 18px;vertical-align: middle;margin-right: 3px;margin-top: -3px;"/>{{item.name}}
                       </span>
                       {% if item.children %}
                         <ul role="tree" aria-expanded="false">
@@ -24,7 +27,7 @@
                 {% else %}
                     <li role="treeitem" class="doc" path="{{item.path}}" ext="{{item.extension}}">
                       <span>
-                        <i class="fa"></i>{{item.name}}
+                        <img src="./src/core/ui/ProjectExplorer/images/{{item.extension}}.png" style="height: 18px;vertical-align: middle;margin-right: 3px;margin-top: -3px;"/>{{item.name}}
                       </span>
                     </li>
                 {% endif %}

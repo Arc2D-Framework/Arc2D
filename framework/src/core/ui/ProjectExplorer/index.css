@@ -1,17 +1,17 @@
-project-explorer{
+:host {
     display: block;
     color: white;
     border-bottom: 1px solid #3a3a3a;
 }
 
 
-project-explorer .title{
+:host .title{
     padding: 16px;
     color: #919191;
     background:#333333;
 }
 
-project-explorer #files{
+:host #files{
     min-height: 200px;
     padding: 10px;
     max-height: 300px;
@@ -21,7 +21,7 @@ project-explorer #files{
 
 
 
-project-explorer ul[role="tree"] {
+:host ul[role="tree"] {
   margin: 0;
   padding: 0;
   list-style: none;

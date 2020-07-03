@@ -61,7 +61,7 @@ namespace `w3c.ui` (
                 try{
                     var style = new CSSStyleSheet();
                     style.replace(stylesheet.innerText);
-                    this.root.adoptedStyleSheets = [stylesheet];
+                    this.adoptedStyleSheets = [stylesheet];
                 } catch(e){
                     //TODO: use error code
                     console.error(`${e.message} Unable to adopt stylesheet 

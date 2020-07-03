@@ -14,6 +14,8 @@ namespace `docs.topics` (
 
             this.msg_ns = this.querySelector("#msg-ns");
             this.where_to_save = this.querySelector("#where_to_save");
+            this.where_to_save_css = this.querySelector("#where_to_save_css");
+            this.where_to_save_html = this.querySelector("#where_to_save_html");
 
             this.why_fqns_1 = this.querySelector("#why_fqns_1");
             this.where_to_save_1 = this.querySelector("#where_to_save_1");
@@ -40,6 +42,8 @@ namespace `docs.topics` (
 
             this.msg_ns.textContent=s;
             this.where_to_save.innerHTML = "src/" + s.replace(/\./g,"/") + "/index.js";
+            this.where_to_save_css.innerHTML = "src/" + s.replace(/\./g,"/") + "/index.css";
+            this.where_to_save_html.innerHTML = "src/" + s.replace(/\./g,"/") + "/index.html";
             // this.where_to_save_1.innerHTML = "src/" + s.replace(/\./g,"/") + ".js";
             // this.why_fqns_1.innerHTML = s;
             // this.classname_1.innerHTML = this.cls;

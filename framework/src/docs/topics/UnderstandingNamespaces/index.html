@@ -82,6 +82,44 @@ namespace \`core.ui\` (
 
 
 
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Importing a namespace</h1>
+        <p>
+          Importing a Class can be done in 1 of 2 ways:
+          <ul>
+            <li>By it's file path</li>
+            <li>By it's fully-qualified namespace</li>
+          </ul>
+          Let's look at both, with the recommendation of using the latter approach.
+        </p>
+        <p>
+          By file path:
+          <pre class="inline javascript lang"><code>import '/src/core/ui/Dog.js';</code>
+          </pre>
+        </p>
+        <p>
+          By it's fully qualified namespace (fqns):
+          <pre class="inline javascript lang"><code>import! 'core.ui.Dog';</code>
+          </pre>
+        </p>
+        <p>
+          Both equivelent, but the latter namespace-import approach is more elegant, intuitive and
+          resembles the syntax of Java and C++. 
+        </p>
+        <p>
+          <em>Important:</em> Pay close attention the to the use of <code>!</code>. The ! is required
+          to import a simple native Javascript class file that is not a Web Component.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
 
   </div>
 </template>
