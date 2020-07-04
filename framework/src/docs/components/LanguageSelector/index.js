@@ -1,3 +1,4 @@
+import 'src/docs/libs/terminal.js';
 
 namespace `docs.components` (
     class LanguageSelector extends w3c.ui.WebComponent {
@@ -7,18 +8,34 @@ namespace `docs.components` (
         
         async onConnected() {
             await super.onConnected();
-            this.on("click", e => this.onSelect(e), false, "a");
+            this.on("click", e => this.onSelect(e), false, "a[data-language-name]");
             this.last_active = this.querySelector("a.active");
             this.lang = this.getLanguage(this.last_active);
+            this.console_panel = this.querySelector("#console_panel");
+
             this["shell"] = this.querySelector("[data-language-name='shell'] .snippet-count");
             this["javascript"] = this.querySelector("[data-language-name='javascript'] .snippet-count");
             this["html"] = this.querySelector("[data-language-name='html'] .snippet-count");
             this["css"] = this.querySelector("[data-language-name='css'] .snippet-count");
-
+            this.addEventListener("click", e=> this.onToggleConsole(e), false, "#console_btn");
             application.addEventListener("onactivityshown", e => this.onActivityDisplayed(e), false);
+            this.initConsole();
         }
 
+        initConsole(){
+            // alert(Terminal)
+            this.terminal = new Terminal();
+            this.console_panel.appendChild(this.terminal.html)
+            this.terminal.input('Evaluate Code',  val => {
+                // this.terminal.print(didConfirm ? 'OK' : 'Why not?')
+                eval(val);
+                this.terminal.clear()
+            })
+        }
 
+        onToggleConsole(){
+            this.console_panel.classList.toggle("visible");
+        }
         // getTemplateEngine() {
         //     return window.customTemplateEngines.getEngineByMimeType("template/threadedliterals")
         // }
