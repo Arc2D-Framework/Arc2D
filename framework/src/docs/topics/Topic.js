@@ -24,8 +24,14 @@ namespace `docs.topics` (
             await super.onConnected()
             setTimeout(_=>this.applyHighlighting(),1000);
             this.onLanguageChange();
+            // setTimeout(_=>this.defaultSnippetTabSelection(),1000);
+            // this.classList.add("shell")
 
         }
+
+        // defaultSnippetTabSelection(){
+            
+        // }
 
         applyHighlighting(){
             var code = Array.from(this.querySelectorAll(".lang code"));

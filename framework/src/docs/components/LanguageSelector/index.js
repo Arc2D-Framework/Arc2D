@@ -27,6 +27,25 @@ namespace `docs.components` (
             var currentActivity = e.data;
             if(currentActivity){
                 this.updateSnippetCounters(currentActivity);
+                setTimeout(_=> this.selectDefaultTab(currentActivity), 300);
+            }
+        }
+
+        selectDefaultTab(currentActivity){
+            var snippets = currentActivity.getExampleSnippets();
+            if(snippets){
+                if(snippets.shell.length >0){
+                    this["shell"].parentNode.click();
+                }
+                else if(snippets.javascript.length > 0){
+                    this["javascript"].parentNode.click();
+                }
+                else if(snippets.html.length > 0){
+                    this["html"].parentNode.click();
+                }
+                else if(snippets.css.length > 0){
+                    this["css"].parentNode.click();
+                }
             }
         }
 

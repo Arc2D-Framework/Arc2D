@@ -1,0 +1,198 @@
+<template>
+	<div>
+		
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Importing Namespaces</h1>
+            <p>
+              Importing a JavaScript Class can be done in 1 of 2 ways:
+              <ul>
+                <li>By it's file path</li>
+                <li>By it's fully-qualified namespace</li>
+              </ul>
+              Let's look at both, with the recommendation of using the latter approach.
+            </p>
+            <p>
+              By file path:
+              <pre class="inline javascript lang"><code>import '/src/core/ui/Dog.js';</code></pre>
+            </p>
+            <p>
+              By it's fully qualified namespace (fqns) - <em>With <strong>!</strong></em>:
+              <pre class="inline javascript lang"><code>import! 'core.ui.Dog';</code></pre>
+            </p>
+            <p>
+              By it's fully qualified namespace (fqns) - <em>Without <strong>!</strong></em>:
+              <pre class="inline javascript lang"><code>import 'core.ui.Dog';</code></pre>
+            </p>
+            <p>
+              Both fqns and file-path imports are equivelent, but the latter two import statements are more elegant, intuitive and resembles the syntax of Java and C++. The former, file-path import, is necessary when
+              importing 3rd party .js libraries such as JQuery.
+            </p>
+            <p>
+              <em>Important:</em> <strong>Pay attention the to the use of <code>!.</code></strong> What does it mean?
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">The import! syntax</h1>
+            <p>
+              Arcs import system is truely unique. The subtle difference in syntax
+              provides the affordance of organization and inferred clarity. 
+              <ul>
+                <li><code>import &nbsp;'core.ui.Person';</code></li>
+                <li><code>import! 'core.ui.Person';</code></li>
+              </ul>
+            </p>
+            <p>
+                At first glance, both statements resemble. But here's how they
+                are interpreted and resolved:
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Import Syntax</th>
+                      <th>Type</th>
+                      <th>File-path Equivelance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>import &nbsp;'core.ui.Person';</code></td>
+                      <th>A Folder</th>
+                      <td><code style="color: green;">src/core/ui/Person/index.js</code></td>
+                    </tr>
+                    <tr>
+                      <td><code>import! 'core.ui.Person;</code></td>
+                      <th>A File</th>
+                      <td><code style="color: green;">src/core/ui/Person.js</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </p>
+
+
+            <h1>So, what can we infer?</h1>
+            <h3><code>import!</code> points to a direct file-path</h3>
+            <p>
+                <strong><em>An ! on an import resolves to a file.</em></strong> Literally, dots are replaced with dashes and ".js"
+                appended, yielding a direct path to a file. It's that simple.
+            </p>
+
+            <h3><code>import</code> points to a web component folder</h3>
+            <p>
+                A normal <code>import</code> resolves to a component folder. The class-name (i.e: "Person") of the fully qualified namespace becomes the parent folder where your components class file,  "index.js" is located. Same idea, dots are replaced with / slashes, yielding a path: <br/>
+                src/core/ui/Person/index.js
+            </p>
+            <p>
+                Immensely important is the understanding of file-path and component imports. Go back once more and review the topics on namespaced classes, and where to save them.
+                <ul>
+                    <li><a href="#docs.topics.UnderstandingNamespaces">Understanding Namespaces</a></li>
+                    <li><a href="#docs.topics.ComponentNamespaces">Component Namespaces</a></li>
+                </ul>
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">When to import?</h1>
+        <p>
+          Import other components you've created from other locations in code at anytime you need to use it. Imports happen statically, different from dynamic importing.
+          It is considered static becaause it happens without conditions, without
+          logical branching, not a drawback at all, but works by design similar to Java and the nodejs
+          <code>require()</code> statement.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">What happens during an import?</h1>
+        <p>
+          Importing other components or classes that you've created are considered dependencies. During 
+          an import, Arc resolves the imported statement (path or fqns), temporaarily freezes code execution
+          at that line, downloads the file, then continues on with code execution.
+        </p>
+        <p>
+          It is guaranteed that by the time your code is ready to use the dependency, it will be available in memory, just-in-time.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Won't imports slow down my app's load time?</h1>
+        <p>
+          Yes and no. If you find yourself importing 20 or more dependencies,
+          each pause in code execution to wait for download will hold up code execution.
+          But with a limited set of imports which is more common, the effects won't be much noticeable.
+        </p>
+        <p>
+          This development strategy is recommended during development and testing, but should be
+          prefabricated when releasing a production build.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Any way to optimize?</h1>
+        <p>
+          Yes. In the topic, "Prefabs", we'll examine a strategy for stitching together
+          every dependency into a single compiled file that will load in 1 step. No more
+          execution pausing. But should not be done until you're ready for a production
+          release.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+	</div>
+</template>

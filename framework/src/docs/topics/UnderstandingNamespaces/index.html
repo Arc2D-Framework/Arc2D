@@ -6,7 +6,7 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">A simple Namespace points to a JavaScript file</h1>
+        <h1 id="api-reference">A Namespace points to a JavaScript file</h1>
         <p>
             A namespace is a unique identifier. It contains 2 parts:
             <ul>
@@ -18,7 +18,10 @@
             Pay attention to where the .js file is saved. 
             <!-- A social security number is a set of digits that uniquely identify an individual in the united states. Licenses plates numbers also identify drivers with their automobiles. Addresses also identify a geographic location semantically. Meaning, an address is composed of several parts:
             A street name, street #, city, state and zip. -->
-            <namespace-explorer></namespace-explorer>
+            <namespace-explorer>
+              <span slot="ns">core.ui</span>
+              <span slot="class">Person</span>
+            </namespace-explorer>
             <!-- <pre class="inline javascript lang"><code>onConnected() {
     this.render({items : await Movies.find()});
 }</code></pre> -->
@@ -29,19 +32,19 @@
         <div class="javascript lang">
             <blockquote class="javascript" style="display:block;width: 100%;">
             The class declared below is fully-qualified and accessible
-            anytime using the namespace <strong><code id="msg-ns" style="display:inline;">core.ui.Dog</code></strong>
+            anytime using the namespace <strong><code id="msg-ns" style="display:inline;">core.ui.Person</code></strong>
             Edit the namespace on the left to see the code changes.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code id="ns-code-block">
 namespace \`core.ui\` (
-    class Dog {
+    class Person {
         
     }
 );
         </code></pre>
         <blockquote class="javascript" style="display:block;width: 100%;">
             <em style="color:red;">Important:</em> The above code should be saved in the related folder structure:<br/>
-            <span id="where_to_save">src/core/ui/Dog.js</span>
+            <span id="where_to_save">src/core/ui/Person.js</span>
           </blockquote>
         </div>
         <div class="html lang"></div>
@@ -56,7 +59,7 @@ namespace \`core.ui\` (
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Simple Namespaces</h1>
+        <h1 id="api-reference">Namespaces</h1>
         <p>
             Every new javascript file you create in the Arc platform will
             have a unique address, or namespace, that points to a Class that
