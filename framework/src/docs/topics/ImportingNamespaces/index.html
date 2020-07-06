@@ -95,7 +95,7 @@
                 src/core/ui/Person/index.js
             </p>
             <p>
-                Immensely important is the understanding of file-path and component imports. Go back once more and review the topics on namespaced classes, and where to save them.
+                Immensely important is the understanding of file-path and namespaced imports. Go back once more and review the topics on namespaced classes, and where to save them.
                 <ul>
                     <li><a href="#docs.topics.UnderstandingNamespaces">Understanding Namespaces</a></li>
                     <li><a href="#docs.topics.ComponentNamespaces">Component Namespaces</a></li>
@@ -118,7 +118,7 @@
         <h1 id="api-reference">When to import?</h1>
         <p>
           Import other components you've created from other locations in code at anytime you need to use it. Imports happen statically, different from dynamic importing.
-          It is considered static becaause it happens without conditions, without
+          It is considered static because it happens without condition, without
           logical branching, not a drawback at all, but works by design similar to Java and the nodejs
           <code>require()</code> statement.
         </p>
@@ -157,8 +157,8 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Won't imports slow down my app's load time?</h1>
         <p>
-          Yes and no. If you find yourself importing 20 or more dependencies,
-          each pause in code execution to wait for download will hold up code execution.
+          Yes and no. If you find yourself importing 20 or more dependencies from a single JaavaaScript file,
+          each pause in code execution to wait for download will hold up code execution momentarily (based on network lag).
           But with a limited set of imports which is more common, the effects won't be much noticeable.
         </p>
         <p>

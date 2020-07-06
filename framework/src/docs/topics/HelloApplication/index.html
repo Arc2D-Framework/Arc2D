@@ -3,11 +3,11 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Hello World Application</h1>
+        <h1 id="api-reference">Hello World Application (manually create the files)</h1>
         <p>
-          <img src="src/docs/images/app_is_w3c_component.png" style="width: 190px;float:right;"/>
-          An Application in Oros represents a world on screen, it inherits from WebComponent. Just like web components which we'll cover shortly, applications are composed of 3 files:
+          An Application in Arc represents a world on screen, it is a larger form of a WebComponent. Just like web components, applications themselves are composed of the same 3 files, where namespace mirrors the directory structure. 
         </p>
+        <p><strong>IMPORTANT:</strong> Review the namespace topics again -- how namespaces maps directly to matching folder directories. It is important to grasp this fundemental concept first.</p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -21,6 +21,10 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
+        <p>
+          Create a folder named <strong>"HelloWorld"</strong> inside the <strong>applications/</strong> directory. Next,
+          create the following 3 files in HelloWorld/:
+        </p>
         <p>
           <table>
             <thead>
@@ -46,15 +50,9 @@
         </table>
         </p>
         <p>
-          <h1>Application Folder Structure</h1>
-          Create these 3 files, the snippets for each are on the right:
-            <ul>
-              <li>index.html</li>
-              <li>index.js</li>
-              <li>index.css</li>
-            </ul>
-          You'll want to group them in a folder. Create a <b>HelloWorld</b> folder for your application in the <em>[src/applications/]</em> directory. Put the 3 files in there. It should look like this:
-          <img src="src/docs/images/first_app_folder_setup.png" style="width: 250px;margin-top: 20px;"/>
+          The <strong>HelloWorld/</strong> folder should now have these 3 files, the snippets for each are on the right,
+          you may copy and paste.<br/>
+          <img src="src/docs/images/first_app_folder_setup.png" style="float:left;width: 250px;margin-top: 20px;"/>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -66,7 +64,7 @@
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`applications\` (
-    class HelloWorld extends w3c.ui.Application { 
+    class HelloWorld extends Application { 
         
     }
 );
@@ -98,11 +96,6 @@ body, html {
   display:block;
   width:100%;
   height:100%;
-}
-
-.HelloWorld span {
-  border:1px solid red;
-  font-size:13px;
 }
         </code></pre>
         </div>
@@ -141,24 +134,28 @@ body, html {
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Loading Applications</h1>
+        <h1 id="api-reference">Create a <strong>hello-world.html</strong> shell page</h1>
         <p>
-          When you have defined the 3 files, open hello-world.html, add a <code>namespace</code> attribute
+          Create an .html page at the root of your project, name it <strong>hello-world.html</strong>. -- Open it in your editor, add a <code>namespace</code> attribute
           to the body tag. It should be the <b>fully-qualified namespace (FQNS)</b> to the <code>HelloWorld</code> class:
         </p>
         <p>
-          <code>
-&#x3C;body <em>namespace="applications.HelloWorld"</em>&#x3E;
+          <pre class="inline html lang">
+            <code>
+&#x3C;body namespace="applications.HelloWorld"&#x3E;
 &#x3C;/body&#x3E;
-          </code>
+            </code>
+          </pre>
         </p>
         <p>
-          Next, use the &#x3C;hello-world"&#x3E; tag that is created for you.
-          <code>
+          Next, use the <strong><code>&#x3C;hello-world&#x3E;</code></strong> tag that is created for you.
+          <pre class="inline html lang">
+            <code>
 &#x3C;body namespace="applications.HelloWorld"&#x3E;
   &#x3C;hello-world"&#x3E;&#x3C;/hello-world&#x3E;
 &#x3C;/body&#x3E;
-          </code>
+            </code>
+          </pre>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -191,9 +188,19 @@ body, html {
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">How it works</h1>
+        <h1 id="api-reference">How was the tag created ?</h1>
         <p>
-          The namespace <code>"applications.HelloWorld"</code>, is a hint to the engine about what Class to use for this application. The <code>&#x3C;hello-world&#x3E;</code> tag was generated for you based on the CamelCase name taken from the <code>HelloWorld</code> class.
+          The namespace <code>"applications.HelloWorld"</code>, is a hint to the engine about what Class to use for this application. The <code>&#x3C;hello-world&#x3E;</code> tag was generated automatically based on the CamelCase name taken from the <code>HelloWorld</code> class.
+        </p>
+        <p>
+          Per the w3c WebComponent specs, tag names require a dash. <em>You cannot have a single word tagName.</em>
+          It is recommended then that your ClassName is <strong>C</strong>amel<strong>C</strong>ased. Arc relies on this
+          pattern for generating a custom tag for use in HTML.
+        </p>
+        <p>
+          <strong>IMPORTANT:</strong><br/>
+          If you ever discover that your application is not initializing within the shell page and there are no warnings
+          or errors, check your ClassName, that it follows a <strong>C</strong>amel<strong>C</strong>ased convention. Alternatively, you may use the <code>@tag</code> decorator on your Class to create a custom tag-name. See: <a href="#docs.topics.JavascriptDecorators/traits">Traits</a>
         </p>
       </div>
       <div style="width: 50%;display: block;">

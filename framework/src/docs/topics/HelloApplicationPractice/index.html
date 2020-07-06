@@ -4,7 +4,7 @@
     
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Let's build another application</h1>
+        <h1 id="api-reference">More Practice: Let's build another application</h1>
         <p>
           To solidify your understanding, let's build another example application.
           As before, create a new folder named "UserDashboard" inside the applications
@@ -25,10 +25,11 @@
         <h1 id="api-reference">Setup the 3 required files</h1>
         <p>
           We'll keep it simple again for brevity. The main point is in
-          understanding how a web page can load up an application.
+          understanding that namespaces map to a folder or file, and declaring
+          your applications tag-name in the shell page.
         </p>
         <p>
-          Setup the 3 required files for it as well:
+          Setup the 3 required files again (or use <a href="#docs.topics.InstallPlop">Plop to generate them</a>):
             <ul>
               <li>index.html</li>
               <li>index.js</li>
@@ -86,8 +87,8 @@ namespace \`applications\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Create your root html page</h1>
         <p>
-          At the root of app/, create another web page similar to helloworld.html.
-          In fact, you can simply copy+paste into a new file named userdashboard.html.
+          At the root of app/, create another web page similar to hello-world.html.
+          In fact, you can simply copy+paste into a new file named user-dashboard.html.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -95,7 +96,7 @@ namespace \`applications\` (
         <div class="javascript lang"></div>
         <div class="html lang">
           <blockquote class="html" style="display:block;width: 100%;">
-            <b>Create a root page, "userdashboard.html"</b><br/>
+            <b>Create a root page, "user-dashboard.html"</b><br/>
             Add a configuration, point it to UserDashboard in the applications folder, then
             declare the <br/><em style="color:black;">&#x3C;user-dashboard&#x3E;&#x3C;/user-dashboard&#x3E;</em> tag.
           </blockquote>
@@ -105,12 +106,9 @@ namespace \`applications\` (
     &#x3C;head&#x3E;
         &#x3C;title&#x3E;Hello World&#x3C;/title&#x3E;
         &#x3C;script src=&#x22;node_modules/od-cocoon/framework.src.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
-        &#x3C;script&#x3E;
-            Config.NAMESPACE = &#x22;applications.UserDashboard&#x22;
-        &#x3C;/script&#x3E;
     &#x3C;/head&#x3E;
 
-    &#x3C;body&#x3E;
+    &#x3C;body namespace="applications.UserDashboard"&#x3E;
         &#x3C;user-dashboard&#x3E;&#x3C;/user-dashboard&#x3E;
     &#x3C;/body&#x3E;
 &#x3C;/html&#x3E;
