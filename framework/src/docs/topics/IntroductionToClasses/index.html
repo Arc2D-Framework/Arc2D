@@ -1,0 +1,160 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">An introduction to Classes</h1>
+        <p>
+          This is a Person:
+            <pre class="inline javascript lang">
+                <code>
+class Person {
+
+}
+                </code>
+            </pre>
+        </p>
+        <p>
+            But this person has no identity and is ambiguous. Using namespaces,
+            Classes like Person become more organized, offering clarity and taxonomy,
+            Similar to how scientists categorizes the plant and animal kingdom.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+    
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Namespaces</h1>
+        <p>
+          A Person can be part of family as a more special set of people:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`people.family\` (     
+    class Person {
+
+    }
+ )
+                </code>
+            </pre>
+        </p>
+        <p>
+            You can duplicate the same Person in other namespaces:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`people.friends\` (    
+    class Person {
+
+    }
+ )
+                </code>
+            </pre>
+        </p>
+        <p>
+            You could refer to the Persons by their fully-qualified namespaces:
+            <pre class="inline javascript lang">
+                <code>
+people.family.Person
+                </code>
+            </pre>
+            <p>And:</p>
+            <pre class="inline javascript lang">
+                <code>
+people.friends.Person
+                </code>
+            </pre>
+        </p>
+        <p>
+            In each namespace, that Person class might carry drastically different connotations.
+            In a social media app, a Person in the friends group cannot simply view all of your
+            photos. A friend might need to be invited, so this class could have an invite()
+            Method:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`people.friends\` (    
+    class Person {
+        invite() {          
+            //code for inviting         
+        }
+    }
+ )
+                </code>
+            </pre>
+        </p>
+        <p>
+            Families may have different privileges and abilities. But what if Friend and
+            Family share certain traits? Like a first name. You may generalize an even broader
+            namespace with these common properties:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`people\` (    
+    class Human {
+        @public firstname = "";
+    }
+ )
+                </code>
+            </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Inherittance</h1>
+        <p>
+          Now you friends and family don’t have to repeat code to define this common 
+            trait. Let’s inherit instead:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`people.friends\` ( 
+    class Person extends people.Human {
+        invite() {          
+            //code for inviting         
+        }
+    } 
+)
+                </code>
+            </pre>
+        </p>
+        <p>
+            AND:
+        </p>
+        <p>
+            <pre class="inline javascript lang">
+                <code>
+namespace \`people.family\` (     
+    class Person extends people.Human {
+        
+    } 
+)
+                </code>
+            </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>
