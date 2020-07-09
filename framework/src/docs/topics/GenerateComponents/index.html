@@ -1,8 +1,55 @@
 <template>
   <div>
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Building a ToggleButton (using generator)</h1>
+        <h1 id="api-reference">Building a ToggleButton Component</h1>
+        <p>
+          You've seen toggle buttons many times, they flip left to right in a boolean state.
+          We'll build one of these components and assemble it unto our HelloWorld app:
+        </p>
+        <p>
+          <strong>Demo:</strong><br/>
+          <toggle-button></toggle-button>
+        </p>
+        <p>
+          Instead of tideously creating the 3 required files by hand for this UI component, we'll
+          generate them quickly. For that, we'll use the following fully-qualified namespace to categorize
+          our toggle: 
+        </p>
+        <p>
+            <namespace-explorer>
+              <span slot="ns">core.ui</span>
+              <span slot="class">ToggleButton</span>
+            </namespace-explorer>
+        </p>
+        <p>
+          Knowing the FQNS, let's now generate the component at the terminal (command line).
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang">
+          <blockquote class="html" style="display:block;width: 100%;">
+            Using the toggle button declaratively in HTML
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;">
+            <code>
+&#x3C;body&#x3E;
+    &#x3C;toggle-button&#x3E;&#x3C;/toggle-button&#x3E;
+&#x3C;/body&#x3E;
+            </code>
+          </pre>
+        </div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Generate the Component</h1>
         <p>
           Open a terminal, <code>cd</code> into the root of your project folder. Enter the <code>plop</code> command.
         </p>
@@ -50,17 +97,43 @@ app - Generates an Application</code>
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference"><span class="article-step-num">2</span> Create a fully-qualified namespace to:</h1>
         <p>
-          <code>core.ui.ToggleButton</code>,
+          Enter <code>core.ui.ToggleButton</code>, <br/>
           Hit <code>ENTER</code> after specifying the namespace.
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang">
           <blockquote class="shell" style="display:block;width: 100%;">
-            Hit <code style="display:inline;">ENTER</code>:
+            Type in the FQNS, <code style="display:inline;">core.ui.ToggleButton</code> and hit <code style="display:inline;">ENTER</code>:
           </blockquote>
           <pre class="highlight shell" style="display:block;width: 100%;"><code>? <span style="color:#8e6dd4;">[PLOP]</span> Please choose a generator. <span style="color:aqua;">component</span> - <span style="color:gray;">Generates a Component</span>
-? Component Namespace : core.ui.ToggleButton</code>
+? Fully-Qualified Namespace : <span style="color:aqua;">core.ui.ToggleButton</span></code>
+        </pre>
+        </div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference"><span class="article-step-num">3</span> Specify the base class</h1>
+        <p>
+          You'll be asked if the component is inheriting (extends) a base class, hit <code>ENTER</code> to accept the
+          default parent, <code>w3c.ui.WebComponent</code>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang">
+          <blockquote class="shell" style="display:block;width: 100%;">
+            Accept default base class, hit <code style="display:inline;">ENTER</code>:
+          </blockquote>
+          <pre class="highlight shell" style="display:block;width: 100%;"><code>? <span style="color:#8e6dd4;">[PLOP]</span> Please choose a generator. <span style="color:aqua;">component</span> - <span style="color:gray;">Generates a Component</span>
+<strong>? Fully-Qualified Namespace</strong> : <span style="color:aqua;">core.ui.ToggleButton</span>
+<strong>? Extends a parent class</strong> : <span style="color:aqua;">w3c.ui.WebComponent</span></code>
         </pre>
         </div>
         <div class="javascript lang"></div>
@@ -72,12 +145,11 @@ app - Generates an Application</code>
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference"><span class="article-step-num">3</span> Verify the files have been created</h1>
+        <h1 id="api-reference"><span class="article-step-num">4</span> Verify the files have been created</h1>
         <p>
           Navigate to the matching folder <strong>core/ui/ToggleButton/</strong> and ensure the files were created.
-          Next, we'll write the logic to power the toggle-button. Here's a working demo of what we'll build:
+          Next, we'll write the logic to power the toggle-button. Let's move on.
         </p>
-        <p><toggle-button></toggle-button></p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang">
@@ -85,7 +157,7 @@ app - Generates an Application</code>
             All files for your Component are generated:
           </blockquote>
           <pre class="highlight shell" style="display:block;width: 100%;"><code>? <span style="color:#8e6dd4;">[PLOP]</span> Please choose a generator. <span style="color:aqua;">component</span> - <span style="color:gray;">Generates a Component</span>
-? Component Namespace : <span style="color:aqua;">core.ui.ToggleButton</span>
+<strong>? Fully-Qualified Namespace</strong> : <span style="color:aqua;">core.ui.ToggleButton</span>
 <span style="color:limegreen;">✔  ++</span> /src/core/ui/ToggleButton/index.js
 <span style="color:limegreen;">✔  ++</span> /src/core/ui/ToggleButton/index.css
 <span style="color:limegreen;">✔  ++</span> /src/core/ui/ToggleButton/index.html</code>

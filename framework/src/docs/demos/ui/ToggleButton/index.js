@@ -14,14 +14,12 @@ namespace `docs.demos.ui` (
             this.knob_bounds = this.knob.getBoundingClientRect();
 
             var style = window.getComputedStyle(this.knob);
-            var matrix = new DOMMatrix(style.transform);
-            this.matrix = matrix;
+            this.matrix = new DOMMatrix(style.transform);
         }
 
         onClick(){
             this.direction *= -1;
             this.onRender();
-            console.log("this.matrix",this.matrix)
         }
 
         get x() {
@@ -32,8 +30,7 @@ namespace `docs.demos.ui` (
         onRender(){
             var vector = {x: this.x, y:0, z:0 }
             this.knob.style.transform = `
-                translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||this.matrix.m43}px)
-            `;
+                translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||this.matrix.m43}px)`;
         }
 	}
 )
