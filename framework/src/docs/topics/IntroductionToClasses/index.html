@@ -165,7 +165,11 @@ namespace \`people.contacts\` ( 
         <p>
             Families may have different privileges and abilities. But what if Friend and
             Family share certain traits? Like a first name. You may generalize an even broader
-            namespace with these common properties:
+            namespace with these common properties.
+
+            <p>
+                Let's create a file at <strong>src/people/Human.js</strong>. This is a simple file-based class with the following source:
+            </p>
             <pre class="inline javascript lang">
                 <code>
 namespace \`people\` (    
@@ -178,9 +182,13 @@ namespace \`people\` ( 
         </p>
         <p>
           Now people in friends and family category don’t have to repeat code to define this common 
-            trait. Let’s inherit instead:
+            trait. Let’s inherit instead. <STRONG>IMPORTANT: </STRONG> Use of ! is required to import
+            the file directly since this is not a component. 
+
             <pre class="inline javascript lang">
                 <code>
+import! 'people.Human';  //loads "src/people/Human.js"
+
 namespace \`people.friends\` ( 
     class Person extends people.Human {
         invite() {          
@@ -197,6 +205,8 @@ namespace \`people.friends\` ( 
         <p>
             <pre class="inline javascript lang">
                 <code>
+import! 'people.Human';
+
 namespace \`people.family\` (     
     class Person extends people.Human {
         
