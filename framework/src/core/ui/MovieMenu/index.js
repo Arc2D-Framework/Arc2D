@@ -21,7 +21,7 @@ namespace `core.ui` (
             this.render({items : only_unique_genres});
         }
 
-        onEnableShadow() {
+        inShadow() {
             return false
         }
 

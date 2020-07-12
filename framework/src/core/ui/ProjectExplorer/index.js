@@ -10,19 +10,18 @@ namespace `core.ui` (
         }
 
         async onConnected() {
-            // var project = application.getProject();
-            // console.log("project",project[0])
-            // this.ft = new core.data.FileTree(project[0].devpath+"/"+project[0].projectfolder);
-            // var filetree = this.ft.build();
-            //     filetree.expanded=true;
-            // console.log("filetree",filetree);
-            var ft = await (await fetch("../../../framework/src/core/ui/ProjectExplorer/data/filetree.json")).json()
+            var ft = await (await fetch("../../../src/core/ui/ProjectExplorer/data/filetree.json")).json()
             await super.onConnected({item:ft});
             
             this.addEventListener("click", e=>this.onToggleExpand(e), false, "li[aria-expanded]")
             this.addEventListener("click", e=>this.onFileClicked(e), true, ".doc");
             this.addEventListener("click", e=> this.onRefresh(e), true, ".icons-try .fa-refresh");
             // this.open()
+        }
+
+        setPrototypeInstance() {
+            this.setAttribute("namespace", this.namespace);
+            this.prototype = this;
         }
 
         static async install(activity){
@@ -56,9 +55,19 @@ namespace `core.ui` (
             }
         }
 
+
         onToggleExpand(e){
             var li = e.target;
             li.classList.toggle("expanded");
+        }
+
+
+        onTransformStyle(cssText){
+            if(!this.inShadow()){
+                return cssText.replace(/\:host\s+/gm, `.${this.classname} `)
+            } else{
+                return cssText;
+            }
         }
     }
 );

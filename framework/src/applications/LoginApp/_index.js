@@ -104,7 +104,7 @@ namespace `applications`(
 	        return null
 	    }
 
-	    onEnableShadow(){
+	    inShadow(){
 	        return false
 	    }
 

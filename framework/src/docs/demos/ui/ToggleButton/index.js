@@ -30,7 +30,8 @@ namespace `docs.demos.ui` (
         onRender(){
             var vector = {x: this.x, y:0, z:0 }
             this.knob.style.transform = `
-                translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||this.matrix.m43}px)`;
+                translate3d(${vector.x||0}px,${vector.y||0}px,${vector.z||this.matrix.m43}px)
+            `;
         }
 	}
 )

@@ -24,7 +24,7 @@ namespace `core.ui` (
 
         
 
-        onEnableShadow() {
+        inShadow() {
             return false
         }
 

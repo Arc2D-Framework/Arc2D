@@ -8,7 +8,7 @@ namespace `applications` (
 			this.AUTH0_CALLBACK_URL=location.href;
         }
 
-        onEnableShadow(){
+        inShadow(){
             return false
         }
 

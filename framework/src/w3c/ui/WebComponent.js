@@ -7,7 +7,7 @@ namespace `w3c.ui` (
             super();
             this.element = el;
             this.__proto = this.constructor.prototype;
-            this.root = this.onEnableShadow() ? 
+            this.root = this.inShadow() ? 
                 this.attachShadow({ mode: 'open' }) : 
                 (this.element||this);
 
@@ -16,19 +16,23 @@ namespace `w3c.ui` (
             }
         }
 
+        
+
         static define(proto,bool){
+            var ce = window.customElements;
             var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
             if(/\-/.test(tag)){
-                if(window.customElements.get(tag)){return}
+                if(ce.get(tag)){return}
                 proto["ns-tagname"] = tag;
                 this.defineAncestors();
                 this.defineAncestralClassList();
-                try{window.customElements && window.customElements.define(tag, this);}
+                try{ce && ce.define(tag, this);}
                 catch(e){console.error(e)}
-            }else {
-                //TODO: Use error codes
-                console.warn(`${proto.namespace}#define() - invalid tag name. Dashes required for`, tag)
-            }       
+            }
+            // else {
+            //     //TODO: Use error codes
+            //     console.warn(`${proto.namespace}#define() - bad tag`)
+            // }       
         }
 
         setStylesheet () {    
@@ -44,24 +48,24 @@ namespace `w3c.ui` (
             if(e){
                 return this.getParentNodeFromEvent(e,cssSel)
             } else {
-            return (this.onEnableShadow()||this.element) ?
+            return (this.inShadow()||this.element) ?
                 this.root.querySelector(cssSel):
                 super.querySelector(cssSel)
             }
         }
 
         querySelectorAll(cssSel, deep){
-            return (this.onEnableShadow()||this.element) ?
+            return (this.inShadow()||this.element) ?
                 this.root.querySelectorAll(cssSel):
                 super.querySelectorAll(cssSel)
         }
 
         onAppendStyle(stylesheet) {
-            if(this.onEnableShadow()){
+            if(this.inShadow()){
                 try{
-                    var style = new CSSStyleSheet();
-                    style.replace(stylesheet.innerText);
-                    this.adoptedStyleSheets = [stylesheet];
+                    var sheet = new CSSStyleSheet();
+                        sheet.replace(stylesheet.innerText);
+                    this.root.adoptedStyleSheets = [sheet];
                 } catch(e){
                     //TODO: use error code
                     console.error(`${e.message} Unable to adopt stylesheet 
@@ -76,6 +80,27 @@ namespace `w3c.ui` (
                 headNode.insertBefore(stylesheet, configscript);
             }
         }
+
+        // onAppendStyle(stylesheet) {
+        //     if(this.inShadow()){
+        //         try{
+        //             var style = new CSSStyleSheet();
+        //             style.replace(stylesheet.innerText);
+        //             this.adoptedStyleSheets = [stylesheet];
+        //         } catch(e){
+        //             //TODO: use error code
+        //             console.error(`${e.message} Unable to adopt stylesheet 
+        //                 into shadow dom -- ${this.namespace}#onAppendStyle(), 
+        //                 see: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690.
+        //                 As a workaround, @import the css from within <template>`)
+        //         }
+        //     }
+        //     else {
+        //         var headNode = document.querySelector("head")
+        //         var configscript = document.querySelector("script");
+        //         headNode.insertBefore(stylesheet, configscript);
+        //     }
+        // }
 
         onStyleComputed(stylesheet){}
 
@@ -194,7 +219,7 @@ namespace `w3c.ui` (
                 var html = await this.evalTemplate(t, data);
                 var temNode = html.toDomElement();
                     temNode = temNode.content;
-                if (!this.onEnableShadow()) {
+                if (!this.inShadow()) {
                     this.slots.forEach(slot => {
                         var slotName = slot.getAttribute('slot');
                         var placeholder = temNode.querySelector(`slot[name="${slotName}"]`);
@@ -259,7 +284,7 @@ namespace `w3c.ui` (
             this.setAttribute('src', val)
         }
 
-        onEnableShadow() {
+        inShadow() {
             return this.hasAttribute('shadow');
         }
 
@@ -298,24 +323,6 @@ namespace `w3c.ui` (
                 } else { break }
             }
         }
-
-        // defineAncestralStyleList(){
-        //     var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
-        //     if(this.onLoadInstanceStylesheet()){stylesheets.push(this.getNSStyleSheet(this.namespace))}
-        //         stylesheets.push(...this.prototype["@stylesheets"]||[]);
-        //     if(!this['@cascade']){return}
-        //     var ancestor = this.__proto.ancestor
-
-        //     while(ancestor) {
-        //         if( ancestor != w3c.ui.WebComponent && 
-        //             ancestor != w3c.ui.Application){
-                    
-        //             stylesheets.unshift(...ancestor.prototype["@stylesheets"]||[]);
-        //             stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
-        //             ancestor = ancestor.prototype.ancestor;
-        //         } else { break }
-        //     }
-        // }
 
         defineAncestralStyleList(){
             var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
@@ -385,7 +392,7 @@ namespace `w3c.ui` (
                     if(path && !stylesheets[path]){
                         var tagName = /^http/.test(path) ? "link" : "style";
                         var tag = document.createElement(tagName);
-                        this.onAppendStyle(tag);
+                        // this.onAppendStyle(tag);
                             tag.setAttribute("type", 'text/css');
                             tag.setAttribute("rel",  'stylesheet');
                             tag.setAttribute("href",  path);
@@ -396,6 +403,7 @@ namespace `w3c.ui` (
                                 if( _cssText){
                                     _cssText = this.onTransformStyle(_cssText);
                                     _cssText && this.setCssTextAttribute(_cssText, tag);
+                                    this.onAppendStyle(tag);
                                     this.onStylesheetLoaded(tag);
                                 }
                             }
@@ -406,7 +414,7 @@ namespace `w3c.ui` (
         }
 
         onLoadStyle(url){ return url }
-
+        
 
         setPrototypeInstance() {
             this.root.setAttribute("namespace", this.namespace);

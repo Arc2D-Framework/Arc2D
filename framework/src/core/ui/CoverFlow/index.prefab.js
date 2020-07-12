@@ -240,7 +240,7 @@ namespace `core.ui` (
             this.carousel.style[this.transform] = 'translateZ(-' + this.radius + 'px) ' + this.rotateFn + '(' + this.rotation + 'deg)';
         }
 
-        onEnableShadow() {
+        inShadow() {
             return false
         }
      }

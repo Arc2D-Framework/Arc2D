@@ -30,7 +30,7 @@ namespace `core.ui.protected` (
             this.render({items : only_unique_genres});
         }
 
-        onEnableShadow() {
+        inShadow() {
             return false
         }
 

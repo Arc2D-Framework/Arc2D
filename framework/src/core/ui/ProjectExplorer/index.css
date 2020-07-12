@@ -16,9 +16,23 @@
     padding: 10px;
     max-height: 300px;
     overflow-y: scroll;
+    background:rgb(51, 51, 51);
 }
 
 
+:host .title .title-pane-icon {
+    font-size: 14px;
+    margin-left: 20px;
+    margin-top: -4px;
+    cursor:pointer;
+}
+:host .title .title-pane-icon:hover{
+    color:white;
+}
+
+:host .title .icons-try{
+    float:right;
+}
 
 
 :host ul[role="tree"] {
@@ -28,40 +42,40 @@
   font-size: 120%;
 }
 
-[role="treeitem"] {
+:host [role="treeitem"] {
     color:#919191;
     font-size: 14px;
 }
 
-[role="treeitem"] .fa{
+:host [role="treeitem"] .fa{
     margin-right:6px;
     min-width: 15px;
 }
 
-[role="treeitem"].doc .fa::before {
+:host [role="treeitem"].doc .fa::before {
   content: "\f1c9";
 }
 
-[role="treeitem"] > ul {
+:host [role="treeitem"] > ul {
   display: none;
 }
 
-[role="treeitem"].expanded > ul {
+:host [role="treeitem"].expanded > ul {
   display: block;
   padding-left:10px;
 }
 
-[role="treeitem"] > span .fa::before {
+:host [role="treeitem"] > span .fa::before {
   content: "\f07b";
 }
 
-[role="treeitem"].expanded > span .fa::before {
+:host [role="treeitem"].expanded > span .fa::before {
   content: "\f07c";
   color:burlywood;
 }
 
-[role="treeitem"],
-[role="treeitem"] span {
+:host [role="treeitem"],
+:host [role="treeitem"] span {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -71,17 +85,17 @@
 
 /* disable default keyboard focus styling for treeitems
    Keyboard focus is styled with the following CSS */
-[role="treeitem"]:focus {
+:host [role="treeitem"]:focus {
   outline: 0;
 }
 
-[role="treeitem"].focus,
-[role="treeitem"] span.focus {
+:host [role="treeitem"].focus,
+:host [role="treeitem"] span.focus {
   border-color: black;
   background-color: #eee;
 }
 
-[role="treeitem"].hover,
-[role="treeitem"] span:hover {
+:host [role="treeitem"].hover,
+:host [role="treeitem"] span:hover {
   /*background-color: #ddd;*/
 }

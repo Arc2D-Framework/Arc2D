@@ -9,7 +9,7 @@ namespace `core.ui.game` (
             this.render();
         }
 
-        onEnableShadow() {
+        inShadow() {
             return false
         }
     }
