@@ -3,12 +3,12 @@
     
   </style>
     <div>
-        <div class="title">Explorer
+        <div class="title">Simulation
           <span class="icons-try">
             <i class="fa fa-refresh title-pane-icon"></i>
           </span>
         </div>
-        <div id="files">
+        <div id="files" style="overflow-x: hidden;">
             <ul role="tree" aria-labelledby="tree_label">
               {% macro menuItem(item) %}
                 {% if item.type == "directory" %}

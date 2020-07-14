@@ -1,10 +1,12 @@
 import 'docs.components.NamespaceExplorer';
+import 'core.ui.ProjectExplorer';
 
 namespace `docs.topics` (
 	class UnderstandingNamespaces extends docs.topics.Topic {
 		async onConnected(){
             await super.onConnected();
             // await this.render();
+            this.project_explorer = this.querySelector("project-explorer");
             this.nsExplorer = this.querySelector("namespace-explorer");
             this.nsExplorer.addEventListener("input", e=> this.onChanged(e),false);
             this.nsCodeBlock = this.querySelector("#ns-code-block");
@@ -33,7 +35,23 @@ namespace `docs.topics` (
             this.why_fqns_1.innerHTML = s;
             this.classname_1.innerHTML = this.cls;
 
+            this.renderProjectFiles();
+        }
 
+
+        renderProjectFiles(){
+            this.project_explorer.reset();
+            var folders = this.ns.split(".");
+            // folders.push(this.cls)
+            var lastFolder = this.project_explorer.getSrcFolder();
+            while(folders && folders.length>0 && lastFolder){
+                var folder = folders.shift();
+                var dir = this.project_explorer.mkDir(folder);
+                lastFolder = this.project_explorer.addChildDirectory(lastFolder, dir);
+            }
+            this.project_explorer.addFileToDirectory(lastFolder, this.cls + ".js");
+
+            this.project_explorer.update();
         }
 
         nsCode(){

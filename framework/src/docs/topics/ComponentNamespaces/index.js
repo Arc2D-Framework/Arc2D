@@ -7,6 +7,7 @@ namespace `docs.topics` (
         async onConnected(){
             await super.onConnected();
             // await this.render();
+            this.project_explorer = this.querySelector("project-explorer");
             this.nsExplorer = this.querySelector("namespace-explorer");
             this.nsExplorer.addEventListener("input", e=> this.onChanged(e),false);
             this.nsCodeBlock = this.querySelector("#ns-code-block");
@@ -50,6 +51,25 @@ namespace `docs.topics` (
             // alert(this.cls)
             // this.css_style.textContent = this.cls;
             // this.css_style2.textContent = s;
+            this.renderProjectFiles();
+        }
+
+
+        renderProjectFiles(){
+            this.project_explorer.reset();
+            var folders = this.ns.split(".");
+            folders.push(this.cls)
+            var lastFolder = this.project_explorer.getSrcFolder();
+            while(folders && folders.length>0 && lastFolder){
+                var folder = folders.shift();
+                var dir = this.project_explorer.mkDir(folder);
+                lastFolder = this.project_explorer.addChildDirectory(lastFolder, dir);
+            }
+            this.project_explorer.addFileToDirectory(lastFolder, "index.html");
+            this.project_explorer.addFileToDirectory(lastFolder, "index.css");
+            this.project_explorer.addFileToDirectory(lastFolder, "index.js");
+
+            this.project_explorer.update();
         }
 
         nsCode(){

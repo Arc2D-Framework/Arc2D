@@ -10,13 +10,57 @@ namespace `core.ui` (
         }
 
         async onConnected() {
-            var ft = await (await fetch("../../../src/core/ui/ProjectExplorer/data/filetree.json")).json()
+            var ft = await (await fetch("../../../src/core/ui/ProjectExplorer/data/filetree.json")).json();
+            this.filetree =ft;
             await super.onConnected({item:ft});
             
             this.addEventListener("click", e=>this.onToggleExpand(e), false, "li[aria-expanded]")
             this.addEventListener("click", e=>this.onFileClicked(e), true, ".doc");
             this.addEventListener("click", e=> this.onRefresh(e), true, ".icons-try .fa-refresh");
             // this.open()
+        }
+
+        async reset(){
+            this.filetree = await (await fetch("../../../src/core/ui/ProjectExplorer/data/filetree.json")).json();
+        }
+
+        mkDir(name){
+            return {
+                "path": "",
+                "name": name,
+                "type": "directory",
+                "size": 0,
+                "children": []  
+            }
+        }
+
+        mkFile(name){
+            return {
+                "path": "",
+                "name": name,
+                "type": "file",
+                "size": 0,
+                "extension" : name.split(".")[1]
+            }
+        }
+
+        update(){
+            this.render({item:this.filetree})
+        }
+
+        addChildDirectory(parent,child){
+            parent.children.push(child);
+            return child;
+        }
+
+        addFileToDirectory(parent,file){
+            file = this.mkFile(file);
+            parent.children.push(file);
+            return file;
+        }
+
+        getSrcFolder(){
+            return this.filetree.children[1];
         }
 
         setPrototypeInstance() {
