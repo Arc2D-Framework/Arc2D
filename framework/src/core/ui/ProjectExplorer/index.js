@@ -17,7 +17,7 @@ namespace `core.ui` (
             this.addEventListener("click", e=>this.onToggleExpand(e), false, "li[aria-expanded]")
             this.addEventListener("click", e=>this.onFileClicked(e), true, ".doc");
             this.addEventListener("click", e=> this.onRefresh(e), true, ".icons-try .fa-refresh");
-            // this.open()
+            this.open()
         }
 
         async reset(){

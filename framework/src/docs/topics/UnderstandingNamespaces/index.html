@@ -6,7 +6,7 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">A non-component namespace points to a JavaScript file</h1>
+        <h1 id="api-reference">Non-component namespaces map to JavaScript files</h1>
         <p>
             A namespace is a unique identifier. It contains 2 parts:
             <ul>
@@ -20,7 +20,7 @@
             <!-- A social security number is a set of digits that uniquely identify an individual in the united states. Licenses plates numbers also identify drivers with their automobiles. Addresses also identify a geographic location semantically. Meaning, an address is composed of several parts:
             A street name, street #, city, state and zip. -->
             <namespace-explorer>
-              <span slot="ns">core.ui</span>
+              <span slot="ns">people.family</span>
               <span slot="class">Person</span>
             </namespace-explorer>
             <!-- <pre class="inline javascript lang"><code>onConnected() {
@@ -115,12 +115,12 @@ namespace \`core.ui\` (
         </p>
         <p>
           By file path:
-          <pre class="inline javascript lang"><code>import '/src/core/ui/Dog.js';</code>
+          <pre class="inline javascript lang"><code>import '/src/people/friends/Person.js';</code>
           </pre>
         </p>
         <p>
           By it's fully qualified namespace (fqns):
-          <pre class="inline javascript lang"><code>import! 'core.ui.Dog';</code>
+          <pre class="inline javascript lang"><code>import! 'people.friends.Person';</code>
           </pre>
         </p>
         <p>
