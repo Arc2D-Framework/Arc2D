@@ -380,7 +380,7 @@ namespace `w3c.ui` (
 
         async loadcss(urls) {
             return new Promise(async (resolve,reject) => {
-                if(this.__proto._css_loaded){
+                if(this.__proto._css_loaded && !this.inShadow()){
                     resolve(true);
                     return
                 }
@@ -389,7 +389,7 @@ namespace `w3c.ui` (
                 var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
                 for(let path of urls){
                     path = this.onLoadStyle(path);
-                    if(path && !stylesheets[path]){
+                    if((path && !stylesheets[path]) || this.inShadow()){
                         var tagName = /^http/.test(path) ? "link" : "style";
                         var tag = document.createElement(tagName);
                         // this.onAppendStyle(tag);
