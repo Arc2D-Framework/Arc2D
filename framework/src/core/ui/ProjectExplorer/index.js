@@ -63,10 +63,10 @@ namespace `core.ui` (
             return this.filetree.children[1];
         }
 
-        setPrototypeInstance() {
-            this.setAttribute("namespace", this.namespace);
-            this.prototype = this;
-        }
+        // setPrototypeInstance() {
+        //     this.setAttribute("namespace", this.namespace);
+        //     this.prototype = this;
+        // }
 
         static async install(activity){
             var pane = activity.getPrimaryPane();
@@ -106,12 +106,12 @@ namespace `core.ui` (
         }
 
 
-        onTransformStyle(cssText){
-            if(!this.inShadow()){
-                return cssText.replace(/\:host\s+/gm, `.${this.classname} `)
-            } else{
-                return cssText;
-            }
-        }
+        // onTransformStyle(cssText){
+        //     if(!this.inShadow()){
+        //         return cssText.replace(/\:host\s+/gm, `.${this.classname} `)
+        //     } else{
+        //         return cssText;
+        //     }
+        // }
     }
 );

@@ -1,6 +1,6 @@
 import '/node_modules/od-paginator/paginator.js';
-import '/framework/src/core/drivers/storage/IStorageInterface.js';
-import '/framework/src/core/drivers/storage/Memory.js';
+import '/src/core/drivers/storage/IStorageInterface.js';
+import '/src/core/drivers/storage/Memory.js';
 
 
 namespace `core.data` (

@@ -1,0 +1,94 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="intro">Introduction</h1>
+        <p>
+          Applications reside in the applications folder. Your software might have just 1 Application
+          or many Applications that you link between. In an eCommerce system, it would make sense that
+          a Store application serves as the catalog for browsing, searching and viewing products.
+        </p>
+        <p>
+            <namespace-explorer>
+              <span slot="ns">applications</span>
+              <span slot="class">HelloWorld</span>
+            </namespace-explorer>
+        </p>
+        <p>
+            You'll have a members account screen, with an entire set of functionality around account
+            management, order history, shipping aaddress, billing info and so on. Creating another
+            application for this screen and linking to and from the Store makes the most sense.
+        </p>
+        <p>
+            Alternatively, one could dump all the code for customer management aand store functionality into
+        a single megalith application. Although you can simulate a Single Page Architecture this way, it
+    would be ultimately incohesive and difficult to maintain so much code related to so many different contextual features. But as we'll see in the chapter Single Page Applications, Arc's Transitionable View architecture make for a more elegant solution.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            The basic class structure for applications
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`applications\` (
+    class HelloWorld extends Application {
+        
+    }
+);</code></pre>
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            Saved in applications/HelloWorld/index.js
+          </blockquote>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1>Where are applications stored in my project?</h1>
+        <p>
+          Applications reside in the applications/ folder. See the chapter showing how to
+          setup a basic <a href="#docs.topics.HelloApplication">HelloWorld application.</a>
+        </p>
+        <project-explorer shadow="true"></project-explorer>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="life-cycle">Application Life-Cycle</h1>
+        <p>
+          In progress...
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+  </div>
+</template>

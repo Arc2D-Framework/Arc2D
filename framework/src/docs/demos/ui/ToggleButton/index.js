@@ -1,15 +1,16 @@
 namespace `docs.demos.ui` (
-	class ToggleButton  extends w3c.ui.WebComponent  {
+	class ToggleButton extends WebComponent  {
 		async onConnected(){
             await super.onConnected();
 
             this.knob = this.querySelector(".knob");
             this.direction = -1;
-            this.addEventListener("click", e => this.onClick(e), false, ".knob");
+            this.addEventListener("click", e => this.onClick(e), false);
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
         }
 
-        onStyleComputed(style){
+        async onStyleComputed(style){
+            await wait(100);
             this.bounds = this.getBoundingClientRect();
             this.knob_bounds = this.knob.getBoundingClientRect();
 

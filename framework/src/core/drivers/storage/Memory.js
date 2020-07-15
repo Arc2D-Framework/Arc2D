@@ -1,4 +1,4 @@
-import '/framework/src/core/drivers/storage/Cursor.js';
+import '/src/core/drivers/storage/Cursor.js';
 import '/node_modules/od-mingo/dist/mingo.min.js';
 
 /**

@@ -1,4 +1,4 @@
-import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
+import '/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
 
 namespace `docs.demos.templates` (
 	class HealthCarePackage  extends w3c.ui.WebComponent  {

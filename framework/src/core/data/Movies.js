@@ -1,6 +1,6 @@
 import '/resources/repositories.js';
-import '/framework/src/core/data/Repository.js';
-import '/framework/src/core/drivers/storage/Memory.js';
+import '/src/core/data/Repository.js';
+import '/src/core/drivers/storage/Memory.js';
 
 
 namespace `core.data` (

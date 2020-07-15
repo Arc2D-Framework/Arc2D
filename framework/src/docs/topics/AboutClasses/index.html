@@ -6,21 +6,13 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">JavaScript Classes</h1>
         <p>
-          Aim for classes. Oros follows a ES6/7 class-oriented structure for writing blocks
+          Aim for classes. Arc follows a ES6/7 class-oriented structure for writing blocks
           of code. If the system you're building is a game, you'll have classes such
           as Weapon, Character, Enemy, Menu, Options, Bullet and so on. Each of these
           being a class in a single .js file.
         </p>
         <p>
-          No webpack, no babel, no npms, no pre or post processors, no AST transpilers, no cli tools or "hot reload". <em>Just blazing fast, 100%-live executable and native ES6/7 code.</em>
-        </p>
-        <p>
-          <b>General best practices:</b>
-          <ul>
-            <li>One class per .js file.</li>
-            <li>Name the file after it's class (ex: Weapon.js, Character.js)</li>
-          </ul>
-          See Javascript Class examples on the right.
+          Explore the Getting Started topic, <strong><a href="#docs.topics.IntroductionToClasses">A terse guide to classes for examples</a></strong>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -53,5 +45,23 @@ class Sword extends Weapon {
 
 
 
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Where to save Class files</h1>
+        <p>
+          At the very simplest, pure ES6/7 JavaScript classes that does not use a namespace, should
+          be <em>saved in the root src/ folder</em>. The basic examples on the right, not residing in a protected
+          namespace would each be a .js file inside <strong>src/</strong> that resembles this simulaation:
+        </p>
+        <project-explorer shadow="true"></project-explorer>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
   </div>
 </template>

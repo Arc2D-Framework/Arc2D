@@ -1,20 +1,18 @@
-import 'docs.demos.ui.ToggleButton';
 import 'docs.components.NamespaceExplorer';
 import 'core.ui.ProjectExplorer';
 
 namespace `docs.topics` (
-	class GenerateComponents extends docs.topics.Topic  {
-
-        async onConnected(){
+	class IntroductionToApplications  extends docs.topics.Topic  {
+		async onConnected(){
             await super.onConnected();
             this.project_explorer = this.querySelector("project-explorer");
-            await wait(2000);
-            this.renderProjectFiles();
+            await wait(300);
+            // this.renderProjectFiles();
         }
 
-		renderProjectFiles(){
+        renderProjectFiles(){
             this.project_explorer.reset();
-            var folders = ["core","ui","ToggleButton"];
+            // var folders = ["applications","StoreCatalog"];
 
             var lastFolder = this.project_explorer.getSrcFolder();
             while(folders && folders.length>0 && lastFolder){

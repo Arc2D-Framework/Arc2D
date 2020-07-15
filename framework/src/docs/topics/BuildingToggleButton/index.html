@@ -8,14 +8,15 @@
         <p>
             A toggle button can be created in a few ways, here I'll give you the
             HTML, JavaScript and CSS snippets (to the right) and leave you to
-            read the code as an exercise for understanding the logic.
+            read the code as an exercise for following along and 
+            understanding the gist of it, at a broad level for now.
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
         <div class="javascript lang">
             <blockquote class="javascript" style="display:block;width: 100%;">
-                Lett's begin by opening the Class that was generated earlier
+                Let's begin by opening the Class that was generated earlier
             </blockquote>
             <pre class="highlight javascript" style="display:block;width: 100%;">
                 <code id="ns-code-block">
@@ -43,14 +44,14 @@ namespace \`core.ui\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">When onConnected()</h1>
         <p>
-            As you'll eventually discover in the chapter, <a href="#docs.topics.ComponentLifecycle">Component Lifecycle</a>, WebComponents move through a series of states as the Arc Engine connects each component to a web page.
+            As you'll eventually discover in the chapter, <a href="#docs.topics.ComponentLifecycle">Component Lifecycle</a>, WebComponents move through a series of states as the Arc Engine discovers and connects each component on the web page.
         </p>
         <p>
-            <code>onConnected()</code> is the meat of your wire-up and variable declarations. It is in here you'll want to query the DOM, specifically, the childNodes that belong to this component. It is in here, you'll want to have any logic regarding its DOM and mutations and/or manipulations of the components children (dom tree). 
+            <code>onConnected()</code> is the wiring junction-box of web components. It is in here you'll query the component tree -- the <strong>childNodes</strong> of this component. It is here where logic resides, regarding mutations and/or manipulations to the childNodes (see html template tab). 
         </p>
         <h3>What trips off onConnected()?</h3>
         <p>
-            <code>onConnected()</code> is auto-triggered by the Arc Engine when the component becomes connected to the web page. What does this mean? Simply put, when a component is appended as a child to the page, and/or used as a tag in the HTML, it trips the <code>onConnected()</code> method of the component instance instantly and only once for that component.
+            <code>onConnected()</code> is auto-fired by the Arc Engine when the component becomes connected to the web page. What does this mean? Simply put, when a component is appended as a child to the page, and/or used as a tag in the HTML, it trips the <code>onConnected()</code> method of the component instance instantly and only once for that component.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -85,7 +86,7 @@ async onConnected(){
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">ToggleButton HTML</h1>
         <p>
-            Open the components html template (index.html file) and enter the HTML shown on the right under <strong>HTML tab</strong>.
+            Open the components html template (index.html file) and enter the HTML shown on the right under <strong>HTML tab</strong>. We'll shoot for clean, supple HTML. We need just a single div at minimum for the .knob. The template itself is wrapped within another parent div when rendered, holding the dom-tree together -- which can be styled as a container, as you'll see in the CSS section.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -116,7 +117,23 @@ async onConnected(){
         <h1 id="api-reference">ToggleButton CSS</h1>
         <p>
             Copy and paste the CSS to the right. These are some basic rules to style the toggle
-            by its tag-name.
+            by its tag-name or :host context. As mentioned above, the components template, when rendered, will be wrapped by a custom tag-name derived from the ClassName as &lt;class-name&gt;. Here, &lt;toggle-button&gt;, derived from ToggleButton class.
+        </p>
+        <p>
+            Styling the toggle-button by it's tag-name serves 2 purposes:
+            <ul>
+                <li><strong>Dimension:</strong> As a container for positioning, dimensions, sizing, etc..</li>
+                <li><strong>Semantics:</strong> As a specificity rule for scoping -- targeting just this component</li>
+            </ul>
+        </p>
+        <h3>Toggling Shadow DOM on/off</h3>
+        <p>
+            Alternatively, the :host context may be used which will allow the component to be used as a Shadow Dom element on a web page via the <code>shadow</code> attribute. Without the attribute, the component is rendered in the Light DOM as usual and probably what you're most familiar with.
+            <pre class="inline html lang">
+                <code>
+&#x3C;toggle-button shadow&#x3E;&#x3C;/toggle-button&#x3E;
+                </code>
+            </pre>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -125,7 +142,36 @@ async onConnected(){
         <div class="html lang"></div>
         <div class="css lang">
             <blockquote class="css" style="display:block;width: 100%;">
-                What our toggle needs is a Knob to indicate direction (on | off) and serve as an element to press or tap on. All we need is a simple &#x3C;div&#x3E; that will be styled into a circular shape using CSS.
+                Using the <code style="display:inline;">:host</code> context allows the component to be Shadow DOM ready
+            </blockquote>
+            <pre class="highlight css" style="display:block;width: 100%;">
+                <code id="ns-code-block">
+:host {
+    width: 70px;
+    height: 30px;
+    display: block;
+    background: lightgray;
+    border-radius: 30px;
+    box-sizing: content-box;
+    padding: 3px;
+    perspective: 3000px;
+}
+
+:host .knob {
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 30px;
+    background: white;
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+}
+                </code>
+            </pre>
+
+
+            <blockquote class="css" style="display:block;width: 100%;">
+                Otherwise, the components tag-name can be used if not using Shadow
+                DOM.
             </blockquote>
             <pre class="highlight css" style="display:block;width: 100%;">
                 <code id="ns-code-block">
@@ -150,6 +196,35 @@ toggle-button .knob {
 }
                 </code>
             </pre>
+
+
+
+            <blockquote class="css" style="display:block;width: 100%;">
+                Finally, the recommended approach is to style by the components <strong>.ClassName</strong> context:
+            </blockquote>
+            <pre class="highlight css" style="display:block;width: 100%;">
+                <code id="ns-code-block">
+.ToggleButton {
+    width: 70px;
+    height: 30px;
+    display: block;
+    background: lightgray;
+    border-radius: 30px;
+    box-sizing: content-box;
+    padding: 3px;
+    perspective: 3000px;
+}
+
+.ToggleButton .knob {
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 30px;
+    background: white;
+    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+}
+                </code>
+            </pre>
         </div>
       </div>
     </div>
@@ -163,7 +238,7 @@ toggle-button .knob {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Basic State</h1>
         <p>
-            We'll need a reference to the knob and the initial direction
+            We'll need a reference to the <code>.knob</code> and the initial direction
             in the off position. 
         </p>
       </div>
@@ -177,6 +252,88 @@ async onConnected(){
 
     this.knob = this.querySelector(".knob");
     this.direction = -1;
+}
+                </code>
+            </pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Listeners</h1>
+        <p>
+            A standard call to <code>addEventListener()</code> is wired during
+            the <code>onConnected()</code> phase to execute <code>onClick()</code>
+            when clicks are detected anywhere on the toggles UI.
+        </p>
+        <p>
+            <pre class="inline javascript lang">
+                <code>
+this.addEventListener("click", e => this.onClick(e), false);
+                </code>
+            </pre>
+        </p>
+        <p>
+            <code>onClick()</code> simply inverts the direction each time by multiplying the
+            current direction by -1 to set the new direction, let's visualize the math:
+            <table>
+                <thead>
+                <tr>
+                  <th>current <code>this.direction</code></th>
+                  <th>onClick multiplies by <code>-1</code></th>
+                  <th>new <code>this.direction</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>-1 (starting state)</td>
+                  <th>-1</th>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <th>-1</th>
+                  <td>-1</td>
+                </tr>
+                <tr>
+                  <td>-1</td>
+                  <th>-1</th>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <th>-1</th>
+                  <td>-1</td>
+                </tr>
+                <tr>
+                  <td colspan="3">And so on between -1 and 1</td>
+                </tr>
+              </tbody>
+            </table>
+        </p>
+        <p>
+            <code>onRender</code> is called right after, which uses a standard css transform to 
+            move the .knob on the x-axis from 0 to the width of the toggle, minus the knob width.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+            <pre class="highlight javascript" style="display:block;width: 100%;">
+                <code id="ns-code-block">
+async onConnected(){
+    await super.onConnected();
+
+    this.knob = this.querySelector(".knob");
+    this.direction = -1;
+    this.addEventListener("click", e => this.onClick(e));
 }
                 </code>
             </pre>
@@ -214,16 +371,13 @@ namespace \`core.ui\` (
 
             this.knob = this.querySelector(".knob");
             this.direction = -1;
-            this.addEventListener("click", e => this.onClick(e), false, ".knob");
-            this.addEventListener("transitionend", e => this.onStyleComputed(e));
+            this.addEventListener("click", e => this.onClick(e));
         }
 
-        onStyleComputed(style){
+        async onStyleComputed(style){
+            await wait(100);
             this.bounds = this.getBoundingClientRect();
             this.knob_bounds = this.knob.getBoundingClientRect();
-
-            var style = window.getComputedStyle(this.knob);
-            this.matrix = new DOMMatrix(style.transform);
         }
 
         onClick(){
@@ -232,14 +386,15 @@ namespace \`core.ui\` (
         }
 
         get x() {
+            var offset=6;
             return this.direction > 0 ?
-                this.bounds.width-this.knob_bounds.width-6 : 0;
+                this.bounds.width - this.knob_bounds.width - offset : 0;
         }
 
         onRender(){
             var vector = {x: this.x, y:0, z:0 }
             this.knob.style.transform = \`
-                translate3d(\${vector.x||0}px,\${vector.y||0}px,\${vector.z||this.matrix.m43}px)
+                translate3d(\${vector.x||0}px,\${vector.y||0}px,\${vector.z}px)
             \`;
         }
     }
@@ -268,7 +423,7 @@ namespace \`core.ui\` (
             </blockquote>
             <pre class="highlight css" style="display:block;width: 100%;">
                 <code id="ns-code-block">
-toggle-button {
+:host {
     width: 70px;
     height: 30px;
     display: block;
@@ -279,7 +434,7 @@ toggle-button {
     perspective: 3000px;
 }
 
-toggle-button .knob {
+:host .knob {
     transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     width: 30px;
     background: white;
@@ -299,17 +454,77 @@ toggle-button .knob {
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Using the ToggleButton</h1>
+        <h1 id="api-reference">Using the ToggleButton inline</h1>
         <p>
-            To be continued...
+            There are 2 ways to use the toggle-button, which are covered in-depth
+            in the chapter, <a href="#docs.topics.ComponentUsage">Using Components</a>. But, the
+            simplest way for now is to use it declaratively in HTML markup:
+        </p>
+        <p>
+            <pre class="inline html lang">
+                <code>
+&#x3C;body namespace=&#x22;applications.HelloWorld&#x22;&#x3E;
+    &#x3C;toggle-button&#x3E;&#x3C;/toggle-button&#x3E;
+&#x3C;/body&#x3E;
+                </code>
+            </pre>
+        </p>
+        <p>
+            Here, our hello-world.html web page declares the toggle-button inline just
+            like any other tag. But for this to work, the ToggleButton class must be
+            imported by the HelloWorld application (see HTML and JavaScript tab on right).
+        </p>
+        <p>
+            <a href="hello-world.html" target="new">DEMO</a>
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
-        <div class="javascript lang"></div>
-        <div class="html lang"></div>
+        <div class="javascript lang">
+            <blockquote class="javascript" style="display:block;width: 100%;">
+            <b>index.js</b><br/>
+            import ToggleButton so it is available for use.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import 'core.ui.ToggleButton';
+
+namespace \`applications\` (
+    class HelloWorld extends Application { 
+        
+    }
+);
+        </code></pre>
+        </div>
+        <div class="html lang">
+            <blockquote class="html" style="display:block;width: 100%;">
+            <b>hello-world.html</b>
+          </blockquote>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html lang=&#x22;en&#x22;&#x3E;
+    &#x3C;head&#x3E;
+        &#x3C;title&#x3E;Hello World&#x3C;/title&#x3E;
+        &#x3C;script src=&#x22;node_modules/od-cocoon/framework.src.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
+    &#x3C;/head&#x3E;
+
+    &#x3C;body namespace="applications.HelloWorld"&#x3E;
+        &#x3C;hello-world&#x3E;
+            &#x3C;toggle-button&#x3E;&#x3C;/toggle-button&#x3E;
+        &#x3C;/hello-world&#x3E;
+    &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+        </code></pre>
+        </div>
         <div class="css lang"></div>
       </div>
     </div>
+
+
+
+
+
+
+    
+
   </div>
 </template>

@@ -168,7 +168,14 @@ namespace `w3c.ui` (
 
         onStylesheetLoaded(style) { }
 
-        onTransformStyle(css) {return css}
+
+        onTransformStyle(cssText){
+            if(!this.inShadow()){
+                return cssText.replace(/\:host\s+/gm, `.${this.classname} `)
+            } else{
+                return cssText;
+            }
+        }
 
         setCssTextAttribute(_cssText, stylenode) {
             if (stylenode && stylenode.styleSheet) {
@@ -417,7 +424,7 @@ namespace `w3c.ui` (
         
 
         setPrototypeInstance() {
-            this.root.setAttribute("namespace", this.namespace);
+            this.setAttribute("namespace", this.namespace);
             this.prototype = this;
         }
 
