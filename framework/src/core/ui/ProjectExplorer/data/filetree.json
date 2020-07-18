@@ -74,6 +74,13 @@
         }],
         "size": 3228959,
         "type": "directory"
+    },
+    {
+        "path": "",
+        "name": "hello-world.html",
+        "size": 353,
+        "extension": "html",
+        "type": "file"
     }],
     "size": 3229312,
     "type": "directory",

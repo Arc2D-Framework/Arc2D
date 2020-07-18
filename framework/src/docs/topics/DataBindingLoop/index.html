@@ -15,6 +15,7 @@
         <p>
             Input, Update and Render usually fires in this order, once, every 1/60th of a second up to 60 frames per second indefinitely, yielding smooth motion graphics. Input from a controller, such as a <code>RIGHT</code> keydown will cause the Update to increment the x,y position Vector of a Sprite on a 2D surface just a little based on Velocity and other force Vectors. Render follows in step, quickly erasing and redrawing the Sprite at a new Vector position. Holding the key down gives the illusion of fluid motion.
         </p>
+        
         <p>
             In essence, this is a kind of data binding, but without relying on polling or event broadcasting, instead the synchronization of state to projection is a bit more indirect and caused by a loop that calls all 3 processes very quickly, back to back. In fact, once the loop is running, it's never touched again. Sprites are placed in a world, react based on their AI and environment conditions, causing NPCs to act autonomously and intelligently. Only the logic is programmed for the simulation, the real meat, never having to wait on a particular user driving the system.
         </p>

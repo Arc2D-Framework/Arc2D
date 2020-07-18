@@ -337,6 +337,15 @@ async onConnected(){
 }
                 </code>
             </pre>
+
+            <pre class="highlight javascript" style="display:block;width: 100%;">
+                <code id="ns-code-block">
+onClick(){
+    this.direction *= -1;
+    this.onRender();
+}
+                </code>
+            </pre>
         </div>
         <div class="html lang"></div>
         <div class="css lang"></div>
@@ -482,8 +491,8 @@ namespace \`core.ui\` (
         <div class="shell lang"></div>
         <div class="javascript lang">
             <blockquote class="javascript" style="display:block;width: 100%;">
-            <b>index.js</b><br/>
-            import ToggleButton so it is available for use.
+            Import ToggleButton so it is available throughout the application and other
+            components that rely on it.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 import 'core.ui.ToggleButton';

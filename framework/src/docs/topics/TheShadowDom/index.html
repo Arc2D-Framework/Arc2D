@@ -1,0 +1,150 @@
+<template>
+  <div>
+
+    
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1>DO NOT use Shadow DOM</h1>
+        <p>
+          Unless you have no other choice. I'd like to preface by saying, shadow
+          dom must be avoided at all costs unless you were designing a component
+          to be shared acorss millions of websites, and this component must preserve
+          brand identity, colors and never be influenced by the surrouding HTML page.
+        </p>
+        <p>
+          A great example: The Twitter share module that many people embed on their
+          pages to share twitter feeds (tweets, videos etc). iframes are used for each tweet being shared,
+          and for good reasons. Security and brand identity. Imagine if the css styling of your
+          web page and millions of other web pages adversely affected the twitter branding and colors
+          of the embedded tweets, not good.
+        </p>
+        <p>
+          If you're not doing anything like that, <em>DO NOT USE SHADOW DOM</em>. I 
+          cannot explain the pitfalls here, please investogate shadow dom and determine
+          this for yourself.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">The Shadow DOM</h1>
+        <p>
+          Not familar with this HTML5 feature? <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM" taraget="new">Read about it here.</a> Mozilla describes how to create a shadow dom web component, it's a bit complicated if you're not using a framework. 
+        </p>
+        <p>
+            TL;DR;<br/>
+            In short, the shadow dom allows one of your web components to be
+            placed on a web page (Light DOM) in a private, isolated boundary, the Shadow DOM. CSS on the outside
+            page cannot pierce it easily, JavaScript may access it's internals to a limited degree.
+            It is an encapsulated armored shell, very much like the &lt;iframe&gt; <em>The Arc Engine is able to
+            run any of your WebComponents in and out of the shadow without any of the complex setup shown
+            in the Mozilla docs, it's handled for you, intelligently and automatically.</em>
+        </p>
+        <p>
+          In Arc, enabling Shadow DOM on a component is achieved using the <code>shadow</code>
+          attribute:
+          <pre class="inline html lang">
+                <code>
+&#x3C;body namespace=&#x22;applications.HelloWorld&#x22;&#x3E;
+    &#x3C;toggle-button shadow&#x3E;&#x3C;/toggle-button&#x3E;
+&#x3C;/body&#x3E;
+                </code>
+            </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Versatility</h1>
+        <p>
+          The same component may be used multiple times on the same page,
+          one in the shadow, the other in the light:
+        </p>
+        <p>
+          <pre class="inline html lang">
+                <code>
+&#x3C;body namespace=&#x22;applications.HelloWorld&#x22;&#x3E;
+    &#x3C;toggle-button shadow&#x3E;&#x3C;/toggle-button&#x3E;
+    &#x3C;toggle-button&#x3E;&#x3C;/toggle-button&#x3E;
+&#x3C;/body&#x3E;
+                </code>
+            </pre>
+        </p>
+        <p>It is highly unrealistic that you would need to run both instances in shadow and light, but the example serves to demonstrate versatility and elegance to enable Shadow DOM easily, instead of the low-level complexity outlined by the W3C WebComponent specification.</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Forcing Shadow DOM</h1>
+        <p>
+          While the <code>shadow</code> attribute can be used in inline HTML to enable/disable
+          the Shadow DOM of components, it does not gaurantee shadow dom encapsulation if by design the component
+          should never be in the Light DOM and only in the Shadow. 
+        </p>
+        <p>
+          If you need to force design components to be Shadow DOM compliant all the time, regardless of
+          the <code>shadow</code> attribute being used by developers, then have a look at the Class level method, 
+          <code>inShadow() : bool</code>.
+        </p>
+        <p>
+          <pre class="inline javascript lang">
+                <code>
+namespace \`core.ui\` (
+  class ToggleButton extends WebComponent  {
+    async onConnected(){
+            await super.onConnected();
+            //removed code for brevity
+        }
+
+        inShadow() {
+            return true
+        }
+  }
+)
+                </code>
+            </pre>
+        </p>
+        <p>
+            Implement <code>inShadow()</code> and return <code>true</code> (boolean). This will force-lock the component
+            in the shadow regardless of how the user of the component is declaring the html use of it, in other
+            words, the <code>shadow</code> attribute has no effect.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+    
+  </div>
+</template>

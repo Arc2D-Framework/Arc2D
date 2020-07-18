@@ -14,6 +14,7 @@ namespace `docs.topics` (
 
 		renderProjectFiles(){
             this.project_explorer.reset();
+            debugger;
             var folders = ["core","ui","ToggleButton"];
 
             var lastFolder = this.project_explorer.getSrcFolder();

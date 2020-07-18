@@ -21,18 +21,18 @@
 	          <tbody>
 	            <tr>
 	              <td>3</td>
-	              <td>Inline (Javascript)</td>
-	              <td>template() method supplies &#x3C;template&#x3E; string from Class</td>
+	              <td>Function</td>
+	              <td>Implement <code>template()</code> function at the Class level</td>
 	            </tr>
 	            <tr>
 	              <td>2</td>
-	              <td>Inline (HTML)</td>
-	              <td>Declare the &#x3C;template&#x3E; inline when using the component tag</td>
+	              <td>HTML</td>
+	              <td>Implement a <code>&#x3C;template&#x3E;</code> Node inline</td>
 	            </tr>
 	            <tr>
 	              <td>1</td>
-	              <td>External (src= attribute)</td>
-	              <td>If none of above, Component loads its default index.html </td>
+	              <td>Attribute</td>
+	              <td>Implement the <code>src</code> attribute; specifies a URI path to a template .html file</td>
 	            </tr>
 	          </tbody>
 	        </table>
@@ -81,18 +81,17 @@ namespace \`core.ui\` (
       </pre>
 
 
-      <blockquote class="html" style="display:block;width: 100%;">
-            <b>Specificity 1 (lowest precedence): Components external index.html &#x3C;template&#x3E;</b><br/>
-            As the default, and final fallback, if no JavaScript template() or inline HTML
-            template was found, the Component loads it's default index.html &#x3C;template&#x3E;.
+          <blockquote class="html" style="display:block;width: 100%;">
+            <b>Specificity 1 (lowest precedence): src attribute path</b><br/>
+            Implement src="" attribute pointing to a template .html file.
           </blockquote>
 
-          <blockquote class="html" style="display:block;width: 100%;">Template in src/core/ui/ModalDialog/index.html</blockquote>
-          <pre class="highlight html" style="display:block;width: 100%;"><code>
-&#x3C;template&#x3E;
-    &#x3C;h3&#x3E;modal dialog template here&#x3C;/h3&#x3E;
-&#x3C;/template&#x3E;</code>
+          <pre class="highlight html" style="display:block;width: 100%;"><code>&#x3C;modal-dialog src="/src/core/ui/ModalDialog/my_template.html"&#x3E;&#x3C;/modal-dialog&#x3E;</code>
       </pre>
+      <blockquote class="html" style="display:block;width: 100%;">
+            As the default, and final fallback, if no JavaScript template() or inline HTML
+            template or src attribute was specified, the Component loads it's default index.html &#x3C;template&#x3E;.
+          </blockquote>
         </div>
         <div class="css lang"></div>
       </div>
