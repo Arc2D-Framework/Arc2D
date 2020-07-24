@@ -1,3 +1,22 @@
+(async ()=>{ var {Paginator} = await require('/node_modules/od-paginator/paginator.js');
+var mingo = (await require('/node_modules/od-mingo/dist/mingo.es6.js')).default;
+
+
+
+
+var REPOSITORIES = {  
+    MOVIES: {
+        config : {
+            table: "movies"
+        },
+        dev: Config.ROOTPATH + "resources/data/movies.json",
+        staging: Config.ROOTPATH + "resources/data/movies.json",
+        test : Config.ROOTPATH + "resources/data/movies.json",
+        prod : Config.ROOTPATH + "resources/data/movies.json"
+    }
+}
+
+
 
 
 /**
@@ -65,3 +84,38 @@ namespace `core.drivers.storage` (
     }
 );
  
+
+
+
+
+namespace `core.data` (
+	class Movies extends core.data.Repository {
+		
+		 /*see: app/resources/repositories.js*/
+
+		static isSeedable(){
+            return this.IRequestStorage.isSeedingEnabled();
+        }
+	}
+);
+
+
+
+
+field(core.data.Movies, "public", "device_driver",  "core.drivers.storage.Memory");
+field(core.data.Movies, "public", "seeds",  REPOSITORIES.MOVIES);
+
+namespace `applications` (
+    class DataAccessTest extends w3c.ui.Application {
+        constructor(element){
+            super(element);
+        }
+
+        async onConnected() {
+            await super.onConnected();
+        }
+    }
+);
+
+
+ })()

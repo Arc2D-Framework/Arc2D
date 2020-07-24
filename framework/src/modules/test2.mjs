@@ -1,4 +1,4 @@
-import {sample as runit} from '/modules/test3.mjs';
+import {sample as runit} from '/src/modules/test3.mjs';
 
 
 function test() {

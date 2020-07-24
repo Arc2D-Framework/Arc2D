@@ -1,5 +1,5 @@
-function transpile(target, level){}
-window.transpile=transpile;
+// function transpile(target, level){}
+// window.transpile=transpile;
 
 function relativeToAbsoluteFilePath(path, ns, appendRoot){
     ns = ns||this.namespace;

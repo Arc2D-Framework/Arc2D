@@ -1,6 +1,6 @@
 
 
-REPOSITORIES = {  
+var REPOSITORIES = {  
     MOVIES: {
         config : {
             table: "movies"

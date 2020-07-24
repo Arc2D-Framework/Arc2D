@@ -1,20 +1,20 @@
-var Session = Session||{State:{}};
-var Config = {};
-Config.NAMESPACE = null;//"applications.MainApp";
-Config.USE_COMPRESSED_BUILD = false;
-Config.FILENAME = "index.*js"
-Config.DYNAMICLOAD = true;
-Config.CHARSET = "utf-8";
-Config.ROOTPATH = "../../../";
-Config.SRC_PATH = "src/";
-Config.ENVIRONMENT = "dev";
-Config.LOGGING = true;
-Config.ENABLE_TRANSPILER = true;
-Config.DEFAULT_TEMPLATE_ENGINE_MIMETYPE = "template/literals";
-Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION = false;//ex: "index.kruntch.html"
-Config.IMPORTS_CACHE_POLICY = "no-store"; //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
-Config.DEBUG=true;
+var Session = window.Session = window.Session||{State:{}};
+var Config = window.Config = window.Config||{
+    NAMESPACE : null,//"applications.MainApp",
+    USE_COMPRESSED_BUILD : false,
+    FILENAME : "index.*js",
+    DYNAMICLOAD : true,
+    CHARSET : "utf-8",
+    ROOTPATH : "../../../",
+    SRC_PATH : "/src/",
+    ENVIRONMENT : "prod",
+    LOGGING : true,
+    ENABLE_TRANSPILER : true,
+    DEFAULT_TEMPLATE_ENGINE_MIMETYPE : "template/literals",
+    TEMPLATE_NAMES_USE_ENGINE_EXTENSION : false,//ex: "index.kruntch.html"
+    IMPORTS_CACHE_POLICY : "no-store", //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
+    DEBUG:true
+};
 
-
-module.exports = Config;
+try{module.exports = Config;}catch(e){}
 
