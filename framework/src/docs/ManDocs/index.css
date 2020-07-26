@@ -116,6 +116,9 @@ padding-left: 0px;
 letter-spacing: 0px;
 }
 
+man-docs .lang blockquote code {
+    display:inline;
+}
 
 .content code,
 .content pre code {
