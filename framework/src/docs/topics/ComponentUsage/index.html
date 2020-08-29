@@ -64,6 +64,13 @@ document.appendChild(goblin);
 var goblin = new core.ui.game.GoblinEnemy;
 document.appendChild(goblin)</code></pre><br/>
         </p>
+        <h3>onConnected()</h3>
+        <p>
+          The <code>onConnected()</code> method of WebComponents will fire immediately as soon
+          as it is appended to the DOM (Document Object Model), i.e: the web page. This is why it
+          is recommended that you begin writing DOM specific code in this callback vs the
+          constructor.
+        </p>
         <goblin-enemy></goblin-enemy>
         <!-- <toggle-button></toggle-button> -->
         <!-- <viking-hero></viking-hero> -->
@@ -76,6 +83,13 @@ document.appendChild(goblin)</code></pre><br/>
         <div class="css lang"></div>
       </div>
     </div>
+
+
+
+
+    
+
+
 
   </div>
 </template>

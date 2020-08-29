@@ -1,4 +1,4 @@
-import '/framework/src/core/ui/ChildComponent.js';
+import '/src/core/ui/ChildComponent.js';
 
 namespace `core.ui` (
     class ProtectedChildComponent extends core.ui.ChildComponent {

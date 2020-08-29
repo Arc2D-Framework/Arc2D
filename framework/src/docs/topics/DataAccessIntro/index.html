@@ -9,26 +9,11 @@
             <img src="src/docs/images/data_access_repositories.png" style="margin-top:60px;"/>
         </p>
         <p>
-            The UI is independent of any particular storage devices and will not have to be changed when switching your database to another device. The changes will be isolated to the driver at an infastructure level, that implements the protocols to communicate with that data source. 
+            The UI is independent of any particular storage devices and will not have to be changed when switching your database to another device, well, in theory. The changes will be isolated to the driver at an infastructure level that implements the protocols to communicate with that data source. 
         </p>
         <p>
             Firebase, Mongo, CouchDB and Arango are all examples of remote No-SQL databases usually exposed as RESTFul end-point connections. Create drivers as needed that knows how to protocol with a data/storage platform.  Local XML and JSON files on disk are also sources of data. So is HTML5 localStorage and sessionStorage. Arc ships with a set of simple storage drivers that allows you to develope offline simply by using the built-in Session or Local storage drivers.
         </p>
-
-<!--         <p>
-            The task was on myself. I started by making a <code>MovieList</code> component that we
-            can place on screen:
-            <pre class="inline javascript lang">
-                <code>
-namespace \`core.ui\` (
-    class MovieList extends w3c.ui.WebComponent {
-        
-    }
-);
-                </code>
-            </pre>
-        </p> -->
-        
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -41,6 +26,41 @@ namespace \`core.ui\` (
 
 
 
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">In english please</h1>
+        <p>
+            Repositories are collections. Collections of object things like Songs, Artists,
+            Movies, Users, Purchases and so on. Notice the pluralization.
+        </p>
+        <p>
+            Let's take Movies as an example. The Repository (Collection) for Movies
+            is defined in the following way:
+            <pre class="inline javascript lang">
+                <code>
+namespace \`core.data\` (
+    class Movies extends core.data.Repository {
+        @public device_driver = "core.drivers.storage.Memory";
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            It is configured here to use the Memory storage driver. When it is used
+            by developers, they should not be concerned where data is being read/written
+            to. The idea is that the <code>device_driver</code> could be switched to
+            MongoDB or some other medium without developers having to alter application
+            code they've written in any specific way for any specific devices.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
 
 
   </div>

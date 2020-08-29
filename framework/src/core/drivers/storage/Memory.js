@@ -10,10 +10,10 @@ namespace `core.drivers.storage` (
         constructor (collection, storage_device){
             super(collection, storage_device);
             if(!mingo) { 
-                console.error(this.namespace + " requires npm mingo to be installed. The storage device will still work but mongo-style queries will be ignored.");
+                console.error(this.namespace + " requires npm mingo to be installed.");
             }
             Session.State.db = Session.State.db||{};
-            this.setCollection(collection.classname);
+            this.setCollection(collection.classname||collection.prototype.classname);
         }
 
         isSeedingEnabled(){

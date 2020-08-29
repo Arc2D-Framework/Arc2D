@@ -7,11 +7,12 @@ import 'src/core/extensions/Document.js';
 import 'src/core/extensions/Function.js';
 import 'src/core/extensions/Array.js';
 import 'src/core/extensions/Window.js';
+import 'src/core/extensions/Element.js';
 import 'src/core/lang/Class.js';
 
 import 'node_modules/od-import-polyfill/import.js';
-import 'src/core/traits/Observer.js';
-import 'src/core/traits/Paginator.js';
+import 'node_modules/od-observer/observer.js';
+import 'node_modules/od-paginator/paginator.js';
 import 'src/core/drivers/storage/IStorageInterface.js';
 import 'src/core/data/Repository.js';
 import 'src/core/drivers/storage/Cursor.js';

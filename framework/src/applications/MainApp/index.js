@@ -1,5 +1,5 @@
 import '/src/applications/FirebaseProtected/index.js';
-import '/framework/src/core/ui/ProtectedChildComponent.js';
+import '/src/core/ui/ProtectedChildComponent.js';
 import '/src/core/data/Movies.js';
 import '/src/core/ui/protected/UserLoginBar/index.js';
 import '/src/core/ui/protected/MovieMenu/index.js';

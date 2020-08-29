@@ -166,23 +166,12 @@ namespace \`core.data\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Creating a Repository</h1>
         <p>
-            Let's build a repository to represent a collection of movies, we are able to
+            Let's build a repository to represent a collection of movies. We should be able to
             query, sort and add/update/delete movies from this collection.
         </p>
 
         <p>
-            We'll need to import 3 framework-level parts for defining a new repository. We'll cover them later.
-            <pre class="inline javascript lang">
-                <code>
-import '/resources/repositories.js';
-import '/framework/src/core/data/Repository.js';
-import '/framework/src/core/drivers/storage/Memory.js';
-                </code>
-            </pre>
-        </p>
-        
-        <p>
-            Movies will extend the base class, <code>Repository</code> (one of the framework-level imports).
+            Movies will extend the base class, <code>Repository</code>
             <pre class="inline javascript lang">
                 <code>
 namespace \`core.data\` (
@@ -273,7 +262,7 @@ var movie = await core.data.Movies.add(movie)
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Seeding a Repository (for testing)</h1>
         <p>
-            Repositories can be seeded with sample data. In ther words, prepopulating the storage device with a small dataset. <em>A crucial feature when Unit Testing</em> but not practical in a real world application, nor
+            Repositories can be seeded with sample data. In ther words, prepopulating the storage device with a small dataset, a crucial feature when <em>Unit Testing</em>, but not practical in a real world application, nor
             recommended for anything other than running offline development tests.
         </p>
 
@@ -281,6 +270,8 @@ var movie = await core.data.Movies.add(movie)
             Configure the <code>seeds</code> property:
             <pre class="inline javascript lang">
                 <code>
+import '/resources/repositories.js';
+
 namespace \`core.data\` (
     class Movies extends core.data.Repository {
         @public device_driver = "core.drivers.storage.Memory";
@@ -291,7 +282,7 @@ namespace \`core.data\` (
             </pre>
         </p>
         <p>
-            <code>REPOSITORIES.MOVIES</code> is avaliable and defined in a previous import (above):
+            <code>REPOSITORIES.MOVIES</code> is a declaration defined in the <code>import '/resources/repositories.js'</code> statement. Have a look at this file later, it's mostly a set of paths to JSON seed files:
             <pre class="inline javascript lang">
                 <code>
 import '/resources/repositories.js';
@@ -538,8 +529,8 @@ namespace \`core.data\` (
         @public device_driver = "core.drivers.storage.Memory";
 
         static async push(obj,cb){
-            //override baseclass method.
-            console.log("dumping obj", obj);
+            //override baseclass method for custom behavior.
+            console.log("thanks, what do i do with?", obj);
         }
     }
 );

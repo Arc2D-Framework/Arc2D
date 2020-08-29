@@ -4,10 +4,13 @@
     
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">JavaScript ClassLoader</h1>
+        <h1 id="api-reference">JavaScript ClassLoader (Advanced)</h1>
         <p>
-          The ClassLoader is one of a few ways to import javascript classes at runtime, dynamically. This is
-          a low-level module. It will import source and it's full dependency graph handling cyclic dependencies. It resolves file:/// (mobile;Cordova) and http:// protocols. No webpack, babel, pre or post compilers. It's live.
+          The <code>core.lang.ClassLoader</code> is one of a few ways to import javascript classes at runtime, dynamically. This is a low-level module. It will import source and it's full dependency graph handling cyclic dependencies. It resolves file:/// (mobile;Cordova) and http:// protocols. There is no need for webpack, babel, pre or post compilers. It's live. It imports and transpiles source-code live at runtime.
+        </p>
+
+        <p>
+          Will you need to use this? Most likely not, unless you're crafting framework oriented architecture.
         </p>
       </div>
       <div style="width: 50%;display: block;">

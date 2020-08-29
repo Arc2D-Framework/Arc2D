@@ -1,6 +1,7 @@
 mingo = (await require('/node_modules/od-mingo/dist/mingo.es6.js')).default;
 
 import! 'core.data.Movies';
+import! 'core.data.Employees';
 
 namespace `applications` (
     class DataAccessTest extends w3c.ui.Application {

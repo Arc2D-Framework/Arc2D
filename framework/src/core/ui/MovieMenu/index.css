@@ -1,16 +1,13 @@
-.MovieMenu{
+:host{
 	background:blue;
 	display:block;
-}
-
-.MovieMenu {
     float: left;
     padding-right: 30px;
 }
 
-.MovieMenu ul {
+:host ul {
     margin: 0;
 }
-.MovieMenu li.active {
+:host li.active {
     background-color:yellow;
 }

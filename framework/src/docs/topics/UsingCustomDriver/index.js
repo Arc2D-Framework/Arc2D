@@ -2,8 +2,8 @@ import 'docs.demos.templates.HealthCarePackage';
 
 namespace `docs.topics` (
 	class UsingCustomDriver  extends docs.topics.Topic  {
-		onConnected(){
-            super.onConnected();
+		async onConnected(){
+            await super.onConnected();
             this.on("click", e => this.runDemo(e), false, "#render-mustache-component")
         }
 

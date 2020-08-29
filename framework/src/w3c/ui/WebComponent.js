@@ -1,5 +1,5 @@
-import 'src/core/ui/templating/CustomTemplateEngines.js';
-import 'src/core/ui/templating/TemplateLiterals.js';
+import 'src/core/drivers/templating/Manager.js';
+import 'src/core/drivers/templating/TemplateLiterals.js';
 
 namespace `w3c.ui` (
     class WebComponent extends HTMLElement {
@@ -11,12 +11,14 @@ namespace `w3c.ui` (
                 this.attachShadow({ mode: 'open' }) : 
                 (this.element||this);
 
-            if(this.element){
-                this.onTemplateLoaded();
+            if(this.isExistingDomNode(this.element)){
+                this.connectedCallback();
             }
         }
 
-        
+        isExistingDomNode(el){
+            return el && el.parentNode && el.parentNode.nodeType==1
+        }
 
         static define(proto,bool){
             var ce = window.customElements;
@@ -28,11 +30,7 @@ namespace `w3c.ui` (
                 this.defineAncestralClassList();
                 try{ce && ce.define(tag, this);}
                 catch(e){console.error(e)}
-            }
-            // else {
-            //     //TODO: Use error codes
-            //     console.warn(`${proto.namespace}#define() - bad tag`)
-            // }       
+            }     
         }
 
         setStylesheet () {    
@@ -40,7 +38,7 @@ namespace `w3c.ui` (
             !!css && !this.__proto._style_defined ? 
                 (this.onAppendStyle(
                     `<style>\n${css}\n</style>`.toDomElement()),
-                    this.__proto._style_defined=true
+                    this.__proto._style_defined=false
                 ) : null;
         }
 
@@ -81,27 +79,6 @@ namespace `w3c.ui` (
             }
         }
 
-        // onAppendStyle(stylesheet) {
-        //     if(this.inShadow()){
-        //         try{
-        //             var style = new CSSStyleSheet();
-        //             style.replace(stylesheet.innerText);
-        //             this.adoptedStyleSheets = [stylesheet];
-        //         } catch(e){
-        //             //TODO: use error code
-        //             console.error(`${e.message} Unable to adopt stylesheet 
-        //                 into shadow dom -- ${this.namespace}#onAppendStyle(), 
-        //                 see: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690.
-        //                 As a workaround, @import the css from within <template>`)
-        //         }
-        //     }
-        //     else {
-        //         var headNode = document.querySelector("head")
-        //         var configscript = document.querySelector("script");
-        //         headNode.insertBefore(stylesheet, configscript);
-        //     }
-        // }
-
         onStyleComputed(stylesheet){}
 
         adopts(orphan) {
@@ -127,7 +104,7 @@ namespace `w3c.ui` (
         addEventListener(evtName, handler, bool=false, el) {
             var self = this;
             if (typeof el == "string") {
-                this.root.addEventListener(evtName, e => {
+                this.addEventListener(evtName, e => {
                     var t = this.getParentNodeFromEvent(e, el);
                     if (t) {
                         handler({
@@ -140,8 +117,13 @@ namespace `w3c.ui` (
                     }
                 }, bool);
             } else {
-                if(this.element){this.element.addEventListener(evtName, handler, bool);}
-                else{this.element||super.addEventListener(evtName, handler, bool);}
+                // super.addEventListener(evtName, handler, bool);
+                if(this.isExistingDomNode(this.element)){
+                    this.element.addEventListener(evtName, handler, bool);
+                }
+                else{
+                    super.addEventListener(evtName, handler, bool);
+                }
             }
         }
 
@@ -171,7 +153,7 @@ namespace `w3c.ui` (
 
         onTransformStyle(cssText){
             if(!this.inShadow()){
-                return cssText.replace(/\:host\s+/gm, `.${this.classname} `)
+                return cssText.replace(/\:host[\s\t\n]*/gm, `.${this.classname} `)
             } else{
                 return cssText;
             }
@@ -189,7 +171,6 @@ namespace `w3c.ui` (
         async loadTemplate() {
             return new Promise(async (resolve, reject) => {
                 var tem  =  this.getTemplateToLoad();
-                
                 if(/\/*\.html$/.test(tem)){
                     var src=this.src||tem;//TODO: bug here?
                     var opts = { cache: "force-cache" };//TODO: use cache policy from appconfig.js
@@ -199,18 +180,43 @@ namespace `w3c.ui` (
                 else if(/<\s*\btemplate\b/.test(tem)){//from inner template()
                     this._template=tem;
                 }
-                else if(tem && tem.nodeType==1){
+                else if(tem && tem.nodeType==1 && tem.tagName.toLowerCase()=="template"){
                     this._template=tem.outerHTML;
+                }
+                else if(tem && tem.nodeType==1){
+                    this._template=`<template>${tem.outerHTML}</template>`;
                 }
                 resolve(this._template);
             })
         }
 
+        // async loadTemplate() {
+        //     return new Promise(async (resolve, reject) => {
+        //         var tem  =  this.getTemplateToLoad();
+                
+        //         if(/\/*\.html$/.test(tem)){
+        //             var src=this.src||tem;//TODO: bug here?
+        //             var opts = { cache: "force-cache" };//TODO: use cache policy from appconfig.js
+        //             src = src.replace("/./", "/" + this.namespace.replace(/\./gim, "/") + "/");
+        //             this._template = await imports(src, opts);
+        //         }
+        //         else if(/<\s*\btemplate\b/.test(tem)){//from inner template()
+        //             this._template=tem;
+        //         }
+        //         else if(tem && tem.nodeType==1){
+        //             this._template=tem.outerHTML;
+        //         }
+        //         resolve(this._template);
+        //     })
+        // }
+
         getTemplateToLoad(){
             var engine = this.getTemplateEngine();
+
             return  this.querySelector("template")||    //node
                     this.src||                          //uri
                     this.template()||                   //string
+                    this.element||
                     "/src/./index" + (engine.ext||"") + ".html" //TODO: default but ignores <Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION>
         }
 
@@ -220,7 +226,11 @@ namespace `w3c.ui` (
         }
         
         async render(data={}) {
-            if(this.element){return}
+            if(this.isExistingDomNode(this.element)){
+                this.onTemplateRendered(temNode);
+                return
+            }
+            // debugger;
             var t = this._template;
             if (t) {
                 var html = await this.evalTemplate(t, data);
@@ -238,8 +248,14 @@ namespace `w3c.ui` (
                         (placeholder||temNode).appendChild(slot)
                     })
                 }
-                this.root.innerHTML = "";
-                this.root.appendChild(temNode);
+                if(this.element){
+                    this.innerHTML = "";
+                    this.appendChild(temNode);
+                }
+                else{
+                    this.root.innerHTML = "";
+                    this.root.appendChild(temNode);
+                }
                 this.onTemplateRendered(temNode);
             }
         }
@@ -368,7 +384,7 @@ namespace `w3c.ui` (
         }
 
         setClassList() {
-            this.root.className = this.root.className + (this["@cascade"]? 
+            this.className = this.className + (this["@cascade"]? 
                 " " + (this.__proto.classes.join(" ")).trim():
                 " " + this.classname);
         }
@@ -385,17 +401,56 @@ namespace `w3c.ui` (
             this.onStyleComputed(this.stylesheets);
         }
 
+        // async loadcss(urls) {
+        //     return new Promise(async (resolve,reject) => {
+        //         if(this.__proto._css_loaded && !this.inShadow()){
+        //             resolve(true);
+        //             return
+        //         }
+        //         this.__proto._css_loaded=true;
+        //         urls=urls.reverse();
+        //         var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
+        //         for(let path of urls){
+        //             path = this.onLoadStyle(path);
+        //             if((path && !stylesheets[path]) || this.inShadow()){
+        //                 var tagName = /^http/.test(path) ? "link" : "style";
+        //                 var tag = document.createElement(tagName);
+        //                 // this.onAppendStyle(tag);
+        //                     tag.setAttribute("type", 'text/css');
+        //                     tag.setAttribute("rel",  'stylesheet');
+        //                     tag.setAttribute("href",  path);
+        //                     tag.setAttribute("component", this.namespace);
+        //                     stylesheets[path] = tag;
+        //                     if(tagName.toLowerCase() == "style"){
+        //                         var _cssText = await window.imports(path);
+        //                         if( _cssText){
+        //                             _cssText = this.onTransformStyle(_cssText);
+        //                             _cssText && this.setCssTextAttribute(_cssText, tag);
+        //                             this.onAppendStyle(tag);
+        //                             this.onStylesheetLoaded(tag);
+        //                         }
+        //                     }
+        //             }
+        //         }
+        //         resolve(true);
+        //     })
+        // }
         async loadcss(urls) {
+            if(!this.__proto._css_loaded){
+                this.__proto._css_loaded={}
+            }
             return new Promise(async (resolve,reject) => {
-                if(this.__proto._css_loaded && !this.inShadow()){
-                    resolve(true);
-                    return
-                }
-                this.__proto._css_loaded=true;
+                // if(this.__proto._css_loaded[] && !this.inShadow()){
+                //     resolve(true);
+                //     return
+                // }
+                // this.__proto._css_loaded=true;
                 urls=urls.reverse();
                 var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
                 for(let path of urls){
+                    if(this.__proto._css_loaded[path] && !this.inShadow()){continue}
                     path = this.onLoadStyle(path);
+                    this.__proto._css_loaded[path]=true;
                     if((path && !stylesheets[path]) || this.inShadow()){
                         var tagName = /^http/.test(path) ? "link" : "style";
                         var tag = document.createElement(tagName);

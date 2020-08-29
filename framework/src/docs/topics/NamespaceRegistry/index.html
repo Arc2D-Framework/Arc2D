@@ -27,6 +27,135 @@ console.log(NSRegistry)
 
 
     
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">What can this be used for?</h1>
+        <p>
+          When you run <code>NSRegistry</code> in the console, you get a record
+          of all namespaces being used by the Arc framework and your custom application:
+          <img src="src/docs/images/ns-registry.png" style="width:100%;"/>
+        </p>
+        <p>
+          Look at the <code>core.drivers.storage</code> namespace, under it are 3 storage
+          drivers. The left side of the table are the keys and the right side are Classes
+          in memory registered to those keys.
+        </p>
+        <p>
+          It is possible to access the NSRegistry by string-based keys to get a reference
+          to it's Class.
+          <pre class="inline javascript lang">
+              <code>
+var MemoryDriver = NSRegistry["core.drivers.storage.Memory"];
+console.log(MemoryDriver)
+              </code>
+          </pre>
+        </p>
+        <p>
+          Console Output:
+          <img src="src/docs/images/ns-registry-class-ref.png" style="width:100%;"/>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            Access the <code style="display:inline;">NSRegistry</code> in console:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+console.log(NSRegistry)
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
 
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Dynamic Instantiation (Dependency Inversion)</h1>
+        <p>
+          This technique demonstrates that dynamic class instantiation is possible at
+          runtime by getting a reference to a Class in registrty using the string
+          representation of the namespace.
+        </p>
+        <p>
+          Arc relies on this technique to invert dependencies and allow configuration
+          while breaking hard references to variables that statically point to the class
+          by it's fully-qualified namespace.
+        </p>
+        <p>
+          Compare the above NSRegistry access to the typical object-literal equivelance:
+          <pre class="inline javascript lang">
+              <code>
+var MemoryDriver = core.drivers.storage.Memory;
+console.log(MemoryDriver)
+              </code>
+          </pre>
+        </p>
+        <p>
+          <code>MemoryDriver</code> points to the same Class as before but the former
+          example was referenced by a string version of the namespace taken from NSRegistry, not the direct, object-literal access as in the 2nd example.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            Access the <code style="display:inline;">NSRegistry</code> in console:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+console.log(NSRegistry)
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Dependency Inversion</h1>
+        <p>
+          When you reach the topic on <a href="#docs.topics.DataAccessIntro">Data Access</a>, you'll learn how to create Repositories. Repositories are collections of data objects, like recipes, songs, movies and so on.
+        </p>
+        <p>
+          One key feature of Arcs Repository design pattern is allowing the developer to specify what kind of storage technology should be used for read/write of data. Drivers such as MongoDB, Memory, LocalStorage etc can be specified as follows:
+        </p>
+        <p>
+          <pre class="inline javascript lang">
+              <code>
+namespace \`core.data\` (
+  class Movies extends core.data.Repository {
+    @public device_driver = "core.drivers.storage.Memory";
+
+    static isSeedable(){
+            return this.IRequestStorage.isSeedingEnabled();
+        }
+  }
+);
+              </code>
+          </pre>
+        </p>
+        <p>
+          Notice, the developer may configure what driver to use for data by providing
+          a string representation of the namespace, NOT a hard-coded literal namespace. Internally, Arc gets the Storage handler from NSRegistry.
+        </p>
+        <p>
+          This is an advance technique and you may not have to do this in simple applications. It is worth looking into the S.O.L.I.D principals of programming for a greater understand of the Dependency Inversion Principal.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
   </div>
 </template>

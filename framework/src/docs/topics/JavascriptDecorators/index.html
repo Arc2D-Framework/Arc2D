@@ -7,12 +7,11 @@
         <h1 id="api-reference">JavaScript Decorators</h1>
         <p>
           ES7 decorators are not fully supported by browsers, but you
-          may use it now in Oros with limits. Decorators work like attributes in C# and Java.
-          With it, you can apply additional metadata or aspect behaviors to classes and
-          functions at runtime.
+          may use it now in Arc with limits. Decorators work like annotation attributes available in C# and Java.
+          With it, you can apply additional meta-data to classes and functions at runtime.
         </p>
         <p>
-          Decorators enhance, describes and/or alter the behavior of classes or functions with clean supple syntax meant to be non-obtrusive and simple to add/remove without breaking code. Let's take a look. 
+          Decorators enhance, describes and/or alter the behavior of classes or functions non-obtrusively:
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -27,9 +26,9 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Oros Built-in Decorators</h1>
+        <h1 id="api-reference">Arc's built-in Decorators</h1>
         <p>
-          Oros ships with a simple set of decorators, add/remove them and
+          Arc ships with a simple set of decorators, add/remove them and
           your code still works. With them, your classes are enhanced in
           some way.
         </p>
@@ -44,38 +43,38 @@
           </thead>
           <tbody>
             <tr>
-              <td>@cascade()</td>
+              <td><code>@cascade()</code></td>
               <td><b>Class Level</b><br/>true | false</td>
               <td>Enables stylesheet inheritance, ancestor component styling cascades down to your custom component</td>
             </tr>
             <tr>
-              <td>@tag()</td>
-              <td><b>Class Level</b><br/>w3c compliant tag-name (string)</td>
+              <td><code>@tag()</code></td>
+              <td><b>Class Level</b><br/>w3c tag-name (string)</td>
               <td>Create an HTML5 tag-name for a WebComponent class that can be used in html pages. By default a tag-name with a w3c required - (dash) is generated from the ClassName. <em>For example, a tag-name of hello-world is generated from a class name of HelloWorld.</em></td>
             </tr>
             <tr>
-              <td id="stylesheets">@stylesheets()</td>
-              <td><b>Class Level</b><br/>Array of css file paths</td>
+              <td id="stylesheets"><code>@stylesheets()</code></td>
+              <td><b>Class Level</b><br/>Array of css filepaths</td>
               <td>An array of css file paths that are loaded in order. Respects the @cascade (and override) order of ancestors that are cascading. Powerful style inheritance.</td>
             </tr>
             <tr id="traits">
-              <td>@traits()</td>
-              <td><b>Class Level</b><br/>An array of simple Objects</td>
+              <td><code>@traits()</code></td>
+              <td><b>Class Level</b><br/>An array of Objects</td>
               <td>
               The methods and attributes in each object is spliced into the prototype chain of the Class.</td>
             </tr>
             <tr>
-              <td>@public</td>
+              <td><code>@public</code></td>
               <td><b>Member Level</b><br/>@public myVariable = "123"</td>
               <td>Creates a publicly shared property on the prototype chain of Class. Hundreds and thousnds of instances can share a single property reference.</td>
             </tr>
             <tr>
-              <td>@static</td>
+              <td><code>@static</code></td>
               <td><b>Member Level</b><br/>@static myVariable = "123"</td>
               <td>Creates a public, statically shared class-level property</td>
             </tr>
             <tr>
-              <td>@private</td>
+              <td><code>@private</code></td>
               <td><b>Member Level</b><br/></td>
               <td>[NOT IMPLEMENTED]</td>
             </tr>

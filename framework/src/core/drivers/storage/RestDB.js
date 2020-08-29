@@ -1,6 +1,6 @@
 //mport '/src/core/drivers/storage/HttpCursor.js';
-import '/framework/src/core/drivers/storage/Command.js';
-import '/framework/src/core/drivers/storage/Cursor.js';
+import '/src/core/drivers/storage/Command.js';
+import '/src/core/drivers/storage/Cursor.js';
 
 /**
  * @desc Device for interfacing with (http://restdb.io) NoSQL database.
@@ -10,7 +10,7 @@ namespace `core.drivers.storage` (
 
         constructor (collection, storage_device){
             super(collection, storage_device);
-            this.setCollection(collection.classname);
+            this.setCollection(collection.classname||collection.prototype.classname);
         }
 
         isSeedingEnabled(){
@@ -61,26 +61,29 @@ namespace `core.drivers.storage` (
         }
 
         find(cb, query) {
-            query = JSON.stringify(query || {});
-            var xhr = new XMLHttpRequest();
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    var res = this.responseText;
-                    var c = new core.drivers.storage.Cursor({
-                        all: function () {
-                            return JSON.parse(res);
-                        }
-                    });
-                    cb(c, null)
-                }
-            });
-            xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?q=" + query);
-            xhr.setRequestHeader("content-type", "application/json");
-            xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
-            xhr.setRequestHeader("cache-control", "no-cache");
-            xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+            return new Promise(async (resolve,reject) =>{
+                query = JSON.stringify(query || {});
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        var res = this.responseText;
+                        var c = new core.drivers.storage.Cursor({
+                            all: function () {
+                                return JSON.parse(res);
+                            }
+                        });
+                        resolve(c)
+                        cb&&cb(c, null)
+                    }
+                });
+                xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?q=" + query);
+                xhr.setRequestHeader("content-type", "application/json");
+                xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
+                xhr.setRequestHeader("cache-control", "no-cache");
+                xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
 
-            xhr.send(null);
+                xhr.send(null);
+            })
         }
     }
 );

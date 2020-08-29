@@ -154,5 +154,49 @@ namespace \`applications\` (
 
 
 
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Destructured Imports</h1>
+        <p>
+          ES6 Destructured imports are also possible
+        </p>
+        <pre class="inline javascript lang">
+              <code>
+mingo = (await require('/node_modules/od-mingo/dist/mingo.es6.js')).default;
+              </code>
+          </pre>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+<blockquote class="javascript" style="display:block;width: 100%;">
+            Use <code>await</code> before dynamic imports for better control flow and readibility.
+          </blockquote>
+          <pre class="inline javascript lang">
+            <code>
+mingo = (await require('/node_modules/od-mingo/dist/mingo.es6.js')).default;
+
+namespace \`applications\` (
+    class HelloWorld extends Application {
+        constructor(element){
+            super(element);
+        }
+
+        async onConnected() {
+            await super.onConnected();
+            if(mingo) {
+              alert("Mingo api is ready for use")
+            }
+        }
+    }
+);
+            </code>
+          </pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
   </div>
 </template>

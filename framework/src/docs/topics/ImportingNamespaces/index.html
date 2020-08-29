@@ -70,7 +70,7 @@
                     <tr>
                       <td><code>import &nbsp;'core.ui.Person';</code></td>
                       <th>A Folder</th>
-                      <td><code style="color: green;">src/core/ui/Person/index.js</code></td>
+                      <td><code style="color: green;">src/core/ui/Person/</code></td>
                     </tr>
                     <tr>
                       <td><code>import! 'core.ui.Person;</code></td>
@@ -81,6 +81,12 @@
                 </table>
             </p>
 
+            <p>
+              <ul>
+                <li>The 1st import will look for an index.js file inside the folder, /Person</li>
+                <li>The 2nd import will look for a Person.js file inside the folder, src/core/ui/</li>
+              </ul>
+            </p>
 
             <h1>So, what can we infer?</h1>
             <h3><code>import!</code> points to a direct file-path</h3>

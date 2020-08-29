@@ -4,7 +4,7 @@ namespace `core.data` (
     class Repository {
         static get IRequestStorage(){
             var driver = this.prototype.device_driver;
-            this.interface = this.interface||new NSRegistry[driver](this);
+            this.interface = this.interface||new NSRegistry[driver](this,driver);
             this.device_driver=driver; 
             return this.interface;
         }
@@ -20,10 +20,24 @@ namespace `core.data` (
         }
 
         static async remove(query,cb){
+            var args=arguments;
+            if(args.length==1){
+                query=args[0];
+                cb=null;
+            }
+            else if(args.length==2){
+                query=args[1];
+                cb=args[0];
+            }
+            else if(args.length==0){
+                query={};
+                cb=null;
+            }
             return new Promise((resolve,reject) =>{
                 this.IRequestStorage.remove((result, error)=>{
-                    cb && cb(result, error);
-                    resolve(result, error)
+                    cb?cb(result, error):resolve(result, error);
+                    // cb && cb(result, error);
+                    // resolve(result, error)
                 },query)
             })
         }
@@ -57,8 +71,12 @@ namespace `core.data` (
 
         static onDataReceived (data, xhr){
             var self=this;
-            data = this.onInitializeModelDataObjects(data);
+            data = this.transform(data);
             this.setData(data.table||data.name, data);
+        }
+
+        static transform (data, xhr){
+            return data;
         }
 
         static setData (name,data){
@@ -71,6 +89,7 @@ namespace `core.data` (
         }
 
         static onInitializeModelDataObjects (data){
+            console.warn(`${this.namespace}#onInitializeModelDataObjects() is deprecated. Use #transform(data) instead`);
             /*var tablename = data.table;
             var items = data.items||[];
             for(var i=0; i<=items.length-1; i++) {
@@ -80,25 +99,38 @@ namespace `core.data` (
                 data.items.splice(i,1, modelObject);
             }
             ;*/
-            return data;
+            return this.transform(data);
         }
 
         static async seed (uri, params, force){
-            if(!this.isSeedable()) {
-                this.prototype.dispatchEvent("loaded", {controller: this}, this);
-                return
-            };
-            force = (typeof force == "boolean") ? force:false;
-            uri = uri || this.prototype.seeds;
-            if(!this.loaded || force){
-                this.loaded=true;
-                await fetch(uri[Config.ENVIRONMENT]) 
-                    .then(async res => this.onDataReceived(await res.json(), null))
-                    .catch(e => console.log("Error in " +this.namespace +"#seed():\n", e))
-                    .finally(_ => this.prototype.dispatchEvent("loaded", {controller: this}, this))
-            } else {
-                this.prototype.dispatchEvent("loaded", {controller: this}, this);
-            }
+            return new Promise(async (resolve,reject) =>{
+                debugger;
+                if(!this.isSeedable()) {
+                    this.prototype.dispatchEvent("loaded", {controller: this}, this);
+                    resolve();
+                    return;
+                };
+                force = (typeof force == "boolean") ? force:false;
+                uri = uri || this.prototype.seeds;
+                if(!this.loaded || force){
+                    this.loaded=true;
+                    var response = await fetch(uri[Config.ENVIRONMENT]);
+                    var json = await response.json();
+                    var res = this.onDataReceived(json);
+                    this.prototype.dispatchEvent("loaded", {controller: this}, this);
+                    resolve(res)
+                    /*await fetch(uri[Config.ENVIRONMENT]) 
+                        .then(async res => this.onDataReceived(await res.json(), null))
+                        .catch(e => console.log("Error in " +this.namespace +"#seed():\n", e))
+                        .finally(_ => {
+                            this.prototype.dispatchEvent("loaded", {controller: this}, this);
+                            resolve()
+                        })*/
+                } else {
+                    this.prototype.dispatchEvent("loaded", {controller: this}, this);
+                    resolve()
+                }  
+            })
         }
     }
 );
