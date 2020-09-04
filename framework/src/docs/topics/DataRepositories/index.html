@@ -158,7 +158,7 @@ var movie = await core.data.Movies.add(movie)
 import! 'core.drivers.storage.Memory';
 
 namespace \`core.data\` (
-    class Movies extends core.data.Repository {
+    class Movies extends Collection {
         @public device_driver = "core.drivers.storage.Memory";
         @public seeds = REPOSITORIES.MOVIES;
 
@@ -232,7 +232,7 @@ REPOSITORIES = {
                 developing an app offline, you may not want the app seeded with any data for full regression testing at
                 the UI level. So here's how to explicitly seed the Repository.
             </p>  
-            <p>Seed and use a Repository with async/await syntax:</p>
+            <p>Seed and use a Collection with async/await syntax:</p>
             <pre class="inline javascript lang">
                 <code>
 await core.data.Movies.seed();
@@ -353,7 +353,7 @@ cursor.hasNext(); //are there more records?
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="using">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Using a Repository</h1>
+        <h1 id="api-reference">Using a Collection</h1>
         <p>
             You can now import the Movies repository from any component:
             <pre class="inline javascript lang">
@@ -393,9 +393,9 @@ console.log("results",res)
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="customize">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Extending a Repository</h1>
+        <h1 id="api-reference">Extending a Collection</h1>
         <p>
-            Repositories inherit a set of base class methods from <code>core.data.Repository</code>:
+            Collections inherit a set of base class methods from <code>core.data.Collection</code>:
         </p>
         <p>
           <table>
@@ -413,7 +413,7 @@ console.log("results",res)
                 obj - an object to add<br/>
                 cb - a callback (optional)
               </td>
-              <td>Adds an item to the repository</td>
+              <td>Adds an item to the collection</td>
             </tr>
             <tr>
               <td><code>remove(query,cb)</code></td>
@@ -444,12 +444,12 @@ console.log("results",res)
               <td>
                 cb - a callback with results (optional)
               </td>
-              <td>Returns all repository items.</td>
+              <td>Returns all items.</td>
             </tr>
             <tr>
               <td><code>isSeedable()</code></td>
               <td>N/A</td>
-              <td>Returns a boolean if repository supports seeding.</td>
+              <td>Returns a boolean if collection supports seeding.</td>
             </tr>
             <tr>
               <td><code>transform(data[])</code></td>
@@ -459,13 +459,13 @@ console.log("results",res)
             <tr>
               <td><code>IRequestStorage</code></td>
               <td>Returns the device storage drver</td>
-              <td>Returns the prototype.device_driver configured for ths repository by default.</td>
+              <td>Returns the prototype.device_driver configured for ths collection by default.</td>
             </tr>
           </tbody>
         </table>
         </p>
         <p>
-            Any of the base class methods can be customized or overrdden in concrete repository classes. For example, the <code>find()</code> method relies on a mongo-style query. If you are not fimilar with mongo query syntax, see: <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" target="_new">Mongo Queries</a>. Executing the following mongo query:
+            Any of the base class methods can be customized or overrdden in concrete collection classes. For example, the <code>find()</code> method relies on a mongo-style query. If you are not fimilar with mongo query syntax, see: <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" target="_new">Mongo Queries</a>. Executing the following mongo query:
             <pre class="inline javascript lang">
                 <code>
 var result = core.data.Movies.find({title : "Gladiator"});
@@ -482,11 +482,11 @@ SELECT * FROM Movies WHERE title = "Gladiator"
         <p>But the Memory driver we've discussed above, does not rely on SQL or translates to SQL. It literally accepts mongo queries and performs matches against it's simple hash-table of objects.
         </p>
         <p>
-            Any method of the base class may be overridden in the concrete repository:
+            Any method of the base class may be overridden in the concrete collection:
             <pre class="inline javascript lang">
                 <code>
 namespace \`core.data\` (
-    class Movies extends core.data.Repository {
+    class Movies extends Collection {
         @public device_driver = "core.drivers.storage.Memory";
 
         static async push(obj,cb){
