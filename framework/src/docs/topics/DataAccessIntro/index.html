@@ -5,14 +5,18 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Introduction</h1>
         <p>
-            Arc uses a clean-architecture, repository pattern, for working with data sources, such that high-level UI components never depend upon low-level devices. Instead, the UI works directly with domain driven Repositories and Models, an abstraction that forces out low-level device implementations into the Infastructure and exposes a supple Model for retrieving and storing data. When viewing an Arc application in layers, it should resemble:
+            Arc leverages the Repository Design Pattern for data management regardless of storage medium. Repositories represent a collection of similar objects, 1 Repository per Collection-type (i.e: Photos, Contacts, Recipes). Imagine
+            an application or system divided into 3 high-level layers. The user interface components in the UI layer will generally be the entities to interface directly with Repositories for C.R.U.D. capabilities.
             <img src="src/docs/images/data_access_repositories.png" style="margin-top:60px;"/>
         </p>
         <p>
-            The UI is independent of any particular storage devices and will not have to be changed when switching your database to another device, well, in theory. The changes will be isolated to the driver at an infastructure level that implements the protocols to communicate with that data source. 
+            The UI is independent of any particular storage media and will not have to be changed when switching your database to another device, well, in theory, and that theory sounds good, it's never perfect though. Repositories sit between the UI and Infastructure. Changes to the infastructure
+            should not force the UI or Repository to undergo change.
         </p>
         <p>
-            Firebase, Mongo, CouchDB and Arango are all examples of remote No-SQL databases usually exposed as RESTFul end-point connections. Create drivers as needed that knows how to protocol with a data/storage platform.  Local XML and JSON files on disk are also sources of data. So is HTML5 localStorage and sessionStorage. Arc ships with a set of simple storage drivers that allows you to develope offline simply by using the built-in Session or Local storage drivers.
+            Firebase, Mongo, CouchDB and Arango are some examples of remote NoSQL databases that are infastructure
+            "devices". Repositories are configured to use the right driver for device communications. Arc ships
+            with a handful of built-in NoSQL drivers, not all, but it's not hard at all to write your own drivers.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -28,30 +32,44 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">In english please</h1>
+        <h1 id="api-reference">Example: Movies Collection</h1>
         <p>
-            Repositories are collections. Collections of object things like Songs, Artists,
-            Movies, Users, Purchases and so on. Notice the pluralization.
-        </p>
-        <p>
-            Let's take Movies as an example. The Repository (Collection) for Movies
-            is defined in the following way:
+            As and example, we'll be working with the Movies collection in upcoming
+            topics. Here's how the collection is defined:
             <pre class="inline javascript lang">
                 <code>
+import! 'core.drivers.storage.RestDB';
+
 namespace \`core.data\` (
-    class Movies extends core.data.Repository {
-        @public device_driver = "core.drivers.storage.Memory";
+    class Movies extends Collection {
+        @public device_driver = "core.drivers.storage.RestDB";
     }
 );
                 </code>
             </pre>
         </p>
         <p>
-            It is configured here to use the Memory storage driver. When it is used
-            by developers, they should not be concerned where data is being read/written
-            to. The idea is that the <code>device_driver</code> could be switched to
-            MongoDB or some other medium without developers having to alter application
-            code they've written in any specific way for any specific devices.
+            It uses RestDB (<a href="www.restdb.io" target="_new">restdb.io</a>) as the NoSQL backend.
+            level. Collections are sub-classes of the Array, supporting all of the <code>Array.prototype</code> methods as well as some others such as <code>find(), remove(), insert() next() and previous()</code> to name a few.
+        </p>
+        <p>
+            Using collections from UI components will resemble calls like the following, with Mongo-style
+            queries:
+            <pre class="inline javascript lang">
+                <code>
+var cursor = await core.data.Movies.find({
+    query : { 
+        genre : "Action"
+    },
+    skip:0,
+    limit:10,
+    totals:true
+});
+
+console.log("1st 10 Results",  await cursor.next());
+console.log("Next 10 Results", await cursor.next());
+                </code>
+            </pre>
         </p>
       </div>
       <div style="width: 50%;display: block;">

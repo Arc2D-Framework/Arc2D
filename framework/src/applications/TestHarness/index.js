@@ -1,7 +1,7 @@
 import '/src/core/traits/UnitTest.js';
 import '/src/tests/Klass.js';
 import '/src/tests/WebComponents.js';
-
+import '/src/tests/Repositories.js';
 
 namespace `applications` (
     class TestHarness extends w3c.ui.Application {
@@ -18,6 +18,9 @@ namespace `applications` (
 
             var t2 = new tests.WebComponents;
             t2.test();
+
+            var t3 = new tests.Repositories;
+            t3.test();
         }
 
     }

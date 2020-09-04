@@ -33,11 +33,10 @@ namespace `core.data` (
                 query={};
                 cb=null;
             }
+            debugger;
             return new Promise((resolve,reject) =>{
                 this.IRequestStorage.remove((result, error)=>{
                     cb?cb(result, error):resolve(result, error);
-                    // cb && cb(result, error);
-                    // resolve(result, error)
                 },query)
             })
         }
@@ -77,19 +76,6 @@ namespace `core.data` (
 
         static transform (data, xhr){
             return data;
-        }
-
-        static setData (name,data){
-            if(data && data.items){
-                for(let obj of data.items){
-                    this.add(obj, (res)=> {});
-                    // this.constructor.prototype.push(obj)
-                }
-            }
-        }
-
-        static onInitializeModelDataObjects (data){
-            console.warn(`${this.namespace}#onInitializeModelDataObjects() is deprecated. Use #transform(data) instead`);
             /*var tablename = data.table;
             var items = data.items||[];
             for(var i=0; i<=items.length-1; i++) {
@@ -99,12 +85,23 @@ namespace `core.data` (
                 data.items.splice(i,1, modelObject);
             }
             ;*/
+        }
+
+        static setData (name,data){
+            if(data && data.items){
+                for(let obj of data.items){
+                    this.add(obj, (res)=> {});
+                }
+            }
+        }
+
+        static onInitializeModelDataObjects (data){
             return this.transform(data);
         }
 
         static async seed (uri, params, force){
             return new Promise(async (resolve,reject) =>{
-                debugger;
+                // debugger;
                 if(!this.isSeedable()) {
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
                     resolve();
@@ -119,13 +116,6 @@ namespace `core.data` (
                     var res = this.onDataReceived(json);
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
                     resolve(res)
-                    /*await fetch(uri[Config.ENVIRONMENT]) 
-                        .then(async res => this.onDataReceived(await res.json(), null))
-                        .catch(e => console.log("Error in " +this.namespace +"#seed():\n", e))
-                        .finally(_ => {
-                            this.prototype.dispatchEvent("loaded", {controller: this}, this);
-                            resolve()
-                        })*/
                 } else {
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
                     resolve()
@@ -134,3 +124,5 @@ namespace `core.data` (
         }
     }
 );
+
+Collection = window.Collection = core.data.Repository;

@@ -1,0 +1,551 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Creating a custom NoSQL/RESTDB.io Driver, part 2</h1>
+        <p>
+          Before proceeding further, you'll need to setup a CORS API key so that access
+          to the collection can be issused from the browser using JavaScript. <a href="https://restdb.io/docs/apikeys-and-cors#restdb" target="_new">Visit this
+          link for instructions.</a>
+          <img src="/src/docs/images/rest-db-cors.png" style="border: 1px solid lightgray;"/>
+        </p>
+        <p>
+          I've used * in the allowed sitessection so that access is granted to my localhost and/or 127.0.0.1 for testing.
+          <em>Do not do this on a live production site.</em> You'll want to investigate how to lock-down and
+          authorize access to logged-in users for your domain, none of which is covered in this book.
+        </p>
+        <p>
+          <em>Copy your API-key and hold on to it, we'll need this for the driver.</em>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">The driver class methods</h1>
+        <p>
+          To the right is the skeleton/shell of what the driver should look like,
+          with a classname of <code>RestDB</code>. You may copy the code instead 
+          of manually typing it out. If this were a Mongo driver, you'd begin the
+          same way with the same shell. Let's break it down.
+        </p>
+        <h3 id="api-reference">The constructor (cctor)</h3>
+        <p>
+          The constructor takes 2 params:
+          <ul>
+            <li>collection as <code>Repository</code>, ex: Movies Repository</li>
+            <li>storage_device as <code>IStorageInterface</code></li>
+          </ul>
+          You're required to pass these params up to the <code>super</code> class. Next,
+          call setCollection().
+        </p>
+        <h3 id="api-reference">setCollection()</h3>
+        <p>
+          <code>setCollection(name)</code> is called with the name of the Repository (Movies)
+          class we created in an earlier topic. The classname is taken from the Repository's
+          ES6 Class .name. A private <code>this.collection_name</code> stores the name for later.
+        </p>
+        <h3 id="api-reference">isSeedingEnabled()</h3>
+        <p>
+          Return false by default. You can experiment later by auto-seeding restdb by setting this
+          flag to true.
+        </p>
+        <h3 id="api-reference">add,remove,find,update</h3>
+        <p>
+          These are the core C.R.U.D. methods for implementing data read/writes and will be the
+          focus of part 2. Any <code>IStorageInterface</code> sub-class such as the RestDB, must
+          implement them.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            Basic setup of a storage driver
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.drivers.storage\` (
+    class RestDB extends core.drivers.storage.IStorageInterface{
+
+        constructor (collection, storage_device){
+            super(collection, storage_device);
+            this.setCollection(collection.name);
+        }
+
+        isSeedingEnabled(){
+            return false;
+        }
+
+        setCollection(name) {
+            this.collection_name = name.toLowerCase();
+        }
+
+        remove(query, cb) {}
+
+        add(obj, cb) {}
+
+        find(cb, query) {}
+    }
+);
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Find Implementation</h1>
+        <p>
+          <code>find(cb,query)</code>, where:
+          <ul>
+            <li>
+              <code>cb</code> - a callback for allowing .then(), thennable 
+              promises when <code>async/await</code> is not supported. By now,
+              even NodeJS and all browsers have wide support for ES6 <code>async/await</code>
+              and we will be our only usage.
+            </li>
+            <li>
+              <code>query</code> - a mongo-compliant query {} object. See the live <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" target="_new">MongoDB
+              docs</a> for Mongo's NoSQL query syntax.
+            </li>
+          </ul>
+        </p>
+        <p>
+          Start off by returning a <code>new Promise()</code> and allow <code>async</code> on the
+          <code>resolve</code> callback. Let this setup serve as a template for any future http/async io
+          operations.
+        </p>
+        <p>
+          Let's stick with Restdb's XHR example snippets. Fetch can be used, feel free to rewrite
+          later as an exercise on using fetch().
+        </p>
+        <h3>The RESFul query end-point</h3>
+        <p>
+          The line of interest is how to access Restdb's end-point for queries. Check out Restdb.io's <a href="https://restdb.io/docs/rest-api#restdb" target="_new">live docs</a> here.
+          <pre class="inline javascript lang">
+            <code class="hljs">
+xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?" + this.getTransformedQuery(query));
+            </code>
+          </pre>
+        </p>
+        <p>
+          We're only logging the response for now when the <code>readyState === 4</code> is true.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            Basic setup of find() implementation for asynchronous/http io calls.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+find(cb, query) {
+    return new Promise(async resolve => {
+        
+    })
+}
+          </code></pre>
+
+
+
+
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            Prepare a new XHR request, setting headers taken directly from restdb's example
+            snippet. <em style="color:black;">this.collection_name</em>, which is "movies",
+            is used to build-up the restful endpoint. Finally, we transform the query into
+            a format restdb can handle using <em style="color:black;">this.getTransformedQuery(query)</em>
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+find(cb, query) {
+    var self=this;
+    return new Promise(async resolve => {
+        var xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", _ => {
+                if (xhr.readyState === 4) {
+                    var res = xhr.responseText;
+                    console.log(res)//
+                }
+            });
+            xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?" + this.getTransformedQuery(query));
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+            xhr.send(null);
+    })
+}
+          </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Updatating the Movies Repository to use RestDB driver</h1>
+        <p>
+          Hop back to the <code>core.data.Movies</code> repository class we created 
+          eariler and modify the driver to use the RestDB. We're not doing any seeding, so
+          i've eliminated tthose lines for clarity. RestDB is not a WebComponent but a
+          .js class located at: src/core/drivers/storage/RestDB.js, so the <code>import!</code>
+          vs <code>import</code> is used for loading native es6/js files.
+        </p>
+        <p>
+          <pre class="inline javascript lang">
+            <code class="hljs">
+import! 'core.drivers.storage.RestDB';
+
+namespace \`core.data\` (
+  class Movies extends core.data.Repository {
+    @public device_driver = "core.drivers.storage.RestDB";
+  }
+);
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Testing the Movies repository</h1>
+        <p>
+          In the console, we should be able to execute an <code>await Movies.find()</code>
+          and see a response logged. Because aawait can only be run from inside an async function,
+          we'll do that just for testing using tthis wrapper:
+          <br/><br/>
+          In console:
+          <pre class="inline javascript lang">
+            <code class="hljs">
+(async()=>{
+  //put await code in here
+})()
+
+            </code>
+          </pre>
+        </p>
+        <p>
+          In console, run:
+          <pre class="inline javascript lang">
+            <code class="hljs">
+(async()=>{
+  var res = await core.data.Movies.find();//finds all as array
+})()
+
+            </code>
+          </pre>
+        </p>
+        <p>
+          You can also try running a query:
+          <pre class="inline javascript lang">
+            <code class="hljs">
+(async()=>{
+  //should find 1 movie with this title
+  var res = await core.data.Movies.find({
+    query : {title: "Airplane"}
+  });
+})()
+
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Transform the query for RestDB</h1>
+        <p>
+          We've designed <code>find()</code> to acceptt a query object of our preferred
+          structure:
+        </p>
+        <p>
+          <pre class="inline javascript lang">
+            <code class="hljs">
+var res = await core.data.Movies.find({
+  query : {title: "Airplane"}
+});
+            </code>
+          </pre>
+        </p>
+        <p>
+          Butt RestDB looks for a <code>q=</code> querystring param. Not a <code>query</code>
+          paramater. We'll have to transform the input query in the driver to prepare it
+          for the RESTFul format that RestDB knows about.
+        </p>
+        <p>
+          <pre class="inline javascript lang">
+            <code class="hljs">
+getTransformedQuery(query){
+    var newQuery={};
+    for(var key in query){
+        if(key == "query"){
+            newQuery["q"]=encodeURIComponent(JSON.stringify(query["query"]));
+
+        }
+        else if(key == "take"){
+            newQuery["max"]=query["take"]
+        }
+        else {
+            newQuery[key]=query[key]
+        }
+    }
+    return this.toQueryString(newQuery);
+}
+            </code>
+          </pre>
+        </p>
+        <p>
+          <code>getTransformedQuery(query)</code> takes the input query, loops over the
+          attribute names and builds a new query for RestDB. It rewrites the <code>q</code>
+          and <code>max</code> attribute names as well as serializing and encoding (JSON.stringify()) the
+          Mongo query ittself. Finally, the <code>newQuery</code> is serialized into a querystring
+          using Arc's built-in <code>.toQueryString()</code> available on every object{}.
+        </p>
+        <p>
+          <pre class="inline javascript lang">
+            <code class="hljs">
+getTransformedQuery(query){
+    var newQuery={};
+    for(var key in query){
+        if(key == "query"){
+            newQuery["q"]=encodeURIComponent(JSON.stringify(query["query"]));
+
+        }
+        else if(key == "take"){
+            newQuery["max"]=query["take"]
+        }
+        else {
+            newQuery[key]=query[key]
+        }
+    }
+    return newQuery.toQueryString()//ex: returns q=%7B%7D&skip=0&max=2
+}
+            </code>
+          </pre>
+        </p>
+        <p>
+          The transformed query (now as a QueryString) is appended to the URI end-point,
+          which resolves into a URI like this:
+        </p>
+        <p>
+          <pre class="inline javascript lang">
+            <code class="hljs">
+https://testing-a837.restdb.io/rest/movies?q=%7B%7D&skip=0&max=2
+            </code>
+          </pre>
+        </p>
+        <p>
+          When called with a query such as:
+          <pre class="inline javascript lang">
+            <code class="hljs">
+await core.data.Movies.find({
+    query : {},
+    skip:0,
+    take:2
+});
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Cursors</h1>
+        <p>
+          The Cursor is an Array. It represents an array of results for
+          the current query and will allow iteration, <code>.previous()</code> and <code>.next()</code> calls
+          for pagination and to generate UI's from the records.
+        </p>
+        <p>
+          The built-in <code>Memory</code> driver uses the base class, <code>Cursor</code>,
+          to paginate all results in memory. Meaning, the Memory driver fetches all results first,
+          then hands it to the cursor which chunks it into groups of records that we iterate and
+          paginate over via <code>next() & previous()</code> calls, but it happens all locally and in memory. 
+        </p>
+        <p>
+          While the Memory driver is absolutely fine for Unit testing
+          and development, it's completely not practical when connecting to a live NoSQL db which could hold tens of thousands
+          of records, for that, we need to use the HttpCursor, which streams back cunks of
+          records by going back to the DB each time we call <code>.next()</code> to take the next dataset for the initial <code>query</code> you supplied and based the <code>skip</code> and <code>take</code> paramenters that you first use.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Integrating the HttpCursor</h1>
+        <p>
+          Before handing the initial results over to the <code>HttpCursor</code>, you'll need
+          to parse the JSON and check which JSON attribute holds the array. RestDB sends back the
+          array of results in a <code>.data[]</code> attribute so we'll pull it out for the
+          cursor, which only accepts an array.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            First parse the JSON
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+if (xhr.readyState === 4) {
+    var res = xhr.responseText;
+        res = JSON.parse(res);
+}
+          </code></pre>
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            Get the array from the JSON <code>.data</code> attribute and
+            hand it over to a new instance of an HttpCursor. Finally, <code>resolve()</code>
+            the call.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+if (xhr.readyState === 4) {
+    var res = xhr.responseText;
+        res = JSON.parse(res);
+        res = (res instanceof Array) ? res : res.data
+    var c = new core.drivers.storage.HttpCursor(res,query,this);
+    resolve(c)
+    cb&&cb(c, null)
+}
+          </code></pre>
+
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            The final <code>find()</code> method should be:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+find(cb, query) {
+    var self=this;
+    return new Promise(async resolve => {
+        var xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", _ => {
+                if (xhr.readyState === 4) {
+                    var res = xhr.responseText;
+                        res = JSON.parse(res);
+                        res = (res instanceof Array) ? res : res.data
+                    var c = new core.drivers.storage.HttpCursor(res,query,this);
+                    resolve(c)
+                    cb&&cb(c, null)
+                }
+            });
+            xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?"+this.getTransformedQuery(query));
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+            xhr.send(null);
+    })
+}
+          </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Query and paginate results</h1>
+        <p>
+          We can now issue a query against the <code>Movies</code> repository, and
+          paginate using <code>.next()</code> and <code>.previous()</code>. Since
+          we have a limited amount of records, let's take 2 at a time:
+          <pre class="inline javascript lang">
+            <code class="hljs">
+(async()=>{
+  var cursor = await core.data.Movies.find({
+      query : {},
+      skip:0,
+      take:2
+  });
+
+  console.log("initial results", cursor)
+})()
+
+            </code>
+          </pre>
+        </p>
+        <p>
+          And paginate forward:
+          <pre class="inline javascript lang">
+            <code class="hljs">
+(async()=>{
+  console.log("initial results", cursor.next())//next 2 items
+})()
+
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+  </div>
+</template>

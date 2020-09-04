@@ -5,10 +5,22 @@
 
 .TocMenu::-webkit-scrollbar { display: none; }
 
+
+.TocMenu ol > li > ol {
+    display:none;
+}
+
+.TocMenu ol > li.active > ol {
+    display:block;
+}
+
 .TocMenu ol > li > a.active {
 	background:#d2cbe2;
 }
 
+/*.TocMenu ol > li > a.active + ol {
+    display:block;
+}*/
 
 .TocMenu ol > li.disabled {
 	opacity:.3;
@@ -18,3 +30,8 @@
 .TocMenu .toc li.expand ol {
     max-height: 1000px !important;
 }
+
+
+/*.TocMenu .toc li.active ol{
+    display:block;
+}*/

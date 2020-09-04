@@ -3,9 +3,10 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Repositories</h1>
+        <h1 id="api-reference">Collections</h1>
         <p>
-            From <a href="https://martinfowler.com/books/eaa.html" target="_new">Patterns of Enterprise Application Architecture</a>, regarding Repositories, Fowler states:
+            Collections in Arc implement a Repository-like pattern discussed in
+            <a href="https://martinfowler.com/books/eaa.html" target="_new">Patterns of Enterprise Application Architecture</a>. Fowler says that a Repository:
             <p class="sidenote"><i>"..Mediates between the domain and data mapping layers using a collection-like interface for accessing domain objects." -- Martin Fowler</i></p>
         </p>
         <p>
@@ -18,10 +19,7 @@
                 <li>logic is centralized</li>
                 <li>provides an in-memory like collection</li>
             </ul>
-        </p>
-        <p>
-            So as far as the consuming component is concerned, it uses the repository just like a collection or array when working with Domain objects.
-        </p>        
+        </p>      
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -40,123 +38,7 @@
 
 <div style="display: flex;flex-direction: row;flex-wrap: nowrap;"></div>
 
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="how">
-      <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">How it works</h1>
-        <h3>Repositories are collections of Aggregrate Roots</h3>
-        <p>
-            A Repository represents a collection of aggregrate root things. For example,
-            a Recipes repository manages a collection of root objects, know as, recipes.
-            They are aggregrate roots because each recipe manages it's ingredients, they are
-            parts of the root object. Individual Recipes become the domain object of interest,
-            having continuity and core meaning. Repositories can also manage parts of
-            an aggregrate root such as ingredients. By introductoin of UnitOfWork and UseCases with
-            Repositories, a well-defined Domain Driven Model emerges.
-            <img src="src/docs/images/black-grapes-aggregrate-root.jpg"/>
-        </p>
-        
-        <p>
-            <h3>Some facts about the Repository:</h3>
-            <ul>
-                <li>Increases Testability</li>
-                <li>Encapsulates persistance technology</li>
-                <li>Works on aggregate root objects</li>
-                <li>queries are centralized</li>
-                <li>logic is centralized</li>
-                <li>provides an in-memory like collection</li>
-            </ul>
-        </p>
-        <p>
-            So as far as the consuming component is concerned, it uses the repository just like a collection or array when working with Domain objects.
-        </p> 
-        <h3>Repositories delegate to Drivers</h3>  
-        <p>
-            <img src="src/docs/images/data_access_repositories2.png"/>
-        </p>     
-        <p>
-            Arc's base class Repository forwards CRUD operation calls to it's storage driver interface, whatever
-            driver that may be. From the developers point of view, working with a concrete Movies repository
-            is similar to working with an array or a collection-like api. All of the device specific calls to query and store data is encapsulated away and hidden in each Driver.
-        </p>
-        <p>
-            Each Driver implements the <code>IStorageInterface</code> contract. See <a href="#docs.topics.DataRepositoryDrivers">Drivers</a> for
-            more details.
-        </p>
-      </div>
-      <div style="width: 50%;display: block;">
-        <div class="shell lang"></div>
-        <div class="javascript lang">
-            <blockquote class="javascript" style="display:block;width: 100%;">
-            <b>LocalStorage Driver</b>
-            Implements the contractual methods/api defined by <code>IStorageInterface</code>
-          </blockquote>
-          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import '/framework/src/core/drivers/storage/pocket.js';
-import '/framework/src/core/drivers/storage/Cursor.js';
-import '/node_modules/od-mingo/dist/mingo.min.js';
-
-/**
- * @desc Device for working with localStorage using
- * a mongodb-like api interface.
- */
-namespace \`core.drivers.storage\`(
-    class LocalStorage extends core.drivers.storage.IStorageInterface {
-        constructor (collection, storage_device){
-            super(collection, storage_device);
-            this.constructor.prototype.pocket = this.constructor.prototype.pocket||new Pocket();
-            this.setCollection(collection.classname);
-        }
-
-        isSeedingEnabled(){
-            return true;
-        }
-
-        setCollection (name){
-            this.collection = this.pocket.collection(name)
-        }
-
-        add(obj, cb){
-            this.collection.insert(obj);
-            cb(obj,null);
-        }
-
-        remove(query, cb){
-            query = new mingo.Query(query);
-            var res = query.remove(this.collection.documents);
-            this.collection.documents = res;
-            cb(res,null)
-        }
-
-        find(cb,query){
-            query = new mingo.Query(query||{});
-            let cursor = query.find(this.collection.documents);
-            var c = new core.drivers.storage.Cursor(cursor)
-            cb(c,null)
-        }
-    }
-);
-</code>
-      </pre>
-
-      <blockquote class="javascript" style="display:block;width: 100%;">
-            <b>Movies Repository</b>
-           configures itself to use the LocalStorage driver.
-          </blockquote>
-          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import '/framework/src/core/data/Repository.js';
-
-namespace \`core.data\` (
-    class Movies extends core.data.Repository {
-        @public device_driver = "core.drivers.storage.LocalStorage";
-    }
-);
-</code>
-      </pre>
-        </div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
-      </div>
-    </div>
+    
 
 
 
@@ -164,18 +46,18 @@ namespace \`core.data\` (
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="create">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Creating a Repository</h1>
+        <h1 id="api-reference">Creating a Collection</h1>
         <p>
             Let's build a repository to represent a collection of movies. We should be able to
             query, sort and add/update/delete movies from this collection.
         </p>
 
         <p>
-            Movies will extend the base class, <code>Repository</code>
+            Movies will extend the base class, <code>Collection</code>
             <pre class="inline javascript lang">
                 <code>
 namespace \`core.data\` (
-    class Movies extends core.data.Repository {
+    class Movies extends Collection {
         
     }
 );
@@ -185,18 +67,20 @@ namespace \`core.data\` (
         <p>
             Next, we configure a device driver that the repository will use. The driver is responsible for communicating with the the raw data source (JSON, Firebase, CSV, MySql, Mongo, localStorage, and so on).
 
-            <p>Let's use the built-in <code>core.drivers.storage.Memory</code> framework driver (imported earlier):</p>
+            <p>Let's use the built-in <code>core.drivers.storage.Memory</code> driver:</p>
             <pre class="inline javascript lang">
                 <code>
+import! 'core.drivers.storage.Memory';
+
 namespace \`core.data\` (
-    class Movies extends core.data.Repository {
+    class Movies extends Collection {
         @public device_driver = "core.drivers.storage.Memory";
     }
 );
                 </code>
             </pre>
         </p>
-        <h3>Finished</h3>
+        <h3>A note on the Memory Driver</h3>
         <p>
             And thats all there is to defining a Repository. The memory driver, one of the simplest, uses a temporary hash-table as the data source. It lasts as long as the browser-tab session (unless refreshed) and is meant for unit tests and rapid prototyping, you'd never use this driver in a production environment.
         </p>
@@ -267,29 +151,27 @@ var movie = await core.data.Movies.add(movie)
         </p>
 
         <p>
-            Configure the <code>seeds</code> property:
+            Configure the <code>seeds</code> property and implement a method <code>isSeedable()</code>, returning
+            <code>true</code>:
             <pre class="inline javascript lang">
                 <code>
-import '/resources/repositories.js';
+import! 'core.drivers.storage.Memory';
 
 namespace \`core.data\` (
     class Movies extends core.data.Repository {
         @public device_driver = "core.drivers.storage.Memory";
         @public seeds = REPOSITORIES.MOVIES;
+
+        static isSeedable(){
+            return this.IRequestStorage.isSeedingEnabled();
+        }
     }
 );
                 </code>
             </pre>
         </p>
         <p>
-            <code>REPOSITORIES.MOVIES</code> is a declaration defined in the <code>import '/resources/repositories.js'</code> statement. Have a look at this file later, it's mostly a set of paths to JSON seed files:
-            <pre class="inline javascript lang">
-                <code>
-import '/resources/repositories.js';
-                </code>
-            </pre>
-        </p>
-        <p>This file (repositories.js) defines a set of seedlings (json data paths) and looks like this</p>
+            <code>REPOSITORIES.MOVIES</code> is a declaration defined in the file <code>'/resources/repositories.js'</code>. Have a look at this file later, it's mostly a set of paths to JSON seeding files:
         <pre class="inline javascript lang">
                 <code>
 REPOSITORIES = {  
@@ -340,7 +222,7 @@ REPOSITORIES = {
                 </code>
             </pre>
             <p>
-                You can very well point the URI path to an external json service, but that defeats the purpose
+                You could very well point the URI path to an external json service, but that defeats the purpose
                 of the simple Memory storage device in this case, especially for testing. Later we'll look at a RESTFul driver (maybe mongo?) and how that idea then comes into play.
             </p> 
 
@@ -387,6 +269,85 @@ core.data.Movies.seed().then(res1 => {
 
 
 
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="querying">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Queries</h1>
+        <p>
+            Repositories have a <code>find()</code> method that accepts a <a href="https://docs.mongodb.com/manual/reference/operator/query/" target="_new">Mongo Query</a> and how much to skip and limit. The last two attributes allow pagination on the results cursor.
+            Additional attributes such as grouping and sorting depend on the NoSQL platform.
+        </p> 
+        <p>
+            <pre class="inline javascript lang">
+                <code>
+var cursor = await core.data.Movies.find({
+    query : {title : "Gladiator", rating: { $gt: 3 }},
+    skip:0,
+    limit:2
+});
+                </code>
+            </pre>
+        </p>  
+        <p>
+            More complex mongo queries can be specified. See the mongo docs to learn more.
+            <pre class="inline javascript lang">
+                <code>
+var cursor = await core.data.Movies.find({
+    query : { $or: [
+        {title: {$like: "Gladiator"}},
+        {rating : {$gt: 1 }}
+    ]},
+    skip:0,
+    limit:2
+});
+                </code>
+            </pre>
+        </p>     
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="cursors">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Cursors</h1>
+        <p>
+            Executing queries via the <code>.find()</code> method returns a pointer to the result-set of a NoSQL query, called a cursor. Cursors allow iteration across the results of the query. Cursors also allow query resizing, sorting and grouping. 
+        <p>
+            <pre class="inline javascript lang">
+                <code>
+var cursor = await core.data.Movies.find({
+    query : {title : "Gladiator", rating: { $gt: 3 }},
+    skip:0,
+    take:2
+});
+
+console.log(cursor.length);// # of results so far
+                </code>
+            </pre>
+            <pre class="inline javascript lang">
+                <code>
+cursor.next(); //next 2 records
+cursor.previous(); //previous 2 records
+cursor.hasNext(); //are there more records?
+                </code>
+            </pre>
+        </p>       
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
 
 
 

@@ -15,8 +15,8 @@ import 'node_modules/od-observer/observer.js';
 import 'node_modules/od-paginator/paginator.js';
 import 'src/core/drivers/storage/IStorageInterface.js';
 import 'src/core/data/Repository.js';
-import 'src/core/drivers/storage/Cursor.js';
-import 'src/core/drivers/storage/Memory.js';
+//mport 'src/core/drivers/storage/Cursor.js';
+//mport 'src/core/drivers/storage/Memory.js';
 
 
 import 'src/w3c/ui/WebComponent.js';

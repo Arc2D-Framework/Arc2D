@@ -23,6 +23,8 @@ namespace `docs.components` (
         }
 
         onTopicChanged(e){
+            // debugger;
+            
             var activeHref = this.querySelector(`a[href = "${location.hash}"]`);
             if(activeHref){
                 this.collapse(this.last_active);
@@ -37,16 +39,37 @@ namespace `docs.components` (
 
 
         onToggleExpandable(e){
-        	if(this.last_active){ 
-                this.collapse(this.last_active)
+        	if(this.last_chapter && !this.isChildOf(this.last_chapter, e.target)){ 
+                this.collapse(this.last_chapter)
         	}
-            this.expand(e.target)
+            if(this.last_active){
+                this.collapse(this.last_active);
+            }
+            this.expand(e.target);
+        }
+
+        isChildOf(parent, child) {
+            var node = child;
+            do {
+                if(node.parentNode == parent){
+                    return true
+                    break;
+                }
+                node=node.parentNode;
+            } while(node && node.parentNode) 
+
+            return false
         }
 
         expand(li){
             li && li.classList.add("active")
             li && li.classList.add("expand");
-            this.last_active = li;
+            if(li.classList.contains("chapter")){
+                this.last_chapter=li;
+            }
+            else{
+                this.last_active = li;
+            }
         }
 
         collapse(li){

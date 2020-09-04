@@ -1,0 +1,278 @@
+<template>
+	<div>
+
+
+		<div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursors</h1>
+            <p>
+                Executing queries via the <code>.find()</code> method returns a pointer to the result-set of a NoSQL query, called a cursor. Cursors are basically Arrays enhanced with additional convenience methods such as moving <code>next()</code> and <code>previous()</code> through a set of results.
+            <p>
+                <pre class="inline javascript lang">
+                    <code>
+    var cursor = await core.data.Movies.find({
+        query : {title : "Gladiator", rating: { $gt: 3 }},
+        skip:0,
+        limit:2
+    });
+
+    console.log(cursor.length);// # of results so far, 0.
+
+    cursor.next(); //next 2 records, .length is 2
+    cursor.previous(); //previous 2 records, .length is 2
+    cursor.hasNext(); //are there more records?
+                    </code>
+                </pre>
+            </p>
+            <p>
+                <code>.find()</code> returns back a cursor that is empty. It only gets filled on the 1st
+                call to <code>cursor.next()</code>
+                <pre class="inline javascript lang">
+                    <code>
+    var cursor = await core.data.Movies.find({
+        query : {title : "Gladiator", rating: { $gt: 3 }},
+        skip:0,
+        limit:2
+    });
+
+    console.log(cursor.length);// 0 length, empty
+
+    cursor.next(); //get next 2 records
+
+    console.log(cursor.length); // 2
+                    </code>
+                </pre>
+            </p> 
+            <p>
+                The results of the cursor can be stored in a variable for use later:
+                <pre class="inline javascript lang">
+                    <code>
+    var cursor = await core.data.Movies.find({
+        query : {title : "Gladiator", rating: { $gt: 3 }},
+        skip:0,
+        limit:2
+    });
+
+    var results = cursor.next();//store first 2 items
+                    </code>
+                </pre>
+            </p>      
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="next">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursor Next</h1>
+            <p>
+                There could be 100s or 1000s of results for the given query, <code>cursor.next()</code>
+                only retrieves a portion of the results at a time, defined by the queries <code>limit</code>
+                attribute.
+            </p>   
+            <p>
+                When the cursor is exhausted, there's a chance that subsequent calls to <code>.next()</code>
+                might return an empty result-set. It is advisable to check if the cursor has more
+                items to retrieve for the given query via <code>cursor.hasNext()</code>:
+                <pre class="inline javascript lang">
+                    <code>
+    var cursor = await core.data.Movies.find({
+        query : {title : "Gladiator", rating: { $gt: 3 }},
+        skip:0,
+        limit:2
+    });
+
+    if(cursor.hasNext()) {
+        var results = cursor.next();//store first 2 items
+    }
+                    </code>
+                </pre>
+            </p>    
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="previous">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursor Previous</h1>
+            <p>
+                Calling <code>cursor.previous()</code> returns the previous result-set. Similar
+                to <code>cursor.next()</code>, calling <code>cursor.previous()</code> multiple
+                times will continue to rewind the results back to the beginning. There is 
+                no cursor.hasPrevious() feature. A cursor will never move past the beginning
+                of the results.
+            </p>   
+            <p>
+                <pre class="inline javascript lang">
+                    <code>
+    var cursor = await core.data.Movies.find({
+        query : {title : "Gladiator", rating: { $gt: 3 }},
+        skip:0,
+        limit:2
+    });
+
+    if(cursor.hasNext()) {
+        var results = cursor.next();//store first 2 items
+        var previousResults = cursor.previous();//store last 2 items
+    }
+                    </code>
+                </pre>
+            </p>    
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="skip">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursor Skipping</h1>
+            <p>
+                The initial call to <code>.find()</code> allows a <code>skip</code>
+                attribute. As the name implies, it tells the initial query how many
+                records should be skipped ahead before the results are returned to
+                the cursor.
+            </p>   
+            <p>
+                Initially, you'll want to keep this at the beginning and not skip anything,
+                setting to <code>0</code> is recommended.
+            </p>    
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="limit">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursor Limits</h1>
+            <p>
+                <code>limit</code> tells the NoSQL backend how to divide up the large
+                result-sets into smaller portions or limits. In the above examples, <code>limit:2</code>
+                means we'll only be seeing 2 items at a time on each call to <code>cursor.next()</code>
+                and <code>cursor.previous()</code>
+            </p>  
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="count">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursor Count</h1>
+            <p>
+                <code>cursor.count</code> returns the total amount of records that was
+                found by the NoSQL query. This is a total count, not the <code>limit</code>
+                amount.
+            </p>  
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="length">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursor Length</h1>
+            <p>
+                <code>cursor.length</code> returns the portion of records in it's current 
+                call to <code>.next()</code>. Usually, this number will be the same as <code>limit</code>
+                unless the total count of results is smaller than the limit OR the cursor is exhausted
+                and reached the end of the dataset.
+            </p>  
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="pagination">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Cursor Pagination</h1>
+            <p>
+                Cursors add <code>skip</code> + <code>limit</code> internally to keep track
+                of the number of pages of records. <code>cursor.count()/limit</code> are
+                the total amount of pages. These values are provided to you without doing the math
+                yourself, via <code>cursor.currentpage()</code> and <code>cursor.totalpages()</code>
+            </p>
+            <p>
+                Having defined a <code>skip</code> and <code>limit</code> amount, the Cursor is able
+                to move forward and back through large data-sets in bite-sized chunks in a simple way. 
+                This feature provides the basis for paginating through records.
+            </p>  
+            <p>
+                A UI component could have Next and Previous buttons wired up to call it's
+                internal cursors <code>.next()</code> and <code>.previous()</code>, each time
+                erasing the list of items displayed and rendering the list from the next
+                chunk given by the cursor.
+            </p>
+            <p>
+                When combined with the cursors current <code>.length</code>,
+                <code>count</code>, <code>cursor.currentpage()</code> and <code>cursor.totalpages()</code>, visual display of the # of pages of records can be displayed
+                along with buttons to skip forward and back into another page of results.
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+	</div>
+</template>

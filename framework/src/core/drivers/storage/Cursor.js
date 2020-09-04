@@ -1,90 +1,93 @@
 
-
-/**
- * @desc Device for simulating a NoSQL database such as
- * mongo or local storage because of common api. This 
- * device is handy during testing.
- */
 namespace `core.drivers.storage`(
-    class Cursor extends Array{
-        constructor (cursor){
-            var items = (typeof cursor == "object" && cursor.all)?cursor.all():[];
-            super(...items);
-            this.cursor = cursor ;
-            this.setPaginator();
+    class Cursor extends Array {
+        constructor (items, query, IRequestStorage){
+            /*items = (items&&items.all)?items.all():
+                    (items instanceof Array)?items:[];*/
+            super();
+            
+            if(IRequestStorage){
+                // this.mongo_cursor = mongo_cursor;
+                this.query=query;
+                this.IRequestStorage=IRequestStorage;
+                this.query.skip = -this.query.limit;
+                this.items = items;
+                this.paginator = new core.traits.Paginator({
+                    data : this.items, pageSize : this.query.limit
+                });
+                this.count = this.items.length;
+            }
         }
 
-        setPaginator(){
-            this.paginator = new core.traits.Paginator({
-                data:this, pageSize:4
-            });
-            this.next = this.paginator.next.bind(this.paginator);
-            this.previous = this.paginator.previous.bind(this.paginator);
-            this.current = this.paginator.current.bind(this.paginator);
-            this.first = this.paginator.first.bind(this.paginator);
-            this.pagenumber = this.paginator.pagenumber.bind(this.paginator);
-            this.totalpages = this.paginator.totalpages.bind(this.paginator);
-            this.islastpage = this.paginator.islastpage.bind(this.paginator);
+
+        async sort(obj){
+            this.paginator.data=this.mongo_cursor.all();
+            this.paginator.resetindex();
         }
-        
 
-        // next(){
-        //     var skip = this.page_size * (this.page_num - 1)
-        // }
+        clear(){
+            this.splice(0, this.length);
+        }
 
-        // sort (sortCriteria){
-        //     alert("asd")
-        //     console.log("items before sort", this.cursor.all());
-        //     this.cursor.sort(sortCriteria)
-        //     console.log("items after sort", this.cursor.all());
-        // }
+        fill(res){
+            if(res&&res.length){
+                for(var i=0; i<=res.length-1;i++){
+                    this[i] = res[i];
+                }
+            }
+        }
+
+
+        next(cb){
+            return new Promise((resolve,reject) =>{
+                this.clear();
+                this.fill(this.paginator.next())
+                resolve(this)
+            })
+        }
+
+
+        previous(cb){
+            return new Promise((resolve,reject) =>{
+                this.clear();
+                this.fill(this.paginator.previous())
+                resolve(this)
+            })
+        }
 
         all(){
             return this;
         }
 
-        skip(num){
-            this._skip = num;
-            // var take = 2;
-            // var end = skip+take;
-            return this.slice(this._skip)
-        }
-
-        take(num){
-            this._limit = this._skip+num;
-            return this.slice(this._skip,this._limit)
-        }
-
-        sort(attrb, order){
-            // console.log(this.sort())
-            super.sort(function(a, b) {
+        // sort(attrb, order){
+        //     super.sort(function(a, b) {
                 
-                var nameA = a[attrb].toUpperCase(); // ignore upper and lowercase
-                var nameB = b[attrb].toUpperCase(); // ignore upper and lowercase
-                if(order){
-                    if (nameA < nameB) {
-                        return -1;
-                    }
-                    if (nameA > nameB) {
-                        return 1;
-                    }
+        //         var nameA = a[attrb].toUpperCase(); // ignore upper and lowercase
+        //         var nameB = b[attrb].toUpperCase(); // ignore upper and lowercase
+        //         if(order){
+        //             if (nameA < nameB) {
+        //                 return -1;
+        //             }
+        //             if (nameA > nameB) {
+        //                 return 1;
+        //             }
                 
-                    // names must be equal
-                    return 0;
-                } else {
-                    if (nameA < nameB) {
-                        return 1;
-                    }
-                    if (nameA > nameB) {
-                        return -1;
-                    }
+        //             // names must be equal
+        //             return 0;
+        //         } else {
+        //             if (nameA < nameB) {
+        //                 return 1;
+        //             }
+        //             if (nameA > nameB) {
+        //                 return -1;
+        //             }
                 
-                    // names must be equal
-                    return 0;
-                }
-            });
-            return this;
-        }
+        //             // names must be equal
+        //             return 0;
+        //         }
+        //     });
+        //     return this;
+        // }
     }
 );
  

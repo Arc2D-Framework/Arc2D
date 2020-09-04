@@ -1,16 +1,13 @@
-//mport '/src/core/drivers/storage/HttpCursor.js';
 import '/src/core/drivers/storage/Command.js';
-import '/src/core/drivers/storage/Cursor.js';
+import! 'core.drivers.storage.HttpCursor';
 
-/**
- * @desc Device for interfacing with (http://restdb.io) NoSQL database.
- */
+
 namespace `core.drivers.storage` (
     class RestDB extends core.drivers.storage.IStorageInterface{
 
         constructor (collection, storage_device){
             super(collection, storage_device);
-            this.setCollection(collection.classname||collection.prototype.classname);
+            this.setCollection(collection.prototype.classname);
         }
 
         isSeedingEnabled(){
@@ -60,30 +57,74 @@ namespace `core.drivers.storage` (
             xhr.send(data);
         }
 
-        find(cb, query) {
-            return new Promise(async (resolve,reject) =>{
-                query = JSON.stringify(query || {});
-                var xhr = new XMLHttpRequest();
-                xhr.addEventListener("readystatechange", function () {
-                    if (this.readyState === 4) {
-                        var res = this.responseText;
-                        var c = new core.drivers.storage.Cursor({
-                            all: function () {
-                                return JSON.parse(res);
+        find(cb, query, cursor) {
+            var self=this;
+            return new Promise(async resolve => {
+                if(cursor){
+                    var xhr = new XMLHttpRequest();
+                        xhr.addEventListener("readystatechange", _ => {
+                            if (xhr.readyState === 4) {
+                                var data = xhr.responseText;
+                                    data = JSON.parse(data);
+                                var res = (data instanceof Array) ? data : data.data
+                                    cursor.splice(0, cursor.length);
+                                    if(res&&res.length){
+                                        for(var i=0; i<=res.length-1;i++){
+                                            cursor[i] = res[i];
+                                        }
+                                    }
+                                    resolve(cursor)
+                                    cb&&cb(cursor, null)
                             }
                         });
-                        resolve(c)
-                        cb&&cb(c, null)
-                    }
-                });
-                xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?q=" + query);
-                xhr.setRequestHeader("content-type", "application/json");
-                xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
-                xhr.setRequestHeader("cache-control", "no-cache");
-                xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
-
-                xhr.send(null);
+                        xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?"+this.getTransformedQuery(query));
+                        xhr.setRequestHeader("content-type", "application/json");
+                        xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
+                        xhr.setRequestHeader("cache-control", "no-cache");
+                        xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+                        xhr.send(null);
+                }
+                else {
+                    var xhr = new XMLHttpRequest();
+                        xhr.addEventListener("readystatechange", _ => {
+                            if (xhr.readyState === 4) {
+                                var data = xhr.responseText;
+                                    data = JSON.parse(data);
+                                var res = (data instanceof Array) ? data : data.data
+                                var c = new core.drivers.storage.HttpCursor([],query,this);
+                                    c.count = data.totals.count;
+                                    resolve(c)
+                                    cb&&cb(c, null)
+                            }
+                        });
+                        xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?"+this.getTransformedQuery(query)+"&totals=true&count=true");
+                        xhr.setRequestHeader("content-type", "application/json");
+                        xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
+                        xhr.setRequestHeader("cache-control", "no-cache");
+                        xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+                        xhr.send(null);
+                }
             })
         }
+
+        getTransformedQuery(query){
+            var newQuery={};
+            for(var key in query){
+                if(key == "query"){
+                    newQuery["q"]=JSON.stringify(query["query"]);
+
+                }
+                else if(key == "limit"){
+                    newQuery["max"]=query["limit"]
+                }
+                else {
+                    newQuery[key]=query[key]
+                }
+            }
+            return newQuery.toQueryString()
+        }
+
+
+
     }
 );

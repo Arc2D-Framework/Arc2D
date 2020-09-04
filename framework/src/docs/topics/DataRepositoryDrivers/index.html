@@ -3,34 +3,7 @@
 
     
 
-
-
-    
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="intro">
-      <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Repository Drivers</h1>
-        <p>
-          By default implementation, repository classes you create inherit from <code>core.data.Repository</code> and are driven by a Memory driver, meaning all data is stored temporarily in browser memory. As soon as the application (browser tab) is closed, the data is lost.
-          <img src="src/docs/images/data_access_repositories2.png">
-        </p>
-        <p>
-            This base setup allows you to rapidly prototype and build out core functionality without worrying about creating or defining technical driver details at the early stages of development. The theory goes: You should be able to swap out the driver of your repository for something like a Mongo driver without having to alter code that was written for UI components, it should just work with a different storage device.
-        </p>
-        <p>In this chapter, we'll explore what the default <code>Memory</code> driver looks like, which is utterly simple. With that piece of knowledge, <em>we'll build a simple Driver for CouchDB</em>, an enterprise-class NoSQL database. We'll then configure our Movies Repository to use the CouchDB driver.</p>
-      </div>
-      <div style="width: 50%;display: block;">
-        <div class="shell lang"></div>
-        <div class="javascript lang"></div>
-        <div class="html lang"></div>
-        <div class="css lang"></div>
-      </div>
-    </div>
-
-
-
-
-
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="what">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">What is a Driver?</h1>
         <p>
@@ -51,6 +24,66 @@
         <div class="css lang"></div>
       </div>
     </div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="switching">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Switching Drivers</h1>
+        <p>
+          Modify the <code>driver</code> attribute of the Collection to communicate with
+          a different storage platform/protocol. Here we are switching to the <code>Memory</code> driver
+          which reads/writes data to memory only and works just like a NoSQL database:
+          <pre class="inline javascript lang">
+                <code>
+import! 'core.drivers.storage.Memory';
+
+namespace \`core.data\` (
+    class Movies extends Collection {
+        @public device_driver = "core.drivers.storage.Memory";
+    }
+);
+                </code>
+            </pre>
+        </p>
+        <p>
+            <img src="src/docs/images/data_access_repositories2.png">
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <!-- <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="intro">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Repository Drivers</h1>
+        <p>
+          By default implementation, repository classes you create inherit from <code>core.data.Repository</code> and are driven by a Memory driver, meaning all data is stored temporarily in browser memory. As soon as the application (browser tab) is closed, the data is lost.
+          <img src="src/docs/images/data_access_repositories2.png">
+        </p>
+        <p>
+            This base setup allows you to rapidly prototype and build out core functionality without worrying about creating or defining technical driver details at the early stages of development. The theory goes: You should be able to swap out the driver of your repository for something like a Mongo driver without having to alter code that was written for UI components, it should just work with a different storage device.
+        </p>
+        <p>In this chapter, we'll explore what the default <code>Memory</code> driver looks like, which is utterly simple. With that piece of knowledge, <em>we'll build a simple Driver for CouchDB</em>, an enterprise-class NoSQL database. We'll then configure our Movies Repository to use the CouchDB driver.</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+ -->
+
+
+
+
+    
 
 
 
@@ -79,9 +112,22 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">The Memory Driver</h1>
         <p>
-            To alliviate some of the headache, Arc is configured with a Memory Driver. Use it, don't think about it until you are ready to integrate with an enterprise-class database, then worry about it. This design allows you to focus on app functionality with little to no "throw away" code.
+            Arc comes with a Memory driver that is available for use during development and 
+            Unit Testing. It is not part of the runtime but can be imported by Collections
+            before declaring it as the device driver:
         </p>
-        <p>Before we can build a Driver that works with Mongo or CouchDB say, it's worth looking into how the Memory Driver was put together. To the right is the implementation under the Javascript tab.
+        <p>
+            <pre class="inline javascript lang">
+                <code>
+import! 'core.drivers.storage.Memory';
+
+namespace \`core.data\` (
+    class Movies extends Collection {
+        @public device_driver = "core.drivers.storage.Memory";
+    }
+);
+                </code>
+            </pre> 
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -92,23 +138,16 @@
             Implements the contractual methods/api defined by <code>IStorageInterface</code>
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
-import '/framework/src/core/drivers/storage/Cursor.js';
-import '/node_modules/od-mingo/dist/mingo.min.js';
+import 'src/core/drivers/storage/Cursor.js';
+import '/resources/repositories.js';
+window.Query = (await require('/src/libs/query.js')).default;
 
-/**
-   @desc Device for simulating a NoSQL database using
-   local memory. Good for development/testing, not for
-   use in prod env.
-**/
 namespace \`core.drivers.storage\` (
     class Memory extends core.drivers.storage.IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
-            if(!('mingo' in window)) { 
-                console.error(this.namespace + " requires npm mingo to be installed.");
-            }
             Session.State.db = Session.State.db||{};
-            this.setCollection(collection.classname);
+            this.setCollection(collection.name);
         }
 
         isSeedingEnabled(){
@@ -128,19 +167,15 @@ namespace \`core.drivers.storage\` (
             return obj;
         }
         
-        find(cb,query){
-            query = new mingo.Query(query||{});
-            let cursor = query.find(this.collection);
-            var c = new core.drivers.storage.Cursor(cursor)
-            cb&&cb(c,null);
-            return c;
+        find(cb, query){
+            var res = Query.query( this.collection, query.query||{});
+            var cursor = new core.drivers.storage.Cursor(res,query,this);
+            cb&&cb(cursor, null)
+            return cursor;
         }
 
-        remove(query, cb){
-            query = new mingo.Query(query||{});
-            let cursor = query.find(this.collection);
-            var c = new core.drivers.storage.Cursor(cursor);
-            var res = c.all()||[];
+        remove(cb,query){
+            var res = Query.query( this.collection, query.query||{});
             var removed=[];
             res.forEach(o => {
                 for(var i=0; i<=this.collection.length-1; i++){
@@ -154,7 +189,7 @@ namespace \`core.drivers.storage\` (
             return removed;
         }
     }
-)
+);
 </code>
       </pre>
         </div>

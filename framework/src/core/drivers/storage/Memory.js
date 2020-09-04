@@ -1,19 +1,13 @@
+import 'src/core/drivers/storage/Cursor.js';
+import '/resources/repositories.js';
+window.Query = (await require('/src/libs/query.js')).default;
 
-
-/**
- * @desc Device for simulating a NoSQL database using
-   local memory. Good for development/testing, not for
-   use in prod env.
- */
 namespace `core.drivers.storage` (
     class Memory extends core.drivers.storage.IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
-            if(!mingo) { 
-                console.error(this.namespace + " requires npm mingo to be installed.");
-            }
             Session.State.db = Session.State.db||{};
-            this.setCollection(collection.classname||collection.prototype.classname);
+            this.setCollection(collection.name);
         }
 
         isSeedingEnabled(){
@@ -33,25 +27,17 @@ namespace `core.drivers.storage` (
             return obj;
         }
         
-        find(cb,query){
-            query = new mingo.Query(query||{});
-            let cursor = query.find(this.collection);
-            // var res = this.collection;//just hand back all
-            var c = new core.drivers.storage.Cursor(cursor)
-            // cb(c,null);
-            cb&&cb(c,null);
-            return c;
+        find(cb, query){
+            var res = Query.query( this.collection, query.query||{});
+            var cursor = new core.drivers.storage.Cursor(res,query,this);
+            cb&&cb(cursor, null)
+            return cursor;
         }
 
-        remove(query, cb){
-            query = new mingo.Query(query||{});
-            let cursor = query.find(this.collection);
-            // var res = this.collection;//just hand back all
-            var c = new core.drivers.storage.Cursor(cursor);
-            var res = c.all()||[];
+        remove(cb,query){
+            var res = Query.query( this.collection, query.query||{});
             var removed=[];
             res.forEach(o => {
-                // console.log("should remove", o)
                 for(var i=0; i<=this.collection.length-1; i++){
                     if(this.collection[i]._id == o._id){
                         this.collection.splice(i,1);

@@ -13,8 +13,17 @@ namespace `core.ui` (
 
         async onRenderGenres(){
             await core.data.Movies.seed();//seed with test data
-            var cursor              = await core.data.Movies.find();
-            var all_genres          = cursor.map(movie => movie.genre);
+
+            var cursor = await core.data.Movies.find({
+                query : { $or: [ 
+                    {title: {$like: "Gladiator"}},{ rating : {$gt: 1 }}
+                ]},
+                skip:0,
+                limit:10,
+                totals:true
+            });
+            await cursor.next();
+            var all_genres          = await cursor.map(movie => movie.genre);
             var only_unique_genres  = [...new Set(all_genres)];//Set() filters out duplicates.
             await this.render({items : only_unique_genres});
         }
