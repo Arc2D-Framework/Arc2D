@@ -1,3 +1,4 @@
+import 'node_modules/od-paginator/paginator.js';
 
 namespace `core.drivers.storage`(
     class Cursor extends Array {
@@ -7,7 +8,6 @@ namespace `core.drivers.storage`(
             super();
             
             if(IRequestStorage){
-                // this.mongo_cursor = mongo_cursor;
                 this.query=query;
                 this.IRequestStorage=IRequestStorage;
                 this.query.skip = -this.query.limit;

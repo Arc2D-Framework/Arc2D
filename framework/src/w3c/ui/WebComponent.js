@@ -117,7 +117,6 @@ namespace `w3c.ui` (
                     }
                 }, bool);
             } else {
-                // super.addEventListener(evtName, handler, bool);
                 if(this.isExistingDomNode(this.element)){
                     this.element.addEventListener(evtName, handler, bool);
                 }
@@ -190,26 +189,6 @@ namespace `w3c.ui` (
             })
         }
 
-        // async loadTemplate() {
-        //     return new Promise(async (resolve, reject) => {
-        //         var tem  =  this.getTemplateToLoad();
-                
-        //         if(/\/*\.html$/.test(tem)){
-        //             var src=this.src||tem;//TODO: bug here?
-        //             var opts = { cache: "force-cache" };//TODO: use cache policy from appconfig.js
-        //             src = src.replace("/./", "/" + this.namespace.replace(/\./gim, "/") + "/");
-        //             this._template = await imports(src, opts);
-        //         }
-        //         else if(/<\s*\btemplate\b/.test(tem)){//from inner template()
-        //             this._template=tem;
-        //         }
-        //         else if(tem && tem.nodeType==1){
-        //             this._template=tem.outerHTML;
-        //         }
-        //         resolve(this._template);
-        //     })
-        // }
-
         getTemplateToLoad(){
             var engine = this.getTemplateEngine();
 
@@ -230,7 +209,6 @@ namespace `w3c.ui` (
                 this.onTemplateRendered(temNode);
                 return
             }
-            // debugger;
             var t = this._template;
             if (t) {
                 var html = await this.evalTemplate(t, data);
@@ -401,50 +379,11 @@ namespace `w3c.ui` (
             this.onStyleComputed(this.stylesheets);
         }
 
-        // async loadcss(urls) {
-        //     return new Promise(async (resolve,reject) => {
-        //         if(this.__proto._css_loaded && !this.inShadow()){
-        //             resolve(true);
-        //             return
-        //         }
-        //         this.__proto._css_loaded=true;
-        //         urls=urls.reverse();
-        //         var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
-        //         for(let path of urls){
-        //             path = this.onLoadStyle(path);
-        //             if((path && !stylesheets[path]) || this.inShadow()){
-        //                 var tagName = /^http/.test(path) ? "link" : "style";
-        //                 var tag = document.createElement(tagName);
-        //                 // this.onAppendStyle(tag);
-        //                     tag.setAttribute("type", 'text/css');
-        //                     tag.setAttribute("rel",  'stylesheet');
-        //                     tag.setAttribute("href",  path);
-        //                     tag.setAttribute("component", this.namespace);
-        //                     stylesheets[path] = tag;
-        //                     if(tagName.toLowerCase() == "style"){
-        //                         var _cssText = await window.imports(path);
-        //                         if( _cssText){
-        //                             _cssText = this.onTransformStyle(_cssText);
-        //                             _cssText && this.setCssTextAttribute(_cssText, tag);
-        //                             this.onAppendStyle(tag);
-        //                             this.onStylesheetLoaded(tag);
-        //                         }
-        //                     }
-        //             }
-        //         }
-        //         resolve(true);
-        //     })
-        // }
         async loadcss(urls) {
             if(!this.__proto._css_loaded){
                 this.__proto._css_loaded={}
             }
             return new Promise(async (resolve,reject) => {
-                // if(this.__proto._css_loaded[] && !this.inShadow()){
-                //     resolve(true);
-                //     return
-                // }
-                // this.__proto._css_loaded=true;
                 urls=urls.reverse();
                 var stylesheets = window.loaded_stylesheets = window.loaded_stylesheets|| {};
                 for(let path of urls){
@@ -454,7 +393,6 @@ namespace `w3c.ui` (
                     if((path && !stylesheets[path]) || this.inShadow()){
                         var tagName = /^http/.test(path) ? "link" : "style";
                         var tag = document.createElement(tagName);
-                        // this.onAppendStyle(tag);
                             tag.setAttribute("type", 'text/css');
                             tag.setAttribute("rel",  'stylesheet');
                             tag.setAttribute("href",  path);
