@@ -7,10 +7,11 @@ namespace `core.ui.protected` (
             // this.bind("#login", "click", e => this.onRequestLogin(e), false)
         }
 
-        async onConnected(user){//protected components get user session when connected to DOM
-            await this.render(user)//renders template
-            console.log("USER", user);
+        async onConnected(){
+            await super.onConnected();
         }
+
+        onLoadInstanceStylesheet(){return true}
 
         onRequestLogin(){
             application.login()

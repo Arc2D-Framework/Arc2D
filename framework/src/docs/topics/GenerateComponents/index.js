@@ -1,6 +1,6 @@
 import 'docs.demos.ui.ToggleButton';
 import 'docs.components.NamespaceExplorer';
-import 'core.ui.ProjectExplorer';
+import 'docs.components.ProjectExplorer';
 
 namespace `docs.topics` (
 	class GenerateComponents extends docs.topics.Topic  {

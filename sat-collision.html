@@ -16,15 +16,21 @@
         <!-- <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.3.0/webcomponents-loader.js"></script> -->
         <!-- <script src="-appconfig.js" charset="utf-8"></script> -->
 
-        
+        <script src="src/libs/game/two/two.min.js"></script>
+        <!-- <script src="src/libs/game/sat/Collisions.mjs" type="module"></script> -->
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
-        <script>
-            Config.USE_COMPRESSED_BUILD=false;
-            Config.DEBUG=true; //true loads .src.js, false loads .min.js
-        </script>
     </head>
 
-    <body namespace="applications.DataAccessTest">
-        <data-access-test></data-access-test>
+    <body namespace="applications.SatCollision">
+        <sat-collision>
+            <template>
+                <div>
+                    <div><b>W, S</b> - Accelerate/Decelerate</div>
+                    <div><b>A, D</b> - Turn</div>
+                    <div><label><input id="bvh" type="checkbox"/> Show Bounding Volume Hierarchy</label></div>
+                    <canvas id="canvas1" width="800" height="600"></canvas>
+                </div>
+            </template>
+        </sat-collision>
     </body>
 </html>

@@ -55,5 +55,3 @@ namespace `core.http` (
         }
     }
 );
-
-export default core.http.Router;

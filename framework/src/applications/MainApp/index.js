@@ -22,6 +22,8 @@ namespace `applications` (
             this.addEventListener("click", (e)=> this.onShowErrorScreen(e), false, "#nowhere");
         }
 
+        onLoadInstanceStylesheet(){return true}
+
 
         onAuthStateChanged(cb){
             firebase.auth().onAuthStateChanged(user => {

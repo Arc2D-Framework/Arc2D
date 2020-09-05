@@ -2,14 +2,16 @@ import '/src/core/ui/ChildComponent.js';
 
 namespace `core.ui` (
     class ProtectedChildComponent extends core.ui.ChildComponent {
-        onPreConnected(){
+        async onConnected(){
             application.onAuthStateChanged(user => {
               if (user) {
-                this.onConnected(user);
+                super.onConnected(user);
                 this.classList.add("authenticated")
               }
             })
         }
+
+        onLoadInstanceStylesheet(){return false}
     }
 );
 

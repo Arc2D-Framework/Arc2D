@@ -10,7 +10,7 @@ namespace `w3c.ui` (
         async onConnected(data){
             await super.onConnected(data);
             if(this.onEnableRouting()){
-                await require('/src/core/http/Router.js');
+                // await equire('/src/core/http/Router.js');
                 this.router = new core.http.Router(this,window);
             }
         }

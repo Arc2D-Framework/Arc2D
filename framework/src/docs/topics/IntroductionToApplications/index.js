@@ -1,5 +1,5 @@
 import 'docs.components.NamespaceExplorer';
-import 'core.ui.ProjectExplorer';
+import 'docs.components.ProjectExplorer';
 
 namespace `docs.topics` (
 	class IntroductionToApplications  extends docs.topics.Topic  {
@@ -27,4 +27,4 @@ namespace `docs.topics` (
             this.project_explorer.update();
         }
 	}
-)
+);

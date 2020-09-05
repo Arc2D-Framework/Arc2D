@@ -7,7 +7,7 @@ namespace `applications` (
             
         }
 
-	    onConnected() {
+	    async onConnected() {
 	        var firebaseConfig = {
                 apiKey: "AIzaSyD3HTd7BH4DKkvOF2AitWyQsSWMSEPYT4Y",
                 authDomain: "test-f6d84.firebaseapp.com",
@@ -20,8 +20,11 @@ namespace `applications` (
               firebase.initializeApp(firebaseConfig)
               
               
-	        this.initApp()
+	        this.initApp();
+            // await super.onConnected();
 	    }
+
+        onLoadInstanceStylesheet(){return false}
 
 
 	    onAuthenticated(){

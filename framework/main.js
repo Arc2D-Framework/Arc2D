@@ -15,6 +15,7 @@ import 'src/core/drivers/storage/IStorageInterface.js';
 import 'src/core/data/Repository.js';
 //mport 'src/core/drivers/storage/Cursor.js';
 //mport 'src/core/drivers/storage/Memory.js';
+import 'src/core/http/Router.js';
 import 'src/w3c/ui/WebComponent.js';
 import 'src/w3c/ui/Application.js';
 import 'src/core/ui/World.js';

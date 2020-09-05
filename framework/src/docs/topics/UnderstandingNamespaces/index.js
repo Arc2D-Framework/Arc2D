@@ -1,5 +1,5 @@
 import 'docs.components.NamespaceExplorer';
-import 'core.ui.ProjectExplorer';
+import 'docs.components.ProjectExplorer';
 
 namespace `docs.topics` (
 	class UnderstandingNamespaces extends docs.topics.Topic {
