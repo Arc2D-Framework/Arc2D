@@ -12,7 +12,6 @@
     },
     "dependencies": {
         "od-cocoon": "github:Nashorn/od-cocoon#3.0.0",
-        "od-mingo": "github:Nashorn/od-mingo#2.2.4",
         "od-observer": "github:Nashorn/od-observer#1.0.0",
         "od-paginator": "github:Nashorn/od-paginator#1.0.0",
         "od-watcher": "github:Nashorn/od-watcher#1.0.0",

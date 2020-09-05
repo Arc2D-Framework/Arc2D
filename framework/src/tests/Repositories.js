@@ -1,4 +1,3 @@
-mingo = (await require('/node_modules/od-mingo/dist/mingo.es6.js')).default;
 import! 'core.data.Movies';
 
 @traits([core.traits.UnitTest]);
