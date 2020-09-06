@@ -33,7 +33,6 @@ namespace `core.data` (
                 query={};
                 cb=null;
             }
-            debugger;
             return new Promise((resolve,reject) =>{
                 this.IRequestStorage.remove((result, error)=>{
                     cb?cb(result, error):resolve(result, error);
@@ -101,7 +100,6 @@ namespace `core.data` (
 
         static async seed (uri, params, force){
             return new Promise(async (resolve,reject) =>{
-                // debugger;
                 if(!this.isSeedable()) {
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
                     resolve();
@@ -114,10 +112,12 @@ namespace `core.data` (
                     var response = await fetch(uri[Config.ENVIRONMENT]);
                     var json = await response.json();
                     var res = this.onDataReceived(json);
+                    this.IRequestStorage.seeded();
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
                     resolve(res)
                 } else {
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
+                    this.IRequestStorage.seeded();
                     resolve()
                 }  
             })

@@ -1,4 +1,3 @@
-import '/src/core/drivers/storage/Command.js';
 import! 'core.drivers.storage.HttpCursor';
 
 
@@ -16,6 +15,13 @@ namespace `core.drivers.storage` (
 
         setCollection(name) {
             this.collection_name = name.toLowerCase();
+        }
+
+        sort(cursor, attrb, order){
+            var field={};
+            field[attrb] = order;
+            cursor.query.h = JSON.stringify({"$orderby": field });
+            cursor.query.skip=-cursor.query.limit;//reset index
         }
 
         remove(query, cb) {
@@ -43,9 +49,9 @@ namespace `core.drivers.storage` (
                 if (this.readyState === 4) {
                     var obj = JSON.parse(this.responseText);
                     // cb(JSON.parse(this.responseText),null);
-                    var cmd = new core.drivers.storage.Command;
-                    cmd.undo = self.remove;
-                    cmd.data = obj;
+                    // var cmd = new core.drivers.storage.Command;
+                    // cmd.undo = self.remove;
+                    // cmd.data = obj;
                     cb(obj, cmd);
                 }
             });
@@ -66,13 +72,9 @@ namespace `core.drivers.storage` (
                             if (xhr.readyState === 4) {
                                 var data = xhr.responseText;
                                     data = JSON.parse(data);
-                                var res = (data instanceof Array) ? data : data.data
-                                    cursor.splice(0, cursor.length);
-                                    if(res&&res.length){
-                                        for(var i=0; i<=res.length-1;i++){
-                                            cursor[i] = res[i];
-                                        }
-                                    }
+                                var res = (data instanceof Array) ? data : data.data;
+                                    cursor.clear();
+                                    cursor.fill(res);
                                     resolve(cursor)
                                     cb&&cb(cursor, null)
                             }

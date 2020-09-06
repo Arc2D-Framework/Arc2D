@@ -1,8 +1,8 @@
-import! 'core.drivers.storage.Memory';
+import! 'core.drivers.storage.LocalStorage';
 
 namespace `core.data` (
 	class Movies extends Collection {
-		@public device_driver = "core.drivers.storage.Memory";
+		@public device_driver = "core.drivers.storage.LocalStorage";
 		@public seeds = REPOSITORIES.MOVIES; /*see: app/resources/repositories.js*/
 
 		static isSeedable(){

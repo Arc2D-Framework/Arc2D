@@ -1,13 +1,12 @@
-import 'node_modules/od-paginator/paginator.js';
+import '/node_modules/od-paginator/paginator.js';
 
 namespace `core.drivers.storage`(
     class Cursor extends Array {
         constructor (items, query, IRequestStorage){
-            /*items = (items&&items.all)?items.all():
-                    (items instanceof Array)?items:[];*/
             super();
             
             if(IRequestStorage){
+                this.currentPage=0;
                 this.query=query;
                 this.IRequestStorage=IRequestStorage;
                 this.query.skip = -this.query.limit;
@@ -19,10 +18,12 @@ namespace `core.drivers.storage`(
             }
         }
 
+        pagenumber(){
+            return this.paginator.pagenumber();
+        }
 
-        async sort(obj){
-            this.paginator.data=this.mongo_cursor.all();
-            this.paginator.resetindex();
+        totalpages(){
+            return this.paginator.totalpages();
         }
 
         clear(){
@@ -41,7 +42,7 @@ namespace `core.drivers.storage`(
         next(cb){
             return new Promise((resolve,reject) =>{
                 this.clear();
-                this.fill(this.paginator.next())
+                this.fill(this.paginator.next());
                 resolve(this)
             })
         }
@@ -59,35 +60,9 @@ namespace `core.drivers.storage`(
             return this;
         }
 
-        // sort(attrb, order){
-        //     super.sort(function(a, b) {
-                
-        //         var nameA = a[attrb].toUpperCase(); // ignore upper and lowercase
-        //         var nameB = b[attrb].toUpperCase(); // ignore upper and lowercase
-        //         if(order){
-        //             if (nameA < nameB) {
-        //                 return -1;
-        //             }
-        //             if (nameA > nameB) {
-        //                 return 1;
-        //             }
-                
-        //             // names must be equal
-        //             return 0;
-        //         } else {
-        //             if (nameA < nameB) {
-        //                 return 1;
-        //             }
-        //             if (nameA > nameB) {
-        //                 return -1;
-        //             }
-                
-        //             // names must be equal
-        //             return 0;
-        //         }
-        //     });
-        //     return this;
-        // }
+        sort(attrb, order){
+            this.IRequestStorage.sort(this, attrb, order);
+        }
     }
 );
  

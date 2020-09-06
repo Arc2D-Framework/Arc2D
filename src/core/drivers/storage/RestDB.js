@@ -1,4 +1,3 @@
-import '/src/core/drivers/storage/Command.js';
 import! 'core.drivers.storage.HttpCursor';
 
 
@@ -50,9 +49,9 @@ namespace `core.drivers.storage` (
                 if (this.readyState === 4) {
                     var obj = JSON.parse(this.responseText);
                     // cb(JSON.parse(this.responseText),null);
-                    var cmd = new core.drivers.storage.Command;
-                    cmd.undo = self.remove;
-                    cmd.data = obj;
+                    // var cmd = new core.drivers.storage.Command;
+                    // cmd.undo = self.remove;
+                    // cmd.data = obj;
                     cb(obj, cmd);
                 }
             });
