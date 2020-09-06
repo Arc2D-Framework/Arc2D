@@ -57,8 +57,8 @@ namespace \`core.ui\` (
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
     class ModalDialog extends w3c.ui.WebComponent {
-        onConnected() {
-            super.onConnected();
+        async onConnected() {
+            await super.onConnected();
             this.addEventListener("click", e => this.onClick(e));
     	}
 
@@ -76,7 +76,7 @@ namespace \`core.ui\` (
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
     class ModalDialog extends w3c.ui.WebComponent {
-        onConnected() {
+        async onConnected() {
             var title = this.querySelector("span.title");
             alert(title) //will not be found; null
     	}
@@ -91,8 +91,8 @@ namespace \`core.ui\` (
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
     class ModalDialog extends w3c.ui.WebComponent {
-        onConnected() {
-            this.render();//DOM is ready
+        async onConnected() {
+            await this.render();//DOM is ready
             var title = this.querySelector("span.title");
             alert(title) //found it :)
     	}
@@ -126,7 +126,7 @@ namespace \`core.ui\` (
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
     class ModalDialog extends w3c.ui.WebComponent {
-        onConnected() {
+        async onConnected() {
             var data = {firstname: 'Sam', age:32};
             var name = document.createElement('my-custom-element');
                 name.innerHTML = &#x60;

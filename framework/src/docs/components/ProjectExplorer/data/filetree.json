@@ -1,6 +1,6 @@
 {
     "path": "",
-    "name": "HelloWorld",
+    "name": "MyProject",
     "children": [
     {
         "path": "",
@@ -78,6 +78,20 @@
     {
         "path": "",
         "name": "hello-world.html",
+        "size": 353,
+        "extension": "html",
+        "type": "file"
+    },
+    {
+        "path": "",
+        "name": "about.html",
+        "size": 353,
+        "extension": "html",
+        "type": "file"
+    },
+    {
+        "path": "",
+        "name": "contact.html",
         "size": 353,
         "extension": "html",
         "type": "file"
