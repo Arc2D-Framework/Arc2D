@@ -8,6 +8,7 @@ import 'src/core/extensions/Array.js';
 import 'src/core/extensions/Window.js';
 import 'src/core/extensions/Element.js';
 import 'src/core/lang/Class.js';
+// mport 'src/core/lang/Thread.js';
 import 'node_modules/od-import-polyfill/import.js';
 import 'node_modules/od-observer/observer.js';
 // mport 'node_modules/od-paginator/paginator.js';

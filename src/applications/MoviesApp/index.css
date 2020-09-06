@@ -1,5 +1,5 @@
 
-html, body, .SatCollision {
+html, body, .MoviesApp {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -8,12 +8,8 @@ html, body, .SatCollision {
     box-sizing:border-box;
 }
 
-.SatCollision {
+.MoviesApp {
 	
-}
-
-canvas {
-    border:2px solid black;
 }
 
 
