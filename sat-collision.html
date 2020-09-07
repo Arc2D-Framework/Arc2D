@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
+            style-src   'self' 'unsafe-inline' *">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Separating Access Theorem</title>
+        <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+    </head>
+
+    <body namespace="display.screens.SatCollision">
+        <sat-collision>
+            <template> 
+                <!-- open new <template>, will ignore the one in "display/screens/SatCollision/index.html" -->
+                <h1>Learn About SAT: <a href="https://www.youtube.com/watch?v=Ap5eBYKlGDo" target="_new">Separating Axis Theorem (SAT) Explanation.</a></h1>
+                <div>
+                    <div><b>W, S</b> - Accelerate/Decelerate</div>
+                    <div><b>A, D</b> - Turn</div>
+                    <div><label><input id="bvh" type="checkbox"/> Show Bounding Volume Hierarchy</label></div>
+                    <canvas id="canvas1" width="800" height="600"></canvas>
+                </div>
+            </template>
+        </sat-collision>
+    </body>
+</html>
