@@ -1,11 +1,12 @@
 
-import '/framework/src/core/lang/Thread.js';
+import '/src/core/lang/Thread.js';
+import '/src/core/extensions/Key.js';
+
 
 namespace `applications` (
-    @stylesheets(["/src/./index.css"]);
     class StickMan extends core.ui.World {
-        onConnected() {
-            this.render();
+        async onConnected() {
+            await this.render();
             this.direction = 1;
    //          var thread = new core.lang.Thread(function(e){
    //          	console.log(e.data)
