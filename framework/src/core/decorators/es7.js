@@ -61,8 +61,10 @@ window.prop = function prop(target,key,val){
 }
 
 window.tag = function tag(target, name){
-    target.prototype["ns-tagname"]=name;
-    try{window.customElements.define(name, target);}catch(e){}
+    target.prototype["ns-trait-tagname"]=name;
+    try{
+        target.define(target.prototype)
+    }catch(e){console.error(e)}
     return;
 }
 
