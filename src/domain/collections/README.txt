@@ -9,9 +9,7 @@ of objects like:
 
 
 Example:
-
-
-
+----------------------------------------------------------------------
 
 import! 'system.drivers.storage.LocalStorage';
 
@@ -34,8 +32,8 @@ namespace `domain.collections` (
 
 
 
-Seeding is only for testing, a realistic example:
-
+Seeding is only for testing, a realistic example, without seeding:
+----------------------------------------------------------------------
 
 import! 'system.drivers.storage.LocalStorage';
 
@@ -44,3 +42,9 @@ namespace `domain.collections` (
         @public device_driver = "system.drivers.storage.LocalStorage";
     }
 );
+
+
+
+
+
+

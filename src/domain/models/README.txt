@@ -9,6 +9,6 @@ Example:
 
 
 
-Developers user the Model without having to thinker with
+Developers use the Model without having to thinker with
 it's sub-process and/or sub-entities. Models manage it
 all as 1 aggregrate root object.
