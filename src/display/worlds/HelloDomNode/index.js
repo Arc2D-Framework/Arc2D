@@ -21,14 +21,17 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
 
 namespace `display.worlds` (
     class HelloDomNode extends World {
+
+        //some code could be moved to cctor, oh well.
         constructor(element){
             super(element);
         }
 
         async onConnected() {
-            await super.onConnected();
+            await super.onConnected();//waits for onConnect to run, see docs
+
             this.scale = 30;//scale is 30px per Meter 
-            this.nodes=[];// [] for holding shapes in memory
+            this.nodes=[];// [] for holding shape nodes in memory
 
             //make a world
             var world = this.world = new b2World(
@@ -40,7 +43,7 @@ namespace `display.worlds` (
             this.stage = this.querySelector("#stage");
             this.svg = this.querySelector("#svg");
 
-            //the ground
+            //the ground, just an HTML box
             var ground = new display.worlds.entities.html.GroundBox(
                 12,1,world,this.stage,this.scale
             );
@@ -86,19 +89,20 @@ namespace `display.worlds` (
                 world.SetDebugDraw(debugDraw);
         }
 
-        //onUpdate steps (runs) at 60fps 1/60th, called by Arc automattically.
+        //onUpdate steps (runs) at 60fps, called by Arc automatically every 1/60th frame
         onUpdate(time){
-            if(!this.world||!this.ready){return}//wait for next step, check again
+            if(!this.world||!this.ready){return}//world might not be ready yet, wait for next step, check again
 
+            //step the world for this update. World handles physics update internally.
             this.world.Step(
-                   1 / 40   //frame-rate
+                   1 / 40   //frame-rate, experimenting with 40fps
                 ,  20       //velocity iterations
                 ,  20       //position iterations
              );
              this.world.ClearForces();
         }
 
-        //onDraw steps (runs) at 60fps 1/60th right after onUpdate runs, called by Arc automattically.
+        //onDraw steps (runs) at 60fps 1/60th right after onUpdate runs, called by Arc automatically.
         onDraw(interpolation){
             if(this.world){//check again, make sure world is there
                 this.world.DrawDebugData();//optional
@@ -113,7 +117,7 @@ namespace `display.worlds` (
                     //if any nodes/shapes fall of screen, destroy them
                     if(!this.isAnyPartOfElementInViewport(node)){
                         node.destroy();//destroy it, but still in list
-                        delete this.nodes[i]; //and clean up list, leaves an empty spot in list though. see line 110
+                        delete this.nodes[i]; //and clean up list, leaves an empty spot in list though. see line 114
                     }
                 }
             }
