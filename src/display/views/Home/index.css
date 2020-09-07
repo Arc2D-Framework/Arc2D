@@ -1,3 +1,12 @@
-.Home {
+/*
+    :host is the root element itself.
+    Example, the <home-page></home-page> tag.
+*/
+
+:host {
 	
+}
+
+:host h1 {
+    color:red;
 }

@@ -12,10 +12,6 @@ using links with namespace to view:
 
 Views are regular, but larger WebComponents that
 are screen-sized. Different Views are navigated to,
-using linkss above, without refreshing the Screen.
-
-
-
-
+using links above, without refreshing the Screen.
 
 
