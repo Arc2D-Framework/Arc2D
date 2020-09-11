@@ -31,6 +31,9 @@
     max-height: 1000px !important;
 }
 
+nav.sidebar .toc > ol > li > ol > li > ol > li > ol > li > a {
+    padding-left: 65px;
+}
 
 /*.TocMenu .toc li.active ol{
     display:block;
