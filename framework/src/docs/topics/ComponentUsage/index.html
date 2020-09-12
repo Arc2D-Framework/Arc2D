@@ -35,7 +35,11 @@
           <pre class="inline html lang"><code>&#x3C;goblin-enemy&#x3E;&#x3C;/goblin-enemy&#x3E;</code></pre>
         </p>
         <p>
-          Component use in html makes sense in the layout of screens, to assemble a user interface when the design (look-n-feel) is known ahead of time. This is considered, declaritive markup. The tag causes the component to be defined and connected to the DOM immediately. At that very moment, the <a href="#docs.topics.ComponentLifecycle">component life-cycle</a> begins.
+          Don't forget to import the component Class before it's used:
+          <pre class="inline javascsript lang"><code>import 'core.ui.GoblinEnemy';</code></pre>
+        </p>
+        <p>
+          Component use in html makes sense in the layout of screens, to assemble a user interface when the design (look-n-feel) is known ahead of time. This is considered, declaritive markup. The tag causes the component to be defined and connected to the DOM immediately. At that very moment, the <a href="#docs.topics.ComponentLifecycle">component life-cycle</a> runs it course.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -55,21 +59,23 @@
           What if the screen dynamically changed based on user action or intelligent state driven decisions? Imagine a case where you wrote logic to spawn new Enemies or destroyed Enemies that took significant damage.
         </p>
         <p>
-          From JavsScript, you are able to create new instances of components (Products, Photos, Enemy...) and place them into the world in two(2) ways:
-          <pre class="inline javascript lang"><code>var goblin = document.createElement("goblin-enemy");
-document.appendChild(goblin);
-
-
-//OR
-var goblin = new core.ui.game.GoblinEnemy;
-document.appendChild(goblin)</code></pre><br/>
+          From JavsScript, you are able to create new instances of components (Products, Photos, Enemy...) and place them into the World or Application in two(2) different ways:
+        </p>
+        <p>
+          The <code>new</code> keyword, makes a new instance from the Class:
+          <pre class="inline javascript lang"><code>var goblin = new core.ui.game.GoblinEnemy;
+document.appendChild(goblin)</code></pre>
+        </p>
+        <p>
+          <code>document.createElement</code> makes a new instance from the tag-name:
+<pre class="inline javascript lang"><code>var goblin = document.createElement("goblin-enemy");
+document.appendChild(goblin);</code></pre>
         </p>
         <h3>onConnected()</h3>
         <p>
-          The <code>onConnected()</code> method of WebComponents will fire immediately as soon
-          as it is appended to the DOM (Document Object Model), i.e: the web page. This is why it
-          is recommended that you begin writing DOM specific code in this callback vs the
-          constructor.
+          <em><code>onConnected()</code> only fires when the new instance is added to the DOM</em>. Otherwise
+          creating a new instance only triggers the components <code>constructor()</code>, it is not
+          yet rendered or connected to the screen.
         </p>
         <goblin-enemy></goblin-enemy>
         <!-- <toggle-button></toggle-button> -->

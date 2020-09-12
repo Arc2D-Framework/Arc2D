@@ -1,6 +1,6 @@
 import '/src/docs/topics/Topic.js';
 // import 'docs.demos.sprites.VikingHero';
-import 'docs.demos.sprites.GoblinEnemy';
+import '/src/docs/demos/sprites/GoblinEnemy/index.js';
 // import 'docs.demos.ui.ToggleButton';
 
 namespace `docs.topics` (
