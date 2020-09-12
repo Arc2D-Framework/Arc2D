@@ -14,13 +14,8 @@
               <a href="https://www.w3.org/TR/DOM-Level-3-Events/#dom-event-architecture" target="_new">W3C DOM Event Architecture</a>
             </p>
             <p>
-              The knowledge of W3C's DOM Event Architecture is almost completely lost since the
-              prolifiration of new-age frameworks, that rely on reinventions of their own kind, none
-              of which are as supple as the event dispatch mechanisms that W3C have labored in design.
-            </p>
-            <p>
-              Arc adheres closely to specs so a good understanding of this topic is necessary
-              when building decoupled, modular graphical-interfaces, wether app or game. 
+              Arc adheres closely to specs so a good understanding of the topic is necessary
+              when building decoupled, modular graphical-interfaces. 
             </p>
           </div>
           <div style="width: 50%;display: block;">
@@ -324,7 +319,7 @@ namespace \`core.ui\` (
               In an Arc application, there is an actual <code>Application</code> that
               represents the screen being seen. It roughly acts as the body of the application,
               and being the ultimate managed parent of everything assembled on screen, it 
-              may participate in the Capture Phase of the event life cycle.
+              may participate in the Capture and Bubble Phase of the event life cycle.
             </p>
       
             <p>
@@ -333,7 +328,7 @@ namespace \`core.ui\` (
               <pre class="inline javascript lang">
                 <code>
 namespace \`core.applications\` (
-  class Catalog extends core.ui.Application {
+  class Catalog extends Application {
 
   }
 )
@@ -345,8 +340,9 @@ namespace \`core.applications\` (
               <pre class="inline javascript lang">
                 <code>
 namespace \`core.applications\` (
-  class Catalog extends core.ui.Application {
-    onConnected(){
+  class Catalog extends Application {
+    async onConnected(){
+      await super.onConnected();
       this.addEventListener("click", e => this.onAddToCartRequested(e), true, "#add-to-cart");
     }
 
