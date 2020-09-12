@@ -24,6 +24,26 @@ namespace `docs.components` (
             this.filetree = await (await fetch("src/docs/components/ProjectExplorer/data/filetree.json")).json();
         }
 
+        getDir(namespace){
+            var parts = namespace.split(".");
+            var dir = this.filetree.children[1];
+            for(var i=0; i<=parts.length-1; i++){
+                dir = this.getFolder(parts[i],dir)
+            }
+            console.log(dir)
+            // src.children.forEach(folder => {
+
+            // })
+            // return {
+            //     "path": "",
+            //     "name": name,
+            //     "type": "directory",
+            //     "size": 0,
+            //     "children": []  
+            // }
+            return dir
+        }
+
         mkDir(name){
             return {
                 "path": "",
@@ -31,6 +51,16 @@ namespace `docs.components` (
                 "type": "directory",
                 "size": 0,
                 "children": []  
+            }
+        }
+
+
+        getFolder(name, dir){
+            for(var i=0;i<=dir.children.length-1;i++){
+                dir = dir.children[i];
+                if(dir&&dir.name==name){
+                    return dir;
+                }
             }
         }
 

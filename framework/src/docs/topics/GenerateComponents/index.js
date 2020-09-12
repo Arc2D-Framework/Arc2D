@@ -13,19 +13,14 @@ namespace `docs.topics` (
         }
 
 		renderProjectFiles(){
-            this.project_explorer.reset();
-
-            var folders = ["core","ui","ToggleButton"];
-
-            var lastFolder = this.project_explorer.getSrcFolder();
-            while(folders && folders.length>0 && lastFolder){
-                var folder = folders.shift();
-                var dir = this.project_explorer.mkDir(folder);
-                lastFolder = this.project_explorer.addChildDirectory(lastFolder, dir);
-            }
-            this.project_explorer.addFileToDirectory(lastFolder, "index.html");
-            this.project_explorer.addFileToDirectory(lastFolder, "index.css");
-            this.project_explorer.addFileToDirectory(lastFolder, "index.js");
+            var explorer = this.project_explorer;
+                explorer.reset();
+            var components = explorer.getDir("display.components");
+            var folder = explorer.mkDir("ToggleButton");
+            explorer.addChildDirectory(components, folder);
+            explorer.addFileToDirectory(folder, "index.html");
+            explorer.addFileToDirectory(folder, "index.css");
+            explorer.addFileToDirectory(folder, "index.js");
 
             this.project_explorer.update();
         }

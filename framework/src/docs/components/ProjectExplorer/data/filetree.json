@@ -43,31 +43,31 @@
         "name": "src",
         "children": [{
             "path": "",
-            "name": "applications",
-            "children": [{
+            "name": "display",
+            "children": [
+            {
                 "path": "",
-                "name": "HelloWorld",
-                "children": [{
-                    "path": "",
-                    "name": "index.css",
-                    "size": 174,
-                    "extension": "css",
-                    "type": "file"
-                }, {
-                    "path": "",
-                    "name": "index.html",
-                    "size": 96872,
-                    "extension": "html",
-                    "type": "file"
-                }, {
-                    "path": "",
-                    "name": "index.js",
-                    "size": 311,
-                    "extension": "js",
-                    "type": "file"
-                }],
-                "size": 97488,
-                "type": "directory"
+                "name": "components",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "screens",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "views",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "worlds",
+                "type": "directory",
+                "children": []
             }],
             "size": 3185460,
             "type": "directory"

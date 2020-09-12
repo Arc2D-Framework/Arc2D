@@ -6,71 +6,39 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Component Life-Cycle</h1>
         <p>
-          The Components life-cycle is fashioned after the influential game loop used in 2D/3D game engines.
+          When components are used, (see: <a href="#docs.topics.ComponentUsage">Using Componentss</a>) either declaratively (via HTML) or programmatically (via JavaScript), the life-cycle of that component initiates and moves through several internal phases very quickly while attempting to connect itself with the DOM.
           <div style="text-align: center;">
             <img src="src/docs/images/component_life_cycle.png" style="width: 80%;text-align: center;"/>
           </div>
         </p>
         <p>
           <h2>STAGE 1: Connected State</h2>
-          When a component is used (see: <a href="#docs.topics.ComponentUsage">Using Components</a>), its onConnected() method is triggered notyfing the component that is has been connected to the DOM. During the connection stage, just before onConnected() is notified, three sub-processes occur:
+          <code>onConnected()</code> is triggered, the component has been connected to the DOM. During the connection stage, just before onConnected() is notified, three sub-processes occur:
           <ul>
             <li>Definition</li>
             <li>Construction</li>
             <li>Connected</li>
           </ul>
         </p>
+        <h3>Definition:</h3>
         <p>
-          <b>Definition:</b><br/>
-          An element is defined when its Javascript class is imported into memory. Immediately after being loaded, the Class is registered as a custom element and a tag-name is generated for the component using it's class name, replacing all UpperCase to dash-case.
+          An element is defined when its Javascript class is imported into memory. Immediately after being loaded, the Class is registered as a custom element. During this phase, any dependencies specified
+          by the Components <code>import</code> statements are also processed and loaded.
         </p>
+        <h3>Construction:</h3>
         <p>
-          <b>Construction:</b> <br/>
-          At this point the components class constructor() runs to setup a new instance of the component being used in your application. The constructor is appropriate for setting up basic state and event listeners. Never attempt to run any DOM related calls against the component at this stage, as the component is not yet in the DOM (not connected), it has not yet been rendered visually.
+          <code>constructor()</code> fires for any new instance being used (see: <a href="#docs.topics.ComponentUsage">Using Componentss</a>). Basic state, variable declarations and I/O or network requests can kick off at this point, not including DOM work. Do not attempt to run any DOM related calls on the component itself, as the component is not yet in the DOM, not rendered and not connected -- It does not have it's Node tree just yet.
         </p>
+        <h3>Connected:</h3>
         <p>
-          <b>Connected:</b> <br/>
-          Finally, just before <code>onConnected()</code> is triggered, the component auto-loads its default stylesheet (index.css) and any additional style-sheets specified by the <a href="#docs.topics.JavascriptDecorators/stylesheets"><code>@stylesheets</code></a>decorator. The component becomes connected to the DOM and onConnected() is fired. At this time, the component is visually rendered, it's DOM fully represented. You may override <code>onConnected()</code> in your component class to wire additional event listeners and any DOM manipulation needed. You also need to invoke <code>super.onConnected()</code> so that the base class handles the call to <code>.render()</code>. If render() needs to happen at your timing, or data needs to be sent into the template, call <code>this.render({data here})</code> with the JSON.
+          <code>onConnected()</code> is triggered. Several other internal processes occur:
+          <ul>
+            <li>The components HTML is loaded</li>
+            <li>The components CSS is loaded</li>
+            <li>The component is rendered</li>
+          </ul>
         </p>
-        <p>
-          Calling <code>super.onConnected()</code> let's the base class handle simple template rendering when the template is not expecting any data to be passed into it.<br/>
-          <pre class="inline javascript lang">
-<code>namespace \`core.ui\` (
-  class CoverFlow extends w3c.ui.WebComponent {
-    onConnected(){
-      super.onConnected();
-      this.addEventListener("click", e => this.onClick(e), false);
-    }
-
-    onClick(e){
-      console.log(e.target)
-    }
-  }
-) </code></pre>
-        </p>
-        <p>
-          Alternatively, you may call <code>this.render()</code> at your own timing and even pass in JSON data that your template can itertate over to generate HTML<br/>
-          <pre class="inline javascript lang">
-<code>namespace \`core.ui\` (
-  class CoverFlow extends w3c.ui.WebComponent {
-    constructor(){
-      super();
-      this.coverFlowData = {
-        items:[...listOfItems]
-      };
-    }
-    onConnected(){
-      this.addEventListener("click", e => this.onClick(e), false);
-      this.render(this.coverFlowData);
-    }
-
-    onClick(e){
-      console.log(e.target)
-    }
-  }
-) </code></pre><br/>
-        </p>
-        <p>The component is now connected and in the DOM.</p>
+        <p>The component is now connected and fully rendered in the DOM. At this stage, the componet has an HTML Node tree and can be queried and manipulated. Listeners may also be attached, basically the component is now free to do whatever initialization you intended.</p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -85,14 +53,24 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h2 id="api-reference">STAGE 2: Input</h2>
+        <h2 id="api-reference">STAGE 2: Input / Update</h2>
         <p>
-          <b>Event-Driven:</b><br/>
-          All input handling was registered during the <code>onConnected()</code> phase using standard <code>addEventListener()</code> wire-up based on w3c standards. Also known as event-driven programming, the events when detected, will delegate to handlers to update it's model/state and UI. In essence, the Component itself works like a controller in a traditional MVC design, but occuring all in a GUI world. In this traditional design, the Component being the "controller", mediates between it's View (it's DOM rendering) and a Model (simple data or complex Model/Collection).
+          At this point, any listeners previously registered in the <code>onConnected()</code> phase
+          could now participate in the input-->feedback/update loop for user interaction (event-driven style). Handlers for input events such as <code>"click"</code> fire when interacted with. If the component participates in a World scene, the World may also fire the components <code>onUpdate()</code> handler at 60fps (the game loop).
         </p>
         <p>
-          <b>2D [ Input, Update, Render ] Loop:</b><br/>
-          Oros was architectured with 2D game development in mind. When building 2D Games such as RPG's, Side Scrollers, Menus, GUI's and HUDs(Heads Up Displays), an event-driven WebComponent design will not work. For cases like this, Oros uses 2D Sprites that each participate in the worlds input, update, render loop. The environment runs the update, render cycle at over 60FPS using a determinstic frame stepper with elapsed time and interpolation for skipped frames during lag. See <a href="#docs.topics.Sprite2D">Sprites</a> for more information. Like WebComponents, the onUpdate() is triggered over 60FPS where the Sprites state can be changed. onRender() also runs right after and is responsible for visual projection either unto cavas or DOM.
+          <b>Event-Driven:</b><br/>
+          Also known as event-driven programming, events delegate to handlers to update the components model/state and UI. In essence, the Component itself works like a controller in a traditional MVC design.
+          The event-driven style only executes when events are raised either by the environment or user interaction.
+        </p>
+        <p>
+          <b>onUpdate() Game Loop:</b><br/>
+          In a World scene, a Component acting as a Character Sprite could be updated at around 60fps. The World automatically fires <code>onUpdate()</code> where input from a controller or keypad could be checked for running actions such as physics calculations, collision detection, movement and so on. Only the components model/state is updated not rendered. <code>onRender()</code> then follows for synching the view to state.
+        </p>
+        <p>
+          <b>onRender() Game Loop:</b><br/>
+          After a component is updated in memory, the sprite should be rendered at this point to sync the vissual representation with the components state. <code>onRender()</code> is fired at the same 60fps frame-rate. For example, <code>onUpdate</code> increments the Sprites x/y location if the user
+          presses on the directional-pad. But only the coordinate values are modified in memory. Immediately after, <code>onRender()</code> fires sequentially and is responsible for visually moving the Sprite to the updated x/y location on screen.
         </p>
       </div>
       <div style="width: 50%;display: block;">
