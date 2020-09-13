@@ -1,0 +1,87 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="introduction">Introduction</h1>
+        <p>
+          A view is a kind-of activity being performed by the user, we'll use the terms interchangeably. Usually there is
+          a single activity in focus on a screen but as we'll cover later, multiple activities
+          can be stacked vertically, horizontally and even on top of each other. But generally, Single Page Applications (SPA), the architectural pattern for building rich applications, have at most
+          a single screen with navigation between many views (activities), where only 1 view is ever visible within that screen without ever reloading the screen.
+        </p>
+        <p>
+            The only requirement for a screen to function as an SPA, is defining
+            a &#x3C;slot&#x3E; on the screen that manages the transitioning of views
+            that come into view and moves out of view for another view:
+            <pre class="inline html lang">
+                <code>
+&#x3C;slot name=&#x22;content&#x22;&#x3E;&#x3C;/slot&#x3E;
+                </code>
+            </pre>
+        </p>
+        <p>
+            The above is all thatt is required to enable SPA navigation on your screen.
+            Here's an example of a screen having a nav and a slot for showing
+            the views declared by the anchor tags:
+            <pre class="inline html lang">
+                <code>
+&#x3C;body namespace=&#x22;display.screens.HelloWorld&#x22;&#x3E;
+   &#x3C;hello-world&#x3E;
+       &#x3C;template&#x3E;
+           &#x3C;nav&#x3E;
+               &#x3C;a href=&#x22;#display.views.Home&#x22;&#x3E;Home&#x3C;/a&#x3E;
+               &#x3C;a href=&#x22;#display.views.Dashboard&#x22;&#x3E;Dashboard&#x3C;/a&#x3E;
+               &#x3C;a href=&#x22;#display.views.About&#x22;&#x3E;About&#x3C;/a&#x3E;
+           &#x3C;/nav&#x3E;
+           &#x3C;slot name=&#x22;content&#x22;&#x3E;&#x3C;/slot&#x3E;
+       &#x3C;/template&#x3E;
+   &#x3C;/hello-world&#x3E;
+&#x3C;/body&#x3E;
+                </code>
+            </pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="introduction">Screen Layout</h1>
+        <p>
+          <img src="src/docs/images/spa-layout.jpg" title="https://sammdolan.wordpress.com/2012/03/27/functionality-wireframe-design-assignment/"/>
+        </p>
+        <p>
+            The layout above shows a screen with several areas. The content area is the
+            slot that will be filled with a View. Maybe the view is loaded from a link in the navigation,
+            maybe from the sidebar or footer.
+        </p>
+        <p>
+            Declare the layout of your screen however you wish, with whatever markup that makes the most sense, assemble it with components such as depicted above and declare a blank slot to achieve the basis
+            of an SPA.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</template>

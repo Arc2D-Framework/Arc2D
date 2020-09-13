@@ -6,16 +6,27 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Activity Life Cycle</h1>
         <p>
-          We've been using the terms, Activity and Views interchangeably. "Views" were mentioned concretely to mean a UI component appearing in an applications view-port. But how views transition in and out of a view-port is a design pattern in Arc called Activities.
+          I've used the terms Activity and Views interchangeably. "Views" were mentioned concretely to mean a UI component appearing within the screens view-port. But how views transition in and out of a view-port is a design pattern in Arc called Activities.
         </p>
         <p>
-            Navigating to views using anchor links:
-            <pre class="inline html lang"><code>&#x3C;a href=&#x22;#store.deals.BlackFriday&#x22;&#x3E;Shop Black Friday Specials&#x3C;/a&#x3E;</code></pre>
+            The following link, at any place on the screen will load up a component from the namespace, "display.views.HomePage" (a view) within the designated content slot on the screen when clicked:
+            <pre class="inline html lang"><code>&#x3C;a href=&#x22;#display.views.HomePage&#x22;&#x3E;Home&#x3C;/a&#x3E;</code></pre>
         </p>
         <p>
-          is a design decision that required an intelligent, real-time routing mechanism that limits any pre-configured "wire-ups". Developers leverage existing knowledge of simple anchor tags to achieve graceful navigation between views.
+          Several sub-processed under-the-hood fire sequentially to:
+          <ul>
+            <li>Download the Class at the namespace "display.views.HomePage"</li>
+            <li>Hide any existing focused activity</li>
+            <li>Prepare the new activity</li>
+            <li>Inserts it into content slot on screen</li>
+          </ul>
         </p>
-       
+        <p>
+          At each step in the process, callbacks are available for developers to hook into
+          the process and override the under pinning logic. Otherwise, you can ignore the
+          callbacks and accept the "out-of-the-box" functionality that ships with Arc. Let's
+          look aat the callbacks.
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -29,7 +40,7 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Activity Life Cycle</h1>
+        <h1 id="api-reference">Life Cycle Callbacks</h1>
         <p>
           An activity moves through a sequence of event callbacks before, during and after it is requested for display. These callbacks can be used from the application level to exit the previous activity (if there was one) and enter the next. The sequence of events are as follows:
           <table>

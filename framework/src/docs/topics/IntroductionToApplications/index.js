@@ -7,22 +7,18 @@ namespace `docs.topics` (
             await super.onConnected();
             this.project_explorer = this.querySelector("project-explorer");
             await wait(300);
-            // this.renderProjectFiles();
+            this.renderProjectFiles();
         }
 
         renderProjectFiles(){
-            this.project_explorer.reset();
-            // var folders = ["applications","StoreCatalog"];
-
-            var lastFolder = this.project_explorer.getSrcFolder();
-            while(folders && folders.length>0 && lastFolder){
-                var folder = folders.shift();
-                var dir = this.project_explorer.mkDir(folder);
-                lastFolder = this.project_explorer.addChildDirectory(lastFolder, dir);
-            }
-            this.project_explorer.addFileToDirectory(lastFolder, "index.html");
-            this.project_explorer.addFileToDirectory(lastFolder, "index.css");
-            this.project_explorer.addFileToDirectory(lastFolder, "index.js");
+            var explorer = this.project_explorer;
+                explorer.reset();
+            var components = explorer.getDir("display.screens");
+            var folder = explorer.mkDir("HelloWorld");
+            explorer.addChildDirectory(components, folder);
+            explorer.addFileToDirectory(folder, "index.html");
+            explorer.addFileToDirectory(folder, "index.css");
+            explorer.addFileToDirectory(folder, "index.js");
 
             this.project_explorer.update();
         }

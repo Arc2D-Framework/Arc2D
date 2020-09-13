@@ -71,6 +71,56 @@
             }],
             "size": 3185460,
             "type": "directory"
+        },
+        {
+            "path": "",
+            "name": "domain",
+            "children": [
+            {
+                "path": "",
+                "name": "collections",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "entities",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "models",
+                "type": "directory",
+                "children": []
+            }],
+            "size": 3185460,
+            "type": "directory"
+        },
+        {
+            "path": "",
+            "name": "system",
+            "children": [
+            {
+                "path": "",
+                "name": "diagnostics",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "drivers",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "game",
+                "type": "directory",
+                "children": []
+            }],
+            "size": 3185460,
+            "type": "directory"
         }],
         "size": 3228959,
         "type": "directory"
@@ -91,7 +141,7 @@
     },
     {
         "path": "",
-        "name": "contact.html",
+        "name": "index.html",
         "size": 353,
         "extension": "html",
         "type": "file"

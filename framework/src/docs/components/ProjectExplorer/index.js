@@ -57,9 +57,9 @@ namespace `docs.components` (
 
         getFolder(name, dir){
             for(var i=0;i<=dir.children.length-1;i++){
-                dir = dir.children[i];
-                if(dir&&dir.name==name){
-                    return dir;
+                var folder = dir.children[i];
+                if(folder&&folder.name==name){
+                    return folder;
                 }
             }
         }

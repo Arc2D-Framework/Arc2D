@@ -13,7 +13,7 @@ namespace `docs` (
             this.addEventListener("lang-selected", e => this.onLanguageChange(e));
         }
 
-        onEnableRouting(){ return true }
+        // onEnableRouting(){ return true }
 
         async onConnected() {
             await super.onConnected();
