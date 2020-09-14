@@ -376,10 +376,15 @@ namespace `w3c.ui` (
             return relativeToAbsoluteFilePath(Config.SRC_PATH+"/./index.css",ns);
         }
 
+        // setClassList() {
+        //     this.className = this.className + (this["@cascade"]? 
+        //         " " + (this.__proto.classes.join(" ")).trim():
+        //         " " + this.classname);
+        // }
         setClassList() {
-            this.className = this.className + (this["@cascade"]? 
+            this.root.className = this.root.className + (this["@cascade"]? 
                 " " + (this.__proto.classes.join(" ")).trim():
-                " " + this.classname);
+                " " + this.root.classname);
         }
 
         getStyleSheets() {
