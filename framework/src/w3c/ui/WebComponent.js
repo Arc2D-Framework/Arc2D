@@ -211,7 +211,7 @@ namespace `w3c.ui` (
                     this.src||                          //uri
                     this.template()||                   //string
                     this.element||
-                    "/src/./index" + (engine.ext||"") + ".html" //TODO: default but ignores <Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION>
+                    Config.SRC_PATH+"/./index" + (engine.ext||"") + ".html" //TODO: default but ignores <Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION>
         }
 
 
@@ -373,7 +373,7 @@ namespace `w3c.ui` (
         }
 
         getNSStyleSheet(ns){
-            return relativeToAbsoluteFilePath("/src/./index.css",ns);
+            return relativeToAbsoluteFilePath(Config.SRC_PATH+"/./index.css",ns);
         }
 
         setClassList() {

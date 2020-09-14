@@ -1,0 +1,124 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Component Life-Cycle</h1>
+        <p>
+          When components are used, (see: <a href="#docs.topics.ComponentUsage">Using Componentss</a>) either declaratively (via HTML) or programmatically (via JavaScript), the life-cycle of that component initiates and moves through several internal phases very quickly while attempting to connect itself with the DOM.
+          <div style="text-align: center;">
+            <img src="docs/images/component_life_cycle.png" style="width: 80%;text-align: center;"/>
+          </div>
+        </p>
+        <p>
+          <h2>STAGE 1: Connected State</h2>
+          <code>onConnected()</code> is triggered, the component has been connected to the DOM. During the connection stage, just before onConnected() is notified, three sub-processes occur:
+          <ul>
+            <li>Definition</li>
+            <li>Construction</li>
+            <li>Connected</li>
+          </ul>
+        </p>
+        <h3>Definition:</h3>
+        <p>
+          An element is defined when its Javascript class is imported into memory. Immediately after being loaded, the Class is registered as a custom element. During this phase, any dependencies specified
+          by the Components <code>import</code> statements are also processed and loaded.
+        </p>
+        <h3>Construction:</h3>
+        <p>
+          <code>constructor()</code> fires for any new instance being used (see: <a href="#docs.topics.ComponentUsage">Using Componentss</a>). Basic state, variable declarations and I/O or network requests can kick off at this point, not including DOM work. Do not attempt to run any DOM related calls on the component itself, as the component is not yet in the DOM, not rendered and not connected -- It does not have it's Node tree just yet.
+        </p>
+        <h3>Connected:</h3>
+        <p>
+          <code>onConnected()</code> is triggered. Several other internal processes occur:
+          <ul>
+            <li>The components HTML is loaded</li>
+            <li>The components CSS is loaded</li>
+            <li>The component is rendered</li>
+          </ul>
+        </p>
+        <p>The component is now connected and fully rendered in the DOM. At this stage, the componet has an HTML Node tree and can be queried and manipulated. Listeners may also be attached, basically the component is now free to do whatever initialization you intended.</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h2 id="api-reference">STAGE 2: Input / Update</h2>
+        <p>
+          At this point, any listeners previously registered in the <code>onConnected()</code> phase
+          could now participate in the input-->feedback/update loop for user interaction (event-driven style). Handlers for input events such as <code>"click"</code> fire when interacted with. If the component participates in a World scene, the World may also fire the components <code>onUpdate()</code> handler at 60fps (the game loop).
+        </p>
+        <p>
+          <b>Event-Driven:</b><br/>
+          Also known as event-driven programming, events delegate to handlers to update the components model/state and UI. In essence, the Component itself works like a controller in a traditional MVC design.
+          The event-driven style only executes when events are raised either by the environment or user interaction.
+        </p>
+        <p>
+          <b>onUpdate() Game Loop:</b><br/>
+          In a World scene, a Component acting as a Character Sprite could be updated at around 60fps. The World automatically fires <code>onUpdate()</code> where input from a controller or keypad could be checked for running actions such as physics calculations, collision detection, movement and so on. Only the components model/state is updated not rendered. <code>onRender()</code> then follows for synching the view to state.
+        </p>
+        <p>
+          <b>onRender() Game Loop:</b><br/>
+          After a component is updated in memory, the sprite should be rendered at this point to sync the vissual representation with the components state. <code>onRender()</code> is fired at the same 60fps frame-rate. For example, <code>onUpdate</code> increments the Sprites x/y location if the user
+          presses on the directional-pad. But only the coordinate values are modified in memory. Immediately after, <code>onRender()</code> fires sequentially and is responsible for visually moving the Sprite to the updated x/y location on screen.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h2 id="api-reference">STAGE 3: Render</h2>
+        <p>
+          <b>Event-Driven Rendering:</b><br/>
+          In traditional WebComponent design, components will repaint/render themselves when events trigger callbacks (event-driven updates) to do so. The call to .render() will cause the component to re-evaluate it's HTML template and if fresh data is supplied to render(), the template will generate new/different HTML causing the view to change visually. When callbacks run, components may also choose to not .render() completely but cherry-pick what DOM nodes needs to change. This is the traditional model we are all use to.
+        </p>
+        <p>
+          <b>Sprite Input, Update, Render Loop:</b><br/>
+          When using Sprites, the environment runs the update, render frame stepper on every sprite in the world. A Sprites onUpdate() and onRender() cycles are closely related, where render depends on any state changes that occured during onUpdate() for visual projection. Unlike event-driven rendering which arbitarily occurs or may never occur, a Sprite will render continously at up to 60+ FPS and during lag, when FPS drops, onRender() will "catch up" by interpolating dropped frames to keep in step with elapsed time.
+        </p>
+        <p>Oros employs a robust and intelligent game loop. See the <a href="#docs.topics.Sprite2D">Sprites</a> topic for more.</p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Destruction</h1>
+        <p>
+          When a component is no longer needed, it's onDestroy() method is invoked. Every component should perform clean-up in this call. Certain components will have it's onDestroy() called for you by the engine, at other times, it will not hurt to invoke it when you know an entity is no longer needed.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>

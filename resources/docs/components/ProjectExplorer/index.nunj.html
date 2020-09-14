@@ -1,0 +1,46 @@
+<template>
+  <style>
+    
+  </style>
+    <div>
+        <div class="title">Simulation
+          <span class="icons-try">
+            <i class="fa fa-refresh title-pane-icon"></i>
+          </span>
+        </div>
+        <div id="files" style="overflow-x: hidden;">
+            <ul role="tree" aria-labelledby="tree_label">
+              {% macro menuItem(item) %}
+                {% if item.type == "directory" %}
+                  <li role="treeitem" aria-expanded="false" path="{{item.path}}" class="{% if item.expanded %}expanded{% endif %}">
+                      <span>
+                        <img src="docs/components/ProjectExplorer/images/Folder-icon.png" style="height: 18px;vertical-align: middle;margin-right: 3px;margin-top: -3px;"/>{{item.name}}
+                      </span>
+                      {% if item.children %}
+                        <ul role="tree" aria-expanded="false">
+                            {% for item in item.children %}
+                            {{ menuItem(item) }}
+                            {% endfor %}
+                        </ul>
+                      {% endif %}
+                  </li>
+                {% else %}
+                    <li role="treeitem" class="doc" path="{{item.path}}" ext="{{item.extension}}">
+                      <span>
+                        <img src="docs/components/ProjectExplorer/images/{{item.extension}}.png" style="height: 18px;vertical-align: middle;margin-right: 3px;margin-top: -3px;"/>{{item.name}}
+                      </span>
+                    </li>
+                {% endif %}
+              {% endmacro %}
+
+              {{ menuItem(item) }}
+              {% for item in children %}
+              {{ menuItem(item) }}
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+</template>
+
+
+

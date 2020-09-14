@@ -1,0 +1,45 @@
+<template>
+  <div>
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">MVC and Data Binding</h1>
+        <p>
+            MVC is a structural pattern and a concept for representing a component in three(3) parts. The View
+            represents what the user interacts with, usually a visual interface. The component Controller sits between
+            the View and the Model. It watches changes on both sides, its core responsibility is to keep
+            the View and Model in sync with each other. The Model represents some kind of state the component
+            is in. Models can be as simple as a set of variables and flags defined in the Controller, an object or a more complex process that models a real world entity such as a Model of a clock. In the case of a clock, the Model would simulate how time passes every second, updating its minutes and incrementing hours mathamatically. This Model is never seen by the user because it is generally a concept, a "process" or data structure in raw logical form. The Controller watches the Model and projects its state unto the View graphically. If the View had controls to set the time, the controller watches the view and keeps the Model in synch with what the user is attempting. This is MVC.
+        </p>
+        <p>
+            In this triad, logic has to be written in the Controller to synchronize both sides so that the user can experience the idea visually with knobs, buttons and graphics. This "wire-up" code in a Controller is usually done in a combination of 1 of 3 ways:
+            <ul>
+                <li>Event-driven</li>
+                <li>Environment Loop (games)</li>
+                <li>Data Binding</li>
+            </ul>
+        </p>
+        <p>
+            We'll cover Data Binding here. First let's conceptually show, from a front and side view what a Component might look like in an MVC structure:
+            <img src="docs/images/mvc.png"/>
+            A side view shows it clearly, the user only ever sees and interacts with a visual projection, never having to touch a Controller or Model. Think of it as the side view of the screen. The drawing shows the controller behind the scheme.
+        </p>
+        <p>
+            In the case of the Model of a Clock again, as seconds and minutes pass by in real-time, the controller watches the changes and sends it to it's View, rendering a visual representation on a canvas or with HTML. The benefit of all of this is being able to change out views so that the Clock can be experienced as an analog (minute hands) or digital clock. If the View has a toggle to switch between representations, the Controller swaps out the view for another.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+   
+
+    
+  </div>
+</template>

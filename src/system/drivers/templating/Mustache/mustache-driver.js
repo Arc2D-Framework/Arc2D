@@ -1,4 +1,4 @@
-import {mustache} from "/framework/src/core/drivers/templating/Mustache/mustache.js";
+import {mustache} from "/src/system/drivers/templating/Mustache/mustache.js";
 
 (() => {
     var MustacheDriver = {

@@ -1,0 +1,11 @@
+event-phase-diagram {
+    display:block;
+}
+
+event-phase-diagram .phase {
+    display:none;
+}
+
+event-phase-diagram .phase.visible {
+    display:block;
+}

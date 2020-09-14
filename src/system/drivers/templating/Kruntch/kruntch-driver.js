@@ -1,4 +1,4 @@
-import "/src/core/simul8/drivers/kruntch-api.js";
+import "/src/system/drivers/templating/Kruntch/kruntch-api.js";
 
 (() => {
     var KruntchDriver = {

@@ -1,0 +1,309 @@
+<template>
+    <div>
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="intro">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Events</h1>
+            <p>
+              Events are like signals that bounce and reflect within an environment. Any component in the World can become a satellitle for intercepting, passing along and/or canceling out signals. Event emmitters are considered Event Targets, the idea being the source component that dispatched the event. 
+            </p>
+            <h3>Component Communications</h3>
+            <p>
+              These event/signals travel within the environment with payloads of data. Any component listening for events can intercept and unpack the signal. The very purpose behind events in UI programming is communications. Events allow components on screen to communicate, passing along data, without having to know about each other, a design that eliminates components being dependent on each other -- signals can be exchanged almost anonymously. 
+              <img src="docs/images/event_signals.png"/>
+            </p>
+            <p class="sidenote" id="skywave">
+              <b>Have you heard of Skywave?</b>: <br/>"In radio communication, skywave or skip refers to the propagation of radio waves reflected or refracted back toward Earth from the ionosphere, an electrically charged layer of the upper atmosphere." .... "Consequently, even signals of only a few Watts can sometimes be received many thousands of miles away. This is what enables shortwave broadcasts to travel all over the world."<br/>
+              Excerpt from Wikipedia.com: <a href="https://en.wikipedia.org/wiki/Skywave" target="_new">https://en.wikipedia.org/wiki/Skywave</a>
+            </p>
+            <p>
+              Imagine an "Add to Cart" button. Clicking it adds an item to your cart. You typically see a Shopping Cart banner or module at the top-right for an online store. There are notifications to the user that their cart was updated. This is an example where <em> a Product and Cart needs to communicate, but NOT directly with each other, ever.</em> You'll soon see that your application works like the ionosphere in Skywave. For now, just to convey the idea of communicating with each other, we'll draw a line across.
+              <img src="docs/images/event_signals_example.png"/>
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+          <div style="width: 50%;padding: 22px;">
+            <p>
+              Let's arrange a Product (just 1 for demonstration) and Shopping Cart module on-screen showing where they might be placed in relation to each other. The drawing also shows the signal emitted, reaching the ionosphere (You application) and being intercepted.
+              <img src="images/events_shopping_cart.png" style="margin-top:20px;"/>
+
+               <code>Products</code> have an "Add to Cart" button, it fires an <code>"addcart"</code> signal, packed with a payload of data about the product (like SKU). The <code>ShoppingCart</code>, listens and waits. When a signal is detected in the environment, it intercepts and handles it. An extremely robust and dynamic communications system.
+            </p>
+            <p>
+              <em>Take note of a subtle idea in the drawing at the red circle.</em> Events are broadcasted in the environment which are ultimately captured by your application and deflected back to any other components who may be interested in the signal (See <a href="#docs.topics.ComponentEvents/skywave">Skywave</a> idea above). Other components can subscribe to signals at the application boundry without having to know the sender of the signals. See <code>ShoppingCart</code> snippet on right. In essence, the application works like a central "bus" or a reflective dome, kind of like the Skywave concept, using the ionosphere (<code>application</code> for us) for decoupled communications between entities.
+            </p>
+            <p>
+              It is important that we understand the concept well. Events and communication between entities will be a core part of building any application or game. You'll be relying on this concept over and again. Now let's understand Propagation, how and where event signals travel.
+            <p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang">
+              <blockquote class="javascript" style="display:block;width: 100%;">The ShoppingCart class:</blockquote>
+              <pre class="highlight javascript" style="display:block;width: 100%;">
+                <code>
+namespace \`core.ui\` (
+  class ShoppingCart extends w3c.ui.WebComponent {
+    constructor() {
+      super();
+      var app = application; //think of ionosphere
+      
+      app.addEventListener("addcart", e => this.onAddProduct(e));
+      app.addEventListener("cartchanged", e => this.onCartUpdated(e))
+    }
+
+    onAddProduct(e){
+      var signal_data = e.data;
+      //Dont worry about db details
+      Cart.add(signal_data.sku);
+    }
+
+    onCartUpdated(e){
+      var countElement = this.querySelector("#cart_count");
+      var notificationElement = this.querySelector("#msg");
+      countElement.innerHTML = Cart.count() + " items in cart";
+      notificationElement.innerHTML = "Successfully added to cart"
+    }
+
+    //other code
+  }
+)
+                </code>
+              </pre>
+
+
+
+              <blockquote class="javascript" style="display:block;width: 100%;">The Product class:</blockquote>
+              <pre class="highlight javascript" style="display:block;width: 100%;">
+                <code>
+namespace \`core.ui\` (
+  class Product extends core.ui.StoreItem {
+    constructor() {
+      super();
+    }
+
+    onConnected(){
+      var app = application;
+      var addBtn = this.querySelector("#add-btn");
+
+      addBtn.addEventListener("click", e => this.onSendToCart(e));
+      app.addEventListener("cartupdated", e => this.onCartSuccess(e));
+    }
+
+    onSendToCart(e){
+      if(!this.disabled) {
+        this.dispatchEvent("addcart", {sku: this.sku});
+        this.disable();
+      }
+    }
+
+    disable() {
+      this.disabled = true;
+    }
+
+    enable(){
+      this.disabled = false;
+    }
+
+    onCartSuccess(){
+      this.enable();
+    }
+  }
+)
+                </code>
+              </pre>
+            </div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="propagation">
+          <div style="width: 50%;padding: 22px;">
+            <h1>Propagation</h1>
+            <p>
+              When events are emmitted from components, they propagate upwards, passing through many
+              layers of material and boundaries on screen, until the signal reaches the application boundary. What an interesting design by the W3C, consciously or not, it brilliantly models the way signals work in our physical world, propagating and penetrating outwards/inwards until a transciever can pick it up. Signals pass through boundaries, at some boundaries, like walls and floors, a wi-fi signal may degrade, be amplified or just stopped from further propagation.<br/>
+              <img src="docs/images/event_signals_through_walls.png" style="width:100%;"/>
+            </p>
+            <p>
+              This WI-FI diagram is wonderful for explaining event-signal propagation because signal spread is closely related to enclosing structure. Have you ever seen a physical blue-print of a house? It resembles an HTML wireframe, with borders, square and rectangular shapes sometimes having shapes inside of shapes, being children to parent shapes. In a blue-print, every Floor groups Rooms, the rooms are child to the Floor they are on, the House is the ultimate parent, holding it all in and being a realized Application of the blue print. Can we replicate this Floor/Room structure as an HTML wireframe? Sure:
+
+              <pre class="inline html lang">
+                <code>
+&#x3C;div id=&#x22;house&#x22;&#x3E;
+  &#x3C;div class=&#x22;attic floor&#x22;&#x3E;
+    &#x3C;div class=&#x22;unheated room&#x22;&#x3E;&#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;second floor&#x22;&#x3E;
+    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+  &#x3C;div class=&#x22;first floor&#x22;&#x3E;
+    &#x3C;div class=&#x22;bed room&#x22;&#x3E;&#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;living room&#x22;&#x3E;&#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                </code>
+              </pre>
+            </p>
+            <p>
+                Now here's the difference between real world signals and simulated event signals in terms of HTML: Event signals in HTML cannot pass from sibling-to-sibling, or from room-to-room, on the same floor, as shown in the wi-fi diagram for a house. Event signals only pass from child-to-parent floors in HTML, ultimately reaching the application, the parent of all. So if the HTML version of the living room had a router dispatching a signal when the user clicks on the simulated Router icon in a room:
+                <pre class="inline html lang">
+                  <code>
+&#x3C;div class=&#x22;living room&#x22;&#x3E;
+  &#x3C;div class=&#x22;router&#x22;&#x3E;&#x3C;!-- click router to send signal --&#x3E;&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+                  </code>
+                </pre>
+            </p>
+            <p>
+                What propagation path do you think the event will travel? It will never go into the sibling bedroom, nor the 2nd floor. But will take this path:<br/><br/>
+                <code>Router -> Living Room -> First Floor -> House</code>
+            </p>
+            <p>
+              What if the bedroom on 1st floor wanted to listen for the signal from it's adjacent sibling? Well, the bedroom has 3 options:
+              <ol>
+                <li>Listen to next door Living Room</li>
+                <li>Listen at the Floor level</li>
+                <li>Listen at the application boundary</li>
+              </ol>
+            </p>
+            <p>
+              I recommend going with the latter approach, as we've discussed, by letting the Bedroom subscribe to the signal at the application level. The ShoppingCart example does just that. The flow will then be:<br/><br/>
+              <code>Router -> Living Room -> First Floor -> House <- Bedroom (1st floor)</code><br/><br/>
+
+              The code for the bedroom to accomplish this would look like:<br/>
+              <pre class="inline javascript lang">
+                  <code>
+namespace \`core.ui\` (
+  class Bedroom extends core.ui.Room {
+    constructor(){
+      super();
+      application.addEventListener("wifi", e => this.onSignalReceived(e));
+    }
+
+    onSignalReceived(e){
+      //check strength
+    }
+  }
+)
+                  </code>
+              </pre>
+            </p>
+            <p class="sidenote">
+              Realize, programming is not a science, but an art. It is art expressed. Stop thinking about programming as some hard and brute force or mathemitically sound algorithms, and start seeing it as a tool for expressing thought from the real world.
+            </p>
+            <h3>Propagation Phases</h3>
+            <p>
+              Events bubble up from child to parent, upwards from the Event Target, moving through all boundaries until it deflects off the application and begins its decent downwards, passing through the layers until it arrives back at the source. This travel, is called the bubble and capture phases of W3C DOM events. Let's examine it a bit more.
+            </p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="bubble">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Bubble Phase</h1>
+            <event-phase-diagram phase="bubble_phase"></event-phase-diagram>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="capture">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Capture Phase</h1>
+            <event-phase-diagram phase="capture_phase"></event-phase-diagram>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="target">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Target Phase</h1>
+            <event-phase-diagram phase="target_phase"></event-phase-diagram>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+
+
+
+
+        <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="example">
+          <div style="width: 50%;padding: 22px;">
+            <h1 id="api-reference">Example</h1>
+            <p>doc..in progress</p>
+          </div>
+          <div style="width: 50%;display: block;">
+            <div class="shell lang"></div>
+            <div class="javascript lang"></div>
+            <div class="html lang"></div>
+            <div class="css lang"></div>
+          </div>
+        </div>
+
+    </div>
+</template>

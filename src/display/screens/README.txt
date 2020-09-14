@@ -14,7 +14,7 @@ Screens are asssembled with reusable Component parts like:
 SPA SETUP
 ------------------------------------------------------------
 In an SPA setup (See: screens/SpaDemo), the screen is asssembled with
-1 default View (see: views/). Add navigation to other views
+1 default View|Activity (see: views/). Add navigation to other views
 using links with namespace to the view:
 
 <a href=#display.views.Home">Home Page</a>
@@ -22,13 +22,13 @@ using links with namespace to the view:
 <a href=#display.views.Contact">Contact Us</a>
 
 
-A screen that will utilize Views must have a <slot>
-with name="content" and as default View to show:
+A screen that will utilize Views (An Activity) must have a <slot>
+with name="view-port" and as the view-port where Views are shown/hidden.
 
-<slot name="content">
-    <home-page></home-page>
+<slot name="view-port">
+    <home-page></home-page> <!--show a default view on load -->
 </slot>
 
 
-The default view must be imported, see SpaDemo/index.js:
+The default view must be imported from the screen that needs the view, see SpaDemo/index.js:
 import 'display.views.Home';

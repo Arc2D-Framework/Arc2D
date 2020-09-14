@@ -1,0 +1,66 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">JavaScript Classes</h1>
+        <p>
+          Arc follows an ES6/7 class-oriented structure for writing blocks
+          of code. If the system you're building is a game, you'll have classes such
+          as Weapon, Character, Enemy, Menu, Options, Bullet and so on. Each of these
+          being a single class in a single .js file.
+        </p>
+        <p>
+          Explore the Getting Started topic, <strong><a href="#docs.topics.IntroductionToClasses">A terse guide to classes for examples</a></strong>. It's also worth reviewing the chapter on <a href="#docs.topics.ComponentNamespaces">Component Namespaces</a> and <a href="#docs.topics.GenerateComponents">Building a Toggle Button</a> for a deep dive into the relationship between Component classes and file-folder structure.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            Weapon.js
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+class Weapon {
+  
+}
+        </code></pre>
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            A Sword is also a Weapon using the <code style="display:inline;color:#fcc28c;">extends</code> keyword. Be sure to
+            import Weapon.js before extending.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import "src/Weapon.js";
+
+class Sword extends Weapon {
+  
+}
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Where to store Class files</h1>
+        <p>
+          The examples on the right are simple classes, not in any namespace. They
+          belong at the src/ root.
+        </p>
+        <project-explorer shadow="true"></project-explorer>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+  </div>
+</template>

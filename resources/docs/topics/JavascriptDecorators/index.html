@@ -1,0 +1,208 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">JavaScript Decorators</h1>
+        <p>
+          ES7 decorators are not fully supported by browsers, but you
+          may use it now in Arc with limits. Decorators work like annotation attributes available in C# and Java.
+          With it, you can apply additional meta-data to classes and functions at runtime.
+        </p>
+        <p>
+          Decorators enhance, describes and/or alter the behavior of classes or functions non-obtrusively:
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Arc's built-in Decorators</h1>
+        <p>
+          Arc ships with a simple set of decorators, add/remove them and
+          your code still works. With them, your classes are enhanced in
+          some way.
+        </p>
+        <p>
+          <table>
+            <thead>
+            <tr>
+              <th>Decorator</th>
+              <th>Type/Arguments</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@cascade()</code></td>
+              <td><b>Class Level</b><br/>true | false</td>
+              <td>Enables stylesheet inheritance, ancestor component styling cascades down to your custom component</td>
+            </tr>
+            <tr>
+              <td><code>@tag()</code></td>
+              <td><b>Class Level</b><br/>w3c tag-name (string)</td>
+              <td>Create an HTML5 tag-name for a WebComponent class that can be used in html pages. By default a tag-name with a w3c required - (dash) is generated from the ClassName. <em>For example, a tag-name of hello-world is generated from a class name of HelloWorld.</em></td>
+            </tr>
+            <tr>
+              <td id="stylesheets"><code>@stylesheets()</code></td>
+              <td><b>Class Level</b><br/>Array of css filepaths</td>
+              <td>An array of css file paths that are loaded in order. Respects the @cascade (and override) order of ancestors that are cascading. Powerful style inheritance.</td>
+            </tr>
+            <tr id="traits">
+              <td><code>@traits()</code></td>
+              <td><b>Class Level</b><br/>An array of Objects</td>
+              <td>
+              The methods and attributes in each object is spliced into the prototype chain of the Class.</td>
+            </tr>
+            <tr>
+              <td><code>@public</code></td>
+              <td><b>Member Level</b><br/>@public myVariable = "123"</td>
+              <td>Creates a publicly shared property on the prototype chain of Class. Hundreds and thousnds of instances can share a single property reference.</td>
+            </tr>
+            <tr>
+              <td><code>@static</code></td>
+              <td><b>Member Level</b><br/>@static myVariable = "123"</td>
+              <td>Creates a public, statically shared class-level property</td>
+            </tr>
+            <tr>
+              <td><code>@private</code></td>
+              <td><b>Member Level</b><br/></td>
+              <td>[NOT IMPLEMENTED]</td>
+            </tr>
+          </tbody>
+        </table>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang">
+          <blockquote class="javascript" style="display:block;width: 100%;">
+            @cascade() usage:
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+  @cascade(true);
+  class Particle extends Sprite {
+
+  }
+)
+        </code></pre>
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            @tag() usage creates a <em style="color:black;">&#x3C;fire-effect&#x3E;</em> tag. By default,
+            if the tag() decorator is not used, a <em style="color:black;">&#x3C;fire-ball&#x3E;</em> tag
+            is generated from the "ClassName" (CamelCasing) with dashes added. This is recommended.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+  @tag("fire-effect");
+  class FireBall extends Particle {
+
+  }
+)
+        </code></pre>
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            @stylesheets() used to import a list of css file paths (JIT) at component level. Paths
+            that contain the prefix, <em style="color:black;">"/src/./"</em> will be loaded from the components local folder. This
+            allows packaging a component with all it's assets in 1 folder.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+  @stylesheets(['/src/./fireball.css']);
+  class FireBall extends Particle {
+
+  }
+)
+        </code></pre>
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            @stylesheets() can also point to any relative/absolute paths.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+namespace \`core.ui\` (
+  @stylesheets(['/resources/css/shared.css', '/src/./fireball.css']);
+  class FireBall extends Particle {
+
+  }
+)
+        </code></pre>
+
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            @traits() usage. Assuming we have a simple Module/Object with
+            methods such as log() and debug(), these can be added to the class
+            prototype. Also called mixins.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import 'utilities.Logger';
+
+namespace \`core.ui\` (
+  @traits([utilities.Logger]);
+  class FireBall extends Particle {
+    constructor(){
+      this.log("testing 123"); //Utilities.Logger.log() runs in scope
+    }
+  }
+)
+        </code></pre>
+
+
+        <blockquote class="javascript" style="display:block;width: 100%;">
+            @public() usage. Creates a publicly shared property on the prototype chain of Class. Hundreds and thousnds of instances can share a single property reference.
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+import 'core.ui.StateMachine';
+
+namespace \`core.ui\` (
+  class FireBall extends Particle {
+    @public stateMachine = new core.ui.StateMachine;
+    constructor(){
+      //use stateMachine
+    }
+  }
+)
+
+var fireball1 = new core.ui.Fireball;
+var fireball2 = new core.ui.Fireball;
+//...
+var fireball100 = new core.ui.Fireball;
+
+fireball1.stateMachine == fireball100.stateMachine
+//all instances share the same stateMachine property
+        </code></pre>
+
+
+
+
+      <blockquote class="javascript" style="display:block;width: 100%;">
+            @static() usage. Like @public, but creates a public static property/method on the Class. 
+          </blockquote>
+          <pre class="highlight javascript" style="display:block;width: 100%;"><code>
+
+namespace \`core.ui\` (
+  class FireBall extends Particle {
+    @static someProp = {name: "123"};
+  }
+)
+
+console.log(core.ui.Fireball.someProp)
+        </code></pre>
+        </div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+  </div>
+</template>

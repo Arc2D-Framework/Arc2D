@@ -1,0 +1,31 @@
+GIT SUB TREES:
+
+* The newly introduced dependency (the "sub-project" e.g. custom control or such) is also being actively developed, and I will want the option to pull in any changes as that library evolves.
+* I may, in the course of working on my "main" project, make some modifications to the sub-project, some or all of which I decide should be incorporated into the main line of development of the shared library.
+
+
+
+
+git remote add framework https://github.com/Nashorn/framework.git
+git subtree add --prefix=framework/ --squash framework 1.0.0
+git subtree pull --prefix=framework/ --squash framework 1.0.0
+git merge -s ours --no-commit --allow-unrelated-histories framework/1.0.0
+
+
+git subtree push --prefix=framework/ https://github.com/Nashorn/framework.git 1.0.0
+
+
+
+
+
+git fetch --all
+git reset --hard origin/3.2.0
+
+
+
+
+git fetch https://github.com/Nashorn/framework.git 1.0.0
+git subtree pull --prefix=app/framework/ https://github.com/Nashorn/framework.git 1.0.0 --squash
+git read-tree --prefix=app/framework/ -u framework/1.0.0
+
+

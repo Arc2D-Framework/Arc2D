@@ -1,0 +1,50 @@
+.LanguageSelector nav {
+	height: 70px;
+}
+.LanguageSelector a {
+	position:relative;
+}
+
+.LanguageSelector .snippet-count {
+	position: absolute;
+	right: 19px;
+	top: 17px;
+	font-size: 10px;
+	background:red;
+	display: block;
+	height: 18px;
+	width: 18px;
+	line-height: 19px;
+	text-align: center;
+	border-radius: 50px;
+}
+
+.LanguageSelector #console_panel{
+	background: black;overflow: scroll;padding: 40px;box-sizing: border-box;position: absolute;bottom: 0;top: 70px;width: 100%;color:white;
+	display:none;
+	z-index: 100;
+}
+.LanguageSelector #console_panel.visible{
+	display:block;
+}
+
+.LanguageSelector .snippet-count.hidden{
+	display:none;
+}
+
+
+.LanguageSelector [data-language-name='shell'] .snippet-count {
+	background:blue;
+}
+
+.LanguageSelector [data-language-name='html'] .snippet-count {
+	background:burlywood;
+}
+
+.LanguageSelector [data-language-name='javascript'] .snippet-count {
+	background:red;
+}
+
+.LanguageSelector [data-language-name='css'] .snippet-count {
+	background:#a18dcc;
+}

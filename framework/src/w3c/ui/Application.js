@@ -16,7 +16,8 @@ namespace `w3c.ui` (
         }
 
         async onEnableRouting(){ 
-            return false;
+            this._view_slot=this.querySelector('slot[name="view-port"]')||this.querySelector('div[name="view-port"]');
+            return this._view_slot;
         }
 
         onExitActivitySaveScroll(){
@@ -54,9 +55,10 @@ namespace `w3c.ui` (
         }
 
         onFindActivitySlot(){
-            var slot = this._activitySlot||this.querySelector('slot[name="content"]')||this.querySelector('div[name="content"]');
+            var slot = this._activitySlot||this._view_slot;
             if(!slot) {
-                console.warn(`${this.namespace}#onFindActivitySlot() - unable to find a <slot|div name='content'></slot|div> for loading views. Using <body> as fallback.`)
+                slot=document.body;
+                console.warn(`${this.namespace}#onFindActivitySlot() - unable to find a <slot|div name='view-port'></slot|div> for loading views. Using <body> as fallback.`)
             }
             this._activitySlot = slot;
             return slot||this

@@ -1,0 +1,152 @@
+{
+    "path": "",
+    "name": "MyProject",
+    "children": [
+    {
+        "path": "",
+        "name": "resources",
+        "children": [
+            {
+                "path": "",
+                "name": "repositories.js",
+                "size": 353,
+                "extension": "js",
+                "type": "file"
+            },
+            {
+                "path": "",
+                "name": "css",
+                "size": 353,
+                "extension": "",
+                "type": "directory"
+            },
+            {
+                "path": "",
+                "name": "fonts",
+                "size": 353,
+                "extension": "",
+                "type": "directory"
+            },
+            {
+                "path": "",
+                "name": "images",
+                "size": 353,
+                "extension": "",
+                "type": "directory"
+            }
+        ],
+        "size": 353,
+        "type": "directory"
+    }, 
+    {
+        "path": "",
+        "name": "src",
+        "children": [{
+            "path": "",
+            "name": "display",
+            "children": [
+            {
+                "path": "",
+                "name": "components",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "screens",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "views",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "worlds",
+                "type": "directory",
+                "children": []
+            }],
+            "size": 3185460,
+            "type": "directory"
+        },
+        {
+            "path": "",
+            "name": "domain",
+            "children": [
+            {
+                "path": "",
+                "name": "collections",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "entities",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "models",
+                "type": "directory",
+                "children": []
+            }],
+            "size": 3185460,
+            "type": "directory"
+        },
+        {
+            "path": "",
+            "name": "system",
+            "children": [
+            {
+                "path": "",
+                "name": "diagnostics",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "drivers",
+                "type": "directory",
+                "children": []
+            },
+            {
+                "path": "",
+                "name": "game",
+                "type": "directory",
+                "children": []
+            }],
+            "size": 3185460,
+            "type": "directory"
+        }],
+        "size": 3228959,
+        "type": "directory"
+    },
+    {
+        "path": "",
+        "name": "hello-world.html",
+        "size": 353,
+        "extension": "html",
+        "type": "file"
+    },
+    {
+        "path": "",
+        "name": "about.html",
+        "size": 353,
+        "extension": "html",
+        "type": "file"
+    },
+    {
+        "path": "",
+        "name": "index.html",
+        "size": 353,
+        "extension": "html",
+        "type": "file"
+    }],
+    "size": 3229312,
+    "type": "directory",
+    "expanded": true
+}

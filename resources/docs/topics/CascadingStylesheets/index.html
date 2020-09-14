@@ -1,0 +1,215 @@
+<template>
+  <div>
+
+    
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Common Styling Problems</h1>
+        <p>
+          Arc intuitively resolves cascade-styling at the WebComponent level <strong>NOT</strong> only at the .css file level that you are familar with when using the &lt;link&gt; tag. WebComponents in Arc inherit base-class styling organically through our own <a href="#docs.topics.JavascriptDecorators/traits">@cascade</a> algorithm. With this propritary architecture pioneered by the Arc team, specificity and stylesheet load-order, amongst the more prevalent concerns, are determined intrinsically by WebComponents themselves, not by your manually intervention. 
+        </p>
+        <p>
+          Arc's intuitive stylesheet engine (Automota) solves each of the problems below without your intervention at all:
+          <ul>
+            <li>Specificity Rule Strength</li>
+            <li><code>!important</code> override hacks</li>
+            <li>StyleSheet Loading Order (&lt;head&gt; tag)</li>
+            <li>BEM-style prefixes and naming conventions</li>
+            <li>Skinning</li>
+          </ul>
+        </p>
+        <p>
+          Let's discuss each briefly
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Common Problem #1: Specificity Rule Strength</h1>
+        <p>
+          Smashing Magazine has a <a href="https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/" target="new">great article explaining the css specificity</a> problem worth reading.
+          To summarize.
+          <ul>
+            <li>Specificity will determine which CSS rule is applied by the browser</li>
+            <li>Some CSS rules don’t apply to some elements, although you expected it to</li>
+            <li>If two css rules apply to the same element, the one with higher specificity wins.</li>
+            <li>The highest specificity is based on which style sheet is loaded last</li>
+            <li>
+               Highest specificity is further determined by the following 
+              rules from highest to lowest strength:
+              <ul>
+                <li><code>!important;</code> statement (Highest specificity)</li>
+                <li>inline styles</li>
+                <li>IDs</li>
+                <li>classes</li>
+                <li>attributes</li>
+                <li>tag-names</li>
+              </ul>
+            </li>
+            <li>Highest specificity is further determined by the length of the rule when chained with combinations of the above strength levels</li>
+          </ul> 
+        </p>
+        <p>
+          It's not an issue until you begin working in a team environment or a rather complext application with many modular parts and complex css files. Specificity is so important and sometimes difficult to understand all at once that
+          frameworks such as bootstrap or methodologies like CSS B.E.M. (naming conventions) were introduced to solve the problem in unique ways but generally introduce an overhead, knowledge training, poor css code quality, readability and maintenance problems.
+        </p>
+        <h3>Arc Engine Solution:</h3>
+        <p>
+          What if you didn't ever have to worry about any of the specifity issues outlined? The Arc Engine automatically resolves specificity strength intuitively without having to consider it, simply by relying on prefixing your component rules with the <code>:host</code> context. For example:
+          <pre class="inline css lang">
+                <code>
+:host div.button {
+  border:1px solid red;
+}
+                </code>
+            </pre>
+        </p>
+        <p>
+          Using the CSS 3.0<code>:host</code> context to prefix all component style rules will not only resolve specificity issues, but pave the way for Cascading (Skinnable) components for free without having to
+          think about inventing a "framework" or methodology to handle a skinnable architecture. Nor will
+          your css code quality be compromised by akward ideas such as B.E.M. naming conventions.
+        </p>
+        <p>
+          <em>In short, all of the issues outlined above are resolved in Arc using the :host context</em>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Common Problem #2: <code style="font-size: 21px !important;">!important</code> flag</h1>
+        <p>
+          When you decide to bite the bullet, there is the !important flag. We generally resort
+          to this quick fix when we have no idea why our rules are not being applied or know why
+          but need to externally style a component from the outside, generally.
+        </p>
+        <h3>Arc Engine Solution:</h3>
+        <p>
+          If the <code>:host</code> context is properly used, you will not need this flag.
+          Probably the only time you'll need it, is if an external css framework (like bootstrap)
+          is conflicting with your components host rules and overriding them.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Common Problem #3: StyleSheet Loading Order</h1>
+        <p>
+          The issue with load order is more prevalent in mega-software or team
+          environments, again. Developers would follow practice, categorizing css into cohesive
+          .css files for organization and modularity, but must then be cherry-picked per screen and loaded in the &lt;head&gt; tag in precise order! Otherwise your styling and specificity strengths are not
+          applied correctly. It's also a management and overhead nightmare with solutions such as introducing webpack and other "build" systems. Why complicate it? Simplicity is beauty.
+        </p>
+        <h3>Arc Engine Solution:</h3>
+        <p>
+          A non issue. Load order is resolved and applied in the precise order for you, atomatically, all the time.
+          There's nothing you'd have to implement. It works intuitively right out-the-box. There's nothing to think
+          about, in fact, it is completely transparent to the developer.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Common Problem #4: B.E.M. prefixed naming conventions</h1>
+        <p>
+          B.E.M is a methodology, a pattern for solving the specificity and 
+          and structuring issues by writing css based on the XHTML schema semantics in a more objective style of thinking. In other words, css rules that
+          target Blocks, Elements and Modifiers. The complete opposite from writing supple, domain-driven css. 
+        </p>
+        <h3>Arc Engine Solution:</h3>
+        <p>
+          You'd never need a 3rd party build tool, special css, methodology or framework for writing css.
+          You simply write native W3C-compliant CSS syntax and Arc's asset manager puts it work, correctly, intuitively. Theres nothing to implement, run or build seperately.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Common Problem #5: Skinning</h1>
+        <p>
+          Inventing a Skinnable architecture is tricky, and is a grey area. There is not a simple
+          way to implement a user Interface that allows switching to something as simple as night-mode
+          or more complex skins involving not only styling, but layout changes to accomodate unique
+          skins.
+        </p>
+        <h3>Arc Engine Solution:</h3>
+        <p>
+          Arc allows custom skins and layouts to be specified via configuration, otherwise the default
+          is used (index.css files at the component level). In the Skinning chapter, we'll look at how
+          a simple night-mode skin can be created and swapped.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Unprecedented Architecture</h1>
+        <p>
+          Arcs Automota engine is truely unique, unprecedented, there are no frameworks
+          in the market that have achieved this level of intelligent design and problem solving with CSS. Automota is our own hand-crafted engine and over a decade old, designed exclusively to supplement and adhere to the W3C Standards body.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+    
+  </div>
+</template>

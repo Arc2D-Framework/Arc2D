@@ -1,0 +1,26 @@
+.ReadingProgress {
+	display:block;
+    display: block;
+    z-index: 10000;
+    position: fixed;
+}
+
+
+
+/* progress bar container */
+.ReadingProgress .progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+/* progress bar */
+.ReadingProgress .progress-bar-container__progress {
+  height: 4px;
+  background-color: #a2fca2;
+  width: 0%;
+  float: left;
+  transform:translate3d(0px,0px,0px);
+}

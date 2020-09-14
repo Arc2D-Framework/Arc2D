@@ -1,0 +1,23 @@
+<template>
+    <h3>Nunjucks -- Family Health Care: {{coverage.type}}</h3>
+    <div>Married: {% if spouse %} "Yes" {% else %} "No" {% endif %}</div>
+    <div>Children: {% if children.length>0 %} {{children.length}} {% else %} None {% endif %}</div>
+    <table>
+        <thead style="background: gray;">
+            <th>Child Name</th>
+            <th>Age</th>
+        </thead>
+        <tbody>
+            {% for child in children %}
+              <tr> 
+                <td>{{child.name}}</td>
+                <td>{{child.age}}</td>
+              </tr>
+            {% else %}
+              <tr> 
+                <td colspan="2">No Children</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</template>

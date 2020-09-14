@@ -9,7 +9,5 @@ namespace `display.screens` (
         async onConnected() {
             await super.onConnected();
         }
-
-        onEnableRouting(){ return true }
     }
 );
