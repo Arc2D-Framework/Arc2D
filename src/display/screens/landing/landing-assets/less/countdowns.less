@@ -1,0 +1,65 @@
+/* ----------------------------------------------------------------------------
+    Countdowns
+---------------------------------------------------------------------------- */
+
+.countdown .counter {
+    position: relative;
+
+    &:after {
+        &:extend(.base-clr-txt);
+
+        position: absolute;
+        right: -19px;
+        top: 109px;
+        content: '\2022';
+    }
+
+    .stat-info {
+        &:extend(.base-clr-txt);
+
+        font-size: @font-size-small;
+        font-weight: @bold-weight;
+        text-transform: uppercase;
+    }
+
+    .stat {
+        &:extend(.base-clr-txt);
+
+        font-size: 100px;
+        font-weight: @thin-weight;
+        line-height: 1;
+    }
+
+    hr {
+        margin-bottom: 10px;
+        width: 90%;
+        border-top: 1px solid @gray-lighter;
+    }
+}
+
+.countdown div[class*="col-"]:last-child > .counter:after {
+    display: none;
+}
+
+
+
+@media (max-width: @screen-xs-middle) {
+    .countdown .counter {
+        &:after {
+            top: 49px;
+        }
+
+        .stat {
+            font-size: 40px;
+            line-height: 1;
+        }
+
+        .stat-info {
+            font-size: @font-size-thin;
+        }
+
+        .counter:after {
+            top: 45px;
+        }
+    }
+}
