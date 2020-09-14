@@ -6,6 +6,7 @@
     "author": "jaysmith024 <jaysmith024@gmail.com>",
     "license": "MIT",
     "scripts": {
+        "start": "node node_modules/od-server/main.js 3000",
         "seam": "node --inspect node_modules/od-seam/index.js",
         "plop": "plop"
     },
