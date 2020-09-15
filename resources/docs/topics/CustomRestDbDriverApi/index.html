@@ -44,7 +44,7 @@
         <p>
           The constructor takes 2 params:
           <ul>
-            <li>collection, ex: <code>core.data.Movies</code> Repository</li>
+            <li>collection, ex: <code>domain.collections.Movies</code> Repository</li>
             <li>storage_device as <code>IStorageInterface</code></li>
           </ul>
           You're required to pass these params up to the <code>super</code> class. Next,
@@ -210,7 +210,7 @@ find(cb, query) {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Updatating the Movies Collection to use RestDB driver</h1>
         <p>
-          Hop back to the <code>core.data.Movies</code> repository class we created 
+          Hop back to the <code>domain.collections.Movies</code> repository class we created 
           eariler and modify the driver to use the RestDB. We're not doing any seeding, so
           i've eliminated tthose lines for clarity. RestDB is not a WebComponent but a
           .js class located at: src/core/drivers/storage/RestDB.js, so the <code>import!</code>
@@ -264,7 +264,7 @@ namespace \`core.data\` (
           <pre class="inline javascript lang">
             <code class="hljs">
 (async()=>{
-  var res = await core.data.Movies.find();//finds all as array
+  var res = await domain.collections.Movies.find();//finds all as array
 })()
 
             </code>
@@ -276,7 +276,7 @@ namespace \`core.data\` (
             <code class="hljs">
 (async()=>{
   //should find 1 movie with this title
-  var res = await core.data.Movies.find({
+  var res = await domain.collections.Movies.find({
     query : {title: "Airplane"}
   });
 })()
@@ -306,14 +306,14 @@ namespace \`core.data\` (
         <p>
           <pre class="inline javascript lang">
             <code class="hljs">
-var res = await core.data.Movies.find({
+var res = await domain.collections.Movies.find({
   query : {title: "Airplane"}
 });
             </code>
           </pre>
         </p>
         <p>
-          Butt RestDB looks for a <code>q=</code> querystring param. Not a <code>query</code>
+          But RestDB looks for a <code>q=</code> querystring param. Not a <code>query</code>
           paramater. We'll have to transform the input query in the driver to prepare it
           for the RESTFul format that RestDB knows about.
         </p>
@@ -383,7 +383,7 @@ https://testing-a837.restdb.io/rest/movies?q=%7B%7D&skip=0&max=2
           When called with a query such as:
           <pre class="inline javascript lang">
             <code class="hljs">
-await core.data.Movies.find({
+await domain.collections.Movies.find({
     query : {},
     skip:0,
     take:2
@@ -516,7 +516,7 @@ find(cb, query) {
           <pre class="inline javascript lang">
             <code class="hljs">
 (async()=>{
-  var cursor = await core.data.Movies.find({
+  var cursor = await domain.collections.Movies.find({
       query : {},
       skip:0,
       take:2
@@ -547,5 +547,26 @@ find(cb, query) {
         <div class="css lang"></div>
       </div>
     </div>
+
+
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Cursors In Depth</h1>
+        <p>
+          For details on how to use a cursor, check out the topic, Domain > <a href="#docs.topics.DataCursors">Cursors</a>.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
+
+
   </div>
 </template>

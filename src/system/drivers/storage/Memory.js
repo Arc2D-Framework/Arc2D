@@ -3,7 +3,7 @@ import '/resources/repositories.js';
 window.Query = (await require('/framework/src/libs/query.js')).default;
 
 namespace `system.drivers.storage` (
-    class Memory extends core.drivers.storage.IStorageInterface {
+    class Memory extends system.drivers.storage.IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
             Session.State.db = Session.State.db||{};
