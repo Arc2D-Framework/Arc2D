@@ -1,4 +1,5 @@
 import '/src/core/ui/game/KenSprite/index.js';
+import '/src/core/extensions/Key.js';
 
 namespace `applications` (
     @stylesheets(["src/./index.css"]);

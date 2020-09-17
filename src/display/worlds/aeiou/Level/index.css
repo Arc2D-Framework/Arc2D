@@ -1,0 +1,37 @@
+:host {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    border: 2px solid red;
+}
+
+:host .btn{
+    margin: 25px;
+    display: inline-block;
+    height: 175px;
+    width: 175px;
+    border: 10px solid black;
+    border-radius: 20%;
+}
+
+:host h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3rem;
+    margin: 5% 5% 3%;
+
+}
+
+:host .btn h1 {
+    position: relative;
+    padding: 0;
+    margin-left: auto;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    margin-right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}

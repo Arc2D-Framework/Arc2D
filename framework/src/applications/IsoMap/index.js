@@ -2,10 +2,20 @@ import! 'core.ui.game.Point';
 import! 'core.ui.game.Tileset';
 
 namespace `applications` (
-    class IsoMap extends w3c.ui.Application {
+    class IsoMap extends Application {
         constructor(element){
             super(element);
             this.addEventListener("click", e => this.onTileClicked(e), false, ".tile");
+        }
+
+        async onConnected() {
+            await super.onConnected();
+            var response = await fetch('resources/maps/ShiningWars2.json');
+            this.map = await response.json();
+
+            this.tileset = new core.ui.game.Tileset(this.map);
+            await this.tileset.load();
+            this.renderMap()
         }
 
         onTileClicked(e){
@@ -50,37 +60,25 @@ namespace `applications` (
             console.log("MAP COORDS", map, [x,y])
         }
 
-
-        async onConnected() {
-            // super.onConnected();
-            await this.render();
-            var response = await fetch('resources/maps/ShiningWars2.json');
-            this.map = await response.json();
-
-            this.tileset = new core.ui.game.Tileset(this.map);
-            await this.tileset.load();
-            this.renderMap()
-        }
-
         getTile (layer, col, row) {
             return this.map.layers[layer].data[row * this.map.height + col];
         }
 
 
         placeTile2(tilepos,pt, map_col, map_row, layer){
-                var tile = document.createElement("div");
-                    tile.classList.add("tile");
-                    var xpos = (pt.x) + "px";
-                    var ypos = (pt.y) + "px";
-                    tile.setAttribute("tile-type",JSON.stringify(tilepos));
-                    tile.setAttribute("tile-col",map_col);
-                    tile.setAttribute("tile-row",map_row);
-                    tile.style.left = xpos;
-                    tile.style.top = ypos;
-                    tile.setAttribute("cart-x",xpos);
-                    tile.setAttribute("cart-y",ypos);
-                    tile.style["background-position"] = `-${tilepos.x}px -${tilepos.y}px`;
-                    layer.appendChild(tile)
+            var xpos = (pt.x) + "px";
+            var ypos = (pt.y) + "px";
+            var tile = document.createElement("div");
+                tile.classList.add("tile");
+                tile.setAttribute("tile-type",JSON.stringify(tilepos));
+                tile.setAttribute("tile-col",map_col);
+                tile.setAttribute("tile-row",map_row);
+                tile.style.left = xpos;
+                tile.style.top = ypos;
+                tile.setAttribute("cart-x",xpos);
+                tile.setAttribute("cart-y",ypos);
+                tile.style["background-position"] = `-${tilepos.x}px -${tilepos.y}px`;
+                layer.appendChild(tile)
         }
 
 
@@ -123,7 +121,5 @@ namespace `applications` (
                 this.appendChild(d)
             }
         }
-    }
-
-    
+    }   
 );

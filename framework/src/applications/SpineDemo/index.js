@@ -1,25 +1,10 @@
+import '/src/core/extensions/Key.js';
 
-import '/framework/src/core/lang/Thread.js';
 
 namespace `applications` (
-    @stylesheets(["/src/./index.css"]);
     class SpineDemo extends core.ui.World {
         onConnected() {
             this.render();
-   //          var thread = new core.lang.Thread(function(e){
-   //          	console.log(e.data)
-   //          	postMessage('msg from worker:' + e.data);
-   //          });
-
-   //          thread.onmessage = function (event) {
-			//     console.log("worker",event.data);
-			// };
-   //          thread.postMessage("123");
-
-            // alert(this.render.toString())
-            // this.lastFrameTime = Date.now() / 1000;
-            // MainLoop.setBegin(this.render)
-            // window.addEventListener("resize", e=>this.resize(e),false);
             this.canvas = document.getElementById("canvas");
 			this.canvas.width = window.innerWidth;
 			this.canvas.height = window.innerHeight;
@@ -52,19 +37,6 @@ namespace `applications` (
 			// file for the atlas. We then wait until all resources are loaded in the load() method.
 			this.assetManager.loadBinary("resources/assets/spineboy-pro.skel");
 			this.assetManager.loadTextureAtlas("resources/assets/spineboy-pma.atlas");
-			// assetManager.loadBinary("assets/raptor-pro.skel");
-			// assetManager.loadTextureAtlas("assets/raptor-pma.atlas");
-			// assetManager.loadBinary("assets/tank-pro.skel");
-			// assetManager.loadTextureAtlas("assets/tank-pma.atlas");
-			// assetManager.loadBinary("assets/goblins-pro.skel");
-			// assetManager.loadTextureAtlas("assets/goblins-pma.atlas");
-			// assetManager.loadBinary("assets/vine-pro.skel");
-			// assetManager.loadTextureAtlas("assets/vine-pma.atlas");
-			// assetManager.loadBinary("assets/stretchyman-pro.skel");
-			// assetManager.loadTextureAtlas("assets/stretchyman-pma.atlas");
-			// assetManager.loadBinary("assets/coin-pro.skel");
-			// assetManager.loadTextureAtlas("assets/coin-pma.atlas");
-			//requestAnimationFrame(load);
 			this.load();
         }
 

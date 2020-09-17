@@ -1,0 +1,95 @@
+import! 'display.worlds.aeiou.Challenge';
+import 'display.worlds.aeiou.GameOver';
+import! 'display.worlds.aeiou.DamageMeter';
+
+namespace `display.worlds.aeiou` (
+    @tag("level-one");
+    class Level extends WebComponent {
+        constructor(world, machine) {
+            super();
+            this.machine = machine;
+            this.actions = new display.worlds.aeiou.Machine;
+            this.world=world;
+            this.music = new Audio("/src/resources/tunes/sawsquarenoise_-_02_-_Towel_Defence_Comic.mp3");
+            this.music.loop=true;
+            this.music.load();
+            this.onReset();
+        }
+
+        onReset(){
+            this.isFinished = false;
+            this.isStarted=false;
+        }
+
+        async onConnected() {
+            await super.onConnected();
+            this.onGameOver = this.onGameOver.bind(this);
+            this.world.addEventListener("gameover", this.onGameOver, false);
+            this.canvas = this.querySelector("#canvas");
+            this.addEventListener("click", e => this.onPauseMenu(), false, "#pause");
+            this.addEventListener("click", e => this.onScored(e), false, "#inc-score");
+            this.addEventListener("challengedone", e => this.onChallengeDone(e));
+            this.addEventListener("failed", e => this.onFailedChallenge(e));
+            
+            this.actions.push(new display.worlds.aeiou.Challenge(this.world, this, this.machine));
+            this.actions.push(new display.worlds.aeiou.ScoreKeeper(this.world, this.machine));
+            this.actions.push(new display.worlds.aeiou.DamageMeter(this.world, this.machine));
+        }
+
+        onGameOver(){
+            this.isFinished=true
+        }
+
+        onFailedChallenge(){
+            //TODO: Could be used to decrement lives as a feature (?)
+        }
+
+        onChallengeDone(){
+            var doit = !this.isFinished && confirm("Try the next Challenge?")
+                doit && this.actions.push(new display.worlds.aeiou.Challenge(this.world, this, this.machine));
+        }
+
+        onPauseMenu(){
+            this.machine.push(new display.worlds.aeiou.Menu(this.world, this.machine));
+        }
+
+        onScored(e){
+            !this.paused && this.dispatchEvent("score", {amount:42});
+        }
+
+        append(vowel){
+            this.canvas.appendChild(vowel)
+        }
+        
+        onPause() {
+            this.paused=true;  
+            this.music.pause();
+        }
+
+        onResume(){
+            this.paused=false; 
+            this.world.settings.music && this.music.play();
+        }
+
+        //----------------MACHINE
+        onStart() {
+            this.world.settings.music && this.music.play();
+            this.world.appendChild(this);
+            this.isStarted=true;   
+            console.log(this.namespace + " Started")
+        }
+
+        onEnd(){
+            this.remove();
+            this.world.removeEventListener("gameover", this.onGameOver, false);
+            console.warn(this.namespace + " Ended");
+            this.onReset();
+            this.music.pause();
+            this.machine.push(new display.worlds.aeiou.GameOver(this.world, this.machine));
+        }
+
+        onUpdate(time){
+            this.actions.onUpdate();
+        }
+    }
+);
