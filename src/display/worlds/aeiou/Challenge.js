@@ -44,7 +44,6 @@ namespace `display.worlds.aeiou` (
             //TODO: Randomize NPC pattern
             this.npc_pattern.push("a");
             this.npc_pattern.push("i");
-            // this.npc_pattern.push("u");
         }
 
 
