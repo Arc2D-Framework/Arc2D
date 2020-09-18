@@ -10,7 +10,6 @@ namespace `w3c.ui` (
         async onConnected(data){
             await super.onConnected(data);
             if(this.onEnableRouting()){
-                // await equire('/src/core/http/Router.js');
                 this.router = new core.http.Router(this,window);
             }
         }
@@ -76,7 +75,6 @@ namespace `w3c.ui` (
         }
 
         onLoadingActivity(c){
-            // application.dispatchEvent("showsplash")
             console.log("onLoadingActivity", c);
         }
 	}

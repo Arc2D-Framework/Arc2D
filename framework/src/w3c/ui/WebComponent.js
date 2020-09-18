@@ -20,20 +20,7 @@ namespace `w3c.ui` (
             return el && el.parentNode && el.parentNode.nodeType==1
         }
 
-        // static define(proto,bool){
-        //     var ce = window.customElements;
-        //     var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
-        //     if(/\-/.test(tag)){
-        //         if(ce.get(tag)){return}
-        //         proto["ns-tagname"] = tag;
-        //         this.defineAncestors();
-        //         this.defineAncestralClassList();
-        //         try{ce && ce.define(tag, this);}
-        //         catch(e){console.error(e)}
-        //     }     
-        // }
         static define(proto,bool){
-            // debugger;
             var ce = window.customElements;
             var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
                 tag = /\-/.test(tag)?tag:proto["ns-trait-tagname"];
@@ -376,11 +363,11 @@ namespace `w3c.ui` (
             return relativeToAbsoluteFilePath(Config.SRC_PATH+"/./index.css",ns);
         }
 
-        // setClassList() {
-        //     this.className = this.className + (this["@cascade"]? 
-        //         " " + (this.__proto.classes.join(" ")).trim():
-        //         " " + this.classname);
-        // }
+        /*setClassList() {
+            this.root.className = this.root.className + (this["@cascade"]? 
+                " " + (this.__proto.classes.join(" ")).trim():
+                " " + this.root.classname);
+        }*/
         setClassList() {
             this.root.className = this.root.className + (this["@cascade"]? 
                 " " + (this.__proto.classes.join(" ")).trim():

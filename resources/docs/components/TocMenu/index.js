@@ -10,21 +10,30 @@ namespace `docs.components` (
             application.addEventListener("topichanged",e=> this.onTopicChanged(e),false);
             this.on("click", e => this.onToggleExpandable(e), false, "ol > li.expandable");
             this.on("click", e => this.onLinkClicked(e), false, "ol > li > a");
-            this.last_active = this.querySelector("ol > li.active");
-            var activeHref = this.querySelector(`a[href = "${location.hash}"]`);
-            if(activeHref){
-                this.collapse(this.last_active);
-                var li = this.getParentBySelectorUntil(activeHref, ".toc", "li.expandable");
-                this.expand(li);
+            this.last_chapter = this.querySelector("ol > li.active");
+            this.highlightTOConLoad();
+        }
 
-                activeHref.classList.add("active");
-                this.last_active_a=activeHref;
+        async highlightTOConLoad(){
+            var hash = location.hash;
+            if(hash&&hash.length){
+                var a = this.querySelector(`a[href = "${hash}"]`);
+                if(a){
+                    this.expand(a);
+                    var parent=a.parentNode;
+                    do {
+                        console.log(parent)
+                        if(parent.classList.contains("expandable")){this.expand(parent);}
+                        parent=parent.parentNode;
+                    } while(parent&&parent.nodeType==1 && !parent.classList.contains("toc"));
+
+                    await wait(500);
+                    a.scrollIntoView({behavior:"smooth",block:"start"})
+                }
             }
         }
 
         onTopicChanged(e){
-            // debugger;
-            
             var activeHref = this.querySelector(`a[href = "${location.hash}"]`);
             if(activeHref){
                 this.collapse(this.last_active);
@@ -37,15 +46,15 @@ namespace `docs.components` (
             }
         }
 
-
         onToggleExpandable(e){
-        	if(this.last_chapter && !this.isChildOf(this.last_chapter, e.target)){ 
-                this.collapse(this.last_chapter)
-        	}
-            if(this.last_active){
-                this.collapse(this.last_active);
-            }
-            this.expand(e.target);
+            var li = e.target;
+            this.collapseSiblings(li.parentNode)
+            this.expand(li);
+        }
+
+        collapseSiblings(ol){
+            var lis = Array.from(ol.querySelectorAll("li.active"));
+                lis.forEach(li => this.collapse(li))
         }
 
         isChildOf(parent, child) {
@@ -64,12 +73,6 @@ namespace `docs.components` (
         expand(li){
             li && li.classList.add("active")
             li && li.classList.add("expand");
-            if(li.classList.contains("chapter")){
-                this.last_chapter=li;
-            }
-            else{
-                this.last_active = li;
-            }
         }
 
         collapse(li){

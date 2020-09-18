@@ -3,13 +3,44 @@
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Welcome</h1>
+        <h1 id="api-reference">Preface</h1>
+        <h3>Brief History</h3>
         <p>
-          <em>Arc is in incubation as a private repo on github. <b>You'll need to be added as a collaborator</b> in order to fork/install. Reach out to jaysmith024@gmail.com for access.</em>
+          The Arc Engine is a native, W3C compliant ES6/7 framework for
+          building enterprise-class 2D/Applications. Over a decade
+          old, Arc began as a personal R&D project to reduce and reuse
+          repetetive UI patterns, cuttting time and costs as a consultant on 
+          projects dating back to 2007. It has since evolved slowly across 
+          prestegious companies to present used for primilarily for 
+          in-house internal applications. Arc is now going public.
+        </p>
+
+        <h3>Framework vs. API</h3>
+        <p>
+          To put it simply: A framework calls you, you do not call a framework.
+          Arc is a meta-prototype of a running, fully functional application
+          designed into the kernel from birth, meaning, the framework, serves
+          as an abstract application, able to run on it's own 
+          autonomously without supplying any additional code until you wish to override. If you're familar
+          with C++ or Java, the analogy can be likened to an Abstract Class,
+          a barebones class-template able to be used but does nothing much until you supply 
+          overrides via inheritance.
         </p>
         <p>
-          Arc is an SDK for building customized framework architectures and apps. You'll want to
-          start with <a href="#docs.topics.InstallFramework">installation</a> and then <a href="#docs.topics.HelloWorld">getting started.</a>
+          In similar fashion, your application will inherit the engine of Arc when
+          embedded, where you supply bare minimum overrides to achieve results or supply
+          nothing and nothing happens. The internal
+          workings and intricate hand-crafted details of inter-communication, collision, timing, physics, 
+          state and work-flow in Arc are the processes that make up it's running "engine". Only
+          parts of the Arc engine (framework) can be swapped or supplied by you with overrides 
+          that Arc depends on, allowing it to call your code, never you calling Arc's
+          code as you would with APIs.
+        </p>
+        <p>
+          The difference is clear. An API is a library of specialized, 
+          dedicated objects and methods around a finer domain. Multiple APIs
+          can be orchastrated to communicate in a process that yields
+          a framework eventually. 
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -19,6 +50,8 @@
         <div class="css lang"></div>
       </div>
     </div>
+
+
 
   </div>
 </template>
