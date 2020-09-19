@@ -24,11 +24,9 @@ Observer.prototype = {
             });  
     },
     
-    removeEventListener : function(eventName, callback){
-        var subscribers = this.subscribers[eventName]||[];
-            subscribers.remove(function(i) {
-                return i.name === eventName && i.func === callback;
-            });
+    removeEventListener : function(name, cb){
+        var subs = this.subscribers[name]||[];
+            subs.remove(i => i.name === name && i.func === cb);
     }
 };
 window.Observer=Observer;

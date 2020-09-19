@@ -165,7 +165,7 @@ namespace `tests` (
 
 
             this.expected("components to initialized using non-connected DOM node as innerHTML template source, ex: `new core.ui.SampleD(aDiv)`, where 'aDiv' is a node, not yet in the DOM -- i.e: doc.createElement();", async (resolve,reject) => {
-                await import('/src/core/ui/SampleD/index.js');
+                await import('/framework/src/core/ui/SampleD/index.js');
                 var el = `<div id="sample-d-html-123">Adoption: a custom tag will wrap a new non-connected DIV in the DOM</div>`.toDomElement();
                 var n = new core.ui.SampleD(el);
                 application.appendChild(n);
@@ -182,7 +182,7 @@ namespace `tests` (
 
 
             this.expected("components to be stealth initialized: using already connected DOM node as is: `new core.ui.SampleD(aDomDiv)`, where 'aDomDiv' is an existing node already in the DOM", async (resolve,reject) => {
-                await import('/src/core/ui/SampleD/index.js');
+                await import('/framework/src/core/ui/SampleD/index.js');
                 var el = `<div id="html-123">Camouflaged: Uses existing Dom-Connected Div as is, no wrapping or physical decoration apparent</div>`.toDomElement();
                 application.appendChild(el);
                 var el = application.querySelector("#html-123");
@@ -199,7 +199,7 @@ namespace `tests` (
 
 
             this.expected("stealth component querySelector() to find child nodes", async (resolve,reject) => {
-                await import('/src/core/ui/SampleD/index.js');
+                await import('/framework/src/core/ui/SampleD/index.js');
                 var el = `<div id="html-123-querySelector1"><div id="test-camo-qs">Camouflaged: QuerySelector test</div></div>`.toDomElement();
                 application.appendChild(el);
                 var el = document.querySelector("#html-123-querySelector1");
@@ -217,7 +217,7 @@ namespace `tests` (
 
 
             this.expected("stealth component querySelector() to find child nodes on sample DatePicker", async (resolve,reject) => {
-                await import('/src/docs/demos/DatePicker/index.js');
+                await import('/resources/docs/demos/DatePicker/index.js');
                 var el = `<div id="html-123-querySelector2"><input/></div>`.toDomElement();
                 application.appendChild(el);
                 await wait(50);
@@ -235,7 +235,7 @@ namespace `tests` (
             });
 
             this.expected("components to be initialized from index.html template", async (resolve,reject) => {
-                await import('/src/core/ui/SampleD/index.js');
+                await import('/framework/src/core/ui/SampleD/index.js');
 
                 var n = new core.ui.SampleD();
                 n.id="my-sample-d-from-template";
@@ -251,7 +251,7 @@ namespace `tests` (
 
 
             this.expected("components to be initialized from inline template()", async (resolve,reject) => {
-                await import('/src/core/ui/SampleD/index.js');
+                await import('/framework/src/core/ui/SampleD/index.js');
 
                 var n = new core.ui.SampleD();
                 n.template = function(){return `<template><div>Inline innerHTML Template</div></template>`}

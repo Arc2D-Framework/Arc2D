@@ -13,5 +13,28 @@ namespace `docs.demos` (
         onClick(e){
             console.log(e.target)
         }
+
+        onLoadInstanceStylesheet(){return false}
+
+        cssStyle(){
+            return `
+                :host {
+                    height:34px;
+                    width:140px;
+                    border:1px solid green;
+                    border-radius:3px;
+                }
+
+                :host input {
+                    width: 100%;
+                    height: 100%;
+                    padding:0px;
+                    margin:0px;
+                    border-radius:3px;
+
+                    font-size:14px;
+                }
+            `
+        }
 	}
 )
