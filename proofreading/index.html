@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Arc2D Proofreading
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="suggestions">
+      <h2>Suggestions & Observations</h2>
+      <ul>
+        <li>Add "reset to default" button incase I change code on the left and don't know what I'm doing, ex. Non-component Namespaces. (Refresh works. Good!)</li>
+        <li>Consider giving commands a gray background like in discord to better distinguish them from ordinary text.</li>
+        <li>some sections become illegible when the width is drastically reduced.</li>
+        <li>When clicking links to sections of the documentation, the navbar should be updated to reflect where the reader is. e.g. StyleSheet Lifecycle</li>
+        <li>Consider setting the target of all anchor tags to "_blank"</li>
+      </ul>
+    </div>
+    <div class="key">
+      <h2>Grammar Key</h2>
+      <table>
+        <thead>
+          <th>Annotation</th>
+          <th>Definition</th>
+        </thead>
+        <tr>
+          <td><em>line-through</em></td>
+          <td>Original text</td>
+        </tr>
+        <tr>
+          <td><span>green & underlined</span></td>
+          <td>My suggested edit</td>
+        </tr>
+        <tr>
+          <td>[<span>in brackets</span>]</td>
+          <td>replaces text that is not gramatically incorrect with a suggestion for improvement</td>
+        </tr>
+        <tr>
+          <td><span class="comment" title="This is a comment.">&#9072;</span></td>
+          <td>hover over this symbol for my comment.</td>
+        </tr>
+        <tr>
+          <td><span class="comma">,</span></td>
+          <td>A comma is necessary here.</td>
+        </tr>
+      </table>
+    </div>
+    <section>
+      <h2>Located in the <strong>home</strong> section</h2>
+      <ul>
+        <li>You'll want to start with installation and<span class="comma">,</span> then<span class="comma">,</span> getting started.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Located in the <strong>Installation/optional installs</strong> section</h2>
+      <h3>/Optional http-server</h3>
+      <ul>
+        <li>Arc ships with a built-in localhost <em>server. So</em> <span>server, so</span> this step is optional unless</li>
+      </ul>
+      <h3>/Optional plop</h3>
+      <ul>
+        <li>You may skip this topic if <em>you rather</em> <span>you'd rather</span> rather create files & folders manually.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Located in the <strong>usage</strong> section</h2>
+      <ul>
+        <li>Shown here is an html file, "hello-world.html", <em>residing</em> <span>which resides</span> at the root and boots up the sample HelloWorld app that we'll build in the chapter, Getting Started<span>.</span></li>
+        <li><em>Arc,</em> <span>Arc.</span> See: Server Boot-up.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Located in the <strong>Server Boot-up</strong> section</h2>
+      <h3>/Default Server</h3>
+      <ul>
+        <li>fire-up your default localhost server<span class="comma">,</span> and the setting can be found</li>
+        <li>only for testing and is extremely <em>lite-weight</em> <span>light-weight</span></li>
+      </ul>
+      <h3>/Using http-server</h3>
+      <ul>
+        <li>only for testing and is extremely <em>lite-weight</em> <span>light-weight</span></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Located in the <strong>Language and Syntax</strong> section</h2>
+      <h3>/Classes</h3>
+      <ul>
+        <li>Bullet and so <em>on. Each</em> <span>on, each</span> of these being a single class || Each of these <span>will be</span> a single class</li>
+        <li>Explore the Getting Started topic, <a href="http://127.0.0.1:3000/framework/doc.html#docs.topics.IntroductionToClasses">A Terse Guide to Classes</a> for examples</li>
+      </ul>
+      <h3>/Imports</h3>
+      <ul>
+        <li>we covered the basics of the import keyword, a static (hard-coded) mechanism for resolving <em>dependencies,</em> <span>dependencies and</span> a core feature of ES6 <em>and</em> <span>that</span> can be used in conjunction with destructuring.</li>
+        <li>A production ready build will load faster than the dev/debug equivalent<span>. Since none</span> <em>since non</em> of the static import calls are made over http,</li>
+        <li>works just like a static import</span> but logic and conditional statements can be used</li>
+        <li>left<span class="comma">,</span> as-is<span class="comma">,</span> in the compressed build and <em>work as you expected it,</em> <span>works as expected,</span></li>
+        <li>Alternatively, without <em>await,</em> <span>a wait,</span></li>
+        <li><em>Which</em><span>This</span> is a glimpse into interesting ways to use this dynamically within logic, importing "on-demand" dependencies right when they are needed.</li>
+        <li>upgrade and reinstall them<span class="comma">,</span> without having to rebuild your Arc project.</li>
+        <li>instant app updates all <em>remote</em> <span>done remotely</span></li>
+        <li>ES6 Destructured imports are also possible<span>.</span></li>
+      </ul>
+      <h3>Namespaces</h3>
+      <ul>
+        <li>Namespaces <em>were</em> <span>will be</span> covered in depth in the following chapters:</li>
+      </ul>
+      <h3>NSRegistry</h3>
+      <ul>
+        <li>Running console.log(NSRegistry) will show all fully-qualified namespaces <em>be</em> <span>being</span> used.</li>
+        <li>The left side of the table <em>are</em> <span>contains</span> the keys and the right side <em>are</em> <span>contains the</span> Classes in memory</li>
+        <li>getting a reference to a Class in <em>registrty</em> <span>registry</span> using the string representation</li>
+        <li>Compare the above NSRegistry access to the typical object-literal <em>equivelance:</em> <span>equivalent:</span></li>
+        <li>This is an <em>advance</em> <span>advanced</span> technique and you may not have to do this in simple applications.</li>
+      </ul>
+      <h3>Decorators</h3>
+      <ul>
+        <li>With <em>it,</em> <span>them,</span> you can apply additional meta-data to classes and functions at runtime.</li>
+        <li>Decorators enhance, <em>describes</em> <span>describe</span> and/or alter the behavior of classes or functions non-obtrusively:</li>
+        <li><em>Create</em> <span>Creates</span> an HTML5 tag-name</li>
+        <li>By default <span class="comma">,</span> a tag-name with a w3c required - (dash) is generated</li>
+        <li>The methods and attributes in each object <em>is</em> <span>are</span> spliced</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Located in the <strong>Getting Started</strong> section</h2>
+      <h3>/A terse guide to classes</h3>
+      <ul>
+        <li>Person is ambiguous<span class="comma">,</span> and there is a risk for variable-name collision</li>
+        <li>The emphasis in these examples is to show that<span class="comma">,</span> without namespaces,<em> the</em> Person becomes ambigious, lacking clarity<span class="comma">,</span> and <em>pose</em> <span>poses</span> a conflict at runtime.</li>
+        <li>[<span>When</span>] Loading 2 different classes or <em>javascript api's</em> <span>JavaScript APIs</span> that both use a Person variable <em>declaration. The</em> <span>declaration, the</span> one loaded last will redefine the former declaration of Person with new semantics.</li>
+        <li>There are other syntactical and strategic ways to prevent variable collisions, [<span>including, but not limited to:</span>]</li>
+        <li>This is a simple<span class="comma">,</span> file-based class with the following source:</li>
+        <li>Now<span class="comma">,</span> people in <span>the</span> friends and family <em>category</em> <span class="comment" title='unless this is one category called "friends and family"'>categories&#9072;</span> don’t have to repeat code to define this common trait.</li>
+      </ul>
+      <h3>Non-Component Namespaces</h3>
+      <ul>
+        <li>This is different from a Component Namespace, [<span class="comment" title="If all Component Name spaces point to a folder">which&#9072;</span>] points to a folder<span class="comma">,</span> as we'll see in the next section.</li>
+        <li>Do not attempt to lump many classes into a .js file. The rule<em> then</em> is: One class per <em>Javascript</em> <span>JavaScript</span> file on disk! || <span>You should not attempt to lump multiple classes into a .js file. Therefore, the rule is: One class per JavaScript file on disk!</span></li>
+        <li>Both <span>are</span> <em>equivelent</em> <span>equivalent</span>, but the latter namespace-import approach is more elegant</li>
+      </ul>
+      <h3>Component Namespaces</h3>
+      <ul>
+        <li>A component namespace is an identifier<span class="comma">,</span> no different from <span>the</span> previous chapter</li>
+        <li> It also contains the same 2 tokens (parts), <em>that is</em> <span>which are</span> || <span>and is</span> fully-qualified when looked at as a whole:</li>
+        <li>Create a fully-qualified component namespace and observe the <em>equivelent</em> <span>equivalent</span> files that you would have created </li>
+      </ul>
+      <h3>Importing Namespaces</h3>
+      <ul>
+        <li>but the latter two import statements are more elegant, intuitive and <em>resembles</em> <span>resemble</span> the syntax</li>
+        <li>At first glance, both statements <em>resemble</em> <span>appear similar</span> || <span>resemble eachother</span>. But<span class="comma">,</span> here's how [<span>each is</span>] interpreted and resolved:</li>
+        <li>The class-name (<em>i.e.</em><span>e.g.</span>: "Person") of the fully qualified namespace becomes the parent folder where your component<span>'</span>s class file, "index.js" is located.</li>
+        <li><em>Importing</em> <span>When importing</span> other components or classes that you've created<span>, they</span> are considered dependencies.</li>
+        <li>During an import, Arc resolves the imported statement (path or fqns), <em>temporaarily</em><span>temporarily</span> freezes code execution at that line, downloads the file, [<span>and, </span>] then<span class="comma">,</span> continues on with code execution.</li>
+        <li>It is guaranteed that<span class="comma">,</span> by the time your code is ready to use the dependency, it will be available in memory, just-in-time.</li> || <span>Arc guarantees that your code will be available in memory just in time for it to use the dependency.</span>
+        <li>If you find yourself importing 20 or more dependencies from a single <em>JaavaaScript</em> <span>JavaScript</span> file,</li>
+        <li>each pause in code execution to wait for download will hold up code execution momentarily (based on network lag). || <span>each download will momentarily pause code execution (based on network lag).</span></li>
+        <li>But<span class="comma">,</span> with a limited set of imports<span class="comma">,</span> which is more common, the effects won't be <em>much</em> <span>very</span> noticeable.</li>
+        <li>file that will load in 1 <em>step. No</em> <span class="comment" title="This is an em dash.">step—no&#9072;</span> more execution pausing. But<span>, this</span> should not be done until you're ready for a production release. </li>
+      </ul>
+      <h3>Hello World (generator)</h3>
+      <ul>
+        <li>Open a terminal, cd into the root of your project <em>folder. Enter</em> <span>folder, and enter</span> the plop command.</li>
+      </ul>
+      <h3>Hello World (manually)</h3>
+      <ul>
+        <li>Just like web components, applications<span class="comma">,</span> themselves are composed of the same 3 <em>files,</em> <span>files</span> where namespace mirrors the directory structure.</li>
+        <li>how namespaces <em>maps</em> <span>map</span> directly to matching folder directories</li>
+        <li>Create an .html page at the root of your project, <span>and</span> name it hello-world.html.</li>
+        <li>[<span>Now, open</span>] it in your editor, <span>and</span> add a namespace attribute to the body tag.</li>
+        <li>The namespace<span class="comma">,</span> "applications.HelloWorld", is a hint to the engine about what Class to use for this application.</li>
+        <li>It is recommended<span class="comma">,</span> then<span class="comma">,</span> that your ClassName is CamelCased.</li>
+        <li>If you ever discover that your application is not initializing within the shell page<span class="comma">,</span> and there are no warnings or errors,</li>
+        <li>check your <em>ClassName,</em> ClassName <span>to be sure</span> that it follows a CamelCased convention.</li>
+        <li><img src="images\Screenshot (34).png" alt="not very responsive"></li>
+      </ul>
+      <h3>Linking Applications</h3>
+      <ul>
+        <li>Applications run isolated from each other<span class="comma">,</span> but may share assets, components and session freely if needed.</li>
+        <li>you'll only ever have a single <em>application, we'll</em> <span>application. We'll</span> cover SPA's in depth later</li>
+        <li>But there are times when you need multiple single page apps within the environment and <em>be able</em> <span>the ability</span> to navigate/link between them.</li>
+        <li>Open a terminal, cd into the root of your project <em>folder. Enter</em> <span>folder, and enter</span> the plop command.</li>
+      </ul>
+      <h3>Building a ToggleButton Component</h3>
+      <ul>
+        <li>You'll be asked if the component is inheriting <em>(extends)</em> <span>(extending)</span> a base <em>class, hit</em> <span>class. Hit</span> ENTER to accept the default parent, w3c.ui.WebComponent</li>
+      </ul>
+      <h3>Building a Toggle Button (continued)</h3>
+      <ul>
+        <li>Below is <span>a</span> simulation of what you should see in your HelloWorld project:</li>
+        <li>A toggle button can be created in a few <em>ways, here</em> <span>ways. Here,</span> I'll give you the HTML, JavaScript and CSS snippets (to the right)<span class="comma">,</span> and leave you to read the code as an exercise for following along and understanding the gist of <em>it,</em> <span>it</span> at a broad level for now.</li>
+        <li>It is in here <span>where</span> you'll query the component tree</li>
+        <li>Open the component<span>'</span>s html template (index.html file)</li>
+        <li>The template<span class="comma">,</span> itself<span class="comma">,</span> is wrapped</li>
+        <li>Alternatively, the :host context may be used<span class="comma">,</span> which will allow the component to be used as a Shadow Dom element</li>
+        <li>when clicks are detected anywhere on the toggle<span>'</span>s UI.</li>
+        <li><em>Alright, to</em> <span>To</span> the right<span class="comma">,</span> under the respective tabs<span class="comma">,</span> <em>are</em> <span>is</span> the final source that you <em>maay</em> <span>may</span> copy + paste into the files of your ToggleButton folder.</li>
+        <li>But, the simplest way<span class="comma">,</span> for now<span class="comma">,</span> is to use it declaratively in HTML <em>markup,</em> <span>markup</span> inside the body of our hello-world.html:</li>
+        <li>But<span class="comma">,</span> for this to work, the ToggleButton class must be imported</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Located in the <strong>Display</strong> section</h2>
+      <h3>/Components/ Component Life-Cycle</h3>
+      <ul>
+        <li>see: Using <em>Componentss</em> <span>Components</span>)</li>
+        <li>Listeners may also be <em>attached, basically</em> <span>attached. Basically,</span>the component is now free to do whatever initialization you intended.</li>
+        <li>Only the components model/state is updated<span class="comma">,</span> not rendered.</li>
+        <li> the sprite should be rendered<span class="comma">,</span> at this point<span class="comma">,</span> to sync the <em>vissual</em> <span>visual</span> representation with the <em>components</em> <span>component's</span> state.</li>
+        <li>components may also choose to not .render() completely<span class="comma">,</span> but cherry-pick what DOM nodes <em>needs</em> <span>need</span> to change.</li>
+        <li>A <em>Sprites</em> <span>Sprite's</span> onUpdate() and onRender() cycles are closely related</li>
+        <li>Unlike event-driven rendering<span class="comma">,</span> which arbitarily occurs or may never occur,</li>
+        <li>When a component is no longer needed, <em>it's</em> <span>its</span> onDestroy() method is invoked.</li>
+        <li>Certain components will have <em>it's</em> <span>their</span> onDestroy() called for you</li>
+        <li>by the <em>engine, at</em> <span>engine. At</span> other times, it will not hurt to invoke it</li>
+      </ul>
+      <h3>/Components/ Using Components</h3>
+      <ul>
+        <li>A prerequsite to using components you've created is <em>ensure</em> <span>ensuring</span> || <span>to insure</span> they are first imported.</li>
+        <li>Otherwise<span class="comma">,</span> creating a new instance only triggers the components <em>constructor(),</em> <span>constructor();</span> it is not yet rendered or connected to the screen.</li>
+      </ul>
+      <h3>Components/ Events</h3>
+      <ul>
+        <li>Arc adheres closely to specs<span class="comma">,</span> so a good understanding of the topic is necessary</li>
+        <li>The 3 phases of the event <em>moves</em> <span>move</span> along the child <-> parent(s) path</li>
+        <li>Each Phase is a starting point in <em>it's</em> <span>its</span> direction.</li>
+        <li>The diagram simulates <em>a</em> <span>the</span> pathway the event will travel for all 3 phases:</li>
+        <li>It does not show <em>in what order the phases occur in</em> <span>the order in which the phases occur</span> over time.</li>
+        <li>the window (the ultimate parent) is notified first, then<span class="comma">,</span> down to each child</li>
+        <li>After the event is processed by the child that spawned <em>it's</em> <span>its</span> own event</li>
+        <li> the event makes its way back up the DOM tree to the ultimate parent <em>(window), this</em> <span>(window). This</span> is known as the Bubbling Phase.</li>
+        <li>Imagine we <em>had</em> <span>have</span> a Product component</li>
+        <li>The click signal could <em>of</em> <span>have</span> originated from the button, or from click/tapping on the description text<span class="comma">,</span> or even the price label.</li>
+        <li><em>That filters</em> <span>This will filter</span> clicks on the #add-to-cart button, which runs our handler</li>
+        <li><em>So given, we</em> <span>So, given we</span> have a Catalog application that has a list of Products assembled on screen:</li>
+        <li>If we were to conceptually represent this hierarchy, <em>you'll</em> <span>you would</span> || <span>you'd</span> see a Catalog app, <em>having</em> <span>with</span> many Products</li>
+        <li>And here's a 3D view of the DOM <em>tree, click-n-drag</em> <span>tree. Click-n-drag</span> to see the parts</li>
+        <li>The code snippets on the right <em>shows</em> <span>show</span> the full <em>srource.</em> <span>source.</span></li>
+        <li>Of course, the alias on() could <em>of</em> <span>have</span> very well be used for more compact code:</li>
+      </ul>
+      <h3>Components/ Skinning & StyleSheets/ Common Styling Problems</h3>
+      <ul>
+        <li>With this <em>propritary</em> <span>proprietary</span> architecture pioneered by the Arc team,</li>
+        <li>determined intrinsically by WebComponents<span class="comma">,</span> themselves, not by your <em>manually</em> <span>manual</span> intervention.</li>
+        <li>Let's discuss each briefly<span>.</span></li>
+        <li>Smashing Magazine has a great article explaining the css specificity problem[<span>. It's worth a read.</span> || <span>It's worth reading.</span>] worth reading. To <em>summarize.</em> <span>summarize:</span></li>
+        <li>Some CSS rules don’t apply to some <em>elements,</em> <span>elements</span> although you <em>expected it</em> <span>expect them</span> to.</li>
+        <li>If two <em>css</em> <span>CSS</span> rules apply to the same element,</li>
+        <li><span class="note">Consider adding periods to the rest of the senences in this list.</span></li>
+        <li>It's not an issue until you begin working in a team environment or <span>on</span> a rather <em>complext</em> <span>complex</span> application with many modular parts</li>
+        <li>Specificity is so important<span class="comma">,</span> and sometimes difficult to understand all at once<span class="comma">,</span> that frameworks such as bootstrap</li>
+        <li>were introduced to solve the problem in unique <em>ways but</em> <span>ways. But, they</span> generally introduce an overhead, knowledge training, poor css code <em>quality, readability</em> <span>quality and readability</span>and maintenance problems.</li>
+        <li> will not only resolve specificity issues, but <span>it will also</span> pave the way for Cascading (Skinnable) components</li>
+        <li>no idea why our rules are not being applied<span class="comma">,</span> or <span>we</span> know why<span class="comma">,</span> but need to externally style a component from the <em>outside, generally.</em> <span>outside.</span></li>
+        <li>Probably<span class="comma">,</span> the only time you'll need <em>it,</em> <span>it</span> is if an external css framework (like bootstrap) is conflicting</li>
+        <li> but <span>it</span> must then be cherry-picked per screen and loaded in the <head> tag in precise order!</li>
+        <li>Otherwise<span class="comma">,</span> your styling and specificity strengths are not applied correctly.</li>
+        <li>There's nothing to think <em>about, in</em> <span>about. In</span> fact, it is completely transparent to the developer.</li>
+        <li>css rules that target Blocks, Elements and <em>Modifiers. The</em> <span class="comment" title="This is an em dash.">Modifiers—the&#9072;</span> complete opposite from writing supple, domain-driven css.</li>
+        <li>Arc's asset manager puts it work, <em>correctly,</em> <span>correctly and</span> intuitively.</li>
+        <li><em>Theres</em> <span>There's</span> nothing to implement,</li>
+        <li>Arc allows custom skins and layouts to be specified via <em>configuration, otherwise</em> <span>confuguration. Otherwise,</span> the default is used</li>
+        <li>Arcs Automota engine is truely <em>unique, unprecidented, there</em> <span>unique and unprecedented. There</span> are no frameworks in the market that have achieved this level of intelligent design and problem solving with CSS.</li>
+      </ul>
+      <h3>Components/ Skinning & StyleSheets/ StyleSheet Lifecycle</h3>
+      <ul>
+        <li>In <em>a previous topic,</em> <span>previous topics,</span> Decorators and Component Packaging <span class="comment" title="I don't know where to find this section. It may not be previous.">&#9072;</span>, we looked at the @stylesheets decorator as well as baking css into your Classes.</li>
+        <li><em>But there's</em> <span>But, there are</span> a few more things to know.</li>
+        <li>These 4 steps occur last <em>in order</em> during the onConnected phase and <span>each</span> gives your component 100% control [<span>during</span>] each step of the cycle.</li>
+      </ul>
+      <h3>Components/ Skinning & StyleSheets/ Stylsheet Transformations</h3>
+      <ul>
+        <li>In <em>the topic, Style Sheets,</em> <span> the topic StyleSheet Lifecycle,</span> || <span>the previous topic,</span> we looked at the style sheet life-cycle.</li>
+        <li>The beauty of CSS is [<em>due to</em>] it's simplicity.</li>
+        <li>As mentioned in the <em>StyleSheet life-cycle</em> <span class="comment" title="Add link?">StyleSheet Lifecycle&#9072;</span> chapter,</li>
+        <li>the components CSS <em>text, you</em> <span>text. You</span> may then apply logic to process it somehow and return back valid css text from this function.</li>
+        <li>the css is loaded and sent as an <em>argument,</em> <span>argument</span>to your components onTransformStyle() <em>method,</em> <span>method</span> IF you had implemented it in the Class of your component.</li>
+        <li> stored in the namespaced folder location <em>at: /src/core/samples/HelloWorld/index.css, contains</em> <span>at: /src/core/samples/HelloWorld/index.css seems to contain</span> CSS that has url() paths to <em> images it seems.</em><span>images.</span></li>
+        <li>So, we replaced it with a relative path to the <em>HelloWorlds</em> <span>HelloWorld's</span> component folder.</li>
+        <li>Now<span class="comma">,</span> we are able to store images in our namespaced folders<span class="comma">,</span> and the paths should propaly resolve.</li>
+        <li><em>Other good cases, maybe</em> <span>Another good case is if</span> your css needs aa dynamic px value that only your component can compute at runtime.</li>
+        <li>So<span class="comma">,</span> similar to the "COMPONENT_PATH" token invented above, one can invent a similar token</li>
+        <li>See what you can imagine<span class="comma">,</span> but remember <span>that</span> there is an expense to <em>it, that if</em> <span>it that, if</span> used widely<span class="comma">,</span> could impact <em>performance, but</em> <span>But, only</span> a few cases should <em>not.</em> <span>not have an impact.</span></li>
+      </ul>
+      <h3>Components/ Skinning & StyleSheets/ The Shadow DOM</h3>
+      <ul>
+        <li>Unless you have no other <em>choice.</em> <span>choice, don't use it.</span></li>
+        <li>I'd like to preface by saying, shadow <em>dom</em> <span>DOM</span> must be avoided at all costs unless you <em>were</em> <span>are</span> designing a component to be shared <em>acorss</em> <span>across</span> millions of websites,</li>
+        <li>[<span>Iframes</span>] are used for each tweet being shared, and for good <em>reasons. Security and brand identity.</em> <span>reasons: security and brand identity</span></li>
+        <li>Mozilla describes how to create a shadow <em>dom</em> <span>DOM</span> web <em>component, it's</em> <span>component. It's</span> a bit complicated if you're not using Arc.</li>
+        <li>In short, <em>the shadow dom</em> <span>using this feature</span> allows one of your web components to be placed on a web page</li>
+        <li>it does not <em>gaurantee</em> <span>guarantee</span> shadow <em>dom</em> <span>DOM</span> encapsulation</li>
+      </ul>
+      <h3>Components/ Progressive Enhancement/ Adopting Nodes</h3>
+      <ul>
+        <li>Take<span class="comma">,</span> for example<span class="comma">,</span> this fragment of HTML that was acquired via a capture/scraping process or was an HTML deliverable (prototyped design, maybe auto-generated) from a design team that should not be <em>modified,</em> <span>modified</span> because the next iterative hand-off will change in structure perhaps.</li>
+        <li>is not efficient in this <em>scenario, the</em> <span>scenario. The</span> next hand-off from your design team might have the node in a different location, or <em>it's</em> <span>its</span> structure changed.</li>
+      </ul>
+      <h3>Components/ Progressive Enhancement/ Decorating Nodes</h3>
+      <ul>
+        <li>The <span>collection of</span> use-cases for node decoration is narrow and special.</li>
+        <li>You generally decorate a node <span>that was</span> generated by CMS and eCommerce platforms or was handed off by design/prototyping teams, agencies or from purchased (pre-made) templates and UI kits.</li>
+        <li>but <span>you are</span> allowed to inject scripts into HEAD, <em>meaning.</em> <span>meaning</span> Arc can run on your page.</li>
+        <li>The <xmp><div id="some-existing-module"></xmp> node, will now be decorated by the <em>component, when inspected, observe</em> <span>component when inspected. Observe</span> the namespace attribute tacked <em>on to</em> <span>onto</span> the div,</li>
+        <li> It has access only to the childNodes and to the root element<span class="comma">,</span> itself<span class="comma">,</span> via this.element</li>
+        <li>It is faster <em>that</em> <span>than</span> replacing or adpoting nodes because the existing DOM tree is never altered, cloned or replaced (no re-paint).</li>
+      </ul>
+      <h3>Components/ Templating/ Introduction</h3>
+      <ul>
+        <li>There are several ways a template is specified for a component<span class="comma">,</span> each with an order of precedence</li>
+        <li>In <em>the Templating</em> <span>this</span> chapter, further execution details are covered including JSON-to-HTML generation.</li>
+      </ul>
+      <h3>Components/ Templating/ Inline</h3>
+      <ul>
+        <li>the HTML fragment that defines a template must be within an HTML5 <xmp><template></xmp> tag<span class="comma">,</span> as seen in the snippets above.</li>
+      </ul>
+      <h3>Components/ Templating/ External</h3>
+      <ul>
+        <li>When a <em><a href="http://127.0.0.1:3000/framework/doc.html#docs.topics.ComponentUsage">componentis used that relies on an external template,</a></em> <span><a href="http://127.0.0.1:3000/framework/doc.html#docs.topics.ComponentUsage">component</a> that relies on an external template is used,</span> || When <span><a href="http://127.0.0.1:3000/framework/doc.html#docs.topics.ComponentUsage">using a component</a></span> that relies on an external template,</li>
+        <li>the HTML fragment that defines a template must be within an HTML5 <xmp><template></xmp> tag<span class="comma">,</span> as seen in the snippets above.</li>
+        <li>This is mostly a standard convention<span class="comma">,</span> and is required by the <em>engines</em> <span>engine's</span> parser.</li>
+      </ul>
+      <h3>Components/ Templating/ Baked</h3>
+      <ul>
+        <li>It would be inefficient to follow a pattern like this in development and<span class="comma">,</span> <em>worst,</em> <span>worse, this</span> breaks the cohesion and clarity of code.</li>
+      </ul>
+      <h3>Components/ Templating/ Rendering Data</h3>
+      <ul>
+        <li>A component will usually have <em>state, maybe</em> <span>state. Maybe</span> it's a simple <em>object, it</em> <span>object. It</span> could be an array of database <em>results or</em> <span>results. Or, </span> maybe it's a more complex process being Modeled (i.e: How a Clock works).</li>
+        <li>During a <em>components</em> <span>component's</span> onConnected() phase, the engine will handle an internal call to .render() should you rely on <em>it,</em> <span>it</span> using super.onConected(withData).</li>
+        <li>It invokes an immediate rendering during this <em>phase, so</em> <span>phase so</span> that a component is seen as soon as it becomes connected to the DOM.</li>
+        <li>and<span class="comma">,</span> only later, when state is ready or has changed/updated,</li>
+        <li>Imagine a <em>button, that</em> <span>button that,</span> when clicked, will filter genres</li>
+        <li>it happens immediately so that something is visible<span class="comma">,</span> but can be <em>ran</em> <span>run</span> again and as often <span>as needed</span>to keep the view in sync with it's state.</li>
+        <li>It'll receive the data from render, <span>and</span> it's job is to transform this raw data back into HTML.</li>
+      </ul>
+      <h3>Components/ Templating/ Transform dataa to HTML</h3>
+      <ul>
+        <li>A call to .render() will inject data<span class="comma">,</span> if supplied, into a template.</li>
+        <li>The previous example<span class="comma">,</span> below, sends a person</li>
+      </ul>
+      <h3>Components/ Templating/ Dynamic Template Sources</h3>
+      <ul>
+        <li>dynamically switched at runtime programmatically or specified <em>declaraticely</em> <span>declaratively</span> in HTML.</li>
+        <li><em>Usecases</em><span>Use cases</span> exist, but<span class="comma">,</span> for brevity, no real-world cases are discussed here.</li>
+        <li>Doing so may cause the component to re-evaluate it's rendering and be connected again (onConnected phase)<span class="comma">,</span> which alters the src again</li>
+        <li>or you could trigger a src <em>chage</em><span>change</span> when the component later receives an event</li>
+        <li>One usecase that does come to mind may be experimenting with a new component <em>UI/layout, so</em> <span>UI/layout. In this case,</span> creating a temporary template file and pointing the component to it for testing makes sense.</li>
+      </ul>
+      <h3>Components/ Templating/Slots</h3>
+      <ul>
+        <li>There are several ways to alter the label, all of which are <em>innefficient</em> <span>inefficient</span> and <em>introduces</em> <span>introduce</span> needless complexity:</li>
+        <li>Let's fill one of the slots to drastically alter the <em>context,</em> <span>context;</span> the other remains empty:</li>
+      </ul>
+      <h3>Components/ Templating/ <em>Composit</em> <span>Composite</span> Components</h3>
+      <ul>
+        <li>And maybe this is <em>eCommerce, let's</em> <span>eCommerce. Let's</span> use a view-cart button and fill-in the label slot for this particular screen:</li>
+        <li>Since the greetings component now <em>rely</em> <span>relies</span> on nested components<span class="comma">,</span> make sure to import these at the component class level</li>
+      </ul>
+      <h3>Components/ Templating/ Template Engines</h3>
+      <ul>
+        <li>WebComponents rely only on an adapted <em>interface, the</em> <span>interface. The</span> the dependency to a concerete template engine or driver is inverted.</li>
+        <li>This makes it possible for the framework<span class="comma">,</span> itself<span class="comma">,</span> to dynamically determine and dispatch rendering to any parser.</li>
+        <li>Oros ships with a native ES6/7 template literals parser which is fast, uses javascript-syntax, <span>and is both</span> supple and powerful.</li>
+        <li>But<span class="comma">,</span> if you would like to use Mustache<span class="comma">,</span> for example, a driver should be created, which delegates to Mustache for parsing.</li>
+        <li>This is what a driver for a template engine could look <em>like. A</em> <span>like: a</span> simple interface-adapter in most cases.</li>
+        <li>Define a <em>parse(), it</em> <span>parse(). It</span> takes in a template string and data, evaluates it and returns HTML-syntax.</li>
+        <li>Download nunjucks.js api file, <span>and</span> save it into the projects "src/libs/" directory.</li>
+        <li>Create a NunjucksDriver.js, <span>and</span> save it into "src/libs/" as well.</li>
+        <li>Let's build a component to use this template engine. See: <a href="http://127.0.0.1:3000/framework/doc.html#docs.topics.UsingCustomDriver"></a>Using <span>a</span> custom template <em>drivers</em> <span>driver</span></li>
+      </ul>
+      <h3>Components/ Templating/ Using a <em>custom template driver</em> <span>Custom Template Driver</span></h3>
+      <ul>
+        <li>Extension, ".nunj"<span class="comma">,</span> was specified in the driver definition earlier.</li>
+      </ul>
+
+    </section>
+  </body>
+</html>

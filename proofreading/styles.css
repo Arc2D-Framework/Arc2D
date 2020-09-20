@@ -1,0 +1,61 @@
+body {
+  background-color: #fea;
+  background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
+  color:  #0a0017;
+  font-family: 'Source Code Pro', monospace;
+}
+section {
+  margin: 50px 20%;
+}
+.suggestions {
+  padding: 20px;
+  margin: 50px 20%;
+  border: 2px dotted #22222220;
+}
+.key {
+  margin: 50px 20%;
+}
+.key h2 {
+  padding-left: 20px;
+}
+table, th, td {
+  padding: 5px;
+  border: 2px solid #00194f80;
+}
+strong {
+  color: #0032c7;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+span {
+  color: #097000;
+  text-decoration: underline;
+  font-weight: bold;
+}
+xmp {
+  font-family: 'Source Code Pro', monospace;
+  display: inline-block;
+}
+a {
+  font-weight: bold;
+  color: #4b525b;
+}
+.comment:hover{
+  cursor: help;
+}
+img {
+  width: 80%;
+}
+em {
+  text-decoration: line-through;
+}
+li {
+  margin-bottom: 10px;
+}
+.comma {
+  border: 2px solid red;
+  border-radius: 90%
+}
+.note {
+  color: #555;
+}
