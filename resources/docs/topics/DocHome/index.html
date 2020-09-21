@@ -11,36 +11,52 @@
           old, Arc began as a personal R&D project to reduce and reuse
           repetetive UI patterns, cuttting time and costs as a consultant on 
           projects dating back to 2007. It has since evolved slowly across 
-          prestegious companies to present used for primilarily for 
+          many prestegious companies to present and has been used primilarily for 
           in-house internal applications. Arc is now going public.
         </p>
 
         <h3>Framework vs. API</h3>
         <p>
-          To put it simply: A framework calls you, you do not call a framework.
+          Arc is a framework. <em><strong>To put it in simple terms:</strong> A framework calls you, you do not call a framework -- as you would with an api.</em>
           Arc is a meta-prototype of a running, fully functional application
-          designed into the kernel from birth, meaning, the framework, serves
-          as an abstract application, able to run on it's own 
-          autonomously without supplying any additional code until you wish to override. If you're familar
+          designed into the kernel from birth, serving as an abstract application, able to run on it's own, autonomously, without supplying any additional code or directions until you wish to override. If you're familar
           with C++ or Java, the analogy can be likened to an Abstract Class,
-          a barebones class-template able to be used but does nothing much until you supply 
-          overrides via inheritance.
+          a barebones template able to be used but does nothing much until you supply 
+          overridable implementation via inheritance.
         </p>
         <p>
-          In similar fashion, your application will inherit the engine of Arc when
-          embedded, where you supply bare minimum overrides to achieve results or supply
-          nothing and nothing happens. The internal
-          workings and intricate hand-crafted details of inter-communication, collision, timing, physics, 
+          In similar fashion, your application will inherit the Arc enging when
+          embedded, where you supply overridable implementations to achieve results, or supply
+          nothing and nothing happens. The internal workings and intricate hand-crafted details of inter-component-communication, life-cycle, collision, timing, physics, 
           state and work-flow in Arc are the processes that make up it's running "engine". Only
-          parts of the Arc engine (framework) can be swapped or supplied by you with overrides 
-          that Arc depends on, allowing it to call your code, never you calling Arc's
-          code as you would with APIs.
+          aspects of the Arc engine (framework) can be swapped or supplied by you with overrides, allowing it to call your code, never you calling Arc's code as you would with APIs.
         </p>
         <p>
-          The difference is clear. An API is a library of specialized, 
-          dedicated objects and methods around a finer domain. Multiple APIs
-          can be orchastrated to communicate in a process that yields
+          The difference is clear. An API is a library of dedicated objects and methods around a finer domain, like api's for grandular I/O Disk or Network operations. Multiple APIs can be orchastrated to communicate with each other in a process that yields
           a framework eventually. 
+        </p>
+
+        <h3>Embedding</h3>
+        <p>
+          Embed Arc in any existing web page within the &#x3C;head&#x3E; tag:
+          <pre class="inline html lang"><code>&#x3C;head&#x3E;
+    &#x3C;script src=&#x22;node_modules/od-cocoon/framework.src.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
+&#x3C;/head&#x3E;</code></pre>
+        </p>
+        <p>
+          The webpage should still function as it did before embedding Arc with no visual differences or added behaviors. At this point, the page is still a page, not an Application or World until you supply one.
+          Of importance are these notes:
+          <ul>
+            <li>No WebPack</li>
+            <li>No Build Scripts, No Grunt</li>
+            <li>No Babel</li>
+            <li>No Pre/Post Compilation stages (live and dynamic)</li>
+            <li>No Configuration or Settings to alter</li>
+          </ul>
+        </p>
+        <p>
+          Arc interprets itself while running. It is live and direct, leveraging the dynamic nature of native ECMAScript/ES6 with standard HTML5 to accomplish elegant solutions. Powerful features are compressed
+          into a kernel size of just @27kB. Built to run on NodeJS, Electron, Mobile (app store via Cordova or Capacitor) and the Web.
         </p>
       </div>
       <div style="width: 50%;display: block;">

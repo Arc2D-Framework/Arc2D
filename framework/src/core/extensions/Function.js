@@ -22,6 +22,8 @@ if(!Function.prototype.with){
 };
 
 /*
+
+//---------------------native class-based traits-----------------
 class TraitX {
     foo(){
         alert("foo X")
@@ -34,7 +36,7 @@ class TraitZ {
     }
 }
 
-//------------------------------------
+//---------------------classes that mix in traits-----------------
 
 class Y {
     constructor(){

@@ -22,7 +22,6 @@ namespace `docs` (
             this.text = this.querySelector('#frameworkname span')
             this.movement = 20;//total distance
             document.body.addEventListener("mousemove", e => this.onMouseMove(e));
-            // this.wrapper = document.querySelector()
         }
 
         onMouseMove(e) {
