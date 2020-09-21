@@ -54,7 +54,7 @@ namespace `display.worlds.aeiou` (
         }
 
         onScored(e){
-            !this.paused && this.dispatchEvent("score", {amount:42});
+            this.dispatchEvent("score", {amount:42});
         }
 
         append(vowel){
@@ -62,13 +62,14 @@ namespace `display.worlds.aeiou` (
         }
         
         onPause() {
-            this.paused=true;  
             this.music.pause();
         }
 
         onResume(){
-            this.paused=false; 
+            if(this.isrunning){return}
             this.world.settings.music && this.music.play();
+            this.isrunning=true;
+            console.log("running")
         }
 
         //----------------MACHINE

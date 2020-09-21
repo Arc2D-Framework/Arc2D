@@ -20,6 +20,8 @@ namespace `display.worlds.aeiou` (
             this.onReset();
         }
 
+        onLoadInstanceStylesheet(){return false}
+
         async onConnected() {
             await super.onConnected();
             this.addEventListener("click", e=> this.onVowelClicked(e), true, "vowel-sound");

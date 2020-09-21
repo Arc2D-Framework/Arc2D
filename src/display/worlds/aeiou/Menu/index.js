@@ -1,4 +1,5 @@
 
+
 namespace `display.worlds.aeiou` (
     @tag("menu-dialog");
     class Menu extends WebComponent {
@@ -49,9 +50,9 @@ namespace `display.worlds.aeiou` (
             this.music.pause();
         }
 
-        onPause() {this.paused=true;}
+        onPause() {}
 
-        onResume(){this.paused=false;}
+        onResume(){}
 
 
         onEnd(){
