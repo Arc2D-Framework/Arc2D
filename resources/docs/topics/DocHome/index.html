@@ -29,7 +29,7 @@
           embedded, where you supply overridable implementations to achieve results, or supply
           nothing and nothing happens. The internal workings and intricate hand-crafted details of inter-component-communication, life-cycle, collision, timing, physics, 
           state and work-flow in Arc are the processes that make up it's running "engine". Only
-          aspects of the Arc engine (framework) can be swapped or supplied by you with overrides, allowing it to call your code, never you calling Arc's code as you would with APIs.
+          certain aspects of the Arc engine (framework) can be swapped or supplied by you with overrides, allowing it to call your code, never you calling Arc's code as you would with APIs.
         </p>
         <p>
           The difference is clear. An API is a library of dedicated objects and methods around a finer domain, like api's for grandular I/O Disk or Network operations. Multiple APIs can be orchastrated to communicate with each other in a process that yields
@@ -38,7 +38,7 @@
 
         <h3>Embedding</h3>
         <p>
-          Embed Arc in any existing web page within the &#x3C;head&#x3E; tag:
+          Embed Arc in any existing web page within the <code>&#x3C;head&#x3E;</code> tag:
           <pre class="inline html lang"><code>&#x3C;head&#x3E;
     &#x3C;script src=&#x22;node_modules/od-cocoon/framework.src.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
 &#x3C;/head&#x3E;</code></pre>
@@ -57,6 +57,27 @@
         <p>
           Arc interprets itself while running. It is live and direct, leveraging the dynamic nature of native ECMAScript/ES6 with standard HTML5 to accomplish sophisticated solutions with elegance, delegating most of the work to the browser. Powerful features are compressed
           into a kernel size of just @27kB (non-gzip). Built to run on NodeJS, Electron, Mobile (app store via Cordova or Capacitor) and the Web.
+        </p>
+        <h3>Applications and Worlds</h3>
+        <p>
+          An Application in Arc represents a web/mobile or desktop user interface on top of a system and the kind we're most familar with. Components such as Dialogs, Popups, Windows, Buttons, Menus, Navigation and so on work in an event-driven style, where user events such as "clicks" trigger interactions and feedback.
+        </p>
+        <p>
+          A World is an application still, but steps at 60FPS using a input-update-render game loop common in
+          most games. Not only is it driven by user events, but is updated every 1/60th of a second allowing Sprites such as NPC's to be animated on Canvas or by DOM transforms. The World environment will have
+          physics and forces applied to bodies. In traditional 2D game engines, the Canvas is cleared and repainted every step, pixel by pixel, giving the illusion of motion. Arc Worlds may also leverage
+          DOM Nodes on top of a canvas, that are only painted once, then animate by transforms on the GPU, allowing HUD displays to be hand-crafted in HTML and overlay
+          canvases in an efficient manner. DOM bodies such as DIVs also have physical bodies and participate
+          in physics, this allows games to be rendered, some portions by canvas and some with DOM bodies
+          using layed canvases. Both DOM/SVG bodies and Canvas pixels will co-operate on a display seamlessly.
+          Character spite animations once accomplished by Canvas drawImage() can now also be achieved as
+          DOM Sprites using CSS animations to step the sprite-sheet. This essentially means, a DIV can represent a Warrior character the same way pixels are painted to animate sprite sheets. Canvases are highly performant, now you have the flexibility to leverage HTML and SVG canvases layered on top of the native Canvas like 3 glass panes. 3 separate rendering technologies combined, each having its own
+          trade-offs. 
+        </p>
+        <p>
+          Have a look at the <a href="">dom-physics</a> demo. 3 canvases lay on top of each other. Some
+          physical bodies are actually HTML div tags, some like Circles are SVG bodies and some are Canvas pixels. Without a developer or user knowing this prior, it would appear as a typical canvas 
+          rendering.
         </p>
       </div>
       <div style="width: 50%;display: block;">
