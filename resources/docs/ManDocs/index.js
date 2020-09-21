@@ -1,3 +1,4 @@
+import! 'docs.topics.Topic';
 import 'docs.topics.LoaderActivity';
 import 'docs.components.TocMenu';
 import 'docs.components.LanguageSelector';

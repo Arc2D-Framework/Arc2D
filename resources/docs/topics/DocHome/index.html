@@ -64,18 +64,21 @@
         </p>
         <p>
           A World is an application still, but steps at 60FPS using a input-update-render game loop common in
-          most games. Not only is it driven by user events, but is updated every 1/60th of a second allowing Sprites such as NPC's to be animated on Canvas or by DOM transforms. The World environment will have
+          most games. Not only is it driven by user events, but is updated every 1/60th of a second allowing Sprites such as NPC's to be animated on Canvas or by DOM transforms. 
+          <a href="../dom-physics.html" target="_new"><img style="border:1px solid #dfdfdf;margin: 25px 0px;" src="/resources/docs/images/dom-physics.png"/></a>
+          The World environment will have
           physics and forces applied to bodies. In traditional 2D game engines, the Canvas is cleared and repainted every step, pixel by pixel, giving the illusion of motion. Arc Worlds may also leverage
           DOM Nodes on top of a canvas, that are only painted once, then animate by transforms on the GPU, allowing HUD displays to be hand-crafted in HTML and overlay
           canvases in an efficient manner. DOM bodies such as DIVs also have physical bodies and participate
           in physics, this allows games to be rendered, some portions by canvas and some with DOM bodies
-          using layed canvases. Both DOM/SVG bodies and Canvas pixels will co-operate on a display seamlessly.
+          using layed canvases. <goblin-enemy style="float:left;"></goblin-enemy>Both DOM/SVG bodies and Canvas pixels will co-operate on a display seamlessly.
           Character spite animations once accomplished by Canvas drawImage() can now also be achieved as
           DOM Sprites using CSS animations to step the sprite-sheet. This essentially means, a DIV can represent a Warrior character the same way pixels are painted to animate sprite sheets. Canvases are highly performant, now you have the flexibility to leverage HTML and SVG canvases layered on top of the native Canvas like 3 glass panes. 3 separate rendering technologies combined, each having its own
           trade-offs. 
+
         </p>
         <p>
-          Have a look at the <a href="">dom-physics</a> demo. 3 canvases lay on top of each other. Some
+          Have a look at the <a href="../dom-physics.html" target="_new">dom-physics</a> demo. 3 canvases lay on top of each other. Some
           physical bodies are actually HTML div tags, some like Circles are SVG bodies and some are Canvas pixels. Without a developer or user knowing this prior, it would appear as a typical canvas 
           rendering.
         </p>

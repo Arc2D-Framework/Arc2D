@@ -1,14 +1,14 @@
 
 .GoblinEnemy {
-    display:block;
-    left: -22px;
+    display:inline-block;
+    /*left: -22px;*/
   /*left:20px;*/
-  transform: scale(.8);
-  position: absolute;
+  /*transform: scale(.8);*/
+  /*position: absolute;*/
   /*bottom: 112px;*/
   /*margin-left: 0;*/
-  width: 767px;
-  height: 532px;
+  width: 142.85px;
+  height: 99px;
   background-image: url("docs/images/goblin.png");
 }
 
@@ -25,7 +25,7 @@
     background-position: 0px 0px;
   }
   to {
-    background-position: -5369px 0px;
+    background-position: -1000px 0px;
   }
 }
 
@@ -34,6 +34,6 @@
     background-position: 0px 0px;
   }
   to {
-    background-position: -5369px 0px;
+    background-position: -1000px 0px;
   }
 }
