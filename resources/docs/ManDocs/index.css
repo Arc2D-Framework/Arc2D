@@ -165,3 +165,9 @@ box-shadow: 2px 7px 6px rgba(0,0,0,.1);
 article.article .manage-nav a {
     padding: 0 18px !important;
 }
+
+
+nav.sidebar .toc li.chapter.active > a{
+    background-color: #a18dcc;
+    color:white;
+}

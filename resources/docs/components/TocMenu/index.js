@@ -11,6 +11,7 @@ namespace `docs.components` (
             this.on("click", e => this.onToggleExpandable(e), false, "ol > li.expandable");
             this.on("click", e => this.onLinkClicked(e), false, "ol > li > a");
             this.last_chapter = this.querySelector("ol > li.active");
+            this.collapseSiblings(this.last_chapter.parentNode)
             this.highlightTOConLoad();
         }
 
@@ -22,8 +23,9 @@ namespace `docs.components` (
                     this.expand(a);
                     var parent=a.parentNode;
                     do {
-                        console.log(parent)
-                        if(parent.classList.contains("expandable")){this.expand(parent);}
+                        if(parent.classList.contains("expandable")){
+                            this.expand(parent);
+                        }
                         parent=parent.parentNode;
                     } while(parent&&parent.nodeType==1 && !parent.classList.contains("toc"));
 
@@ -38,6 +40,7 @@ namespace `docs.components` (
             if(activeHref){
                 this.collapse(this.last_active);
                 var li = this.getParentBySelectorUntil(activeHref, ".toc", "li.expandable");
+                this.collapseSiblings(li.parentNode)
                 this.expand(li);
 
                 activeHref.classList.add("active");

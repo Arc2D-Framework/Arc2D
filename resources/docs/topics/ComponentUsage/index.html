@@ -32,7 +32,11 @@
           A component can be embedded in normal HTML markup the same way you would use a div tag.
         </p>
         <p>
-          <pre class="inline html lang"><code>&#x3C;goblin-enemy&#x3E;&#x3C;/goblin-enemy&#x3E;</code></pre>
+          <pre class="inline html lang">
+            <code>
+&#x3C;goblin-enemy&#x3E;&#x3C;/goblin-enemy&#x3E;
+            </code>
+          </pre>
         </p>
         <p>
           Don't forget to import the component Class before it's used:
@@ -63,19 +67,27 @@
         </p>
         <p>
           The <code>new</code> keyword, makes a new instance from the Class:
-          <pre class="inline javascript lang"><code>var goblin = new core.ui.game.GoblinEnemy;
-document.appendChild(goblin)</code></pre>
+          <pre class="inline javascript lang">
+            <code>
+var goblin = new core.ui.game.GoblinEnemy;
+document.body.appendChild(goblin)
+            </code>
+          </pre>
         </p>
         <p>
           <code>document.createElement</code> makes a new instance from the tag-name:
-<pre class="inline javascript lang"><code>var goblin = document.createElement("goblin-enemy");
-document.appendChild(goblin);</code></pre>
+          <pre class="inline javascript lang">
+            <code>
+var goblin = document.createElement("goblin-enemy");
+document.body.appendChild(goblin);
+            </code>
+          </pre>
         </p>
         <h3>onConnected()</h3>
         <p>
           <em><code>onConnected()</code> only fires when the new instance is added to the DOM</em>. Otherwise
           creating a new instance only triggers the components <code>constructor()</code>, it is not
-          yet rendered or connected to the screen.
+          yet connectted or rendered to the screen. Read about the <a href="#docs.topics.ComponentLifecycle">Component Life-Cycle</a> for more details.
         </p>
         <goblin-enemy></goblin-enemy>
         <!-- <toggle-button></toggle-button> -->

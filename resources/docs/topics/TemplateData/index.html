@@ -6,11 +6,15 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Rendering Template Data</h1>
         <p>
-          A component will usually have state, maybe it's a simple object, it could be an array of database results or maybe it's a more complex process being Modeled (i.e: How a Clock works). You would like to render this state|model within it's template. Simply call .render(withData) at anytime:
+          A component will usually have state, maybe it's a simple object, it could be an array of database results or maybe it's a more complex process being Modeled (i.e: How a Clock works). You would like to render this state|model within it's template. Simply call <code>await this.render(withData)</code> at anytime:
         </p>
         <p>
-        	<pre class="inline javascript lang"><code>var person = {name: "Joe"};
-this.render(person)</code></pre><br/>
+        	<pre class="inline javascript lang">
+            <code>
+var person = {name: "Joe"};
+await this.render(person)
+            </code>
+          </pre>
         </p>
         <p>
         	The call to .render() will re-evaluate the components template each time to update it's DOM view. Call it multiple times if there is a need to keep the view in sync when state changes.
@@ -32,19 +36,27 @@ this.render(person)</code></pre><br/>
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">When to render?</h1>
         <p>
-          During a components onConnected() phase, the engine will handle an internal call to .render() should you rely on it, using super.onConected(withData). It invokes an immediate rendering during this phase, so that a component is seen as soon as it becomes connected to the DOM.
-          <pre class="inline javascript lang"><code>onConnected() {
+          During a components <code>onConnected()</code> phase, the engine will handle an internal call to .render() should you rely on it, using <code>super.onConected(withData)</code>. It invokes an immediate rendering during this phase, so that a component is seen as soon as it becomes connected to the DOM.
+          <pre class="inline javascript lang">
+            <code>
+onConnected() {
     var person = {name: "Joe"};
-    super.onConnected(person);//internal call to .render() immediately
-}</code></pre><br/>
+    await super.onConnected(person);//internal call to .render() immediately
+}           
+            </code>
+          </pre>
         </p>
         <p>
         	You don't have to rely on the default order and timing in this manner. You may choose to override onConnected() with custom logic, and only later, when state is ready or has changed/updated, you then onvoke .render() manually at your timing.
-        	<pre class="inline javascript lang"><code>onConnected() {
+        	<pre class="inline javascript lang">
+            <code>
+onConnected() {
     var person = {name: "Joe"};
     //still renders immediately, but better control, as you'll soon see
-    this.render(person);
-}</code></pre><br/>
+    await this.render(person);
+}           
+            </code>
+          </pre>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -64,9 +76,13 @@ this.render(person)</code></pre><br/>
         <h1 id="api-reference">Await Rendering</h1>
         <p>
         	Here's an example of awaiting the response from a Collection which could be a local JSON asset or a remote database query. 
-        	<pre class="inline javascript lang"><code>onConnected() {
-    this.render({items : await Movies.find()});
-}</code></pre><br/>
+        	<pre class="inline javascript lang">
+            <code>
+onConnected() {
+  await this.render({items : await Movies.find()});
+}
+          </code>
+          </pre>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -88,7 +104,9 @@ this.render(person)</code></pre><br/>
         <p>
           Events can be registered to trigger rendering as well. Imagine a button,
           that when clicked, will filter genres and show the new update. 
-          <pre class="inline javascript lang"><code>onConnected() {
+          <pre class="inline javascript lang">
+            <code>
+onConnected() {
     this.addEventListener("click", e => this.filter(e));
     this.render({items : await Movies.find()});//start by showing all
 }
@@ -96,7 +114,9 @@ this.render(person)</code></pre><br/>
 filter(e){
     var movies = await Movies.find({genre: "Action"});//just action movies
     this.render({items : movies});//redraw template
-}</code></pre><br/>
+}
+            </code>
+          </pre>
         </p>
         <p>
           The central idea here is that a call to .render() can happen deterministically at your timing to re-evaluate and display updates. When a component renders during onConnected(), it happens immediately so that something is visible but can be ran again and as often to keep the view in sync with it's state.

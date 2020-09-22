@@ -6,45 +6,60 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">WebComponent Templates</h1>
         <p>
-          All WebComponents are visual elements that have a view(s) defined as an HTML fragment. There are several ways a template is specified for a component each with an order of precedence (Specificity), where only one strategy is used by the component for rendering.
+          All WebComponents are visual elements that have a view(s) defined as an HTML <code>template</code> fragment. There are several ways a template is specified for a component each with an order of precedence (specificity), where only one strategy is used by the component for rendering.
         </p>
+
+        <p>Specificity order falls broadly under 2 categories. Design-time and run-time. Component
+        engineers rely on design-time choices for behavior control and packaging whereas developers rely on it's
+      runtime use when actually using tthe component on screen. Runtime use will always take precedence over
+    design time definition</p>
         <p>
-        	The order is from <b>grestest (3)</b> specificity to <b>least (1)</b>.
+        	The order is from <b>grestest (3)</b> specificity to <b>least (0)</b>.
 	        <table>
-	            <thead>
-	            <tr>
-	              <th>Specificity</th>
-	              <th>Type</th>
-	              <th>Description</th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <tr>
-	              <td>3</td>
-	              <td>Function</td>
-	              <td>Implement <code>template()</code> function at the Class level</td>
-	            </tr>
-	            <tr>
-	              <td>2</td>
-	              <td>HTML</td>
-	              <td>Implement a <code>&#x3C;template&#x3E;</code> Node inline</td>
-	            </tr>
-	            <tr>
-	              <td>1</td>
-	              <td>Attribute</td>
-	              <td>Implement the <code>src</code> attribute; specifies a URI path to a template .html file</td>
-	            </tr>
-	          </tbody>
-	        </table>
+              <thead>
+              <tr>
+                <th>Specificity</th>
+                <th style="width: 106px;">Type</th>
+                <th style="width: 200px;">Source</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3</td>
+                <td>Runtime</td>
+                <td>HTML Inline <code>template</code></td>
+                <td>Template is inlined during usage</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Runtime</td>
+                <td>HTML <code>src</code> attribute</td>
+                <td>Externally loaded during usage</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Design-time</td>
+                <td>JavaScript <code>template()</code></td>
+                <td>Template found in components JavaScript Class definition</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>Design-time</td>
+                <td><code>index.html</code> asset file</td>
+                <td>Template found in components asset folder as index.html</td>
+              </tr>
+            </tbody>
+          </table>
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
         <div class="javascript lang">
         	<blockquote class="javascript" style="display:block;width: 100%;">
-            <b>Specificity 3 (highest): JavaScript inline template()</b><br/>
-            Inline template supplied by template() method has the greatest weight. This
-            template will always be used.
+            <b>Specificity 1: JavaScript inline template()</b><br/>
+            Falls back to <code>template()</code> source from the component class,
+            declared at design-time.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
@@ -64,33 +79,32 @@ namespace \`core.ui\` (
         </div>
         <div class="html lang">
         	<blockquote class="html" style="display:block;width: 100%;">
-            <b>Specificity 2: HTML inline &#x3C;template&#x3E;</b><br/>
-            Second choice made by component if  Javascript template() was empty/null. Here,
-            a &#x3C;template&#x3E; can be declared inline when using the tag.
+            <b>Specificity 3: HTML inline &#x3C;template&#x3E;</b><br/>
+            Inline <code>template</code> at runtime use carries the greatest weight, first choice
+            as source.
           </blockquote>
           <pre class="highlight html" style="display:block;width: 100%;"><code>
 &#x3C;body&#x3E;
-    &#x3C;my-application&#x3E;
-        &#x3C;modal-dialog&#x3E;
-            &#x3C;template&#x3E;
-                &#x3C;h3&#x3E;Hello World&#x3C;/h3&#x3E;
-            &#x3C;/template&#x3E;
-        &#x3C;/modal-dialog&#x3E;
-    &#x3C;/my-application&#x3E;
+  &#x3C;modal-dialog&#x3E;
+      &#x3C;template&#x3E;
+          &#x3C;h3&#x3E;Hello World&#x3C;/h3&#x3E;
+      &#x3C;/template&#x3E;
+  &#x3C;/modal-dialog&#x3E;
 &#x3C;/body&#x3E;</code>
       </pre>
 
 
           <blockquote class="html" style="display:block;width: 100%;">
-            <b>Specificity 1 (lowest precedence): src attribute path</b><br/>
-            Implement src="" attribute pointing to a template .html file.
+            <b>Specificity 2: <code>src</code> attribute path</b><br/>
+            Alternatively <code>src=""</code> attribute pointing to a template .html file
+            at runtime.
           </blockquote>
 
           <pre class="highlight html" style="display:block;width: 100%;"><code>&#x3C;modal-dialog src="/src/core/ui/ModalDialog/my_template.html"&#x3E;&#x3C;/modal-dialog&#x3E;</code>
       </pre>
       <blockquote class="html" style="display:block;width: 100%;">
             As the default, and final fallback, if no JavaScript template() or inline HTML
-            template or src attribute was specified, the Component loads it's default index.html &#x3C;template&#x3E;.
+            template or src attribute was specified, the Component loads it's default index.html &#x3C;template&#x3E; asset from it's component folder.
           </blockquote>
         </div>
         <div class="css lang"></div>
@@ -106,10 +120,11 @@ namespace \`core.ui\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Load performance side-effect</h1>
         <p>
-          The order of precedence lends to an interesting performance side-effect. A prefab component can be baked with it's template inlined in the Javascript, decreasing load time significantly. Since a JavaScript supplied inline template() carries the highest precedence, the external template src file is never loaded. See <a href="#docs.topics.ComponentPrefabs">Prefab Components</a>.
+          The order of precedence lends to an interesting performance side-effect. A "prefab" component can be baked with it's template inlined in the Javascript via the <code>ttemplate()</code> function, decreasing load & render time significantly.
         </p>
         <p>
-          In the <a href="#docs.topics.TemplateBasics">Templating</a> chapter, further execution details are covered including JSON-to-HTML generation.
+          Later, in the <a href="#docs.topics.TemplateDataToHtml" class="active">Transform data to HTML</a> topic, we'll
+          look at how JSON data can be sent into a template to generate HTML.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -120,5 +135,22 @@ namespace \`core.ui\` (
       </div>
     </div>
 
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">JSON to HTML in templates</h1>
+        <p>
+          Later, in the <a href="#docs.topics.TemplateDataToHtml" class="active">Transform data to HTML</a> topic, we'll
+          look at how JSON data can be sent into a template to generate HTML.
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
   </div>
 </template>

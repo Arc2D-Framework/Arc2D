@@ -4,16 +4,13 @@
     
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Templating Basics</h1>
+        <h1 id="api-reference">Rendering Templates</h1>
         <p>
-          A WebComponent template is parsed and rendered at onConnected() time. By default,
-          the base-class WebComponent implements onConnected() and dispatches a call to .render(),
-          which simply renders the template tag visually. The template fragment becomes the HTML view of the component.
-        </p>
-        <p>
-        	At minimum, a class (right-pane) that extends WebComponent will be rendered for you
+          A components template is rendered at <code>onConnected()</code> time. By default,
+          the base-class WebComponent implements onConnected() and handles the render.
+        	At minimum, a components class (right-pane) that extends WebComponent will be rendered for you
         	when the component is used (see: <a href="#docs.topics.ComponentUsage">Component Usage</a>).
-        	Essentially, your class could be mostly empty while you focus on the HTML/CSS skin.
+        	Essentially, this means your class could be mostly empty while focusing on the HTML/CSS skinning.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -40,19 +37,21 @@ namespace \`core.ui\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Render manually</h1>
         <p>
-          onConnected(), in most cases will be overridden in your custom 
-          components to wire-up listeners and manipulate the components
-          local DOM - a W3C recommendation, not from the constructor.
+          <code>onConnected()</code>, in most cases will be overridden in your 
+          components definition to wire-up listeners and manipulate the components
+          local DOM - <em>a W3C recommendation. Do not attempt to access/manipulate the DOM from the <code>constructor</code></em>, as the <code>constructor</code> only fires when a new component instance 
+          is created via the <code>new</code> operator or from the <code>document.createElement()</code>
+          factory method. 
         </p>
         <p>
-          When implementing onConnected() in your components, it is advisable to invoke super.onConnected() before any DOM manipulations so that the base-class handles the .render() call for generating the DOM before you can manipulate it as seen in the JavaScript example (right-pane).
+          When implementing <code>onConnected()</code>, it is advisable to invoke <code>super.onConnected()</code> before any DOM manipulations so that the <code>WebComponent</code> base-class handles the render call for generating the DOM <strong>before</strong> it can be manipulated. Example (right-pane).
         </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
         <div class="javascript lang">
           <blockquote class="javascript" style="display:block;width: 100%;">
-            When overriding onConnected(), call super.onConnected() to render the components DOM
+            When overriding <code>onConnected()</code>, call <code>super.onConnected()</code> to render the components DOM
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
@@ -70,8 +69,9 @@ namespace \`core.ui\` (
 
 
           <blockquote class="javascript" style="display:block;width: 100%;">
-            If super.onConnected() is never called, the components DOM never
-            renders. You will not be able to query child nodes.
+            If you override and never call <code>super.onConnected()</code>, the components DOM never
+            renders, it will be an empty shell on screen, with no dom tree. Trying to manipute
+            a non-existing DOM will cause errors:
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
@@ -85,8 +85,7 @@ namespace \`core.ui\` (
 
 
           <blockquote class="javascript" style="display:block;width: 100%;">
-            super.onConnected() does just one thing, it calls .render() for you. So alternatively,
-            you could just .render() yourself.
+            <code>super.onConnected()</code> does just one thing, it calls <code>this.render()</code> for you. So alternatively, you could also call <code>this.render()</code> yourself.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
@@ -111,7 +110,8 @@ namespace \`core.ui\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Rendering Custom DOM</h1>
         <p>
-          It's possible that you may never want to invoke super.onConnected() for template rendering because you intend to generate the components DOM with some sort of algorithm or dynamic html generation aspects (see Javascript snippet tab). This is necessary if you plan to loop over a JSON data-set and manually create table rows for example using the DOM api. 
+          It's possible that you may never want to invoke <code>super.onConnected()</code> for template rendering because you intend to generate the DOM manually, i.e: for..loop over an array to
+          create Nodes. 
         </p>
         <p>
         	<em>Alternatively</em>, JSON data could be injected into .render(data) or super.onConnected(data), to generate HTML using any open-source templating engine available (Mustache, Handlebars, ES6 Template Literals) - we'll cover this strategy in <a href="#docs.topics.PluggableTemplateEngines">Pluggable Engines</a>.
@@ -125,7 +125,7 @@ namespace \`core.ui\` (
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
-    class ModalDialog extends w3c.ui.WebComponent {
+    class ModalDialog extends WebComponent {
         async onConnected() {
             var data = {firstname: 'Sam', age:32};
             var name = document.createElement('my-custom-element');
@@ -142,9 +142,7 @@ namespace \`core.ui\` (
         }
     }
 );</code></pre>
-<blockquote class="javascript" style="display:block;width: 100%;">
-            Shown here is a custom component, &#x3C;my-custom-element&#x3E;, being used with document.createElement(), having an inline &#x3C;template&#x3E;. In the same way, a loop can be used to generate tables. But there's a a better way using a template-engine, as we'll soon see.
-          </blockquote>
+
         </div>
         <div class="html lang"></div>
         <div class="css lang"></div>

@@ -58,6 +58,12 @@
 	width: 100%;
 	box-sizing: border-box;
 	border-radius: 4px;
-	margin-top: 8px;
-	margin-bottom: 24px !important;
+	/*margin-top: 8px;
+	margin-bottom: 24px !important;*/
+	white-space: normal;
+	margin-bottom: 30px;
+}
+
+.Topic .inline.lang code {
+	padding: 0 24px;
 }

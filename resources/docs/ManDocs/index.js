@@ -30,7 +30,7 @@ namespace `docs` (
           let { pageX: x, pageY: y } = e
           const xMovement = Math.round((x / width * this.movement) - (this.movement / 2)*.8) 
           const yMovement = Math.round((y / width * this.movement) - (this.movement / 2)*.8) 
-          console.log(x,y)
+          // console.log(x,y)
           this.text.style.textShadow = `${xMovement* -1}px ${yMovement* -1}px 4px rgba(0,0,0,.3)`
         }
 
