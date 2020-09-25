@@ -4,10 +4,10 @@ namespace `display.worlds.aeiou` (
             super();
             this.machine = machine;
             this.world=world;
-            this.music = new Audio("/src/resources/tunes/sawsquarenoise_-_10_-_Towel_Defence_Ending.mp3");
-            this.music.loop=true;
-            this.music.load();
-            this.onReset();
+            // this.music = new Audio("/src/resources/tunes/sawsquarenoise_-_10_-_Towel_Defence_Ending.mp3");
+            // this.music.loop=true;
+            // this.music.load();
+            // this.onReset();
         }
 
         onReset(){
@@ -28,16 +28,26 @@ namespace `display.worlds.aeiou` (
             this.isBlocking=false;
         }
         
-        onPause() {this.paused=true;  this.music.pause();}
+        // onPause() {this.paused=true;  this.music.pause();}
 
-        onResume(){this.paused=false; this.world.settings.music && this.music.play();}
+        // onResume(){this.paused=false; this.world.settings.music && this.music.play();}
 
         //----------------MACHINE
         onStart() {
-            this.world.settings.music && this.music.play();
+            // this.world.settings.music && this.music.play();
             this.world.appendChild(this);
             this.isStarted=true;   
             console.log(this.namespace + " Started")
+        }
+
+        onAwake(){
+            this.style.display="block";
+            console.log(this.namespace + " Awake")
+        }
+
+        onSleep(){
+            this.style.display="none";
+            console.log(this.namespace + " Sleeping")
         }
 
         onEnd(){

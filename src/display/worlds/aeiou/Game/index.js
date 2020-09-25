@@ -1,7 +1,9 @@
 import '/src/system/math/MathUUID.js';
 import! 'display.worlds.aeiou.Machine';
+import! 'display.worlds.aeiou.UIMachine';
 import 'display.worlds.aeiou.Menu';
 import 'display.worlds.aeiou.Level';
+import 'display.worlds.aeiou.GameOver';
 import! 'display.worlds.aeiou.ScoreKeeper';
 
 
@@ -15,14 +17,36 @@ namespace `display.worlds.aeiou` (
                 music : false
             }
             var ns = display.worlds.aeiou;//shortcut
-            this.machine = new ns.Machine;
-            this.machine.push(new ns.Level(this, this.machine));
-            this.machine.push(new ns.Menu( this, this.machine));
+            this.machine    = new ns.UIMachine;
+            this.level      = new ns.Level(this, this.machine);
+            this.menu       = new ns.Menu(this, this.machine);
+            this.gameover   = new ns.GameOver(this, this.machine);
+            // this.machine.push(new ns.Level(this, this.machine));
+            this.machine.push(this.menu);
         }
 
         async onConnected() {
             await super.onConnected();
+            this.addEventListener("startgame", e => this.onStartGame(e))
+            this.addEventListener("pausegame", e => this.onPauseGame(e))
+            this.addEventListener("gameover", e => this.onGameOver(e))
+        }
+
+        onGameOver(){
+            this.machine.push(this.gameover);
+        }
+
+        onPauseGame(){
             var ns = display.worlds.aeiou;
+            this.machine.push(this.menu);
+            // this.machine.pop();
+            // this.machine.push(new ns.Level(this, this.machine));
+        }
+
+        onStartGame(){
+            var ns = display.worlds.aeiou;
+            // this.machine.pop();
+            this.machine.push(this.level);
         }
 
         onUpdate(time){

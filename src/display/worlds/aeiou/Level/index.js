@@ -1,5 +1,4 @@
 import! 'display.worlds.aeiou.Challenge';
-import 'display.worlds.aeiou.GameOver';
 import! 'display.worlds.aeiou.DamageMeter';
 
 namespace `display.worlds.aeiou` (
@@ -27,6 +26,7 @@ namespace `display.worlds.aeiou` (
             this.world.addEventListener("gameover", this.onGameOver, false);
             this.canvas = this.querySelector("#canvas");
             this.addEventListener("click", e => this.onPauseMenu(), false, "#pause");
+            this.addEventListener("click", e => this.onEndLevel(), false, "#exit");
             this.addEventListener("click", e => this.onScored(e), false, "#inc-score");
             this.addEventListener("challengedone", e => this.onChallengeDone(e));
             this.addEventListener("failed", e => this.onFailedChallenge(e));
@@ -34,6 +34,11 @@ namespace `display.worlds.aeiou` (
             this.actions.push(new display.worlds.aeiou.Challenge(this.world, this, this.machine));
             this.actions.push(new display.worlds.aeiou.ScoreKeeper(this.world, this.machine));
             this.actions.push(new display.worlds.aeiou.DamageMeter(this.world, this.machine));
+        }
+
+        onEndLevel(){
+            this.isFinished=true
+            this.dispatchEvent("gameover");
         }
 
         onGameOver(){
@@ -61,32 +66,53 @@ namespace `display.worlds.aeiou` (
             this.canvas.appendChild(vowel)
         }
         
-        onPause() {
-            this.music.pause();
+        // onPause() {
+        //     this.music.pause();
+        // }
+
+        // onResume(){
+        //     if(this.isrunning){return}
+        //     this.world.settings.music && this.music.play();
+        //     this.isrunning=true;
+        //     console.log("running")
+        // }
+
+        // onSleep(){
+        //     this.style.display="none";
+        //     console.log(this.namespace + " Sleeping")
+        // }
+        onAwake(){
+            this.style.display="block";
+            console.log(this.namespace + " Awake")
         }
 
-        onResume(){
-            if(this.isrunning){return}
-            this.world.settings.music && this.music.play();
-            this.isrunning=true;
-            console.log("running")
+        onSleep(){
+            this.style.display="none";
+            console.log(this.namespace + " Sleeping")
         }
 
         //----------------MACHINE
         onStart() {
             this.world.settings.music && this.music.play();
-            this.world.appendChild(this);
+            // if(!this.isStarted){this.world.appendChild(this);}
+            this.world.appendChild(this)
+            // else {
+            //     this.style.display="block"
+            // }
             this.isStarted=true;   
             console.log(this.namespace + " Started")
         }
 
-        onEnd(){
+        onExit(){
             this.remove();
-            this.world.removeEventListener("gameover", this.onGameOver, false);
-            console.warn(this.namespace + " Ended");
-            this.onReset();
-            this.music.pause();
-            this.machine.push(new display.worlds.aeiou.GameOver(this.world, this.machine));
+            console.log(this.namespace + " Exit")
+            // this.remove();
+            // this.style.display="none";
+            // this.world.removeEventListener("gameover", this.onGameOver, false);
+            // console.warn(this.namespace + " Ended");
+            // this.onReset();
+            // this.music.pause();
+            // this.machine.push(new display.worlds.aeiou.GameOver(this.world, this.machine));
         }
 
         onUpdate(time){

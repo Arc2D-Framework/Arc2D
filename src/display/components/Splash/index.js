@@ -70,11 +70,11 @@ namespace `display.components` (
 				box-sizing: border-box;
 			}
 
-			:host.fade{
+			:host(.fade){
 				opacity:0;
 			}
 
-			:host.hidden{
+			:host(.hidden){
 				visibility:hidden;
 				z-index:-100;
 			}

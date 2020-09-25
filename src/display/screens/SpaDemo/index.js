@@ -1,3 +1,4 @@
+import 'display.components.Splash';
 import 'display.views.Home';
 
 namespace `display.screens` (

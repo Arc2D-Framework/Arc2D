@@ -24,7 +24,7 @@ namespace `display.worlds.aeiou` (
 
         async onConnected() {
             await super.onConnected(this.world.settings);
-            this.addEventListener("click", e => this.onExit(), false, "#start-game");
+            this.addEventListener("click", e => this.onStartGame(), false, "#start-game");
             this.addEventListener("change", e => this.onToggleMusic(e), false, "#enable-music");
         }
 
@@ -35,25 +35,39 @@ namespace `display.worlds.aeiou` (
             this.world.settings.music = e.target.checked;
         }
 
+
+
         async onStart() {
-            this.world.appendChild(this);
+            this.world.appendChild(this)
+            // else {
+            //     this.style.display="block"
+            // }
             if(this.world.settings.music){this.music.play();}
             this.isStarted=true;  
-            this.machine.onPause(); 
+            // this.machine.onPause(); 
             console.log(this.namespace + " Started")
         }
  
-        onExit(){
-            this.isFinished = true;
-            this.isBlocking = false;
-            this.machine.onResume();
-            this.music.pause();
+        onStartGame(){
+            this.dispatchEvent("startgame");
+            // this.machine.push(new display.worlds.aeiou.Level(this.world, this.machine));
+            // this.isFinished = true;
+            // this.isBlocking = false;
+            // this.machine.onResume();
+            // this.music.pause();
+            // this.style.display="none";
+            // console.warn(this.namespace + " Exit");
         }
 
-        onPause() {}
+        onAwake(){
+            this.style.display="block";
+            console.log(this.namespace + " Awake")
+        }
 
-        onResume(){}
-
+        onSleep(){
+            this.style.display="none";
+            console.log(this.namespace + " Sleeping")
+        }
 
         onEnd(){
             this.remove();
@@ -63,6 +77,8 @@ namespace `display.worlds.aeiou` (
             this.music.pause();
         }
 
-        onUpdate(){}
+        onUpdate(){
+
+        }
     }
 );
