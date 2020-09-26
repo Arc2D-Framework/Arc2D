@@ -620,7 +620,7 @@ Startuply = {
 
     //sticky menu initialization
     stickMenu: function () {
-        var $header = $('header');
+        var $header = $('header:nth-child(2)');
 
         if ( $header.length && !$header.is('.fixed-menu') ) {
             $header.addClass('fixed-menu');
