@@ -10,8 +10,8 @@ namespace `display.worlds` (
 
         async onConnected() {
             await super.onConnected();
-            this.world      = this.querySelector('#world');
-            this.viewport   = this.querySelector('#viewport1');
+            this.world = this.querySelector( '#world' );
+            this.viewport = this.querySelector( '#viewport1' );
             this.fpsCounter = this.querySelector("#fpscounter");
 
             this.d = 700;//depth
@@ -19,12 +19,12 @@ namespace `display.worlds` (
             this.worldXAngle = 0;
             this.worldYAngle = 0;
 
+            this.viewport.style.perspective= this.p;
+
             window.addEventListener( 'mousewheel', e=>this.onContainerMouseWheel(e) );
             window.addEventListener( 'DOMMouseScroll', e=>this.onContainerMouseWheel(e) );
             window.addEventListener( 'mousemove', e=>this.onMouseMove(e) );
             window.addEventListener( 'touchmove', e=>this.onMouseMove(e) );
-            this.viewport.style.perspective= this.p;
-            
             this.generate();//make clouds
         }
 
@@ -49,6 +49,13 @@ namespace `display.worlds` (
             }
         }
 
+        onEnd(fps, panic){
+            super.onEnd(fps, panic);
+            if(this.fpsCounter){
+                this.fpsCounter.textContent = Math.round(fps) + ' FPS';
+            }
+        }
+
 
         //Updates worldYAngle, worldXAngle with mouse.
         onMouseMove ( e ) {
@@ -65,14 +72,6 @@ namespace `display.worlds` (
             e = e ? e : window.event;
             this.d = this.d - ( e.detail ? e.detail * -5 : e.wheelDelta / 8 );
             e.preventDefault();
-        }
-
-
-        onEnd(fps, panic){
-            super.onEnd(fps, panic);
-            if(this.fpsCounter){
-                this.fpsCounter.textContent = Math.round(fps) + ' FPS';
-            }
         }
 
 

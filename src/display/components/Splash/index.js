@@ -3,7 +3,6 @@ namespace `display.components` (
     @tag("splash-loader");
     class Splash extends w3c.ui.WebComponent {
         constructor() {
-            debugger;
             super();
         }
 
