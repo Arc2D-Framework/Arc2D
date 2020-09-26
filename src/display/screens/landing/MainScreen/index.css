@@ -157,3 +157,9 @@ html, body, .MainScreen {
     letter-spacing: 0.3px !important;
     background-color: #aa1515 !important;
 }
+
+.MainScreen .package-column .package-detail a:hover {
+    background-color: white !important;
+    color: #1c3a64 !important;
+    font-weight: 600;
+}
