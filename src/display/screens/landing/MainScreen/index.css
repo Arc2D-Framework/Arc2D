@@ -163,3 +163,49 @@ html, body, .MainScreen {
     color: #1c3a64 !important;
     font-weight: 600;
 }
+
+@media screen and (min-width:400px) and (max-width:991px){
+    .MainScreen .package-column .package-detail {
+        height: 100% !important;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1199px){
+    .MainScreen .package-column .package-detail {
+        height: 100% !important;
+    }
+
+    .MainScreen .package-column .package-title {
+        font-size: 20px !important;
+    }
+
+    .MainScreen .package-column .package-price {
+        padding: 0 !important;
+    }
+
+    .MainScreen .package-column .package-price .price {
+        font-size: 50px !important;
+    }
+
+    .MainScreen .package-column .package-price .currency {
+        font-size: 22px !important;
+    }
+
+    .MainScreen .package-column .package-price .period {
+        margin-top: 0px !important;
+        padding-bottom: 10px;
+        font-size: 12px !important;
+    }
+
+    .MainScreen .package-column .package-detail ul li {
+        font-size: 12px !important;
+        height: auto !important;
+        padding: 10px 0 !important;
+    }
+
+    .MainScreen .package-column .fa.fa-check,
+    .MainScreen .package-column .fa.fa-times,
+    .MainScreen .package-column .package-detail a{
+        font-size: 12px !important;
+    }
+}
