@@ -72,6 +72,11 @@ html, body, .MainScreen {
     display: none !important;
 }
 
+.MainScreen #chartdiv tspan,
+.MainScreen #chartdiv .amcharts-balloon-div > div {
+    font-family: 'Poppins', sans-serif !important;
+}
+
 .MainScreen .sub-title, .MainScreen .sub-title.alt{
     color: #646161;
     font-size: 27px;
