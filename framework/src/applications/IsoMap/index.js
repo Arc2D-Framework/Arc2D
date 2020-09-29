@@ -1,5 +1,5 @@
 import! 'core.ui.game.Point';
-import! 'core.ui.game.Tileset';
+import! 'core.ui.game.Map';
 
 namespace `applications` (
     class IsoMap extends Application {
@@ -10,11 +10,12 @@ namespace `applications` (
 
         async onConnected() {
             await super.onConnected();
-            var response = await fetch('resources/maps/ShiningWars2.json');
-            this.map = await response.json();
+            // var response = await fetch('resources/maps/ShiningWars2.json');
+            // this.map = await response.json();
 
-            this.tileset = new core.ui.game.Tileset(this.map);
-            await this.tileset.load();
+            // this.tileset = new core.ui.game.Map(this.map);
+            this.map = new core.ui.game.Map("resources/maps/ShiningWars2.json");
+            await this.map.load();
             this.renderMap()
         }
 
@@ -109,11 +110,11 @@ namespace `applications` (
                     var voffset  = this.voffset(layers[layer]);
                     d.setAttribute("voffset",voffset)
                     if(tileType!=0){
-                        var tileset = this.tileset.getTilesetByIndex(layer);
+                        var tileset = this.map.getTilesetByIndex(layer);
                         if(layer > 0){//Tiled Bug
-                            tileset = this.tileset.getTilesetForLayerByMaterialSource(layers[layer]);
+                            tileset = this.map.getTilesetForLayerByMaterialSource(layers[layer]);
                         }
-                        var tileType2 = this.tileset.getTileTypeById(tileset, tileType, layer);
+                        var tileType2 = this.map.getTileTypeById(tileset, tileType, layer);
                         this.placeTile2(tileType2, new core.ui.game.Point(x, y+voffset), c, r, d)
                     }
                   }

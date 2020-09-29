@@ -2,8 +2,8 @@ import 'display.components.Splash';
 
 namespace `display.worlds` (
     class DomClouds extends World {
-        constructor(element){
-            super(element);
+        constructor(){
+            super();
             this.layers = [];
             this.objects = [];
         }
@@ -24,7 +24,7 @@ namespace `display.worlds` (
             window.addEventListener( 'mousemove', e=>this.onMouseMove(e) );
             window.addEventListener( 'touchmove', e=>this.onMouseMove(e) );
             this.viewport.style.perspective= this.p;
-            
+
             this.generate();//make clouds
         }
 
@@ -79,11 +79,7 @@ namespace `display.worlds` (
         //generate many clouds
         generate() {
             this.objects = [];
-            if ( this.world.hasChildNodes() ) {
-                while ( this.world.childNodes.length >= 1 ) {
-                    this.world.removeChild( this.world.firstChild );
-                }
-            }
+            this.world.innerHTML=""; //clear it
 
             for( var j = 0; j < 10; j++ ) {
                 this.objects.push( this.createCloud() );
