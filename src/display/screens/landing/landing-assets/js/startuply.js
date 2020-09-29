@@ -1,23 +1,16 @@
-/*
-*
-* Custom js snippets for Startuply v2.0
-* by Vivaco
-*
-*/
-
-var Startuply;
+var LandingTheme;
 
 ;(function($){
 
     $(document).on('ready', function () {
-        Startuply.init();
+        LandingTheme.init();
     });
 
 })( jQuery );
 
 
 // Main theme functions start
-Startuply = {
+LandingTheme = {
     defaults: {
         log: false,
         styleSwitcher: false,
@@ -51,7 +44,7 @@ Startuply = {
     },
 
     log: function (msg) {
-        if ( this.options.log ) console.log('%cStartupLy Log: ' + msg, 'color: #1ac6ff');
+        if ( this.options.log ) console.log('%cLandingTheme Log: ' + msg, 'color: #1ac6ff');
     },
 
     buildStyleSwitcher: function () {
@@ -264,34 +257,34 @@ Startuply = {
                     this.log( 'Can\'t find jQuery.slider function. Volumn slider doesn\'t work.');
                 }
 
-                $playBtn.on('click.startuply', function () {
+                $playBtn.on('click.LandingTheme', function () {
                     $player.getPlayer().playVideo();
                 });
 
-                $playToggle.on('click.startuply', function () {
+                $playToggle.on('click.LandingTheme', function () {
                     if ( $(this).is('.active') ) $player.getPlayer().playVideo();
                     else $player.getPlayer().pauseVideo();
                 });
 
-                $muteToggle.on('click.startuply', function () {
+                $muteToggle.on('click.LandingTheme', function () {
                     $player.toggleVolume();
                 });
 
-                $player.on('YTPStart.startuply', function () {
+                $player.on('YTPStart.LandingTheme', function () {
                     $playBtn.fadeOut(300);
                     $playToggle.removeClass('active');
                 });
 
-                $player.on('YTPPause.startuply', function () {
+                $player.on('YTPPause.LandingTheme', function () {
                     $playBtn.fadeIn(200);
                     $playToggle.addClass('active');
                 });
 
-                $player.on('YTPMuted.startuply', function () {
+                $player.on('YTPMuted.LandingTheme', function () {
                     $muteToggle.addClass('active');
                 });
 
-                $player.on('YTPUnmuted.startuply', function () {
+                $player.on('YTPUnmuted.LandingTheme', function () {
                     $muteToggle.removeClass('active');
                 });
 
@@ -470,7 +463,7 @@ Startuply = {
                         _this.log( 'Can\'t find jQuery.validate function.' );
                     }
                 }else {
-                    $(this).on('submit.startuply', mailchimpHandler);
+                    $(this).on('submit.LandingTheme', mailchimpHandler);
                 }
             });
         }
@@ -503,7 +496,7 @@ Startuply = {
                             moveSlides: 4
                         });
 
-                        $('.product-thumb-list').on('click.startuply', '.product-thumb', function () {
+                        $('.product-thumb-list').on('click.LandingTheme', '.product-thumb', function () {
                             var $this = $(this),
                                 imgId = $this.attr('data-img-id'),
                                 $currentSlide = $('.product-image-list').find('[data-img-id=' + imgId + ']');
@@ -526,7 +519,7 @@ Startuply = {
             var $nav = $('.cart-checkout-navigation-list'),
                 $navControls = $('.cart-checkout-navigation-controls');
 
-            $navControls.on('click.startuply', '.btn', function (event) {
+            $navControls.on('click.LandingTheme', '.btn', function (event) {
                 var next = $(this).is('.next'),
                     $activeLi = $nav.find('> .active'),
                     $next = $activeLi.next().find('.cart-checkout-navigation-list-item-link'),
@@ -642,7 +635,7 @@ Startuply = {
     //show & hide login/forgot password form
     loginShowHide: function () {
         $(window).on('load', function () {
-            $('.forgot-link a').on('click.startuply', function (event) {
+            $('.forgot-link a').on('click.LandingTheme', function (event) {
                 event.preventDefault();
 
                 $('#login-form').toggleClass('show hide');
@@ -704,7 +697,7 @@ Startuply = {
                     }
                 }, { offset: -100 });
 
-                $('body').on( 'click.startuply', 'a[href*="#"]', function (event) {
+                $('body').on( 'click.LandingTheme', 'a[href*="#"]', function (event) {
                     var href = $(this).attr('href'),
                         anchorId = href.substring(href.indexOf('#'), href.length);
 
@@ -1006,71 +999,71 @@ Startuply = {
     setEventHandlers: function () {
         var _this = this;
 
-        $(window).on('load.startuply', function (event) {
+        $(window).on('load.LandingTheme', function (event) {
             _this.windowLoadHeandler(event);
         });
 
-        $(window).on('resize.startuply', function (event) {
+        $(window).on('resize.LandingTheme', function (event) {
             _this.windowResizeHandler(event);
         });
 
-        $(window).on('scroll.startuply', function (event) {
+        $(window).on('scroll.LandingTheme', function (event) {
             _this.windowScrollHandler(event);
         });
 
-        $('.navigation-toggle').on('click.startuply', function () {
+        $('.navigation-toggle').on('click.LandingTheme', function () {
             _this.navigationToggleHandler($(this));
         });
 
-        $('body').on('mousemove.startuply', function (event) {
+        $('body').on('mousemove.LandingTheme', function (event) {
             _this.bodyMouseMoveHandler(event);
         });
 
-        $('header .dropdown').on('mouseover.startuply', function () {
+        $('header .dropdown').on('mouseover.LandingTheme', function () {
             _this.dropdownMouseOverHandler($(this));
         });
 
-        $('.dropdown > a').on('click.startuply', function (event) {
+        $('.dropdown > a').on('click.LandingTheme', function (event) {
             event.preventDefault();
 
             _this.dropdownClickHandler($(this));
         });
 
-        $('.back-to-top').on('click.startuply', function (event) {
+        $('.back-to-top').on('click.LandingTheme', function (event) {
             event.preventDefault();
 
             _this.backToTopHandler();
         });
 
-        $('body').on('mouseover.startuply', '.wave-mouseover', function (event) {
+        $('body').on('mouseover.LandingTheme', '.wave-mouseover', function (event) {
             _this.waveShowAnimation(event, $(this));
         });
 
-        $('body').on('mouseout.startuply', '.wave-mouseover', function (event) {
+        $('body').on('mouseout.LandingTheme', '.wave-mouseover', function (event) {
             _this.waveHideAnimation(event, $(this));
         });
 
-        $('body').on('mousedown.startuply', '.wave-click', function (event) {
+        $('body').on('mousedown.LandingTheme', '.wave-click', function (event) {
             _this.waveShowAnimation(event, $(this));
         });
 
-        $('body').on('mouseup.startuply mouseover.startuply', '.wave-click', function (event) {
+        $('body').on('mouseup.LandingTheme mouseover.LandingTheme', '.wave-click', function (event) {
             _this.waveHideAnimation(event, $(this));
         });
 
-        $('.navigation-navbar').on( 'mousewheel.startuply DOMMouseScroll.startuply', function (event) {
+        $('.navigation-navbar').on( 'mousewheel.LandingTheme DOMMouseScroll.LandingTheme', function (event) {
             _this.navScrollHandler(event, this);
         });
 
-        $('.style-toggle').on('click.startuply', function(event){
+        $('.style-toggle').on('click.LandingTheme', function(event){
             _this.styleSwitcherHandler(event, $(this));
         });
 
-        $('.style-switcher .color').on('click.startuply', function(event) {
+        $('.style-switcher .color').on('click.LandingTheme', function(event) {
             _this.styleSwitcherColorHandler(event, $(this));
         });
 
-        $('#animations_switch').on('change.startuply', function(event){
+        $('#animations_switch').on('change.LandingTheme', function(event){
             _this.styleSwitcherToggleAnimation(event, $(this));
         });
 
