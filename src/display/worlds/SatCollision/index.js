@@ -1,11 +1,11 @@
 import 'src/system/game/sat/Collisions.js';
 
-namespace `display.screens` (
+namespace `display.worlds` (
     class SatCollision extends core.ui.World {
         constructor(element){
             super(element);
-            document.addEventListener('keydown', e=>this.updateKeys(e));
-            document.addEventListener('keyup',   e=>this.updateKeys(e));
+            document.addEventListener('keydown', e=>this.onKeyInput(e));
+            document.addEventListener('keyup',   e=>this.onKeyInput(e));
         }
 
         async onConnected() {
@@ -27,24 +27,17 @@ namespace `display.screens` (
             this.createMap();
         }
 
-        createPlayer(x, y) {
-            const size = 15;
-            this.player = new Polygon(x, y, [
-                [-20, -10],
-                [20, -10],
-                [20, 10],
-                [-20, 10],
-            ], 0.2);
-
-            this.player.velocity = 0;
-            this.collisions.insert(this.player);
-        }
-
         onUpdate(){
             if(!this.player){return}
-            this.handleInput();
-            this.processGameLogic();
-            this.handleCollisions();
+            this.up    && (this.player.velocity += 0.1);
+            this.down  && (this.player.velocity -= 0.1);
+            this.left  && (this.player.angle -= 0.04);
+            this.right && (this.player.angle += 0.04);
+        }
+
+        onFixedUpdate(){
+            this.updateMovement();
+            this.updateCollisions();
         }
 
         onDraw(){
@@ -69,14 +62,7 @@ namespace `display.screens` (
             }
         }
 
-        handleInput() {
-            this.up    && (this.player.velocity += 0.1);
-            this.down  && (this.player.velocity -= 0.1);
-            this.left  && (this.player.angle -= 0.04);
-            this.right && (this.player.angle += 0.04);
-        }
-
-        updateKeys(e){
+        onKeyInput(e){
             const keydown = e.type === 'keydown';
             const key     = e.key.toLowerCase();
 
@@ -86,7 +72,22 @@ namespace `display.screens` (
             key === 'd' && (this.right = keydown);
         }
 
-        processGameLogic() {
+
+        createPlayer(x, y) {
+            const size = 15;
+            this.player = new Polygon(x, y, [
+                [-20, -10],
+                [20, -10],
+                [20, 10],
+                [-20, 10],
+            ], 0.2);
+
+            this.player.velocity = 0;
+            this.collisions.insert(this.player);
+        }
+
+
+        updateMovement() {
             const x = Math.cos(this.player.angle);
             const y = Math.sin(this.player.angle);
 
@@ -115,7 +116,7 @@ namespace `display.screens` (
             }
         }
 
-        handleCollisions() {
+        updateCollisions() {
             var result = this.result;
             this.collisions.update();
             const potentials = this.player.potentials();

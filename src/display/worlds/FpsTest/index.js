@@ -1,9 +1,10 @@
 import! 'display.components.Planet';
 
-namespace `display.screens` (
+namespace `display.worlds` (
     class FpsTest extends World {
         constructor(element){
             super(element);
+            window.sprites = [];
         }
 
         async onConnected() {
@@ -44,6 +45,25 @@ namespace `display.screens` (
 
         }
 
+        onFixedUpdate(time){
+            // console.log("fixed",time)
+            window.sprites.forEach(sprite => sprite.onFixedUpdate(time))
+        }
+
+        onDraw(interpolation){
+            // console.log("interpolation",interpolation)
+            if(this.context){
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+            window.sprites.forEach(sprite => sprite.onDraw(interpolation,this.context))
+        }
+
+
+        onUpdate(timestamp, delta){
+            // console.log("delta",delta)
+            // console.log("timestamp",timestamp)
+        }
+
         onShowFPS(e){
             this.fpsValue.textContent = Math.round(e.target.value);
         }
@@ -53,9 +73,11 @@ namespace `display.screens` (
             MainLoop.setMaxAllowedFPS(val === 60 ? Infinity : val);
         }
 
-		onEnd(fps, panic){
-			super.onEnd(fps, panic);
-			if(this.fpsCounter){this.fpsCounter.textContent = Math.round(fps) + ' FPS';}
+		onUpdateEnd(fps, panic){
+			super.onUpdateEnd(fps, panic);
+			if(this.fpsCounter){
+                this.fpsCounter.textContent = Math.round(fps) + ' FPS';
+            }
 		}
     }
 );

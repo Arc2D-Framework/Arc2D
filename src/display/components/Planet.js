@@ -37,7 +37,8 @@ namespace `display.components` (
          * @param {Number} delta
          *   The amount of time since the last time the planet was updated, in seconds.
          */
-        onUpdate (delta) {
+        onFixedUpdate (delta) {
+            // console.log("delta",delta)
             this.lastX = this.x;
             this.lastY = this.y;
             this.theta += this.velocity * delta;

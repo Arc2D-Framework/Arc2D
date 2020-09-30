@@ -25,9 +25,10 @@ document.addEventListener("DOMContentLoaded", e => {
           );
           (app instanceof core.ui.World) ? 
             MainLoop
-              .setUpdate(app.onUpdate.bind(app))
+              .setBegin(app.onUpdate.bind(app))
+              .setUpdate(app.onFixedUpdate.bind(app))
               .setDraw(app.onDraw.bind(app))
-              .setEnd(app.onEnd.bind(app))
+              .setEnd(app.onUpdateEnd.bind(app))
               .start() : null;
         });
     }

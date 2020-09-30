@@ -22,22 +22,21 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
 namespace `display.worlds` (
     class HelloDomNode extends World {
 
-        //some code could be moved to cctor, oh well.
         constructor(element){
             super(element);
+            this.scale = 30;//scale is 30px per Meter 
+            this.nodes=[];  //for holding shapes
+
+            //make a world
+            this.world = new b2World(
+                new b2Vec2(0, 20)    //gravity
+                ,true                //allow sleep
+            );
         }
 
         async onConnected() {
             await super.onConnected();//waits for onConnect to run, see docs
-
-            this.scale = 30;//scale is 30px per Meter 
-            this.nodes=[];// [] for holding shape nodes in memory
-
-            //make a world
-            var world = this.world = new b2World(
-                new b2Vec2(0, 20)    //gravity
-                ,  true              //allow sleep
-            );
+            this.fpsCounter = this.querySelector('#fpscounter');
 
             //using 2 canvases, one for svg circles and other for HTML
             this.stage = this.querySelector("#stage");
@@ -45,16 +44,21 @@ namespace `display.worlds` (
 
             //the ground, just an HTML box
             var ground = new display.worlds.entities.html.GroundBox(
-                12,1,world,this.stage,this.scale
+                12, 
+                1, 
+                this.world, 
+                this.stage, 
+                this.scale
             );
-            this.stage.appendChild(ground);// add ground to stage
+            //add ground to stage
+            this.stage.appendChild(ground);
                 
             //generate 10 random Polygons
             for(var i = 0; i < 10; ++i) {
                 var poly = new display.worlds.entities.html.PolygonShape(
                     Math.random() + 0.5,
                     Math.random() + 0.5,
-                    world,
+                    this.world,
                     this.stage,
                     this.scale
                 );
@@ -67,7 +71,10 @@ namespace `display.worlds` (
              //generate 10 random Circles
              for(var i = 0; i < 10; ++i) {
                 var circle = new display.worlds.entities.svg.CircleShape(
-                    Math.random() + 0.5,world,this.svg,this.scale
+                    Math.random() + 0.5,
+                    this.world,
+                    this.svg,
+                    this.scale
                 );
                 //add it to list
                 this.nodes.push(circle);
@@ -75,22 +82,16 @@ namespace `display.worlds` (
                 this.svg.appendChild(circle.element);
              }
              
-
-             await wait(100);//a little breather after all that setup.
-             this.ready=true;//now we are ready
-
-             //setup debug draw -- optional
-             var debugDraw = new b2DebugDraw();
-                debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
-                debugDraw.SetDrawScale(30.0);
-                debugDraw.SetFillAlpha(0.3);
-                debugDraw.SetLineThickness(0);
-                debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
-                world.SetDebugDraw(debugDraw);
+             //breathe
+             await wait(100);
+             //ready
+             this.ready=true;
+             //optional debug
+             // this.setupCanvasDebug();
         }
 
-        //onUpdate steps (runs) at 60fps, called by Arc automatically every 1/60th frame
-        onUpdate(time){
+        //affected by time. called zero or more times per frame depending on the frame rate
+        onFixedUpdate(time){
             if(!this.world||!this.ready){return}//world might not be ready yet, wait for next step, check again
 
             //step the world for this update. World handles physics update internally.
@@ -102,7 +103,7 @@ namespace `display.worlds` (
              this.world.ClearForces();
         }
 
-        //onDraw steps (runs) at 60fps 1/60th right after onUpdate runs, called by Arc automatically.
+
         onDraw(interpolation){
             if(this.world){//check again, make sure world is there
                 this.world.DrawDebugData();//optional
@@ -123,12 +124,23 @@ namespace `display.worlds` (
             }
         }
 
-        //helper function for checking if node goes off screen dimensions
-        isAnyPartOfElementInViewport(el=this.root) {
-            var rect = el.getBoundingClientRect();
-            var v = (rect.top  <= window.innerHeight) && ((rect.bottom) >= 0);
-            var h = (rect.left <= window.innerWidth)  && ((rect.right)  >= 0);
-            return (v && h);
+        onUpdateEnd(fps, panic){
+            super.onUpdateEnd(fps, panic);
+            if(this.fpsCounter){
+                this.fpsCounter.textContent = Math.round(fps) + ' FPS';
+            }
+        }
+
+        //optional
+        setupCanvasDebug(){
+            //setup b2 debug draw
+             var debugDraw = new b2DebugDraw();
+                debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
+                debugDraw.SetDrawScale(30.0);
+                debugDraw.SetFillAlpha(0.3);
+                debugDraw.SetLineThickness(0);
+                debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+                this.world.SetDebugDraw(debugDraw);
         }
     }
 );

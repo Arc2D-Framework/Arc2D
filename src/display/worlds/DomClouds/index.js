@@ -28,7 +28,7 @@ namespace `display.worlds` (
             this.generate();//make clouds
         }
 
-        onUpdate(delta){
+        onFixedUpdate(delta){
             for( var j = 0; j < this.layers.length; j++ ) {
                 var layer = this.layers[ j ];
                 layer.data.a += layer.data.speed*delta;
@@ -49,8 +49,8 @@ namespace `display.worlds` (
             }
         }
 
-        onEnd(fps, panic){
-            super.onEnd(fps, panic);
+        onUpdateEnd(fps, panic){
+            super.onUpdateEnd(fps, panic);
             if(this.fpsCounter){
                 this.fpsCounter.textContent = Math.round(fps) + ' FPS';
             }
@@ -59,30 +59,26 @@ namespace `display.worlds` (
 
         //Updates worldYAngle, worldXAngle with mouse.
         onMouseMove ( e ) {
-            var x = e.clientX || e.touches[ 0 ].clientX;
-            var y = e.clientY || e.touches[ 0 ].clientY;
+            var x = e.clientX || e.touches&&e.touches[ 0 ].clientX;
+            var y = e.clientY || e.touches&&e.touches[ 0 ].clientY;
 
             this.worldYAngle = -( .5 - ( x / window.innerWidth ) ) * 180;
             this.worldXAngle = ( .5 - ( y / window.innerHeight ) ) * 180;
-            e.preventDefault();
+            // e.preventDefault();
         }
 
         //Updates depth on zoom in|out with mouse
         onContainerMouseWheel( e ) {
             e = e ? e : window.event;
             this.d = this.d - ( e.detail ? e.detail * -5 : e.wheelDelta / 8 );
-            e.preventDefault();
+            //e.preventDefault();
         }
 
 
         //generate many clouds
         generate() {
             this.objects = [];
-            if ( this.world.hasChildNodes() ) {
-                while ( this.world.childNodes.length >= 1 ) {
-                    this.world.removeChild( this.world.firstChild );
-                }
-            }
+            this.world.innerHTML="";
 
             for( var j = 0; j < 10; j++ ) {
                 this.objects.push( this.createCloud() );
