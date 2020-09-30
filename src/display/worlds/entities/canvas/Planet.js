@@ -14,8 +14,8 @@
  *   The color of the planet.
  */
 
-import '/src/display/screens/FpsTest/misc/circle.js';
-namespace `display.components` (
+import '/src/display/worlds/entities/canvas/Circle.js';
+namespace `display.worlds.entities.canvas` (
     class Planet {
         constructor(center, radius, orbitRadius, velocity, color){
             this.center = center;

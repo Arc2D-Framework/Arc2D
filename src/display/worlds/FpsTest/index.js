@@ -1,4 +1,4 @@
-import! 'display.components.Planet';
+import! 'display.worlds.entities.canvas.Planet';
 
 namespace `display.worlds` (
     class FpsTest extends World {
@@ -33,10 +33,10 @@ namespace `display.worlds` (
 			    moon2Radius = smallerDimension * 0.04,
 			    sunRadius = earthOrbitRadius * 0.5,
 			    earthRadius = earthOrbitRadius * 0.15,
-			    sun = new display.components.Planet({x: this.canvas.width*0.5, y: this.canvas.height * 0.5}, sunRadius, 0, 0, '#FFD000'),
-			    earth = new display.components.Planet(sun, earthRadius, earthOrbitRadius, 0.03 * Math.PI / 180, 'blue'),
-			    moon = new display.components.Planet(earth, moonRadius, moonOrbitRadius, 0.1 * Math.PI / 180, 'gray'),
-			    moon2 = new display.components.Planet(moon, moon2Radius, moonOrbitRadius, 0.3 * Math.PI / 180, 'gray');
+			    sun = new display.worlds.entities.canvas.Planet({x: this.canvas.width*0.5, y: this.canvas.height * 0.5}, sunRadius, 0, 0, '#FFD000'),
+			    earth = new display.worlds.entities.canvas.Planet(sun, earthRadius, earthOrbitRadius, 0.03 * Math.PI / 180, 'blue'),
+			    moon = new display.worlds.entities.canvas.Planet(earth, moonRadius, moonOrbitRadius, 0.1 * Math.PI / 180, 'gray'),
+			    moon2 = new display.worlds.entities.canvas.Planet(moon, moon2Radius, moonOrbitRadius, 0.3 * Math.PI / 180, 'gray');
 
 			window.sprites.push(sun);
 			window.sprites.push(earth);
