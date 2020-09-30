@@ -87,7 +87,7 @@ namespace `display.worlds` (
              //ready
              this.ready=true;
              //optional debug
-             // this.setupCanvasDebug();
+             this.setupCanvasDebug();
         }
 
         //affected by time. called zero or more times per frame depending on the frame rate
