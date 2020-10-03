@@ -41,7 +41,7 @@
         <div class="javascript lang"></div>
         <div class="html lang">
         	<blockquote class="html" style="display:block;width: 100%;">
-            <b>Figure 1: The <code>&#x3C;template&#x3E;</code> used in the <span style="color:yellow;">sat-collision.html</span> example</b><br/>
+            <b>Figure 1: The <code>&#x3C;template&#x3E;</code> used in the <span style="color:yellow;"><a href="https://nodeapptest01.herokuapp.com/sat-collision.html" target="_new">sat-collision.html</a></span> example</b><br/>
             Whether component, screen, or world display, the index.html asset is always a fragment of
             HTML wrapped in a template. <em style="color:red;">Never embed typical HTML DOCTYPE markup, as you would for a webpage (See shell example below, figure 2)</em>.
           </blockquote>
@@ -68,7 +68,7 @@
           <blockquote class="html" style="display:block;width: 100%;">
             <b>Figure 2: A webpage shell, at root of the project, embedded with a screen or world.</b>
             <br/>
-            The <span style="color:yellow;">sat-collision.html</span> webpage example is an empty shell for embedding a world or screen.
+            The <span style="color:yellow;"><a href="https://nodeapptest01.herokuapp.com/sat-collision.html" target="_new">sat-collision.html</a></span> webpage example is an empty shell for embedding a world or screen.
             It's UI is defined by the screen or world <code>&#x3C;template&#x3E;</code> being loaded.
           </blockquote>
           <pre class="highlight html" style="display:block;width: 100%;">
@@ -124,7 +124,7 @@
           As the mozilla docs state, a template is not to be rendered immediately but may be
           instantiated subsequently during runtime. When you finally embed and use the HTML5
           tag (figure 2 html) representing the screen/world, rendering is triggered immediately by Arc
-          during <code>onConnected</code> time.
+          during <code>onConnected</code> time (see Figure 3 - JavaScript tab).
           It is interesting to know what does happen to the final HTML body after render.
         </p>
         <h3>What happens during render</h3>
@@ -137,7 +137,7 @@
         <p>
           After render, use the DevTools inspector  to have a look at the body. The innerHTML of all
           custom components (screens/worlds & components) are fully populated for any custom-tags in the DOM tree.
-          Here's what the body should look like for the sat-collision.html example:
+          Here's what the body should look like for the <a href="https://nodeapptest01.herokuapp.com/sat-collision.html" target="_new">sat-collision.html</a> example:
           <pre class="inline html lang">
             <code class="hljs">
 &#x3C;body namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
