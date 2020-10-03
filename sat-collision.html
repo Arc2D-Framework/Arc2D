@@ -17,13 +17,17 @@
     <body namespace="display.worlds.SatCollision">
         <sat-collision>
             <template> 
-                <!-- open new <template>, will ignore the one in "display/screens/SatCollision/index.html" -->
-                <h1>Learn About SAT: <a href="https://www.youtube.com/watch?v=Ap5eBYKlGDo" target="_new">Separating Axis Theorem (SAT) Explanation.</a></h1>
                 <div>
-                    <div><b>W, S</b> - Accelerate/Decelerate</div>
-                    <div><b>A, D</b> - Turn</div>
-                    <div><label><input id="bvh" type="checkbox"/> Show Bounding Volume Hierarchy</label></div>
-                    <canvas id="canvas1" width="800" height="600"></canvas>
+                    <div>
+                        <div><b>W, S</b> - Accelerate/Decelerate</div>
+                        <div><b>A, D</b> - Turn</div>
+                        <div>
+                            <label>
+                                <input id="bvh" type="checkbox"/> Show Bounding Volume Hierarchy
+                            </label>
+                        </div>
+                        <canvas id="canvas1" width="800" height="600"></canvas>
+                    </div>
                 </div>
             </template>
         </sat-collision>

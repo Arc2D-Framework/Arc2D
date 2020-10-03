@@ -72,7 +72,7 @@ namespace `display.worlds` (
                 world.SetDebugDraw(debugDraw);
         }
 
-        onUpdate(time){
+        onFixedUpdate = (time) =>{
             if(!this.world){return}
 
             this.world.Step(
@@ -83,7 +83,7 @@ namespace `display.worlds` (
              this.world.ClearForces();
         }
 
-        onDraw(interpolation){
+        onDraw = (interpolation) =>{
             if(this.world){
                 this.world.DrawDebugData();
             }

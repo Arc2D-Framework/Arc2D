@@ -18,8 +18,8 @@ namespace `display.worlds` (
 		    this.fps = this.querySelector('#fps');
 
 		    // Update the slider value label while the slider is being dragged.
-			this.fps.addEventListener('input',  e => this.onShowFPS(e));
-            this.fps.addEventListener('change', e => this.onUpdateFPS(e));
+			this.fps.addEventListener('input',  this.onShowFPS);
+            this.fps.addEventListener('change', this.onUpdateFPS);
 
 
 			this.canvas.width  = window.innerWidth;
@@ -50,7 +50,7 @@ namespace `display.worlds` (
             window.sprites.forEach(sprite => sprite.onFixedUpdate(time))
         }
 
-        onDraw(interpolation){
+        onDraw = (interpolation) => {
             // console.log("interpolation",interpolation)
             if(this.context){
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -59,21 +59,21 @@ namespace `display.worlds` (
         }
 
 
-        onUpdate(timestamp, delta){
+        onUpdate = (timestamp, delta) => {
             // console.log("delta",delta)
             // console.log("timestamp",timestamp)
         }
 
-        onShowFPS(e){
+        onShowFPS = (e) => {
             this.fpsValue.textContent = Math.round(e.target.value);
         }
 
-        onUpdateFPS(e){
+        onUpdateFPS = (e) => {
             var val = parseInt(e.target.value, 10);
             MainLoop.setMaxAllowedFPS(val === 60 ? Infinity : val);
         }
 
-		onUpdateEnd(fps, panic){
+		onUpdateEnd = (fps, panic) => {
 			super.onUpdateEnd(fps, panic);
 			if(this.fpsCounter){
                 this.fpsCounter.textContent = Math.round(fps) + ' FPS';

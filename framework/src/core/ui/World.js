@@ -17,6 +17,8 @@ namespace `core.ui` (
                 var discardedTime = Math.round(MainLoop.resetFrameDelta());
             }
         }
+
+        getSimulationTimestep(){ return 1000/60 }
     }
 );
 window.World = window.World||core.ui.World;

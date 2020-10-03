@@ -27,7 +27,7 @@ namespace `display.worlds` (
             this.createMap();
         }
 
-        onUpdate(){
+        onUpdate =()=>{
             if(!this.player){return}
             this.up    && (this.player.velocity += 0.1);
             this.down  && (this.player.velocity -= 0.1);
@@ -35,12 +35,12 @@ namespace `display.worlds` (
             this.right && (this.player.angle += 0.04);
         }
 
-        onFixedUpdate(){
+        onFixedUpdate=()=>{
             this.updateMovement();
             this.updateCollisions();
         }
 
-        onDraw(){
+        onDraw=()=>{
             if(!this.player){return}
 
             this.context.fillStyle = '#000000';

@@ -2,6 +2,10 @@ import 'src/core/http/ClassLoader.js';
 import 'src/mainloop.js';
 
 document.addEventListener("DOMContentLoaded", e => {
+  var link = function(func,scope){
+    func.self=scope;
+    return func;
+  }
   async function bootup() {
     var ns = document.body.getAttribute("namespace");
         ns = ns||Config.NAMESPACE;
@@ -25,11 +29,19 @@ document.addEventListener("DOMContentLoaded", e => {
           );
           (app instanceof core.ui.World) ? 
             MainLoop
-              .setBegin(app.onUpdate.bind(app))
-              .setUpdate(app.onFixedUpdate.bind(app))
-              .setDraw(app.onDraw.bind(app))
-              .setEnd(app.onUpdateEnd.bind(app))
+              .setBegin(app.onUpdate)
+              .setUpdate(app.onFixedUpdate)
+              .setDraw(app.onDraw)
+              .setEnd(app.onUpdateEnd)
+              .setSimulationTimestep(app.getSimulationTimestep())
               .start() : null;
+            // MainLoop
+            //   .setBegin(link(app.onUpdate, app))
+            //   .setUpdate(link(app.onFixedUpdate,app))
+            //   .setDraw(link(app.onDraw,app))
+            //   .setEnd(link(app.onUpdateEnd,app))
+            //   .setSimulationTimestep( linkapp.getSimulationTimestep())
+            //   .start() : null;
         });
     }
   };

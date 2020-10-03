@@ -1,10 +1,4 @@
 BUILDCONFIG = {
-    // LoadPaths:[
-    //     "/", 
-    //     "src", 
-    //     "libs"
-    // ],
-    
     Input : "src/applications/NotificationsApp/index.js",
     
     Output : {
@@ -14,17 +8,13 @@ BUILDCONFIG = {
 
     LoadsAsync : true,
 
-    // Output : {
-    //     SourcePath:"src/applications/InlineTest/index.src.js",
-    //     CompressedPath: "src/applications/InlineTest/index.min.js"
-    // },
-
-    // Output : {
-    //  SourcePath:"node_modules/od-cocoon/framework.src.js",
-    //  CompressedPath: "node_modules/od-cocoon/framework.min.js"
-    // },
-    
     Verbos:true,
+
+    CompilationLevel : "WHITESPACE_ONLY",
+
+    InputLanguage : "ECMASCRIPT_2018",
+
+    OutputLanguage : "ECMASCRIPT_2018",
 
     Prefabs : {
         Enabled : true,

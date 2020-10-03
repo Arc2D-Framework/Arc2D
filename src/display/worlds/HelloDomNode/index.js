@@ -38,9 +38,10 @@ namespace `display.worlds` (
             await super.onConnected();//waits for onConnect to run, see docs
             this.fpsCounter = this.querySelector('#fpscounter');
 
-            //using 2 canvases, one for svg circles and other for HTML
+            //using 3 canvases, one for svg circles 1 for HTML and Canvas for debug
             this.stage = this.querySelector("#stage");
             this.svg = this.querySelector("#svg");
+            this.canvas = document.getElementById("canvas");
 
             //the ground, just an HTML box
             var ground = new display.worlds.entities.html.GroundBox(
@@ -91,12 +92,13 @@ namespace `display.worlds` (
         }
 
         //affected by time. called zero or more times per frame depending on the frame rate
-        onFixedUpdate(time){
+        onFixedUpdate = (time) =>{
+            // console.log(time/60)
             if(!this.world||!this.ready){return}//world might not be ready yet, wait for next step, check again
 
             //step the world for this update. World handles physics update internally.
             this.world.Step(
-                   1 / 40   //frame-rate, experimenting with 40fps
+                   time/650 //time siumlated in seconds or 1/40
                 ,  20       //velocity iterations
                 ,  20       //position iterations
              );
@@ -104,7 +106,7 @@ namespace `display.worlds` (
         }
 
 
-        onDraw(interpolation){
+        onDraw = (interpolation) =>{
             if(this.world){//check again, make sure world is there
                 this.world.DrawDebugData();//optional
                 
@@ -113,7 +115,7 @@ namespace `display.worlds` (
                     var node = this.nodes[i];
                     //check! maybe node was deleted when it went off screen, splice it out, continue
                     if(!node) {this.nodes.splice(i,0); continue}
-                    node.onDraw(); //else, subsequently tell node to onDraw() for this step (1/60th frame)
+                    node.onDraw(interpolation); //else, subsequently tell node to onDraw() for this step (1/60th frame)
                     
                     //if any nodes/shapes fall of screen, destroy them
                     if(!this.isAnyPartOfElementInViewport(node)){
@@ -124,7 +126,7 @@ namespace `display.worlds` (
             }
         }
 
-        onUpdateEnd(fps, panic){
+        onUpdateEnd = (fps, panic) => {
             super.onUpdateEnd(fps, panic);
             if(this.fpsCounter){
                 this.fpsCounter.textContent = Math.round(fps) + ' FPS';
@@ -135,7 +137,7 @@ namespace `display.worlds` (
         setupCanvasDebug(){
             //setup b2 debug draw
              var debugDraw = new b2DebugDraw();
-                debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
+                debugDraw.SetSprite(this.canvas.getContext("2d"));
                 debugDraw.SetDrawScale(30.0);
                 debugDraw.SetFillAlpha(0.3);
                 debugDraw.SetLineThickness(0);

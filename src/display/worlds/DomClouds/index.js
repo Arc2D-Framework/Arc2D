@@ -28,7 +28,7 @@ namespace `display.worlds` (
             this.generate();//make clouds
         }
 
-        onFixedUpdate(delta){
+        onFixedUpdate = (delta) => {
             for( var j = 0; j < this.layers.length; j++ ) {
                 var layer = this.layers[ j ];
                 layer.data.a += layer.data.speed*delta;
@@ -36,7 +36,7 @@ namespace `display.worlds` (
         }
 
         //LETS DRAW ALL OF THE UPDATES
-        onDraw (delta){
+        onDraw = (delta) => {
             if(!this.world){return}
 
             var t = 'translateZ( ' + this.d + 'px ) rotateX( ' + this.worldXAngle + 'deg) rotateY( ' + this.worldYAngle + 'deg)';
@@ -49,7 +49,7 @@ namespace `display.worlds` (
             }
         }
 
-        onUpdateEnd(fps, panic){
+        onUpdateEnd = (fps, panic) =>{
             super.onUpdateEnd(fps, panic);
             if(this.fpsCounter){
                 this.fpsCounter.textContent = Math.round(fps) + ' FPS';
@@ -99,7 +99,7 @@ namespace `display.worlds` (
             for( var j = 0; j < 5 + Math.round( Math.random() * 10 ); j++ ) {
                 var cloud = document.createElement( 'img' );
                     cloud.style.opacity = .8;
-                    cloud.setAttribute( 'src', 'src/display/screens/DomClouds/images/cloud.png' );
+                    cloud.setAttribute( 'src', 'src/display/worlds/DomClouds/images/cloud.png' );
                     cloud.className = 'cloudLayer';
 
                 var x = 256 - ( Math.random() * 512 );
