@@ -18,6 +18,8 @@ import 'src/core/data/Repository.js';
 //mport 'src/core/drivers/storage/Memory.js';
 import 'src/core/http/Router.js';
 import 'src/w3c/ui/WebComponent.js';
+import 'src/core/ui/ChildComponent.js';
+import 'src/core/ui/ProtectedChildComponent.js';
 import 'src/w3c/ui/Application.js';
 import 'src/core/ui/World.js';
 import 'src/bootloader.js';

@@ -1,4 +1,4 @@
-Models are like individual entities but are aggregrate
+Models are individual entities as aggregrate
 roots. They manage multiple sub-entities and coordinates
 a process between them.
 

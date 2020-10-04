@@ -15,6 +15,15 @@ Config.TEMPLATE_NAMES_USE_ENGINE_EXTENSION = false;//ex: "index.kruntch.html"
 Config.IMPORTS_CACHE_POLICY = "no-store"; //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
 Config.DEBUG=true;
 
+Config.FIREBASE = {
+    apiKey: "AIzaSyD3HTd7BH4DKkvOF2AitWyQsSWMSEPYT4Y",
+    authDomain: "test-f6d84.firebaseapp.com",
+    databaseURL: "https://test-f6d84.firebaseio.com",
+    projectId: "test-f6d84",
+    storageBucket: "test-f6d84.appspot.com",
+    messagingSenderId: "507958760916",
+    appId: "1:507958760916:web:0ba398f0785cf2f4017241"
+}
 
-module.exports = Config;
+try{module.exports = Config;}catch(e){}
 

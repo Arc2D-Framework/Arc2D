@@ -24,6 +24,13 @@ namespace `applications` (
             // await super.onConnected();
 	    }
 
+        initApp() {
+            firebase.auth().onAuthStateChanged(
+                user  => this.onAuthenticated(user||null), 
+                error => console.log(error)
+            );
+        }
+
         onLoadInstanceStylesheet(){return false}
 
 
@@ -31,9 +38,7 @@ namespace `applications` (
 		
 		}
 
-		onLoggedOut(){
-			alert("Logged Out")
-		}
+		onLoggedOut(){}
 
 
 		logout(){
@@ -41,13 +46,5 @@ namespace `applications` (
                 then(_  => this.onLoggedOut()).
                 catch(e => console.error(e));
 		}
-
-
-	    initApp() {
-	        firebase.auth().onAuthStateChanged(
-                user  => this.onAuthenticated(user||null), 
-                error => console.log(error)
-            );
-	    }
 	}
 );

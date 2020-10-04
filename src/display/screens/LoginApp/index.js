@@ -1,36 +1,19 @@
 
 
 
-namespace `applications`(
+namespace `display.screens`(
 	class LoginApp extends Application {
 	    constructor(element){
 	        super(element);
 	    }
 
-	    async onConnected(){
-	    	await this.render();
-	  //   	this.bind("#login-btn","click", e =>this.onLogin(e), false);
-			// this.bind("#logout-btn","click", e =>this.onLogOut(e), false);
-
-			var firebaseConfig = {
-			    apiKey: "AIzaSyD3HTd7BH4DKkvOF2AitWyQsSWMSEPYT4Y",
-			    authDomain: "test-f6d84.firebaseapp.com",
-			    databaseURL: "https://test-f6d84.firebaseio.com",
-			    projectId: "test-f6d84",
-			    storageBucket: "test-f6d84.appspot.com",
-			    messagingSenderId: "507958760916",
-			    appId: "1:507958760916:web:0ba398f0785cf2f4017241"
-			  };
-			  firebase.initializeApp(firebaseConfig)
-			  
-
-			this.initApp()
-	    }
-
-	    initApp() {
+	    async onConnected() {
+            await wait(100);
+            await this.render();
+            firebase.initializeApp(Config.FIREBASE)
             firebase.auth().onAuthStateChanged(
-                user  => this.onAuthenticated(user||null), 
-                error => console.log(error)
+                this.onAuthenticated, 
+                this.onAuthenticationError
             );
         }
 
@@ -74,10 +57,14 @@ namespace `applications`(
 	    }
 
 
-	    onAuthenticated(user){
+	    onAuthenticated=(user)=>{
 			// this.initializeChildComponents()
 			if(user){location.href="oauth.html"}
-				else { this.onLogin()}
+			else { this.onLogin()}
 		}
+
+		onAuthenticationError=(error)=>{
+            console.log("oauth error", error)
+        }
 	}
 );

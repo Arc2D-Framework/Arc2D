@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');body{
+    margin: 0;
+    padding: 0;
+    background-color:#202830;
+    overflow: hidden;
+}
+
+#hud{
+    position: absolute;
+    text-align: center;
+    font-size: 10vh;
+    font-family: 'Rubik';
+    color: white;
+    top: 30%;
+    width: 100%;
+}

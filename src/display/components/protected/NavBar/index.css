@@ -1,0 +1,37 @@
+:host{
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
+	display:block;
+	padding:10px;
+	overflow: hidden;
+	background: lightslategray;
+}
+:host > div {
+
+	
+}
+:host > div > div{
+	display: inline-block;
+}
+:host img{
+	border-radius: 50%;
+	width: 40px;
+}
+
+:host #logout,
+:host #login{
+	display: inline-block;
+	float: right;
+	margin: 12px;
+	padding: 10px;
+	background:
+	gray;
+	border-radius: 3px;
+}
+
+:host.authenticated #logout{
+	display:block;
+}
+:host.authenticated #login{
+	display:none;
+}
+

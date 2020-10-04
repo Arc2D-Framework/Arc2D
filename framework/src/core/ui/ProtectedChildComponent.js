@@ -3,9 +3,9 @@ import '/src/core/ui/ChildComponent.js';
 namespace `core.ui` (
     class ProtectedChildComponent extends core.ui.ChildComponent {
         async onConnected(){
-            application.onAuthStateChanged(user => {
+            application.onAuthStateChanged(async user => {
               if (user) {
-                super.onConnected(user);
+                await super.onConnected(user);
                 this.classList.add("authenticated")
               }
             })

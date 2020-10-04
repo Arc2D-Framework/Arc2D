@@ -21,19 +21,20 @@
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth.css" />
         <!-- END FIREBASE -->
         
-        <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+        <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+        <script src="-appconfig.js" charset="utf-8"></script>
        
     </head>
 
-    <body namespace="applications.OAuth">
-        <o-auth>
+    <body namespace="display.screens.OAuthDemo">
+        <o-auth-demo>
             <template> <!-- inline template; comment to use screens "index.html" template -->
                 <div id="firebaseui-auth-container"></div>
-                <user-login-bar></user-login-bar>
+                <nav-bar></nav-bar>
                 <div>
-                    <H1>Hello World</H1>
+                    <H1>Hello OAuth :)</H1>
                 </div>
             </template>
-        </o-auth>
+        </o-auth-demo>
     </body>
 </html>
