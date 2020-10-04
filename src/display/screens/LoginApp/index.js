@@ -59,7 +59,7 @@ namespace `display.screens`(
 
 	    onAuthenticated=(user)=>{
 			// this.initializeChildComponents()
-			if(user){location.href="oauth.html"}
+			if(user){location.href="oauth-demo.html"}
 			else { this.onLogin()}
 		}
 
