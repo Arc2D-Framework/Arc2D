@@ -1,3 +1,4 @@
+import 'display.components.Splash';
 import 'display.components.protected.NavBar';
 
 namespace `display.screens` (
