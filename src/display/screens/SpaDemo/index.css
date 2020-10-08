@@ -1,5 +1,5 @@
 
-html, body, .SpaDemo {
+html, body, :host {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -8,20 +8,20 @@ html, body, .SpaDemo {
     box-sizing:border-box;
 }
 
-.SpaDemo {
-	
+:host {
+	border:1px solid red;
 }
 
-.SpaDemo nav a {
+:host nav a {
     margin-right: 40px;
 }
 
-.SpaDemo nav {
+:host nav {
     width: 100%;
     padding: 20px;
 }
 
-.SpaDemo slot[name="content"]{
+:host slot[name="content"]{
     padding: 20px;
     display: block;
 }

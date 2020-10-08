@@ -6,23 +6,30 @@ namespace `display.components` (
         }
 
         async onConnected(){
+            document.addEventListener("movieschanged", (e)=>this.onMoviesChanged(e), false);
+            application.addEventListener("domain.collections.Movies::changed", e => this.onRenderGenres(), false);
+
             this.on("click", (e) => this.onClick(e), false,"li");
             await this.onRenderGenres();
         }
 
         async onRenderGenres(){
             // await core.data.Movies.seed();//seed with test data
-
+            debugger;
             var cursor = await domain.collections.Movies.find({
                 query : {},
                 skip:0,
-                limit:10,
+                limit:40,
                 totals:true
             });
             await cursor.next();
             var all_genres          = await cursor.map(movie => movie.genre);
             var only_unique_genres  = [...new Set(all_genres)];//Set() filters out duplicates.
             await this.render({items : only_unique_genres});
+        }
+
+        onMoviesChanged(){
+            this.onRenderGenres();
         }
 
         // getTemplateEngine() {

@@ -1,7 +1,9 @@
-import! 'core.drivers.storage.HttpCursor';
+import '/resources/repositories.js';
+import! 'system.drivers.storage.IStorageInterface';
+import! 'system.drivers.storage.HttpCursor';
 
 
-namespace `core.drivers.storage` (
+namespace `system.drivers.storage` (
     class RestDB extends core.drivers.storage.IStorageInterface{
 
         constructor (collection, storage_device){
@@ -93,7 +95,7 @@ namespace `core.drivers.storage` (
                                 var data = xhr.responseText;
                                     data = JSON.parse(data);
                                 var res = (data instanceof Array) ? data : data.data
-                                var c = new core.drivers.storage.HttpCursor([],query,this);
+                                var c = new system.drivers.storage.HttpCursor([],query,this);
                                     c.count = data.totals.count;
                                     resolve(c)
                                     cb&&cb(c, null)

@@ -1,6 +1,6 @@
 import '/node_modules/od-paginator/paginator.js';
 
-namespace `core.drivers.storage`(
+namespace `system.drivers.storage`(
     class Cursor extends Array {
         constructor (items, query, IRequestStorage){
             super();

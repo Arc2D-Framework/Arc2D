@@ -1,10 +1,11 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
+import! 'system.drivers.storage.IStorageInterface';
 window.Query = (await require('/framework/src/libs/query.js')).default;
 
 
 namespace `system.drivers.storage`(
-    class LocalStorage extends core.drivers.storage.IStorageInterface {
+    class LocalStorage extends system.drivers.storage.IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
             this.setCollection(collection.name);
@@ -48,7 +49,7 @@ namespace `system.drivers.storage`(
 
         find(cb, query){
             var res = Query.query( this.data.items, query.query||{});
-            var cursor = new core.drivers.storage.Cursor(res,query,this);
+            var cursor = new system.drivers.storage.Cursor(res,query,this);
             cb&&cb(cursor, null)
             return cursor;
         }

@@ -1,5 +1,5 @@
 
-namespace `core.drivers.storage` (
+namespace `system.drivers.storage` (
     class HttpCursor extends Array{
         constructor (items, query, IRequestStorage){
             items = (items&&items.all)?items.all():

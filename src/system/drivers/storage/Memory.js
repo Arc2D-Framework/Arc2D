@@ -1,5 +1,7 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
+import! 'system.drivers.storage.IStorageInterface';
+
 window.Query = (await require('/framework/src/libs/query.js')).default;
 
 namespace `system.drivers.storage` (
@@ -12,6 +14,10 @@ namespace `system.drivers.storage` (
 
         isSeedingEnabled(){
             return true;
+        }
+
+        seeded(){
+            this.seeded=true;
         }
 
         setCollection (name){
@@ -30,7 +36,7 @@ namespace `system.drivers.storage` (
         
         find(cb, query){
             var res = Query.query( this.collection, query.query||{});
-            var cursor = new core.drivers.storage.Cursor(res,query,this);
+            var cursor = new system.drivers.storage.Cursor(res,query,this);
             cb&&cb(cursor, null)
             return cursor;
         }
