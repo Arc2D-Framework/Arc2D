@@ -1,0 +1,14 @@
+<template>
+    <ul>
+        <slot name="generes-label">
+            <li data-genre="All" test="ok">All Genres</li>
+        </slot>
+        {% for genre in items %}
+            <li data-genre="{{genre}}">
+                <x-test defer attach-shadow="false">
+                    <span slot="test">{{genre}}</span>
+                </x-test>
+            </li>
+       {% endfor %}
+    </ul>
+</template>

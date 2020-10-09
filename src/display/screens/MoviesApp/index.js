@@ -2,6 +2,7 @@ import 'display.components.Splash';
 import! 'domain.collections.Movies';
 import 'display.components.MovieMenu';
 import 'display.components.MoviesList';
+import '/src/system/drivers/templating/Nunjucks/nunjucks-driver.js';
 
 namespace `display.screens` (
     class MoviesApp extends w3c.ui.Application {

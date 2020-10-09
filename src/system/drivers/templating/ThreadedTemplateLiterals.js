@@ -1,4 +1,4 @@
-import '/src/core/lang/Thread.js';
+import '/src/system/lang/Thread.js';
 
 ;(() => {
     var ThreadedTemplateLiterals = {

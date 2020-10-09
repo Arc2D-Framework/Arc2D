@@ -1,9 +1,9 @@
 BUILDCONFIG = {
-    Input : "src/applications/NotificationsApp/index.js",
+    Input : "src/display/screens/MoviesApp/index.js",
     
     Output : {
-        SourcePath:"src/applications/NotificationsApp/index.src.js",
-        CompressedPath: "src/applications/NotificationsApp/index.min.js"
+        SourcePath:"src/display/screens/MoviesApp/index.src.js",
+        CompressedPath: "src/display/screens/MoviesApp/index.min.js"
     },
 
     LoadsAsync : true,
@@ -19,8 +19,7 @@ BUILDCONFIG = {
     Prefabs : {
         Enabled : true,
         Components : [
-            "applications.NotificationsApp",
-            "core.ui.NotificationsToggleSwitch"
+          
         ]
     }
 };

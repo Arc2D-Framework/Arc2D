@@ -1,5 +1,6 @@
 import '/src/core/lang/Thread.js';
 
+alert("asd")
 ;(() => {
     var ThreadedTemplateLiterals = {
         name : "ThreadedTemplateLiterals",
@@ -8,7 +9,7 @@ import '/src/core/lang/Thread.js';
             return new Promise(async (resolve, reject)=> {                
                 var thread = new core.lang.Thread(async function(e){
                     var parse = new Function("return `"+e.data.template +"`;");
-                        postMessage(parse.call(e.data.dataobj));
+                        postMessage(parse.call(self));
                 });
                 thread.onmessage = function (event) {
                     resolve(event.data)
