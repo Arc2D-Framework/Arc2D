@@ -1,10 +1,3 @@
-/*
-*
-* Custom js snippets for Startuply v2.0
-* by Vivaco
-*
-*/
-
 var Startuply;
 
 ;(function($){
