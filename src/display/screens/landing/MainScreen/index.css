@@ -223,7 +223,7 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
     margin-bottom: 10px !important;
     margin-left: 15px !important;
     margin-right: 15px !important;
-    font-size: 20px !important;
+    font-size: 24px !important;
 }
 
 .cd-header {
@@ -332,27 +332,23 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
   }
   
   .cd-hero__slide:first-of-type {
-    /* background-color: #2c343b; */
     background: url("https://images.unsplash.com/photo-1547954575-855750c57bd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+    background-size: cover;
   }
   
   .cd-hero__slide:nth-of-type(2) {
-    /* background-color: #3d4952; */
     background-image: url("https://images.unsplash.com/photo-1565120130276-dfbd9a7a3ad7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
   }
   
   .cd-hero__slide:nth-of-type(3) {
-    /* background-color: #586775; */
     background-image: url("https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80");
   }
   
   .cd-hero__slide:nth-of-type(4) {
-    /* background-color: #2c343b; */
-    background-image: url("https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80");
+    background-image: url("https://images.unsplash.com/photo-1544256718-3bcf237f3974?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80");
   }
   
   .cd-hero__slide:nth-of-type(5) {
-    /* background-color: #2c343b; */
     background-image: url("https://images.unsplash.com/photo-1563660908188-1af7b8a6388c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80");
   }
   
@@ -380,13 +376,7 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
     will-change: transform;
   }
   
-  .cd-hero__content.cd-hero__content--img {
-    /* hide image on mobile device */
-    display: none;
-  }
-  
   .cd-hero__content--img img {
-    /* position: absolute; */
     max-width:300px;
     position: relative;
     left: 50%;
@@ -398,36 +388,7 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
             transform: translateX(-50%) translateY(-50%);
   }
   
-  .cd-hero__content.cd-hero__content--bg-video {
-    /* hide video on mobile device */
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .cd-hero__content--bg-video video {
-    /* you won't see this element in the html, but it will be injected using javascript */
-    display: block;
-    min-height: 100%;
-    min-width: 100%;
-    max-width: none;
-    height: auto;
-    width: auto;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    bottom: auto;
-    right: auto;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-        -ms-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-  }
-  
-  .cd-hero__content h2, .cd-hero__content p {
+  .cd-hero__content h2, .cd-hero__content p{
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     line-height: 1.2;
     margin: 0 auto 14px;
@@ -449,7 +410,6 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
     display: inline-block;
     padding: 5px 20px;
     margin-top: none;
-    /* background-color: rgba(212, 68, 87, 0.9); */
     background: linear-gradient(90deg, rgba(57, 107, 202, 0.95) 11%, rgb(62, 62, 155) 74%, rgba(79, 38, 135, 0.85) 100%);
     font-size: 22.4px;
     font-weight: 700;
@@ -462,6 +422,12 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
     transition: background-color 0.2s;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
+  }
+
+  .cd-hero__btn:hover{
+    color: #fff;
+    background: rgba(207,0,0,.7) !important;
+    transition: all .3s ease-in-out !important;
   }
   
   .cd-hero__btn.cd-hero__btn--secondary {
@@ -484,9 +450,6 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
     .cd-hero__content.cd-hero__content--full-width,
     .cd-hero__content.cd-hero__content--half-width {
       padding-top: 150px;
-    }
-    .cd-hero__content.cd-hero__content--bg-video {
-      display: block;
     }
     .cd-hero__content.cd-hero__content--half-width {
       width: 45%;
@@ -638,7 +601,6 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
   
   /* Slider navigation */
   .cd-hero__nav {
-    /* position: absolute; */
     position: relative;
     width: 100%;
     bottom: 0;
@@ -830,5 +792,68 @@ li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
     li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h5:nth-child(2){
         margin-left:15px;
         margin-right:15px;
+    }
+  }
+
+  @media screen and (min-width:360px) and (max-width:480px){
+    .cd-hero__content.cd-hero__content--full-width h1{
+        font-size:26px !important;
+    }
+
+    .cd-hero__content.cd-hero__content--full-width h2{
+        font-size:22px !important;
+    }
+
+    .cd-hero__slide:nth-of-type(2) h5{
+        font-size:15px !important;
+        margin-top:10px !important;
+    }
+
+    .cd-hero__slide:nth-of-type(2) a.cd-hero__btn{
+        width: 100% !important;
+        max-width:170px;
+        margin:5px;
+    }
+
+    .cd-hero__content.cd-hero__content--full-width a.cd-hero__btn{
+        width: 200px !important;
+        font-size: 12px !important;
+    }
+
+    a.cd-hero__btn:nth-child(5){
+        margin-left:0 !important;
+        margin-top:5px !important;
+    }
+  }
+
+  @media screen and (min-width:360px) and (max-width:413px){
+    li.cd-hero__slide:nth-child(1) > div:nth-child(1) > h1:nth-child(1){
+        margin-bottom: 0 !important;
+    }
+
+    .cd-hero__content.cd-hero__content--full-width h5{
+        margin-top: 0 !important;
+    }
+
+    li.cd-hero__slide:nth-child(1) > div:nth-child(1){
+        padding-top:65px !important;
+    }
+  }
+
+  @media screen and (min-width:414px) and (max-width:480px){
+    li.cd-hero__slide:nth-child(1) > div:nth-child(1){
+        padding-top:95px !important;
+    }
+  }
+
+  @media screen and (min-width:768px) and (max-width:1169px){
+      .cd-hero__content.cd-hero__content--full-width h1{
+          font-size:40px !important;
+      }
+  }
+
+  @media screen and (min-width:481px) and (max-width:867px){
+    li.cd-hero__slide:nth-child(2) > div:nth-child(1) > h2:nth-child(1){
+        font-size:35px !important;
     }
   }
