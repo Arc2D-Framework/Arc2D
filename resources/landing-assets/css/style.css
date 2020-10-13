@@ -5545,12 +5545,10 @@ body.always-mobile .fixed-menu .navigation-header.white-dropdown .navigation-bar
 }
 
 .static-header .image-wrapper {
-	/* position: absolute; */
-	position: relative;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	top:25px;
 }
 
 .video-wrapper {
