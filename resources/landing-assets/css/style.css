@@ -171,11 +171,6 @@ body {
 	font-family: "PT Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-.heading-font,
-.team-member .position {
-	/* font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif; */
-}
-
 .uppercase {
 	text-transform: uppercase;
 }
@@ -6723,7 +6718,7 @@ h6 {
 .featured-tab li > a .tab-info {
 	width: 100%;
 	padding: 15px;
-	line-heigh: 1.07;
+	line-height: 1.07;
 }
 
 .featured-tab li > a .tab-info .tab-desc {
