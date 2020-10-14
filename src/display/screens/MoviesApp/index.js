@@ -1,3 +1,4 @@
+import {NodeTest} from '/src/system/libs/modules/nodejsmod.js';
 import 'display.components.Splash';
 import! 'domain.collections.Movies';
 import 'display.components.MovieMenu';
@@ -8,7 +9,7 @@ namespace `display.screens` (
     class MoviesApp extends w3c.ui.Application {
         constructor(element){
             super(element);
-
+            alert(NodeTest)
             //sow seeds for mock/testing (optional)
             domain.collections.Movies.seed();
             

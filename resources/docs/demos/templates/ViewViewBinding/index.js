@@ -1,4 +1,4 @@
-import '/node_modules/od-watcher/wrist.js';
+import {wrist} from '/node_modules/od-watcher/wrist.js';
 
 namespace `docs.demos.templates` (
 	class ViewViewBinding  extends w3c.ui.WebComponent  {

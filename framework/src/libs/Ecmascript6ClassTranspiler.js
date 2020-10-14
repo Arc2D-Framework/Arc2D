@@ -49,12 +49,24 @@ Ecmascript6ClassTranspiler.prototype.transipleDecoratorFields = function (ns,src
 }
 
 Ecmascript6ClassTranspiler.prototype.transipleImportsDestructuring = function (src) {
-    var regex = /import\s\{([^\}]*)\}\sfrom\s([^;]*)/gm;
+    if(/webpack/.test(src)||typeof module == "object"){return src}
+    var regex = /import\s\{+([^\}]*)\}+\sfrom\s([^;]*)/gm;
+        src = src.replace(regex, (full, destructured_var, src_path) => {
+            destructured_var = destructured_var.replace(/\s+as\s+/gm, ":");
+            return `var {${destructured_var}} = (()=> {\nimport ${src_path};\n})();`;
+        });
+    src = this.transipleExportsDestructuring(src)
+    return src;
+}
+
+
+Ecmascript6ClassTranspiler.prototype.transipleExportsDestructuring = function (src) {
+    var regex = /module\.exports[\s\t\n]*\=[\s\t\n]*([^\;\(]*)?/gm;
     src = src.replace(regex, (full, destructured_var, src_path) => {
-        destructured_var = destructured_var.replace(/\s+as\s+/gm, ":");
-        return `var {${destructured_var}} = (()=> {\nimport ${src_path};\n})();`;
+        return `return {${destructured_var}}`;
     });
-    src = src.replace("export", "return");
+    src = src.replace(["e","x","p","o","r","t"," ", "d","e","f","a","u","l","t"].join(""), "return");
+    src = src.replace(["e","x","p","o","r","t"].join(""), "return");
     return src;
 }
 
