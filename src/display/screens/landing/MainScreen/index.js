@@ -70,12 +70,12 @@ namespace `display.screens.landing` (
                         'rgb(255, 99, 132)'
                     ],
                     yAxisID: 'y-axis-1',
-                    data: [0.09,1.24,1.50,1.90,1.00]
+                    data: [9,173,150,190,100]
                 }, {
                     label: 'Non-Optimized',
                     backgroundColor: 'rgb(255, 99, 132)',
                     yAxisID: 'y-axis-2',
-                    data: [0.27,1.92,2.50,1.20,1.50]
+                    data: [27,1343,250,120,150]
                 }]
     
             };
@@ -88,36 +88,46 @@ namespace `display.screens.landing` (
                 data: this.barChartData,
                 options: {
                     responsiveAnimationDuration: 2000,
-                    aspectRatio:1.5,
-					responsive: true,
-					title: {
-						display: true,
-						text: 'Framework/Library Size Comparison Chart (Kilobytes)'
-					},
-					tooltips: {
-						mode: 'index',
-						intersect: true
-					},
-					scales: {
-						yAxes: [{
-							type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-							display: true,
-							position: 'left',
-							id: 'y-axis-1',
-						}, {
-							type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-							display: true,
-							position: 'right',
-							id: 'y-axis-2',
-							gridLines: {
-								drawOnChartArea: false
-							}
-						}],
-					}
-				}
+                    aspectRatio: 1.5,
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Framework/Library Size Comparison Chart (Kilobytes)'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: true,
+                        callbacks: {
+                            label: (tooltipItem, data) => {
+                                const value =
+                                    data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                return data.datasets[tooltipItem.datasetIndex].label + ": " + this.numberWithCommas(value);
+                            }
+                        }
+                    },
+                    scales: {
+                        yAxes: [{
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            id: 'y-axis-1'
+                        }, {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            id: 'y-axis-2',
+                            gridLines: {
+                                drawOnChartArea: false
+                            }
+                        }],
+                    }
+                }
             });
+            console.log("chart",chart);
+        }
 
-            
+        numberWithCommas(num){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         // randomizeHeading() {
