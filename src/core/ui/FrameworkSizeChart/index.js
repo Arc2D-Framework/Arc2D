@@ -12,19 +12,18 @@ namespace `core.ui` (
 		
 		initBarData(){
             this.barChartData = {
-                labels: ['Arc2D', 'AngularJS', 'ReactJS', 'VueJS', 'Svelte'],
+                labels: ['Arc2D', 'AngularJS', 'ReactJS', 'VueJS'],
                 datasets: [{
                     label: 'Optimized',
                     backgroundColor: 'rgb(26, 198, 255)',
                     yAxisID: 'y-axis-1',
-                    data: [9,173,150,190,100]
+                    data: [9,173,304,92]
                 }, {
                     label: 'Non-Optimized',
                     backgroundColor: 'rgb(255, 134, 35)',
                     yAxisID: 'y-axis-2',
-                    data: [46,1343,250,120,150]
+                    data: [46,1343,1091,335]
                 }]
-    
             };
         }
 
@@ -47,13 +46,10 @@ namespace `core.ui` (
                         intersect: true,
                         callbacks: {
                             label: (tooltipItem, data) => {
-                                const value =
-									data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-								if(data.datasets[tooltipItem.datasetIndex].label.toString() == "Optimized"){
-									return `${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB`;
-								}else{
-									return `${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;	
-								}
+                                const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+								return (data.datasets[tooltipItem.datasetIndex].label.toString() == "Optimized") ?
+								`${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB`
+								: `${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;
                             }
                         }
                     },
