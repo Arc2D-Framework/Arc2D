@@ -12,7 +12,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title>Welcome to Arc2D</title>
 
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+        <link onload="this.media='all'" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
         <link rel="shortcut icon" href="resources/landing-assets/img/favicon.ico">
         <!-- <link rel="apple-touch-icon" href="resources/landing-assets/img/apple-touch-icon.jpg">
         <link rel="apple-touch-icon" sizes="72x72" href="resources/landing-assets/img/apple-touch-icon-72x72.jpg">
@@ -26,22 +26,21 @@
                     <script defer type="text/javascript" src="resources/landing-assets/js/jquery-1.11.3.min.js?ver=1"></script>
                 <![endif]-->
                 <!--[if (gte IE 9) | (!IE)]><!-->
-                    <script defer type="text/javascript" src="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1"></script>
+                    <script async defer type="text/javascript" src="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1"></script>
                 <!--<![endif]-->
                 
         <script defer type="text/javascript" src="resources/landing-assets/js/bootstrap.min.js"></script>
         <script defer type="text/javascript" src="resources/landing-assets/js/jquery.flexslider-min.js"></script>
         <script defer type="text/javascript" src="resources/landing-assets/js/jquery.appear.js"></script>
         <script defer type="text/javascript" src="resources/landing-assets/js/jquery.plugin.js"></script>
-        <script defer type="text/javascript" src="resources/landing-assets/js/jquery.countdown.js"></script>
+        <!-- <script async defer type="text/javascript" src="resources/landing-assets/js/jquery.countdown.js"></script> -->
         <script defer type="text/javascript" src="resources/landing-assets/js/jquery.waypoints.min.js"></script>
         <script defer type="text/javascript" src="resources/landing-assets/js/jquery.validate.min.js"></script>
         <script defer type="text/javascript" src="resources/landing-assets/js/toastr.min.js"></script>
         <script defer type="text/javascript" src="resources/landing-assets/js/startuply.js"></script>
-        <script defer type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-        <script defer type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-        <!-- <script defer type="text/javascript" src="https://www.amcharts.com/lib/3/themes/black.js"></script> -->
-        
+        <script async src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- <script defer type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script> -->
+        <!-- <script defer type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script> -->
         
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
@@ -52,8 +51,7 @@
         </script>
         
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&family=Roboto:wght@300;700&display=swap" rel="stylesheet" onload="this.media='all'">
-        <!-- <script type="text/javascript">setTimeout(() => {AmCharts.makeChart("chartdiv", { "type": "serial", "categoryField": "category", "maxSelectedTime": 0, "angle": 30, "depth3D": 30, "startDuration": 2, "theme": "default", "usePrefixes": false, "categoryAxis": { "gridPosition": "start", "centerLabels": true, "title": "" }, "trendLines": [], "graphs": [ { "balloonText": "[[title]] of [[category]] — [[value]]KB", "fillAlphas": 1, "id": "AmGraph-1", "title": "Minified", "type": "column", "valueField": "Minified" }, { "balloonText": "[[title]] of [[category]] — [[value]]KB", "fillAlphas": 1, "id": "AmGraph-2", "title": "Unminified", "type": "column", "valueField": "Unminified" } ], "guides": [], "valueAxes": [ { "id": "ValueAxis-1", "title": "Kilobytes" } ], "allLabels": [], "balloon": { "animationDuration": 0.4 }, "legend": { "enabled": true, "useGraphSettings": true }, "titles": [ { "id": "Title-1", "size": 15, "text": "Framework/Library Size Comparison Chart" } ], "dataProvider": [ { "category": "Arc2D", "Minified": "9", "Unminified": "30" }, { "category": "AngularJS", "Minified": "172.42", "Unminified": "1310" }, { "category": "ReactJS", "Minified": "128.05", "Unminified": "250.96" }, { "category": "VueJS", "Minified": "91.78", "Unminified": "334.44" } ] } );}, 500);  </script> -->
-        <script defer src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;600&display=swap" rel="stylesheet" onload="this.media='all'"> 
     </head>
 
     <body namespace="display.screens.landing.MainScreen">
@@ -83,13 +81,13 @@
                             <div class="navigation-navbar collapsed">
                                 <ul class="navigation-bar navigation-bar-left">
                                     <li class="active"><a href="#hero">Home</a></li>
-                                    <li><a href="../doc.html" target="_blank">Docs</a></li>
+                                    <li><a href="resources/doc.html" target="_blank">Docs</a></li>
                                     <li><a href="#about">About</a></li>
                                     <li><a href="#features">Features</a></li>
                                     <li><a href="#product">Prices</a></li>
                                     <li><a href="#feedback">Feedback</a></li>
                                     <li><a href="#team">Team</a></li>
-                                    <li><a href="#guarantee">Contacts</a></li>
+                                    <!-- <li><a href="#guarantee">Contacts</a></li> -->
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" href="#">Extra</a>
                                         <ul class="dropdown-menu">
@@ -167,7 +165,7 @@
                     </div>
                 </div>
                    
-                <div id="clients" class="clients-section align-center">
+                <!-- <div id="clients" class="clients-section align-center">
                     <div class="container">
                         <ul class="list-inline logos">
                             <li><img class="animated" data-animation="fadeInDown" data-duration="500" src="resources/landing-assets/img/logos/logo-1.png" alt="mashable" /></li>
@@ -177,7 +175,7 @@
                             <li><img class="animated" data-animation="fadeInDown" data-duration="500" data-delay="800" src="resources/landing-assets/img/logos/logo-5.png" alt="forbes" /></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
                 
                 <section id="about" class="section about-section align-center dark-text" style="background:white;">
                     <div class="container">
@@ -194,9 +192,7 @@
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
                                         <!-- <img src="resources/images/chart.png" class="img-responsive" alt="process 3" /> -->
                                         <!-- <div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div> -->
-                                        <framework-size-chart>
-                                            <!-- <canvas id="myChart" style="width: 100%;"></canvas> -->
-                                        </framework-size-chart>
+                                        <framework-size-chart></framework-size-chart>
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
                                         <br/>
@@ -221,7 +217,7 @@
                                         <br/><br/>
                                         <article class="align-center">
                                             <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
-                                            <p class="sub-title">Lorem ipsum dolor sit atmet sit dolor greand fdanrh<br/> sdfs sit atmet sit dolor greand fdanrh sdfs</p>
+                                            <p class="sub-title">Lorem ipsum dolor sit atmet sit dolor greand fdanrh sdfs sit atmet sit dolor greand fdanrh sdfs</p>
                                             <p>In his igitur partibus duabus nihil erat, quod Zeno commuta rest gestiret. Sed virtutem ipsam inchoavit, nihil ampliusuma. Scien tiam pollicentur, quam non erat mirum sapientiae lorem cupido patria esse cariorem. Quae qui non vident, nihilamane umquam magnum ac cognitione.</p>
                                         </article>
                                     </div>
@@ -278,7 +274,7 @@
                                 <br/><br/>
                                 <article>
                                     <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
-                                    <p class="sub-title">Lorem ipsum dolor sit atmet sit dolor greand fdanrh<br/> sdfs sit atmet sit dolor greand fdanrh sdfs</p>
+                                    <p class="sub-title">Lorem ipsum dolor sit atmet sit dolor greand fdanrh sdfs sit atmet sit dolor greand fdanrh sdfs</p>
                                     <p>In his igitur partibus duabus nihil erat, quod Zeno commuta rest gestiret. Sed virtutem ipsam inchoavit, nihil ampliusuma. Scien tiam pollicentur, quam non erat mirum sapientiae lorem cupido patria esse cariorem. Quae qui non vident, nihilamane umquam magnum ac cognitione.</p>
                                 </article>
                             </div>
@@ -292,7 +288,7 @@
                                 <br/><br/>
                                 <article>
                                     <h3>HANG <span class="highlight">ON TO</span> YER HELMET</h3>
-                                    <p class="sub-title">Lorem ipsum dolor sit atmet sit dolor greand fdanrh<br/> sdfs sit atmet sit dolor greand fdanrh sdfs</p>
+                                    <p class="sub-title">Lorem ipsum dolor sit atmet sit dolor greand fdanrh sdfs sit atmet sit dolor greand fdanrh sdfs</p>
                                     <p>In his igitur partibus duabus nihil erat, quod Zeno commuta rest gestiret. Sed virtutem ipsam inchoavit, nihil ampliusuma. Scien tiam pollicentur, quam non erat mirum sapientiae lorem cupido patria esse cariorem. Quae qui non vident, nihilamane umquam magnum ac cognitione.</p>
                                 </article>
                             </div>
@@ -436,8 +432,7 @@
                         <div class="section-header">
                             <h2>PRODUCT <span class="highlight">PACKAGES</span></h2>
                             <p class="sub-header">
-                                Lorem ipsum dolor sit atmet sit dolor greand fdanrh s
-                                <br />dfs sit atmet sit dolor greand fdanrh sdfs
+                                Lorem ipsum dolor sit atmet sit dolor greand fdanrh sdfs sit atmet sit dolor greand fdanrh sdfs
                             </p>
                         </div>
                         <div class="section-content row">
@@ -514,7 +509,7 @@
                     </div>
                 </section>
                 
-                <section id="awards" class="section awards-section align-center dark-text animated" data-animation="fadeInDown" data-duration="500">
+                <!-- <section id="awards" class="section awards-section align-center dark-text animated" data-animation="fadeInDown" data-duration="500">
                     <div class="container">
                         <div class="section-header">
                             <h2><span class="highlight">OUR</span> AWARDS</h2>
@@ -532,15 +527,14 @@
                             </ul>
                         </div>
                     </div>
-                </section>
+                </section> -->
                 
-                <section id="feedback" class="section feedback-section align-center light-text">
+                <!-- <section id="feedback" class="section feedback-section align-center light-text">
                     <div class="container animated" data-animation="fadeInDown" data-duration="500">
                         <div class="section-header">
                             <h2>WHAT <span class="highlight">CLIENTS</span> SAY</h2>
                         </div>
                         <div class="section-content">
-                            <!-- BEGIN SLIDER CONTENT -->
                             <div class="col-sm-10 col-sm-offset-1">
                                 <div class="flexslider testimonials-slider align-center">
                                     <ul class="slides">
@@ -562,15 +556,13 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- END SLIDER -->
                         </div>
                     </div>
-                </section>
+                </section> -->
                 
-                <section id="feedback-controls" class="section feedback-controls-section align-center light-text animated" data-animation="fadeInDown" data-duration="500">
+                <!-- <section id="feedback-controls" class="section feedback-controls-section align-center light-text animated" data-animation="fadeInDown" data-duration="500">
                     <div class="container">
                         <div class="col-md-10 col-md-offset-1">
-                            <!-- BEGIN CONTROLS -->
                             <div class="flex-manual">
                                 <div class="col-xs-12 col-sm-4 wrap">
                                     <div class="switch flex-active">
@@ -599,18 +591,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- END CONTROLS -->
                         </div>
                     </div>
-                </section>
+                </section> -->
                 
                 <section id="team" class="section team-section align-center dark-text">
                     <div class="container">
                         <div class="section-header">
                             <h2>BEHIND <span class="highlight">THE</span> SCENES</h2>
                             <p class="sub-header">
-                                Lorem ipsum dolor sit atmet sit dolor greand fdanrh s
-                                <br>dfs sit atmet sit dolor greand fdanrh sdfs
+                                Lorem ipsum dolor sit atmet sit dolor greand fdanrh sdfs sit atmet sit dolor greand fdanrh sdfs
                             </p>
                             <p>In his igitur partibus duabus nihil erat, quod Zeno commuta rest gestiret. Sed virtutem ipsam inchoavit, nihil<br/> ampliusuma. Scien tiam pollicentur, quam non erat mirum sapientiae lorem cupido patria esse cariorem. Quae<br/> qui non vident, nihilamane umquam magnum ac cognitione. In his rest gestiret. Sed ipsam inchoavit, nihil ampliusuma.<br/> Scien tiam pollicentur, quam non erat mirum sapientiae lorem cupido patria esse cariorem. Quae qui non vident,<br/> nihilamane umquam magnum ac cognitione.</p>
                         </div>

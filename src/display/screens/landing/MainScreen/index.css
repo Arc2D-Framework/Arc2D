@@ -47,6 +47,22 @@ html, body, .MainScreen {
     font-weight: 600;
 }
 
+.MainScreen article p:nth-of-type(1) {
+  font-weight: 300;
+  color: #5b5b5b;
+  font-size: 24px;
+}
+
+.MainScreen article p:nth-of-type(2) {
+  color: #5b5b5b;
+  font-weight: 100;
+}
+
+.MainScreen article > h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
 .MainScreen .features-list-section article span.heading{
     text-transform: uppercase;
 }
@@ -54,10 +70,22 @@ html, body, .MainScreen {
 .MainScreen .features-list-section article p{
     color: #5b6264 !important;
     font-weight: 300 !important;
+    font-size: 15px !important;
 }
 
 .MainScreen #newsletter .mailchimp-form div.form-group{
     display: flex;
+}
+
+.MainScreen #newsletter article > p {
+  color: #fff !important;
+  font-size: 16px !important;
+}
+
+.MainScreen #product .section-header p,
+.MainScreen #team .section-header p {
+  color: #5b5b5b;
+  font-weight: 100;
 }
 
 /* Hidden Sections - Until Ready for Use */
@@ -83,8 +111,8 @@ html, body, .MainScreen {
 
 .MainScreen .sub-title, .MainScreen .sub-title.alt{
     color: #646161;
-    font-size: 27px;
-    line-height: 38px;
+    font-size: 20px;
+    line-height: 30px;
 }
 
 /* Pricing Table Section */

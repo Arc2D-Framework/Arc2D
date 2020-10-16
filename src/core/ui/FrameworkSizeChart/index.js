@@ -5,11 +5,9 @@ namespace `core.ui` (
 		}
 		
 		async onConnected(){
-            // await this.render({});
             await super.onConnected();
-            // this.addEventListener("click", (e)=>this.onClick(e), false);
 			this.initBarData();
-            this.createChart();
+			this.createChart();
 		}
 		
 		initBarData(){
@@ -17,18 +15,12 @@ namespace `core.ui` (
                 labels: ['Arc2D', 'AngularJS', 'ReactJS', 'VueJS', 'Svelte'],
                 datasets: [{
                     label: 'Optimized',
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)'
-                    ],
+                    backgroundColor: 'rgb(26, 198, 255)',
                     yAxisID: 'y-axis-1',
                     data: [9,173,150,190,100]
                 }, {
                     label: 'Non-Optimized',
-                    backgroundColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(255, 134, 35)',
                     yAxisID: 'y-axis-2',
                     data: [46,1343,250,120,150]
                 }]
@@ -56,8 +48,12 @@ namespace `core.ui` (
                         callbacks: {
                             label: (tooltipItem, data) => {
                                 const value =
-                                    data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`;
+									data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+								if(data.datasets[tooltipItem.datasetIndex].label.toString() == "Optimized"){
+									return `${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB`;
+								}else{
+									return `${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;	
+								}
                             }
                         }
                     },
