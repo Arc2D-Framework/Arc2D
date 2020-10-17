@@ -1,4 +1,4 @@
-import 'src/system/game/sat/modules/BVHBranch.js';
+import 'src/system/2d/sat/modules/BVHBranch.js';
 
 /**
  * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly

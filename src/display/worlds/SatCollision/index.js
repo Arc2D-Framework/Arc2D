@@ -1,4 +1,4 @@
-import 'src/system/game/sat/Collisions.js';
+import 'src/system/2d/sat/Collisions.js';
 
 namespace `display.worlds` (
     class SatCollision extends core.ui.World {

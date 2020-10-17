@@ -1,9 +1,9 @@
-import 'src/system/game/sat/modules/BVH.js';
-import 'src/system/game/sat/modules/Circle.js';
-import 'src/system/game/sat/modules/Polygon.js';
-import 'src/system/game/sat/modules/Point.js';
-import 'src/system/game/sat/modules/Result.js';
-import 'src/system/game/sat/modules/SAT.js';
+import 'src/system/2d/sat/modules/BVH.js';
+import 'src/system/2d/sat/modules/Circle.js';
+import 'src/system/2d/sat/modules/Polygon.js';
+import 'src/system/2d/sat/modules/Point.js';
+import 'src/system/2d/sat/modules/Result.js';
+import 'src/system/2d/sat/modules/SAT.js';
 
 /**
  * A collision system used to track bodies in order to improve collision detection performance
