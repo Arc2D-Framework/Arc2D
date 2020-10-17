@@ -88,6 +88,7 @@ namespace `display.worlds` (
 
 
         updateMovement() {
+            if(!this.player){return}
             const x = Math.cos(this.player.angle);
             const y = Math.sin(this.player.angle);
 
