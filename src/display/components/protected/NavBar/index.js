@@ -1,6 +1,8 @@
+import! 'display.components.protected.ProtectedChildComponent';
+
 
 namespace `display.components.protected` (
-    class NavBar extends core.ui.ProtectedChildComponent {
+    class NavBar extends display.components.protected.ProtectedChildComponent {
         constructor(){
             super();
             this.addEventListener("click", e => application.logout(e), false, "#logout");
