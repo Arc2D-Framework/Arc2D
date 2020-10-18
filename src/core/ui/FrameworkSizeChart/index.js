@@ -12,20 +12,20 @@ namespace `core.ui` (
 		
 		initBarData(){
             this.barChartData = {
-                labels: ['Arc2D', 'AngularJS', 'ReactJS', 'VueJS'],
+                labels: ['Arc2D', 'VueJS', 'ReactJS', 'AngularJS'],
                 datasets: [{
                     label: 'Optimized',
                     backgroundColor: 'rgb(26, 198, 255)',
                     yAxisID: 'y-axis-1',
-                    data: [9,173,304,92]
+                    data: [9,92,304,173]
                 }, {
                     label: 'Non-Optimized',
                     backgroundColor: 'rgb(255, 134, 35)',
                     yAxisID: 'y-axis-2',
-                    data: [46,1343,1091,335]
+                    data: [46,335,1091,1343]
                 }]
             };
-        }
+		}
 
         createChart() {
             this.chartInstanceObj = this.querySelector('#myChart');
@@ -39,19 +39,20 @@ namespace `core.ui` (
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Framework/Library Size Comparison Chart (Kilobytes)'
+						text: 'Framework/Library Size Comparison Chart (Kilobytes)',
+						fontSize: 14
                     },
                     tooltips: {
                         mode: 'index',
                         intersect: true,
                         callbacks: {
-                            label: (tooltipItem, data) => {
-                                const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-								return (data.datasets[tooltipItem.datasetIndex].label.toString() == "Optimized") ?
-								`${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB`
-								: `${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;
-                            }
-                        }
+							label: (tooltipItem, data) => {
+								const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+								return (data.datasets[tooltipItem.datasetIndex].label == "Optimized") ?
+									`${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB` :
+									`${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;
+							}
+						}
                     },
                     scales: {
                         yAxes: [{
