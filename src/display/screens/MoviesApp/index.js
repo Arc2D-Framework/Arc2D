@@ -1,4 +1,4 @@
-import {NodeTest} from '/src/system/libs/modules/nodejsmod.js';
+import {NodeTest} from '/src/system/libs/sample_modules/nodejsmod.js';
 import 'display.components.Splash';
 import! 'domain.collections.Movies';
 import 'display.components.MovieMenu';

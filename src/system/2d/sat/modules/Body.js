@@ -1,5 +1,5 @@
-import 'src/system/game/sat/modules/Result.js';
-import 'src/system/game/sat/modules/SAT.js';
+import 'src/system/2d/sat/modules/Result.js';
+import 'src/system/2d/sat/modules/SAT.js';
 
 /**
  * The base class for bodies used to detect collisions

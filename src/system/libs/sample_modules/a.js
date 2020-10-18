@@ -1,4 +1,4 @@
-import {runit} from '/src/system/libs/modules/test2.mjs';
+import {runit} from '/src/system/libs/sample_modules/test2.mjs';
 
 
 function myExport() {

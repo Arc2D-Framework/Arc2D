@@ -1,4 +1,4 @@
-import 'src/system/game/sat/modules/Body.js';
+import 'src/system/2d/sat/modules/Body.js';
 
 /**
  * A circle used to detect collisions

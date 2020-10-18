@@ -1,4 +1,4 @@
-import 'src/system/game/sat/Collisions.js';
+import 'src/system/2d/sat/Collisions.js';
 
 namespace `display.worlds` (
     class SatCollision extends core.ui.World {
@@ -88,6 +88,7 @@ namespace `display.worlds` (
 
 
         updateMovement() {
+            if(!this.player){return}
             const x = Math.cos(this.player.angle);
             const y = Math.sin(this.player.angle);
 

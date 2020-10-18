@@ -1,4 +1,4 @@
-import '/src/system/physics/Box2D.js';
+import '/src/system/2d/physics/Box2D.js';
 import! 'display.worlds.entities.html.Box2DEntity';
 import 'display.worlds.entities.html.GroundBox';
 import 'display.worlds.entities.html.PolygonShape';

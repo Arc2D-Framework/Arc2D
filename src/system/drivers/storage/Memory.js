@@ -2,7 +2,7 @@ import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
 import! 'system.drivers.storage.IStorageInterface';
 
-window.Query = (await require('/framework/src/libs/query.js')).default;
+window.Query = (await require('/src/system/libs/query.js')).default;
 
 namespace `system.drivers.storage` (
     class Memory extends system.drivers.storage.IStorageInterface {
