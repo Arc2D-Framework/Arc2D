@@ -10,6 +10,7 @@ import 'src/core/extensions/Element.js';
 import 'src/core/lang/Class.js';
 // mport 'src/core/lang/Thread.js';
 import 'node_modules/od-import-polyfill/import.js';
+import 'node_modules/od-watcher/wrist.js';
 import 'node_modules/od-observer/observer.js';
 // mport 'node_modules/od-paginator/paginator.js';
 import 'src/core/drivers/storage/IStorageInterface.js';

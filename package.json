@@ -13,10 +13,7 @@
     },
     "dependencies": {
         "od-cocoon": "github:Nashorn/od-cocoon#3.0.0",
-        "od-import-polyfill": "github:Nashorn/od-import-polyfill#1.0.0",
-        "od-observer": "github:Nashorn/od-observer#1.0.0",
-        "od-paginator": "github:Nashorn/od-paginator#1.0.0",
-        "od-watcher": "github:Nashorn/od-watcher#1.0.0"
+        "od-paginator": "github:Nashorn/od-paginator#1.0.0"
     },
     "devDependencies": {
         "http-server": "^0.12.3",
