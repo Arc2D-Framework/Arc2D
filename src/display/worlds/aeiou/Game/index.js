@@ -49,7 +49,7 @@ namespace `display.worlds.aeiou` (
             this.machine.push(this.level);
         }
 
-        onUpdate(time){
+        onUpdate=(time)=>{
             this.machine.onUpdate();
         }
     }

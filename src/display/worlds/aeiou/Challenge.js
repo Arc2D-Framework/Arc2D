@@ -11,11 +11,11 @@ namespace `display.worlds.aeiou` (
             this.world   = world;
             this.level   = level;
             this.sounds = {
-                "a" : new Audio("/src/resources/sounds/a.mp3"),
-                "e" : new Audio("/src/resources/sounds/e.mp3"),
-                "i" : new Audio("/src/resources/sounds/i.mp3"),
-                "o" : new Audio("/src/resources/sounds/o.mp3"),
-                "u" : new Audio("/src/resources/sounds/u.mp3")
+                "a" : new Audio("/resources/sounds/a.mp3"),
+                "e" : new Audio("/resources/sounds/e.mp3"),
+                "i" : new Audio("/resources/sounds/i.mp3"),
+                "o" : new Audio("/resources/sounds/o.mp3"),
+                "u" : new Audio("/resources/sounds/u.mp3")
             }
             this.onReset();
         }

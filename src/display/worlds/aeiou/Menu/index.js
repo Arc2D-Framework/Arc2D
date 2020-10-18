@@ -7,8 +7,8 @@ namespace `display.worlds.aeiou` (
             super();
             this.machine = machine;
             this.world   = world;
-            this.music = new Audio("/src/resources/tunes/04_start5.wav");
-            this.music_select = new Audio("/src/resources/tunes/09_select1.wav");
+            this.music = new Audio("/resources/tunes/04_start5.wav");
+            this.music_select = new Audio("/resources/tunes/09_select1.wav");
             this.music.loop=false;
             this.music.load();
             this.music_select.loop=false;
@@ -31,23 +31,11 @@ namespace `display.worlds.aeiou` (
         onToggleMusic(e){
             if(e.target.checked){
                 this.music_select.play();
+                // this.music.play()
             }
             this.world.settings.music = e.target.checked;
         }
 
-
-
-        async onStart() {
-            this.world.appendChild(this)
-            // else {
-            //     this.style.display="block"
-            // }
-            if(this.world.settings.music){this.music.play();}
-            this.isStarted=true;  
-            // this.machine.onPause(); 
-            console.log(this.namespace + " Started")
-        }
- 
         onStartGame(){
             this.dispatchEvent("startgame");
             // this.machine.push(new display.worlds.aeiou.Level(this.world, this.machine));
@@ -57,6 +45,15 @@ namespace `display.worlds.aeiou` (
             // this.music.pause();
             // this.style.display="none";
             // console.warn(this.namespace + " Exit");
+        }
+
+
+        //------------------MACHINE--------------------
+        async onStart() {
+            this.world.appendChild(this)
+            if(this.world.settings.music){this.music.play();}
+            this.isStarted=true;  
+            console.log(this.namespace + " Started")
         }
 
         onAwake(){

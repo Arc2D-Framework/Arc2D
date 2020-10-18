@@ -4,9 +4,9 @@ namespace `display.worlds.aeiou` (
             super();
             this.machine = machine;
             this.world=world;
-            // this.music = new Audio("/src/resources/tunes/sawsquarenoise_-_10_-_Towel_Defence_Ending.mp3");
-            // this.music.loop=true;
-            // this.music.load();
+            this.music = new Audio("/resources/tunes/sawsquarenoise_-_10_-_Towel_Defence_Ending.mp3");
+            this.music.loop=true;
+            this.music.load();
             // this.onReset();
         }
 
@@ -26,6 +26,7 @@ namespace `display.worlds.aeiou` (
         onTryAgain(){
             this.isFinished=true;
             this.isBlocking=false;
+            this.dispatchEvent("startgame");
         }
         
         // onPause() {this.paused=true;  this.music.pause();}

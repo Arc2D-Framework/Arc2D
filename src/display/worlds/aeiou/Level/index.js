@@ -9,7 +9,7 @@ namespace `display.worlds.aeiou` (
             this.machine = machine;
             this.actions = new display.worlds.aeiou.Machine;
             this.world=world;
-            this.music = new Audio("/src/resources/tunes/sawsquarenoise_-_02_-_Towel_Defence_Comic.mp3");
+            this.music = new Audio("/resources/tunes/sawsquarenoise_-_02_-_Towel_Defence_Comic.mp3");
             this.music.loop=true;
             this.music.load();
             this.onReset();
@@ -37,12 +37,15 @@ namespace `display.worlds.aeiou` (
         }
 
         onEndLevel(){
+            debugger;
             this.isFinished=true
             this.dispatchEvent("gameover");
+            this.music.pause();
         }
 
         onGameOver(){
-            this.isFinished=true
+            this.isFinished=true;
+            this.music.pause();
         }
 
         onFailedChallenge(){
@@ -88,7 +91,8 @@ namespace `display.worlds.aeiou` (
 
         onSleep(){
             this.style.display="none";
-            console.log(this.namespace + " Sleeping")
+            console.log(this.namespace + " Sleeping");
+            this.music.pause();
         }
 
         //----------------MACHINE
@@ -106,6 +110,7 @@ namespace `display.worlds.aeiou` (
         onExit(){
             this.remove();
             console.log(this.namespace + " Exit")
+            this.music.pause();
             // this.remove();
             // this.style.display="none";
             // this.world.removeEventListener("gameover", this.onGameOver, false);
@@ -115,7 +120,7 @@ namespace `display.worlds.aeiou` (
             // this.machine.push(new display.worlds.aeiou.GameOver(this.world, this.machine));
         }
 
-        onUpdate(time){
+        onUpdate=(time)=>{
             this.actions.onUpdate();
         }
     }

@@ -1,16 +1,20 @@
-namespace `core.ui` (
-	class FrameworkSizeChart extends w3c.ui.WebComponent  {
-		constructor(){
+namespace `display.components` (
+    class FrameworkSizeChart extends w3c.ui.WebComponent  {
+        constructor(){
             super();
-		}
-		
-		async onConnected(){
+        }
+        
+        async onConnected(){
             await super.onConnected();
-			this.initBarData();
-			this.createChart();
-		}
-		
-		initBarData(){
+            this.initBarData();
+            this.createChart();
+        }
+
+        onLoadInstanceStylesheet(){
+            return false
+        }
+        
+        initBarData(){
             this.barChartData = {
                 labels: ['Arc2D', 'VueJS', 'ReactJS', 'AngularJS'],
                 datasets: [{
@@ -25,11 +29,19 @@ namespace `core.ui` (
                     data: [46,335,1091,1343]
                 }]
             };
-		}
+        }
+
+        template(){
+            return `<template>
+                        <div>
+                            <canvas id="myChart" style="width: 100%;"></canvas>
+                        </div>
+                    </template>`
+        }
 
         createChart() {
             this.chartInstanceObj = this.querySelector('#myChart');
-			Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
+            Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
             var chart = new Chart(this.chartInstanceObj, {
                 type: 'bar',
                 data: this.barChartData,
@@ -39,43 +51,43 @@ namespace `core.ui` (
                     responsive: true,
                     title: {
                         display: true,
-						text: 'Framework/Library Size Comparison Chart (Kilobytes)',
-						fontSize: 14
+                        text: 'Framework/Library Size Comparison Chart (Kilobytes)',
+                        fontSize: 14
                     },
                     tooltips: {
                         mode: 'index',
                         intersect: true,
                         callbacks: {
-							label: (tooltipItem, data) => {
-								const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-								return (data.datasets[tooltipItem.datasetIndex].label == "Optimized") ?
-									`${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB` :
-									`${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;
-							}
-						}
+                            label: (tooltipItem, data) => {
+                                const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                return (data.datasets[tooltipItem.datasetIndex].label == "Optimized") ?
+                                    `${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB` :
+                                    `${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;
+                            }
+                        }
                     },
                     scales: {
                         yAxes: [{
                             type: 'linear',
                             display: true,
                             position: 'left',
-							id: 'y-axis-1'
+                            id: 'y-axis-1'
                         },{
                             type: 'linear',
                             display: true,
                             position: 'right',
-							id: 'y-axis-2',
+                            id: 'y-axis-2',
                             gridLines: {
                                 drawOnChartArea: false
                             }
                         }],
                     }
                 }
-			});
+            });
         }
 
         numberWithCommas(num){
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-	}
+    }
 )

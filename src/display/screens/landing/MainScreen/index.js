@@ -1,4 +1,4 @@
-import 'core.ui.FrameworkSizeChart';
+import 'display.components.FrameworkSizeChart';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
