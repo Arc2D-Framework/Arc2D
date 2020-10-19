@@ -25,7 +25,7 @@ namespace `display.components` (
                 }, {
                     label: 'Non-Optimized',
                     backgroundColor: 'rgb(255, 134, 35)',
-                    yAxisID: 'y-axis-2',
+                    yAxisID: 'y-axis-1',
                     data: [46,335,1091,1343]
                 }]
             };
@@ -63,6 +63,16 @@ namespace `display.components` (
                                 return (data.datasets[tooltipItem.datasetIndex].label == "Optimized") ?
                                     `${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB` :
                                     `${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;
+                            },
+                            footer: (tooltipItem, data) => {
+                                // console.log("data",data);
+                                // console.log("tooltipItem",tooltipItem)
+                                tooltipItem.forEach(item =>{
+                                    if(item.label == "ReactJS"){
+                                        alert("React");
+                                        console.log(item.label)
+                                    }
+                                })
                             }
                         }
                     },
@@ -75,10 +85,10 @@ namespace `display.components` (
                         },{
                             type: 'linear',
                             display: true,
-                            position: 'right',
-                            id: 'y-axis-2',
+                            position: 'left',
+                            id: 'y-axis-1',
                             gridLines: {
-                                drawOnChartArea: false
+                                drawOnChartArea: true
                             }
                         }],
                     }
