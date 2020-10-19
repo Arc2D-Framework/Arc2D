@@ -60,13 +60,10 @@ namespace `display.components` (
                         callbacks: {
                             label: (tooltipItem, data) => {
                                 const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return (data.datasets[tooltipItem.datasetIndex].label == "Optimized") ?
-                                    `${data.datasets[tooltipItem.datasetIndex].label} (Left Y-Axis): ${this.numberWithCommas(value)} kB` :
-                                    `${data.datasets[tooltipItem.datasetIndex].label} (Right Y-Axis): ${this.numberWithCommas(value)} kB`;
+                                return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`
                             },
-                            footer: (tooltipItem, data) => {
-                                // console.log("data",data);
-                                // console.log("tooltipItem",tooltipItem)
+                            footer: (tooltipItem) => {
+                                console.log("tooltipItem",tooltipItem)
                                 tooltipItem.forEach(item =>{
                                     if(item.label == "ReactJS"){
                                         alert("React");
