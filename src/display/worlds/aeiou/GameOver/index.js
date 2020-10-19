@@ -7,7 +7,7 @@ namespace `display.worlds.aeiou` (
             this.music = new Audio("/resources/tunes/sawsquarenoise_-_10_-_Towel_Defence_Ending.mp3");
             this.music.loop=true;
             this.music.load();
-            // this.onReset();
+            this.onReset();
         }
 
         onReset(){
@@ -55,7 +55,21 @@ namespace `display.worlds.aeiou` (
             this.remove();
             this.machine.push(new display.worlds.aeiou.Level(this.world, this.machine));
             console.warn(this.namespace + " Ended");
+            this.machine.onResume();
             this.onReset();
+        }
+
+        onExit(){
+            this.remove();
+            console.log(this.namespace + " Exit")
+            this.music.pause();
+            // this.remove();
+            // this.style.display="none";
+            // this.world.removeEventListener("gameover", this.onGameOver, false);
+            // console.warn(this.namespace + " Ended");
+            // this.onReset();
+            // this.music.pause();
+            // this.machine.push(new display.worlds.aeiou.GameOver(this.world, this.machine));
         }
 
         onUpdate(time){

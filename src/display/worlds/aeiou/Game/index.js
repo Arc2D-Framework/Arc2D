@@ -37,6 +37,7 @@ namespace `display.worlds.aeiou` (
         }
 
         onPauseGame(){
+            debugger;
             var ns = display.worlds.aeiou;
             this.machine.push(this.menu);
             // this.machine.pop();

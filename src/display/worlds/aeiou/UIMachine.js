@@ -7,17 +7,19 @@ namespace `display.worlds.aeiou` (
 
         onUpdate(){
             var state = this[0];
-                state&&state.onUpdate();
+                state&&!state.isSleeping&&state.onUpdate();
         }
 
         onRender(){
             var state = this[0];
-                state&&state.onRender();
+                state&&!state.isSleeping&&state.onRender();
         }
 
         push(state){
+            debugger;
             state && !state.isStarted && state.onStart();
-            state && state.onAwake();
+            state && state.onAwake() ;//&& (current.isSleeping=false)
+            state.isSleeping=false
             // var current = this[0];
                 // current&&current.onSleep();
             this.pop();
@@ -25,9 +27,17 @@ namespace `display.worlds.aeiou` (
         }
 
         pop(){
+            debugger;
             var current = this[0];
-                current&&!current.isFinished&&current.onSleep();
-                current&&current.isFinished&&current.onExit();
+            if(current){
+                if(!current.isFinished){
+                    current.onSleep()
+                    current.isSleeping=true;
+                }
+            }
+                // current&&!current.isFinished&&current.onSleep()&&(current.isSleeping=true);
+                // current&&current.isFinished&&current.onExit();
+
             this.shift();
             // current = this[0];
             // current&&current.onAwake();

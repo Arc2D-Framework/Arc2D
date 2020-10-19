@@ -67,6 +67,7 @@ namespace `display.worlds.aeiou` (
         }
 
         onEnd(){
+            debugger;
             this.remove();
             console.warn(this.namespace + " Ended");
             this.onReset();

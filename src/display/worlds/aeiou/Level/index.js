@@ -58,7 +58,8 @@ namespace `display.worlds.aeiou` (
         }
 
         onPauseMenu(){
-            this.machine.push(new display.worlds.aeiou.Menu(this.world, this.machine));
+            // this.machine.push(new display.worlds.aeiou.Menu(this.world, this.machine));
+            this.dispatchEvent("pausegame")
         }
 
         onScored(e){
@@ -69,24 +70,11 @@ namespace `display.worlds.aeiou` (
             this.canvas.appendChild(vowel)
         }
         
-        // onPause() {
-        //     this.music.pause();
-        // }
-
-        // onResume(){
-        //     if(this.isrunning){return}
-        //     this.world.settings.music && this.music.play();
-        //     this.isrunning=true;
-        //     console.log("running")
-        // }
-
-        // onSleep(){
-        //     this.style.display="none";
-        //     console.log(this.namespace + " Sleeping")
-        // }
+        
         onAwake(){
             this.style.display="block";
             console.log(this.namespace + " Awake")
+            this.music.play();
         }
 
         onSleep(){
