@@ -19,8 +19,8 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
          
 
 
-namespace `display.worlds` (
-    class HelloDomNode extends World {
+namespace `display.worlds.entities` (
+    class Box2DDemo extends WebComponent {
 
         constructor(element){
             super(element);
@@ -84,8 +84,7 @@ namespace `display.worlds` (
              }
              
              //breathe
-             await wait(1000);
-             this.querySelector("#container").style.display="inline-block"
+             await wait(100);
              //ready
              this.ready=true;
              //optional debug

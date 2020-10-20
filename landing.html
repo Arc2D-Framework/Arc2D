@@ -140,7 +140,7 @@
                 
                 <div id="hero" class="static-header image-version window-height light-text hero-section clearfix">
                     <div class="container">
-                        <div class="heading-block animated align-center" data-animation="fadeIn" data-duration="700" style="padding-top: 135px;width: 68%;margin: auto;">
+                        <div class="heading-block animated align-center" data-animation="fadeIn" data-duration="700" style="padding-top: 135px;width: 68%;margin: auto;padding-bottom: 10px;">
                             <div class="heading-container">
                                 <div id="heading-1">
                                     <h1>An Agnostic, W3C/ES6 Compliant <div class="highlight"> 2D World & GUI Engine</div></h1>
@@ -158,11 +158,7 @@
                             <a href="#" class="btn btn-solid" style="padding-right: 50px; padding-left: 50px;"><span class="fa fa-shopping-cart"></span>Get started</a><a href="#" class="btn btn-outline">Take tour</a>
                         </div>
                         
-                        <div class="image-wrapper">
-                            <div class="container">
-                                <img src="resources/landing-assets/img/features/app_block.png" alt="video" class="img-responsive animated" data-animation="fadeInUp" data-delay="400" data-duration="700" />
-                            </div>
-                        </div>
+                        <iframe src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
                     </div>
                 </div>
                    
@@ -197,11 +193,15 @@
                                         <br/>
                                         <article class="align-center">
                                             <h3><span class="highlight">SIZE </span>COMPARISON</h3>
-                                            <p class="sub-title">Arc2D's architecture and design makes it super fast and lightweight, a GZip totaling 10KB, one of the worlds smallest frameworks with the most powerful features crammed in without the need for 3rd party resources and bare minimal dependencies</p>
+                                            <p class="sub-title">
+                                                At 10KB, or roughly 1200 Lines of Code (uncompressed LOC), the Arc Engine spares no
+                                                expense. We've aimed for ultra efficiency on mobile,
+                                                desktop and web devices. A low memory (RAM) footprint and small kernel size gives Arc a solid advantage in boot and Time-to-Interactive (TTI) metrics.
+                                            </p>
                                             <!-- <p>You may ask yourself, what's the difference? Most frameworks and libraries source code may contain 5, 10, 20+ thousand lines of code with having to pull in extra dependencies to setup in order to create a simple HelloWorld application. Arc2D is just 900 lines of code, 9KB in size with no dependencies! Here we can see a comparison chart showing you the differences in size.</p>
                                             <br/> -->
-                                            <a href="#" class="btn btn-outline-color">Get template</a>
-                                            <a href="#" class="btn btn-outline-color">See elements</a>
+                                            <a href="#" class="btn btn-outline-color">Weight</a>
+                                            <a href="#" class="btn btn-outline-color">Lines of Code</a>
                                         </article>
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                             <div class="tab-pane" id="second-tab-alt">
                                 <div class="section-content row">
                                     <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-                                        <img src="resources/landing-assets/img/features/phone.jpg" class="img-responsive pull-right" alt="process 2" />
+                                        <img src="resources/landing-assets/img/benchmarks.png" class="img-responsive pull-right" alt="process 2" />
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
                                         <br/><br/>
@@ -225,32 +225,41 @@
                 
                             <div class="tab-pane" id="third-tab-alt">
                                 <div class="section-header align-center">
-                                    <h2>3 EASY STEPS</h2>
-                                    <p class="sub-header animated" data-duration="700" data-animation="zoomIn">Lorem ipsum dolor sit atmet sit dolor greand fdanrh s<br />dfs sit atmet sit dolor greand fdanrh sdfs
+                                    <h2>LOW MEMORY FOOTPRINT</h2>
+                                    <p class="sub-header animated" data-duration="700" data-animation="zoomIn">
+                                        From boot to run cycles, Arc uses the least amount of memory.
                                     </p>
                                 </div>
                                 <div class="section-content row animated" data-duration="700" data-delay="200" data-animation="fadeInDown">
                                     <div class="col-sm-4">
                                         <article class="align-center">
                                             <i class="howitworks icon icon-shopping-04 highlight"></i>
-                                            <span class="heading">PLACE ORDER</span>
-                                            <p class="thin" >Sit amet, consectetur adipiscing elit.<br />In hac divisione rem ipsam prorsus probo<br />elegantiam desidero.</p>
+                                            <span class="heading">RUN MEMORY</span>
+                                            <p class="thin" >
+                                                50% more efficient than in memory usage at boot-up compared to Angular.
+                                            </p>
                                         </article>
                                         <!--<span class="icon icon-arrows-04"></span>-->
                                     </div>
                                     <div class="col-sm-4">
                                         <article class="align-center">
                                             <i class="howitworks icon icon-seo-icons-03 highlight"></i>
-                                            <span class="heading">OUR SYSTEM RUNS</span>
-                                            <p class="thin" >Sit amet, consectetur adipiscing elit.<br />In hac divisione rem ipsam prorsus probo<br />elegantiam desidero.</p>
+                                            <span class="heading">BOOT MEMORY</span>
+                                            <p class="thin" >
+                                                45% more efficient than the competing & popular framework, Angular and React
+                                                when rendering 1000 objects.
+                                            </p>
                                         </article>
                                         <!--<span class="icon icon-arrows-04"></span>-->
                                     </div>
                                     <div class="col-sm-4">
                                         <article class="align-center">
                                             <i class="howitworks icon icon-seo-icons-05 highlight"></i>
-                                            <span class="heading">RECEIVE REPORT</span>
-                                            <p class="thin" >Sit amet, consectetur adipiscing elit.<br />In hac divisione rem ipsam prorsus probo<br />elegantiam desidero.</p>
+                                            <span class="heading">UNDER STRESS</span>
+                                            <p class="thin" >
+                                                50% less memory usage at rendering 10,000 objects when
+                                                compared to most popular frameworks.
+                                            </p>
                                         </article>
                                     </div>
                                 </div>
@@ -353,22 +362,30 @@
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="icon icon-shopping-18 highlight"></i>
-                                    <span class="heading">NO COMPILERS NECESSARY</span>
-                                    <p class="">Sit amet, consectetur adipiscing elit. In hac divisione rem ipsam prorsus probo elegantiam desidero. </p>
+                                    <span class="heading">NO COMPILERS</span>
+                                    <p class="">
+                                        Just 2 npm depdendencies, no webpack, live builds or babel.
+                                    </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="icon icon-seo-icons-27 highlight"></i>
                                     <span class="heading">W3C WEB COMPONENTS</span>
-                                    <p class="">Using native web components is fast, memory efficient, ease-of-use &amp; built on web standards</p>
+                                    <p class="">
+                                        Build custom component parts
+                                        and assemble them on screen following w3c recommendation.
+                                    </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="icon icon-office-24 highlight"></i>
                                     <span class="heading">Agnostic HTML Templating</span>
-                                    <p class="">Arc2D supports pluggable templating engines such as Mustache, Nunjucks, Handlebars &amp; more</p>
+                                    <p class="">
+                                        Plug-in your engine of choice (Mustache, Nunjucks, Handlebars &amp; more). No
+                                        vendor lock-in to technologies like JSX.
+                                    </p>
                                 </article>
                             </div>
                         </div>

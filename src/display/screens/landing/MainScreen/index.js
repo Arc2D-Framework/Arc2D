@@ -1,7 +1,8 @@
 import 'display.components.FrameworkSizeChart';
+import 'display.worlds.entities.Box2DDemo';
 
 namespace `display.screens.landing` (
-    class MainScreen extends Application {
+    class MainScreen extends World {
         constructor(element){
             super(element);
         }
@@ -16,6 +17,10 @@ namespace `display.screens.landing` (
             // this.headingsArray = [this.heading1, this.heading2, this.heading3];
 
             // this.randomizeHeading();
+        }
+
+        onUpdate(){
+
         }
 
         // randomizeHeading() {
