@@ -11,7 +11,7 @@ namespace `display.components` (
         }
 
         onLoadInstanceStylesheet(){
-            return false
+            return false;
         }
         
         initBarData(){
@@ -21,12 +21,12 @@ namespace `display.components` (
                     label: 'Optimized',
                     backgroundColor: 'rgb(26, 198, 255)',
                     yAxisID: 'y-axis-1',
-                    data: [9,92,304,173]
+                    data: [10,92,304,173]
                 }, {
                     label: 'Non-Optimized',
                     backgroundColor: 'rgb(255, 134, 35)',
                     yAxisID: 'y-axis-1',
-                    data: [46,335,1091,1343]
+                    data: [28,335,1091,1343]
                 }]
             };
         }
@@ -36,13 +36,14 @@ namespace `display.components` (
                         <div>
                             <canvas id="myChart" style="width: 100%;"></canvas>
                         </div>
-                    </template>`
+                    </template>`;
         }
 
         createChart() {
-            this.chartInstanceObj = this.querySelector('#myChart');
+            const chartInstanceObj = this.querySelector('#myChart');
             Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
-            var chart = new Chart(this.chartInstanceObj, {
+            Chart.defaults.global.animation.easing = 'easeOutBack';
+            var chart = new Chart(chartInstanceObj, {
                 type: 'bar',
                 data: this.barChartData,
                 options: {
@@ -55,6 +56,9 @@ namespace `display.components` (
                         fontSize: 14
                     },
                     tooltips: {
+                        titleFontSize: 15,
+                        xPadding: 8,
+                        yPadding: 8,
                         mode: 'index',
                         intersect: true,
                         callbacks: {
@@ -62,14 +66,8 @@ namespace `display.components` (
                                 const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
                                 return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`
                             },
-                            footer: (tooltipItem) => {
-                                console.log("tooltipItem",tooltipItem)
-                                tooltipItem.forEach(item =>{
-                                    if(item.label == "ReactJS"){
-                                        alert("React");
-                                        console.log(item.label)
-                                    }
-                                })
+                            footer: (tooltipItem, data) => {
+                                return this.onHoverCustomToolTipMsgs(tooltipItem);
                             }
                         }
                     },
@@ -91,6 +89,13 @@ namespace `display.components` (
                     }
                 }
             });
+        }
+
+        onHoverCustomToolTipMsgs(tooltipItem){
+            for(let item of tooltipItem)
+                return (item.label == "ReactJS") ? "\n*This is excluding Redux, Babel,\nWebpack and any other needed\ndependencies" :
+                    (item.label == "VueJS") ? "\n*This is excluding Babel, Webpack \nand any other needed dependencies" :
+                    (item.label == "AngularJS") ? "\n*This is excluding workspace\nnpm dependencies, dev dependencies,\nangular packages & support packages" : null;
         }
 
         numberWithCommas(num){
