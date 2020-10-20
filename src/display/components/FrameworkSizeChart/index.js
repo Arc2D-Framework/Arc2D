@@ -21,12 +21,12 @@ namespace `display.components` (
                     label: 'Optimized',
                     backgroundColor: 'rgb(26, 198, 255)',
                     yAxisID: 'y-axis-1',
-                    data: [10,92,304,173]
+                    data: [10,122,304,173]
                 }, {
                     label: 'Non-Optimized',
                     backgroundColor: 'rgb(255, 134, 35)',
                     yAxisID: 'y-axis-1',
-                    data: [28,335,1091,1343]
+                    data: [28,418,1091,1343]
                 }]
             };
         }
@@ -66,7 +66,7 @@ namespace `display.components` (
                                 const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
                                 return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`
                             },
-                            footer: (tooltipItem, data) => {
+                            footer: (tooltipItem) => {
                                 return this.onHoverCustomToolTipMsgs(tooltipItem);
                             }
                         }
