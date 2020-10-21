@@ -195,6 +195,12 @@ html, body, .MainScreen {
     background-color: #aa1515 !important;
 }
 
+
+.MainScreen a.active-link {
+    background-color:#1ac6ff;
+    color:white;
+}
+
 .MainScreen .package-column .package-detail a:hover {
     background-color: white !important;
     color: #1c3a64 !important;

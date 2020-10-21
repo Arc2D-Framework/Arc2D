@@ -109,8 +109,7 @@ namespace `display.components` (
         cssStyle(){
             return `
                 .FrameworkSizeChart {
-                    display: none;
-                    visibility: hidden;
+
                 }
             `;
         }

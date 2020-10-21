@@ -123,7 +123,7 @@ namespace `display.components` (
         cssStyle(){
             return `
                 .LinesOfCodeChart {
-                    visibility: visible;
+
                 }
             `;
         }
