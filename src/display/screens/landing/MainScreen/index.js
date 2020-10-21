@@ -1,4 +1,5 @@
 import 'display.components.FrameworkSizeChart';
+import 'display.components.LinesOfCodeChart';
 import 'display.worlds.entities.Box2DDemo';
 
 namespace `display.screens.landing` (

@@ -31,16 +31,8 @@ namespace `display.components` (
             };
         }
 
-        template(){
-            return `<template>
-                        <div>
-                            <canvas id="myChart" style="width: 100%;"></canvas>
-                        </div>
-                    </template>`;
-        }
-
         createChart() {
-            const chartInstanceObj = this.querySelector('#myChart');
+            const chartInstanceObj = this.querySelector('#sizeChart');
             Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
             Chart.defaults.global.animation.easing = 'easeOutBack';
             var chart = new Chart(chartInstanceObj, {
@@ -48,7 +40,7 @@ namespace `display.components` (
                 data: this.barChartData,
                 options: {
                     responsiveAnimationDuration: 2000,
-                    aspectRatio: 1.5,
+                    aspectRatio: this.aspectRatioViewPort(),
                     responsive: true,
                     title: {
                         display: true,
@@ -91,6 +83,10 @@ namespace `display.components` (
             });
         }
 
+        aspectRatioViewPort(){
+            return (window.matchMedia('(max-width: 480px)').matches) ? 1 : 1.5;
+        }
+
         onHoverCustomToolTipMsgs(tooltipItem){
             for(let item of tooltipItem)
                 return (item.label == "ReactJS") ? "\n*This is excluding Redux, Babel,\nWebpack and any other needed\ndependencies" :
@@ -100,6 +96,23 @@ namespace `display.components` (
 
         numberWithCommas(num){
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        template(){
+            return `<template>
+                        <div>
+                            <canvas id="sizeChart" style="width: 100%;"></canvas>
+                        </div>
+                    </template>`;
+        }
+
+        cssStyle(){
+            return `
+                .FrameworkSizeChart {
+                    display: none;
+                    visibility: hidden;
+                }
+            `;
         }
     }
 )
