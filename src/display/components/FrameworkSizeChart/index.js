@@ -52,7 +52,7 @@ namespace `display.components` (
                         xPadding: 8,
                         yPadding: 8,
                         mode: 'index',
-                        intersect: true,
+					    intersect: false,
                         callbacks: {
                             label: (tooltipItem, data) => {
                                 const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
@@ -62,6 +62,10 @@ namespace `display.components` (
                                 return this.onHoverCustomToolTipMsgs(tooltipItem);
                             }
                         }
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
                     },
                     scales: {
                         yAxes: [{
@@ -109,7 +113,7 @@ namespace `display.components` (
         cssStyle(){
             return `
                 .FrameworkSizeChart {
-
+                    visibility: visible;
                 }
             `;
         }

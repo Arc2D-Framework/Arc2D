@@ -15,86 +15,107 @@ namespace `display.components` (
 		}
 		
 		initBarData(){
-            this.barChartData = {
-				labels: [ 'Arc2D', 'VueJS', 'ReactJS', 'AngularJS'],
+			var chart = document.getElementById('loc-chart').getContext('2d');
+			var gradient = chart.createLinearGradient(0, 0, 0, 450);
+
+			gradient.addColorStop(0, 'rgba(26, 198, 255, 0.5)');
+			gradient.addColorStop(0.5, 'rgba(62, 62, 155, 0.25)');
+			gradient.addColorStop(1, 'rgba(26, 198, 255, 0)');
+
+            var data = {
+				labels: ['Arc2D', 'VueJS', 'ReactJS', 'AngularJS'],
 				datasets: [{
-						label: 'Lines of Code',
-						backgroundColor: this.gradient,
-						pointBackgroundColor: 'white',
-						borderWidth: 2,
-						borderColor: '#1ac6ff',
-						data: [1316, 15029, 31540, 48295]
+					label: 'Lines of Code',
+					backgroundColor: gradient,
+					pointBackgroundColor: 'white',
+					borderWidth: 1,
+					borderColor: '#1ac6ff',
+					pointBorderColor: "#1ac6ff",
+					pointBackgroundColor: "#1ac6ff",
+					pointHoverBackgroundColor: "#1ac6ff",
+					pointHoverBorderColor: "#1ac6ff",
+					pointBorderWidth: 3,
+					pointHoverRadius: 10,
+					pointHoverBorderWidth: 1,
+					pointRadius: 3,
+					data: [1316, 15029, 31540, 37762]
 				}]
 			};
-		}
 
-		createChart() {
-			this.chartInstanceObj = this.querySelector('#loc-chart').getContext('2d');
-			this.gradient = this.chartInstanceObj.createLinearGradient(0, 0, 0, 0);
-			this.gradient.addColorStop(0, 'rgba(26, 198,255, 0.5)');
-			this.gradient.addColorStop(0.5, 'rgba(26, 198,255, 0.25)');
-			this.gradient.addColorStop(1, 'rgba(26, 198,255, 0)');
-
-            Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
-            Chart.defaults.global.animation.easing = 'easeOutBack';
-            var loc_chart = new Chart(this.chartInstanceObj, {
-                type: 'line',
-                data: this.barChartData,
-                options: {
-					responsive: true,
-					responsiveAnimationDuration: 2000,
-                    aspectRatio: this.aspectRatioViewPort(),
-					animation: {
-						easing: 'easeInOutQuad',
-						duration: 520
-					},
-					scales: {
-						xAxes: [{
-							gridLines: {
-								color: 'rgba(200, 200, 200, 0.05)',
-								lineWidth: 1
-							}
-						}],
-						yAxes: [{
-							gridLines: {
-								color: 'rgba(200, 200, 200, 0.08)',
-								lineWidth: 1
-							}
-						}]
-					},
-					// elements: {
-					// 	line: {
-					// 		tension: 0.4
-					// 	}
-					// },
-					legend: {
-						display: false
-					},
-					// point: {
-					// 	backgroundColor: 'white'
-					// },
-					tooltips: {
-						// titleFontFamily: 'Open Sans',
-						// backgroundColor: 'rgba(0,0,0,0.3)',
-						// titleFontColor: 'red',
-						// caretSize: 5,
-						// cornerRadius: 2,
-						xPadding: 10,
-						yPadding: 10,
-						titleFontSize: 15,
-						callbacks: {
-                            label: (tooltipItem, data) => {
-                                const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)}`
-                            },
-                            footer: (tooltipItem) => {
-                                return this.onHoverCustomToolTipMsgs(tooltipItem);
-                            }
-                        }
+			var options = {
+				responsive: true,
+				aspectRatio: this.aspectRatioViewPort(),
+				scales: {
+					xAxes: [{
+						gridLines: {
+							color: 'rgba(200, 200, 200, 0.05)',
+							lineWidth: 1
+						}
+					}],
+					yAxes: [{
+						gridLines: {
+							color: 'rgba(200, 200, 200, 0.08)',
+							lineWidth: 1
+						}
+					}]
+				},
+				elements: {
+					line: {
+						tension: 0.4
 					}
+				},
+				legend: {
+					display: false
+				},
+				point: {
+					backgroundColor: 'white'
+				},
+				tooltips: {
+					titleFontSize: 15,
+					caretSize: 5,
+					mode: 'index',
+					intersect: false,
+					cornerRadius: 2,
+					xPadding: 10,
+					yPadding: 10,
+					callbacks: {
+						label: (tooltipItem, data) => {
+							const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+							return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)}`
+						},
+						footer: (tooltipItem) => {
+							return this.onHoverCustomToolTipMsgs(tooltipItem);
+						}
+					}
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
 				}
-            });
-        }
+			};
+			
+			this.lineGraph = {
+				data: data,
+				options: options
+			}
+		}
+		
+		createChart() {
+			var chart = document.getElementById('loc-chart').getContext('2d'),
+				gradient = chart.createLinearGradient(0, 0, 0, 450);
+		
+			gradient.addColorStop(0, 'rgba(26, 198,255, 0.5)');
+			gradient.addColorStop(0.5, 'rgba(26, 198,255, 0.25)');
+			gradient.addColorStop(1, 'rgba(26, 198,255, 0)');
+		
+			Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
+			Chart.defaults.global.animation.easing = 'easeOutBack';
+			var chartInstance = new Chart(chart, {
+				type: 'line',
+				data: this.lineGraph.data,
+				options: this.lineGraph.options
+			});
+		}
 
 		aspectRatioViewPort(){
             return (window.matchMedia('(max-width: 480px)').matches) ? 1 : 1.5;
@@ -105,7 +126,7 @@ namespace `display.components` (
                 return (item.label == "ReactJS") ? "\n*These results were based on React Library,\nReact-DOM, React Router and could vary\ndepending on any other needed dependencies" :
                     (item.label == "VueJS") ? "\n*These results were based on VueJS Library,\nVue Router and could vary depending on\nany other needed dependencies" :
 					(item.label == "AngularJS") ? "\n*These results were based on AngularJS\nFramework, Angular Route, Angular-UI-Router\nand could vary depending on any other needed\ndependencies" :
-					"*These results were based on the entire Arc Framework including it's router and 2 dependencies."
+					"*These results were based on the entire\nArc Framework including it's router and\n2 dependencies."
         }
 
         numberWithCommas(num){
@@ -123,7 +144,7 @@ namespace `display.components` (
         cssStyle(){
             return `
                 .LinesOfCodeChart {
-
+					visibility: hidden;
                 }
             `;
         }

@@ -7,6 +7,13 @@ html, body, .MainScreen {
     box-sizing:border-box;
 }
 
+.MainScreen .animation {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
 .MainScreen #hero > div:nth-child(1){
     width: 100% !important;
 }
@@ -53,9 +60,14 @@ html, body, .MainScreen {
   font-size: 24px;
 }
 
-.MainScreen article p:nth-of-type(2) {
+.MainScreen article p:nth-of-type(2),
+.MainScreen article p:nth-of-type(3) {
   color: #5b5b5b;
   font-weight: 100;
+}
+
+.MainScreen #process div.section-content.row div:nth-of-type(4) article {
+  text-align:left;
 }
 
 .MainScreen article > h3 {

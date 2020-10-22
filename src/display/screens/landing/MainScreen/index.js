@@ -1,6 +1,6 @@
+import 'display.worlds.entities.Box2DDemo';
 import 'display.components.FrameworkSizeChart';
 import 'display.components.LinesOfCodeChart';
-import 'display.worlds.entities.Box2DDemo';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
@@ -19,7 +19,6 @@ namespace `display.screens.landing` (
             this.addEventListener("click", e => this.onShowLOCChart(), false, "#loc-chart-button");
             this.size_button.click();//force a click
 
-
             // this.headingContainer = this.querySelector(".heading-container");
             // this.heading1 = "<h1>An Agnostic, W3C/ES6 Compliant <div class='highlight'> 2D World & GUI Engine</div></h1><h5 style='margin-bottom: 33px;'>Native ES6 and HTML5 with time dependent simulation stepper for AI, DOM Physics and 2D Canvas games up to 60fps. No compilers, pre or post processors, no webpack, grunt or babel, no typescript or parsers</h5>";
             // this.heading2 = "<h1>The Dawn of a New Age –<div class='highlight'> Arc2D</div> a Dynamic HTML W3C/ES6 Compliant Framework</h1><h5 style='margin-bottom: 33px;'>Arc2D is a dynamic HTML Framework used for its architecture, building apps, 2D games and more!</h5>";
@@ -32,22 +31,47 @@ namespace `display.screens.landing` (
         onShowSizeChart(){
             this.size_button.classList.add("active-link");
             this.loc_button.classList.remove("active-link");
+            this.size_chart.classList.add("lightSpeedInLeft");
+            this.loc_chart.classList.add("fadeOutRight");
 
-            this.size_chart.style.display="block";
-            this.loc_chart.style.display="none";
+            this.toggleVisibility(this.size_chart, this.loc_chart);
+            this.toggleDisplay(this.size_chart, this.loc_chart);
+
+            setTimeout(() => {
+                this.size_chart.classList.remove("lightSpeedInLeft");
+                this.loc_chart.classList.remove("fadeOutRight");
+            }, 1200);
         }
 
         onShowLOCChart(){
             this.size_button.classList.remove("active-link");
             this.loc_button.classList.add("active-link");
+            this.size_chart.classList.add("fadeOutLeft");
+            this.loc_chart.classList.add("lightSpeedInRight");
 
-            this.size_chart.style.display="none";
-            this.loc_chart.style.display="block";
+            this.toggleVisibility(this.loc_chart, this.size_chart);
+            this.toggleDisplay(this.loc_chart, this.size_chart);
+
+            setTimeout(() => {
+                this.size_chart.classList.remove("fadeOutLeft");
+                this.loc_chart.classList.remove("lightSpeedInRight");
+            }, 1200);
+            
         }
 
-        // onUpdate(){
+        toggleVisibility(element1, element2){
+            setTimeout(() => {
+                element1.style.visibility = "visible";
+                element2.style.visibility = "hidden";
+            }, 300);
+        }
 
-        // }
+        toggleDisplay(element1, element2){
+            setTimeout(() => {
+                element1.style.display="block";
+                element2.style.display="none";
+            }, 500);
+        }
 
         // randomizeHeading() {
         //     this.headingContainer.innerHTML = this.headingsArray[Math.floor(Math.random() * this.headingsArray.length)];
