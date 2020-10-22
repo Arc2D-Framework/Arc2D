@@ -56,7 +56,7 @@ namespace `display.components` (
                         callbacks: {
                             label: (tooltipItem, data) => {
                                 const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`
+                                return ` ${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`
                             },
                             footer: (tooltipItem) => {
                                 return this.onHoverCustomToolTipMsgs(tooltipItem);
