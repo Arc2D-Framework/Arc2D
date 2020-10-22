@@ -38,7 +38,7 @@ namespace `display.components` (
 					pointHoverRadius: 10,
 					pointHoverBorderWidth: 1,
 					pointRadius: 3,
-					data: [1316, 15029, 31540, 37762]
+					data: [1316, 15029, 31540, 48295]
 				}]
 			};
 
