@@ -31,14 +31,14 @@ namespace `display.screens.landing` (
         onShowSizeChart(){
             this.size_button.classList.add("active-link");
             this.loc_button.classList.remove("active-link");
-            this.size_chart.classList.add("lightSpeedInLeft");
+            this.size_chart.classList.add("fadeInLeft");
             this.loc_chart.classList.add("fadeOutRight");
 
             this.toggleVisibility(this.size_chart, this.loc_chart);
             this.toggleDisplay(this.size_chart, this.loc_chart);
 
             setTimeout(() => {
-                this.size_chart.classList.remove("lightSpeedInLeft");
+                this.size_chart.classList.remove("fadeInLeft");
                 this.loc_chart.classList.remove("fadeOutRight");
             }, 1200);
         }
@@ -47,14 +47,14 @@ namespace `display.screens.landing` (
             this.size_button.classList.remove("active-link");
             this.loc_button.classList.add("active-link");
             this.size_chart.classList.add("fadeOutLeft");
-            this.loc_chart.classList.add("lightSpeedInRight");
+            this.loc_chart.classList.add("fadeInRight");
 
             this.toggleVisibility(this.loc_chart, this.size_chart);
             this.toggleDisplay(this.loc_chart, this.size_chart);
 
             setTimeout(() => {
                 this.size_chart.classList.remove("fadeOutLeft");
-                this.loc_chart.classList.remove("lightSpeedInRight");
+                this.loc_chart.classList.remove("fadeInRight");
             }, 1200);
             
         }

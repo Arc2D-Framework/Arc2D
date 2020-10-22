@@ -79,7 +79,15 @@ namespace `display.components` (
                             position: 'left',
                             id: 'y-axis-1',
                             gridLines: {
-                                drawOnChartArea: true
+                                drawOnChartArea: true,
+                                color: 'rgba(200, 200, 200, 0.30)',
+							    lineWidth: 1
+                            }
+                        }],
+                        xAxes: [{
+                            gridLines: {
+                                color: 'rgba(200, 200, 200, .30)',
+                                lineWidth: 1
                             }
                         }],
                     }

@@ -20,7 +20,7 @@ namespace `display.components` (
 
 			gradient.addColorStop(0, 'rgba(26, 198, 255, 0.5)');
 			gradient.addColorStop(0.5, 'rgba(62, 62, 155, 0.25)');
-			gradient.addColorStop(1, 'rgba(26, 198, 255, 0.20)');
+			gradient.addColorStop(1, 'rgba(26, 198, 255, 0.30)');
 
             var data = {
 				labels: ['Arc2D', 'VueJS', 'ReactJS', 'AngularJS'],
@@ -123,9 +123,9 @@ namespace `display.components` (
 
         onHoverCustomToolTipMsgs(tooltipItem){
             for(let item of tooltipItem)
-                return (item.label == "ReactJS") ? "\n*These results were based on React Library,\nReact-DOM, React Router and could vary\ndepending on any other needed dependencies" :
-                    (item.label == "VueJS") ? "\n*These results were based on VueJS Library,\nVue Router and could vary depending on\nany other needed dependencies" :
-					(item.label == "AngularJS") ? "\n*These results were based on AngularJS\nFramework, Angular Route, Angular-UI-Router\nand could vary depending on any other needed\ndependencies" :
+                return (item.label == "ReactJS") ? "\n*These results were based on the React Library,\nReact-DOM, React Router and could vary\ndepending on any other needed dependencies" :
+                    (item.label == "VueJS") ? "\n*These results were based on the VueJS Library,\nVue Router and could vary depending on\nany other needed dependencies" :
+					(item.label == "AngularJS") ? "\n*These results were based on the AngularJS\nFramework, Angular Route, Angular-UI-Router\nand could vary depending on any other needed\ndependencies" :
 					"*These results were based on the entire\nArc Framework including its router and\n2 dependencies."
         }
 

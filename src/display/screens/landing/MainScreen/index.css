@@ -231,6 +231,7 @@ html, body, .MainScreen {
 @media (min-width: 1200px) {
     .featured-tab .tab-content {
         top: -50px;
+        right:-92px;
     }
 }
 
