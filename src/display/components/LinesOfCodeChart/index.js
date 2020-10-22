@@ -34,7 +34,7 @@ namespace `display.components` (
 					pointBackgroundColor: "#1ac6ff",
 					pointHoverBackgroundColor: "#1ac6ff",
 					pointHoverBorderColor: "#1ac6ff",
-					pointBorderWidth: 3,
+					pointBorderWidth: 2,
 					pointHoverRadius: 10,
 					pointHoverBorderWidth: 1,
 					pointRadius: 3,
@@ -48,13 +48,13 @@ namespace `display.components` (
 				scales: {
 					xAxes: [{
 						gridLines: {
-							color: 'rgba(200, 200, 200, 0.05)',
+							color: 'rgba(200, 200, 200, .05)',
 							lineWidth: 1
 						}
 					}],
 					yAxes: [{
 						gridLines: {
-							color: 'rgba(200, 200, 200, 0.08)',
+							color: 'rgba(200, 200, 200, 0.2)',
 							lineWidth: 1
 						}
 					}]
