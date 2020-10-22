@@ -12,24 +12,27 @@ namespace `display.worlds.entities.html` (
         onLoadInstanceStylesheet(){return true}
 
 		async onConnected(){
-            // await super.onConnected();
-            await this.render();
+            await super.onConnected();
+            // await this.render();
+            var hw = this.hw;
+            var hh = this.hh;
+
             var fixDef = new b2FixtureDef;
                 fixDef.density = 1.0;
                 fixDef.friction = 0.5;
                 fixDef.restitution = 0.2;
-             
+                fixDef.shape = new b2PolygonShape;
+                fixDef.shape.SetAsBox(hw, hh);
+
              var bodyDef = new b2BodyDef;
                  bodyDef.type = b2Body.b2_staticBody;
                  bodyDef.position.x = 10;
                  bodyDef.position.y = 11;
-             fixDef.shape = new b2PolygonShape;
-             var hw = this.hw;
-             var hh = this.hh;
-             fixDef.shape.SetAsBox(hw, hh);
-             this.world.CreateBody(bodyDef).CreateFixture(fixDef);
+             
+             this.world
+                .CreateBody(bodyDef)
+                .CreateFixture(fixDef);
 
-             // debugger;
              this.style.transform = `translate3d(${(bodyDef.position.x-(hw))*this.scale}px, ${(bodyDef.position.y-(hh))*this.scale}px, 0px)`;
              this.style.width = (hw*2)* (this.scale)+"px";
              this.style.height= (hh*2)* (this.scale)+"px";

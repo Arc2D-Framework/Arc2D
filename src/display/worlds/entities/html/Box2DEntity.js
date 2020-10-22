@@ -18,6 +18,14 @@ namespace `display.worlds.entities.html` (
                     box-sizing:border-box;
                     z-index:1;
                 }
+                .Box2DEntity > div {
+                    align-items: center;
+                    display: flex;
+                    height: 100%;
+                    font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+                    font-size: 11px;
+                    justify-content: center;
+                }
             `
         }
 

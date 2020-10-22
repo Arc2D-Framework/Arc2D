@@ -8,8 +8,8 @@ html, body, .MainScreen {
 }
 
 .MainScreen .animation {
-  -webkit-animation-duration: .5s;
-  animation-duration: .5s;
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -101,7 +101,6 @@ html, body, .MainScreen {
 }
 
 /* Hidden Sections - Until Ready for Use */
-.MainScreen #clients,
 .MainScreen #guarantee,
 .MainScreen #awards,
 .MainScreen #feedback,
@@ -213,6 +212,10 @@ html, body, .MainScreen {
     color:white;
 }
 
+.MainScreen .featured-tab li > a .tab-desc {
+    line-height: 1.6;
+}
+
 .MainScreen .package-column .package-detail a:hover {
     background-color: white !important;
     color: #1c3a64 !important;
@@ -222,6 +225,12 @@ html, body, .MainScreen {
 @media screen and (min-width:400px) and (max-width:991px){
     .MainScreen .package-column .package-detail {
         height: 100% !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .featured-tab .tab-content {
+        top: -50px;
     }
 }
 
