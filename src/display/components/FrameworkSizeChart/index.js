@@ -52,16 +52,20 @@ namespace `display.components` (
                         xPadding: 8,
                         yPadding: 8,
                         mode: 'index',
-                        intersect: true,
+					    intersect: false,
                         callbacks: {
                             label: (tooltipItem, data) => {
                                 const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return `${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`
+                                return ` ${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)} kB`
                             },
                             footer: (tooltipItem) => {
                                 return this.onHoverCustomToolTipMsgs(tooltipItem);
                             }
                         }
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
                     },
                     scales: {
                         yAxes: [{
@@ -109,7 +113,7 @@ namespace `display.components` (
         cssStyle(){
             return `
                 .FrameworkSizeChart {
-
+                    visibility: visible;
                 }
             `;
         }
