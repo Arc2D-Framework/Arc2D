@@ -10,15 +10,11 @@ namespace `display.components` (
             this.createChart();
         }
 
-        onLoadInstanceStylesheet(){
-            return false;
-		}
-
 		initBarData(){
 			var lineGraph = {
 				type: 'line',
 				data: {
-					labels: ['Consistently Interactive', 'Script Bootup Time', 'Total Kilobyte Weight', 'Geometric Mean'],
+					labels: [['Consistently', 'Interactive'], 'Script Bootup Time', 'Total Kilobyte Weight', ['Geometric', 'Mean']],
 					datasets: [{
 						label: 'Vanilla JS',
 						borderColor: 'rgb(233, 214, 27)',
@@ -31,18 +27,18 @@ namespace `display.components` (
 						data: [1.08, 1.00, 1.32, 1.12],
 					}, {
 						label: 'VueJS',
-						borderColor: window.chartColors.green,
-						backgroundColor: window.chartColors.green,
+						borderColor: 'rgb(63, 178, 127)',
+						backgroundColor: 'rgb(63, 178, 127)',
 						data: [1.17, 3.52, 1.40, 1.80],
 					}, {
 						label: 'ReactJS',
-						borderColor: window.chartColors.yellow,
-						backgroundColor: window.chartColors.yellow,
+						borderColor: 'rgb(94, 211, 243)',
+						backgroundColor: 'rgb(94, 211, 243)',
 						data: [1.33, 4.19, 1.74, 2.13],
 					}, {
 						label: 'Angular',
-						borderColor: window.chartColors.yellow,
-						backgroundColor: window.chartColors.yellow,
+						borderColor: 'rgb(216, 45, 47)',
+						backgroundColor: 'rgb(216, 45, 47)',
 						data: [1.48, 13.94, 1.97, 3.44],
 					}]
 				},
@@ -51,9 +47,11 @@ namespace `display.components` (
 					responsive: true,
 					title: {
 						display: true,
-						text: 'Startup metrics (Lighthouse with Mobile Simulation)'
+						text: 'Startup Metrics (Lighthouse with Mobile Simulation)',
+						fontSize: 15
 					},
 					tooltips: {
+						bodySpacing: 4,
 						titleFontSize: 15,
 						caretSize: 5,
 						mode: 'index',
@@ -62,11 +60,12 @@ namespace `display.components` (
 						xPadding: 10,
 						yPadding: 10,
 						callbacks: {
-							label: (tooltipItem, data) => {
-								const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-								return ` ${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)}`
-							},
+							// label: (tooltipItem, data) => {
+							// 	const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+							// 	return ` ${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)}`
+							// },
 							footer: (tooltipItem) => {
+								console.log("tooltipItem",tooltipItem);
 								return this.onHoverCustomToolTipMsgs(tooltipItem);
 							}
 						}
@@ -80,13 +79,17 @@ namespace `display.components` (
 							scaleLabel: {
 								display: false,
 								labelString: 'Month'
+							},
+							ticks: {
+								fontSize: this.xAxesFontSize()
 							}
 						}],
 						yAxes: [{
 							stacked: true,
 							scaleLabel: {
-								display: false,
-								labelString: 'Value'
+								display: true,
+								labelString: 'Benchmark Score Result',
+								fontSize: 14
 							}
 						}]
 					}
@@ -111,9 +114,21 @@ namespace `display.components` (
 			});
 		}
 
-		aspectRatioViewPort(){
-            return (window.matchMedia('(max-width: 480px)').matches) ? 1 : 1.5;
+		onHoverCustomToolTipMsgs(tooltipItem){
+            for(let item of tooltipItem)
+                return (item.label == "Consistently,Interactive") ? "\n*A pessimistic TTI - when the CPU and\nnetwork are both definitely very idle\n(no more CPU tasks over 50ms)." :
+                    (item.label == "Script Bootup Time") ? "\n*The total ms required to parse, compile\n& evaluate all the page's scripts." :
+					(item.label == "Total Kilobyte Weight") ? "\n*Network transfer cost (post-compression)\nof all the resources loaded into the page." :
+					"\n*The average score based on\nthe following start-up metrics."
         }
+
+		aspectRatioViewPort(){
+            return (window.matchMedia('(max-width: 480px)').matches) ? 1 : 1.3;
+		}
+
+		xAxesFontSize(){
+			return (window.matchMedia('(max-width: 480px)').matches) ? 10 : 12;
+		}
 		
 		template(){
             return `<template>
@@ -121,7 +136,11 @@ namespace `display.components` (
                             <canvas id="speed-chart" style="width: 100%;"></canvas>
                         </div>
                     </template>`;
-        }
+		}
+		
+		onLoadInstanceStylesheet(){
+            return false;
+		}
 
         // cssStyle(){
             

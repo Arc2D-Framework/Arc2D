@@ -120,7 +120,7 @@ namespace `display.components` (
                 return (item.label == "ReactJS") ? "\n*These results were based on the React Library,\nReact-DOM, React Router and could vary\ndepending on any other needed dependencies." :
                     (item.label == "VueJS") ? "\n*These results were based on the VueJS Library,\nVue Router and could vary depending on\nany other needed dependencies." :
 					(item.label == "AngularJS") ? "\n*These results were based on the AngularJS\nFramework, Angular Route, Angular-UI-Router\nand could vary depending on any other needed\ndependencies." :
-					"*These results were based on the entire\nArc Framework including its router and\n2 dependencies."
+					"\n*These results were based on the entire\nArc Framework including its router and\n2 dependencies."
         }
 
         numberWithCommas(num){
