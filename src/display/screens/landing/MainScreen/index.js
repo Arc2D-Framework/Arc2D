@@ -1,6 +1,7 @@
 import 'display.worlds.entities.Box2DDemo';
 import 'display.components.FrameworkSizeChart';
 import 'display.components.LinesOfCodeChart';
+// import 'display.components.SpeedChart';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
@@ -31,14 +32,14 @@ namespace `display.screens.landing` (
         onShowSizeChart(){
             this.size_button.classList.add("active-link");
             this.loc_button.classList.remove("active-link");
-            this.size_chart.classList.add("fadeInLeft");
+            this.size_chart.classList.add("slide-in-blurred-left");
             this.loc_chart.classList.add("fadeOutRight");
 
             this.toggleVisibility(this.size_chart, this.loc_chart);
             this.toggleDisplay(this.size_chart, this.loc_chart);
 
             setTimeout(() => {
-                this.size_chart.classList.remove("fadeInLeft");
+                this.size_chart.classList.remove("slide-in-blurred-left");
                 this.loc_chart.classList.remove("fadeOutRight");
             }, 1200);
         }
@@ -47,14 +48,14 @@ namespace `display.screens.landing` (
             this.size_button.classList.remove("active-link");
             this.loc_button.classList.add("active-link");
             this.size_chart.classList.add("fadeOutLeft");
-            this.loc_chart.classList.add("fadeInRight");
+            this.loc_chart.classList.add("slide-in-blurred-right");
 
             this.toggleVisibility(this.loc_chart, this.size_chart);
             this.toggleDisplay(this.loc_chart, this.size_chart);
 
             setTimeout(() => {
                 this.size_chart.classList.remove("fadeOutLeft");
-                this.loc_chart.classList.remove("fadeInRight");
+                this.loc_chart.classList.remove("slide-in-blurred-right");
             }, 1200);
             
         }
