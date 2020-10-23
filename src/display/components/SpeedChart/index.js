@@ -17,29 +17,55 @@ namespace `display.components` (
 					labels: [['Consistently', 'Interactive'], 'Script Bootup Time', 'Total Kilobyte Weight', ['Geometric', 'Mean']],
 					datasets: [{
 						label: 'Vanilla JS',
-						borderColor: 'rgb(233, 214, 27)',
 						backgroundColor: 'rgb(233, 214, 27)',
 						data: [1.00, 1.00, 1.00, 1.00],
+						pointHitRadius: 50,
+						borderColor: 'rgba(255, 255, 255, 0.5)',
+						pointBorderColor: 'rgb(233, 214, 27)',
+						pointHoverRadius: 8,
+						borderWidth: 1,
+						pointBorderWidth: 2,
 					}, {
 						label: 'Arc2D',
-						borderColor: 'rgb(0, 83, 163)',
 						backgroundColor: 'rgb(0, 83, 163)',
 						data: [1.08, 1.00, 1.32, 1.12],
+						pointHitRadius: 50,
+						borderColor: 'rgba(255, 255, 255, 0.5)',
+						pointBorderColor: 'rgb(0, 83, 163)',
+						pointHoverRadius: 8,
+						borderWidth: 1,
+						pointBorderWidth: 2,
 					}, {
 						label: 'VueJS',
-						borderColor: 'rgb(63, 178, 127)',
 						backgroundColor: 'rgb(63, 178, 127)',
 						data: [1.17, 3.52, 1.40, 1.80],
+						pointHitRadius: 50,
+						borderColor: 'rgba(255, 255, 255, 0.5)',
+						pointBorderColor: 'rgb(63, 178, 127)',
+						pointHoverRadius: 8,
+						borderWidth: 1,
+						pointBorderWidth: 2,
+						
 					}, {
 						label: 'ReactJS',
-						borderColor: 'rgb(94, 211, 243)',
 						backgroundColor: 'rgb(94, 211, 243)',
 						data: [1.33, 4.19, 1.74, 2.13],
+						pointHitRadius: 50,
+						borderColor: 'rgba(255, 255, 255, 0.5)',
+						pointBorderColor: 'rgb(94, 211, 243)',
+						pointHoverRadius: 8,
+						borderWidth: 1,
+						pointBorderWidth: 2,
 					}, {
 						label: 'Angular',
-						borderColor: 'rgb(216, 45, 47)',
 						backgroundColor: 'rgb(216, 45, 47)',
 						data: [1.48, 13.94, 1.97, 3.44],
+						pointHitRadius: 50,
+						borderColor: 'rgba(255, 255, 255, 0.5)',
+						pointBorderColor: 'rgb(216, 45, 47)',
+						pointHoverRadius: 8,
+						borderWidth: 1,
+						pointBorderWidth: 2,
 					}]
 				},
 				options: {
@@ -60,10 +86,6 @@ namespace `display.components` (
 						xPadding: 10,
 						yPadding: 10,
 						callbacks: {
-							// label: (tooltipItem, data) => {
-							// 	const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-							// 	return ` ${data.datasets[tooltipItem.datasetIndex].label}: ${this.numberWithCommas(value)}`
-							// },
 							footer: (tooltipItem) => {
 								console.log("tooltipItem",tooltipItem);
 								return this.onHoverCustomToolTipMsgs(tooltipItem);
@@ -141,9 +163,5 @@ namespace `display.components` (
 		onLoadInstanceStylesheet(){
             return false;
 		}
-
-        // cssStyle(){
-            
-        // }
 	}
 )

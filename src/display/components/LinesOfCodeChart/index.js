@@ -27,17 +27,18 @@ namespace `display.components` (
 				datasets: [{
 					label: 'Lines of Code',
 					backgroundColor: gradient,
-					pointBackgroundColor: 'white',
-					borderWidth: 1,
-					borderColor: '#1ac6ff',
+					borderWidth: 0,
+					borderColor: '#fff',
+					// bnackgroundColor: "#1ac6ff",
 					pointBorderColor: "#1ac6ff",
 					pointBackgroundColor: "#1ac6ff",
-					pointHoverBackgroundColor: "#1ac6ff",
-					pointHoverBorderColor: "#1ac6ff",
+					// pointHoverBackgroundColor: "#1ac6ff",
+					// pointHoverBorderColor: "#1ac6ff",
 					pointBorderWidth: 2,
 					pointHoverRadius: 10,
 					pointHoverBorderWidth: 1,
 					pointRadius: 3,
+					pointHitRadius: 100,
 					data: [1316, 15029, 31540, 48295]
 				}]
 			};
@@ -59,16 +60,8 @@ namespace `display.components` (
 						}
 					}]
 				},
-				elements: {
-					line: {
-						tension: 0.4
-					}
-				},
 				legend: {
 					display: false
-				},
-				point: {
-					backgroundColor: 'white'
 				},
 				tooltips: {
 					titleFontSize: 15,
