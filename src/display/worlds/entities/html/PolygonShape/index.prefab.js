@@ -1,3 +1,5 @@
+
+                
 namespace `display.worlds.entities.html` (
     class PolygonShape extends display.worlds.entities.html.Box2DEntity {
         // constructor(hWidth,hHeight,world,stage,scale,element){
@@ -77,3 +79,22 @@ namespace `display.worlds.entities.html` (
         }
     }
 )
+
+
+                display.worlds.entities.html.PolygonShape.prototype.template = function(){
+                    return `<template>
+    <div>DIV</div>
+</template>
+`
+                };
+
+                display.worlds.entities.html.PolygonShape.prototype.cssStyle = function(){
+                    return `.PolygonShape {
+    background:#a5e002;
+    /*display:none;*/
+    transform-origin: center;
+}
+`
+                };
+
+                display.worlds.entities.html.PolygonShape.prototype.onLoadInstanceStylesheet = function(){ return false }

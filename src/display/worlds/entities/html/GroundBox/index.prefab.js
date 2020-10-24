@@ -1,3 +1,5 @@
+
+                
 namespace `display.worlds.entities.html` (
 	class GroundBox extends display.worlds.entities.html.Box2DEntity {
         constructor(hWidth,hHeight,world,stage,scale,element){
@@ -47,3 +49,21 @@ namespace `display.worlds.entities.html` (
         }
 	}
 )
+
+
+                display.worlds.entities.html.GroundBox.prototype.template = function(){
+                    return `<template>
+	<div>DIV</div>
+</template>
+`
+                };
+
+                display.worlds.entities.html.GroundBox.prototype.cssStyle = function(){
+                    return `.GroundBox {
+	background:#1ac6ff;
+    /*display:none;*/
+}
+`
+                };
+
+                display.worlds.entities.html.GroundBox.prototype.onLoadInstanceStylesheet = function(){ return false }

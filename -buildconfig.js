@@ -1,9 +1,9 @@
 BUILDCONFIG = {
-    Input : "src/display/screens/MoviesApp/index.js",
+    Input : "src/display/worlds/HelloDomNode/index.js",
     
     Output : {
-        SourcePath:"src/display/screens/MoviesApp/index.src.js",
-        CompressedPath: "src/display/screens/MoviesApp/index.min.js"
+        SourcePath:"src/display/worlds/HelloDomNode/index.src.js",
+        CompressedPath: "src/display/worlds/HelloDomNode/index.min.js"
     },
 
     LoadsAsync : true,
@@ -19,7 +19,9 @@ BUILDCONFIG = {
     Prefabs : {
         Enabled : true,
         Components : [
-          
+            "display.worlds.entities.html.GroundBox",
+            "display.worlds.entities.svg.CircleShape",
+            "display.worlds.entities.html.PolygonShape"
         ]
     }
 };
