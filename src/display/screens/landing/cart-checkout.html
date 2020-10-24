@@ -8,21 +8,28 @@
 	<title>Home</title>
 	<meta name="description" content="Startups template">
 	<meta name="keywords" content="Startups template">
-	<link rel="shortcut icon" href="assets/img/favicon.ico">
-	<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.jpg">
-	<link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.jpg">
-	<link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.jpg">
-	<link rel="stylesheet" type="text/css" href="assets/css/custom-animations.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/lib/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+	<link rel="shortcut icon" href="landing-assets/img/favicon.ico">
+	<link rel="apple-touch-icon" href="landing-assets/img/apple-touch-icon.jpg">
+	<link rel="apple-touch-icon" sizes="72x72" href="landing-assets/img/apple-touch-icon-72x72.jpg">
+	<link rel="apple-touch-icon" sizes="114x114" href="landing-assets/img/apple-touch-icon-114x114.jpg">
+	<link rel="stylesheet" type="text/css" href="landing-assets/css/custom-animations.css" />
+	<link rel="stylesheet" type="text/css" href="landing-assets/css/lib/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="landing-assets/css/style.css" />
 
 	<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.js"></script>
-		<script src="assets/js/respond.min.js"></script>
+		<script src="landing-assets/js/html5shiv.js"></script>
+		<script src="landing-assets/js/respond.min.js"></script>
 	<![endif]-->
+	<script src="../../../../node_modules/od-cocoon/framework.min.js" charset="utf-8"></script>
+    <script>
+        Config.USE_COMPRESSED_BUILD=false;
+        Config.DEBUG=true; //true loads .src.js, false loads .min.js
+        Config.ROOTPATH = "../../../../";
+        Config.SRC_PATH = "/src/";
+    </script>
 </head>
 
-<body id="blog-page" class="product-page">
+<body id="blog-page" class="product-page" namespace="display.screens.landing.CheckOut">
 	<!-- Preloader -->
 	<div class="preloader-mask">
 		<div class="preloader"><div class="spin base_clr_brd"><div class="clip left"><div class="circle"></div></div><div class="gap"><div class="circle"></div></div><div class="clip right"><div class="circle"></div></div></div></div>
@@ -129,7 +136,7 @@
 						<tr class="cart-list-item">
 							<td class="cart-list-item-meta">
 								<div class="cart-list-item-image">
-									<img src="assets/img/products/product-no-img-800x560.jpg" alt="">
+									<img src="landing-assets/img/products/product-no-img-800x560.jpg" alt="">
 								</div>
 								<div class="cart-list-item-name">
 									<span>Simple product 1</span>
@@ -143,7 +150,7 @@
 						<tr class="cart-list-item">
 							<td class="cart-list-item-meta">
 								<div class="cart-list-item-image">
-									<img width="300" height="163" src="assets/img/products/product-no-img-800x560.jpg" class="attachment-medium wp-post-image" alt="smileys">
+									<img width="300" height="163" src="landing-assets/img/products/product-no-img-800x560.jpg" class="attachment-medium wp-post-image" alt="smileys">
 								</div>
 								<div class="cart-list-item-name">
 									<span>Simple product 2</span>
@@ -157,7 +164,7 @@
 						<tr class="cart-list-item">
 							<td class="cart-list-item-meta">
 								<div class="cart-list-item-image">
-									<img width="300" height="225" src="assets/img/products/product-no-img-800x560.jpg" class="attachment-medium wp-post-image" alt="dribbble_beer">
+									<img width="300" height="225" src="landing-assets/img/products/product-no-img-800x560.jpg" class="attachment-medium wp-post-image" alt="dribbble_beer">
 								</div>
 								<div class="cart-list-item-name">
 									<span>Simple product 3</span>
@@ -185,7 +192,7 @@
 				<form class="form payment-method-form">
 					<input id="payment_paypal" type="radio" name="payment-method" value="paypal" checked="checked">
 					<label for="payment_paypal" class="payment-method">
-						<i class="pseudo-radio"></i><img src="assets/img/paypal-133x35.png" alt="" class="payment-method-icon">PayPal
+						<i class="pseudo-radio"></i><img src="landing-assets/img/paypal-133x35.png" alt="" class="payment-method-icon">PayPal
 					</label>
 					<input id="payment_test" type="radio" name="payment-method" value="test-payment">
 					<label for="payment_test" class="payment-method">
@@ -235,7 +242,7 @@
 			<div class="footer-content row">
 				<div class="col-sm-4 col-xs-12">
 					<div class="logo-wrapper">
-						<img width="130" height="31" src="assets/img/logo-white.png" alt="logo" />
+						<img width="130" height="31" src="landing-assets/img/logo-white.png" alt="logo" />
 					</div>
 					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco. Qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco. Nisi ut aliquid ex ea commodi consequatur?</p>
 					<p><strong>John Doeson, Founder</strong>.</p>
@@ -271,14 +278,14 @@
 	<div class="back-to-top"><i class="fa fa-angle-up fa-3x"></i></div>
 
 	<!--[if lt IE 9]>
-		<script type="text/javascript" src="assets/js/jquery-1.11.3.min.js?ver=1"></script>
+		<script type="text/javascript" src="landing-assets/js/jquery-1.11.3.min.js?ver=1"></script>
 	<![endif]-->
 	<!--[if (gte IE 9) | (!IE)]><!-->
-		<script type="text/javascript" src="assets/js/jquery-2.1.4.min.js?ver=1"></script>
+		<script type="text/javascript" src="landing-assets/js/jquery-2.1.4.min.js?ver=1"></script>
 	<!--<![endif]-->
 
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.bxslider.min.js"></script>
-	<script type="text/javascript" src="assets/js/startuply.js"></script>
+	<script type="text/javascript" src="landing-assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="landing-assets/js/jquery.bxslider.min.js"></script>
+	<script type="text/javascript" src="landing-assets/js/startuply.js"></script>
 </body>
 </html>
