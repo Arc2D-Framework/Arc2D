@@ -9,10 +9,6 @@ namespace `display.components` (
             this.initBarData();
             this.createChart();
         }
-
-        onLoadInstanceStylesheet(){
-            return false;
-        }
         
         initBarData(){
             this.barChartData = {
@@ -31,7 +27,7 @@ namespace `display.components` (
             };
         }
 
-        createChart() {
+        createChart(){
             const chartInstanceObj = this.querySelector('#sizeChart');
             Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
             Chart.defaults.global.animation.easing = 'easeOutBack';
@@ -80,14 +76,15 @@ namespace `display.components` (
                             id: 'y-axis-1',
                             gridLines: {
                                 drawOnChartArea: true,
-                                color: 'rgba(200, 200, 200, 0.30)',
+                                color: 'rgba(200, 200, 200, 0.40)',
 							    lineWidth: 1
                             }
                         }],
                         xAxes: [{
                             gridLines: {
-                                color: 'rgba(200, 200, 200, .30)',
-                                lineWidth: 1
+                                color: 'rgba(200, 200, 200, .40)',
+                                lineWidth: 1,
+                                zeroLineWidth: 0
                             }
                         }],
                     }
@@ -124,6 +121,10 @@ namespace `display.components` (
                     visibility: visible;
                 }
             `;
+        }
+
+        onLoadInstanceStylesheet(){
+            return false;
         }
     }
 )

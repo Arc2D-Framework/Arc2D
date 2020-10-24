@@ -79,15 +79,14 @@ namespace `display.components` (
 					tooltips: {
 						bodySpacing: 4,
 						titleFontSize: 15,
-						caretSize: 5,
+						// caretSize: 5,
 						mode: 'index',
 						intersect: false,
-						cornerRadius: 2,
+						// cornerRadius: 2,
 						xPadding: 10,
 						yPadding: 10,
 						callbacks: {
 							footer: (tooltipItem) => {
-								console.log("tooltipItem",tooltipItem);
 								return this.onHoverCustomToolTipMsgs(tooltipItem);
 							}
 						}
@@ -97,6 +96,7 @@ namespace `display.components` (
 						intersect: true
 					},
 					scales: {
+						borderWidth: 1,
 						xAxes: [{
 							scaleLabel: {
 								display: false,
@@ -104,6 +104,9 @@ namespace `display.components` (
 							},
 							ticks: {
 								fontSize: this.xAxesFontSize()
+							},
+							gridLines: {
+								zeroLineWidth: 0
 							}
 						}],
 						yAxes: [{
@@ -112,6 +115,9 @@ namespace `display.components` (
 								display: true,
 								labelString: 'Benchmark Score Result',
 								fontSize: 14
+							},
+							gridLines: {
+								zeroLineWidth: 0
 							}
 						}]
 					}

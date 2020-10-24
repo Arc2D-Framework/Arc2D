@@ -29,11 +29,8 @@ namespace `display.components` (
 					backgroundColor: gradient,
 					borderWidth: 0,
 					borderColor: '#fff',
-					// bnackgroundColor: "#1ac6ff",
 					pointBorderColor: "#1ac6ff",
 					pointBackgroundColor: "#1ac6ff",
-					// pointHoverBackgroundColor: "#1ac6ff",
-					// pointHoverBorderColor: "#1ac6ff",
 					pointBorderWidth: 2,
 					pointHoverRadius: 10,
 					pointHoverBorderWidth: 1,
@@ -49,13 +46,14 @@ namespace `display.components` (
 				scales: {
 					xAxes: [{
 						gridLines: {
-							color: 'rgba(200, 200, 200, .05)',
-							lineWidth: 1
+							color: 'rgba(200, 200, 200, .3)',
+							lineWidth: 1,
+							zeroLineWidth: 0
 						}
 					}],
 					yAxes: [{
 						gridLines: {
-							color: 'rgba(200, 200, 200, 0.2)',
+							color: 'rgba(200, 200, 200, 0.3)',
 							lineWidth: 1
 						}
 					}]
