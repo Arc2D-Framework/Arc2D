@@ -24,7 +24,7 @@ namespace `display.worlds.aeiou` (
         }
 
         onTryAgain(){
-            this.isFinished=true;
+            this.isFinished=false;
             this.isBlocking=false;
             this.dispatchEvent("startgame");
         }

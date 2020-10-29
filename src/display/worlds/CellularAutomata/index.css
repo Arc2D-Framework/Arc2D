@@ -1,0 +1,24 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #202830;;
+    overflow: hidden;
+    user-select: none;
+}
+
+.UI{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+}
+.UI:first-of-type{
+    top: 0;
+}
+.UI:last-of-type{
+    bottom: 0;
+}
+
+button{
+    /* TODO: Style the button 8*/
+}

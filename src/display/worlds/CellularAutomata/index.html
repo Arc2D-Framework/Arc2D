@@ -1,0 +1,22 @@
+<template>
+    <canvas></canvas>
+    <div class="UI">
+        <button id="reset-button">Reset</button>
+        <button id="randomize-button">Randomize</button>
+        <select id="simulation-dropdown">
+            <option value="ConwaysGameOfLife">Conways Game Of life</option>
+            <option value="FallingSand">Falling Sand</option>
+            <option value="FloodFill">Floodfill</option>
+            <option value="WireWorld">Wire World</option>
+        </select>
+        <select id="edit-type-dropdown" hidden></select>
+        <button id="play-pause-button">Play</button>
+        <button id="step-button">Step</button>
+        <button id="edit-button">Edit</button>
+    </div>
+    <div class="UI">
+        <label for="fr-slider">Framerate</label>
+        <input type="range" id="fr-slider" name="fr-slider" min="1" max="60" value="15">
+        <input type="text" id="fr-input" value="15">
+    </div>
+</template>

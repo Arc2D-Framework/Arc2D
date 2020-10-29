@@ -7,8 +7,8 @@ namespace `display.worlds.aeiou` (
     class Challenge extends WebComponent {
         constructor(world, level, machine) {
             super()
-            this.machine = machine;
-            this.world   = world;
+            // this.machine = machine;
+            // this.world   = world;
             this.level   = level;
             this.sounds = {
                 "a" : new Audio("/resources/sounds/a.mp3"),

@@ -16,37 +16,32 @@ namespace `display.worlds.aeiou` (
             this.settings = {
                 music : false
             }
-            var ns = display.worlds.aeiou;//shortcut
+            var ns          = display.worlds.aeiou;//shortcut
             this.machine    = new ns.UIMachine;
             this.level      = new ns.Level(this, this.machine);
             this.menu       = new ns.Menu(this, this.machine);
             this.gameover   = new ns.GameOver(this, this.machine);
-            // this.machine.push(new ns.Level(this, this.machine));
             this.machine.push(this.menu);
         }
 
         async onConnected() {
             await super.onConnected();
-            this.addEventListener("startgame", e => this.onStartGame(e))
-            this.addEventListener("pausegame", e => this.onPauseGame(e))
-            this.addEventListener("gameover", e => this.onGameOver(e))
+            this.addEventListener("startgame",  e => this.onStartGame(e))
+            this.addEventListener("pausegame",  e => this.onPauseGame(e))
+            this.addEventListener("gameover",   e => this.onGameOver(e))
         }
 
         onGameOver(){
             this.machine.push(this.gameover);
+            this.level=null
         }
 
         onPauseGame(){
-            debugger;
-            var ns = display.worlds.aeiou;
             this.machine.push(this.menu);
-            // this.machine.pop();
-            // this.machine.push(new ns.Level(this, this.machine));
         }
 
         onStartGame(){
-            var ns = display.worlds.aeiou;
-            // this.machine.pop();
+            this.level = this.level || new display.worlds.aeiou.Level(this, this.machine);
             this.machine.push(this.level);
         }
 

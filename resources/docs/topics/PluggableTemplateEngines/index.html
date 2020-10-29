@@ -6,7 +6,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Pluggable Template Engines</h1>
         <p>
-          So you hate JSX, but love Mustache. You like Template Literals and can't stand Handlebars. Some prefer JSP-style &#x3C;%= %&#x3E; syntax. Maybe you rather roll your own parser from scratch. Oros allows custom template engines (drivers) to be "plugged" in. With this architecture, you are able to use any 3rd party engines at the grandular WebComponent level. Some of your components in the system could use Nunjucks, some components, Handlebars, others, Dot.
+          So you hate JSX, but love Mustache. You like Template Literals and can't stand Handlebars. Some prefer JSP-style &#x3C;%= %&#x3E; syntax. Maybe you rather roll your own parser from scratch. Arc allows custom template engines (drivers) to be "plugged" in. With this architecture, you are able to use any 3rd party engines at the grandular WebComponent level. Some of your components in the system could use Nunjucks, some components, Handlebars, others, Dot.
 
           <p>WebComponents rely only on an adapted interface, the dependency to a concerete template engine or driver is inverted. This makes it possible for the framework itself to dynamically determine and dispatch rendering to any parser.</p>
           <img src="docs/images/template_driver_interface.png"/>
@@ -29,7 +29,7 @@
           </ul>
         </p>
         <p>
-            Oros ships with a native ES6/7 template literals parser which is 
+            Arc ships with a native ES6/7 template literals parser which is 
             fast, uses javascript-syntax, supple and powerful. But if you would like to use Mustache for example, a driver should be created, which delegates to Mustache for parsing. At minimum, a driver must implement:
         </p>
         <p>

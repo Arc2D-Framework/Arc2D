@@ -38,13 +38,6 @@ namespace `display.worlds.aeiou` (
 
         onStartGame(){
             this.dispatchEvent("startgame");
-            // this.machine.push(new display.worlds.aeiou.Level(this.world, this.machine));
-            // this.isFinished = true;
-            // this.isBlocking = false;
-            // this.machine.onResume();
-            // this.music.pause();
-            // this.style.display="none";
-            // console.warn(this.namespace + " Exit");
         }
 
 
@@ -65,15 +58,17 @@ namespace `display.worlds.aeiou` (
             this.style.display="none";
             console.log(this.namespace + " Sleeping")
         }
+        onExit(){
 
-        onEnd(){
-            debugger;
-            this.remove();
-            console.warn(this.namespace + " Ended");
-            this.onReset();
-            this.machine.onResume();
-            this.music.pause();
         }
+        // onEnd(){
+        //     debugger;
+        //     this.remove();
+        //     console.warn(this.namespace + " Ended");
+        //     this.onReset();
+        //     this.machine.onResume();
+        //     this.music.pause();
+        // }
 
         onUpdate(){
 

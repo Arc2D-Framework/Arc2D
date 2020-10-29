@@ -34,6 +34,10 @@ namespace `display.worlds.aeiou` (
                     current.onSleep()
                     current.isSleeping=true;
                 }
+                else {
+                    current.onExit();
+                    this[0]=null;
+                }
             }
                 // current&&!current.isFinished&&current.onSleep()&&(current.isSleeping=true);
                 // current&&current.isFinished&&current.onExit();

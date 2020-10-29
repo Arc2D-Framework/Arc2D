@@ -1,5 +1,6 @@
 import 'src/core/drivers/templating/Manager.js';
 import 'src/core/drivers/templating/TemplateLiterals.js';
+import 'src/core/drivers/watchers/default.js';
 
 namespace `w3c.ui` (
     class WebComponent extends HTMLElement {
@@ -446,6 +447,11 @@ namespace `w3c.ui` (
             var v = (rect.top  <= window.innerHeight) && ((rect.bottom) >= 0);
             var h = (rect.left <= window.innerWidth)  && ((rect.right)  >= 0);
             return (v && h);
+        }
+
+        watch(object,prop,cb,force,engine=core.drivers.watchers.Watcher){
+            object = typeof object == "string"?this.querySelector(object):object;
+            return engine.watch(object,prop,cb,force)
         }
     }
 );

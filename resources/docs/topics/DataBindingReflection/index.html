@@ -16,7 +16,7 @@
               <li>model <- view</li>
               <li>model <-> view</li>
           </ul>
-          Unlike "data binding" implemented in most modern frameworks, bindings in Oros excel because the implementation focuses on:
+          Unlike "data binding" implemented in most modern frameworks, bindings in Arc excel because the implementation focuses on:
           <ul>
               <li><b>Transparency:</b> You see what you are wiring up.</li>
               <li><b>Control:</b> Grandular ability to bind, unbind and transform  in | output</li>
@@ -27,7 +27,7 @@
           </ul>
         </p>
         <p>
-          Let's look at a simple case of binding 2 input boxes on a view with each other, 1-way and bi-directional. We're not forced to bind to a model, in Oros, anything can be bound to each other for synchronization.
+          Let's look at a simple case of binding 2 input boxes on a view with each other, 1-way and bi-directional. We're not forced to bind to a model, in Arc, anything can be bound to each other for synchronization.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -191,14 +191,17 @@ this.watch(dest,  'value', e => source.value = e.val);
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">1-Way Binding to a Model</h1>
+        <h1 id="api-reference">1-Way Binding to a Object</h1>
         <p>
             Let's say we have a simple object{} having a firstname property, it's in our Controller. We can bind from this model to the input box in the View the same way.
             <view-view-binding bind-type="both">
                 <template>
                     <div>
-                    <h3>Example 3: Model -> View (1-way)</h3>
-                    <span style="width:130px;display: inline-block;">MODEL:</span> <code>var user = {firstname: "Bill"};</code>
+                    <h3>Example 3: Object -> View (1-way)</h3>
+                    <span style="width:130px;display: inline-block;">OBJECT:</span> 
+        <pre class="inline javascript lang"><code>
+var user = {firstname: "Bill"};
+        </code></pre>
                     <br/>
                     <span style="width:130px;display: inline-block;">DESTINATION:</span> <input id="input1" disabled/>
                     <div><em>HINT:</em> try to change <code>user.firstname=</code> in dev console to see view update</div>
