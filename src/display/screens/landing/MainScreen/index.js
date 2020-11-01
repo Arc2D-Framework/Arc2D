@@ -2,6 +2,7 @@ import 'display.worlds.entities.Box2DDemo';
 import 'display.components.FrameworkSizeChart';
 import 'display.components.LinesOfCodeChart';
 import 'display.components.SpeedChart';
+import 'display.components.MemoryAllocation';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {

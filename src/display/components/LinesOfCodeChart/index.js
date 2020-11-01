@@ -35,8 +35,8 @@ namespace `display.components` (
 					pointHoverRadius: 10,
 					pointHoverBorderWidth: 1,
 					pointRadius: 3,
-					pointHitRadius: 100,
-					data: [1316, 15029, 31540, 48295]
+					pointHitRadius: 120,
+					data: [1316, 15029, 32922, 48295]
 				}]
 			};
 
@@ -108,9 +108,9 @@ namespace `display.components` (
 
         onHoverCustomToolTipMsgs(tooltipItem){
             for(let item of tooltipItem)
-                return (item.label == "ReactJS") ? "\n*These results were based on the React Library,\nReact-DOM, React Router and could vary\ndepending on any other needed dependencies." :
-                    (item.label == "VueJS") ? "\n*These results were based on the VueJS Library,\nVue Router and could vary depending on\nany other needed dependencies." :
-					(item.label == "AngularJS") ? "\n*These results were based on the AngularJS\nFramework, Angular Route, Angular-UI-Router\nand could vary depending on any other needed\ndependencies." :
+                return (item.label == "ReactJS") ? "\n*These results were based on the React\nv17.0.1 Library, React-DOM, React Router\nand could vary depending on any other\nneeded dependencies." :
+                    (item.label == "VueJS") ? "\n*These results were based on the VueJS\nv2.6.12 Library, Vue Router and could vary\ndepending on any other needed dependencies." :
+					(item.label == "AngularJS") ? "\n*These results were based on the AngularJS\nv1.8.0 Framework, Angular-UI-Router and\ncould vary depending on any other needed\ndependencies." :
 					"\n*These results were based on the entire\nArc Framework including its router and\n2 dependencies."
         }
 
