@@ -4,7 +4,7 @@ namespace `docs.demos.ui` (
             await super.onConnected();
 
             this.knob = this.querySelector(".knob");
-            this.direction = -1;
+            this.value = -1;
             this.addEventListener("click", e => this.onClick(e), false);
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
         }
@@ -19,12 +19,13 @@ namespace `docs.demos.ui` (
         }
 
         onClick(){
-            this.direction *= -1;
+            this.value *= -1;
+            this.dispatchEvent("change");
             this.onRender();
         }
 
         get x() {
-            return this.direction > 0 ?
+            return this.value > 0 ?
                 this.bounds.width-this.knob_bounds.width-6 : 0;
         }
 

@@ -4,7 +4,7 @@
     
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Initialize the engine</h1>
+        <h1 id="api-reference">Usage</h1>
         <p>
           A reference to Arc should be added to your page &#x3C;head&#x3E; tag.
         </p>
@@ -24,15 +24,39 @@
       </div>
     </div>
 
+
+
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+      <div style="width: 50%;padding: 22px;">
+        <h1 id="api-reference">Alternative Usage: jsDeliver</h1>
+        <p>
+          Loading Arc from jsDeliver:
+        </p>
+        <p>
+          <pre class="inline html lang"><code>&#x3C;head&#x3E;
+    ...
+    &#x3C;script src=&#x22;https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@3.0.0/framework.min.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
+    ...
+&#x3C;/head&#x3E;</code></pre>
+        </p>
+      </div>
+      <div style="width: 50%;display: block;">
+        <div class="shell lang"></div>
+        <div class="javascript lang"></div>
+        <div class="html lang"></div>
+        <div class="css lang"></div>
+      </div>
+    </div>
+
     
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Using the engine</h1>
+        <h1 id="api-reference">Initialize existing HTML page</h1>
         <p>
-          The above reference is enough to get the framework loaded and initialized 
-          for use, nothing else. There are no visual or functional differences on the page until
-          you declare the <code>&lt;body&gt;</code> tag in a namespace.
+          The above reference is enough to get the framework loaded and ready for use on
+          an existing webpage not built witth Arc. This approach allows existing HTML to
+          be progressively enhanced.
         </p>
         <p>
           <pre class="inline html lang"><code>
@@ -42,11 +66,14 @@
         &#x3C;script src=&#x22;node_modules/od-cocoon/framework.src.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;
     &#x3C;/head&#x3E;
 
-    &#x3C;body namespace=&#x22;applications.HelloWorld&#x22;&#x3E;
-
+    &#x3C;body&#x3E;
+        &#x3C;div&#x3E;...existing HTML...&#x3C;/div&#x3E;
     &#x3C;/body&#x3E;
 &#x3C;/html&#x3E;
           </code></pre>
+        </p>
+        <p>
+          See: <a href="#docs.topics.ProgressiveEnhancementIntro">Progressive Enhancement</a>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -92,7 +119,7 @@
         &#x3C;/script&#x3E;
     &#x3C;/head&#x3E;
 
-    &#x3C;body namespace=&#x22;applications.HelloWorld&#x22;&#x3E;
+    &#x3C;body namespace=&#x22;display.screens.HelloWorld&#x22;&#x3E;
         &#x3C;hello-world&#x3E;&#x3C;/hello-world&#x3E;
     &#x3C;/body&#x3E;
 &#x3C;/html&#x3E;
