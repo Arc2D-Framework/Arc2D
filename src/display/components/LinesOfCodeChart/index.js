@@ -9,10 +9,6 @@ namespace `display.components` (
             this.initBarData();
             this.createChart();
         }
-
-        onLoadInstanceStylesheet(){
-            return false;
-		}
 		
 		initBarData(){
 			var chart = document.getElementById('loc-chart').getContext('2d');
@@ -132,6 +128,10 @@ namespace `display.components` (
 					visibility: hidden;
                 }
             `;
-        }
+		}
+		
+		onLoadInstanceStylesheet(){
+            return false;
+		}
 	}
 )

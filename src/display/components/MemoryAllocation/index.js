@@ -20,56 +20,56 @@ namespace `display.components` (
 						backgroundColor: 'rgb(233, 214, 27)',
 						data: [1.00, 1.00, 1.00, 1.00, 1.00, 1.00],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(233, 214, 27)',
 						pointBorderColor: 'rgb(233, 214, 27)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
                         pointBorderWidth: 2,
-                        yAxisID: 'm1',
+                        yAxisID: 'bm-score',
 					}, {
 						label: 'Arc2D',
 						backgroundColor: 'rgb(0, 83, 163)',
 						data: [1.03, 1.12, 1.11, 1.47, 1.22, 1.18],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(0, 83, 163)',
 						pointBorderColor: 'rgb(0, 83, 163)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
                         pointBorderWidth: 2,
-                        yAxisID: 'm1',
+                        yAxisID: 'bm-score',
 					}, {
 						label: 'VueJS',
 						backgroundColor: 'rgb(63, 178, 127)',
 						data: [1.15, 2.51, 2.28, 2.31, 1.16, 1.78],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(63, 178, 127)',
 						pointBorderColor: 'rgb(63, 178, 127)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
                         pointBorderWidth: 2,
-                        yAxisID: 'm1',
+                        yAxisID: 'bm-score',
 					}, {
 						label: 'ReactJS',
 						backgroundColor: 'rgb(94, 211, 243)',
 						data: [1.23, 2.72, 2.66, 3.66, 1.60, 2.20],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(94, 211, 243)',
 						pointBorderColor: 'rgb(94, 211, 243)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
                         pointBorderWidth: 2,
-                        yAxisID: 'm1',
+                        yAxisID: 'bm-score',
 					}, {
 						label: 'Angular',
 						backgroundColor: 'rgb(216, 45, 47)',
 						data: [2.54, 3.21, 2.85, 2.93, 1.91, 2.65],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(216, 45, 47)',
 						pointBorderColor: 'rgb(216, 45, 47)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
                         pointBorderWidth: 2,
-                        yAxisID: 'm1',
+                        yAxisID: 'bm-score',
 					}]
 				},
 				options: {
@@ -125,7 +125,7 @@ namespace `display.components` (
                             type: 'linear',
                             display: true,
                             position: 'left',
-                            id: 'm1'
+                            id: 'bm-score'
 						}]
 					}
 				}
@@ -138,7 +138,7 @@ namespace `display.components` (
 		}
 
 		createChart() {
-			var chart = this.querySelector('#speed-chart').getContext('2d');
+			var chart = this.querySelector('#memory-chart').getContext('2d');
 		
 			Chart.defaults.global.defaultFontFamily = "'Poppins', 'Helvetica', 'Arial', sans-serif";
 			Chart.defaults.global.animation.easing = 'easeOutBack';
@@ -153,7 +153,7 @@ namespace `display.components` (
             for(let item of tooltipItem)
                 return (item.label == "Ready,Memory") ? "\n*Memory usage after page load." :
                     (item.label == "Run Memory") ? "\n*Memory usage after adding 1000 rows." :
-					(item.label == "Update Each,10th Row For,1k Rows (5 Cycles)") ? "\n*Memory usage after clicking update every 10th row 5 times." :
+					(item.label == "Update Each,10th Row For,1k Rows (5 Cycles)") ? "\n*Memory usage after clicking update every 10th\nrow 5 times." :
                     (item.label == "Replace 1k,Rows (5 Cycles)") ? "\n*Memory usage after clicking\ncreate 1000 rows 5 times." :
                     (item.label == "Creating/Clearing,1k Rows, (5 Cycles)") ? "\n*Memory usage after creating and clearing 1000\nrows 5 times." :
                     "\n*Geometric Mean of all\nfactors in the table.";
@@ -170,7 +170,7 @@ namespace `display.components` (
 		template(){
             return `<template>
                         <div>
-                            <canvas id="speed-chart" style="width: 100%;"></canvas>
+                            <canvas id="memory-chart" style="width: 100%;"></canvas>
                         </div>
                     </template>`;
 		}

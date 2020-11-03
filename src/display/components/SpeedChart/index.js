@@ -20,52 +20,57 @@ namespace `display.components` (
 						backgroundColor: 'rgb(233, 214, 27)',
 						data: [1.00, 1.00, 1.00, 1.00],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(233, 214, 27)',
 						pointBorderColor: 'rgb(233, 214, 27)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
 						pointBorderWidth: 2,
+						yAxisID: 'bm-score',
 					}, {
 						label: 'Arc2D',
 						backgroundColor: 'rgb(0, 83, 163)',
 						data: [1.08, 1.00, 1.32, 1.12],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(0, 83, 163)',
 						pointBorderColor: 'rgb(0, 83, 163)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
 						pointBorderWidth: 2,
+						yAxisID: 'bm-score',
 					}, {
 						label: 'VueJS',
 						backgroundColor: 'rgb(63, 178, 127)',
 						data: [1.17, 3.52, 1.40, 1.80],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(63, 178, 127)',
 						pointBorderColor: 'rgb(63, 178, 127)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
 						pointBorderWidth: 2,
+						yAxisID: 'bm-score',
 						
 					}, {
 						label: 'ReactJS',
 						backgroundColor: 'rgb(94, 211, 243)',
 						data: [1.33, 4.19, 1.74, 2.13],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(94, 211, 243)',
 						pointBorderColor: 'rgb(94, 211, 243)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
 						pointBorderWidth: 2,
+						yAxisID: 'bm-score',
 					}, {
 						label: 'Angular',
 						backgroundColor: 'rgb(216, 45, 47)',
 						data: [1.48, 13.94, 1.97, 3.44],
 						pointHitRadius: 50,
-						borderColor: 'rgba(255, 255, 255, 0.5)',
+						borderColor: 'rgb(216, 45, 47)',
 						pointBorderColor: 'rgb(216, 45, 47)',
 						pointHoverRadius: 8,
 						borderWidth: 1,
 						pointBorderWidth: 2,
+						yAxisID: 'bm-score',
 					}]
 				},
 				options: {
@@ -109,7 +114,7 @@ namespace `display.components` (
 							}
 						}],
 						yAxes: [{
-							stacked: true,
+							stacked: false,
 							scaleLabel: {
 								display: true,
 								labelString: 'Benchmark Score Result',
@@ -117,7 +122,11 @@ namespace `display.components` (
 							},
 							gridLines: {
 								zeroLineWidth: 0
-							}
+							},
+							type: 'linear',
+                            display: true,
+                            position: 'left',
+                            id: 'bm-score'
 						}]
 					}
 				}

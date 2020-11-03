@@ -7,6 +7,10 @@ html, body, .MainScreen {
     box-sizing:border-box;
 }
 
+:root {
+    --poppins-font-family: 'Poppins', sans-serif;
+}
+
 .MainScreen .animation {
   -webkit-animation-duration: .3s;
   animation-duration: .3s;
@@ -71,7 +75,7 @@ html, body, .MainScreen {
 }
 
 .MainScreen article > h3 {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--poppins-font-family);
   font-weight: 400;
 }
 
@@ -100,6 +104,10 @@ html, body, .MainScreen {
   font-weight: 100;
 }
 
+.MainScreen div.section-header.align-center{
+    font-family: var(--poppins-font-family);
+}
+
 /* Hidden Sections - Until Ready for Use */
 .MainScreen #guarantee,
 .MainScreen #awards,
@@ -117,7 +125,7 @@ html, body, .MainScreen {
 
 .MainScreen #chartdiv tspan,
 .MainScreen #chartdiv .amcharts-balloon-div > div {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: var(--poppins-font-family) !important;
 }
 
 .MainScreen .sub-title, .MainScreen .sub-title.alt{
@@ -176,12 +184,12 @@ html, body, .MainScreen {
     font-size: 95px !important;
     font-weight: 200 !important;
     line-height: 85px !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: var(--poppins-font-family) !important;
 }
 
 .MainScreen .package-column .package-price .period {
     margin-top: 20px !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: var(--poppins-font-family) !important;
     font-weight: 400 !important;
 }
 
@@ -193,14 +201,14 @@ html, body, .MainScreen {
     font-size: 18px !important;
     border-bottom: 1px solid #dadada57 !important;
     /*color: #fff !important;*/
-    font-family: 'Poppins', sans-serif !important;
+    font-family: var(--poppins-font-family) !important;
     letter-spacing: 0.5px !important;
 }
 
 .MainScreen .package-column .package-detail a {
     border: 0 !important;
     color: #fff !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: var(--poppins-font-family) !important;
     font-size: 16px !important;
     letter-spacing: 0.3px !important;
     background-color: #aa1515 !important;
@@ -228,10 +236,15 @@ html, body, .MainScreen {
     }
 }
 
-@media (min-width: 1200px) {
-    .featured-tab .tab-content {
-        top: -50px;
-        right:-92px;
+@media screen and (max-width:767px){
+    #second-tab-alt > div:nth-child(1) > div:nth-child(2){
+        top:40px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .MainScreen #third-tab-alt div:nth-of-type(4).col-sm-6.animated.fadeInRight{
+        margin-top:75px;
     }
 }
 
@@ -272,6 +285,13 @@ html, body, .MainScreen {
     .MainScreen .package-column .fa.fa-times,
     .MainScreen .package-column .package-detail a{
         font-size: 12px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .featured-tab .tab-content {
+        top: -50px;
+        right:-92px;
     }
 }
 
