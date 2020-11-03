@@ -12,8 +12,9 @@ namespace `display.worlds.entities.html` (
         onLoadInstanceStylesheet(){return false}
 
         async onConnected(){
-            // await super.onConnected();
-            await this.render()
+            await super.onConnected();
+            // await this.render();
+            this.addEventListener("click", this.onClick);
             var fixDef = new b2FixtureDef;
                 fixDef.density = 3.0;
                 fixDef.friction = 0.2;
@@ -35,7 +36,12 @@ namespace `display.worlds.entities.html` (
              // this.style.transform = `translate3d(${(bodyDef.position.x-(this.hw))*this.scale}px, ${(bodyDef.position.y-(this.hh))*this.scale}px, 0px)`;
              this.style.width = (this.hw*2)* (this.scale)+"px";
              this.style.height= (this.hh*2)* (this.scale)+"px";
+             this.dispatchEvent("connected",{target:this});
+        }
 
+        onClick=()=>{
+            this.body.SetType(b2Body.b2_dynamicBody);
+            this.body.SetAwake(true);
         }
 
         cssStyle(){

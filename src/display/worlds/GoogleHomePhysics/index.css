@@ -1,0 +1,22 @@
+
+
+html, body, .GoogleHomePhysics {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    box-sizing:border-box;
+    overflow:hidden;
+}
+
+.GoogleHomePhysics canvas,
+.GoogleHomePhysics #stage,
+.GoogleHomePhysics #svg{
+    position:absolute;
+    top:30px;
+    left:100px;
+    width:600px;
+    height:400px;
+    overflow: visible;
+}

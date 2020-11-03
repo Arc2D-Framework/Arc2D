@@ -183,7 +183,7 @@ namespace `tests` (
 
             this.expected("components to be stealth initialized: using already connected DOM node as is: `new core.ui.SampleD(aDomDiv)`, where 'aDomDiv' is an existing node already in the DOM", async (resolve,reject) => {
                 await import('/framework/src/core/ui/SampleD/index.js');
-                var el = `<div id="html-123">Camouflaged: Uses existing Dom-Connected Div as is, no wrapping or physical decoration apparent</div>`.toDomElement();
+                var el = `<div id="html-123" class="mybox">Camouflaged: Uses existing Dom-Connected Div as is, no wrapping or physical decoration apparent</div>`.toDomElement();
                 application.appendChild(el);
                 var el = application.querySelector("#html-123");
                 var n = new core.ui.SampleD(el);
