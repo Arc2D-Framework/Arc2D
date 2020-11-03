@@ -11,6 +11,16 @@ html, body, .MainScreen {
     --poppins-font-family: 'Poppins', sans-serif;
 }
 
+.MainScreen .section-header > h2,
+.MainScreen #newsletter article,
+.MainScreen #product div.section-header,
+.MainScreen .team-member,
+.MainScreen .footer-content.row div:nth-of-type(1) p,
+.MainScreen .footer-content.row div:nth-of-type(2),
+.MainScreen .footer-content.row div:nth-of-type(3){
+    font-family: var(--poppins-font-family);
+}
+
 .MainScreen .animation {
   -webkit-animation-duration: .3s;
   animation-duration: .3s;
@@ -89,6 +99,30 @@ html, body, .MainScreen {
     font-size: 15px !important;
 }
 
+.MainScreen #newsletter {
+    font-family: var(--poppins-font-family);
+}
+
+.MainScreen .form.mailchimp-form.subscribe-form > div {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(1),
+.MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(2){
+    flex: 0 1 auto;
+    max-width:400px;
+}
+
+.MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(2){
+    margin:0 !important;
+}
+
+.MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
+    margin-top: 10px;
+    flex: 0 1 100%;
+}
+
 .MainScreen #newsletter .mailchimp-form div.form-group{
     display: flex;
 }
@@ -104,6 +138,10 @@ html, body, .MainScreen {
   font-weight: 100;
 }
 
+.MainScreen #product div.section-header p.sub-header{
+    font-weight: 400 !important;
+}
+
 .MainScreen div.section-header.align-center{
     font-family: var(--poppins-font-family);
 }
@@ -117,15 +155,6 @@ html, body, .MainScreen {
 .MainScreen ul.navigation-bar:nth-child(1) > li:nth-child(8),
 .MainScreen li.dropdown:nth-child(9){
     display: none !important;
-}
-
-.MainScreen #chartdiv a[href='http://www.amcharts.com']{
-    display: none !important;
-}
-
-.MainScreen #chartdiv tspan,
-.MainScreen #chartdiv .amcharts-balloon-div > div {
-    font-family: var(--poppins-font-family) !important;
 }
 
 .MainScreen .sub-title, .MainScreen .sub-title.alt{
@@ -230,6 +259,10 @@ html, body, .MainScreen {
     font-weight: 600;
 }
 
+.MainScreen .footer-content.row > div p{
+
+}
+
 @media screen and (min-width:400px) and (max-width:991px){
     .MainScreen .package-column .package-detail {
         height: 100% !important;
@@ -240,11 +273,23 @@ html, body, .MainScreen {
     #second-tab-alt > div:nth-child(1) > div:nth-child(2){
         top:40px;
     }
+
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
+        max-width:400px;
+    }
 }
 
 @media screen and (min-width:768px) {
     .MainScreen #third-tab-alt div:nth-of-type(4).col-sm-6.animated.fadeInRight{
         margin-top:75px;
+    }
+
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(1){
+        margin-right: 5px;
+    }
+
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
+        max-width:579.5px;
     }
 }
 
