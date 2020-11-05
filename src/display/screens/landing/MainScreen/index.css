@@ -21,6 +21,16 @@ html, body, .MainScreen {
     font-family: var(--poppins-font-family);
 }
 
+
+.MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+    min-height: 284px;
+}
+
+.MainScreen #features-list .core.active{
+    border: 1px solid #e1e1e2;
+    background: #f7f7fb;
+    box-shadow: 0px 0px 7px -3px rgba(0,0,0,.3);
+}
 .MainScreen .animation {
   -webkit-animation-duration: .3s;
   animation-duration: .3s;

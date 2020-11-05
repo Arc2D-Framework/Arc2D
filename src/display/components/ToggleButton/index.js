@@ -1,10 +1,13 @@
 namespace `display.components` (
 	class ToggleButton extends WebComponent  {
+        constructor(el){
+            super(el);
+            this.value = -1;
+        }
 		async onConnected(){
             await super.onConnected();
 
             this.knob = this.querySelector(".knob");
-            this.value = -1;
             this.addEventListener("click", e => this.onClick(e), false);
             this.addEventListener("transitionend", e => this.onStyleComputed(e));
         }

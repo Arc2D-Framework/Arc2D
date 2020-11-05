@@ -21,7 +21,10 @@ namespace `display.screens.landing` (
             this.addEventListener("click", e => this.onShowSizeChart(), false, "#size-chart-button");
             this.addEventListener("click", e => this.onShowLOCChart(), false, "#loc-chart-button");
             this.size_button.click();//force a click
-            
+
+            this.core_features = this.querySelectorAll(".core");
+            this.sdk_features = this.querySelectorAll(".sdk");
+            this.watch("#core_vs_sdk", "value", e => this.onToggleFeatures(e), true);
             // this.headingContainer = this.querySelector(".heading-container");
             // this.heading1 = "<h1>An Agnostic, W3C/ES6 Compliant <div class='highlight'> 2D World & GUI Engine</div></h1><h5 style='margin-bottom: 33px;'>Native ES6 and HTML5 with time dependent simulation stepper for AI, DOM Physics and 2D Canvas games up to 60fps. No compilers, pre or post processors, no webpack, grunt or babel, no typescript or parsers</h5>";
             // this.heading2 = "<h1>The Dawn of a New Age –<div class='highlight'> Arc2D</div> a Dynamic HTML W3C/ES6 Compliant Framework</h1><h5 style='margin-bottom: 33px;'>Arc2D is a dynamic HTML Framework used for its architecture, building apps, 2D games and more!</h5>";
@@ -29,6 +32,15 @@ namespace `display.screens.landing` (
             // this.headingsArray = [this.heading1, this.heading2, this.heading3];
 
             // this.randomizeHeading();
+        }
+
+        onToggleFeatures(e){
+            if(e.val == "" || e.val==-1){//core
+                this.core_features.forEach(el => el.classList.add("active"))
+            }
+            else {
+                this.core_features.forEach(el => el.classList.remove("active"))
+            }
         }
 
         onShowSizeChart(){
