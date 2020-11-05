@@ -163,6 +163,16 @@ html, body, .MainScreen {
     line-height: 30px;
 }
 
+.MainScreen .list-inline.logos img {
+    height: 52px;
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 5px;
+    border-radius: 3px;
+    background: white;
+    box-shadow: 2px 1px 13px -5px rgba(0,0,0,.3);
+    margin-top: 7px;
+}
+
 /* Pricing Table Section */
 /*.MainScreen .package-column {
     background-color: #204c89;
