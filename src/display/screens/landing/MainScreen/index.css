@@ -279,10 +279,6 @@ html, body, .MainScreen {
     font-weight: 600;
 }
 
-.MainScreen .footer-content.row > div p{
-
-}
-
 @media screen and (min-width:400px) and (max-width:991px){
     .MainScreen .package-column .package-detail {
         height: 100% !important;
