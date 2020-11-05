@@ -23,7 +23,7 @@ window.classof = function(ns){ return NSRegistry[ns] }
 
 window.imported_classes = window.imported_classes || {};
 window.imports = async function (x, opts, isError) {
-    opts = opts || { cache: Config.IMPORTS_CACHE_POLICY || "no-store" };
+    opts = opts || Config.IMPORTS_CACHE_POLICY || {cache:"no-store"};
     return new Promise(async (resolve, reject) => {
         var path = x;
         path = path.replace(/^\/+/, Config.ROOTPATH);

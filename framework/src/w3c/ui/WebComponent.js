@@ -175,7 +175,7 @@ namespace `w3c.ui` (
                 var tem  =  this.getTemplateToLoad();
                 if(/\/*\.html$/.test(tem)){
                     var src=this.src||tem;//TODO: bug here?
-                    var opts = { cache: "force-cache" };//TODO: use cache policy from appconfig.js
+                    var opts = Config.IMPORTS_CACHE_POLICY;
                     src = src.replace("/./", "/" + this.namespace.replace(/\./gim, "/") + "/");
                     this._template = await imports(src, opts);
                 }
