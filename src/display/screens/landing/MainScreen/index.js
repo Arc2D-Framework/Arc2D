@@ -3,6 +3,7 @@ import 'display.components.FrameworkSizeChart';
 import 'display.components.LinesOfCodeChart';
 import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
+import 'display.components.ToggleButton';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
