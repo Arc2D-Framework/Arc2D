@@ -10,6 +10,7 @@ namespace `display.components` (
             this.createChart();
         }
         
+        
         initBarData(){
             this.barChartData = {
                 labels: ['Arc2D', 'VueJS', 'ReactJS', 'AngularJS'],
@@ -26,6 +27,7 @@ namespace `display.components` (
                 }]
             };
         }
+
 
         createChart(){
             const chartInstanceObj = this.querySelector('#sizeChart');
