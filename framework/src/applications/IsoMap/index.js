@@ -10,13 +10,39 @@ namespace `applications` (
 
         async onConnected() {
             await super.onConnected();
-            // var response = await fetch('resources/maps/ShiningWars2.json');
-            // this.map = await response.json();
-
-            // this.tileset = new core.ui.game.Map(this.map);
             this.map = new core.ui.game.Map("resources/maps/ShiningWars2.json");
             await this.map.load();
             this.renderMap()
+        }
+
+        renderMap(){
+            var layers    = this.map.layers;
+            for(var layer = 0; layer <= layers.length-1; layer++){
+                if(!layers[layer].visible){
+                    continue
+                }
+                var d = document.createElement("div");
+                    d.classList.add("layer");
+                    d.classList.add(layers[layer].name)
+                for (var r = 0; r < this.map.height; r++) {
+                  for (var c = 0; c < this.map.width; c++) {
+                    var x = (c - r) * this.map.tilewidth/2;
+                    var y = (c + r) * this.map.tileheight/2;
+                    var tileType = this.getTile(layer,c, r);
+                    var voffset  = this.voffset(layers[layer]);
+                    d.setAttribute("voffset",voffset)
+                    if(tileType!=0){
+                        var tileset = this.map.getTilesetByIndex(layer);
+                        if(layer > 0){//Tiled Bug
+                            tileset = this.map.getTilesetForLayerByMaterialSource(layers[layer]);
+                        }
+                        var tileType2 = this.map.getTileTypeById(tileset, tileType, layer);
+                        this.placeTile2(tileType2, new core.ui.game.Point(x, y+voffset), c, r, d)
+                    }
+                  }
+                }
+                this.appendChild(d)
+            }
         }
 
         onTileClicked(e){
@@ -91,36 +117,6 @@ namespace `applications` (
                 } else {return 0}
             }
             return 0;
-        }
-
-        renderMap(){
-            var layers    = this.map.layers;
-            for(var layer = 0; layer <= layers.length-1; layer++){
-                if(!layers[layer].visible){
-                    continue
-                }
-                var d = document.createElement("div");
-                    d.classList.add("layer");
-                    d.classList.add(layers[layer].name)
-                for (var r = 0; r < this.map.height; r++) {
-                  for (var c = 0; c < this.map.width; c++) {
-                    var x = (c - r) * this.map.tilewidth/2;
-                    var y = (c + r) * this.map.tileheight/2;
-                    var tileType = this.getTile(layer,c, r);
-                    var voffset  = this.voffset(layers[layer]);
-                    d.setAttribute("voffset",voffset)
-                    if(tileType!=0){
-                        var tileset = this.map.getTilesetByIndex(layer);
-                        if(layer > 0){//Tiled Bug
-                            tileset = this.map.getTilesetForLayerByMaterialSource(layers[layer]);
-                        }
-                        var tileType2 = this.map.getTileTypeById(tileset, tileType, layer);
-                        this.placeTile2(tileType2, new core.ui.game.Point(x, y+voffset), c, r, d)
-                    }
-                  }
-                }
-                this.appendChild(d)
-            }
         }
     }   
 );

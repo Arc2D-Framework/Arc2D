@@ -1,6 +1,4 @@
 
-import {wrist} from '/node_modules/od-watcher/wrist.js';
-
 
 @tag("about-page");
 namespace `display.views` (
