@@ -21,9 +21,12 @@ html, body, .MainScreen {
     font-family: var(--poppins-font-family);
 }
 
-
 .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
     min-height: 284px;
+    max-height: 284px;
+    box-shadow: 2px 1px 13px -5px rgba(0,0,0,.3);
+    transition: background .3s ease-in-out;
+    -webkit-transition: background .3s ease-in-out;
 }
 
 .MainScreen #features-list .core.active{
@@ -279,9 +282,13 @@ html, body, .MainScreen {
     font-weight: 600;
 }
 
-@media screen and (min-width:400px) and (max-width:991px){
+@media screen and (max-width:991px){
     .MainScreen .package-column .package-detail {
         height: 100% !important;
+    }
+
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article{
+        transform: translateY(50px);
     }
 }
 
@@ -353,6 +360,10 @@ html, body, .MainScreen {
     .featured-tab .tab-content {
         top: -50px;
         right:-92px;
+    }
+
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article{
+        transform: translateY(35px);
     }
 }
 
