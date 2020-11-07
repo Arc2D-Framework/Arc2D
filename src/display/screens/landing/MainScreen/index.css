@@ -27,13 +27,30 @@ html, body, .MainScreen {
     box-shadow: 2px 1px 13px -5px rgba(0,0,0,.3);
     transition: background .3s ease-in-out;
     -webkit-transition: background .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article code {
+    background: transparent;
+}
+
+.MainScreen #features-list .core.active article code {
+    color: orange;
 }
 
 .MainScreen #features-list .core.active{
     border: 1px solid #e1e1e2;
     background: #f7f7fb;
-    box-shadow: 0px 0px 7px -3px rgba(0,0,0,.3);
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,.7) !important;
+    background-image: url("resources/landing-assets/img/background/low_poly_background.jpg");
 }
+
+.MainScreen #features-list .core.active article,
+.col-md-3.col-sm-6.col-xs-12.core.active span.heading,
+.MainScreen #features-list .core.active article p {
+    color: #fff !important;
+}
+
 .MainScreen .animation {
   -webkit-animation-duration: .3s;
   animation-duration: .3s;
@@ -104,12 +121,15 @@ html, body, .MainScreen {
 
 .MainScreen .features-list-section article span.heading{
     text-transform: uppercase;
+    font-family: var(--poppins-font-family);
+    font-weight: 400;
+    color: #393535;
 }
 
 .MainScreen .features-list-section article p{
     color: #5b6264 !important;
     font-weight: 300 !important;
-    font-size: 15px !important;
+    font-size: 14px !important;
 }
 
 .MainScreen #newsletter {
@@ -193,6 +213,10 @@ html, body, .MainScreen {
     box-shadow: 7px 6px 5px -2px rgba(0,0,0,0.37);
     border: 0 !important;
 }*/
+
+.MainScreen .package-column {
+    border:0 !important;
+}
 
 .MainScreen .package-column .fa.fa-check {
     color: #1dee1d;
