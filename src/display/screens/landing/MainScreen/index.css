@@ -21,13 +21,43 @@ html, body, .MainScreen {
     font-family: var(--poppins-font-family);
 }
 
+.MainScreen #features {
+    margin-bottom:0 !important;
+}
+
+.MainScreen #features,
+.MainScreen #features-list{
+    background: linear-gradient(180deg, rgb(240, 240, 240) 0%, rgba(33,182,177,0.4) 60%, rgba(34, 145, 188, 0.4) 70%,rgba(95, 102, 183,0.3) 90%, rgb(240, 240, 240) 100%);
+    -webkit-background: linear-gradient(180deg, rgb(240, 240, 240) 0%, rgba(33,182,177,0.4) 60%, rgba(34, 145, 188, 0.4) 70%,rgba(95, 102, 183,0.3) 90%, rgb(240, 240, 240) 100%);
+}
+
+.MainScreen .featured-tab li {
+    vertical-align: text-top;
+}
+
+.MainScreen .featured-tab li > a .tab-desc{
+    color: #555e68;
+    font-weight: 400 !important;
+    font-family: var(--poppins-font-family);
+}
+
+.MainScreen #features-list .animated{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
     min-height: 284px;
     max-height: 284px;
     box-shadow: 2px 1px 13px -5px rgba(0,0,0,.3);
     transition: background .3s ease-in-out;
     -webkit-transition: background .3s ease-in-out;
-    border-radius: 10px;
+    border-radius: 5px;
+    background: #fff;
+    flex: 0 1 auto;
+    margin: 5px,5px,5px,5px;
+    width:100%;
 }
 
 .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article code {
@@ -39,10 +69,10 @@ html, body, .MainScreen {
 }
 
 .MainScreen #features-list .core.active{
-    border: 1px solid #e1e1e2;
+    /* border: 1px solid #e1e1e2; */
     background: #f7f7fb;
     box-shadow: 0px 5px 10px -3px rgba(0,0,0,.7) !important;
-    background-image: url("resources/landing-assets/img/background/low_poly_background.jpg");
+    background-image: url("resources/landing-assets/img/background/low_poly_background.jpg") !important;
 }
 
 .MainScreen #features-list .core.active article,
@@ -124,6 +154,7 @@ html, body, .MainScreen {
     font-family: var(--poppins-font-family);
     font-weight: 400;
     color: #393535;
+    font-size: 18px !important;
 }
 
 .MainScreen .features-list-section article p{
@@ -306,13 +337,30 @@ html, body, .MainScreen {
     font-weight: 600;
 }
 
-@media screen and (max-width:991px){
-    .MainScreen .package-column .package-detail {
-        height: 100% !important;
-    }
+/* MEDIA QUERIES */
 
-    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article{
-        transform: translateY(50px);
+@media screen and (max-width:583px){
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+        max-width:480px;
+        margin: 0 0 10px 0;
+    }
+}
+
+@media screen and (min-width: 584px) and (max-width:767px){
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+        max-width:265px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width:991px){
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+        max-width:340px;
+    }
+}
+
+@media screen and (min-width:992px) and (max-width:1199px){
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+        max-width:265px;
     }
 }
 
@@ -380,6 +428,33 @@ html, body, .MainScreen {
     }
 }
 
+@media screen and (max-width:991px){
+    .MainScreen .featured-tab li{
+        height: 256px;
+        border-bottom: none !important;
+    }
+
+    .MainScreen .package-column .package-detail {
+        height: 100% !important;
+    }
+
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article{
+        transform: translateY(35px);
+    }
+}
+
+@media screen and (max-width:1199px){
+    .MainScreen .featured-tab li{
+        height: 256px;
+        border-bottom: none !important;
+    }
+
+    .MainScreen #home,
+    .MainScreen #messages{
+        margin-top: 10px;
+    }
+}
+
 @media (min-width: 1200px) {
     .featured-tab .tab-content {
         top: -50px;
@@ -388,6 +463,17 @@ html, body, .MainScreen {
 
     .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article{
         transform: translateY(35px);
+    }
+
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+        max-width:360px;
+    }
+
+    .MainScreen .tab-content img {
+        position: relative;
+        left: 40px;
+        top: 80px;
+        max-width: 800px;
     }
 }
 
