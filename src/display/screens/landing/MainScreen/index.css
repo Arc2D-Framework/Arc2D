@@ -175,13 +175,8 @@ html, body, .MainScreen {
 .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(1),
 .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(2){
     flex: 0 1 auto;
-    max-width:400px;
+    border-radius:3px;
 }
-
-.MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(2){
-    margin:0 !important;
-}
-
 .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
     margin-top: 10px;
     flex: 0 1 100%;
@@ -357,6 +352,11 @@ html, body, .MainScreen {
         max-width:340px;
         margin: 5px;
     }
+
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(1),
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(2){
+        max-width:185px;
+    }
 }
 
 @media screen and (min-width:992px) and (max-width:1199px){
@@ -366,13 +366,23 @@ html, body, .MainScreen {
     }
 }
 
+@media screen and (min-width:360px) and (max-width:767px){
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
+        margin: 5px;
+    }
+
+    .MainScreen .form.mailchimp-form.subscribe-form > div input {
+        max-width: 400px;
+    }
+
+    .MainScreen .newsletter-section .subscribe-form input {
+        margin: 5px !important;
+    }
+}
+
 @media screen and (max-width:767px){
     #second-tab-alt > div:nth-child(1) > div:nth-child(2){
         top:40px;
-    }
-
-    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
-        max-width:400px;
     }
 }
 
@@ -386,7 +396,8 @@ html, body, .MainScreen {
     }
 
     .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
-        max-width:579.5px;
+        max-width: 185px;
+        margin: 0;
     }
 }
 
@@ -455,7 +466,7 @@ html, body, .MainScreen {
     }
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
     .featured-tab .tab-content {
         top: -50px;
         right:-92px;
@@ -485,6 +496,10 @@ html, body, .MainScreen {
         width: 99% !important;
         content: '' !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+    }
+
+    .MainScreen .form.mailchimp-form.subscribe-form > div input{
+        max-width:185px;
     }
 }
 
