@@ -307,7 +307,6 @@ html, body, .MainScreen {
 .MainScreen .package-column .package-detail ul li {
     font-size: 18px !important;
     border-bottom: 1px solid #dadada57 !important;
-    /*color: #fff !important;*/
     font-family: var(--poppins-font-family) !important;
     letter-spacing: 0.5px !important;
 }
@@ -349,18 +348,21 @@ html, body, .MainScreen {
 @media screen and (min-width: 584px) and (max-width:767px){
     .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
         max-width:265px;
+        margin: 5px;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width:991px){
     .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
         max-width:340px;
+        margin: 5px;
     }
 }
 
 @media screen and (min-width:992px) and (max-width:1199px){
     .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
         max-width:265px;
+        margin: 5px;
     }
 }
 
@@ -430,7 +432,6 @@ html, body, .MainScreen {
 
 @media screen and (max-width:991px){
     .MainScreen .featured-tab li{
-        height: 256px;
         border-bottom: none !important;
     }
 
@@ -445,7 +446,6 @@ html, body, .MainScreen {
 
 @media screen and (max-width:1199px){
     .MainScreen .featured-tab li{
-        height: 256px;
         border-bottom: none !important;
     }
 
@@ -467,13 +467,24 @@ html, body, .MainScreen {
 
     .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
         max-width:360px;
+        margin: 5px;
     }
 
     .MainScreen .tab-content img {
         position: relative;
-        left: 40px;
+        left: 25px;
         top: 80px;
         max-width: 800px;
+    }
+
+    .MainScreen .tab-info::after {
+        position: absolute !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        display: block !important;
+        width: 99% !important;
+        content: '' !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
     }
 }
 
