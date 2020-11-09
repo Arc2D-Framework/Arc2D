@@ -384,6 +384,14 @@ html, body, .MainScreen {
     #second-tab-alt > div:nth-child(1) > div:nth-child(2){
         top:40px;
     }
+
+    .MainScreen .navigation.navigation-header span.logo {
+        display: inline-block !important;
+    }
+
+    .MainScreen .fixed-menu .navigation.navigation-header .navigation-toggle {
+        top: 25px !important;
+    }
 }
 
 @media screen and (min-width:768px) {
