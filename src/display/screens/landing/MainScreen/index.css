@@ -489,7 +489,7 @@ html, body, .MainScreen {
         margin: 5px;
     }
 
-    .MainScreen .tab-content img {
+    .MainScreen .featured-tab .tab-content img {
         position: relative;
         left: 25px;
         top: 80px;
