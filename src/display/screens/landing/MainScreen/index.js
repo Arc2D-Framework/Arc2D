@@ -32,6 +32,35 @@ namespace `display.screens.landing` (
             // this.headingsArray = [this.heading1, this.heading2, this.heading3];
 
             // this.randomizeHeading();
+            var form = this.querySelector(".subscribe-form");
+            form.addEventListener("submit", (e) => this.onSignupSendForm(e), false);
+        }
+
+        onSignupSendForm(e){
+            e.preventDefault();
+            emailjs.sendForm('service_m7fro3e', 'signup_form', 'signup-form')
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                });
+
+
+            // var formData = new FormData(this);
+            // formData.append('service_id', 'service_m7fro3e');
+            // formData.append('template_id', 'signup_form');
+            // formData.append('user_id', 'user_vX6AXNFQOeqgk2twbfB5a');
+            
+            // $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
+            //     type: 'POST',
+            //     data: formData,
+            //     contentType: false, // auto-detection
+            //     processData: false // no need to parse formData to string
+            // }).done(function() {
+            //     alert('Your mail is sent!');
+            // }).fail(function(error) {
+            //     alert('Oops... ' + JSON.stringify(error));
+            // });
         }
 
         onToggleFeatures(e){
