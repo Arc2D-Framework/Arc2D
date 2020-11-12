@@ -2318,7 +2318,9 @@ input[type=checkbox]:focus {
 	border-radius: 2px;
 }
 
-.team-member .socials-block > li .fa {
+.team-member .socials-block > li .fa, 
+.team-member .socials-block > li .fas, 
+.team-member .socials-block > li .fab {
 	-webkit-transition: color 0.2s ease;
 	-moz-transition: color 0.2s ease;
 	-o-transition: color 0.2s ease;
@@ -2328,7 +2330,7 @@ input[type=checkbox]:focus {
 	left: 0;
 	right: 0;
 	margin-top: -7px;
-	font-size: 14px;
+	font-size: 16px;
 	text-align: center;
 }
 
@@ -5850,7 +5852,9 @@ body.always-mobile .fixed-menu .navigation-header.white-dropdown .navigation-bar
 	background-color: #ffffff;
 }
 
-.team-member .socials-block > li > a:not(:hover):not(:active) .fa {
+.team-member .socials-block > li > a:not(:hover):not(:active) .fa,
+.team-member .socials-block > li > a:not(:hover):not(:active) .fas,
+.team-member .socials-block > li > a:not(:hover):not(:active) .fab {
 	color: #ffffff;
 }
 

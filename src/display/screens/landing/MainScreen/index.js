@@ -33,7 +33,7 @@ namespace `display.screens.landing` (
 
             // this.randomizeHeading();
 
-            this.on("submit", (e) => this.onSignupSendForm(e), false. ".subscribe-form");
+            this.on("submit", (e) => this.onSignupSendForm(e), false, ".subscribe-form");
         }
 
         onSignupSendForm(e){

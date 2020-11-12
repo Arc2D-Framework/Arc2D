@@ -11,13 +11,18 @@ html, body, .MainScreen {
     --poppins-font-family: 'Poppins', sans-serif;
 }
 
+.MainScreen .back-to-top:hover i {
+    color: #1ac6ff;
+}
+
 .MainScreen .section-header > h2,
 .MainScreen #newsletter article,
 .MainScreen #product div.section-header,
 .MainScreen .team-member,
 .MainScreen .footer-content.row div:nth-of-type(1) p,
 .MainScreen .footer-content.row div:nth-of-type(2),
-.MainScreen .footer-content.row div:nth-of-type(3){
+.MainScreen .footer-content.row div:nth-of-type(3),
+.MainScreen .col-md-3.col-sm-6.col-xs-12.core p span{
     font-family: var(--poppins-font-family);
 }
 
@@ -69,7 +74,6 @@ html, body, .MainScreen {
 }
 
 .MainScreen #features-list .core.active{
-    /* border: 1px solid #e1e1e2; */
     background: #f7f7fb;
     box-shadow: 0px 5px 10px -3px rgba(0,0,0,.7) !important;
     background-image: url("resources/landing-assets/img/background/low_poly_background.jpg") !important;
@@ -157,10 +161,18 @@ html, body, .MainScreen {
     font-size: 18px !important;
 }
 
+.MainScreen .features-list-section .highlight {
+    margin: 0 !important;
+}
+
 .MainScreen .features-list-section article p{
     color: #5b6264 !important;
     font-weight: 300 !important;
     font-size: 14px !important;
+}
+
+.MainScreen .col-md-3.col-sm-6.col-xs-12.core.active p span {
+    color: orange !important;
 }
 
 .MainScreen #newsletter {

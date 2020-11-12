@@ -12,14 +12,14 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title>Arc2D</title>
 
-        <link onload="this.media='all'" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
         <link rel="shortcut icon" href="resources/landing-assets/img/favicon.ico">
         <!-- <link rel="apple-touch-icon" href="resources/landing-assets/img/apple-touch-icon.jpg">
         <link rel="apple-touch-icon" sizes="72x72" href="resources/landing-assets/img/apple-touch-icon-72x72.jpg">
         <link rel="apple-touch-icon" sizes="114x114" href="resources/landing-assets/img/apple-touch-icon-114x114.jpg"> -->
         <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" />
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/font-awesome.min.css" />
-        <!-- <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" onload="this.media='all'" /> -->
+        <!-- <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/font-awesome.min.css" /> -->
+        <link rel="stylesheet" type="text/css" href="resources/css/all.min.css" onload="this.media='all'" />
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" onload="this.media='all'" />
         
 
 
@@ -56,7 +56,6 @@
             })();
         </script>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&family=Roboto:wght@300;700&display=swap" rel="stylesheet" onload="this.media='all'">
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" onload="this.media='all'" />
     </head>
 
     <body namespace="display.screens.landing.MainScreen">
@@ -413,37 +412,37 @@
                         <div class="animated" data-duration="500" data-animation="fadeInRight">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-office-44 highlight"></i>
+                                    <i class="fas fa-file-code icon highlight" style="margin: 0;"></i>
                                     <span class="heading">Zero Config Setup</span>
-                                    <p class="">Getting started is easy, add 1 line to your <span style="color: #1ac5fe;">&lt;head&gt;</span> tag to run the framework.</p>
+                                    <p class="">Getting started is easy, add 1 line to your HTML <span style="color: #1ac5fe;font-weight:400;">&lt;head&gt;</span> tag to run the framework.</p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-shopping-18 highlight"></i>
+                                    <i class="fas fa-ban icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">NO COMPILERS</span>
                                     <p class="">
-                                        Just 2 npm depdendencies, no webpack, grunt, babel, pre or post processors.
+                                        Just 2 npm depdendencies – no webpack, grunt, babel, pre or post processors needed. Optional dependencies vary on the developer.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-seo-icons-27 highlight"></i>
+                                    <i class="fal fa-phone-laptop icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">W3C WEB COMPONENTS</span>
                                     <p class="">
-                                        Build custom component parts
-                                        and assemble them on screen following w3c recommendation.
+                                        Build true native WebComponents
+                                        and assemble them on screen following W3C's recommendation.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-office-24 highlight"></i>
+                                    <i class="far fa-chart-network icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">Agnostic HTML Templating</span>
                                     <p class="">
                                         Plug-in your engine of choice (Mustache, Nunjucks, Handlebars &amp; more). No
-                                        vendor lock-in to technologies like JSX.
+                                        vendor lock-in to technologies like React's JSX.
                                     </p>
                                 </article>
                             </div>
@@ -451,28 +450,26 @@
                         <div class="animated" data-duration="500" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-graphic-design-13 highlight"></i>
+                                    <i class="fas fa-magic icon highlight" style="margin: 0;font-style: italic;font-weight: 300;"></i>
                                     <span class="heading">Multi-app SPA</span>
                                     <p class="">
-                                        Build multi-connected spa apps in the same container
-                                        that load and cache better than React -- if that was
-                                        even possible.
+                                        Build multi-connected SPA apps in the same container
+                                        that load and cache better than React, Angular &amp; Vue.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 sdk">
                                 <article class="align-center">
-                                    <i class="icon icon-arrows-37 highlight"></i>
+                                    <i class="fas fa-tools icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">SDK Tools</span>
                                     <p class="">
-                                        Stitch and seam together multiple apps using arcs
-                                        prefab sdk tools.
+                                        Stitch and seam together multiple apps using Arcs prefab SDK tools.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-14 highlight"></i>
+                                    <i class="fad fa-folder-tree icon highlight"></i>
                                     <span class="heading">Namespace Management</span>
                                     <p class="">
                                         Like Java packages, organize complex applications in a folder
@@ -482,7 +479,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-16 highlight"></i>
+                                    <i class="fab fa-js-square icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">Native ES6</span>
                                     <p class="">
                                         Native ES6 without builds. Runs live
@@ -495,7 +492,7 @@
                         <div class="animated" data-duration="500" data-animation="fadeInRight">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-graphic-design-13 highlight"></i>
+                                    <i class="fad fa-pencil-paintbrush icon highlight"></i>
                                     <span class="heading">Progressive Enhancement</span>
                                     <p class="">
                                         Stealthfully decorate &amp; enhance existing/legacy pages
@@ -505,18 +502,18 @@
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-arrows-37 highlight"></i>
+                                    <i class="fas fa-history icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">Quartz Loop</span>
                                     <p class="">
                                         Time sensitive simulation of physics, collision
-                                        and AI with input, update, render sequence at fixed
+                                        and AI with input, update and render sequence at an fixed
                                         update.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-14 highlight"></i>
+                                    <i class="fas fa-sitemap icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">Data Binding</span>
                                     <p class="">
                                         Data bind a DOMNode on screen to a class member variable in JavaScript
@@ -526,11 +523,11 @@
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-16 highlight"></i>
+                                    <i class="far fa-grin-stars icon highlight"></i>
                                     <span class="heading">SPA Architecture</span>
                                     <p class="">
                                         Framework managed SPA architecture. Intuitive, seamless and transparent,
-                                        no "Router" mechanisms or api's to fiddle with.
+                                        no "Router" mechanisms or API's to fiddle with.
                                     </p>
                                 </article>
                             </div>
@@ -538,37 +535,37 @@
                         <div class="animated" data-duration="500" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-graphic-design-13 highlight"></i>
+                                    <i class="fad fa-sparkles icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">Auto-Nav (for SPA)</span>
                                     <p class="">
-                                        Auto-nav handles navigation between multiple views of an SPA using
-                                        traditional links. 
+                                        The Auto-Nav feature handles navigation between multiple "views" or apps of an SPA using
+                                        traditional links in dot notation mirroring namespace folder structure.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-arrows-37 highlight"></i>
+                                    <i class="fad fa-abacus icon highlight"></i>
                                     <span class="heading">Component Cascade</span>
                                     <p class="">
-                                        Components auto-cascade their css in the right
+                                        Components auto-cascade their CSS in the right
                                         order automatically.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-14 highlight"></i>
+                                    <i class="fas fa-gamepad icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">STATE MACHINE</span>
                                     <p class="">
                                         Transition between modes (views) of gameplay with little effort.
-                                        Ex: Splash to Menu to Level to Game Over to Menu to Level.
+                                        (Ex: Splash to Menu <i class="fad fa-arrow-alt-square-right" style="color: #1ac6ff;"></i> Level to Game <i class="fad fa-arrow-alt-square-right" style="color: #1ac6ff;"></i> Menu to Level).
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-16 highlight"></i>
+                                    <i class="fas fa-meteor icon highlight"></i>
                                     <span class="heading">Collisions</span>
                                     <p class="">
                                         SAT engine resolves collisions between any convex
@@ -580,16 +577,16 @@
                         <div class="animated" data-duration="500" data-animation="fadeInRight">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
-                                    <i class="icon icon-graphic-design-13 highlight"></i>
+                                    <i class="fas fa-bezier-curve icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">Tweens</span>
                                     <p class="">
-                                        Tween any object 
+                                        Tween or animate any object with HTML5 and JavaScript properties.
                                     </p>
                                 </article>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
-                                    <i class="icon icon-arrows-37 highlight"></i>
+                                    <i class="far fa-function icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">A* Path Finding</span>
                                     <p class="">
                                         2D path finder resolves best path to target
@@ -599,7 +596,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-14 highlight"></i>
+                                    <i class="fas fa-shield-alt icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">FPS Control</span>
                                     <p class="">
                                         Frame dropping and interpolation for smooth animation
@@ -609,7 +606,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-16 highlight"></i>
+                                    <i class="far fa-star-shooting icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">2D Physics</span>
                                     <p class="">
                                         Box2D ready, stepped at a fixed physics update by
@@ -621,7 +618,7 @@
                         <div class="animated" data-duration="500" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
-                                    <i class="icon icon-graphic-design-13 highlight"></i>
+                                    <i class="fab fa-buffer icon highlight" style="font-weight: 300;"></i>
                                     <span class="heading">Layered Canvas</span>
                                     <p class="">
                                         Layer HTML, SVG and native Canvas together to
@@ -631,10 +628,10 @@
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-arrows-37 highlight"></i>
+                                    <i class="fas fa-database icon highlight"></i>
                                     <span class="heading">Agnostic Data Storage</span>
                                     <p class="">
-                                        Mongo-like api with swappable data storage
+                                        Mongo-like API with swappable data storage
                                         drivers for local and remote connectivity. 
                                     </p>
                                 </article>
@@ -651,7 +648,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
-                                    <i class="icon icon-badges-votes-16 highlight"></i>
+                                    <i class="fad fa-rocket-launch icon highlight"></i>
                                     <span class="heading">Heroku Ready</span>
                                     <p class="">
                                         <code>git push heroku master</code> for deployment.
@@ -883,11 +880,10 @@
                                                     </div>
                                                 </div>
                                                 <ul class="socials-block">
-                                                    <li><a href="#" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
-                                                    <li><a href="#" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a href="#" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="#" class="skype" title="Skype"><i class="fa fa-skype"></i></a></li>
-                                                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                                    <li><a href="#" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
+                                                    <li><a href="https://github.com/Nashorn" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
+                                                    <li><a href="https://discordapp.com/users/619206669783531521" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
+                                                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -909,7 +905,10 @@
                                                     </div>
                                                 </div>
                                                 <ul class="socials-block align-center">
-                                                    <li><a href="#" class="skype" title="Skype"><i class="fa fa-skype"></i></a></li>
+                                                    <li><a href="mailto:jaysmith696@gmail.com" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
+                                                    <li><a href="https://github.com/jamesta696" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
+                                                    <li><a href="https://discordapp.com/users/709414897473159179" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
+                                                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -1035,7 +1034,7 @@
                     <div class="copyright">Arc2D 2020. All rights reserved.</div>
                 </footer>
                 
-                <div class="back-to-top"><i class="fa fa-angle-up fa-3x"></i></div>
+                <div class="back-to-top"><i class="fad fa-angle-up fa-3x"></i></div>
 
     </body>
 </html>
