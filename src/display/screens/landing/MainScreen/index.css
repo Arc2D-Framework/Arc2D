@@ -210,7 +210,8 @@ html, body, .MainScreen {
 .MainScreen #product .section-header p,
 .MainScreen #team .section-header p {
   color: #5b5b5b;
-  font-weight: 100;
+  font-family: var(--poppins-font-family);
+    font-weight: 400;
 }
 
 .MainScreen #product div.section-header p.sub-header{
