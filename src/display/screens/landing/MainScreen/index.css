@@ -11,6 +11,10 @@ html, body, .MainScreen {
     --poppins-font-family: 'Poppins', sans-serif;
 }
 
+.MainScreen .back-to-top {
+    border-radius: 50%;
+}
+
 .MainScreen .back-to-top:hover i {
     color: #1ac6ff;
 }
@@ -503,7 +507,7 @@ html, body, .MainScreen {
 
     .MainScreen .featured-tab .tab-content img {
         position: relative;
-        left: 25px;
+        right:30px;
         top: 80px;
         max-width: 800px;
     }
