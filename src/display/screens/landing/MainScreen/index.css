@@ -209,8 +209,8 @@ html, body, .MainScreen {
 
 .MainScreen #product .section-header p,
 .MainScreen #team .section-header p {
-  color: #5b5b5b;
-  font-family: var(--poppins-font-family);
+    color: #5b5b5b;
+    font-family: var(--poppins-font-family);
     font-weight: 400;
 }
 
@@ -348,6 +348,19 @@ html, body, .MainScreen {
     font-weight: 600;
 }
 
+.MainScreen .footer-content.row div:nth-of-type(1) p {
+    font-weight: 400;
+}
+
+.MainScreen #contact-info #contact-email {
+    font-weight: 400;
+    color: #fff;
+}
+
+.MainScreen #contact-info #contact-email:hover{
+    color: #1ac6ff;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width:583px){
@@ -409,6 +422,15 @@ html, body, .MainScreen {
     .MainScreen .fixed-menu .navigation.navigation-header .navigation-toggle {
         top: 25px !important;
     }
+
+    .MainScreen .footer .footer-title,
+    .MainScreen .footer .list-inline {
+        text-align: center !important;
+    }
+
+    .MainScreen .footer .list-inline li .icon {
+        color: #fff;
+    }
 }
 
 @media screen and (min-width:768px) {
@@ -423,6 +445,12 @@ html, body, .MainScreen {
     .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
         max-width: 185px;
         margin: 0;
+    }
+
+    .MainScreen .footer .list-inline li .icon {
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent;
+        background: linear-gradient(180deg, rgb(255, 255, 255) 50%,rgba(0, 93, 157, 0.7) 110%);
     }
 }
 
@@ -488,6 +516,10 @@ html, body, .MainScreen {
     .MainScreen #home,
     .MainScreen #messages{
         margin-top: 10px;
+    }
+
+    .MainScreen .footer .list-inline li .icon {
+        font-size:34px !important;
     }
 }
 

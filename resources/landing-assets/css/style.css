@@ -6294,10 +6294,6 @@ body:not(.always-mobile) .navigation-header .navigation-brand .brand-logo {
 
 @media (max-width: 992px) and (orientation: portrait) {
 
-.footer .list-inline li .icon {
-	font-size: 34px;
-}
-
 .register-version .signup-wrapper {
 	padding-left: 0;
 	padding-right: 0;
@@ -7345,10 +7341,6 @@ body.collapsed .fixed-menu .navigation-header {
 	clear: both;
 }
 
-.social-wrap > ul {
-	float: left;
-}
-
 blockquote:before {
 	top: 10%;
 }
@@ -7651,10 +7643,6 @@ blockquote {
 
 .footer .social-wrap:after {
 	clear: both;
-}
-
-.footer .social-wrap > ul {
-	float: left;
 }
 
 .heading-block .btn {
