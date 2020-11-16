@@ -352,6 +352,10 @@ html, body, .MainScreen {
     font-weight: 400;
 }
 
+.MainScreen .team-member .position {
+    color: #5b5b5b;
+}
+
 .MainScreen #contact-info #contact-email {
     font-weight: 400;
     color: #fff;
