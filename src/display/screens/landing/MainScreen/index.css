@@ -250,12 +250,23 @@ html, body, .MainScreen {
 }
 
 /* Pricing Table Section */
+
 /*.MainScreen .package-column {
     background-color: #204c89;
     border-radius: 10px;
     box-shadow: 7px 6px 5px -2px rgba(0,0,0,0.37);
     border: 0 !important;
 }*/
+
+
+/* .MainScreen #product div.container div:nth-of-type(2) div.col-sm-4:nth-of-type(3){
+    display: none;
+} */
+
+.MainScreen #product div.section-content.row {
+    display: flex;
+    justify-content: center;
+}
 
 .MainScreen .package-column {
     border:0 !important;
@@ -370,6 +381,10 @@ html, body, .MainScreen {
 @media screen and (max-width:480px){
     .MainScreen .footer .social-wrap {
         height: auto !important;
+    }
+
+    .MainScreen #product div.container div:nth-of-type(2) div.col-sm-4:nth-of-type(3) {
+        display:none;
     }
 }
 
