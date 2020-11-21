@@ -279,13 +279,6 @@ html, body, .MainScreen {
     background: linear-gradient(90deg, rgba(57, 107, 202, 0.95) 11%, rgb(62, 62, 155) 74%, rgba(79, 38, 135, 0.85) 100%);
 }
 
-/*.MainScreen .package-column .package-title {
-    letter-spacing: 1.5px !important;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600 !important;
-    color: #fff !important;
-}*/
-
 /*.MainScreen .package-column .package-price {
     transition: background 0.1s ease-in-out !important;
     -webkit-transition: background 0.1s ease-in-out !important;
