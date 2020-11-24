@@ -16,6 +16,7 @@ namespace `applications` (
             await super.onConnected({
                 items: ["News Feeds", "Likes and Comments", "Live Stream", "Upcoming Events", "Friend Requests", "Nearby Friends", "Birthdays", "Account Sign-In"]
             });
+            
             this.addEventListener("toggleit", (e) => this.toggleContent(e), false, "#main-toggle");
             this.bottomContent = this.querySelector("#bottom-content");
             this.allToggleSwitches = Array.from(this.querySelectorAll("notifications-toggle-switch"));
