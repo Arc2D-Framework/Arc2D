@@ -1,4 +1,4 @@
-namespace `core.ui` (
+namespace `display.components` (
 	class NotificationsToggleSwitch  extends w3c.ui.WebComponent  {
 		async onConnected(){
             await super.onConnected();

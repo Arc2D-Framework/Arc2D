@@ -7,7 +7,7 @@ var Config = window.Config = window.Config||{
     CHARSET : "utf-8",
     ROOTPATH : "../../../",
     SRC_PATH : "/src/",
-    ENVIRONMENT : "prod",
+    ENVIRONMENT : "dev",
     LOGGING : true,
     ENABLE_TRANSPILER : true,
     DEFAULT_TEMPLATE_ENGINE_MIMETYPE : "template/literals",
