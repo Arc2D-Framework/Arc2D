@@ -390,25 +390,6 @@ html, body, .MainScreen {
     }
 }
 
-@media screen and (min-width: 768px) and (max-width:991px){
-    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
-        max-width:340px;
-        margin: 5px;
-    }
-
-    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(1),
-    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(2){
-        max-width:185px;
-    }
-}
-
-@media screen and (min-width:992px) and (max-width:1199px){
-    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
-        max-width:265px;
-        margin: 5px;
-    }
-}
-
 @media screen and (min-width:360px) and (max-width:767px){
     .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(3){
         margin: 5px;
@@ -468,6 +449,32 @@ html, body, .MainScreen {
     }
 }
 
+@media screen and (min-width: 768px) and (max-width:991px){
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+        max-width:340px;
+        margin: 5px;
+    }
+
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(1),
+    .MainScreen .form.mailchimp-form.subscribe-form > div input:nth-of-type(2){
+        max-width:185px;
+    }
+}
+
+@media screen and (max-width:991px){
+    .MainScreen .featured-tab li{
+        border-bottom: none !important;
+    }
+
+    .MainScreen .package-column .package-detail {
+        height: 100% !important;
+    }
+
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article{
+        transform: translateY(35px);
+    }
+}
+
 @media screen and (min-width:768px) and (max-width:1199px){
     .MainScreen .package-column .package-detail {
         height: 100% !important;
@@ -508,17 +515,15 @@ html, body, .MainScreen {
     }
 }
 
-@media screen and (max-width:991px){
-    .MainScreen .featured-tab li{
-        border-bottom: none !important;
+@media screen and (min-width:992px) and (max-width:1199px){
+    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 {
+        max-width:265px;
+        margin: 5px;
     }
 
-    .MainScreen .package-column .package-detail {
-        height: 100% !important;
-    }
-
-    .MainScreen #features-list .col-md-3.col-sm-6.col-xs-12 article{
-        transform: translateY(35px);
+    .MainScreen .featured-tab .tab-content img {
+        max-width: 700px;
+        margin: auto;
     }
 }
 
