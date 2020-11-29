@@ -113,6 +113,9 @@ namespace `display.components` (
 							}
 						}],
 						yAxes: [{
+							ticks: {
+								min:0.5
+							},
 							stacked: false,
 							scaleLabel: {
 								display: true,

@@ -1,8 +1,8 @@
-// import 'node_modules/od-import-polyfill/import.js';
-await require('/src/system/drivers/templating/Nunjucks/nunjucks-driver.js');
-import 'display.components.NotificationsToggleSwitch';
+import 'node_modules/od-import-polyfill/import.js';
+await require('/src/core/drivers/templating/Nunjucks/nunjucks-driver.js');
+import 'core.ui.NotificationsToggleSwitch';
 
-namespace `testApps` (
+namespace `applications` (
     class NotificationsApp extends w3c.ui.Application {
         constructor(element){
             super(element);
