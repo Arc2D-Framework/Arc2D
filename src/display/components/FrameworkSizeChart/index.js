@@ -112,7 +112,7 @@ namespace `display.components` (
         template(){
             return `<template>
                         <div>
-                            <canvas id="sizeChart" style="width: 100%;"></canvas>
+                            <canvas id="sizeChart" style="width: 100%;" title="Framework/Library Size Comparison Chart (Kilobytes)" alt="Framework/Library Size Comparison Chart (Kilobytes)"></canvas>
                         </div>
                     </template>`;
         }

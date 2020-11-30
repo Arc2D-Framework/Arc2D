@@ -35,6 +35,11 @@ html, body, .MainScreen {
     font-family: var(--poppins-font-family);
 }
 
+.MainScreen #cross-platform-header {
+    font-size: clamp(1rem, 0.7857rem + 0.9524vw, 1.5rem);
+    color: rgb(87, 85, 85);
+}
+
 .MainScreen #features {
     margin-bottom:0 !important;
 }
@@ -141,16 +146,11 @@ html, body, .MainScreen {
     font-weight: 600;
 }
 
-.MainScreen article p:nth-of-type(1) {
+.MainScreen article p {
   font-weight: 300;
   color: #5b5b5b;
-  font-size: 24px;
-}
-
-.MainScreen article p:nth-of-type(2),
-.MainScreen article p:nth-of-type(3) {
-  color: #5b5b5b;
-  font-weight: 100;
+  font-size: clamp(1rem, 0.7857rem + 0.9524vw, 1.3rem);
+  line-height: 30px;
 }
 
 .MainScreen #process div.section-content.row div:nth-of-type(4) article {
@@ -239,8 +239,6 @@ html, body, .MainScreen {
 }
 
 .MainScreen .sub-title, .MainScreen .sub-title.alt{
-    color: #646161;
-    font-size: 20px;
     line-height: 30px;
 }
 
@@ -521,9 +519,15 @@ html, body, .MainScreen {
         margin: 5px;
     }
 
-    .MainScreen .featured-tab .tab-content img {
-        max-width: 700px;
+    .MainScreen .featured-tab .tab-content div:nth-of-type(1) img,
+    .MainScreen .featured-tab .tab-content div:nth-of-type(3) img {
         margin: auto;
+        width:clamp(300px,100%,800px);
+    }
+
+    .MainScreen .featured-tab .tab-content div:nth-of-type(2) img{
+        margin: auto;
+        width:clamp(300px,100%,900px);
     }
 }
 

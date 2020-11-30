@@ -20,6 +20,8 @@
         <!-- <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/font-awesome.min.css" /> -->
         <link rel="stylesheet" type="text/css" href="resources/css/all.min.css" onload="this.media='all'" />
         <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" onload="this.media='all'" />
+        <link href="https://cdn.jsdelivr.net/npm/@pnotify/core@5.2.0/BrightTheme.css" rel="stylesheet" type="text/css" onload="this.media='all'" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&family=Roboto:wght@300;700&display=swap" rel="stylesheet" onload="this.media='all'">
         
 
 
@@ -40,6 +42,13 @@
         <script type="text/javascript" src="resources/landing-assets/js/toastr.min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/startuply.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@pnotify/core@5.2.0/dist/PNotify.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');
+            })();
+        </script>
         
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
@@ -48,14 +57,6 @@
             // Config.ROOTPATH = "../../../framework/";
             // Config.SRC_PATH = "/src/";
         </script>
-
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-        <script type="text/javascript">
-            (function() {
-                emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');
-            })();
-        </script>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&family=Roboto:wght@300;700&display=swap" rel="stylesheet" onload="this.media='all'">
     </head>
 
     <body namespace="display.screens.landing.MainScreen">
@@ -168,7 +169,7 @@
                    
                 <div id="clients" class="clients-section align-center">
                     <div class="container">
-                        <h5 class="animated" data-animation="fadeInDown" data-duration="1000" data-delay="200">Arc2D is compatiable with various cross-platform environments</h5>
+                        <h5 id="cross-platform-header" class="animated" data-animation="fadeInDown" data-duration="1000" data-delay="200">Arc2D is compatiable with various cross-platform environments</h5>
                         <ul class="list-inline logos">
                             <li><img class="animated" data-animation="fadeInDown" data-duration="500" src="resources/landing-assets/img/logos/nodejs.png" alt="Node JS" title="NodeJS" /></li>
                             <li><img class="animated" data-animation="fadeInUp" data-duration="500" data-delay="400" src="resources/landing-assets/img/logos/apache_cordova.png" alt="Apache Cordova" title="Apache Cordova" /></li>
@@ -198,7 +199,9 @@
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
                                         <br/>
                                         <article class="align-center">
-                                            <h3><span class="highlight">SIZE </span>COMPARISON</h3>
+                                            <h3 title="Arc2D - Size Comparison Chart vs Other Frameworks/Libraries" alt="Arc2D - Size Comparison Chart vs Other Frameworks/Libraries">
+                                                <span class="highlight">SIZE </span>COMPARISON
+                                            </h3>
                                             <p class="sub-title">
                                                 At 10KB, or roughly 1300 Lines of Code (uncompressed LOC), the Arc Engine spares no
                                                 expense. We've aimed for ultra efficiency on mobile,
@@ -306,17 +309,15 @@
                                         In similar fashion, Arc sets the precedence for how a framework should be designed, 
                                         many will try to reproduce the craftsman-ship we pioneered.
                                     </p>
-                                    <p>
+                                    <p class="sub-title">
                                         Arc is a framework managed architecture. Instead of fiddling with specialized API calls,
                                         the framework will call the code you write. Write no code and nothing happens. Leverage
                                         HTML, CSS and native JavaScript the way you learned it, breaking the barrier to adoption
                                         and lenghtty learning curves.
                                         The unobtrusive nature of the Arc Engine allows legacy web pages already existing to
                                         be progressively enhanced by real components without having to touch the existing
-                                        HTML even if the existing page is running other apis and frameworks.
-                                    </p>
-                                    <p>
-                                        Optimization from the start led to quality crafted.
+                                        HTML even if the existing page is running other apis and frameworks. Optimization from 
+                                        the start led to quality crafted.
                                     </p>
                                 </article>
                             </div>
@@ -698,7 +699,7 @@
                         <div class="section-header">
                             <h2>PRODUCT <span class="highlight">PACKAGES</span></h2>
                             <p class="sub-header">Review &amp; choose your Arc package that best suits your needs. 
-                                If you purchased an Engineers License &amp; require techical support, please don't 
+                                If you purchased an Engineers License &amp; require technical support, please don't 
                                 hesitate to <a href="javascript:void(null)">contact us</a> for more information. 
                                 If you choose the Core Developer package, we recommend upgrading to an Engineers 
                                 license to receive support from our Arc development team.
