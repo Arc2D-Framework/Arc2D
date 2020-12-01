@@ -44,11 +44,16 @@ namespace `core.ui.game` (
             return this.tilesets;
         }
 
+        //only used by layer 0 tto get tileset/atlas due to a tiled bug, mussst be accessed differently.
         getTilesetByIndex(index){
             return this.tilesets[index];
         }
 
-        //returns a tileset
+        getTile (layer, col, row) {
+            return this.map.layers[layer].data[row * this.map.height + col];
+        }
+
+        //returns a tileset/atlas for the layer based on MaterialSource property
         getTilesetForLayerByMaterialSource(layer){
             if(layer){
                 if(layer.properties){
@@ -78,13 +83,13 @@ namespace `core.ui.game` (
             }
         }
 
-        getTileTypeById(tileset, tileType, layerIndex){
+        getTilePositionFor(tileset, tileType, layerIndex){
             if(tileset.firstgid != 1){
                 // debugger;
             }
             var firstgid = Number(tileset.firstgid);
             var tileType = tileType-firstgid;
-            // layerIndex <=0 ? (tileType -= 1):null;//Tiled Bug
+            // layerIndex <=0 ? (tileType -= 1):null;//Tiled Bug 
 
             var index = tileType;
             var col = index % tileset.columns; 

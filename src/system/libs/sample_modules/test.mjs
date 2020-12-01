@@ -15,4 +15,4 @@ const f = () => {
 }
 
 var age = 21;
-export {myExport,hello,f,age};
+return {myExport,hello,f,age};

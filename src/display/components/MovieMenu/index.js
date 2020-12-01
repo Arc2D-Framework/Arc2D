@@ -16,13 +16,15 @@ namespace `display.components` (
         }
 
         async onRenderGenres(){
-            // await core.data.Movies.seed();//seed with test data
+            await domain.collections.Movies.seed();//seed with test data
+            debugger;
             var cursor = await domain.collections.Movies.find({
                 query : {},
                 skip:0,
                 limit:40,
                 totals:true
             });
+            debugger;
             await cursor.next();
             var all_genres          = await cursor.map(movie => movie.genre);
             var only_unique_genres  = [...new Set(all_genres)];//Set() filters out duplicates.

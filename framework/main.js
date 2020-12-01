@@ -1,3 +1,4 @@
+try{window.exports = ("object"==typeof exports&&"object"==typeof module)?module.exports:"object"==typeof exports?exports:{};}catch(e){console.error(e)};
 import '-appconfig.js';
 import 'src/core/extensions/Math.js';
 import 'src/core/extensions/Object.js';

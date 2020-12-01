@@ -70,6 +70,7 @@ Ecmascript6ClassTranspiler.prototype.transipleExportsDestructuring = function (s
     return src;
 }
 
+
 Ecmascript6ClassTranspiler.prototype.transipleClassFields = function (ns, src) {
     var regex = new RegExp(
         /(\@static|@public|\@private)\s+([^\s]*)\s+\=([^\;]*)\;/gm

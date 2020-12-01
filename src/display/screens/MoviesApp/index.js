@@ -9,9 +9,9 @@ namespace `display.screens` (
     class MoviesApp extends w3c.ui.Application {
         constructor(element){
             super(element);
-            alert(NodeTest)
+            // alert(NodeTest)
             //sow seeds for mock/testing (optional)
-            domain.collections.Movies.seed();
+            // domain.collections.Movies.seed();
             
             //listen to core.ui.Menu -> 'genrechanged' event
             this.addEventListener("genrechanged", (e)=>this.onGenreChanged(e), false);
@@ -22,6 +22,7 @@ namespace `display.screens` (
         }
 
         async onConnected() {
+            await domain.collections.Movies.seed();
             await super.onConnected();
         }
 

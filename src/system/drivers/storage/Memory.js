@@ -1,8 +1,7 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
 import! 'system.drivers.storage.IStorageInterface';
-
-window.Query = (await require('/src/system/libs/query.js')).default;
+import '/src/system/libs/query.js';
 
 namespace `system.drivers.storage` (
     class Memory extends system.drivers.storage.IStorageInterface {
@@ -14,10 +13,6 @@ namespace `system.drivers.storage` (
 
         isSeedingEnabled(){
             return true;
-        }
-
-        seeded(){
-            this.seeded=true;
         }
 
         setCollection (name){

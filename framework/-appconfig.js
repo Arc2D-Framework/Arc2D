@@ -12,7 +12,7 @@ var Config = window.Config = window.Config||{
     ENABLE_TRANSPILER : true,
     DEFAULT_TEMPLATE_ENGINE_MIMETYPE : "template/literals",
     TEMPLATE_NAMES_USE_ENGINE_EXTENSION : false,//ex: "index.kruntch.html"
-    IMPORTS_CACHE_POLICY : "no-store", //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
+    IMPORTS_CACHE_POLICY : { cache: "no-store"}, //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
     DEBUG:true
 };
 

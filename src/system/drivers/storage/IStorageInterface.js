@@ -8,5 +8,13 @@ namespace `system.drivers.storage` (
         isSeedingEnabled(){
             return false;
         }
+
+        get seeded(){
+            return this._seeded;
+        }
+
+        set seeded(bool){
+            this._seeded=bool;
+        }
     }
 );

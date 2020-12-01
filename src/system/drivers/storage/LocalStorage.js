@@ -1,7 +1,7 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
 import! 'system.drivers.storage.IStorageInterface';
-window.Query = (await require('/framework/src/libs/query.js')).default;
+import '/src/system/libs/query.js';
 
 
 namespace `system.drivers.storage`(

@@ -4,8 +4,9 @@ import 'display.components.LinesOfCodeChart';
 import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
 import 'display.components.ToggleButton';
-// import swal from './sweetalert/dist/sweetalert.min.js';
-// swal = require('/node_modules/sweetalert/dist/sweetalert.min.js');
+
+import '/node_modules/sweetalert/dist/sweetalert.min.js';
+// swal = await require('/node_modules/sweetalert/dist/sweetalert.min.js').default;
 // var {swal} = await require ('/node_modules/sweetalert/dist/sweetalert.min.js');
 // var swal = await import('/node_modules/sweetalert/dist/sweetalert.min.js');
 
@@ -14,10 +15,12 @@ namespace `display.screens.landing` (
         constructor(element){
             super(element);
             this._mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            swal("Good job!", "You clicked the button!", "success");
         }
 
         async onConnected() {
             await super.onConnected();
+
             this.size_chart     = this.querySelector("framework-size-chart");
             this.loc_chart      = this.querySelector("lines-of-code-chart");
             this.size_button    = this.querySelector("#size-chart-button");

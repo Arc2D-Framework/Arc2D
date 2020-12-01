@@ -16,7 +16,6 @@ namespace `display.worlds.aeiou` (
         }
 
         push(state){
-            debugger;
             state && !state.isStarted && state.onStart();
             state && state.onAwake() ;//&& (current.isSleeping=false)
             state.isSleeping=false
@@ -27,7 +26,6 @@ namespace `display.worlds.aeiou` (
         }
 
         pop(){
-            debugger;
             var current = this[0];
             if(current){
                 if(!current.isFinished){

@@ -4,4 +4,4 @@ class NodeTest {
     }
 }
 
-module.exports = NodeTest;
+return{NodeTest};

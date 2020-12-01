@@ -1,4 +1,4 @@
-;export default (function () {
+;(function () {
   function objectify(a) {
     var rows = [];
     for (var key in a) {
@@ -506,6 +506,6 @@
   })
   else if (typeof window != 'undefined') window.Query = Query;
   else if (typeof GLOBAL != undefined && GLOBAL.global) GLOBAL.global.Query = Query;
-
+  window.Query=Query;
   return Query;
 })(this);

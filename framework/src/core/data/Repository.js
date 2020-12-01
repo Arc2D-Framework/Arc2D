@@ -112,12 +112,12 @@ namespace `core.data` (
                     var response = await fetch(uri[Config.ENVIRONMENT]);
                     var json = await response.json();
                     var res = this.onDataReceived(json);
-                    this.IRequestStorage.seeded();
+                    this.IRequestStorage.seeded=true;
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
                     resolve(res)
                 } else {
                     this.prototype.dispatchEvent("loaded", {controller: this}, this);
-                    this.IRequestStorage.seeded();
+                    this.IRequestStorage.seeded=true;
                     resolve()
                 }  
             })
