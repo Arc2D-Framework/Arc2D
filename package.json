@@ -14,7 +14,7 @@
     "dependencies": {
         "od-cocoon": "github:Nashorn/od-cocoon#3.0.0",
         "od-paginator": "github:Nashorn/od-paginator#1.0.0",
-        "od-seam": "git+https://jaysmitth024@gmail.com:cb580ccbf0e30d7236e63661979634542e3ee6bc@github.com/Nashorn/od-seam#1.0.0"
+        "od-seam": "git+https://jaysmith024@gmail.com:cb580ccbf0e30d7236e63661979634542e3ee6bc@github.com/Nashorn/od-seam#1.0.0"
     },
     "optionalDependencies": {
 
