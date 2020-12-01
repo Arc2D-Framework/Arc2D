@@ -9,7 +9,7 @@ import 'display.components.ToggleButton';
 // swal = await require('/node_modules/sweetalert/dist/sweetalert.min.js').default;
 // var {swal} = await require ('/node_modules/sweetalert/dist/sweetalert.min.js');
 // var swal = await import('/node_modules/sweetalert/dist/sweetalert.min.js');
-await require('/node_modules/sweetalert/dist/sweetalert.min.js');
+import '/node_modules/sweetalert/dist/sweetalert.min.js';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {

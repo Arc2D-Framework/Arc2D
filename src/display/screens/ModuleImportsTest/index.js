@@ -1,8 +1,7 @@
 var {TWEEN} = await import('/src/system/2d/tween.esm.js');
-import {myExport,hello as Hello, runit} from '/src/system/libs/sample_modules/a.mjs';
-// var {myExport,hello : Hello, runit} = await import('/src/system/libs/sample_modules/a.mjs');
+var {myExport,hello : Hello, runit} = await import('/src/system/libs/sample_modules/a.mjs');
 import {NodeTest} from '/src/system/libs/sample_modules/nodejsmod.js';
-await require('/node_modules/sweetalert/dist/sweetalert.min.js');
+import '/node_modules/sweetalert/dist/sweetalert.min.js';
 await require('/src/system/libs/sample_modules/introjs.js');
 
 namespace `display.screens` (

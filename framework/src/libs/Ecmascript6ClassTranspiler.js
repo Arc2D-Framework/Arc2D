@@ -55,7 +55,7 @@ Ecmascript6ClassTranspiler.prototype.transipleImportsDestructuring = function (s
             destructured_var = destructured_var.replace(/\s+as\s+/gm, ":");
             return `var {${destructured_var}} = (()=> {\nimport ${src_path};\n})();`;
         });
-    src = this.transipleExportsDestructuring(src)
+    // src = this.transipleExportsDestructuring(src)
     return src;
 }
 
