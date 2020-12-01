@@ -18,7 +18,6 @@
     },
     "optionalDependencies": {
         "od-plopgen-templates": "github:Nashorn/od-plopgen-templates#1.0.0",
-        "od-seam": "github:Nashorn/od-seam#1.0.0",
         "od-server": "github:Nashorn/od-server#1.0.0",
         "od-toolset": "github:Nashorn/od-toolset#1.0.0"
     }
