@@ -5,10 +5,11 @@ import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
 import 'display.components.ToggleButton';
 
-import '/node_modules/sweetalert/dist/sweetalert.min.js';
+// mport '/node_modules/sweetalert/dist/sweetalert.min.js';
 // swal = await require('/node_modules/sweetalert/dist/sweetalert.min.js').default;
 // var {swal} = await require ('/node_modules/sweetalert/dist/sweetalert.min.js');
 // var swal = await import('/node_modules/sweetalert/dist/sweetalert.min.js');
+await require('/node_modules/sweetalert/dist/sweetalert.min.js');
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
