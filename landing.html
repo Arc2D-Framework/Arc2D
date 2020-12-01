@@ -42,11 +42,8 @@
         <script type="text/javascript" src="resources/landing-assets/js/startuply.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-        <script type="text/javascript">
-            (function() {
-                emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');
-            })();
-        </script>
+        <script type="text/javascript">(function(){emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');})();</script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
@@ -682,7 +679,7 @@
                             </form> -->
                             <form class="form mailchimp-form subscribe-form" id="signup-form" style="padding-top: 10px;" action="https://api.emailjs.com/api/v1.0/email/send-form" method="post">
                                 <div class="form-group form-inline">
-                                    <input size="15" type="text" class="form-control required" name="user_name" placeholder="Your name" required />
+                                    <input id="user-name" size="15" type="text" class="form-control required" name="user_name" placeholder="Your name" required />
                                     <input id="user-email" size="15" type="email" class="form-control required" name="user_email" placeholder="your@email.com" required />
                                     <input id="submit-btn" type="submit" class="btn btn-outline" value="SUBSCRIBE" />
                                     <span class="response"></span>

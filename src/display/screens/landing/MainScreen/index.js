@@ -9,14 +9,13 @@ import 'display.components.ToggleButton';
 // swal = await require('/node_modules/sweetalert/dist/sweetalert.min.js').default;
 // var {swal} = await require ('/node_modules/sweetalert/dist/sweetalert.min.js');
 // var swal = await import('/node_modules/sweetalert/dist/sweetalert.min.js');
-import '/node_modules/sweetalert/dist/sweetalert.min.js';
+// import '/node_modules/sweetalert/dist/sweetalert.min.js';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
         constructor(element){
             super(element);
             this._mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            swal("Good job!", "You clicked the button!", "success");
         }
 
         async onConnected() {
@@ -40,9 +39,15 @@ namespace `display.screens.landing` (
             // this.heading3 = "<h1>Lorem ipsum dolor sit atmet si <div class='highlight'> Lorem ipsum dolor sit</div></h1><h5 style='margin-bottom: 33px;'>Lorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit </h5>";
             // this.headingsArray = [this.heading1, this.heading2, this.heading3];
             // this.randomizeHeading();
-            
+
             this.emailInput = this.querySelector("input#user-email");
+            this.userNameInput = this.querySelector("input#user-name");
+            this.signupInputsArray = [this.emailInput, this.userNameInput];
             this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
+        }
+
+        resetSignupInputs = () => {
+            this.signupInputsArray.forEach(input => {input.value = ""})
         }
 
         _validateEmail = (e) => {
@@ -53,8 +58,10 @@ namespace `display.screens.landing` (
             e.preventDefault();
             emailjs.sendForm('service_m7fro3e', 'signup_form', 'signup-form')
                 .then(response => {
-                    console.log('SUCCESS!', response.status, response.text);
-                    swal({title:"Success!",text:"Thanks for signing up to our newsletter!",icon:"success",button:"Close"});
+                    // console.log('SUCCESS!', response.status, response.text);
+                    response.status == 200 
+                    ? (swal({title:"Success!",text:"Thanks for signing up to our newsletter!",icon:"success",button:"Close"}), this.resetSignupInputs())
+                    : null;
                 }, error => {
                     console.log('FAILED...', error);
                     swal("Error!", error, "error");
