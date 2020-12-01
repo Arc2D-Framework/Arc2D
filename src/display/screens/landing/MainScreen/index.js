@@ -4,11 +4,16 @@ import 'display.components.LinesOfCodeChart';
 import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
 import 'display.components.ToggleButton';
+// import swal from './sweetalert/dist/sweetalert.min.js';
+// swal = require('/node_modules/sweetalert/dist/sweetalert.min.js');
+// var {swal} = await require ('/node_modules/sweetalert/dist/sweetalert.min.js');
+// var swal = await import('/node_modules/sweetalert/dist/sweetalert.min.js');
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
         constructor(element){
             super(element);
+            this._mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         }
 
         async onConnected() {
@@ -30,10 +35,14 @@ namespace `display.screens.landing` (
             // this.heading2 = "<h1>The Dawn of a New Age –<div class='highlight'> Arc2D</div> a Dynamic HTML W3C/ES6 Compliant Framework</h1><h5 style='margin-bottom: 33px;'>Arc2D is a dynamic HTML Framework used for its architecture, building apps, 2D games and more!</h5>";
             // this.heading3 = "<h1>Lorem ipsum dolor sit atmet si <div class='highlight'> Lorem ipsum dolor sit</div></h1><h5 style='margin-bottom: 33px;'>Lorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit </h5>";
             // this.headingsArray = [this.heading1, this.heading2, this.heading3];
-
             // this.randomizeHeading();
+            
+            this.emailInput = this.querySelector("input#user-email");
+            this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
+        }
 
-            this.on("submit", (e) => this.onSignupSendForm(e), false, ".subscribe-form");
+        _validateEmail = (e) => {
+            this.emailInput.value.match(this._mailFormat) ? this.onSignupSendForm(e) : alert("error");
         }
 
         onSignupSendForm(e){
@@ -41,8 +50,10 @@ namespace `display.screens.landing` (
             emailjs.sendForm('service_m7fro3e', 'signup_form', 'signup-form')
                 .then(response => {
                     console.log('SUCCESS!', response.status, response.text);
+                    swal({title:"Success!",text:"Thanks for signing up to our newsletter!",icon:"success",button:"Close"});
                 }, error => {
                     console.log('FAILED...', error);
+                    swal("Error!", error, "error");
                 });
         }
 
@@ -103,5 +114,6 @@ namespace `display.screens.landing` (
         // randomizeHeading() {
         //     this.headingContainer.innerHTML = this.headingsArray[Math.floor(Math.random() * this.headingsArray.length)];
         // }
+        
     }
 );
