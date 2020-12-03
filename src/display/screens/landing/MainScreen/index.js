@@ -15,7 +15,7 @@ namespace `display.screens.landing` (
 
         async onConnected() {
             await super.onConnected();
-
+            this.onRandomizedHeader();
             this.size_chart     = this.querySelector("framework-size-chart");
             this.loc_chart      = this.querySelector("lines-of-code-chart");
             this.size_button    = this.querySelector("#size-chart-button");
@@ -39,6 +39,17 @@ namespace `display.screens.landing` (
             this.userNameInput = this.querySelector("input#user-name");
             this.signupInputsArray = [this.emailInput, this.userNameInput];
             this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
+        }
+
+        randomNumber(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        onRandomizedHeader(){
+            var headings = Array.from(this.querySelectorAll(".heading-item"));
+            var num = Math.round(this.randomNumber(0,headings.length-1))
+            // this.headingContainer = this.querySelector(".heading-container");
+            headings[num].style.display="block"
         }
 
         resetSignupInputs = () => {
