@@ -4,11 +4,6 @@ import 'display.components.LinesOfCodeChart';
 import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
 import 'display.components.ToggleButton';
-
-// mport '/node_modules/sweetalert/dist/sweetalert.min.js';
-// swal = await require('/node_modules/sweetalert/dist/sweetalert.min.js').default;
-// var {swal} = await require ('/node_modules/sweetalert/dist/sweetalert.min.js');
-// var swal = await import('/node_modules/sweetalert/dist/sweetalert.min.js');
 import '/node_modules/sweetalert/dist/sweetalert.min.js';
 
 namespace `display.screens.landing` (
