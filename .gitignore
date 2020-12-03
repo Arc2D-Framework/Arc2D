@@ -9,3 +9,4 @@ fruit-bowl.html
 .vscode/
 .DS_Store
 *.DS_Store
+package-lock.json
