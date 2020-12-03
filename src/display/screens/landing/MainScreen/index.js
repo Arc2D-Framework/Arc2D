@@ -4,7 +4,7 @@ import 'display.components.LinesOfCodeChart';
 import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
 import 'display.components.ToggleButton';
-import '/node_modules/sweetalert/dist/sweetalert.min.js';
+
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
