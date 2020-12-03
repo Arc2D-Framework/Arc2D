@@ -180,6 +180,10 @@ html, body, .MainScreen {
     font-size: 14px !important;
 }
 
+.MainScreen .featured-tab .tab-content div img {
+    image-rendering: -webkit-optimize-contrast;
+}
+
 .MainScreen .col-md-3.col-sm-6.col-xs-12.core.active p span {
     color: orange !important;
 }
