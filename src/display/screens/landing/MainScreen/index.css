@@ -40,6 +40,11 @@ html, body, .MainScreen {
     color: rgb(87, 85, 85);
 }
 
+.MainScreen #sizeChart,
+.MainScreen #loc-chart{
+    will-change: auto;
+}
+
 .MainScreen #features {
     margin-bottom:0 !important;
 }
@@ -182,6 +187,7 @@ html, body, .MainScreen {
 
 .MainScreen .featured-tab .tab-content div img {
     image-rendering: -webkit-optimize-contrast;
+    will-change: auto;
 }
 
 .MainScreen .col-md-3.col-sm-6.col-xs-12.core.active p span {

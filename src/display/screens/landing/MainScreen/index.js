@@ -1,10 +1,10 @@
-import 'display.worlds.entities.Box2DDemo';
 import 'display.components.FrameworkSizeChart';
 import 'display.components.LinesOfCodeChart';
 import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
 import 'display.components.ToggleButton';
 import '/node_modules/sweetalert/dist/sweetalert.min.js';
+import 'display.worlds.entities.Box2DDemo';
 
 namespace `display.screens.landing` (
     class MainScreen extends Application {
@@ -28,12 +28,6 @@ namespace `display.screens.landing` (
             this.core_features = this.querySelectorAll(".core");
             this.sdk_features = this.querySelectorAll(".sdk");
             this.watch("#core_vs_sdk", "value", e => this.onToggleFeatures(e), true);
-            // this.headingContainer = this.querySelector(".heading-container");
-            // this.heading1 = "<h1>An Agnostic, W3C/ES6 Compliant <div class='highlight'> 2D World & GUI Engine</div></h1><h5 style='margin-bottom: 33px;'>Native ES6 and HTML5 with time dependent simulation stepper for AI, DOM Physics and 2D Canvas games up to 60fps. No compilers, pre or post processors, no webpack, grunt or babel, no typescript or parsers</h5>";
-            // this.heading2 = "<h1>The Dawn of a New Age –<div class='highlight'> Arc2D</div> a Dynamic HTML W3C/ES6 Compliant Framework</h1><h5 style='margin-bottom: 33px;'>Arc2D is a dynamic HTML Framework used for its architecture, building apps, 2D games and more!</h5>";
-            // this.heading3 = "<h1>Lorem ipsum dolor sit atmet si <div class='highlight'> Lorem ipsum dolor sit</div></h1><h5 style='margin-bottom: 33px;'>Lorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit atmet siLorem ipsum dolor sit </h5>";
-            // this.headingsArray = [this.heading1, this.heading2, this.heading3];
-            // this.randomizeHeading();
 
             this.emailInput = this.querySelector("input#user-email");
             this.userNameInput = this.querySelector("input#user-name");
@@ -127,10 +121,5 @@ namespace `display.screens.landing` (
                 element2.style.display="none";
             }, 500);
         }
-
-        // randomizeHeading() {
-        //     this.headingContainer.innerHTML = this.headingsArray[Math.floor(Math.random() * this.headingsArray.length)];
-        // }
-        
     }
 );
