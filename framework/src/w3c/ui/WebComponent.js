@@ -449,7 +449,7 @@ namespace `w3c.ui` (
             return (v && h);
         }
 
-        watch(object,prop,cb,force,engine=core.drivers.watchers.Watcher){
+        watch(object,prop,cb,force,engine=system.drivers.watchers.Watcher){
             object = typeof object == "string"?this.querySelector(object):object;
             return engine.watch(object,prop,cb,force)
         }
