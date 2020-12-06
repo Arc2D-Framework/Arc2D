@@ -3,6 +3,7 @@ import! 'system.drivers.storage.Memory';
 import! 'system.drivers.storage.LocalStorage';
 import! 'system.drivers.storage.RestDB';
 
+
 namespace `domain.collections` (
     class Movies extends Collection {
         @public device_driver = "system.drivers.storage.Memory";

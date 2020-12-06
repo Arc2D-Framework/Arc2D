@@ -1,6 +1,6 @@
 
 @traits([new Observer]);
-namespace `domain.collections.Repository` (
+namespace `domain.collections` (
     class Repository {
         static get IRequestStorage(){
             var driver = this.prototype.device_driver;

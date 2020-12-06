@@ -1,3 +1,4 @@
+import 'version.js';
 import '-appconfig.js';
 import 'src/system/extensions/Math.js';
 import 'src/system/extensions/Object.js';

@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", e => {
             window.application||new NSRegistry[ns](document.body)
           );
             if(app instanceof core.ui.World) {
+              window.world=app;
               var af=1;
               try{eval("class T {do=()=>{}}")}catch(e){af=0}
               MainLoop
