@@ -1,6 +1,6 @@
-import 'src/core/drivers/templating/Manager.js';
-import 'src/core/drivers/templating/TemplateLiterals.js';
-import 'src/core/drivers/watchers/default.js';
+import 'src/system/drivers/templating/Manager.js';
+import 'src/system/drivers/templating/TemplateLiterals.js';
+import 'src/system/drivers/watchers/default.js';
 
 namespace `w3c.ui` (
     class WebComponent extends HTMLElement {

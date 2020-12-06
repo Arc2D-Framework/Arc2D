@@ -1,6 +1,6 @@
 import! 'domain.collections.Movies';
 
-@traits([core.traits.UnitTest]);
+@traits([system.traits.UnitTest]);
 namespace `tests` (
     class Repositories {
         constructor(){

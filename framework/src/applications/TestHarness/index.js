@@ -1,4 +1,4 @@
-import '/src/core/traits/UnitTest.js';
+import '/src/system/traits/UnitTest.js';
 import '/src/tests/Klass.js';
 import '/src/tests/WebComponents.js';
 import '/src/tests/Repositories.js';

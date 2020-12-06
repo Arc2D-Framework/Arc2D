@@ -1,4 +1,4 @@
-import 'src/core/http/ClassLoader.js';
+import 'src/system/http/ClassLoader.js';
 import 'src/mainloop.js';
 
 document.addEventListener("DOMContentLoaded", e => {
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", e => {
         filename_path.replace("*", Config.DEBUG ? "src.":"min."):
         filename_path.replace("*","");
       var c = (Config.ENABLE_TRANSPILER) ?
-        new core.http.ClassLoader :
+        new system.http.ClassLoader :
         null;
         c.load(ns, Config.ROOTPATH + path, async function init(res) {
           Config.USE_COMPRESSED_BUILD=false;

@@ -1,5 +1,4 @@
 
-//NOTE: built into Arc Engine by default. Only for demonstration.
 namespace `system.drivers.watchers` (
     class Watcher {
         static watch(object,prop,cb,force){

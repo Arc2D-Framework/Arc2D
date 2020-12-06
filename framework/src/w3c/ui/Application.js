@@ -10,7 +10,7 @@ namespace `w3c.ui` (
         async onConnected(data){
             await super.onConnected(data);
             if(this.onEnableRouting()){
-                this.router = new core.http.Router(this,window);
+                this.router = new system.http.Router(this,window);
             }
         }
 

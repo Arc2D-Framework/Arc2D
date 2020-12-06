@@ -1,4 +1,4 @@
-import '/framework/src/core/drivers/storage/Cursor.js';
+import! 'system.drivers.storage.HttpCursor';
 
 /**
  * @desc Driver for interfacing with CouchDB NoSQL database.

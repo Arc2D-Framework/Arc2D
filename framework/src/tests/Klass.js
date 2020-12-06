@@ -1,4 +1,4 @@
-@traits([core.traits.UnitTest]);
+@traits([system.traits.UnitTest]);
 namespace `tests` (
     class Klass {
         constructor(){
