@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="description" content="Arc2D – An Agnostic, W3C ES6/7 Compliant 2D World & GUI Engine used for building enterprise-class 2D/Web/Mobile Applications.">
+        <meta name="description" content="Arc2D – An Agnostic, W3C ES6/7 Vanilla JavaScript Compliant 2D World & GUI Engine used for building enterprise-class 2D, Web and Mobile Applications.">
         <title>Arc2D Framework | Cutting Edge MVC Architecture</title>
 
         <link rel="shortcut icon" href="resources/landing-assets/img/favicon.ico">
@@ -66,7 +66,7 @@
                         <div class="container">
                             <div class="navigation-brand">
                                 <div class="brand-logo" style="width: 100%;height: 100%;">
-                                    <span href="index.html" class="logo" style="display: block;margin: 0;border: none;font-size: 20px;">
+                                    <span class="logo" style="display: block;margin: 0;border: none;font-size: 20px;">
                                         <div id="frameworkname" style="letter-spacing: -1.5px;font-weight: bold;padding-top: 3px;color: #fff;font-size: 25px;">ARC<span style="background: red;border-radius: 20px 0px 0px;line-height: 25px;color: #fff;text-shadow: 5px 0px 2px rgba(0,0,0,.3);">2D</span>
                                         </div>
                                         <div id="frameworkcaption" style="width: 100%;display: block;font-size: 10px;line-height: 12px;text-align: left;padding-left: 0px;letter-spacing: 0px;color: #ffff;">DYNAMIC HTML</div>
@@ -346,7 +346,7 @@
                         <div class="section-content">
                             <div class="featured-tab">
                                 <ul class="list-unstyled" style="z-index: 100;">
-                                    <li class="active">
+                                    <li class="active animated" data-duration="900" data-animation="fade-in-right" data-delay="200">
                                         <a href="#vce" data-toggle="tab">
                                             <div class="tab-info">
                                                 <div class="tab-title">Visual Component Engine</div>
@@ -357,7 +357,7 @@
                                             <!--<div class="tab-icon"><span class="icon icon-multimedia-20"></span></div>-->
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="animated" data-duration="900" data-animation="fade-in-bottom" data-delay="400">
                                         <a href="#drivers" data-toggle="tab">
                                             <div class="tab-info">
                                                 <div class="tab-title">Drivers</div>
@@ -370,7 +370,7 @@
                                             <!--<div class="tab-icon"><span class="icon icon-seo-icons-27"></span></div>-->
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="animated" data-duration="900" data-animation="fade-in-left" data-delay="400">
                                         <a href="#namespaces" data-toggle="tab">
                                             <div class="tab-info">
                                                 <div class="tab-title">Namespaces</div>
@@ -395,18 +395,10 @@
                 
                 <section id="features-list" class="section features-list-section align-center dark-text">
                     <div class="container">
-                        <div style="
-    display: flex;
-    justify-content: center;
-    margin-bottom: 33px;
-">
-                        <toggle-button id="core_vs_sdk" style="
-                        display: block;
-                        width: 100px;
-                        height: 30px;
-                    "></toggle-button>
-                    </div>
-                        <div class="animated" data-duration="500" data-animation="fadeInRight">
+                        <div style="display: flex;justify-content: center;margin-bottom: 33px;">
+                            <toggle-button id="core_vs_sdk" style="display: block;width: 100px;height: 30px;"></toggle-button>
+                        </div>
+                        <div class="animated" data-duration="700" data-animation="fade-in-left">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fas fa-file-code icon highlight" style="margin: 0;"></i>
@@ -444,7 +436,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="500" data-animation="fadeInLeft">
+                        <div class="animated" data-duration="700" data-animation="fade-in-right">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fas fa-magic icon highlight" style="margin: 0;font-style: italic;font-weight: 300;"></i>
@@ -486,7 +478,7 @@
                             </div>
                         </div>
                     
-                        <div class="animated" data-duration="500" data-animation="fadeInRight">
+                        <div class="animated" data-duration="700" data-animation="fade-in-left">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fad fa-pencil-paintbrush icon highlight"></i>
@@ -529,7 +521,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="500" data-animation="fadeInLeft">
+                        <div class="animated" data-duration="700" data-animation="fade-in-right">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fad fa-sparkles icon highlight" style="font-weight: 300;"></i>
@@ -571,7 +563,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="500" data-animation="fadeInRight">
+                        <div class="animated" data-duration="700" data-animation="fade-in-left">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fas fa-bezier-curve icon highlight" style="font-weight: 300;"></i>
@@ -612,7 +604,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="500" data-animation="fadeInLeft">
+                        <div class="animated" data-duration="700" data-animation="fade-in-right">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fab fa-buffer icon highlight" style="font-weight: 300;"></i>
