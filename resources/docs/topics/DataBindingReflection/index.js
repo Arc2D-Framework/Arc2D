@@ -1,6 +1,5 @@
 import 'docs.demos.templates.ViewViewBinding';
 import 'docs.demos.ui.ToggleButton';
-import {WristWatch} from '/src/system/drivers/watchers/wrist_watch.js';
 
 namespace `docs.topics` (
 	class DataBindingReflection  extends docs.topics.Topic  {

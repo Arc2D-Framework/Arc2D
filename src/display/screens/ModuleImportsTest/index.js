@@ -3,6 +3,8 @@ var {myExport,hello : Hello, runit} = await import('/src/system/libs/sample_modu
 import {NodeTest} from '/src/system/libs/sample_modules/nodejsmod.js';
 import '/node_modules/sweetalert/dist/sweetalert.min.js';
 await require('/src/system/libs/sample_modules/introjs.js');
+import 'display.components.ToggleButton';
+
 
 namespace `display.screens` (
     class ModuleImportsTest extends w3c.ui.Application {

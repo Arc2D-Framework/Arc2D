@@ -1,4 +1,4 @@
-import {wrist} from '/node_modules/od-watcher/wrist.js';
+import {WristWatch} from '/src/system/drivers/watchers/wrist_watch.js';
 
 namespace `docs.demos.templates` (
 	class ViewViewBinding  extends w3c.ui.WebComponent  {
@@ -17,7 +17,7 @@ namespace `docs.demos.templates` (
             else {
                 var user = {firstname:""};
                 window.user = user;
-                this.watch(user, 'firstname', e => input1.value = e.val, true, wrist);
+                this.watch(user, 'firstname', e => input1.value = e.val, true, WristWatch);
                 user.firstname = "Bill"
             }
         }

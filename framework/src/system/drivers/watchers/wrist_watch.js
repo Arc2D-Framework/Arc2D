@@ -149,6 +149,8 @@ var wrist = (function (O) {'use strict';
   };
 
 }(Object));
-var WristWatch=wrist;
 
-return {WristWatch}
+try { 
+  window.wrist=wrist; 
+  module.exports = wrist; 
+} catch(o_O) {}

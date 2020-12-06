@@ -1,4 +1,4 @@
-import! 'core.data.Movies';
+import! 'domain.collections.Movies';
 
 @traits([core.traits.UnitTest]);
 namespace `tests` (
@@ -12,13 +12,13 @@ namespace `tests` (
 
         async test (){
             var self=this;
-            await core.data.Movies.seed();
+            await domain.collections.Movies.seed();
             
 
 
             
             this.expected("cursor object after calling .find()", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {},
                     skip:0,
                     limit:10,
@@ -38,7 +38,7 @@ namespace `tests` (
 
 
             this.expected("cursor object to be empty[] on initial .find()", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {},
                     skip:0,
                     limit:10,
@@ -63,7 +63,7 @@ namespace `tests` (
 
             
             this.expected("cursor object to have >= 7 movies", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {},
                     skip:0,
                     limit:10,
@@ -85,7 +85,7 @@ namespace `tests` (
 
 
             this.expected("cursor.next() with limit:2 to return 2 records", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {},
                     skip:0,
                     limit:2,
@@ -104,7 +104,7 @@ namespace `tests` (
 
 
             this.expected("cursor.next() with limit:5 to return 5 records", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {},
                     skip:0,
                     limit:5,
@@ -122,7 +122,7 @@ namespace `tests` (
 
 
             this.expected("cursor.find() to find 1 record of 'Gladiator' movie", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {title:"Gladiator"},
                     skip:0,
                     limit:5,
@@ -146,7 +146,7 @@ namespace `tests` (
 
 
             this.expected("cursor.find() to find 2 records of 'Action' movies when taking only 2 at a time", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {genre:"Action"},
                     skip:0,
                     limit:2,
@@ -165,7 +165,7 @@ namespace `tests` (
 
 
             this.expected("cursor.find() to find 2 of 3+ records of 'Action' movies", async (resolve,reject) => {
-                var cursor = await core.data.Movies.find({
+                var cursor = await domain.collections.Movies.find({
                     query : {genre:"Action"},
                     skip:0,
                     limit:2,
