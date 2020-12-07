@@ -50,6 +50,10 @@ html, body, .MainScreen {
     margin: 50px auto 0 auto;
 }
 
+.MainScreen #arc-spa {
+    margin: 50px auto 0 auto;
+}
+
 .MainScreen #features {
     margin-bottom:0 !important;
 }
@@ -439,9 +443,12 @@ html, body, .MainScreen {
         color: #fff;
     }
 
-    .MainScreen #arc-iphone {
+    .MainScreen #arc-iphone,
+    .MainScreen #arc-spa {
         margin: 0 auto 0 auto;
     }
+
+    
 }
 
 @media screen and (min-width:768px) {
