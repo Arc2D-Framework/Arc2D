@@ -45,6 +45,11 @@ html, body, .MainScreen {
     will-change: auto;
 }
 
+.MainScreen #arc-iphone {
+    width: clamp(200px,100%,300px);
+    margin: 50px auto 0 auto;
+}
+
 .MainScreen #features {
     margin-bottom:0 !important;
 }
@@ -432,6 +437,10 @@ html, body, .MainScreen {
 
     .MainScreen .footer .list-inline li .icon {
         color: #fff;
+    }
+
+    .MainScreen #arc-iphone {
+        margin: 0 auto 0 auto;
     }
 }
 
