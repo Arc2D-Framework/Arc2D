@@ -4,7 +4,7 @@ import! 'system.drivers.storage.HttpCursor';
 
 
 namespace `system.drivers.storage` (
-    class RestDB extends core.drivers.storage.IStorageInterface{
+    class RestDB extends system.drivers.storage.IStorageInterface{
 
         constructor (collection, storage_device){
             super(collection, storage_device);

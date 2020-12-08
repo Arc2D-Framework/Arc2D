@@ -1,10 +1,10 @@
-import '/framework/src/core/drivers/storage/Cursor.js';
+import '/src/system/drivers/storage/Cursor.js';
 
 /**
  * @desc Driver for interfacing with CouchDB NoSQL database.
  */
-namespace `core.drivers.storage` (
-    class CouchDB extends core.drivers.storage.IStorageInterface{
+namespace `system.drivers.storage` (
+    class CouchDB extends system.drivers.storage.IStorageInterface{
 
         constructor (collection, storage_device){
             super(collection, storage_device);
