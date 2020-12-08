@@ -1,1 +1,1 @@
-console.log("Arc v3.0.0:12062020");
+console.log("Arc v3.0.0:12082020");
