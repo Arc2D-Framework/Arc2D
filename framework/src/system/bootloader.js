@@ -1,5 +1,5 @@
 import 'src/system/http/ClassLoader.js';
-import 'src/mainloop.js';
+import 'src/system/mainloop.js';
 
 document.addEventListener("DOMContentLoaded", e => {
   async function bootup() {

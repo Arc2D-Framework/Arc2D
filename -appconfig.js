@@ -1,6 +1,6 @@
 var Session = Session||{State:{}};
 var Config = {};
-Config.NAMESPACE = null;//"applications.MainApp";
+Config.NAMESPACE = null;
 Config.USE_COMPRESSED_BUILD = false;
 Config.FILENAME = "index.*js"
 Config.DYNAMICLOAD = true;

@@ -1,7 +1,7 @@
 import '/src/system/drivers/templating/Nunjucks/nunjucks-driver.js';
 
 namespace `docs.demos.templates` (
-	class HealthCarePackage  extends w3c.ui.WebComponent  {
+	class HealthCarePackage  extends WebComponent  {
 
 		getTemplateEngine() {
             return window.customTemplateEngines.getEngineByMimeType("template/nunjucks")

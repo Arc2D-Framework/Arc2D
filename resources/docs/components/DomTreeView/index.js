@@ -1,6 +1,6 @@
 
 namespace `docs.components` (
-    class DomTreeView extends w3c.ui.WebComponent {
+    class DomTreeView extends WebComponent {
         async onConnected() {
             await super.onConnected();
             wait(300).then(e => {

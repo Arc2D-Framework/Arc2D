@@ -1,5 +1,5 @@
 namespace `docs.demos` (
-    class EventPhaseDiagram  extends w3c.ui.WebComponent  {
+    class EventPhaseDiagram  extends WebComponent  {
         async onConnected(){
             await super.onConnected();
             this.setVisiblePhases();

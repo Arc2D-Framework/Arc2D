@@ -1,6 +1,6 @@
 
 namespace `core.ui` (
-    class ChildComponent extends core.ui.WebComponent {
+    class ChildComponent extends w3c.ui.WebComponent {
         constructor (element){
             super(element);
         }

@@ -5,7 +5,7 @@ import! 'system.drivers.storage.RestDB';
 
 namespace `domain.collections` (
     class Movies extends Collection {
-        @public device_driver = "system.drivers.storage.RestDB";
+        @public device_driver = "system.drivers.storage.Memory";
         @public seeds = REPOSITORIES.MOVIES; /*see: app/resources/repositories.js*/
 
         static isSeedable(){

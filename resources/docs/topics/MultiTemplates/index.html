@@ -34,7 +34,7 @@
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
-    class ModalDialog extends w3c.ui.WebComponent {
+    class ModalDialog extends WebComponent {
         constructor(){
             this.src = navigator.userAgent.includes("iOS") ? 
                 "/src/./mobile-layout.html":
@@ -55,7 +55,7 @@ namespace \`core.ui\` (
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
-    class ModalDialog extends w3c.ui.WebComponent {
+    class ModalDialog extends WebComponent {
         onConnected(){
             this.bind("#template-btn", "click", e => this.onChangeSrc())
         }

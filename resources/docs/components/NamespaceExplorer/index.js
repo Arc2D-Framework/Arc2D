@@ -1,7 +1,7 @@
 import '/resources/docs/libs/fitty.js';
 
 namespace `docs.components` (
-	class NamespaceExplorer extends w3c.ui.WebComponent  {
+	class NamespaceExplorer extends WebComponent  {
 		async onConnected(){
             await this.render();
             setTimeout(_=>{

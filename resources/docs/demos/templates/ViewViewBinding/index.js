@@ -1,7 +1,7 @@
 import {WristWatch} from '/src/system/drivers/watchers/wrist_watch.js';
 
 namespace `docs.demos.templates` (
-	class ViewViewBinding  extends w3c.ui.WebComponent  {
+	class ViewViewBinding  extends WebComponent  {
 		async onConnected(){
             await super.onConnected();
             var input1 = this.querySelector("#input1");

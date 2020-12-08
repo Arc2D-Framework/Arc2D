@@ -1,6 +1,6 @@
 
 namespace `docs.topics` (
-    class LoaderActivity extends w3c.ui.WebComponent {
+    class LoaderActivity extends WebComponent {
         constructor() {
             super();
         }

@@ -1,7 +1,7 @@
-import 'src/core/ui/WebComponent.js';
+import 'src/w3c/ui/WebComponent.js';
 
 namespace `core.ui` (
-    class World extends core.ui.Application {
+    class World extends w3c.ui.Application {
         constructor(el) {
             super(el);
         }

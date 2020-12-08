@@ -1,6 +1,6 @@
 
 namespace `docs.components` (
-    class ExplorerPanel extends w3c.ui.WebComponent {
+    class ExplorerPanel extends WebComponent {
         constructor() {
             super();
         }

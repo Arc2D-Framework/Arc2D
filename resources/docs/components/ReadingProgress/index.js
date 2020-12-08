@@ -1,5 +1,5 @@
 namespace `docs.components` (
-	class ReadingProgress  extends w3c.ui.WebComponent  {
+	class ReadingProgress  extends WebComponent  {
 	   async onConnected(){
         await super.onConnected();
         // await this.render();

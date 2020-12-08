@@ -1,7 +1,7 @@
 import '/resources/docs/libs/terminal.js';
 
 namespace `docs.components` (
-    class LanguageSelector extends w3c.ui.WebComponent {
+    class LanguageSelector extends WebComponent {
         constructor(element){
             super(element);
         }

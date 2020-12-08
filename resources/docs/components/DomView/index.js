@@ -1,6 +1,6 @@
 
 namespace `docs.components` (
-    class DomView extends w3c.ui.WebComponent {
+    class DomView extends WebComponent {
         async onConnected() {
             await super.onConnected();
             this.lastMouseX=0;

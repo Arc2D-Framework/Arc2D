@@ -1,6 +1,6 @@
 
 namespace `docs.demos.ui.mods` (
-	class ToggleButtonImproved  extends w3c.ui.WebComponent  {
+	class ToggleButtonImproved  extends WebComponent  {
 		async onConnected(){
             await super.onConnected();
             this.addEventListener("click", e => this.onClick(e));

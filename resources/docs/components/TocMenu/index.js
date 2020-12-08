@@ -1,6 +1,6 @@
 
 namespace `docs.components` (
-    class TocMenu extends w3c.ui.WebComponent {
+    class TocMenu extends WebComponent {
         constructor(element){
             super(element);
         }

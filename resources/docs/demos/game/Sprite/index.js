@@ -1,6 +1,6 @@
 
 namespace `docs.demos.game` (
-    class Sprite extends w3c.ui.WebComponent{
+    class Sprite extends WebComponent{
         constructor (element){
             super(element);
         }

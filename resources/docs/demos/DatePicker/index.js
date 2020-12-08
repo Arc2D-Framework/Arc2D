@@ -1,5 +1,5 @@
 namespace `docs.demos` (
-	class DatePicker  extends w3c.ui.WebComponent  {
+	class DatePicker  extends WebComponent  {
         constructor(el){
             super(el);
         }

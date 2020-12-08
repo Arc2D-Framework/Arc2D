@@ -1,6 +1,6 @@
 @cascade(true);
 namespace `docs.topics` (
-    class Topic extends w3c.ui.WebComponent {
+    class Topic extends WebComponent {
         constructor() {
             super();
             application.addEventListener("lang-selected", e=>this.onLanguageChange(e), false);
