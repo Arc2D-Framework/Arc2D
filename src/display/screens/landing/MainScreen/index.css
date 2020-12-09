@@ -372,6 +372,11 @@ html, body, .MainScreen {
     color: #5b5b5b;
 }
 
+.MainScreen #team .section-content.row {
+    display: flex;
+    justify-content: center;
+}
+
 .MainScreen #contact-info #contact-email {
     font-weight: 400;
     color: #fff;
@@ -537,6 +542,10 @@ html, body, .MainScreen {
     .MainScreen .package-column .fa.fa-times,
     .MainScreen .package-column .package-detail a{
         font-size: 12px !important;
+    }
+
+    .MainScreen #team .section-content.row div.col-sm-3{
+        width: 100%;
     }
 }
 
