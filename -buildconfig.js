@@ -1,9 +1,9 @@
 BUILDCONFIG = {
-    Input : "src/display/worlds/HelloDomNode/index.js",
+    Input : "src/display/screens/landing/MainScreen/index.js",
     
     Output : {
-        SourcePath:"src/display/worlds/HelloDomNode/index.src.js",
-        CompressedPath: "src/display/worlds/HelloDomNode/index.min.js"
+        SourcePath:"src/display/screens/landing/MainScreen/index.src.js",
+        CompressedPath: "src/display/screens/landing/MainScreen/index.min.js"
     },
 
     LoadsAsync : true,
@@ -19,9 +19,11 @@ BUILDCONFIG = {
     Prefabs : {
         Enabled : true,
         Components : [
-            "display.worlds.entities.html.GroundBox",
-            "display.worlds.entities.svg.CircleShape",
-            "display.worlds.entities.html.PolygonShape"
+            // "display.worlds.entities.html.GroundBox",
+            // "display.worlds.entities.svg.CircleShape",
+            // "display.worlds.entities.html.PolygonShape"
+            "display.components.ToggleButton",
+            "display.worlds.entities.Box2DDemo"
         ]
     }
 };
