@@ -612,7 +612,7 @@ input[type=submit]:not(.default).btn-no-border.pressed,
 div.bg-low-poly,
 footer.bg-low-poly,
 section.bg-low-poly {
-	background-image: url("../img/background/low_poly_background.jpg");
+	background-image: url("../img/background/low_poly_background.webp");
 	background-repeat: no-repeat;
 	background-position: center top;
 }
@@ -4190,7 +4190,7 @@ td.cart-list-item-price {
 }
 
 .ytp-player-background.no-video-bg {
-	background: transparent url('../img/background/low_poly_background.jpg') top center no-repeat;
+	background: transparent url('../img/background/low_poly_background.webp') top center no-repeat;
 }
 
 .ytp-player-background.no-video-bg .video-conrols {
@@ -4398,7 +4398,7 @@ td.cart-list-item-price {
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
-	background: #6f186c url("../img/background/low_poly_background.jpg") top center no-repeat;
+	background: #6f186c url("../img/background/low_poly_background.webp") top center no-repeat;
 }
 
 .navigation-header .navigation-brand {
@@ -4974,7 +4974,7 @@ body.always-mobile .fixed-menu .navigation-header.white-dropdown .navigation-bar
 	background-size: cover;
 	padding: 0 0 30px;
 	font-weight: 300;
-	background-image: url('../img//background/low_poly_background.jpg');
+	background-image: url('../img//background/low_poly_background.webp');
 	background-repeat: no-repeat;
 	background-position: top center;
 	background-attachment: fixed;
@@ -5414,7 +5414,7 @@ body.always-mobile .fixed-menu .navigation-header.white-dropdown .navigation-bar
 	-moz-background-size: cover;
 	background-size: cover;
 	position: relative;
-	background-image: url("../img/background/low_poly_background.jpg");
+	background-image: url("../img/background/low_poly_background.webp");
 	background-repeat: no-repeat;
 	background-position: top center;
 	background-attachment: fixed;
@@ -5668,7 +5668,7 @@ body.always-mobile .fixed-menu .navigation-header.white-dropdown .navigation-bar
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
-	background-image: url('../img/background/low_poly_background.jpg');
+	background-image: url('../img/background/low_poly_background.webp');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-attachment: fixed;
@@ -5699,7 +5699,7 @@ body.always-mobile .fixed-menu .navigation-header.white-dropdown .navigation-bar
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
-	background-image: url('../img/background/low_poly_background.jpg');
+	background-image: url('../img/background/low_poly_background.webp');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-attachment: fixed;
@@ -5778,7 +5778,7 @@ body.always-mobile .fixed-menu .navigation-header.white-dropdown .navigation-bar
 	-moz-background-size: cover;
 	background-size: cover;
 	position: relative;
-	background: url("../img/background/low_poly_background.jpg") no-repeat center center;
+	background: url("../img/background/low_poly_background.webp") no-repeat center center;
 	background-attachment: fixed;
 }
 

@@ -17,33 +17,46 @@
         <!-- <link rel="apple-touch-icon" href="resources/landing-assets/img/apple-touch-icon.jpg">
         <link rel="apple-touch-icon" sizes="72x72" href="resources/landing-assets/img/apple-touch-icon-72x72.jpg">
         <link rel="apple-touch-icon" sizes="114x114" href="resources/landing-assets/img/apple-touch-icon-114x114.jpg"> -->
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" />
-        <!-- <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/font-awesome.min.css" /> -->
-        <link rel="stylesheet" type="text/css" href="resources/css/all.min.css" onload="this.media='all'" />
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" onload="this.media='all'" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&family=Roboto:wght@300;700&display=swap" rel="stylesheet" onload="this.media='all'">
-        
+
+        <link rel="preload" href="resources/landing-assets/css/lib/animate.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/custom-animations.css" as="style">
+        <link rel="preload" href="resources/webfonts/fa-light-300.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-duotone-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/css/all.min.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/lib/bootstrap.min.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/style.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/fonts.css" as="style">
+        <link rel="preload" href="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1" as="script">
+
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/animate.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="resources/css/all.min.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/bootstrap.min.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/fonts.css" media="all">
 
 
         <!--[if lt IE 9]>
                     <script defer type="text/javascript" src="resources/landing-assets/js/jquery-1.11.3.min.js?ver=1"></script>
                 <![endif]-->
                 <!--[if (gte IE 9) | (!IE)]><!-->
-                    <script type="text/javascript" src="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1"></script>
+                    <script type="text/javascript" src="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1" defer></script>
                 <!--<![endif]-->
                 
         <script type="text/javascript" src="resources/landing-assets/js/bootstrap.min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/jquery.flexslider-min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/jquery.appear.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/jquery.plugin.js" defer></script>
-        <!-- <script async type="text/javascript" src="resources/landing-assets/js/jquery.countdown.js"></script> -->
+        <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.countdown.js"></script> -->
         <script type="text/javascript" src="resources/landing-assets/js/jquery.waypoints.min.js" defer></script>
-        <script type="text/javascript" src="resources/landing-assets/js/jquery.validate.min.js" defer></script>
-        <script type="text/javascript" src="resources/landing-assets/js/toastr.min.js" defer></script>
+        <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.validate.min.js" defer></script> -->
+        <!-- <script type="text/javascript" src="resources/landing-assets/js/toastr.min.js" defer></script> -->
         <script type="text/javascript" src="resources/landing-assets/js/startup-script.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-        <script type="text/javascript">(function(){emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');})();</script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" defer></script>
+        <script type="text/javascript" src="resources/landing-assets/js/lazysizes.min.js" defer></script>
         
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
@@ -52,6 +65,9 @@
             // Config.ROOTPATH = "../../../framework/";
             // Config.SRC_PATH = "/src/";
         </script>
+        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+        <script type="text/javascript">(function(){emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');})();</script>
     </head>
 
     <body namespace="display.screens.landing.MainScreen">
@@ -154,7 +170,7 @@
                             <a href="#about" class="btn btn-outline" style="font-family: var(--poppins-font-family);font-weight: 400;">Take tour</a>
                         </div>
                         
-                        <iframe src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
+                        <iframe class="lazyload" data-src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
                     </div>
                 </div>
                    
@@ -162,11 +178,11 @@
                     <div class="container">
                         <h5 id="cross-platform-header" class="animated" data-animation="fadeInDown" data-duration="1000" data-delay="200">Arc2D is compatiable with various cross-platform environments</h5>
                         <ul class="list-inline logos">
-                            <li><img class="animated" data-animation="fadeInDown" data-duration="500" data-delay="200" src="resources/landing-assets/img/logos/nodejs.png" alt="Node JS" title="NodeJS" /></li>
-                            <li><img class="animated" data-animation="fadeInUp" data-duration="500" data-delay="400" src="resources/landing-assets/img/logos/apache_cordova.png" alt="Apache Cordova" title="Apache Cordova" /></li>
-                            <li><img class="animated" data-animation="fadeInDown" data-duration="500" data-delay="600" src="resources/landing-assets/img/logos/electron_logo.png" alt="Electron" title="Electron" /></li>
-                            <li><img class="animated" data-animation="fadeInUp" data-duration="500" data-delay="800" src="resources/landing-assets/img/logos/capacitor.png" alt="Capacitor" title="Capacitor" /></li>
-                            <li><img class="animated" data-animation="fadeInDown" data-duration="500" data-delay="1000" src="resources/landing-assets/img/logos/pwa-logo.png" alt="Progressive Web Application (PWA)" title="Progressive Web Applications (PWA)" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="200" data-src="resources/landing-assets/img/logos/nodejs.png" alt="Node JS" title="NodeJS" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="400" data-src="resources/landing-assets/img/logos/apache_cordova.png" alt="Apache Cordova" title="Apache Cordova" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="600" data-src="resources/landing-assets/img/logos/electron_logo.png" alt="Electron" title="Electron" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="800" data-src="resources/landing-assets/img/logos/capacitor.png" alt="Capacitor" title="Capacitor" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="1000" data-src="resources/landing-assets/img/logos/pwa-logo.png" alt="Progressive Web Application (PWA)" title="Progressive Web Applications (PWA)" /></li>
                         </ul>
                     </div>
                 </div>
@@ -210,7 +226,7 @@
                             <div class="tab-pane" id="second-tab-alt">
                                 <div class="section-content row">
                                     <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-                                        <img src="resources/landing-assets/img/benchmarks.png" class="img-responsive pull-right" alt="process 2" />
+                                        <img data-src="resources/landing-assets/img/benchmarks.webp" class="img-responsive pull-right lazyload" alt="Arc2D Framework - Benchmarks" />
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
                                         <br/><br/>
@@ -228,34 +244,32 @@
                                 <div class="section-header align-center">
                                     <h2>LOW MEMORY FOOTPRINT</h2>
                                     <p class="sub-header animated" data-duration="700" data-animation="zoomIn">
-                                        From boot to run cycles, Arc uses the least amount of memory.
+                                        From boot to run cycles, Arc2D uses the least amount of memory.
                                     </p>
                                 </div>
                                 <div class="section-content row">
                                     <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="fadeInLeft">
                                         <article class="align-center">
-                                            <i class="howitworks icon icon-shopping-04 highlight"></i>
+                                            <i class="howitworks icon fad fa-memory highlight"></i>
                                             <span class="heading">RUN MEMORY</span>
                                             <p class="thin" >
                                                 50% less memory usage at boot-up time compared to Angular.
                                             </p>
                                         </article>
-                                        <!--<span class="icon icon-arrows-04"></span>-->
                                     </div>
                                     <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="fadeInDown">
                                         <article class="align-center">
-                                            <i class="howitworks icon icon-seo-icons-03 highlight"></i>
+                                            <i class="howitworks icon fad fa-tachometer-alt-fastest highlight"></i>
                                             <span class="heading">BOOT MEMORY</span>
                                             <p class="thin" >
                                                 45% more efficient than Angular and React
                                                 when rendering 1000 objects.
                                             </p>
                                         </article>
-                                        <!--<span class="icon icon-arrows-04"></span>-->
                                     </div>
                                     <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="fadeInRight">
                                         <article class="align-center">
-                                            <i class="howitworks icon icon-seo-icons-05 highlight"></i>
+                                            <i class="howitworks icon fad fa-chart-line-down highlight"></i>
                                             <span class="heading">UNDER STRESS</span>
                                             <p class="thin" >
                                                 50% less memory usage at rendering 10,000 objects when
@@ -288,7 +302,7 @@
                     <div class="container">
                         <div class="section-content row">
                             <div class="col-sm-6 pull-right animated" data-duration="700" data-animation="fadeInRight">
-                                <img id="arc-iphone" src="resources/landing-assets/img/features/arc-iphone.webp" class="img-responsive" title="Arc2D – Setting The Precedence" alt="Arc2D – Setting The Precedence" />
+                                <img id="arc-iphone" data-src="resources/landing-assets/img/features/arc-iphone.webp" class="img-responsive lazyload" title="Arc2D – Setting The Precedence" alt="Arc2D – Setting The Precedence" />
                             </div>
                             <div class="col-sm-6 align-left animated" data-duration="700" data-animation="fadeInLeft">
 
@@ -316,7 +330,7 @@
                             <hr class="clearfix" />
                 
                             <div class="col-sm-6 animated" data-duration="700" data-animation="fadeInLeft">
-                                <img src="resources/landing-assets/img/features/arc-single-page-applications.webp" class="img-responsive" id="arc-spa" alt="Arc2D – Designing SPA's hasn't been more simple!" />
+                                <img data-src="resources/landing-assets/img/features/arc-single-page-applications.webp" class="img-responsive lazyload" id="arc-spa" alt="Arc2D – Designing SPA's hasn't been more simple!" />
                             </div>
                             <div class="col-sm-6 align-right animated" data-duration="700" data-animation="fadeInRight">
                                 <article>
@@ -383,7 +397,7 @@
                                 </ul>
                 
                                 <div class="tab-content" style="z-index: 1;">
-                                    <div class="tab-pane in active" id="vce"><img src="resources/landing-assets/img/features/visual_component_engine.webp" class="img-responsive animated" data-duration="900" data-animation="fadeInLeft" alt="macbook" /></div>
+                                    <div class="tab-pane in active" id="vce"><img data-src="resources/landing-assets/img/features/visual_component_engine.webp" class="img-responsive animated lazyload" data-duration="900" data-animation="fadeInLeft" alt="macbook" /></div>
                                     <div class="tab-pane" id="drivers"><img src="resources/landing-assets/img/features/drivers.webp" class="img-responsive animated" data-duration="900" data-animation="fadeInRight" alt="macbook" /></div>
                                     <div class="tab-pane" id="namespaces"><img src="resources/landing-assets/img/features/namespaces.webp" class="img-responsive animated" data-duration="900" data-animation="fadeInDown" alt="macbook" /></div>
                                 </div>
@@ -870,7 +884,7 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img src="resources/landing-assets/img/people/Nashorn.png" alt="Nashorn - Architect & Founder">
+                                            <img data-src="resources/landing-assets/img/people/Nashorn.webp" class="lazyload" alt="Nashorn - Architect & Founder">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
@@ -895,7 +909,7 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img src="resources/landing-assets/img/people/jamesta.png" alt="Jamie Smith - Engineer">
+                                            <img data-src="resources/landing-assets/img/people/jamesta.webp" class="lazyload" alt="Jamie Smith - Engineer">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
