@@ -551,7 +551,7 @@ html, body, .MainScreen {
     }
 
     .MainScreen #team .section-content.row div.col-sm-3{
-        width: 100%;
+        width: 30%;
     }
 }
 
