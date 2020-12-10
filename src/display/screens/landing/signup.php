@@ -6,7 +6,7 @@ $to = "office@example.com";
 
 if (isset($_POST)){
 
-	$subject = "Startuply system email";
+	$subject = "Arc2D system email";
 	
 	if ($_POST['fullname'] ! =''){
 		$message = "Fullname: " . $_POST['fullname'];

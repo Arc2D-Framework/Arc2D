@@ -17,33 +17,46 @@
         <!-- <link rel="apple-touch-icon" href="resources/landing-assets/img/apple-touch-icon.jpg">
         <link rel="apple-touch-icon" sizes="72x72" href="resources/landing-assets/img/apple-touch-icon-72x72.jpg">
         <link rel="apple-touch-icon" sizes="114x114" href="resources/landing-assets/img/apple-touch-icon-114x114.jpg"> -->
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" />
-        <!-- <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/font-awesome.min.css" /> -->
-        <link rel="stylesheet" type="text/css" href="resources/css/all.min.css" onload="this.media='all'" />
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" onload="this.media='all'" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&family=Roboto:wght@300;700&display=swap" rel="stylesheet" onload="this.media='all'">
-        
+
+        <link rel="preload" href="resources/landing-assets/css/lib/animate.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/custom-animations.css" as="style">
+        <link rel="preload" href="resources/webfonts/fa-light-300.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-duotone-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        <link rel="preload" href="resources/css/all.min.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/lib/bootstrap.min.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/style.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/fonts.css" as="style">
+        <link rel="preload" href="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1" as="script">
+
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/animate.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="resources/css/all.min.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/bootstrap.min.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/fonts.css" media="all">
 
 
         <!--[if lt IE 9]>
                     <script defer type="text/javascript" src="resources/landing-assets/js/jquery-1.11.3.min.js?ver=1"></script>
                 <![endif]-->
                 <!--[if (gte IE 9) | (!IE)]><!-->
-                    <script type="text/javascript" src="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1"></script>
+                    <script type="text/javascript" src="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1" defer></script>
                 <!--<![endif]-->
                 
         <script type="text/javascript" src="resources/landing-assets/js/bootstrap.min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/jquery.flexslider-min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/jquery.appear.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/jquery.plugin.js" defer></script>
-        <!-- <script async type="text/javascript" src="resources/landing-assets/js/jquery.countdown.js"></script> -->
+        <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.countdown.js"></script> -->
         <script type="text/javascript" src="resources/landing-assets/js/jquery.waypoints.min.js" defer></script>
-        <script type="text/javascript" src="resources/landing-assets/js/jquery.validate.min.js" defer></script>
-        <script type="text/javascript" src="resources/landing-assets/js/toastr.min.js" defer></script>
-        <script type="text/javascript" src="resources/landing-assets/js/startuply.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-        <script type="text/javascript">(function(){emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');})();</script>
+        <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.validate.min.js" defer></script> -->
+        <!-- <script type="text/javascript" src="resources/landing-assets/js/toastr.min.js" defer></script> -->
+        <script type="text/javascript" src="resources/landing-assets/js/startup-script.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" defer></script>
+        <script type="text/javascript" src="resources/landing-assets/js/lazysizes.min.js" defer></script>
         
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
@@ -52,6 +65,9 @@
             // Config.ROOTPATH = "../../../framework/";
             // Config.SRC_PATH = "/src/";
         </script>
+        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+        <script type="text/javascript">(function(){emailjs.init('user_vX6AXNFQOeqgk2twbfB5a');})();</script>
     </head>
 
     <body namespace="display.screens.landing.MainScreen">
@@ -139,7 +155,7 @@
                 
                 <div id="hero" class="static-header image-version window-height light-text hero-section clearfix">
                     <div class="container">
-                        <div class="heading-block animated align-center" data-animation="slide-in-blurred-top" data-duration="700" style="padding-top: 135px;width: 68%;margin: auto;padding-bottom: 10px;">
+                        <div class="heading-block animated align-center" data-animation="fadeIn" data-duration="700" style="padding-top: 135px;width: 68%;margin: auto;padding-bottom: 10px;">
                             <div class="heading-container">
                                 <!-- <div id="heading-1" class="heading-item" style="display:none;">
                                     <h1>An Agnostic, W3C/ES6 Compliant <div class="highlight"> 2D World & GUI Engine</div></h1>
@@ -158,7 +174,7 @@
                             <a href="#about" class="btn btn-outline" style="font-family: var(--poppins-font-family);font-weight: 400;">Take tour</a>
                         </div>
                         
-                        <iframe src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
+                        <iframe class="lazyload" data-src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
                     </div>
                 </div>
                    
@@ -166,11 +182,11 @@
                     <div class="container">
                         <h5 id="cross-platform-header" class="animated" data-animation="fadeInDown" data-duration="1000" data-delay="200">Arc2D is compatiable with various cross-platform environments</h5>
                         <ul class="list-inline logos">
-                            <li><img class="animated" data-animation="slide-in-blurred-left" data-duration="700" src="resources/landing-assets/img/logos/nodejs.png" alt="Node JS" title="NodeJS" /></li>
-                            <li><img class="animated" data-animation="fadeInUp" data-duration="600" data-delay="400" src="resources/landing-assets/img/logos/apache_cordova.png" alt="Apache Cordova" title="Apache Cordova" /></li>
-                            <li><img class="animated" data-animation="fadeInDown" data-duration="600" data-delay="600" src="resources/landing-assets/img/logos/electron_logo.png" alt="Electron" title="Electron" /></li>
-                            <li><img class="animated" data-animation="fadeInUp" data-duration="600" data-delay="800" src="resources/landing-assets/img/logos/capacitor.png" alt="Capacitor" title="Capacitor" /></li>
-                            <li><img class="animated" data-animation="slide-in-blurred-right" data-duration="700" src="resources/landing-assets/img/logos/pwa-logo.png" alt="Progressive Web Application (PWA)" title="Progressive Web Applications (PWA)" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="200" data-src="resources/landing-assets/img/logos/nodejs.png" alt="Node JS" title="NodeJS" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="400" data-src="resources/landing-assets/img/logos/apache_cordova.png" alt="Apache Cordova" title="Apache Cordova" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="600" data-src="resources/landing-assets/img/logos/electron_logo.png" alt="Electron" title="Electron" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="800" data-src="resources/landing-assets/img/logos/capacitor.png" alt="Capacitor" title="Capacitor" /></li>
+                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="1000" data-src="resources/landing-assets/img/logos/pwa-logo.png" alt="Progressive Web Application (PWA)" title="Progressive Web Applications (PWA)" /></li>
                         </ul>
                     </div>
                 </div>
@@ -187,11 +203,11 @@
                         <div class="tab-content alt">
                             <div class="tab-pane active" id="first-tab-alt">
                                 <div class="section-content row">
-                                    <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="slide-in-blurred-left">
+                                    <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
                                         <framework-size-chart class="animation"></framework-size-chart>
                                         <lines-of-code-chart class="animation"></lines-of-code-chart>
                                     </div>
-                                    <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="slide-in-blurred-right">
+                                    <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
                                         <br/>
                                         <article class="align-center">
                                             <h3 title="Arc2D - Size Comparison Chart vs Other Frameworks/Libraries" alt="Arc2D - Size Comparison Chart vs Other Frameworks/Libraries">
@@ -213,10 +229,10 @@
                 
                             <div class="tab-pane" id="second-tab-alt">
                                 <div class="section-content row">
-                                    <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="slide-in-blurred-right">
-                                        <img src="resources/landing-assets/img/benchmarks.png" class="img-responsive pull-right" alt="process 2" />
+                                    <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
+                                        <img data-src="resources/landing-assets/img/benchmarks.webp" class="img-responsive pull-right lazyload" alt="Arc2D Framework - Benchmarks" />
                                     </div>
-                                    <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="slide-in-blurred-left">
+                                    <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
                                         <br/><br/>
                                         <article class="align-center">
                                             <h3>SPEED <span class="highlight">COMPARISON</span></h3>
@@ -232,34 +248,32 @@
                                 <div class="section-header align-center">
                                     <h2>LOW MEMORY FOOTPRINT</h2>
                                     <p class="sub-header animated" data-duration="700" data-animation="zoomIn">
-                                        From boot to run cycles, Arc uses the least amount of memory.
+                                        From boot to run cycles, Arc2D uses the least amount of memory.
                                     </p>
                                 </div>
                                 <div class="section-content row">
-                                    <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="slide-in-blurred-left">
+                                    <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="fadeInLeft">
                                         <article class="align-center">
-                                            <i class="howitworks icon icon-shopping-04 highlight"></i>
+                                            <i class="howitworks icon fad fa-memory highlight"></i>
                                             <span class="heading">RUN MEMORY</span>
                                             <p class="thin" >
                                                 50% less memory usage at boot-up time compared to Angular.
                                             </p>
                                         </article>
-                                        <!--<span class="icon icon-arrows-04"></span>-->
                                     </div>
-                                    <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="slide-in-blurred-top">
+                                    <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="fadeInDown">
                                         <article class="align-center">
-                                            <i class="howitworks icon icon-seo-icons-03 highlight"></i>
+                                            <i class="howitworks icon fad fa-tachometer-alt-fastest highlight"></i>
                                             <span class="heading">BOOT MEMORY</span>
                                             <p class="thin" >
                                                 45% more efficient than Angular and React
                                                 when rendering 1000 objects.
                                             </p>
                                         </article>
-                                        <!--<span class="icon icon-arrows-04"></span>-->
                                     </div>
-                                    <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="slide-in-blurred-right">
+                                    <div class="col-sm-4 animated" data-duration="700" data-delay="200" data-animation="fadeInRight">
                                         <article class="align-center">
-                                            <i class="howitworks icon icon-seo-icons-05 highlight"></i>
+                                            <i class="howitworks icon fad fa-chart-line-down highlight"></i>
                                             <span class="heading">UNDER STRESS</span>
                                             <p class="thin" >
                                                 50% less memory usage at rendering 10,000 objects when
@@ -291,10 +305,10 @@
                 <section id="process" class="section process-section align-center dark-text">
                     <div class="container">
                         <div class="section-content row">
-                            <div class="col-sm-6 pull-right animated" data-duration="700" data-animation="slide-in-blurred-right">
-                                <img id="arc-iphone" src="resources/landing-assets/img/features/arc-iphone.webp" class="img-responsive" title="Arc2D – Setting The Precedence" alt="Arc2D – Setting The Precedence" />
+                            <div class="col-sm-6 pull-right animated" data-duration="700" data-animation="fadeInRight">
+                                <img id="arc-iphone" data-src="resources/landing-assets/img/features/arc-iphone.webp" class="img-responsive lazyload" title="Arc2D – Setting The Precedence" alt="Arc2D – Setting The Precedence" />
                             </div>
-                            <div class="col-sm-6 align-left animated" data-duration="700" data-animation="slide-in-blurred-left">
+                            <div class="col-sm-6 align-left animated" data-duration="700" data-animation="fadeInLeft">
 
                                 <article>
                                     <h3>SETTING THE <span class="highlight">PRECEDENCE</span></h3>
@@ -319,10 +333,10 @@
                             
                             <hr class="clearfix" />
                 
-                            <div class="col-sm-6 animated" data-duration="700" data-animation="slide-in-blurred-left">
-                                <img src="resources/landing-assets/img/features/arc-single-page-applications.webp" class="img-responsive" id="arc-spa" alt="Arc2D – Designing SPA's hasn't been more simple!" />
+                            <div class="col-sm-6 animated" data-duration="700" data-animation="fadeInLeft">
+                                <img data-src="resources/landing-assets/img/features/arc-single-page-applications.webp" class="img-responsive lazyload" id="arc-spa" alt="Arc2D – Designing SPA's hasn't been more simple!" />
                             </div>
-                            <div class="col-sm-6 align-right animated" data-duration="700" data-animation="slide-in-blurred-right">
+                            <div class="col-sm-6 align-right animated" data-duration="700" data-animation="fadeInRight">
                                 <article>
                                     <h3>SINGLE PAGE <span class="highlight">ARCHITECTURE</span> </h3>
                                     <p class="sub-title">
@@ -387,9 +401,9 @@
                                 </ul>
                 
                                 <div class="tab-content" style="z-index: 1;">
-                                    <div class="tab-pane in active" id="vce"><img src="resources/landing-assets/img/features/visual_component_engine.webp" class="img-responsive animated" data-duration="900" data-animation="slide-in-blurred-left" alt="macbook" /></div>
-                                    <div class="tab-pane" id="drivers"><img src="resources/landing-assets/img/features/drivers.webp" class="img-responsive animated" data-duration="900" data-animation="slide-in-blurred-right" alt="macbook" /></div>
-                                    <div class="tab-pane" id="namespaces"><img src="resources/landing-assets/img/features/namespaces.webp" class="img-responsive animated" data-duration="900" data-animation="slide-in-blurred-top" alt="macbook" /></div>
+                                    <div class="tab-pane in active" id="vce"><img data-src="resources/landing-assets/img/features/visual_component_engine.webp" class="img-responsive animated lazyload" data-duration="900" data-animation="fadeInLeft" alt="macbook" /></div>
+                                    <div class="tab-pane" id="drivers"><img src="resources/landing-assets/img/features/drivers.webp" class="img-responsive animated" data-duration="900" data-animation="fadeInRight" alt="macbook" /></div>
+                                    <div class="tab-pane" id="namespaces"><img src="resources/landing-assets/img/features/namespaces.webp" class="img-responsive animated" data-duration="900" data-animation="fadeInDown" alt="macbook" /></div>
                                 </div>
                             </div>
                         </div>
@@ -401,7 +415,7 @@
                         <div style="display: flex;justify-content: center;margin-bottom: 33px;">
                             <toggle-button id="core_vs_sdk" style="display: block;width: 100px;height: 30px;"></toggle-button>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="slide-in-blurred-left">
+                        <div class="animated" data-duration="700" data-animation="fadeIn">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fas fa-file-code icon highlight" style="margin: 0;"></i>
@@ -439,7 +453,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="slide-in-blurred-right">
+                        <div class="animated" data-duration="700" data-animation="fadeIn">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fas fa-magic icon highlight" style="margin: 0;font-style: italic;font-weight: 300;"></i>
@@ -481,7 +495,7 @@
                             </div>
                         </div>
                     
-                        <div class="animated" data-duration="700" data-animation="slide-in-blurred-left">
+                        <div class="animated" data-duration="700" data-animation="fadeIn">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fad fa-pencil-paintbrush icon highlight"></i>
@@ -524,7 +538,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="slide-in-blurred-right">
+                        <div class="animated" data-duration="700" data-animation="fadeIn">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fad fa-sparkles icon highlight" style="font-weight: 300;"></i>
@@ -566,7 +580,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="slide-in-blurred-left">
+                        <div class="animated" data-duration="700" data-animation="fadeIn">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fas fa-bezier-curve icon highlight" style="font-weight: 300;"></i>
@@ -607,7 +621,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="slide-in-blurred-right">
+                        <div class="animated" data-duration="700" data-animation="fadeIn">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fab fa-buffer icon highlight" style="font-weight: 300;"></i>
@@ -680,7 +694,7 @@
                     </div>
                 </section>
                 
-                <section id="product" class="section product-section align-center dark-text animated" data-animation="slide-in-blurred-top" data-duration="1000">
+                <section id="product" class="section product-section align-center dark-text animated" data-animation="fadeInDown" data-duration="1000">
                     <div class="container">
                         <div class="section-header">
                             <h2>PRODUCT <span class="highlight">PACKAGES</span></h2>
@@ -874,7 +888,7 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img src="resources/landing-assets/img/people/Nashorn.png" alt="Nashorn - Architect & Founder">
+                                            <img data-src="resources/landing-assets/img/people/Nashorn.webp" class="lazyload" alt="Nashorn - Architect & Founder">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
@@ -882,10 +896,10 @@
                                                     </div>
                                                 </div>
                                                 <ul class="socials-block align-center">
-                                                    <li><a href="#" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
-                                                    <li><a href="https://github.com/Nashorn" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
-                                                    <li><a href="https://discordapp.com/users/619206669783531521" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
-                                                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                                    <li><a href="javascript:void(null)" alt="Email" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
+                                                    <li><a href="https://github.com/Nashorn" alt="GitHub" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
+                                                    <li><a href="https://discordapp.com/users/619206669783531521" alt="Discord" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
+                                                    <li><a href="javascript:void(null)" alt="LinkedIn" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -899,74 +913,28 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img src="resources/landing-assets/img/people/jamesta.png" alt="Jamie Smith - Engineer">
+                                            <img data-src="resources/landing-assets/img/people/jamesta.webp" class="lazyload" alt="Jamie Smith - Engineer">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
-                                                        <p>JameSta has worked with CARE USA, for 12 years holding positions such as Deputy Country Director to Director of Programs and Information Systems.</p>
+                                                        <p>JameSta has been in the web development industry since 2005 &amp;
+                                                            is always learning new technologies, further expanding his skill-sets.
+                                                            He has teamed up with Nashorn to bring fourth Arc2D to the web
+                                                            development community.
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <ul class="socials-block align-center">
-                                                    <li><a href="mailto:jaysmith696@gmail.com" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
-                                                    <li><a href="https://github.com/jamesta696" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
-                                                    <li><a href="https://discordapp.com/users/709414897473159179" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
-                                                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                                    <li><a href="mailto:jaysmith696@gmail.com" alt="Email" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
+                                                    <li><a href="https://github.com/jamesta696" alt="GitHub" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
+                                                    <li><a href="https://discordapp.com/users/709414897473159179" alt="Discord" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
+                                                    <li><a href="https://www.linkedin.com/in/jamie1436b937" alt="LinkedIn" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <h5 class="name">JameSta</h5>
-                                    <p class="position">Lead Front-End Engineer</p>
-                                </div>
-                            </div>
-                
-                            <div class="col-md-3 col-sm-3 col-xs-6 animated" data-animation="fadeInDown" data-delay="400" data-duration="500">
-                                <div class="team-member">
-                                    <div class="photo-wrapper">
-                                        <div class="overlay-wrapper">
-                                            <img src="resources/landing-assets/img/people/team-3.jpg" alt="">
-                                            <div class="overlay-content">
-                                                <div class="text-wrapper">
-                                                    <div class="text-container">
-                                                        <p>Ellen has over 13 years of experience in development projects as a senior consultant and project manager in the areas of project management, fund and board development, strategic & financial planning, monitoring & evaluation.</p>
-                                                    </div>
-                                                </div>
-                                                <ul class="socials-block align-center">
-                                                    <li><a href="#" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
-                                                    <li><a href="#" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
-                                                    <li><a href="#" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
-                                                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="name">Mike Bolder</h5>
-                                    <p class="position">Developer</p>
-                                </div>
-                            </div>
-                
-                            <div class="col-md-3 col-sm-3 col-xs-6 animated" data-animation="fadeInUp" data-delay="600" data-duration="500">
-                                <div class="team-member">
-                                    <div class="photo-wrapper">
-                                        <div class="overlay-wrapper">
-                                            <img src="resources/landing-assets/img/people/team-4.jpg" alt="">
-                                            <div class="overlay-content">
-                                                <div class="text-wrapper">
-                                                    <div class="text-container">
-                                                        <p>Mike has worked with CARE USA for 12 years.</p>
-                                                    </div>
-                                                </div>
-                                                <ul class="socials-block align-center">
-                                                    <li><a href="#" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
-                                                    <li><a href="#" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
-                                                    <li><a href="#" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
-                                                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="name">Mike Bolder</h5>
-                                    <p class="position">Developer</p>
+                                    <h5 class="name" alt="Jamie Smith" title="Jamie Smith">JameSta</h5>
+                                    <p class="position" alt="Lead Front-End Engineer">Lead Front-End Engineer</p>
                                 </div>
                             </div>
                         </div>
@@ -984,7 +952,7 @@
                         </div>
                 
                         <div class="col-md-12 col-lg-3">
-                            <a href="http://themeforest.net/item/startuply-responsive-multipurpose-landing-page/7953388" class="btn btn-outline" style="margin-top: 7px;">Get this template</a>
+                            <a href="#" class="btn btn-outline" style="margin-top: 7px;">Get this template</a>
                         </div>
                     </div>
                 </section>
@@ -1022,9 +990,9 @@
                             <div class="col-sm-3 col-xs-12">
                                 <strong class="heading" title="Arc2D – Contact Information">Contact Info</strong>
                                 <ul id="contact-info" class="list-unstyled">
-                                    <li><span class="icon far fa-envelope"></span><a id="contact-email" href="mailto:info@arc2d.com" title="Arc2D – Email">info@arc2d.com</a></li>
+                                    <li><span class="icon far fa-envelope"></span><a id="contact-email" href="mailto:support@arc2d.com" alt="Arc2D – Technical Support Email" title="Arc2D – Technical Support Email">support@arc2d.com</a></li>
                                     <li><span class="icon fas fa-map-marker-alt"></span>2901 Marmora road, Glassgow, Seattle, WA 98122-1090</li>
-                                    <li><span class="icon fas fa-phone-alt"></span>1 - 234-456-7980</li>
+                                    <li><span class="icon fas fa-phone-alt"></span>Coming Soon</li>
                                 </ul>
                             </div>
                         </div>

@@ -45,6 +45,11 @@ html, body, .MainScreen {
     will-change: auto;
 }
 
+.MainScreen #about .heading {
+    font-family: var(--poppins-font-family);
+    color: #5b5b5b;
+}
+
 .MainScreen #arc-iphone {
     width: clamp(200px,100%,300px);
     margin: 50px auto 0 auto;
@@ -104,7 +109,7 @@ html, body, .MainScreen {
 .MainScreen #features-list .core.active{
     background: #f7f7fb;
     box-shadow: 0px 5px 10px -3px rgba(0,0,0,.7) !important;
-    background-image: url("resources/landing-assets/img/background/low_poly_background.jpg") !important;
+    background-image: url("resources/landing-assets/img/background/low_poly_background.webp") !important;
 }
 
 .MainScreen #features-list .core.active article,
@@ -146,7 +151,7 @@ html, body, .MainScreen {
 }
 
 .MainScreen .fixed-menu .navigation-header{
-    background-image: url("resources/landing-assets/img/background/low_poly_background.jpg") !important;
+    background-image: url("resources/landing-assets/img/background/low_poly_background.webp") !important;
     background-size: cover;
 }
 
@@ -263,6 +268,7 @@ html, body, .MainScreen {
 
 .MainScreen .list-inline.logos img {
     height: 52px;
+    width:96.5px;
     border: 1px solid rgba(0,0,0,.2);
     padding: 5px;
     border-radius: 3px;
@@ -370,6 +376,11 @@ html, body, .MainScreen {
 
 .MainScreen .team-member .position {
     color: #5b5b5b;
+}
+
+.MainScreen #team .section-content.row {
+    display: flex;
+    justify-content: center;
 }
 
 .MainScreen #contact-info #contact-email {
@@ -537,6 +548,10 @@ html, body, .MainScreen {
     .MainScreen .package-column .fa.fa-times,
     .MainScreen .package-column .package-detail a{
         font-size: 12px !important;
+    }
+
+    .MainScreen #team .section-content.row div.col-sm-3{
+        width: 100%;
     }
 }
 
