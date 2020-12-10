@@ -251,8 +251,10 @@ html, body, .MainScreen {
     font-family: var(--poppins-font-family);
 }
 
+
+
 /* Hidden Sections - Until Ready for Use */
-.MainScreen #guarantee,
+/*.MainScreen #guarantee,
 .MainScreen #awards,
 .MainScreen #feedback,
 .MainScreen #feedback-controls,
@@ -260,7 +262,7 @@ html, body, .MainScreen {
 .MainScreen ul.navigation-bar:nth-child(1) > li:nth-child(8),
 .MainScreen li.dropdown:nth-child(9){
     display: none !important;
-}
+}*/
 
 .MainScreen .sub-title, .MainScreen .sub-title.alt{
     line-height: 30px;

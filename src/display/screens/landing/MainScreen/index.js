@@ -21,18 +21,34 @@ namespace `display.screens.landing` (
             this.size_button    = this.querySelector("#size-chart-button");
             this.loc_button     = this.querySelector("#loc-chart-button");
 
-            this.addEventListener("click", e => this.onShowSizeChart(), false, "#size-chart-button");
-            this.addEventListener("click", e => this.onShowLOCChart(), false, "#loc-chart-button");
+            this.addEventListener("click", e => this.onShowSizeChart(), {passive:true}, "#size-chart-button");
+            this.addEventListener("click", e => this.onShowLOCChart(), {passive:true}, "#loc-chart-button");
+            // this.addEventListener("click", e => this.onScrollIntoView(e), false, ".navigation-bar a");
             this.size_button.click();//force a click
 
             this.core_features = this.querySelectorAll(".core");
             this.sdk_features = this.querySelectorAll(".sdk");
             this.watch("#core_vs_sdk", "value", e => this.onToggleFeatures(e), true);
 
-            this.emailInput = this.querySelector("input#user-email");
-            this.userNameInput = this.querySelector("input#user-name");
-            this.signupInputsArray = [this.emailInput, this.userNameInput];
-            this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
+            // this.emailInput = this.querySelector("input#user-email");
+            // this.userNameInput = this.querySelector("input#user-name");
+            // this.signupInputsArray = [this.emailInput, this.userNameInput];
+            // this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
+        }
+
+        onHashChange(e){
+            /*var hash = location.hash;
+                debugger;
+            var section = this.querySelector(`section${hash}`)||this.querySelector(`${hash}`)
+            if(section){
+                section.scrollIntoView({behavior:"smooth",block:"start"});
+            }*/
+        }
+
+        onScrollIntoView(e){
+            e.preventDefault();
+            e.stopPropagation();
+            
         }
 
         randomNumber(min, max) {
