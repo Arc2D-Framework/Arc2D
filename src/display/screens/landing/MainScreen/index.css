@@ -461,7 +461,14 @@ html, body, .MainScreen {
         margin: 0 auto 0 auto;
     }
 
-    
+    .MainScreen #about {
+        padding-bottom:0 !important;
+    }
+
+    .MainScreen #about #third-tab-alt div:nth-of-type(2) div.col-sm-4:nth-of-type(2),
+    .MainScreen #about #third-tab-alt div:nth-of-type(2) div.col-sm-4:nth-of-type(3){
+        margin-top: 30px;
+    }
 }
 
 @media screen and (min-width:768px) {
@@ -484,6 +491,10 @@ html, body, .MainScreen {
         -webkit-text-fill-color: transparent;
         background: linear-gradient(180deg, rgb(255, 255, 255) 50%,rgba(26, 198, 255, 0.7) 110%);
         -webkit-background: linear-gradient(180deg, rgb(255, 255, 255) 50%,rgba(26, 198, 255, 0.7) 110%);
+    }
+
+    .MainScreen #about #third-tab-alt div:nth-of-type(4){
+        margin-top:75px !important;
     }
 }
 

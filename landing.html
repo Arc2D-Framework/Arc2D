@@ -7,7 +7,7 @@
             default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
             script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
             style-src   'self' 'unsafe-inline' *">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="description" content="Arc2D – An Agnostic, W3C ES6/7 Vanilla JavaScript Compliant 2D World & GUI Engine used for building enterprise-class 2D, Web and Mobile Applications.">
@@ -18,42 +18,36 @@
         <link rel="apple-touch-icon" sizes="72x72" href="resources/landing-assets/img/apple-touch-icon-72x72.jpg">
         <link rel="apple-touch-icon" sizes="114x114" href="resources/landing-assets/img/apple-touch-icon-114x114.jpg"> -->
 
-        <!-- <link rel="preload" href="resources/landing-assets/css/lib/animate.css" as="style"> -->
-        <!-- <link rel="preload" href="resources/landing-assets/css/custom-animations.css" as="style"> -->
-       <!--  <link rel="preload" href="resources/webfonts/fa-light-300.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-        <link rel="preload" href="resources/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-        <link rel="preload" href="resources/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-        <link rel="preload" href="resources/webfonts/fa-duotone-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-        <link rel="preload" href="resources/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous"> -->
-        <!-- <link rel="preload" href="resources/css/all.min.css" as="style"> -->
-        <!-- <link rel="preload" href="resources/landing-assets/css/lib/bootstrap.min.css" as="style"> -->
-        <!-- <link rel="preload" href="resources/landing-assets/css/style.css" as="style"> -->
-        <!-- <link rel="preload" href="resources/landing-assets/css/fonts.css" as="style"> -->
-        <!-- <link rel="preload" href="resources/landing-assets/js/jquery-2.1.4.min.js?ver=1" as="script"> -->
-
         <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/animate.useonly.css" media="all" defer>
         <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" media="all"  defer/>
         <link rel="stylesheet" type="text/css" href="resources/css/all.min.useonly.css" media="all" defer>
         <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/bootstrap.min.useonly.css" media="all" defer>
         <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.useonly.css" media="all" defer>
         <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/fonts.useonly.css" media="all" defer>
+        <link rel="preload" href="resources/landing-assets/js/jquery-2.2.4.min.js" as="script" defer>
 
 
         <!--[if lt IE 9]>
                     <script defer type="text/javascript" src="resources/landing-assets/js/jquery-1.11.3.min.js?ver=1"></script>
                 <![endif]-->
                 <!--[if (gte IE 9) | (!IE)]><!-->
-                    <script type="text/javascript" src="resources/landing-assets/js/jquery-2.2.4.min.js?ver=1"></script>
+                    <script type="text/javascript" src="resources/landing-assets/js/jquery-2.2.4.min.js"></script>
+                    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+                    <!-- <script>
+                        jQuery.noConflict();
+                    </script> -->
                 <!--<![endif]-->
                 
-        <!-- <script type="text/javascript" src="resources/landing-assets/js/bootstrap.min.js" defer></script> -->
-        <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.flexslider-min.js" defer></script> -->
-        <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.appear.js" defer></script> -->
+                
+        <script type="text/javascript" src="resources/landing-assets/js/bootstrap.min.js" defer></script>
+        <script type="text/javascript" src="resources/landing-assets/js/jquery.flexslider-min.js" defer></script>
+        <script type="text/javascript" src="resources/landing-assets/js/jquery.appear.js" defer></script>
         <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.plugin.js" defer></script> -->
-        <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.waypoints.min.js" defer></script> -->
+        <script type="text/javascript" src="resources/landing-assets/js/jquery.waypoints.min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/startup-script.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/lazysizes.min.js" defer></script>
+        
         
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
@@ -98,7 +92,7 @@
                                     <li><a href="#features-list">Features</a></li>
                                     <li><a href="#product">Download</a></li>
                                     <li><a href="#team">Team</a></li> | 
-                                    <li><a href="resources/doc.html" target="_blank">Docs</a></li>
+                                    <li><a href="resources/doc.html#docs.topics.DocHome" target="_blank">Docs</a></li>
                                     <!-- <li><a href="#guarantee">Contacts</a></li> -->
                                     <!-- <li class="dropdown">
                                         <a class="dropdown-toggle" href="#">Extra</a>
@@ -161,7 +155,7 @@
                                     <h1>Build more than just apps. Build the next <div class='highlight' style="display: inline-block;">framework</div> you always imagined.</h1>
                                     <h5 style='margin-bottom: 33px;'>Arc is a meta-framework kernel for building new kinds of engines, from gaming to business-oriented domains. Enforce your own standards in large teams.</h5>
                                 </div>
-                                <div id="heading-2" style="display:none;" class="heading-item">
+                                <div id="heading-3" style="display:none;" class="heading-item">
                                     <h1>The Arc Engine. <div class='highlight' style="display: inline-block;">A Powerful,</div> Versatile 2D Component Kernel.</h1>
                                     <h5 style='margin-bottom: 33px;'>Arc is a meta-framework kernel for building new kinds of engines, from gaming to business-oriented domains. Enforce your own standards in large teams.</h5>
                                 </div>
@@ -170,7 +164,7 @@
                             <a href="#about" class="btn btn-outline" style="font-family: var(--poppins-font-family);font-weight: 400;">Take tour</a>
                         </div>
                         
-                        <iframe class="lazyload" data-src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
+                        <iframe title="Arc2D Framework - DOM Physics" class="lazyload" data-src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
                     </div>
                 </div>
                    
@@ -178,11 +172,11 @@
                     <div class="container">
                         <h5 id="cross-platform-header" class="animated" data-animation="fadeInDown" data-duration="1000" data-delay="200">Arc2D is compatiable with various cross-platform environments</h5>
                         <ul class="list-inline logos">
-                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="200" data-src="resources/landing-assets/img/logos/nodejs.png" alt="Node JS" title="NodeJS" /></li>
-                            <li><img class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="400" data-src="resources/landing-assets/img/logos/apache_cordova.png" alt="Apache Cordova" title="Apache Cordova" /></li>
-                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="600" data-src="resources/landing-assets/img/logos/electron_logo.png" alt="Electron" title="Electron" /></li>
-                            <li><img class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="800" data-src="resources/landing-assets/img/logos/capacitor.png" alt="Capacitor" title="Capacitor" /></li>
-                            <li><img class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="1000" data-src="resources/landing-assets/img/logos/pwa-logo.png" alt="Progressive Web Application (PWA)" title="Progressive Web Applications (PWA)" /></li>
+                            <li><img width="96.5" height="52" class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="200" data-src="resources/landing-assets/img/logos/nodejs.png" alt="Node JS" title="NodeJS" /></li>
+                            <li><img width="96.5" height="52" class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="400" data-src="resources/landing-assets/img/logos/apache_cordova.png" alt="Apache Cordova" title="Apache Cordova" /></li>
+                            <li><img width="96.5" height="52" class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="600" data-src="resources/landing-assets/img/logos/electron_logo.png" alt="Electron" title="Electron" /></li>
+                            <li><img width="96.5" height="52" class="animated lazyload" data-animation="fadeInUp" data-duration="500" data-delay="800" data-src="resources/landing-assets/img/logos/capacitor.png" alt="Capacitor" title="Capacitor" /></li>
+                            <li><img width="96.5" height="52" class="animated lazyload" data-animation="fadeInDown" data-duration="500" data-delay="1000" data-src="resources/landing-assets/img/logos/pwa-logo.png" alt="Progressive Web Application (PWA)" title="Progressive Web Applications (PWA)" /></li>
                         </ul>
                     </div>
                 </div>
@@ -226,14 +220,14 @@
                             <div class="tab-pane" id="second-tab-alt">
                                 <div class="section-content row">
                                     <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-                                        <img data-src="resources/landing-assets/img/benchmarks.webp" class="img-responsive pull-right lazyload" alt="Arc2D Framework - Benchmarks" />
+                                        <img width="auto" height="auto" data-src="resources/landing-assets/img/benchmarks.webp" class="img-responsive pull-right lazyload" alt="Arc2D Framework - Benchmarks" />
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
                                         <br/><br/>
                                         <article class="align-center">
                                             <h3>SPEED <span class="highlight">COMPARISON</span></h3>
                                             <p class="sub-title">Arc2D's benchmark result scores out performs todays industry leading technologies</p>
-                                            <p>According to GitHub user <a href="https://github.com/krausest/js-framework-benchmark" target="_blank">krausest</a>, we've used the JS framework benchmark repository &amp; tested the Arc engine against these modern frameworks and libraries. The results show the power of Arc2D's speed &amp; performance on startup metrics.</p>
+                                            <p>According to GitHub user <a href="https://github.com/krausest/js-framework-benchmark" rel="noreferrer" target="_blank">krausest</a>, we've used the JS framework benchmark repository &amp; tested the Arc engine against these modern frameworks and libraries. The results show the power of Arc2D's speed &amp; performance on startup metrics.</p>
                                         </article>
                                         <speed-chart></speed-chart>
                                     </div>
@@ -279,7 +273,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 animated fadeInLeft" data-delay="1200" data-duration="700" data-animation="fadeInLeft">
+                                <div class="col-sm-6">
                                     <br><br>
                                     <article class="align-center">
                                         <h3>MEMORY <span class="highlight">ALLOCATION</span></h3>
@@ -288,7 +282,7 @@
                                     </article>
                                 </div>
 
-                                <div class="col-sm-6 animated fadeInRight" data-delay="1200" data-duration="700" data-animation="fadeInRight">
+                                <div class="col-sm-6">
                                     <memory-allocation></memory-allocation>
                                 </div>
                             </div>
@@ -409,7 +403,7 @@
                         <div style="display: flex;justify-content: center;margin-bottom: 33px;">
                             <toggle-button id="core_vs_sdk" style="display: block;width: 100px;height: 30px;"></toggle-button>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeIn">
+                        <div class="animated" data-duration="700" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fas fa-file-code icon highlight" style="margin: 0;"></i>
@@ -447,7 +441,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeIn">
+                        <div class="animated" data-duration="700" data-animation="fadeInRight">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fas fa-magic icon highlight" style="margin: 0;font-style: italic;font-weight: 300;"></i>
@@ -489,7 +483,7 @@
                             </div>
                         </div>
                     
-                        <div class="animated" data-duration="700" data-animation="fadeIn">
+                        <div class="animated" data-duration="700" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fad fa-pencil-paintbrush icon highlight"></i>
@@ -532,7 +526,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeIn">
+                        <div class="animated" data-duration="700" data-animation="fadeInRight">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fad fa-sparkles icon highlight" style="font-weight: 300;"></i>
@@ -574,7 +568,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeIn">
+                        <div class="animated" data-duration="700" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fas fa-bezier-curve icon highlight" style="font-weight: 300;"></i>
@@ -615,7 +609,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeIn">
+                        <div class="animated" data-duration="700" data-animation="fadeInRight">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fab fa-buffer icon highlight" style="font-weight: 300;"></i>
@@ -688,7 +682,7 @@
                     </div>
                 </section>
                 
-                <section id="product" class="section product-section align-center dark-text" data-animation="fadeInDown" data-duration="1000">
+                <section id="product" class="section product-section align-center dark-text">
                     <div class="container">
                         <div class="section-header">
                             <h2>DOWNLOAD <span class="highlight">PACKAGES</span></h2>
@@ -891,9 +885,9 @@
                                                 </div>
                                                 <ul class="socials-block align-center">
                                                     <li><a href="javascript:void(null)" alt="Email" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
-                                                    <li><a href="https://github.com/Nashorn" alt="GitHub" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
-                                                    <li><a href="https://discordapp.com/users/619206669783531521" alt="Discord" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
-                                                    <li><a href="javascript:void(null)" alt="LinkedIn" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                                    <li><a href="https://github.com/Nashorn" rel="noreferrer" alt="GitHub" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
+                                                    <li><a href="https://discordapp.com/users/619206669783531521" rel="noreferrer" alt="Discord" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
+                                                    <li><a href="javascript:void(null)" alt="LinkedIn" rel="noreferrer" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -920,9 +914,9 @@
                                                 </div>
                                                 <ul class="socials-block align-center">
                                                     <li><a href="mailto:jaysmith696@gmail.com" alt="Email" class="email" title="Email"><i class="fas fa-envelope-square"></i></a></li>
-                                                    <li><a href="https://github.com/jamesta696" alt="GitHub" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
-                                                    <li><a href="https://discordapp.com/users/709414897473159179" alt="Discord" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
-                                                    <li><a href="https://www.linkedin.com/in/jamie1436b937" alt="LinkedIn" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                                    <li><a href="https://github.com/jamesta696" rel="noreferrer" alt="GitHub" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a></li>
+                                                    <li><a href="https://discordapp.com/users/709414897473159179" rel="noreferrer" alt="Discord" class="discord" title="Discord" target="_blank"><i class="fab fa-discord"></i></a></li>
+                                                    <li><a href="https://www.linkedin.com/in/jamie1436b937" rel="noreferrer" alt="LinkedIn" class="linked_in" title="Linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -958,7 +952,7 @@
                                 <div class="logo-wrapper">
                                     <div class="navigation-brand">
                                         <div class="brand-logo" style="width: 100%;height: 100%;">
-                                            <span href="index.html" class="logo" style="display: block;margin: 0;border: none;font-size: 20px;">
+                                            <span class="logo" style="display: block;margin: 0;border: none;font-size: 20px;">
                                                 <div id="frameworkname" style="letter-spacing: -1.5px;font-weight: bold;padding-top: 3px;color: #fff;font-size: 25px;height: 38px;">ARC<span style="background: red;border-radius: 20px 0px 0px;line-height: 25px;color: #fff;text-shadow: 5px 0px 2px rgba(0,0,0,.3);">2D</span>
                                                 </div>
                                                 <div id="frameworkcaption" style="width: 100%;display: block;font-size: 10px;line-height: 12px;text-align: left;padding-left: 0px;letter-spacing: 0px;color: #ffff;font-family: revert;font-weight: bold;">DYNAMIC HTML</div>
@@ -975,10 +969,10 @@
                             <div class="col-sm-5 social-wrap col-xs-12">
                                 <strong class="heading" title="Arc2D – Connect With Us">Connect With Us</strong>
                                 <ul class="list-inline socials align-center">
-                                    <li><a href="#" title="Arc2D – Instagram" target="_blank"><span class="icon fab fa-instagram"></span></a></li>
-                                    <li><a href="#" title="Arc2D – LinkedIn" target="_blank"><span class="icon fab fa-linkedin-in"></span></a></li>
-                                    <li><a href="https://github.com/Arc2D-Framework/arc2d" title="Arc2D – GitHub" target="_blank"><span class="icon fab fa-github"></span></a></li>
-                                    <li><a href="#" title="Arc2D – Twitter" target="_blank"><span class="icon fab fa-twitter"></span></a></li>
+                                    <li><a href="javascript:void(null)" title="Arc2D Framework – Instagram" target="_blank"><span class="icon fab fa-instagram"></span></a></li>
+                                    <li><a href="javascript:void(null)" title="Arc2D Framework – LinkedIn" target="_blank"><span class="icon fab fa-linkedin-in"></span></a></li>
+                                    <li><a href="https://github.com/Arc2D-Framework/arc2d" rel="noreferrer" title="Arc2D Framework – GitHub" target="_blank"><span class="icon fab fa-github"></span></a></li>
+                                    <li><a href="javascript:void(null)" title="Arc2D Framework – Twitter" target="_blank" rel="noreferrer"><span class="icon fab fa-twitter"></span></a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-3 col-xs-12">
