@@ -94,7 +94,7 @@ html, body, .MainScreen {
     border-radius: 5px;
     background-color: white;
     flex: 0 1 auto;
-    margin: 5px;
+    margin: 5px,5px,5px,5px;
     width:100%;
 }
 
