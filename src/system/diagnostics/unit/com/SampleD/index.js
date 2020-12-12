@@ -5,10 +5,10 @@ namespace `system.diagnostics.unit.com` (
         }
 		async onConnected(){
             super.onConnected();
-            this.addEventListener("click", e=>this.onClick())
+            this.addEventListener("click", this.onClick)
         }
 
-        onClick(){
+        onClick(e){
             alert("you clicked me")
         }
 	}

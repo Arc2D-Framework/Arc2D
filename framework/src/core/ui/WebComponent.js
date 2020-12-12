@@ -94,7 +94,7 @@ namespace `core.ui` (
         }
 
         dispatchEvent(type, data, details = { bubbles: true, cancelable: true, composed: true }, element = this) {
-            var evt = new CustomEvent(type, details);
+            var evt = typeof type =="object" ? type : new CustomEvent(type, details);
                 evt.data = data;
             if(this.element){return this.element.dispatchEvent(evt);}
             else{return super.dispatchEvent(evt);}
@@ -104,7 +104,7 @@ namespace `core.ui` (
             this.addEventListener(evtName, handler, bool, el)
         }
 
-        addEventListener(evtName, handler, bool=false, el) {
+        addEventListener(evtName, handler, bool={capture:false,passive:true}, el) {
             var self = this;
             if (typeof el == "string") {
                 this.addEventListener(evtName, e => {
@@ -112,10 +112,9 @@ namespace `core.ui` (
                     if (t) {
                         handler({
                             target: t,
-                            realtarget: e.target,
                             src: e,
-                            preventDefault:  () => e.preventDefault(),
-                            stopPropagation: () => e.stopPropagation()
+                            preventDefault :  e => e.preventDefault(),
+                            stopPropagation:  e => e.stopPropagation()
                         });
                     }
                 }, bool);
