@@ -7,7 +7,7 @@
             default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
             script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
             style-src   'self' 'unsafe-inline' *">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="description" content="Arc2D – An Agnostic, W3C ES6/7 Vanilla JavaScript Compliant 2D World & GUI Engine used for building enterprise-class 2D, Web and Mobile Applications.">
@@ -18,13 +18,22 @@
         <link rel="apple-touch-icon" sizes="72x72" href="resources/landing-assets/img/apple-touch-icon-72x72.jpg">
         <link rel="apple-touch-icon" sizes="114x114" href="resources/landing-assets/img/apple-touch-icon-114x114.jpg"> -->
 
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/animate.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" media="all"  defer/>
-        <link rel="stylesheet" type="text/css" href="resources/css/all.min.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/bootstrap.min.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/fonts.useonly.css" media="all" defer>
-        <link rel="preload" href="resources/landing-assets/js/jquery-2.2.4.min.js" as="script" defer>
+        <link rel="preload" href="resources/landing-assets/css/lib/animate.useonly.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="resources/landing-assets/css/custom-animations.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="resources/css/all.min.useonly.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="resources/landing-assets/css/lib/bootstrap.min.useonly.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="resources/landing-assets/css/style.useonly.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="resources/landing-assets/css/fonts.useonly.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="resources/landing-assets/js/jquery-2.2.4.min.js" as="script">
+        <link rel="preload" href="resources/landing-assets/js/passiveFix.js" as="script">
+        <link rel="preload" href="resources/landing-assets/js/Chart.min.js" as="script">
+
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/animate.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/css/all.min.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/bootstrap.min.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/fonts.useonly.css" media="all">
 
 
         <!--[if lt IE 9]>
@@ -32,6 +41,7 @@
                 <![endif]-->
                 <!--[if (gte IE 9) | (!IE)]><!-->
                     <script type="text/javascript" src="resources/landing-assets/js/jquery-2.2.4.min.js"></script>
+                    <script type="text/javascript" src="resources/landing-assets/js/passiveFix.js"></script>
                     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
                     <!-- <script>
                         jQuery.noConflict();
@@ -45,7 +55,7 @@
         <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.plugin.js" defer></script> -->
         <script type="text/javascript" src="resources/landing-assets/js/jquery.waypoints.min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/startup-script.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" defer></script>
+        <script src="resources/landing-assets/js/Chart.min.js"></script>
         <script type="text/javascript" src="resources/landing-assets/js/lazysizes.min.js" defer></script>
         
         
@@ -220,7 +230,7 @@
                             <div class="tab-pane" id="second-tab-alt">
                                 <div class="section-content row">
                                     <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-                                        <img width="auto" height="auto" data-src="resources/landing-assets/img/benchmarks.webp" class="img-responsive pull-right lazyload" alt="Arc2D Framework - Benchmarks" />
+                                        <img style="width:100%;height:100%;" data-src="resources/landing-assets/img/benchmarks.webp" class="img-responsive pull-right lazyload" alt="Arc2D Framework - Benchmarks" />
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
                                         <br/><br/>
@@ -237,7 +247,7 @@
                             <div class="tab-pane" id="third-tab-alt">
                                 <div class="section-header align-center">
                                     <h2>LOW MEMORY FOOTPRINT</h2>
-                                    <p class="sub-header animated" data-duration="700" data-animation="zoomIn">
+                                    <p class="sub-header animated" data-duration="700" data-animation="fadeInDown">
                                         From boot to run cycles, Arc2D uses the least amount of memory.
                                     </p>
                                 </div>
@@ -324,7 +334,7 @@
                             <hr class="clearfix" />
                 
                             <div class="col-sm-6 animated" data-duration="700" data-animation="fadeInLeft">
-                                <img data-src="resources/landing-assets/img/features/arc-single-page-applications.webp" class="img-responsive lazyload" id="arc-spa" alt="Arc2D – Designing SPA's hasn't been more simple!" />
+                                <img style="width:100%;height:100%;" data-src="resources/landing-assets/img/features/arc-single-page-applications.webp" class="img-responsive lazyload" id="arc-spa" alt="Arc2D – Designing SPA's hasn't been more simple!" />
                             </div>
                             <div class="col-sm-6 align-right animated" data-duration="700" data-animation="fadeInRight">
                                 <article>
@@ -526,7 +536,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeInRight">
+                        <div class="animated" data-duration="700" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12 core">
                                 <article class="align-center">
                                     <i class="fad fa-sparkles icon highlight" style="font-weight: 300;"></i>
@@ -568,7 +578,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeInLeft">
+                        <div class="animated" data-duration="700" data-animation="fadeInRight">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fas fa-bezier-curve icon highlight" style="font-weight: 300;"></i>
@@ -609,7 +619,7 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="animated" data-duration="700" data-animation="fadeInRight">
+                        <div class="animated" data-duration="700" data-animation="fadeInLeft">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <article class="align-center">
                                     <i class="fab fa-buffer icon highlight" style="font-weight: 300;"></i>
@@ -876,7 +886,7 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img data-src="resources/landing-assets/img/people/Nashorn.webp" class="lazyload" alt="Nashorn - Architect & Founder">
+                                            <img id="nashorn-img" data-src="resources/landing-assets/img/people/Nashorn.webp" style="width:100%;height:100%;" class="lazyload" alt="Nashorn - Architect & Founder">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
@@ -901,7 +911,7 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img data-src="resources/landing-assets/img/people/jamesta.webp" class="lazyload" alt="Jamie Smith - Engineer">
+                                            <img id="jamesta-img" data-src="resources/landing-assets/img/people/jamesta.webp" style="width:100%;height:100%;" class="lazyload" alt="Jamie Smith - Engineer">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
@@ -948,7 +958,7 @@
                 <footer id="footer" class="footer light-text">
                     <div class="container">
                         <div class="footer-content row">
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="logo-wrapper">
                                     <div class="navigation-brand">
                                         <div class="brand-logo" style="width: 100%;height: 100%;">
