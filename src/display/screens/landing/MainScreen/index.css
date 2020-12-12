@@ -89,12 +89,12 @@ html, body, .MainScreen {
     min-height: 284px;
     max-height: 284px;
     box-shadow: 2px 1px 13px -5px rgba(0,0,0,.3);
-    transition: background .3s ease-in-out;
-    -webkit-transition: background .3s ease-in-out;
+    transition: background-color .3s ease-in-out;
+    -webkit-transition: background-color .3s ease-in-out;
     border-radius: 5px;
-    background: #fff;
+    background-color: white;
     flex: 0 1 auto;
-    margin: 5px,5px,5px,5px;
+    margin: 5px;
     width:100%;
 }
 
@@ -564,7 +564,7 @@ html, body, .MainScreen {
     }
 
     .MainScreen #team .section-content.row div.col-sm-3{
-        width: 30%;
+        width: 40%;
     }
 }
 

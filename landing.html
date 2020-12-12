@@ -18,13 +18,22 @@
         <link rel="apple-touch-icon" sizes="72x72" href="resources/landing-assets/img/apple-touch-icon-72x72.jpg">
         <link rel="apple-touch-icon" sizes="114x114" href="resources/landing-assets/img/apple-touch-icon-114x114.jpg"> -->
 
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/animate.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" media="all"  defer/>
-        <link rel="stylesheet" type="text/css" href="resources/css/all.min.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/bootstrap.min.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.useonly.css" media="all" defer>
-        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/fonts.useonly.css" media="all" defer>
-        <link rel="preload" href="resources/landing-assets/js/jquery-2.2.4.min.js" as="script" defer>
+        <link rel="preload" href="resources/landing-assets/css/lib/animate.useonly.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/custom-animations.css" as="style">
+        <link rel="preload" href="resources/css/all.min.useonly.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/lib/bootstrap.min.useonly.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/style.useonly.css" as="style">
+        <link rel="preload" href="resources/landing-assets/css/fonts.useonly.css" as="style">
+        <link rel="preload" href="resources/landing-assets/js/jquery-2.2.4.min.js" as="script">
+        <link rel="preload" href="resources/landing-assets/js/passiveFix.js" as="script">
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" as="script">
+
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/animate.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/custom-animations.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/css/all.min.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/lib/bootstrap.min.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/style.useonly.css" media="all">
+        <link rel="stylesheet" type="text/css" href="resources/landing-assets/css/fonts.useonly.css" media="all">
 
 
         <!--[if lt IE 9]>
@@ -32,6 +41,7 @@
                 <![endif]-->
                 <!--[if (gte IE 9) | (!IE)]><!-->
                     <script type="text/javascript" src="resources/landing-assets/js/jquery-2.2.4.min.js"></script>
+                    <script type="text/javascript" src="resources/landing-assets/js/passiveFix.js"></script>
                     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
                     <!-- <script>
                         jQuery.noConflict();
@@ -237,7 +247,7 @@
                             <div class="tab-pane" id="third-tab-alt">
                                 <div class="section-header align-center">
                                     <h2>LOW MEMORY FOOTPRINT</h2>
-                                    <p class="sub-header animated" data-duration="700" data-animation="zoomIn">
+                                    <p class="sub-header animated" data-duration="700" data-animation="fadeInDown">
                                         From boot to run cycles, Arc2D uses the least amount of memory.
                                     </p>
                                 </div>
@@ -876,7 +886,7 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img id="nashorn-img" data-src="resources/landing-assets/img/people/Nashorn.webp" width="100" height="100" class="lazyload" alt="Nashorn - Architect & Founder">
+                                            <img id="nashorn-img" data-src="resources/landing-assets/img/people/Nashorn.webp" style="width:100%;height:100%;" class="lazyload" alt="Nashorn - Architect & Founder">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
@@ -901,7 +911,7 @@
                                 <div class="team-member">
                                     <div class="photo-wrapper">
                                         <div class="overlay-wrapper">
-                                            <img id="jamesta-img" data-src="resources/landing-assets/img/people/jamesta.webp" width="100" height="100" class="lazyload" alt="Jamie Smith - Engineer">
+                                            <img id="jamesta-img" data-src="resources/landing-assets/img/people/jamesta.webp" style="width:100%;height:100%;" class="lazyload" alt="Jamie Smith - Engineer">
                                             <div class="overlay-content">
                                                 <div class="text-wrapper">
                                                     <div class="text-container">
@@ -948,7 +958,7 @@
                 <footer id="footer" class="footer light-text">
                     <div class="container">
                         <div class="footer-content row">
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="logo-wrapper">
                                     <div class="navigation-brand">
                                         <div class="brand-logo" style="width: 100%;height: 100%;">
