@@ -1,13 +1,1 @@
-(function () {
-    if (typeof EventTarget !== "undefined") {
-        let func = EventTarget.prototype.addEventListener;
-        EventTarget.prototype.addEventListener = function (type, fn, capture) {
-            this.func = func;
-            if(typeof capture !== "boolean"){
-                capture = capture || {};
-                capture.passive = false;
-            }
-            this.func(type, fn, capture);
-        };
-    };
-}());
+!function(){if("undefined"!=typeof EventTarget){let e=EventTarget.prototype.addEventListener;EventTarget.prototype.addEventListener=function(t,n,o){this.func=e,"boolean"!=typeof o&&((o=o||{}).passive=!1),this.func(t,n,o)}}}();
