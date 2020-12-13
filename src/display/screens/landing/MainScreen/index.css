@@ -79,7 +79,8 @@ html, body, .MainScreen {
     font-family: var(--poppins-font-family);
 }
 
-.MainScreen #features-list .animated{
+.MainScreen #features-list .animated,
+.MainScreen #features-list .not-animated{
     display: inline-flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -435,6 +436,10 @@ html, body, .MainScreen {
 }
 
 @media screen and (max-width:767px){
+    .MainScreen #separator {
+        display:none;
+    }
+
     #second-tab-alt > div:nth-child(1) > div:nth-child(2){
         top:40px;
     }
@@ -462,7 +467,7 @@ html, body, .MainScreen {
     }
 
     .MainScreen #about {
-        padding-bottom:0 !important;
+        padding-bottom:20px !important;
     }
 
     .MainScreen #about #third-tab-alt div:nth-of-type(2) div.col-sm-4:nth-of-type(2),
