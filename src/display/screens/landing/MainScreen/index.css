@@ -126,9 +126,9 @@ html, body, .MainScreen {
   animation-fill-mode: both;
 }
 
-.MainScreen #hero > div:nth-child(1){
+/* .MainScreen #hero > div:nth-child(1){
     width: 100% !important;
-}
+} */
 
 .MainScreen,
 .MainScreen ul.navigation-bar:nth-child(1) li a,

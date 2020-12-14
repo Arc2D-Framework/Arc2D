@@ -155,7 +155,7 @@
                     </nav>
                 </header>
                 
-                <div id="hero" class="static-header image-version window-height light-text hero-section clearfix">
+                <div id="hero" class="static-header window-height light-text hero-section">
                     <div class="container">
                         <div class="heading-block animated align-center" data-animation="fadeIn" data-duration="700" style="padding-top: 135px;width: 68%;margin: auto;padding-bottom: 10px;">
                             <div class="heading-container">
@@ -172,11 +172,11 @@
                                     <h5 style='margin-bottom: 33px;'>Arc is a meta-framework kernel for building new kinds of engines, from gaming to business-oriented domains. Enforce your own standards in large teams.</h5>
                                 </div>
                             </div>
-                            <a href="resources/doc.html#docs.topics.DocHome" target="new" class="btn btn-solid" style="padding-right: 50px; padding-left: 50px; font-family: var(--poppins-font-family);"><span class="fas fa-mouse-pointer" style="transform: scaleX(-1);"></span> Docs</a>
-                            <a href="#product" class="btn btn-outline" style="font-family: var(--poppins-font-family);font-weight: 400;">Download</a>
+                            <a id="docsLink" href="resources/doc.html#docs.topics.DocHome" target="new" class="btn btn-solid" style="padding-right: 50px; padding-left: 50px; font-family: var(--poppins-font-family);visibility: hidden;opacity: 0;transition: opacity .5s ease;"><span class="fas fa-mouse-pointer" style="transform: scaleX(-1);"></span> Docs</a>
+                            <a id="downloadLink" href="#product" class="btn btn-outline" style="font-family: var(--poppins-font-family);font-weight: 400;visibility: hidden;opacity: 0;transition: opacity .5s ease;">Download</a>
                         </div>
                         
-                        <iframe title="Arc2D Framework - DOM Physics" class="lazyload" data-src="dom-physics.html" style="width: 100%;height: 500px;margin-top: -158px;"></iframe>
+                        <iframe id="dom-physics" referrerpolicy="same-origin" allowfullscreen="false" loading="eager" title="Arc2D Framework - DOM Physics with Box2D" src="dom-physics.html" style="width: 100%;height: 315px;overflow:hidden;visibility: hidden;opacity: 0;transition: opacity .5s ease;" scrolling="no"></iframe>
                     </div>
                 </div>
                    

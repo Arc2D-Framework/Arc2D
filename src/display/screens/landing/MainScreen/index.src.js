@@ -12233,6 +12233,20 @@ namespace `display.screens.landing` (
             // this.userNameInput = this.querySelector("input#user-name");
             // this.signupInputsArray = [this.emailInput, this.userNameInput];
             // this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
+            const docsLink = this.querySelector("#docsLink");
+            const downloadLink = this.querySelector("#downloadLink");
+            const iframe = this.querySelector("#dom-physics");
+            this.cumulutiveShiftElements = [docsLink, downloadLink, iframe];
+            this.cumulitiveElementsFix();
+        }
+
+        cumulitiveElementsFix(){
+            setTimeout(() => {
+               this.cumulutiveShiftElements.forEach(link =>{
+                  link.style.visibility = "visible";
+                  link.style.opacity = "1";
+               })
+         }, 2300);
         }
 
         onHashChange(e){
