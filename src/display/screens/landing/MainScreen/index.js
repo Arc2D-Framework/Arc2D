@@ -4,10 +4,10 @@ import 'display.components.SpeedChart';
 import 'display.components.MemoryAllocation';
 import 'display.components.ToggleButton';
 import '/node_modules/sweetalert/dist/sweetalert.min.js';
-import 'display.worlds.entities.Box2DDemo';
+
 
 namespace `display.screens.landing` (
-    class MainScreen extends Application {
+    class MainScreen extends World {
         constructor(element){
             super(element);
             this._mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -20,9 +20,9 @@ namespace `display.screens.landing` (
             this.loc_chart      = this.querySelector("lines-of-code-chart");
             this.size_button    = this.querySelector("#size-chart-button");
             this.loc_button     = this.querySelector("#loc-chart-button");
-
-            this.addEventListener("click", e => this.onShowSizeChart(), {passive:true}, "#size-chart-button");
-            this.addEventListener("click", e => this.onShowLOCChart(), {passive:true}, "#loc-chart-button");
+            this.box2ddemo      = this.querySelector("box-2d-demo");
+            this.addEventListener("click", e => this.onShowSizeChart(), false, "#size-chart-button");
+            this.addEventListener("click", e => this.onShowLOCChart(), false, "#loc-chart-button");
             // this.addEventListener("click", e => this.onScrollIntoView(e), false, ".navigation-bar a");
             this.size_button.click();//force a click
 
@@ -34,6 +34,20 @@ namespace `display.screens.landing` (
             // this.userNameInput = this.querySelector("input#user-name");
             // this.signupInputsArray = [this.emailInput, this.userNameInput];
             // this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
+            const docsLink = this.querySelector("#docsLink");
+            const downloadLink = this.querySelector("#downloadLink");
+            const iframe = this.querySelector("#dom-physics");
+            this.cumulutiveShiftElements = [docsLink, downloadLink];
+            this.cumulitiveElementsFix();
+        }
+
+        cumulitiveElementsFix(){
+            setTimeout(() => {
+               this.cumulutiveShiftElements.forEach(link =>{
+                  link.style.visibility = "visible";
+                  link.style.opacity = "1";
+               })
+         }, 1400);
         }
 
         onHashChange(e){
@@ -136,6 +150,23 @@ namespace `display.screens.landing` (
                 element1.style.display="block";
                 element2.style.display="none";
             }, 500);
+        }
+
+
+
+        onFixedUpdate = (time) =>{
+            // this.box2ddemo.onFixedUpdate(time)
+        }
+
+
+        onDraw = (interpolation) =>{
+            // this.box2ddemo.onDraw(interpolation)
+            // console.log("draw")
+        }
+
+        onUpdateEnd = (fps, panic) => {
+            // super.onUpdateEnd(fps, panic);
+            // this.box2ddemo.onUpdateEnd(fps, panic)
         }
     }
 );

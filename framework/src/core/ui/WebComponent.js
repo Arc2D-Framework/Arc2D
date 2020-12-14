@@ -363,11 +363,6 @@ namespace `core.ui` (
             return relativeToAbsoluteFilePath(Config.SRC_PATH+"/./index.css",ns);
         }
 
-        /*setClassList() {
-            this.root.className = this.root.className + (this["@cascade"]? 
-                " " + (this.__proto.classes.join(" ")).trim():
-                " " + this.root.classname);
-        }*/
         setClassList() {
             this.root.className = this.root.className + (this["@cascade"]? 
                 " " + (this.__proto.classes.join(" ")).trim():

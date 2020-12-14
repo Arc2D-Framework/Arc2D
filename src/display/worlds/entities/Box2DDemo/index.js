@@ -18,7 +18,7 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
 ;
          
 
-
+@tag("box2d-demo");
 namespace `display.worlds.entities` (
     class Box2DDemo extends WebComponent {
 
@@ -84,7 +84,8 @@ namespace `display.worlds.entities` (
              }
              
              //breathe
-             await wait(100);
+             await wait(1000);
+             // this.querySelector("#container").style.display="inline-block"
              //ready
              this.ready=true;
              //optional debug

@@ -9,7 +9,8 @@ namespace `system.diagnostics.unit.com` (
         }
 
         onClick(e){
-            alert("you clicked me")
+            console.log(this)
+            alert(this.namespace)
         }
 	}
 )
