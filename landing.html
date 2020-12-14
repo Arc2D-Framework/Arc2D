@@ -211,15 +211,13 @@
                                         <lines-of-code-chart class="animation"></lines-of-code-chart>
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-                                        <br/>
                                         <article class="align-center">
                                             <h3 title="Arc2D - Size Comparison Chart vs Other Frameworks/Libraries" alt="Arc2D - Size Comparison Chart vs Other Frameworks/Libraries">
                                                 <span class="highlight">SIZE </span>COMPARISON
                                             </h3>
                                             <p class="sub-title">
-                                                At 10KB, or roughly 1300 Lines of Code (uncompressed LOC), the Arc Engine spares no
-                                                expense. We've aimed for ultra efficiency on mobile,
-                                                desktop and web devices. A low memory (RAM) footprint and small kernel size gives Arc a solid advantage in boot and Time-to-Interactive (TTI) metrics.
+                                                10KB/1400 Lines of Code (LOC). Ultra efficient on mobile,
+                                                desktop and web devices. Low memory (RAM) footprint and small kernel size puts Arc at a solid advantage.
                                             </p>
                                             <!-- <p>You may ask yourself, what's the difference? Most frameworks and libraries source code may contain 5, 10, 20+ thousand lines of code with having to pull in extra dependencies to setup in order to create a simple HelloWorld application. Arc2D is just 900 lines of code, 9KB in size with no dependencies! Here we can see a comparison chart showing you the differences in size.</p>
                                             <br/> -->
@@ -233,22 +231,22 @@
                             <div class="tab-pane" id="second-tab-alt">
                                 <div class="section-content row">
                                     <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-                                        <img style="width:100%;height:100%;" data-src="resources/landing-assets/img/benchmarks.webp" class="img-responsive pull-right lazyload" alt="Arc2D Framework - Benchmarks" />
+                                        <speed-chart></speed-chart>
                                     </div>
                                     <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
-                                        <br/><br/>
                                         <article class="align-center">
                                             <h3>SPEED <span class="highlight">COMPARISON</span></h3>
-                                            <p class="sub-title">Arc2D's benchmark result scores out performs todays industry leading technologies</p>
-                                            <p>According to GitHub user <a href="https://github.com/krausest/js-framework-benchmark" rel="noreferrer" target="_blank">krausest</a>, we've used the JS framework benchmark repository &amp; tested the Arc engine against these modern frameworks and libraries. The results show the power of Arc2D's speed &amp; performance on startup metrics.</p>
+                                            <!-- <p class="sub-title">Arc2D's benchmark result scores out performs todays industry leading technologies</p> -->
+                                            <p>Arcs native ES6 syntax allows direct, <b>to-the-metal</b> DOM manipulation at speeds
+                                            comparable to pure vanilla js. </p>
                                         </article>
-                                        <speed-chart></speed-chart>
+                                        
                                     </div>
                                 </div>
                             </div>
                 
                             <div class="tab-pane" id="third-tab-alt">
-                                <div class="section-header align-center">
+                                <!-- <div class="section-header align-center">
                                     <h2>LOW MEMORY FOOTPRINT</h2>
                                     <p class="sub-header animated" data-duration="700" data-animation="fadeInDown">
                                         From boot to run cycles, Arc2D uses the least amount of memory.
@@ -284,19 +282,18 @@
                                             </p>
                                         </article>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="col-sm-6">
-                                    <br><br>
-                                    <article class="align-center">
-                                        <h3>MEMORY <span class="highlight">ALLOCATION</span></h3>
-                                        <p class="sub-title">In terms of memory allocation &amp; overall, Arc2D takes the leading streak in all tests put up against React, Angular &amp; Vue</p>
-                                        <p>It's particually important how frameworks and libraries perform from ready memory, run memory and stress testing memory usage. Arc holds up almost identical to Vanilla JS while others fall behind in other areas.</p>
-                                    </article>
-                                </div>
+                                
 
                                 <div class="col-sm-6">
                                     <memory-allocation></memory-allocation>
+                                </div>
+                                <div class="col-sm-6">
+                                    <article class="align-center">
+                                        <h3>MEMORY <span class="highlight">ALLOCATION</span></h3>
+                                        <p></p>
+                                    </article>
                                 </div>
                             </div>
                         </div>
