@@ -758,7 +758,6 @@ namespace `display.screens.landing` (
             this.box2ddemo      = this.querySelector("box-2d-demo");
             this.addEventListener("click", e => this.onShowSizeChart(), false, "#size-chart-button");
             this.addEventListener("click", e => this.onShowLOCChart(), false, "#loc-chart-button");
-            // this.addEventListener("click", e => this.onScrollIntoView(e), false, ".navigation-bar a");
             this.size_button.click();//force a click
 
             this.core_features = this.querySelectorAll(".core");
@@ -771,7 +770,6 @@ namespace `display.screens.landing` (
             // this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
             const docsLink = this.querySelector("#docsLink");
             const downloadLink = this.querySelector("#downloadLink");
-            const iframe = this.querySelector("#dom-physics");
             this.cumulutiveShiftElements = [docsLink, downloadLink];
             this.cumulitiveElementsFix();
         }
@@ -782,7 +780,7 @@ namespace `display.screens.landing` (
                   link.style.visibility = "visible";
                   link.style.opacity = "1";
                })
-         }, 1400);
+            }, 1400);
         }
 
         onHashChange(e){
@@ -797,7 +795,6 @@ namespace `display.screens.landing` (
         onScrollIntoView(e){
             e.preventDefault();
             e.stopPropagation();
-            
         }
 
         randomNumber(min, max) {
@@ -886,8 +883,6 @@ namespace `display.screens.landing` (
                 element2.style.display="none";
             }, 500);
         }
-
-
 
         onFixedUpdate = (time) =>{
             // this.box2ddemo.onFixedUpdate(time)
