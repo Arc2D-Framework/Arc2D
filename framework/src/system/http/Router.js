@@ -28,7 +28,7 @@ namespace `system.http` (
                 //TODO: add logic for debug path, see bootloader how it uses .src.js and .min.js
                 var path = filename_path.replace("*", Config.USE_COMPRESSED_BUILD ? "min.":"");
                 var cl = new system.http.ClassLoader;
-                cl.load(ns, Config.ROOTPATH + path, data => this.onActivityLoaded(ns,NSRegistry[ns],scrollTo));
+                cl.load(ns, path, data => this.onActivityLoaded(ns,NSRegistry[ns],scrollTo));
             } else {    
                 this.application.onResumeActivity && 
                 this.application.onResumeActivity(NSRegistry[ns],scrollTo);

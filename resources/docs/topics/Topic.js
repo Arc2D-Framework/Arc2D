@@ -7,7 +7,7 @@ namespace `docs.topics` (
             hljs.getLanguage('javascript').keywords += ' namespace'; // note the leading space
         }
 
-        onLoadStyle(url){ return Config.SRC_PATH+"/docs/topics/index.css" }
+        onLoadStyle(url){ return Config.SRC_PATH+"docs/topics/index.css" }
 
         onLanguageChange(){
         	var lang = application.current_language;;

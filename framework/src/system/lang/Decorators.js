@@ -17,6 +17,7 @@ window.stylesheets = function stylesheets (target, paths){
 }
 
 function traits(target, __traits){
+    console.warn(`@traits is deprecated in favor of 'extends Y.with(Z)'`,target.name)
     var inheritTraits = function(klass, properties){
         properties = properties.reverse();
         properties.forEach(trait => {
@@ -59,6 +60,10 @@ window.cascade = function cascade(target,shouldCascade){
 window.prop = function prop(target,key,val){
     target.prototype[key] = val;
 }
+
+// window.tag = function tag(target, name){
+//     try{target.define(target,name);}catch(e){}
+// }
 
 window.tag = function tag(target, name){
     target.prototype["ns-trait-tagname"]=name;

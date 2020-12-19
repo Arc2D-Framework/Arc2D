@@ -1,4 +1,4 @@
-
+import 'display.components.Label';
 
 namespace `display.components` (
 	class MoviesList extends w3c.ui.WebComponent {
@@ -22,6 +22,9 @@ namespace `display.components` (
 			}
 		}
 
+		hasSlots(){
+			return true
+		}
 
         async onConnected(){
         	// for now, dont render anything when connected.

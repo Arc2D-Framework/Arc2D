@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", e => {
       var c = (Config.ENABLE_TRANSPILER) ?
         new system.http.ClassLoader :
         null;
-        c.load(ns, Config.ROOTPATH + path, async function init(res) {
+        c.load(ns, path, async function init(res) {
           Config.USE_COMPRESSED_BUILD=false;
           if(!NSRegistry[ns]) {
             await wait(1000/30);

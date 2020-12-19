@@ -21,6 +21,32 @@ namespace `core.ui` (
             return el && el.parentNode && el.parentNode.nodeType==1
         }
 
+        // static define(proto=this,name){
+        //     if(proto == WebComponent||proto == Application||proto == World){return}
+        //     var ce = window.customElements;
+        //     var tag = (name||proto.classname||proto.name||'').replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
+        //     if(tag && ce.get(tag)){
+        //         console.log(`Class ${proto.classname||proto.name} already defined by another tag '${tag}'`);
+        //         return
+        //     }
+            
+        //     if(/\-/.test(tag)){
+        //         if(ce.get(tag)){return}
+        //         this.defineAncestors();
+        //         this.defineAncestralClassList();
+        //         try{
+        //             ce && ce.define(tag, this);
+        //             proto["ns-tagname"] = tag;
+        //         }
+        //         catch(e){
+        //             console.warn(`${proto.name} already registerd as tag: '${proto["ns-tagname"]}'. Ignoring tag '${tag}'`)
+        //             throw e
+        //         }
+        //     }    
+        // }
+
+
+        //WORKING::
         static define(proto,bool){
             var ce = window.customElements;
             var tag = proto.classname.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
@@ -32,9 +58,12 @@ namespace `core.ui` (
                 this.defineAncestors();
                 this.defineAncestralClassList();
                 try{ce && ce.define(tag, this);}
-                catch(e){console.error(e)}
+                catch(e){
+
+                }
             }     
         }
+
 
         setStylesheet () {    
             var css = this.cssStyle();
@@ -71,8 +100,7 @@ namespace `core.ui` (
                     //TODO: use error code
                     console.error(`${e.message} Unable to adopt stylesheet 
                         into shadow dom -- ${this.namespace}#onAppendStyle(), 
-                        see: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690.
-                        As a workaround, @import the css from within <template>`)
+                        see: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690.`)
                 }
             }
             else {
@@ -104,7 +132,7 @@ namespace `core.ui` (
             this.addEventListener(evtName, handler, bool, el)
         }
 
-        addEventListener(evtName, handler, bool={capture:false,passive:true}, el) {
+        addEventListener(evtName, handler, bool=false, el) {
             var self = this;
             if (typeof el == "string") {
                 this.addEventListener(evtName, e => {
@@ -112,9 +140,10 @@ namespace `core.ui` (
                     if (t) {
                         handler({
                             target: t,
+                            realtarget: e.target,
                             src: e,
-                            preventDefault :  e => e.preventDefault(),
-                            stopPropagation:  e => e.stopPropagation()
+                            preventDefault:  () => e.preventDefault(),
+                            stopPropagation: () => e.stopPropagation()
                         });
                     }
                 }, bool);
@@ -175,7 +204,7 @@ namespace `core.ui` (
                 if(/\/*\.html$/.test(tem)){
                     var src=this.src||tem;//TODO: bug here?
                     var opts = Config.IMPORTS_CACHE_POLICY;
-                    src = src.replace("/./", "/" + this.namespace.replace(/\./gim, "/") + "/");
+                    src = src.replace("/./", this.namespace.replace(/\./gim, "/") + "/");
                     this._template = await imports(src, opts);
                 }
                 else if(/<\s*\btemplate\b/.test(tem)){//from inner template()
@@ -206,6 +235,7 @@ namespace `core.ui` (
             await this.render(data);
         }
         
+        //TODO: Refactor
         async render(data={}) {
             if(this.isExistingDomNode(this.element)){
                 this.onTemplateRendered(temNode);
@@ -216,8 +246,8 @@ namespace `core.ui` (
                 var html = await this.evalTemplate(t, data);
                 var temNode = html.toDomElement();
                     temNode = temNode.content;
-                if (!this.inShadow()) {
-                    this.slots.forEach(slot => {
+                if (!this.inShadow() && this.isComposable()) {
+                    for(let slot of this.slots){
                         var slotName = slot.getAttribute('slot');
                         var placeholder = temNode.querySelector(`slot[name="${slotName}"]`);
                         if( placeholder){
@@ -226,7 +256,7 @@ namespace `core.ui` (
                             }
                         }
                         (placeholder||temNode).appendChild(slot)
-                    })
+                    }
                 }
                 if(this.element){
                     this.innerHTML = "";
@@ -238,6 +268,10 @@ namespace `core.ui` (
                 }
                 this.onTemplateRendered(temNode);
             }
+        }
+
+        isComposable(){
+            return false
         }
 
         template(){return null}
@@ -259,7 +293,7 @@ namespace `core.ui` (
         }
 
         async onTemplateLoaded() {
-            this.slots = this.getSlots();
+            this.slots = this.isComposable()&&this.getSlots();
             this.setClassList();
             this.setPrototypeInstance();
             this.defineAncestralStyleList();
@@ -333,29 +367,17 @@ namespace `core.ui` (
                 stylesheets.push(this.getNSStyleSheet(this.namespace))
             }
             stylesheets.push(...this.prototype["@stylesheets"]||[]);
-            if(!this['@cascade']){
-                return
-            }
-            var ancestor = this.__proto.ancestor
-
+            if(!this['@cascade']){ return }
+            var ancestor = this.__proto.ancestor;
             while(ancestor) {
-                if( ancestor != core.ui.WebComponent && 
-                    ancestor != core.ui.Application  &&
-                    ancestor != core.ui.World       &&
+                if( ancestor != WebComponent && 
+                    ancestor != Application  &&
+                    ancestor != World        &&
                     ancestor.prototype.onLoadInstanceStylesheet() ){
-                    
                     stylesheets.unshift(...ancestor.prototype["@stylesheets"]||[]);
                     stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
                     ancestor = ancestor.prototype.ancestor;
-
-                    //TODO: What if current ancestor is not cascading?
-                    //TODO: What if the next ancestor is not cascading?
-                    // if(!ancestor.prototype['@cascade']){
-                    //     break;
-                    // }
-                } else { 
-                    break 
-                }
+                } else { break }
             }
         }
 
@@ -364,9 +386,9 @@ namespace `core.ui` (
         }
 
         setClassList() {
-            this.root.className = this.root.className + (this["@cascade"]? 
-                " " + (this.__proto.classes.join(" ")).trim():
-                " " + this.root.classname);
+            this.root.className += (this["@cascade"]? 
+                " " + (this.__proto.classes.join(" ")):
+                " " + this.root.classname).trim();
         }
 
         getStyleSheets() {
@@ -417,22 +439,18 @@ namespace `core.ui` (
 
         onLoadStyle(url){ return url }
         
-
         setPrototypeInstance() {
             this.setAttribute("namespace", this.namespace);
             this.prototype = this;
         }
 
-        initializeChildComponents (el){//TODO: called everytime for all components, need to optimize.
-            el = el||this.root;
-            var nodes = this.querySelectorAll("*");
-                nodes = [].slice.call(nodes);
+        hasChildComponents(){return false}
+
+        initializeChildComponents (el=this.root){
+            if(!this.hasChildComponents()){return}
+            var nodes = Array.from(el.querySelectorAll("*"));
                 nodes.forEach(n => {
-                    if(n && n.nodeType == 1) {
-                        var tag = n.tagName.toLowerCase();
-                        var c = window.registered_tags[tag];
-                        c && c.define(c.prototype,true);
-                    }
+                    if(n && n.nodeType == 1) {/*TODO: implement*/}
                 })
         }
 

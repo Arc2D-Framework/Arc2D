@@ -15,7 +15,11 @@ if(!Function.prototype.with){
   Function.prototype.with = function(...mixin) {
     class c extends this{};
     for(let m of mixin){
-        reflect(c.prototype, m.prototype);
+        if(typeof m =="object") {
+            reflect(c.prototype, m);
+        } else{
+            reflect(c.prototype, m.prototype);
+        }
     }
     return c
   };

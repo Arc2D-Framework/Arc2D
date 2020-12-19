@@ -2,7 +2,7 @@ import 'src/system/lang/Decorators.js';
 
 ; (function(env) {
     env.NSRegistry = env.NSRegistry||{};
-    
+    try{env.Meta= class{};}catch(e){};
     env.namespace = function(ns){
         ns = ns[0];
         return function(...defs){
@@ -40,4 +40,14 @@ import 'src/system/lang/Decorators.js';
         } catch(e){ return func }
         return func
     };
+
+    // var createClass = function(func){
+    //     try {
+    //         var proto  = func.prototype;
+    //             proto.ancestor = proto.__proto__.constructor;
+    //             try{  func.define(func) }catch(e){};
+    //             return func;
+    //     } catch(e){ return func }
+    //     return func
+    // };
 })(typeof window !="undefined" ? window : global);

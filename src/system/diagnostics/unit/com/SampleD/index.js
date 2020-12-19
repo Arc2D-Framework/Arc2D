@@ -5,7 +5,7 @@ namespace `system.diagnostics.unit.com` (
         }
 		async onConnected(){
             super.onConnected();
-            this.addEventListener("click", this.onClick)
+            this.addEventListener("click", e=>this.onClick(e))
         }
 
         onClick(e){

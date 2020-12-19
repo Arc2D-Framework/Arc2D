@@ -1,8 +1,9 @@
-@traits([system.diagnostics.UnitTest]);
+
+
 namespace `system.diagnostics.unit` (
-    class Klass {
+    class Klass extends system.diagnostics.UnitTest  {
         constructor(){
-            // alert(this.getNs())
+            super()
         }
 
 

@@ -1,11 +1,10 @@
 import! 'domain.collections.Movies';
 
-@traits([system.diagnostics.UnitTest]);
-namespace `system.diagnostics.unit` (
-    class Repositories {
-        constructor(){
-            
 
+namespace `system.diagnostics.unit` (
+    class Repositories extends system.diagnostics.UnitTest {
+        constructor(){
+            super()
         }
 
 

@@ -1,8 +1,8 @@
-@traits([system.diagnostics.UnitTest]);
+
 namespace `system.diagnostics.unit` (
-    class WebComponents {
+    class WebComponents extends system.diagnostics.UnitTest {
         constructor(){
-            // alert(this.getNs())
+            super()
         }
 
 
@@ -40,6 +40,7 @@ namespace `system.diagnostics.unit` (
             );
 
 
+
             namespace `system.diagnostics.unit.com` (
                 class ToggleButtonExtended extends system.diagnostics.unit.com.ToggleButton {
                     async onConnected(){
@@ -69,6 +70,58 @@ namespace `system.diagnostics.unit` (
                 }
             );
 
+            this.expected("to make an instance of ToggleButtonExtended using createElement", (resolve,reject) => {
+                var b = document.createElement("toggle-button-extended")
+                if(b) {
+                    if(b instanceof system.diagnostics.unit.com.ToggleButton){
+                        document.body.appendChild(b)
+                        resolve(true)
+                    } else {
+                        reject("the instance created from '<toggle-button-extended>', is not an instanceof ToggleButton")
+                    }
+                } else {
+                    reject("tagname '<toggle-button-extended>', the default, is not working")
+                }
+            });
+
+
+            this.expected(`@tag trait to not re-define a new/custom tag for ToggleButtonExtended class, which is already defined with a tag in CustomElementsRegistrty`, (resolve,reject) => {
+
+                try{
+                    tag(system.diagnostics.unit.com.ToggleButtonExtended,"toggle-extended")
+                }
+                catch(e){
+                    debugger
+                    resolve(true);
+                    return
+                };
+            });
+
+
+            this.expected(`@tag trait to define a tag when a Class cannot generate its own from the Class name`, (resolve,reject) => {
+                namespace `system.diagnostics.unit.com` (
+                    class Toggle extends system.diagnostics.unit.com.ToggleButton {
+                        
+                    }
+                );
+
+                try{tag(system.diagnostics.unit.com.Toggle,"toggle-custom")}
+                catch(e){
+                    reject(e)
+                    return
+                };
+                var b = document.createElement("toggle-custom")
+
+                if(b) {
+                    if(b instanceof system.diagnostics.unit.com.Toggle){
+                        resolve(true)
+                    } else {
+                        reject("the instance created from '<toggle-custom>' tage, is not an instanceof Toggle")
+                    }
+                } else {
+                    reject("tagname '<toggle-custom>', the custom tag, is not working")
+                }
+            });
 
             
             this.expected("the ability to create a simple WebComponent class", (resolve,reject) => {
@@ -82,12 +135,6 @@ namespace `system.diagnostics.unit` (
 
 
             this.expected("the ability to create a simple WebComponent instance", (resolve,reject) => {
-                // namespace `com` (
-                //     class ToggleButton extends w3c.ui.WebComponent {
-
-                //     }
-                // );
-
                 if(new system.diagnostics.unit.com.ToggleButton) {
                     resolve(true)
                 } else {
@@ -100,12 +147,6 @@ namespace `system.diagnostics.unit` (
 
 
             this.expected("ToggleButton to be instanceof HTMLElement", (resolve,reject) => {
-                // namespace `com` (
-                //     class ToggleButton extends w3c.ui.WebComponent {
-
-                //     }
-                // );
-
                 if(new system.diagnostics.unit.com.ToggleButton instanceof HTMLElement) {
                     resolve(true)
                 } else {
@@ -117,23 +158,13 @@ namespace `system.diagnostics.unit` (
 
 
             this.expected("ToggleButton to be in DOM", async (resolve,reject) => {
-                // namespace `com` (
-                //     class ToggleButton extends w3c.ui.WebComponent {
-
-                //     }
-                // );
-                // console.log("app",application)
-                // await wait(300);
                 var b = new system.diagnostics.unit.com.ToggleButton;
                 try{
                     application.appendChild(b)
-                    // console.log(b)
                     resolve(true)
                 } catch(e){
                     reject("was unable to append instance to DOM: " + e.message)
                 }
-
-                
             });
 
 
@@ -172,7 +203,6 @@ namespace `system.diagnostics.unit` (
                 await wait(100);
                 var dampled = application.querySelector("sample-d #sample-d-html-123");
                 if(dampled){
-                    // n.remove();
                     resolve(true)
                 } else {
                     reject("no sample d")
