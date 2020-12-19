@@ -23,7 +23,6 @@ namespace `display.screens.landing` (
             this.box2ddemo      = this.querySelector("box-2d-demo");
             this.addEventListener("click", e => this.onShowSizeChart(), false, "#size-chart-button");
             this.addEventListener("click", e => this.onShowLOCChart(), false, "#loc-chart-button");
-            // this.addEventListener("click", e => this.onScrollIntoView(e), false, ".navigation-bar a");
             this.size_button.click();//force a click
 
             this.core_features = this.querySelectorAll(".core");
@@ -36,9 +35,10 @@ namespace `display.screens.landing` (
             // this.on("submit", (e) => this._validateEmail(e), false, ".subscribe-form");
             const docsLink = this.querySelector("#docsLink");
             const downloadLink = this.querySelector("#downloadLink");
-            const iframe = this.querySelector("#dom-physics");
             this.cumulutiveShiftElements = [docsLink, downloadLink];
             this.cumulitiveElementsFix();
+
+            // this.setupEditorContent();
         }
 
         cumulitiveElementsFix(){
@@ -53,16 +53,10 @@ namespace `display.screens.landing` (
         onHashChange(e){
             /*var hash = location.hash;
                 debugger;
-            var section = this.querySelector(`section${hash}`)||this.querySelector(`${hash}`)
+            var section = this.querySelector(\`section${hash}`)||this.querySelector(`${hash}`)
             if(section){
                 section.scrollIntoView({behavior:"smooth",block:"start"});
             }*/
-        }
-
-        onScrollIntoView(e){
-            e.preventDefault();
-            e.stopPropagation();
-            
         }
 
         randomNumber(min, max) {
@@ -150,23 +144,6 @@ namespace `display.screens.landing` (
                 element1.style.display="block";
                 element2.style.display="none";
             }, 500);
-        }
-
-
-
-        onFixedUpdate = (time) =>{
-            // this.box2ddemo.onFixedUpdate(time)
-        }
-
-
-        onDraw = (interpolation) =>{
-            // this.box2ddemo.onDraw(interpolation)
-            // console.log("draw")
-        }
-
-        onUpdateEnd = (fps, panic) => {
-            // super.onUpdateEnd(fps, panic);
-            // this.box2ddemo.onUpdateEnd(fps, panic)
         }
     }
 );

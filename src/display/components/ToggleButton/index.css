@@ -5,7 +5,6 @@
     display: block;
     background: lightgray;
     border-radius: 30px;
-    box-sizing: content-box;
     padding: 3px;
     perspective: 3000px;
     box-sizing: unset !important;

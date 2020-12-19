@@ -59,6 +59,13 @@ html, body, .MainScreen {
     margin: 50px auto 0 auto;
 }
 
+.MainScreen #samples #toggle-button-snippet .text-center.p-3{
+    height: 300px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c6bfbf #282c34;
+}
+
 .MainScreen #features {
     margin-bottom:0 !important;
 }
@@ -398,6 +405,11 @@ html, body, .MainScreen {
 /* MEDIA QUERIES */
 
 @media screen and (max-width:480px){
+    .MainScreen .hero-section {
+        display:block !important;
+        min-height:0 !important;
+    }
+
     .MainScreen .footer .social-wrap {
         height: auto !important;
     }

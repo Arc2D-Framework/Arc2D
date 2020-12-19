@@ -56,13 +56,14 @@
         <!-- <script type="text/javascript" src="resources/landing-assets/js/jquery.plugin.js" defer></script> -->
         <script type="text/javascript" src="resources/landing-assets/js/jquery.waypoints.min.js" defer></script>
         <script type="text/javascript" src="resources/landing-assets/js/startup-script.js" defer></script>
-        <script src="resources/landing-assets/js/Chart.min.js"></script>
+        <script type="text/javascript" src="resources/landing-assets/js/Chart.min.js"></script>
         <script type="text/javascript" src="resources/landing-assets/js/lazysizes.min.js" defer></script>
+        <!-- <script type="text/javascript" src="https://unpkg.com/codeflask/build/codeflask.min.js" defer></script> -->
         
         
         <script src="node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
-            Config.USE_COMPRESSED_BUILD=true;
+            Config.USE_COMPRESSED_BUILD=false;
             Config.DEBUG=true; //true loads .src.js, false loads .min.js
             // Config.ROOTPATH = "../../../framework/";
             // Config.SRC_PATH = "/src/";
@@ -357,6 +358,8 @@
                         </div>
                     </div>
                 </section>
+
+                <hr class="no-margin">
                 
                 <!-- <section id="features" class="section features-section align-center inverted">
                     <div class="container">
@@ -407,7 +410,28 @@
                         </div>
                     </div>
                 </section> -->
-                <a name="features-list"></a>
+                <!-- <a name="features-list"></a> -->
+                <section id="samples" class="section align-center dark-text">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>ARC2D DEMO <span class="highlight">SNIPPETS</span></h2>
+                        </div>
+                        <div class="col-sm-6" id="toggle-button-snippet">
+                            <script src="https://gist.github.com/jamesta696/9983566327a0d8e7a1e9329e812a0873.js"></script>
+                        </div>
+                        <div class="col-sm-6">
+                            <article class="align-center">
+                                <h3>TOGGLE <span class="highlight">BUTTON</span></h3>
+                            </article>
+                            <toggle-button style="display: inline-block;">
+                                <template>    
+                                    <div class="knob"></div>
+                                </template>
+                            </toggle-button>
+                        </div>
+                    </div>
+                </section>
+
                 <section id="features-list" class="section features-list-section align-center dark-text">
                     <div class="container">
                         <div style="display: flex;justify-content: center;margin-bottom: 33px;">
