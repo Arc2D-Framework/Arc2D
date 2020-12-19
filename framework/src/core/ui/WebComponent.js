@@ -222,7 +222,6 @@ namespace `core.ui` (
 
         getTemplateToLoad(){
             var engine = this.getTemplateEngine();
-
             return  this.querySelector("template")||    //node
                     this.src||                          //uri
                     this.template()||                   //string
@@ -231,9 +230,7 @@ namespace `core.ui` (
         }
 
 
-        async onConnected(data) { 
-            await this.render(data);
-        }
+        async onConnected(data) { await this.render(data) }
         
         //TODO: Refactor
         async render(data={}) {
