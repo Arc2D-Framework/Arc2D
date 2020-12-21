@@ -193,14 +193,39 @@ body, html {
           The namespace <code>"applications.HelloWorld"</code>, is a hint to the engine about what Class to use for this application. The <code>&#x3C;hello-world&#x3E;</code> tag was generated automatically based on the CamelCase name taken from the <code>HelloWorld</code> class.
         </p>
         <p>
-          Per the w3c WebComponent specs, tag names require a dash. <em>You cannot have a single word tagName.</em>
+          <em>Based on w3c WebComponent specs, <b>tag names require a dash</b>. You cannot have a single word tag-name.</em>
           It is recommended then that your ClassName is <strong>C</strong>amel<strong>C</strong>ased. Arc relies on this
           pattern for generating a custom tag for use in HTML.
         </p>
         <p>
           <strong>IMPORTANT:</strong><br/>
           If you ever discover that your application is not initializing within the shell page and there are no warnings
-          or errors, check your ClassName, that it follows a <strong>C</strong>amel<strong>C</strong>ased convention. Alternatively, you may use the <code>@tag</code> decorator on your Class to create a custom tag-name. See: <a href="#docs.topics.JavascriptDecorators/traits">Traits</a>
+          or errors, check your ClassName, that it follows a <strong>C</strong>amel<strong>C</strong>ased convention. Alternatively, you may use the <em><code>@tag</code></em> decorator on your Class to create a custom tag-name. See: <a href="#docs.topics.JavascriptDecorators/traits">Traits</a>.
+        </p>
+        <p>
+          Example:
+          <pre class="inline javascript lang">
+            <code>
+@tag("my-panel");
+namespace \`core.ui\` (
+  class Panel {
+    onConnected(){
+      ...
+    }
+  }
+)
+            </code>
+          </pre>
+        </p>
+        <p>
+          Which would then allow the component to be embedded within HTML by it's tag-name:
+          <pre class="inline html lang">
+            <code>
+&#x3C;body namespace="applications.HelloWorld"&#x3E;
+  &#x3C;my-panel&#x3E;&#x3C;/my-panel&#x3E;
+&#x3C;/body&#x3E;
+            </code>
+          </pre>
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -220,8 +245,8 @@ body, html {
           The namespace, folder structure and tags are highly cohesive and related to each other.
           <ul>
             <li>Namespaces are always lower case</li>
-            <li>Class names are 2 words in CamelCase</li>
-            <li>The folders should always mirror the namespaces</li>
+            <li>Class names should be at least 2 words CamelCased; or use <code>@tag()</code> to generate a compliant HTML5 tag-name</li>
+            <li>The folder structure should always mirror the namespace</li>
           </ul>
         </p>
       </div>

@@ -790,4 +790,4 @@ var Main = /** @class */ (function (_super) {
 }(Group));
 var TWEEN = new Main();
 
-export {TWEEN};
+export {TWEEN, Easing};

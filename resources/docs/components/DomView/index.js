@@ -16,7 +16,7 @@ namespace `docs.components` (
 
         onStyleComputed(style){//wait for styles
             var canvasBounds = this.getBoundingClientRect();
-            wait(300).then(e => {
+            wait(1000).then(e => {
                 var node = this.querySelector(".WebComponent");
                 var rect = node.getBoundingClientRect();
                 var node_half_w = (rect.width/2);
@@ -27,6 +27,9 @@ namespace `docs.components` (
             })
         }
 
+        isComposable(){
+          return true
+        }
 
         onMouseDown(e){
             this.lastMouseX = e.clientX;

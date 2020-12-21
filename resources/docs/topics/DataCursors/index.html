@@ -53,7 +53,7 @@
         limit:2
     });
 
-    var results = cursor.next();//store first 2 items
+    var results = cursor.next();//next 2 items
                     </code>
                 </pre>
             </p>      
@@ -91,7 +91,7 @@
     });
 
     if(cursor.hasNext()) {
-        var results = cursor.next();//store first 2 items
+        var results = cursor.next();//next first 2 items
     }
                     </code>
                 </pre>
@@ -128,8 +128,8 @@
     });
 
     if(cursor.hasNext()) {
-        var results = cursor.next();//store first 2 items
-        var previousResults = cursor.previous();//store last 2 items
+        var results = cursor.next();//next first 2 items
+        var previousResults = cursor.previous();//next last 2 items
     }
                     </code>
                 </pre>

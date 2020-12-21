@@ -26,6 +26,10 @@ namespace `docs.demos.ui.mods` (
                 this.classList.remove("on")
         }
 
+        isComposable(){
+          return true
+        }
+
         get x() {
             return this.direction > 0 ?
                 this.bounds.width-this.knob_bounds.width-6 : 0;
