@@ -50,6 +50,10 @@ namespace `docs.components` (
               this.walk(node.nextElementSibling, cb)
             }
         }
+
+        isComposable(){
+          return true
+        }
     
 
         init() {

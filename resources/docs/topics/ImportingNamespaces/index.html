@@ -69,13 +69,18 @@
                   <tbody>
                     <tr>
                       <td><code>import &nbsp;'core.ui.Person';</code></td>
-                      <th>A Folder</th>
-                      <td><code style="color: green;">src/core/ui/Person/</code></td>
+                      <th>index.js</th>
+                      <td><code style="color: green;">/core/ui/Person/index.js</code></td>
                     </tr>
                     <tr>
                       <td><code>import! 'core.ui.Person;</code></td>
-                      <th>A File</th>
-                      <td><code style="color: green;">src/core/ui/Person.js</code></td>
+                      <th>Person.js</th>
+                      <td><code style="color: green;">/core/ui/Person.js</code></td>
+                    </tr>
+                    <tr>
+                      <td><code>import '/src/core/ui/Person.js;</code></td>
+                      <th>Person.js</th>
+                      <td><code style="color: green;">/core/ui/Person.js</code></td>
                     </tr>
                   </tbody>
                 </table>
@@ -83,8 +88,11 @@
 
             <p>
               <ul>
-                <li>The 1st import will look for an index.js file inside the folder, /Person</li>
-                <li>The 2nd import will look for a Person.js file inside the folder, src/core/ui/</li>
+                <li>The 1st import loads the default index.js file from the folder, /core/ui/Person/. Only used
+                for WebComponent packages that have multiple separated assets (html, css & js)</li>
+                <li>The 2nd & 3rd import rule loads a Person.js file from the folder, /core/ui/,
+                and are equivelent. May also be used for WebComponents that have their html & css inlined within the JavaScript.
+                Note that in the file-path import (3rd rule), "/src" must be prefixed to form a full relative path to the "src" directory.</li>
               </ul>
             </p>
 
@@ -163,13 +171,14 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Won't imports slow down my app's load time?</h1>
         <p>
-          Yes and no. If you find yourself importing 20 or more dependencies from a single JaavaaScript file,
+          Yes and no. If you find yourself importing 20 or more dependencies from a single JavaScript file,
           each pause in code execution to wait for download will hold up code execution momentarily (based on network lag).
           But with a limited set of imports which is more common, the effects won't be much noticeable.
         </p>
         <p>
           This development strategy is recommended during development and testing, but should be
-          prefabricated when releasing a production build.
+          prefabricated when releasing a production build. The Arc SDK ships with a tool to link and
+          compress all dependencies into 1 file, this tool is not available in Arc Core version.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -191,6 +200,10 @@
           every dependency into a single compiled file that will load in 1 step. No more
           execution pausing. But should not be done until you're ready for a production
           release.
+        </p>
+        <p>
+          The Seam tool handles stiching together all app dependencies and are only
+          availabled as part of the Arc SDK download.
         </p>
       </div>
       <div style="width: 50%;display: block;">

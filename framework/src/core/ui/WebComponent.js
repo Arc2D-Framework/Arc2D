@@ -383,7 +383,7 @@ namespace `core.ui` (
         }
 
         setClassList() {
-            this.root.className += (this["@cascade"]? 
+            this.root.className += " " + (this["@cascade"]? 
                 " " + (this.__proto.classes.join(" ")):
                 " " + this.root.classname).trim();
         }

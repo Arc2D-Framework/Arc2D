@@ -24,6 +24,10 @@ namespace `docs.demos.ui` (
             this.onRender();
         }
 
+        isComposable(){
+          return true
+        }
+
         get x() {
             return this.value > 0 ?
                 this.bounds.width-this.knob_bounds.width-6 : 0;

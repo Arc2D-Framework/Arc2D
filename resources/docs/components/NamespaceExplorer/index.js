@@ -11,5 +11,7 @@ namespace `docs.components` (
             },200)
             
         }
+
+        isComposable(){ return true}
 	}
 )

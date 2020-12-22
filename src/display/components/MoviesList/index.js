@@ -22,10 +22,6 @@ namespace `display.components` (
 			}
 		}
 
-		hasSlots(){
-			return true
-		}
-
         async onConnected(){
         	// for now, dont render anything when connected.
         	// will appear blank/hidden on screen
