@@ -69,7 +69,7 @@ namespace `core.ui` (
             var css = this.cssStyle();
             !!css && !this.__proto._style_defined ? 
                 (this.onAppendStyle(
-                    `<style>\n${this.onTransformStyle(css)}\n</style>`.toDomElement()),
+                    `<style>\n${this.onTransformStyle(css)}\n</style>`.toNode()),
                     this.__proto._style_defined=false
                 ) : null;
         }
@@ -241,7 +241,7 @@ namespace `core.ui` (
             var t = this._template;
             if (t) {
                 var html = await this.evalTemplate(t, data);
-                var temNode = html.toDomElement();
+                var temNode = html.toNode();
                     temNode = temNode.content;
                 if (!this.inShadow() && this.isComposable()) {
                     for(let slot of this.slots){
