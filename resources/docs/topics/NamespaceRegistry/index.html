@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">JavaScript Namespace Registry</h1>
@@ -26,7 +26,7 @@ console.log(NSRegistry)
 
 
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">What can this be used for?</h1>
@@ -36,9 +36,9 @@ console.log(NSRegistry)
           <img src="docs/images/ns-registry.png" style="width:100%;"/>
         </p>
         <p>
-          Look at the <code>core.drivers.storage</code> namespace, under it are 3 storage
+          Look at the <code>core.drivers.storage</code> namespace. Under it are 3 storage
           drivers. The left side of the table are the keys and the right side are Classes
-          in memory registered to those keys.
+          in memory that are registered to those keys.
         </p>
         <p>
           It is possible to access the NSRegistry by string-based keys to get a reference
@@ -122,10 +122,10 @@ console.log(NSRegistry)
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Dependency Inversion</h1>
         <p>
-          When you reach the topic on <a href="#docs.topics.DataAccessIntro">Data Access</a>, you'll learn how to create Repositories. Repositories are collections of data objects, like recipes, songs, movies and so on.
+          When you reach the Chapter titled <a href="#docs.topics.DataAccessIntro">Domain</a>, you'll learn how to create Repositories. Repositories are collections of data objects, like recipes, songs, movies and so on.
         </p>
         <p>
-          One key feature of Arcs Repository design pattern is allowing the developer to specify what kind of storage technology should be used for read/write of data. Drivers such as MongoDB, Memory, LocalStorage etc can be specified as follows:
+          One key feature of Arc's Repository design pattern is allowing the developer to specify what kind of storage technology should be used for read/write of data. Drivers such as MongoDB, Memory, LocalStorage etc can be specified as follows:
         </p>
         <p>
           <pre class="inline javascript lang">
@@ -147,7 +147,7 @@ namespace \`core.data\` (
           a string representation of the namespace, NOT a hard-coded literal namespace. Internally, Arc gets the Storage handler from NSRegistry.
         </p>
         <p>
-          This is an advance technique and you may not have to do this in simple applications. It is worth looking into the S.O.L.I.D principals of programming for a greater understand of the Dependency Inversion Principal.
+          This is an advanced technique, and you may not have to do this in simple applications. It is worth looking into the S.O.L.I.D principals of programming for a greater understanding of the Dependency Inversion Principal.
         </p>
       </div>
       <div style="width: 50%;display: block;">

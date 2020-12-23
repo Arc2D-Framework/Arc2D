@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">A terse guide to Classes</h1>
@@ -29,7 +29,7 @@ class Person {
       </div>
     </div>
 
-    
+
 
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
@@ -39,7 +39,7 @@ class Person {
           A Person can be part of family as a more special set of people:
             <pre class="inline javascript lang">
                 <code>
-namespace \`people.family\` (     
+namespace \`people.family\` ( 
     class Person {
 
     }
@@ -51,7 +51,7 @@ namespace \`people.family\` ( 
             You can duplicate the same Person in other namespaces:
             <pre class="inline javascript lang">
                 <code>
-namespace \`people.friends\` (    
+namespace \`people.friends\` ( 
     class Person {
 
     }
@@ -76,14 +76,14 @@ namespace \`people.friends\` ( 
             In a social media app, the semantics and design of Person could resemble:
             <pre class="inline javascript lang">
                 <code>
-namespace \`people.friends\` (    
+namespace \`people.friends\` ( 
     class Person {
-        invite() {          
-            //code for inviting         
+        invite() { 
+            //code for inviting 
         }
 
-        send(txt) {          
-            //code for sending a txt message         
+        send(txt) { 
+            //code for sending a txt message 
         }
 
         share(media){
@@ -102,14 +102,14 @@ namespace \`people.friends\` ( 
             In a contacts (Rolodex) app, the semantics and design of Person could resemble:
             <pre class="inline javascript lang">
                 <code>
-namespace \`people.contacts\` (    
+namespace \`people.contacts\` ( 
     class Person {
-        setContact(data) {          
-            //code for setting phone, address, etc         
+        setContact(data) { 
+            //code for setting phone, address, etc 
         }
 
-        getContact() {          
-            //returns phone, address, etc       
+        getContact() { 
+            //returns phone, address, etc
         }
 
         remove(){
@@ -128,7 +128,7 @@ namespace \`people.contacts\` ( 
         <h3>Variable Collision</h3>
         <p>
             The emphasis in these examples is to show that without namespaces,
-            the Person becomes ambigious, lacking clarity and pose a conflict
+            the Person becomes ambigious lacking clarity and poses a conflict
             at runtime. Which Person? This is called namspace collision, or variable
             collision.
         </p>
@@ -141,7 +141,7 @@ namespace \`people.contacts\` ( 
         </p>
         <h3>Solutions</h3>
         <p>
-            There are other syntactical and strategic ways to prevent variable collisions, such as -- but not all discussed here:
+            There are other syntactical and strategic ways to prevent variable collisions, such as, but not limited to:
             <ul>
                 <li><a href="#docs.topics.UnderstandingNamespaces">Namespaces</a></li>
                 <li><i class="fa fa-external-link"></i> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="new">Constant variables</a></li>
@@ -164,7 +164,7 @@ namespace \`people.contacts\` ( 
         <h1 id="api-reference">Class Inheritance</h1>
         <p>
             Families may have different privileges and abilities. But what if Friend and
-            Family share certain traits? Like a first name. You may generalize an even broader
+            Family share certain traits? Like a first name? You may generalize an even broader
             namespace with these common properties.
 
             <p>
@@ -172,7 +172,7 @@ namespace \`people.contacts\` ( 
             </p>
             <pre class="inline javascript lang">
                 <code>
-namespace \`people\` (    
+namespace \`people\` ( 
     class Human {
         @public firstname = "";
     }
@@ -181,9 +181,9 @@ namespace \`people\` ( 
             </pre>
         </p>
         <p>
-          Now people in friends and family category don’t have to repeat code to define this common 
+          Now, people in the friends and family categories don’t have to repeat code to define this common
             trait. Let’s inherit instead. <STRONG>IMPORTANT: </STRONG> Use of ! is required to import
-            the file directly since this is not a component. 
+            the file directly since this is not a component.
 
             <pre class="inline javascript lang">
                 <code>
@@ -191,8 +191,8 @@ import! 'people.Human';  //loads "src/people/Human.js"
 
 namespace \`people.friends\` ( 
     class Person extends people.Human {
-        invite() {          
-            //code for inviting         
+        invite() { 
+            //code for inviting 
         }
     } 
 )
@@ -207,16 +207,16 @@ namespace \`people.friends\` ( 
                 <code>
 import! 'people.Human';
 
-namespace \`people.family\` (     
+namespace \`people.family\` ( 
     class Person extends people.Human {
-        
+
     } 
 )
                 </code>
             </pre>
         </p>
         <p>
-            Now friends and family are people, having a first name
+            Now, friends and family are people, having a first name
             by inheritance. Intrinsically, they are all Human.
         </p>
       </div>
