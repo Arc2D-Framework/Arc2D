@@ -1,13 +1,13 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Stylesheet Transformations</h1>
         <p>
-          In the topic, <a href="#docs.topics.StyleSheets">Style Sheets</a>, we looked at
-          the style sheet life-cycle. 4 steps occur while proessing the styles for each component. In particular, the <code style="display:inline;">onTransformStyle()</code> callback can be used in your components to accept raw css text and optionally apply a transform on it.
+          In the <a href="#docs.topics.StyleSheets">previous topic</a>, we looked at
+          the stylesheet life cycle. 4 steps occur while proessing the styles for each component. In particular, the <code style="display:inline;">onTransformStyle()</code> callback can be used in your components to accept raw css text and optionally apply a transform on it.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -32,10 +32,10 @@
             <li>Dynamic transitions and dimensions</li>
             <li>Introspection</li>
             <li>Debugging</li>
-          </ul> 
+          </ul>
         </p>
         <p>
-          But is it necessary? The beauty of CSS is due to it's simplicity. If used in the right way, you'd never have to transform css. In fact, most of the above ideas are due to pitfalls in existing front-end frameworks.
+          But is it necessary? The beauty of CSS is it's simplicity. If used in the right way, you'd never have to transform css. In fact, most of the above ideas are due to pitfalls in existing front-end frameworks.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -52,7 +52,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">What Happens?</h1>
         <p>
-          As mentioned in the StyleSheet life-cycle chapter, the onTransformStyle() can be implemented in your component classes to take as input (string), the components CSS text, you may then apply logic to process it somehow and return back valid css text from this function. 
+          As mentioned in the <a href="#docs.topics.StyleSheets">StyleSheets Life Cycle</a> chapter, the onTransformStyle() can be implemented in your component classes to take as input (string) for the components CSS text. You may then apply logic to process it, somehow, and return back valid CSS text from this function.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -69,12 +69,12 @@
         <h1 id="api-reference">How it works</h1>
         <p>
           Remember, all components have 3 files in their namespaced folders: the .css, .js and .html.
-          During the components StyleSheet life-cycle, the css is loaded and sent as an argument, to your
-          components onTransformStyle() method, IF you had implemented it in the Class of your component. 
+          During the components StyleSheet life-cycle, the CSS is loaded and sent as an argument to your
+          components onTransformStyle() method IF you had implemented it in the Class of your component.
         </p>
         <p>
-          So let's imagine a scenario of implementing onTransformStyle() method in a fictional HelloWorld
-          component. 
+          So, let's imagine a scenario of implementing onTransformStyle() method in a fictional HelloWorld
+          component.
           <pre class="inline javascript lang">
             <code>
 namespace \`core.samples\` (
@@ -89,13 +89,13 @@ namespace \`core.samples\` (
         </p>
         <p>
           Self explanatory. What can we infer from the logic? Well, our HelloWorld's index.css file, stored in
-          the namespaced folder location at: <code>/src/core/samples/HelloWorld/index.css</code>, contains CSS
-          that has url() paths to images it seems.
+          the namespaced folder location at: <code>/src/core/samples/HelloWorld/index.css</code>, seems to contain CSS
+          that has url() paths to images.
         </p>
         <p>
-          Further, the paths have a token "COMPONENT_PATH" which means nothing to css. So, we replaced it with
-          a relative path to the HelloWorlds component folder. Now we are able to store images in our namespaced folders
-          and the paths should propaly resolve.
+          Further, the paths have a token "COMPONENT_PATH" which means nothing to CSS. So, we replaced it with
+          a relative path to the HelloWorld's component folder. Now, we are able to store images in our namespaced folders,
+          and the paths should properly resolve.
         </p>
         <p>
           The fictional HelloWorld's index.css might resemble this on disk:
@@ -112,7 +112,7 @@ namespace \`core.samples\` (
           </pre>
         </p>
         <p>
-          After being transformed, the component now sees this css
+          After being transformed, the component now sees this CSS
           <pre class="inline css lang">
             <code>
 .HelloWorld {
@@ -138,17 +138,17 @@ namespace \`core.samples\` (
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">When should css transformations be used?</h1>
+        <h1 id="api-reference">When should CSS transformations be used?</h1>
         <p>
           Good cases are mentioned above in the introductory paragraph. Maybe you'd
-          like to code your css in LESS, then use the LESS api during onTransformStyle() to
-          parse and return valid css.
+          like to code your CSS in LESS. Then, use the LESS api during onTransformStyle() to
+          parse and return valid CSS.
         </p>
         <p>
-          Other good cases, maybe your css needs aa dynamic px value that only your component
-          can compute at runtime. So similar to the "COMPONENT_PATH" token invented above, one
-          can invent a similar token for a DYNAMIC_LOGO_HEIGHT for example, then within transformation,
-          compute the Math height and replace the css token.
+          Another good case is if your CSS needs aa dynamic px value that only your component
+          can compute at runtime. So, similar to the "COMPONENT_PATH" token invented above, one
+          can invent a similar token for a DYNAMIC_LOGO_HEIGHT for example, then, within transformation,
+          compute the Math height and replace the CSS token.
           <pre class="inline css lang">
             <code>
 .HelloWorld {
@@ -178,8 +178,8 @@ onTransformStyle(cssText){
           </pre>
         </p>
         <p>
-          See what you can imagine but remember there is an expense to it, that if used widely
-          could impact performance, but a few cases should not.
+          See what you can imagine, but remember that there is an expense to it that, if used widely,
+          could impact performance. But, only a few cases should not have an impact.
         </p>
       </div>
       <div style="width: 50%;display: block;">

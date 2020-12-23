@@ -1,12 +1,12 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Component Life-Cycle</h1>
         <p>
-          When components are used, (see: <a href="#docs.topics.ComponentUsage">Using Componentss</a>) either declaratively (via HTML) or programmatically (via JavaScript), the life-cycle of that component initiates and moves through several internal phases very quickly while attempting to connect itself with the DOM.
+          When components are used, (see: <a href="#docs.topics.ComponentUsage">Using Components</a>) either declaratively (via HTML) or programmatically (via JavaScript), the life-cycle of that component initiates and moves through several internal phases very quickly while attempting to connect itself with the DOM.
           <div style="text-align: center;">
             <img src="docs/images/component_life_cycle.png" style="width: 80%;text-align: center;"/>
           </div>
@@ -27,7 +27,7 @@
         </p>
         <h3>Construction:</h3>
         <p>
-          <code>constructor()</code> fires for any new instance being used (see: <a href="#docs.topics.ComponentUsage">Using Componentss</a>). Basic state, variable declarations and I/O or network requests can kick off at this point, not including DOM work. <em>Do not attempt to run any DOM related calls on the component from the constructor, as the component is not yet in the DOM, not rendered and not connected</em> -- Its node tree has not been processed yet by the browser.
+          <code>constructor()</code> fires for any new instance being used (see: <a href="#docs.topics.ComponentUsage">Using Components</a>). Basic state, variable declarations and I/O or network requests can kick off at this point, not including DOM work. <em>Do not attempt to run any DOM related calls on the component from the constructor as the component is not yet in the DOM, not rendered and not connected</em> -- Its node tree has not been processed yet by the browser.
         </p>
         <h3>Connected:</h3>
         <p>
@@ -38,7 +38,7 @@
             <li>The component is rendered</li>
           </ul>
         </p>
-        <p>The component is now connected and fully rendered in the DOM. At this stage, the componet has an HTML Node tree and can be queried and manipulated. Listeners may also be attached, basically the component is now free to do whatever initialization you intended.</p>
+        <p>The component is now connected and fully rendered in the DOM. At this stage, the componet has an HTML Node tree and can be queried and manipulated. Listeners may also be attached. Basically, the component is now free to do whatever initialization you intended.</p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -65,7 +65,7 @@
         </p>
         <p>
           <b>onFixedUpdate() Game Loop:</b><br/>
-          In a World scene, a Component could be updated at around 60fps. The World may first invoke the components <code>onFixedUpdate()</code> for AI processing and/or physics and collision handling. <code>onFixedUpdate()</code> fires multiple times each frame at a fixed time-step (0.16ms, configurable). 
+          In a World scene, a Component could be updated at around 60fps. The World may first invoke the components <code>onFixedUpdate()</code> for AI processing and/or physics and collision handling. <code>onFixedUpdate()</code> fires multiple times each frame at a fixed time-step (0.16ms, configurable).
         </p>
         <p>
           <b>onUpdate() Game Loop:</b><br/>
@@ -87,11 +87,11 @@
         <h1 id="api-reference">STAGE 3: Render</h1>
         <p>
           <b>Event-Driven Rendering:</b><br/>
-          In traditional WebComponent design, components will repaint/render themselves when events trigger callbacks (event-driven updates) to do so. The call to .render() will cause the component to re-evaluate it's HTML template and if fresh data is supplied to render(), the template will generate new/different HTML causing the view to change visually. When callbacks run, components may also choose to not .render() completely but cherry-pick what DOM nodes needs to change. This is the traditional model we are all use to.
+          In traditional WebComponent design, components will repaint/render themselves when events trigger callbacks (event-driven updates) to do so. The call to .render() will cause the component to re-evaluate it's HTML template and, if fresh data is supplied to render(), the template will generate new/different HTML, causing the view to change visually. When callbacks run, components may also choose to not .render() completely, but cherry-pick what DOM nodes needs to change. This is the traditional model we are all used to.
         </p>
         <p>
           <b>onDraw() Game Loop:</b><br/>
-          After a component is updated during <code>onUpdate</code>, it may need to render itself at this point for painting a visual representation of its state. <code>onDraw()</code> is fired once every frame after <code>onUpdate</code> and is the recommended handler for rendering unto canvas, svg or html. Example, immediately after onUpdate ran, <code>onDraw()</code> should visually move the Sprite using transforms, to the updated x/y location on screen.
+          After a component is updated during <code>onUpdate</code>, it may need to render itself at this point for painting a visual representation of its state. <code>onDraw()</code> is fired once every frame after <code>onUpdate</code> and is the recommended handler for rendering unto canvas, svg or html. Example: immediately after onUpdate runs, <code>onDraw()</code> should visually move the Sprite, using transforms, to the updated x/y location on screen.
         </p>
         <p>Arc employs a robust and intelligent game loop. See the <a href="#docs.topics.Sprite2D">Sprites</a> topic for more.</p>
       </div>
@@ -108,7 +108,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Destruction</h1>
         <p>
-          When a component is no longer needed, it's onDestroy() method is invoked. Every component should perform clean-up in this call. Certain components may have it's onDestroy() called for you by the engine, but not guaranteed. Its recommended you destroy components appropriately as needed.
+          When a component is no longer needed, it's onDestroy() method is invoked. Every component should perform clean-up in this call. Certain components may have their onDestroy() called for you by the engine, but not guaranteed. It's recommended that you destroy components appropriately as needed.
         </p>
       </div>
       <div style="width: 50%;display: block;">
