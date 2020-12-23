@@ -4,7 +4,7 @@ namespace `display.views` (
 		constructor(){
             super();
 		}
-		
+
 		async onConnected() {
 			await super.onConnected();
 		}

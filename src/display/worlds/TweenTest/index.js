@@ -12,13 +12,7 @@ namespace `display.worlds` (
             this.coords = {x: 0, y: 0};
             this.box = this.querySelector("#box")
             this.dest = {x: 300, y: 200};
-
-            // this.t = new system["2d"].Tween(this.coords, TWEEN);
-            // this.t.to({x: 300, y: 200}, 2000);
-            // this.t.setEasing(TWEEN.Easing.Quadratic.Out);
-            // this.t.start();
-             // this.currentTime = 0;
-             this.duration = 500;
+            this.duration = 500;
              
         }
 
@@ -32,7 +26,6 @@ namespace `display.worlds` (
                     this.box.ismoving = false;
                 }
             }
-            // this.t.onUpdate(time,delta)
         }
 
         onUpdate=()=>{
