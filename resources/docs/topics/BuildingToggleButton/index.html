@@ -1,15 +1,15 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Building a Toggle Button (continued)</h1>
         <p>
-            A toggle button can be created in a few ways, here I'll give you the
+            A toggle button can be created in a few ways. Here, I'll give you the
             HTML, JavaScript and CSS snippets (to the right) and leave you to
-            read the code as an exercise for following along and 
-            understanding the gist of it, at a broad level for now.
+            read the code as an exercise for following along and
+            understanding the gist of it at a broad level for now.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -35,7 +35,7 @@ namespace \`core.ui\` (
       </div>
     </div>
 
-    
+
 
 
 
@@ -47,7 +47,7 @@ namespace \`core.ui\` (
             As you'll eventually discover in the chapter, <a href="#docs.topics.ComponentLifecycle">Component Lifecycle</a>, WebComponents move through a series of states as the Arc Engine discovers and connects each component on the web page.
         </p>
         <p>
-            <code>onConnected()</code> is the wiring junction-box of web components. It is in here you'll query the component tree -- the <strong>childNodes</strong> of this component. It is here where logic resides, regarding mutations and/or manipulations to the childNodes (see html template tab). 
+            <code>onConnected()</code> is the wiring junction-box of web components. It is in here where you'll query the component tree -- the <strong>childNodes</strong> of this component. It is here where logic resides, regarding mutations and/or manipulations to the childNodes (see html template tab).
         </p>
         <h3>What trips off onConnected()?</h3>
         <p>
@@ -117,7 +117,7 @@ async onConnected(){
         <h1 id="api-reference">ToggleButton CSS</h1>
         <p>
             Copy and paste the CSS to the right. These are some basic rules to style the toggle
-            by its tag-name or :host context. As mentioned above, the components template, when rendered, will be wrapped by a custom tag-name derived from the ClassName as &lt;class-name&gt;. Here, &lt;toggle-button&gt;, derived from ToggleButton class.
+            by its tag-name or :host context. As mentioned above, the components template, when rendered, will be wrapped by a custom tag-name derived from the ClassName as &lt;class-name&gt;. Here, &lt;toggle-button&gt;, is derived from ToggleButton class.
         </p>
         <p>
             Styling the toggle-button by it's tag-name serves 2 purposes:
@@ -128,7 +128,7 @@ async onConnected(){
         </p>
         <h3>Toggling Shadow DOM on/off</h3>
         <p>
-            Alternatively, the :host context may be used which will allow the component to be used as a Shadow Dom element on a web page via the <code>shadow</code> attribute. Without the attribute, the component is rendered in the Light DOM as usual and probably what you're most familiar with.
+            Alternatively, the :host context may be used which will allow the component to be used as a Shadow DOM element on a web page via the <code>shadow</code> attribute. Without the attribute, the component is rendered in the Light DOM as usual and probably what you're most familiar with.
             <pre class="inline html lang">
                 <code>
 &#x3C;toggle-button shadow&#x3E;&#x3C;/toggle-button&#x3E;
@@ -239,7 +239,7 @@ toggle-button .knob {
         <h1 id="api-reference">Basic State</h1>
         <p>
             We'll need a reference to the <code>.knob</code> and the initial direction
-            in the off position. 
+            in the off position.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -271,7 +271,7 @@ async onConnected(){
         <p>
             A standard call to <code>addEventListener()</code> is wired during
             the <code>onConnected()</code> phase to execute <code>onClick()</code>
-            when clicks are detected anywhere on the toggles UI.
+            when clicks are detected anywhere on the toggle's UI.
         </p>
         <p>
             <pre class="inline javascript lang">
@@ -319,7 +319,7 @@ this.addEventListener("click", e => this.onClick(e), false);
             </table>
         </p>
         <p>
-            <code>onRender</code> is called right after, which uses a standard css transform to 
+            <code>onRender</code> is called right after, which uses a standard css transform to
             move the .knob on the x-axis from 0 to the width of the toggle, minus the knob width.
         </p>
       </div>
@@ -500,8 +500,8 @@ namespace \`core.ui\` (
 import 'core.ui.ToggleButton';
 
 namespace \`applications\` (
-    class HelloWorld extends Application { 
-        
+    class HelloWorld extends Application {
+
     }
 );
         </code></pre>
@@ -535,7 +535,7 @@ namespace \`applications\` (
 
 
 
-    
+
 
   </div>
 </template>

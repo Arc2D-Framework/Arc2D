@@ -5,9 +5,9 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Hello World Application (manually create the files)</h1>
         <p>
-          An Application in Arc represents a world on screen, it is a larger form of a WebComponent. Just like web components, applications themselves are composed of the same 3 files, where namespace mirrors the directory structure. 
+          An Application in Arc represents a world on screen, it is a larger form of a WebComponent. Just like web components, applications, themselves, are composed of the same 3 files where namespace mirrors the directory structure.
         </p>
-        <p><strong>IMPORTANT:</strong> Review the namespace topics again -- how namespaces maps directly to matching folder directories. It is important to grasp this fundemental concept first.</p>
+        <p><strong>IMPORTANT:</strong> Review the namespace topics again -- how namespaces map directly to matching folder directories. It is important to grasp this fundemental concept first.</p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -64,8 +64,8 @@
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`applications\` (
-    class HelloWorld extends Application { 
-        
+    class HelloWorld extends Application {
+
     }
 );
         </code></pre>
@@ -104,7 +104,7 @@ body, html {
 
 
 
-<!-- 
+<!--
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Applications and Components</h1>
@@ -136,7 +136,7 @@ body, html {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Create a <strong>hello-world.html</strong> shell page</h1>
         <p>
-          Create an .html page at the root of your project, name it <strong>hello-world.html</strong>. -- Open it in your editor, add a <code>namespace</code> attribute
+          Create an .html page at the root of your project, and name it <strong>hello-world.html</strong>. --Now, open it in your editor, and add a <code>namespace</code> attribute
           to the body tag. It should be the <b>fully-qualified namespace (FQNS)</b> to the <code>HelloWorld</code> class:
         </p>
         <p>
@@ -164,7 +164,7 @@ body, html {
         <div class="html lang">
           <blockquote class="html" style="display:block;width: 100%;">
             <b>hello-world.html</b><br/>
-            Add a configuration, point it to HelloWorld in the applications folder:
+            Add a configuration, and point it to HelloWorld in the applications folder:
           </blockquote>
           <pre class="highlight html" style="display:block;width: 100%;"><code>
 &#x3C;!DOCTYPE html&#x3E;
@@ -190,17 +190,17 @@ body, html {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">How was the tag created ?</h1>
         <p>
-          The namespace <code>"applications.HelloWorld"</code>, is a hint to the engine about what Class to use for this application. The <code>&#x3C;hello-world&#x3E;</code> tag was generated automatically based on the CamelCase name taken from the <code>HelloWorld</code> class.
+          The namespace, <code>"applications.HelloWorld"</code>, is a hint to the engine about what Class to use for this application. The <code>&#x3C;hello-world&#x3E;</code> tag was generated automatically based on the CamelCase name taken from the <code>HelloWorld</code> class.
         </p>
         <p>
           <em>Based on w3c WebComponent specs, <b>tag names require a dash</b>. You cannot have a single word tag-name.</em>
-          It is recommended then that your ClassName is <strong>C</strong>amel<strong>C</strong>ased. Arc relies on this
+          It is recommended, then, that your ClassName is <strong>C</strong>amel<strong>C</strong>ased. Arc relies on this
           pattern for generating a custom tag for use in HTML.
         </p>
         <p>
           <strong>IMPORTANT:</strong><br/>
           If you ever discover that your application is not initializing within the shell page and there are no warnings
-          or errors, check your ClassName, that it follows a <strong>C</strong>amel<strong>C</strong>ased convention. Alternatively, you may use the <em><code>@tag</code></em> decorator on your Class to create a custom tag-name. See: <a href="#docs.topics.JavascriptDecorators/traits">Traits</a>.
+          or errors, check your ClassName to make sure that it follows a <strong>C</strong>amel<strong>C</strong>ased convention. Alternatively, you may use the <em><code>@tag</code></em> decorator on your Class to create a custom tag-name. See: <a href="#docs.topics.JavascriptDecorators/traits">Traits</a>.
         </p>
         <p>
           Example:

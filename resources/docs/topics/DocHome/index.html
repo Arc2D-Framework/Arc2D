@@ -1,17 +1,17 @@
-<template>
+APIs<template>
   <div>
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Preface</h1>
+        <h1 id="API-reference">Preface</h1>
         <h3>Brief History</h3>
         <p>
           The Arc Engine is a native, W3C compliant ES6/7 framework for
           building enterprise-class 2D/Applications. Over a decade
           old, Arc began as a personal R&D project to reduce and reuse
-          repetetive UI patterns, cuttting time and costs as a consultant on 
-          projects dating back to 2007. It has since evolved slowly across 
-          many prestegious companies to present and has been used primilarily for 
+          repetetive UI patterns, cuttting time and costs as a consultant on
+          projects dating back to 2007. It has since evolved slowly across
+          many prestegious companies to present and has been used primilarily for
           in-house internal applications. Arc is now going public.
         </p>
         <p>
@@ -20,23 +20,23 @@
         </p>
         <h3>Framework vs. API</h3>
         <p>
-          Arc is a framework. <em><strong>To put it in simple terms:</strong> A framework calls you, you do not call a framework -- as you would with an api.</em>
+          Arc is a framework. <em><strong>To put it in simple terms:</strong> A framework calls you. You do not call a framework—as you would with an API.</em>
           Arc is a meta-prototype of a running, fully functional application
-          designed into the kernel from birth, serving as an abstract application, able to run on it's own, autonomously, without supplying any additional code or directions until you wish to override. If you're familar
+          designed into the kernel from birth. Arc serves as an abstract application able to run on it's own, autonomously, without supplying any additional code or directions until you wish to override. If you're familar
           with C++ or Java, the analogy can be likened to an Abstract Class,
-          a barebones template able to be used but does nothing much until you supply 
+          a barebones template able to be used but does nothing much until you supply
           overridable implementation via inheritance.
         </p>
         <p>
-          In similar fashion, your application will inherit the Arc enging when
-          embedded, where you supply overridable implementations to achieve results, or supply
-          nothing and nothing happens. The internal workings and intricate hand-crafted details of inter-component-communication, life-cycle, collision, timing, physics, 
+          In similar fashion, your application will inherit the Arc engine when
+          embedded. Then, you supply overridable implementations to achieve results, or supply
+          nothing and nothing happens. The internal workings and intricate hand-crafted details of inter-component-communication, life-cycle, collision, timing, physics,
           state and work-flow in Arc are the processes that make up it's running "engine". Only
-          certain aspects of the Arc engine (framework) can be swapped or supplied by you with overrides, allowing it to call your code, never you calling Arc's code as you would with APIs.
+          certain aspects of the Arc engine (framework) can be swapped or supplied by you with overrides, allowing it to call your code—never you calling Arc's code as you would with APIs.
         </p>
         <p>
-          The difference is clear. An API is a library of dedicated objects and methods around a finer domain, like api's for grandular I/O Disk or Network operations. Multiple APIs can be orchastrated to communicate with each other in a process that yields
-          a framework eventually. 
+          The difference is clear. An API is a library of dedicated objects and methods around a finer domain, like APIs for grandular I/O Disk or Network operations. Multiple APIs can be orchastrated to communicate with each other in a process that eventually yields
+          a framework.
         </p>
 
         <h3>Embedding</h3>
@@ -52,7 +52,7 @@
         </p>
         <p>
           The webpage should still function as it did before embedding Arc with no visual differences or added behaviors. At this point, the page is still a page, not an Application or World until you supply one.
-          Of importance are these notes:
+          Here are some important notes:
           <ul>
             <li>No TypeScript</li>
             <li>No WebPack</li>
@@ -64,28 +64,28 @@
             <li>Zero Config</li>
           </ul>
         </p>
-        
+
         <h3>Applications and Worlds</h3>
         <p>
-          An Application in Arc represents a web/mobile or desktop user interface on top of a system (backend) and the kind we're most familar with. Components such as Dialogs, Popups, Windows, Buttons, Menus, Navigation and so on work in an event-driven style, where user events such as "clicks" trigger interactions and feedback.
+          An Application in Arc represents a web/mobile or desktop user interface on top of a system (backend). This is the one we're most familar with. Components such as Dialogs, Popups, Windows, Buttons, Menus, Navigation and so on work in an event-driven style, where user events such as "clicks" trigger interactions and feedback.
         </p>
         <p>
           A World is an application still, but steps at 60FPS using a input-update-render game loop common in
-          most games. Not only is it driven by user events, but is updated every 1/60th of a second allowing Sprites such as NPC's to be animated on Canvas or by DOM transforms. 
+          most games. Not only is it driven by user events, but it's updated every 1/60th of a second allowing Sprites such as NPC's to be animated on Canvas or by DOM transforms.
           <a href="../dom-physics.html" target="_new"><img style="border:1px solid #dfdfdf;margin: 25px 0px;" src="/resources/docs/images/dom-physics.png"/></a>
           The World environment will have
           physics and forces applied to bodies. In traditional 2D game engines, the Canvas is cleared and repainted every step, pixel by pixel, giving the illusion of motion. Arc Worlds may also leverage
-          DOM Nodes on top of a canvas, that are only painted once, then animate by transforms on the GPU, allowing HUD displays to be hand-crafted in HTML and overlay
+          DOM Nodes on top of a canvas that are only painted once. Then, they animate by transforms on the GPU, allowing HUD displays to be hand-crafted in HTML and overlay
           canvases in an efficient manner. DOM bodies such as DIVs also have physical bodies and participate
-          in physics, this allows games to be rendered, some portions by canvas and some with DOM bodies
+          in physics. This allows games to be rendered, some portions by canvas and some with DOM bodies
           using layed canvases. <goblin-enemy style="float:left;"></goblin-enemy>Both DOM/SVG bodies and Canvas pixels will co-operate on a display seamlessly.
-          Character spite animations once accomplished by Canvas drawImage() can now also be achieved as
-          DOM Sprites using CSS animations to step the sprite-sheet. This essentially means, a DIV can represent a Warrior character the same way pixels are painted to animate sprite sheets. Canvases are highly performant, now you have the flexibility to leverage HTML and SVG canvases layered on top of the native Canvas like 3 glass panes. 3 separate rendering technologies combined, each having its own
-          trade-offs. 
+          Character sprite animations, once accomplished by Canvas drawImage(), can now also be achieved as
+          DOM Sprites using CSS animations to step the sprite-sheet. This essentially means a DIV can represent a Warrior character in the the same way that pixels are painted to animate sprite sheets. Canvases are highly performant. You now have the flexibility to leverage HTML and SVG canvases layered on top of the native Canvas like 3 glass panes―3 separate rendering technologies combined, each having its own
+          trade-offs.
         </p>
         <p>
           Have a look at the <a href="../dom-physics.html" target="_new">dom-physics</a> demo. 3 canvases lay on top of each other. Some
-          physical bodies are actually HTML div tags, some like Circles are SVG bodies and some are Canvas pixels. Without a developer or user knowing this prior, it would appear as a typical canvas 
+          physical bodies are actually HTML div tags. Some, like Circles, are SVG bodies, and some are Canvas pixels. Without a developer or user already knowing this, it would appear to be a typical canvas
           rendering.
         </p>
       </div>

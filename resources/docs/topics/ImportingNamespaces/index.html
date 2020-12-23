@@ -1,6 +1,6 @@
 <template>
 	<div>
-		
+
 
         <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
           <div style="width: 50%;padding: 22px;">
@@ -26,7 +26,7 @@
               <pre class="inline javascript lang"><code>import 'core.ui.Dog';</code></pre>
             </p>
             <p>
-              Both fqns and file-path imports are equivelent, but the latter two import statements are more elegant, intuitive and resembles the syntax of Java and C++. The former, file-path import, is necessary when
+              Both fqns and file-path imports are equivelent, but the latter two import statements are more elegant, intuitive and resemble the syntax of Java and C++. The former, file-path import, is necessary when
               importing 3rd party .js libraries such as JQuery.
             </p>
             <p>
@@ -49,15 +49,14 @@
             <h1 id="api-reference">The import! syntax</h1>
             <p>
               Arcs import system is truely unique. The subtle difference in syntax
-              provides the affordance of organization and inferred clarity. 
+              provides the affordance of organization and inferred clarity.
               <ul>
                 <li><code>import &nbsp;'core.ui.Person';</code></li>
                 <li><code>import! 'core.ui.Person';</code></li>
               </ul>
             </p>
             <p>
-                At first glance, both statements resemble. But here's how they
-                are interpreted and resolved:
+                At first glance, both statements look alike. But, here's how each is interpreted and resolved:
                   <table>
                     <thead>
                     <tr>
@@ -88,11 +87,11 @@
 
             <p>
               <ul>
-                <li>The 1st import loads the default index.js file from the folder, /core/ui/Person/. Only used
+                <li>The 1st import loads the default index.js file from the folder, /core/ui/Person/. It is only used
                 for WebComponent packages that have multiple separated assets (html, css & js)</li>
-                <li>The 2nd & 3rd import rule loads a Person.js file from the folder, /core/ui/,
-                and are equivelent. May also be used for WebComponents that have their html & css inlined within the JavaScript.
-                Note that in the file-path import (3rd rule), "/src" must be prefixed to form a full relative path to the "src" directory.</li>
+                <li>The 2nd & 3rd import rules load a Person.js file from the folder, /core/ui/,
+                and are equivelent. They may also be used for WebComponents that have their html & css inlined within the JavaScript.
+                Note that in the file-path import (3rd rule), "/src", must be prefixed to form a full relative path to the "src" directory.</li>
               </ul>
             </p>
 
@@ -105,7 +104,7 @@
 
             <h3><code>import</code> points to a web component folder</h3>
             <p>
-                A normal <code>import</code> resolves to a component folder. The class-name (i.e: "Person") of the fully qualified namespace becomes the parent folder where your components class file,  "index.js" is located. Same idea, dots are replaced with / slashes, yielding a path: <br/>
+                A normal <code>import</code> resolves to a component folder. The class-name (e.g: "Person") of the fully qualified namespace becomes the parent folder where your component's class file,  "index.js" is located. Same idea, dots are replaced with / slashes, yielding a path: <br/>
                 src/core/ui/Person/index.js
             </p>
             <p>
@@ -131,9 +130,9 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">When to import?</h1>
         <p>
-          Import other components you've created from other locations in code at anytime you need to use it. Imports happen statically, different from dynamic importing.
+          Import other components you've created from other locations in code at anytime you need to use them. Imports happen statically, different from dynamic importing.
           It is considered static because it happens without condition, without
-          logical branching, not a drawback at all, but works by design similar to Java and the nodejs
+          logical branching. This is not a drawback at all; rather it works by design similar to Java and the nodejs
           <code>require()</code> statement.
         </p>
       </div>
@@ -150,12 +149,12 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">What happens during an import?</h1>
         <p>
-          Importing other components or classes that you've created are considered dependencies. During 
-          an import, Arc resolves the imported statement (path or fqns), temporaarily freezes code execution
-          at that line, downloads the file, then continues on with code execution.
+          When importing other components or classes that you've created, they are considered dependencies. During
+          an import, Arc resolves the imported statement (path or fqns), temporarily freezes code execution
+          at that line, downloads the file, and then, continues on with code execution.
         </p>
         <p>
-          It is guaranteed that by the time your code is ready to use the dependency, it will be available in memory, just-in-time.
+          It is guaranteed that, by the time your code is ready to use the dependency, it will be available in memory, just-in-time.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -173,12 +172,12 @@
         <p>
           Yes and no. If you find yourself importing 20 or more dependencies from a single JavaScript file,
           each pause in code execution to wait for download will hold up code execution momentarily (based on network lag).
-          But with a limited set of imports which is more common, the effects won't be much noticeable.
+          But, with a limited set of imports, which is more common, the effects won't be very noticeable.
         </p>
         <p>
           This development strategy is recommended during development and testing, but should be
           prefabricated when releasing a production build. The Arc SDK ships with a tool to link and
-          compress all dependencies into 1 file, this tool is not available in Arc Core version.
+          compress all dependencies into 1 file, this tool is not available in the Arc Core version.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -197,12 +196,12 @@
         <h1 id="api-reference">Any way to optimize?</h1>
         <p>
           Yes. In the topic, "Prefabs", we'll examine a strategy for stitching together
-          every dependency into a single compiled file that will load in 1 step. No more
-          execution pausing. But should not be done until you're ready for a production
+          every dependency into a single compiled file that will load in 1 step—no more
+          execution pausing. But, this should not be done until you're ready for a production
           release.
         </p>
         <p>
-          The Seam tool handles stiching together all app dependencies and are only
+          The Seam tool handles stiching together all app dependencies and is only
           availabled as part of the Arc SDK download.
         </p>
       </div>

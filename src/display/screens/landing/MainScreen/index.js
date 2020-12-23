@@ -37,8 +37,6 @@ namespace `display.screens.landing` (
             const downloadLink = this.querySelector("#downloadLink");
             this.cumulutiveShiftElements = [docsLink, downloadLink];
             this.cumulitiveElementsFix();
-
-            // this.setupEditorContent();
         }
 
         cumulitiveElementsFix(){
@@ -47,16 +45,11 @@ namespace `display.screens.landing` (
                   link.style.visibility = "visible";
                   link.style.opacity = "1";
                })
-         }, 1400);
+            }, 1400);
         }
 
         onHashChange(e){
-            /*var hash = location.hash;
-                debugger;
-            var section = this.querySelector(\`section${hash}`)||this.querySelector(`${hash}`)
-            if(section){
-                section.scrollIntoView({behavior:"smooth",block:"start"});
-            }*/
+
         }
 
         randomNumber(min, max) {

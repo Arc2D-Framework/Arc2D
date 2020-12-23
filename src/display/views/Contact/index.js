@@ -1,6 +1,12 @@
+@tag("contact-page");
 namespace `display.views` (
-    @tag("contact-page");
-	class Contact extends WebComponent  {
+	class Contact extends w3c.ui.WebComponent  {
+		constructor(){
+            super();
+		}
 		
+		async onConnected() {
+			await super.onConnected();
+		}
 	}
 )

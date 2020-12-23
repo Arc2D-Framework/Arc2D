@@ -1,17 +1,17 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">JavaScript Decorators</h1>
         <p>
           ES7 decorators are not fully supported by browsers, but you
-          may use it now in Arc with limits. Decorators work like annotation attributes available in C# and Java.
-          With it, you can apply additional meta-data to classes and functions at runtime.
+          may use them now in Arc with limits. Decorators work like annotation attributes available in C# and Java.
+          With them, you can apply additional meta-data to classes and functions at runtime.
         </p>
         <p>
-          Decorators enhance, describes and/or alter the behavior of classes or functions non-obtrusively:
+          Decorators enhance, describe and/or alter the behavior of classes or functions non-obtrusively:
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -28,7 +28,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Arc's built-in Decorators</h1>
         <p>
-          Arc ships with a simple set of decorators, add/remove them and
+          Arc ships with a simple set of decorators; add/remove them and
           your code still works. With them, your classes are enhanced in
           some way.
         </p>
@@ -50,7 +50,7 @@
             <tr>
               <td><code>@tag()</code></td>
               <td><b>Class Level</b><br/>w3c tag-name (string)</td>
-              <td>Create an HTML5 tag-name for a WebComponent class that can be used in html pages. By default a tag-name with a w3c required - (dash) is generated from the ClassName. <em>For example, a tag-name of hello-world is generated from a class name of HelloWorld.</em></td>
+              <td>Create an HTML5 tag-name for a WebComponent class that can be used in html pages. By default, a tag-name with a w3c required - (dash) is generated from the ClassName. <em>For example, a tag-name of hello-world is generated from a class name of HelloWorld.</em></td>
             </tr>
             <tr>
               <td id="stylesheets"><code>@stylesheets()</code></td>
@@ -61,7 +61,7 @@
               <td><code>@traits()</code></td>
               <td><b>Class Level</b><br/>An array of Objects</td>
               <td>
-              The methods and attributes in each object is spliced into the prototype chain of the Class.</td>
+              The methods and attributes in each object are spliced into the prototype chain of the Class.</td>
             </tr>
             <tr>
               <td><code>@public</code></td>
@@ -186,7 +186,7 @@ fireball1.stateMachine == fireball100.stateMachine
 
 
       <blockquote class="javascript" style="display:block;width: 100%;">
-            @static() usage. Like @public, but creates a public static property/method on the Class. 
+            @static() usage. Like @public, but creates a public static property/method on the Class.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 
