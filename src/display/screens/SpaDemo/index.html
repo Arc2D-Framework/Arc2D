@@ -1,12 +1,26 @@
 <template>
-	<div>
-		<nav>
-            <a href="#display.views.Home">Home Page</a>
-            <a href="#display.views.Contact">Contact Page</a>
-            <a href="#display.views.About">About Page</a>
-        </nav>
-        <slot name="view-port">
+    <div>
+        <nav class="nav">
+			<div class="container">
+				<div class="logo">
+					<a href="#display.views.Home"></a>
+				</div>
+				<div id="mainListDiv" class="main_list">
+					<ul class="navlinks">
+                        <li><a href="#display.views.Home">Home</a></li>
+						<li><a href="#display.views.About">About</a></li>
+						<li><a href="#display.views.Contact">Contact</a></li>
+					</ul>
+				</div>
+				<span class="navTrigger">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+			</div>
+		</nav>
+		<slot name="view-port">
             <home-page></home-page>
         </slot>
-	</div>
+    </div>
 </template>

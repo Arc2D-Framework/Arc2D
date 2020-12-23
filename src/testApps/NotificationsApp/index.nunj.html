@@ -1,0 +1,40 @@
+<template>
+	<div id="container">
+		<div id="top-content" class="d-flex p-3 border rounded align-items-center w-100">
+			<notifications-toggle-switch name="Notifications" id="main-toggle"></notifications-toggle-switch>
+		</div>
+
+		<div id="bottom-content" class="w-100 mt-5">
+			<div class="container-fluid px-0">
+				<div id="email" class="pt-5">
+					<div class="d-flex justify-content-between align-items-center">
+						<span class="d-block font-weight-bold text-secondary small">Email Address</span>
+						<span class="text-secondary small mb-1 d-block">
+							<small>Provide a valid email address with which to receive notifications.</small>
+						</span>
+					</div>
+					<div class="mt-2"><input type="text" placeholder="mail@domain.com" class="form-control" style="font-size: 14px;"></div>
+				</div>
+				<div id="notification-node" class="pt-5 mt-4">
+					<div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+						<span class="d-block font-weight-bold text-secondary small">Filter Notifications</span>
+						<span class="text-secondary small mb-1 d-block">
+							<small>Select the account activities for which to receive notifications.</small>
+						</span>
+					</div>
+					<div class="mt-5">
+						<div class="row flex-row align-content-start" style="max-height: 180px;">
+							{% for notification in items %}
+                                <div class="col-6 d-flex mb-3">
+                                    <div class="d-flex">
+                                        <notifications-toggle-switch name="{{notification}}"></notifications-toggle-switch>
+                                    </div>
+                                </div>
+                            {% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -6,17 +6,17 @@ namespace `display.views` (
 		async onConnected(){
             await super.onConnected();
 
-            this.addEventListener("click", this.unwatch, false, "#unwatch");
-            this.w = this.watch("#input1", "value", this.output, true, wrist);
+            // this.addEventListener("click", this.unwatch, false, "#unwatch");
+            // this.w = this.watch("#input1", "value", this.output, true, wrist);
         }
 
-        output =(e)=> {
-            var output = this.querySelector("#output");
-            output.innerHTML=e.val
-        }
+        // output =(e)=> {
+        //     var output = this.querySelector("#output");
+        //     output.innerHTML=e.val
+        // }
 
-        unwatch =()=> {
-            this.w.unwatch();
-        }
+        // unwatch =()=> {
+        //     this.w.unwatch();
+        // }
 	}
 );
