@@ -1,4 +1,4 @@
-// import 'display.components.Splash';
+import 'display.components.Splash';
 import '../../../../resources/js/jquery.3.1.1.min.js';
 import 'display.views.Home';
 
@@ -29,6 +29,12 @@ namespace `display.screens` (
             $("#mainListDiv").fadeIn();
         }
 
-        shrinkNavBar(){ $(window).scroll(function() { $(document).scrollTop() > 50 ? $('.nav').addClass('affix') : $('.nav').removeClass('affix'); }); }
+        shrinkNavBar(){ 
+            $(window).scroll(function() { 
+                $(document).scrollTop() > 50 
+                ? $('.nav').addClass('affix') 
+                : $('.nav').removeClass('affix'); 
+            }); 
+        }
     }
 );
