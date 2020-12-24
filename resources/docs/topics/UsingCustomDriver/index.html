@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Using our Nunjucks Template Driver</h1>
@@ -37,8 +37,8 @@ import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
     }
 );
         </code></pre>
-        <p> 
-            Override baseclass method, <code>getTemplateEngine()</code> and return the nunjucks driver by it's registered mime-type:
+        <p>
+            Override baseclass method, <code>getTemplateEngine()</code>, and return the nunjucks driver by its registered mime-type:
             <pre class="inline javascript lang" style="display:block;width: 100%;"><code>
 import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
 
@@ -70,10 +70,10 @@ import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
     }
 );
         </code></pre>
-            <p>Now let's create another template in the HealthCarePackage folder with filename: "index.nunj.html". Extension, ".nunj" was specified in the driver definition earlier.</p>
+            <p>Now, let's create another template in the HealthCarePackage folder with filename: "index.nunj.html". Extension, ".nunj" was specified in the driver definition earlier.</p>
         </p>
         <p>
-            The new nunjucks template for rendering the health package looks like this:
+            The new nunjucks template for rendering the health care package looks like this:
             <pre class="inline html lang" style="display:block;width: 100%;"><code>
 &#x3C;template&#x3E;
     &#x3C;h3&#x3E;Nunjucks -- Family Health Care: {{coverage.type}}&#x3C;/h3&#x3E;
@@ -86,12 +86,12 @@ import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
         &#x3C;/thead&#x3E;
         &#x3C;tbody&#x3E;
             {% for child in children %}
-              &#x3C;tr&#x3E; 
+              &#x3C;tr&#x3E;
                 &#x3C;td&#x3E;{{child.name}}&#x3C;/td&#x3E;
                 &#x3C;td&#x3E;{{child.age}}&#x3C;/td&#x3E;
               &#x3C;/tr&#x3E;
             {% else %}
-              &#x3C;tr&#x3E; 
+              &#x3C;tr&#x3E;
                 &#x3C;td colspan=&#x22;2&#x22;&#x3E;No Children&#x3C;/td&#x3E;
               &#x3C;/tr&#x3E;
             {% endfor %}
@@ -121,17 +121,17 @@ import '/framework/src/core/drivers/templating/Nunjucks/nunjucks-driver.js';
         <pre class="inline javascript lang" style="display:block;width: 100%;"><code>
 import 'docs.demos.templates.HealthCarePackage';
         </code></pre>
-        <p> 
+        <p>
             We'll create a dynamic instance and add it to the page:
             <pre class="inline javascript lang" style="display:block;width: 100%;"><code>
 var component = new docs.demos.templates.HealthCarePackage;
 application.appendChild(component)
         </code></pre>
-   
+
             <button id="render-mustache-component">Try It : Display HealthCarePackage Component</button>
             <div id="render-mustache-component-results"></div>
         </p>
-        
+
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>

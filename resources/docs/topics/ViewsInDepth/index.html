@@ -1,20 +1,20 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="introduction">Introduction</h1>
         <p>
-          A view is a kind-of activity being performed by the user, we'll use the terms interchangeably. Usually there is
-          a single activity in focus on a screen but as we'll cover later, multiple activities
-          can be stacked vertically, horizontally and even on top of each other. But generally, Single Page Applications (SPA), the architectural pattern for building rich applications, have at most
-          a single screen with navigation between many views (activities), where only 1 view is ever visible within that screen without ever reloading the screen.
+          A view is a kind of activity being performed by the user. We'll use the terms, "view" and "activity", interchangeably. Usually there is
+          a single activity in focus on a screen, but, as we'll cover later, multiple activities
+          can be stacked vertically, horizontally and even on top of each other. But, generally, Single Page Applications (SPA), the architectural pattern for building rich applications, have, at most,
+          a single screen with navigation between many views (activities) where only 1 view is ever visible within that screen without ever reloading the screen.
         </p>
         <p>
             The only requirement for a screen to function as an SPA, is defining
             a &#x3C;slot&#x3E; on the screen that manages the transitioning of views
-            that come into view and moves out of view for another view:
+            that come into view and swap out of view for another view:
             <pre class="inline html lang">
                 <code>
 &#x3C;slot name=&#x22;content&#x22;&#x3E;&#x3C;/slot&#x3E;
@@ -67,7 +67,7 @@
             maybe from the sidebar or footer.
         </p>
         <p>
-            Declare the layout of your screen however you wish, with whatever markup that makes the most sense, assemble it with components such as depicted above and declare a blank slot to achieve the basis
+            Declare the layout of your screen however you wish, with whatever markup that makes the most sense, assemble it with components such as depicted above, and declare a blank slot to achieve the basis
             of an SPA.
         </p>
       </div>
