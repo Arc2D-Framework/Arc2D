@@ -2,17 +2,17 @@
 window.wait=wait;
 
 
-if(!Function.prototype.with){
-    function reflect(target, source) {
-        for (let key of Reflect.ownKeys(source)) {
-            if(!/constructor|namespace|ancestor|classname|prototype|name/.test(key)){
-                let desc = Object.getOwnPropertyDescriptor(source, key);
-                Object.defineProperty(target, key, desc);
-            }
-        }
-    };
 
-  Function.prototype.with = function(...mixin) {
+function reflect(target, source) {
+    for (let key of Reflect.ownKeys(source)) {
+        if(!/constructor|namespace|ancestor|classname|prototype|name/.test(key)){
+            let desc = Object.getOwnPropertyDescriptor(source, key);
+            Object.defineProperty(target, key, desc);
+        }
+    }
+};
+
+Function.prototype.with = function(...mixin) {
     class c extends this{};
     for(let m of mixin){
         if(typeof m =="object") {
@@ -22,8 +22,8 @@ if(!Function.prototype.with){
         }
     }
     return c
-  };
 };
+
 
 /*
 

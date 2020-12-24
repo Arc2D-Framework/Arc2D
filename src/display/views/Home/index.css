@@ -3,10 +3,55 @@
     Example, the <home-page></home-page> tag.
 */
 
-:host {
+/* :host {
 	
 }
 
 :host h1 {
     color:red;
+} */
+
+/* html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-size: 62.5%;
+    font-size: 10px;
+} */
+
+/* .home {
+    width: 100%;
+    height: 100vh;
+    background-image: url("resources/img/mac-bg.webp");
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all .7s ease;
+} */
+
+/* #headerTxt {
+    margin: auto;
+    color: #fff;
+} */
+
+/* .myH2 {
+	text-align:center;
+    font-size: 4rem;
+    font-weight: 100;
 }
+.myP {
+	text-align: justify;
+	padding-left:15%;
+	padding-right:15%;
+	font-size: 20px;
+} */
+
+/* @media all and (max-width:700px){
+	.myP {
+		padding:2%;
+	}
+} */

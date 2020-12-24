@@ -1,0 +1,82 @@
+html, body, .NotificationsApp {
+    height: 100%;
+    padding: 0;
+    display: block;
+    box-sizing:border-box;
+    max-width: 600px;
+    margin: auto;
+}
+
+.NotificationsApp{
+    background: #fff;
+}
+
+.NotificationsApp #container{
+    width: auto;
+    height: 100%;
+    align-items: center;
+    padding: 20px 40px 0 40px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    /* margin:auto; */
+}
+
+.NotificationsApp #container.mobile {
+    max-width:320px !important;
+    padding: 0 !important;
+    /* margin: auto; */
+}
+
+.NotificationsApp #container #bottom-content{
+    height: auto;
+    font-family: 'Inter', sans-serif;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .5s;
+}
+
+.NotificationsApp #container #bottom-content notifications-toggle-switch{
+    width: 40px !important;
+    height: 20px !important;
+}
+
+.NotificationsApp #container #bottom-content notifications-toggle-switch div.knob{
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.NotificationsApp #container #bottom-content notifications-toggle-switch span#nameSlot{
+    font-size: 13px !important;
+    margin:0 !important;
+    left: 55px !important;
+    width: max-content;
+    top:2px !important;
+}
+
+.show{
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+@media screen and (min-width:360px) and (max-width:414px){
+    .NotificationsApp #container #bottom-content .row{
+        margin-right: -45px;
+    }
+
+    .NotificationsApp #container #bottom-content notifications-toggle-switch{
+        width: 35px !important;
+        height: 15px !important;
+    }
+
+    .NotificationsApp #container #bottom-content notifications-toggle-switch div.knob{
+        width: 15px !important;
+        height: 15px !important;
+    }
+
+    .NotificationsApp #container #bottom-content notifications-toggle-switch span#nameSlot{
+        font-size: 12px !important;
+        left: 48px !important;
+        top: 1px !important;
+        letter-spacing: -0.5px;
+    }
+}
