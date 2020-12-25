@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Using Components</h1>
@@ -13,7 +13,7 @@
           </ul>
         </p>
         <p>
-          <em>Import Dependencies</em> A prerequsite to using components you've created is ensure
+          <em>Import Dependencies</em> A prerequsite to using components you've created is ensuring that
           they are first <a href="#docs.topics.JavascriptImports">imported</a>.
         </p>
       </div>
@@ -43,7 +43,7 @@
           <pre class="inline javascsript lang"><code>import 'core.ui.GoblinEnemy';</code></pre>
         </p>
         <p>
-          Component use in html makes sense in the layout of screens, to assemble a user interface when the design (look-n-feel) is known ahead of time. This is considered, declaritive markup. The tag causes the component to be defined and connected to the DOM immediately. At that very moment, the <a href="#docs.topics.ComponentLifecycle">component life-cycle</a> runs it course.
+          Component use in HTML makes sense in the layout of screens to assemble a user interface when the design (look-n-feel) is known ahead of time. This is considered, declaritive markup. The tag causes the component to be defined and connected to the DOM immediately. At that very moment, the <a href="#docs.topics.ComponentLifecycle">component life-cycle</a> runs its course.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -60,7 +60,7 @@
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Using components programmatically in Javascript</h1>
         <p>
-          What if the screen dynamically changed based on user action or intelligent state driven decisions? Imagine a case where you wrote logic to spawn new Enemies or destroyed Enemies that took significant damage.
+          What if the screen dynamically changed based on user action or intelligent, state-driven decisions? Imagine a case where you wrote logic to spawn new Enemies or destroyed Enemies that took significant damage.
         </p>
         <p>
           From JavsScript, you are able to create new instances of components (Products, Photos, Enemy...) and place them into the World or Application in two(2) different ways:
@@ -85,8 +85,8 @@ document.body.appendChild(goblin);
         </p>
         <h3>onConnected()</h3>
         <p>
-          <em><code>onConnected()</code> only fires when the new instance is added to the DOM</em>. Otherwise
-          creating a new instance only triggers the components <code>constructor()</code>, it is not
+          <em><code>onConnected()</code> only fires when the new instance is added to the DOM</em>. Otherwise,
+          creating a new instance only triggers the components <code>constructor()</code>; it is not
           yet connectted or rendered to the screen. Read about the <a href="#docs.topics.ComponentLifecycle">Component Life-Cycle</a> for more details.
         </p>
         <goblin-enemy></goblin-enemy>
@@ -105,7 +105,7 @@ document.body.appendChild(goblin);
 
 
 
-    
+
 
 
 

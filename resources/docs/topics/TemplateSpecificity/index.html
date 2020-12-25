@@ -1,20 +1,20 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Template Specificity</h1>
         <p>
-          All WebComponents are visual elements that have a view(s) defined as an HTML <code>template</code> fragment. There are several ways a template is specified for a component each with an order of precedence (specificity), where only one strategy is used by the component for rendering.
+          All WebComponents are visual elements that have a view(s) defined as an HTML <code>template</code> fragment. There are several ways a template is specified for a component, each with an order of precedence (specificity) where only one strategy is used by the component for rendering.
         </p>
 
-        <p>Specificity order falls broadly under 2 categories. Design-time and run-time. Component
-        engineers rely on design-time choices for behavior control and packaging whereas developers rely on it's
-      runtime use when actually using tthe component on screen. Runtime use will always take precedence over
-    design time definition</p>
+        <p>Specificity order falls broadly under 2 categories: Design-time and run-time. Component
+        engineers rely on design-time choices for behavior control and packaging, whereas developers rely on it's
+      runtime use when actually using the component on screen. Runtime use will always take precedence over
+    design time definition.</p>
         <p>
-        	The order is from <b>grestest (3)</b> specificity to <b>least (0)</b>.
+        	The order is from <b>greatest (3)</b> specificity to <b>least (0)</b>.
 	        <table>
               <thead>
               <tr>
@@ -41,13 +41,13 @@
                 <td>1</td>
                 <td>Design-time</td>
                 <td>JavaScript <code>template()</code></td>
-                <td>Template found in components JavaScript Class definition</td>
+                <td>Template found in component's JavaScript Class definition</td>
               </tr>
               <tr>
                 <td>0</td>
                 <td>Design-time</td>
                 <td><code>index.html</code> asset file</td>
-                <td>Template found in components asset folder as index.html</td>
+                <td>Template found in component's asset folder as index.html</td>
               </tr>
             </tbody>
           </table>
@@ -58,7 +58,7 @@
         <div class="javascript lang">
         	<blockquote class="javascript" style="display:block;width: 100%;">
             <b>Specificity 1: JavaScript inline template()</b><br/>
-            Falls back to <code>template()</code> source from the component class,
+            Falls back to <code>template()</code> source from the component class
             declared at design-time.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
@@ -113,14 +113,14 @@ namespace \`core.ui\` (
 
 
 
-    
+
 
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Load performance side-effect</h1>
+        <h1 id="api-reference">Load performance side effect</h1>
         <p>
-          The order of precedence lends to an interesting performance side-effect. A "prefab" component can be baked with it's template inlined in the Javascript via the <code>ttemplate()</code> function, decreasing load & render time significantly.
+          The order of precedence lends to an interesting performance side effect. A "prefab" component can be baked with its template inlined in the JavaScript via the <code>template()</code> function, decreasing load & render time significantly.
         </p>
         <p>
           Later, in the <a href="#docs.topics.TemplateDataToHtml" class="active">Transform data to HTML</a> topic, we'll

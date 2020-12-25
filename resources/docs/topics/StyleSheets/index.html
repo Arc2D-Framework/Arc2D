@@ -1,16 +1,16 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Component StyleSheets</h1>
         <p>
-          In a previous topic, <a href="#docs.topics.JavascriptDecorators/stylesheets">Decorators</a> and <a href="#docs.topics.ComponentPackaging">Component Packaging</a>, we looked at the <b>@stylesheets</b> decorator as well as baking css into your Classes. But there's a few more things to know. The loading and parsing of stylesheets for each component also has a life-cycle.
+          In previous topics, <a href="#docs.topics.JavascriptDecorators/stylesheets">Decorators</a> and <a href="#docs.topics.ComponentPackaging">Component Packaging</a>, we looked at the <b>@stylesheets</b> decorator as well as baking CSS into your Classes. But, there are a few more things to know. The loading and parsing of stylesheets for each component also has a life-cycle.
           <div style="text-align:center;"><img src="docs/images/style_sheet_life_cycle.png" style="width: 70%;"/></div>
         </p>
         <p>
-          These 4 steps occur last in order during the onConnected phase and gives your component 100% control in each step of the cycle. Exposed to you as life-cycle methods, your components are able to override and/or suplement the outcome via 4 hooks:
+          These 4 steps occur last during the onConnected phase and each gives your component 100% control during each step of the cycle. Exposed to you as life-cycle methods, your components are able to override and/or supplement the outcome via 4 hooks:
 
           <table>
             <thead>
@@ -24,12 +24,12 @@
               <tr>
                 <td>onLoadStyle</td>
                 <td>String: url of the style src</td>
-                <td>Possible to alter url or return false to stop loading of this url</td>
+                <td>allows you to alter url or return false to stop loading of this url</td>
               </tr>
               <tr>
                 <td>onTransformStyle</td>
                 <td>String: css src text</td>
-                <td>Possibly parse, transform the css in this step (i.e: LESS-to-CSS) </td>
+                <td>Allows you to parse and transform the CSS in this step (i.e: LESS-to-CSS) </td>
               </tr>
               <tr>
                 <td>onStylesheetLoaded</td>
@@ -82,7 +82,7 @@ namespace \`core.ui\` (
 
 
 <blockquote class="javascript" style="display:block;width: 100%;">
-            <code style="display:inline;">onStylesheetLoaded(style)</code> - Notifies the component that the css was loaded, transformed and the StyleSheet object is ready. Not yet applied to the DOM.
+            <code style="display:inline;">onStylesheetLoaded(style)</code> - Notifies the component that the CSS was loaded, transformed and the StyleSheet object is ready. Not yet applied to the DOM.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (

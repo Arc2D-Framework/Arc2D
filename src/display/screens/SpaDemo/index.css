@@ -1,5 +1,3 @@
-
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 html, body {
     width: 100%;
     height: 100%;
@@ -9,7 +7,6 @@ html, body {
     box-sizing:border-box;
     font-family: "Quicksand", sans-serif;
 }
-
 .logo {
     background-image: url("resources/img/Arc2D_logo.png");
     width: 72px !important;
@@ -20,7 +17,6 @@ html, body {
     left: 30px;
     padding:0 !important;
 }
-
 .nav {
     width: 100%;
     height: 65px;
@@ -32,22 +28,18 @@ html, body {
     -webkit-transition: all .9s ease;
     transition: all .9s ease;
 }
-
 .nav.affix{
     height:85px;
 }
-
 .nav.affix div.logo{
     top:5px;
 }
-
 .nav div.logo {
     float: left;
     width: auto;
     height: auto;
     padding-left: 3rem;
 }
-
 .nav div.logo a {
     text-decoration: none;
     color: #fff;
@@ -56,16 +48,13 @@ html, body {
     height: inherit;
     display:inline-block;
 }
-
 .nav div.logo a:hover {
     color: #00E676;
 }
-
 .nav div.main_list {
     height: 65px;
     float: right;
 }
-
 .nav div.main_list ul {
     width: 100%;
     height: 65px;
@@ -74,29 +63,26 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
 .nav div.main_list ul li {
     width: auto;
     height: 65px;
     padding: 0;
     padding-right: 3rem;
 }
-
 .nav div.main_list ul li a {
     text-decoration: none;
     color: #fff;
     line-height: 65px;
-    font-size: 2.4rem;
+    font-size: 1.5rem;
+    font-weight:400;
+    transition: all .3s ease;
 }
-
 .nav div.main_list ul li a:hover {
-    color: #00E676;
+    color: #0359A6;
 }
-
 .navTrigger {
     display: none;
 }
-
 .affix {
     padding: 0;
     background-color: #010101
@@ -154,14 +140,13 @@ html, body {
     .nav div.main_list ul li a {
         text-align: center;
         width: 100%;
-        font-size: 3rem;
+        font-size: 1.5rem;
         padding: 20px;
     }
     .nav div.media_button {
         display: block;
     }
 }
-
 .navTrigger {
     cursor: pointer;
     width: 30px;
@@ -172,7 +157,6 @@ html, body {
     top: 0;
     bottom: 0;
 }
-
 .navTrigger i {
     background-color: #fff;
     border-radius: 2px;
@@ -181,14 +165,12 @@ html, body {
     width: 100%;
     height: 4px;
 }
-
 .navTrigger i:nth-child(1) {
     -webkit-animation: outT 0.8s backwards;
     animation: outT 0.8s backwards;
     -webkit-animation-direction: reverse;
     animation-direction: reverse;
 }
-
 .navTrigger i:nth-child(2) {
     margin: 5px 0;
     -webkit-animation: outM 0.8s backwards;
@@ -196,157 +178,78 @@ html, body {
     -webkit-animation-direction: reverse;
     animation-direction: reverse;
 }
-
 .navTrigger i:nth-child(3) {
     -webkit-animation: outBtm 0.8s backwards;
     animation: outBtm 0.8s backwards;
     -webkit-animation-direction: reverse;
     animation-direction: reverse;
 }
-
 .navTrigger.active i:nth-child(1) {
     -webkit-animation: inT 0.8s forwards;
     animation: inT 0.8s forwards;
 }
-
 .navTrigger.active i:nth-child(2) {
     -webkit-animation: inM 0.8s forwards;
     animation: inM 0.8s forwards;
 }
-
 .navTrigger.active i:nth-child(3) {
     -webkit-animation: inBtm 0.8s forwards;
     animation: inBtm 0.8s forwards;
 }
-
-@-webkit-keyframes inM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
+home-page .home {
+    width: 100%;
+    height: 100vh;
+    background-image: url("resources/img/mac-bg.webp");
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all .7s ease;
+}
+about-page .about {
+    width: 100%;
+    height: 100vh;
+    background-image: url("resources/img/pc-laptop-bg.webp");
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+contact-page .contact {
+    width: 100%;
+    height: 100vh;
+    background-image: url("resources/img/laptop-bg.webp");
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#headerTxt {
+    margin: auto;
+    color: #fff;
+}
+.myH2 {
+	text-align:center;
+    font-size: 2.5rem;
+    font-weight: 100;
+}
+.centerP{
+    text-align:center;
+    font-size: 1.5em;
+}
+.myP {
+	text-align: justify;
+	padding-left:15%;
+	padding-right:15%;
+	font-size: 20px;
+}
+@media all and (max-width:700px){
+	.myP {
+		padding:2%;
+	}
 }
 
-@keyframes inM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes outM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
-}
-
-@keyframes outM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes inT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes inT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes outT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes inBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes inBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes outBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
+@-webkit-keyframes inM{50%{-webkit-transform:rotate(0)}100%{-webkit-transform:rotate(45deg)}}@keyframes inM{50%{transform:rotate(0)}100%{transform:rotate(45deg)}}@-webkit-keyframes outM{50%{-webkit-transform:rotate(0)}100%{-webkit-transform:rotate(45deg)}}@keyframes outM{50%{transform:rotate(0)}100%{transform:rotate(45deg)}}@-webkit-keyframes inT{0%{-webkit-transform:translateY(0) rotate(0)}50%{-webkit-transform:translateY(9px) rotate(0)}100%{-webkit-transform:translateY(9px) rotate(135deg)}}@keyframes inT{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(9px) rotate(0)}100%{transform:translateY(9px) rotate(135deg)}}@-webkit-keyframes outT{0%{-webkit-transform:translateY(0) rotate(0)}50%{-webkit-transform:translateY(9px) rotate(0)}100%{-webkit-transform:translateY(9px) rotate(135deg)}}@keyframes outT{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(9px) rotate(0)}100%{transform:translateY(9px) rotate(135deg)}}@-webkit-keyframes inBtm{0%{-webkit-transform:translateY(0) rotate(0)}50%{-webkit-transform:translateY(-9px) rotate(0)}100%{-webkit-transform:translateY(-9px) rotate(135deg)}}@keyframes inBtm{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(0)}100%{transform:translateY(-9px) rotate(135deg)}}@-webkit-keyframes outBtm{0%{-webkit-transform:translateY(0) rotate(0)}50%{-webkit-transform:translateY(-9px) rotate(0)}100%{-webkit-transform:translateY(-9px) rotate(135deg)}}@keyframes outBtm{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(0)}100%{transform:translateY(-9px) rotate(135deg)}}

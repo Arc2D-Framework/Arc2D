@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Component Definition</h1>
@@ -12,7 +12,7 @@
             <code>
 namespace \`display.components\` (
   class ToggleButton extends WebComponent  {
-    
+
   }
 )
             </code>
@@ -27,9 +27,9 @@ namespace \`display.components\` (
       </div>
     </div>
 
-    
 
-    
+
+
 
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
@@ -52,7 +52,7 @@ namespace \`display.components\` (
             <code>
 namespace \`display.components\` (
   class ToggleButton extends WebComponent  {
-    
+
   }
 )
             </code>
@@ -90,7 +90,7 @@ namespace \`display.components\` (
             <code>
 namespace \`display.components\` (
   class ToggleButton extends WebComponent  {
-    
+
   }
 )
             </code>
@@ -98,9 +98,9 @@ namespace \`display.components\` (
         </p>
         <h2>Template Specificity</h2>
         <p>
-          There are 3 versatile strategies a component uses at runtime to determine 
+          There are 3 versatile strategies a component uses at runtime to determine
           where it's template will come from, this is covered more in the topic, <a href="#docs.topics.ComponentTemplates" class="active">Templating</a>, but we'll briefly
-          summarize. 
+          summarize.
         </p>
 
         <h3>Design-time Templates</h3>
@@ -127,8 +127,8 @@ namespace \`display.components\` (
         </p>
         <h3>Runtime-time Templates</h3>
         <p>
-          When components are used in normal HTML flow (see: <a href="#docs.topics.ComponentUsage">Using Components</a>), developers have the option of overriding the design-time template and specify
-          their own run-time template that takes the highest priority, the component render process will
+          When components are used in normal HTML flow (see: <a href="#docs.topics.ComponentUsage">Using Components</a>), developers have the option of overriding the design-time template and specifying
+          their own run-time template that takes the highest priority. The component render process will
           ignore all design-time templates and use the inline, runtime <code>template</code> for it's
           UI. Here's an example:
 
@@ -149,7 +149,7 @@ namespace \`display.components\` (
         </p>
         <p>
           Alternatively, you may use the <code>src</code> attribute to load the template
-          externally, this could perhaps be a web-service or a static PHP/HTML file.
+          externally. This could perhaps be a web-service or a static PHP/HTML file.
           <pre class="inline html lang">
             <code>
 &#x3C;body namespace=&#x22;display.screens.HelloWorld&#x22;&#x3E;
@@ -219,14 +219,14 @@ namespace \`display.components\` (
         <p>
           Component styling is unlike the components <code>template</code> specificity. Since
           CSS has built-in specificity due to it's additive nature and style inheritance,
-          engineers may package the stylesheet of a component at design-time using the
-          external index.css asset file or within the Component class via the <code>cssStyle()</code>
+          engineers may package the stylesheet of a component at design-time. This can be done either using the
+          external index.css asset file, within the Component class via the <code>cssStyle()</code>
           function or both. In addition, extra stylesheets can be loaded in combination, giving
-          good flexibility but will be confusing. You should generally design components to use
-          styling from JavaScript, using <code>cssStyle()</code> OR let the component fall-back to loading it's default index.css asset.
+          good flexibility, but this would be confusing. You should generally design components to use
+          styling from JavaScript, using <code>cssStyle()</code>, OR let the component fall-back to loading it's default index.css asset.
         </p>
         <p>
-          Here's an example of declaring the stylesheet within the Components class definition using 
+          Here's an example of declaring the stylesheet within the Components class definition using
           the <code>cssStyle()</code> function:
           <pre class="inline javascript lang">
             <code>
@@ -256,8 +256,8 @@ namespace \`display.components\` (
           priority.
         </p>
         <p>
-          Here's an example of a stylesheet from a components index.css asset file. NOTE: Do not
-          wrap the css rules in a <code>style</code> tag.
+          Here's an example of a stylesheet from a components index.css asset file. <em>NOTE: Do not
+          wrap the css rules in a <code>style</code> tag.</em>
             <pre class="inline css lang">
             <code>
 :host {
@@ -276,7 +276,7 @@ namespace \`display.components\` (
         </p>
         <h3>Loading Additional Stylesheets</h3>
         <p>
-          Additional stylesheets may also be specified using the <code>@stylesheets</code> decorator, see 
+          Additional stylesheets may also be specified using the <code>@stylesheets</code> decorator, see
           <a href="#docs.topics.JavascriptDecorators" class="active">Decorators</a>. An array
           of .css paths is supported:
           <pre class="inline javascript lang">
@@ -305,7 +305,7 @@ namespace \`display.components\` (
         <h3>Inline Stylesheets</h3>
         <p>
           Additionally, inline stylesheets could be loaded at design-time within
-          the design-time template using either the <code>&#x3C;link&#x3E;</code> or 
+          the design-time template using either the <code>&#x3C;link&#x3E;</code> or
           <code>&#x3C;style&#x3E;</code> tags or a combination of both:
           <pre class="inline html lang">
             <code>
@@ -335,13 +335,13 @@ namespace \`display.components\` (
         </p>
         <h3>Stylesheet Lifecycle</h3>
         <p>
-          The components stylesheet transitions through a life-cycle in several stages during load/render, see the chapter, <a href="#docs.topics.StyleSheets">Stylesheet life-cycle</a> to understand the process and
-          some interesting transformations that can be applied, like parsing LESS into CSS att runtime.
+          The components stylesheet transitions through a life-cycle in several stages during load/render. See the chapter, <a href="#docs.topics.StyleSheets">Stylesheet life-cycle</a> to understand the process and
+          some interesting transformations that can be applied, like parsing LESS into CSS at runtime.
         </p>
         <h3>Disable Stylesheet Loading</h3>
         <p>
           Finally, component engineers may want to disable any external stylesheets from being loaded during design-time. Maybe the <code>cssStyle()</code> function will be the sole source of styling, this can
-          be used as an optimization technique for faster rendering. Override the <code>onLoadInstanceSstylesheet()</code> hook and return false, this prevents any fallback/external .css files from loading.
+          be used as an optimization technique for faster rendering. Override the <code>onLoadInstanceSstylesheet()</code> hook, and return false. This prevents any fallback/external .css files from loading.
           <pre class="inline javascript lang">
             <code>
 namespace \`display.components\` (
@@ -385,8 +385,8 @@ namespace \`display.components\` (
         <h1 id="api-reference">Component Usage</h1>
         <p>
           Now that a component is defined (design-time) let's look at the
-          various ways it can be used natively according to the W3C specs,
-          read about <a href="#docs.topics.ComponentUsage">Using Components</a>
+          various ways it can be used natively according to the W3C specs.
+          Read about <a href="#docs.topics.ComponentUsage">Using Components</a>
         </p>
       </div>
       <div style="width: 50%;display: block;">

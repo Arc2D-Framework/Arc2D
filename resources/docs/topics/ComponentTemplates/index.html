@@ -1,12 +1,12 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Introduction</h1>
         <p>
-          All components, screens and world applications have 3 assets, an index.html, index.css and an index.js.
+          All components, screens and world applications have 3 assets: an index.html, index.css and an index.js.
           The index.html asset is the content template belonging to a component or screen. It is only a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template" ttargett="_new">fragment
           of HTML</a> wrapped in a <code>&#x3C;template&#x3E;</code>. As Mozilla explains:
         </p>
@@ -47,7 +47,7 @@
           </blockquote>
           <pre class="highlight html" style="display:block;width: 100%;">
             <code>
-&#x3C;template&#x3E; 
+&#x3C;template&#x3E;
     &#x3C;div&#x3E;
         &#x3C;div&#x3E;
             &#x3C;div&#x3E;&#x3C;b&#x3E;W, S&#x3C;/b&#x3E; - Accelerate/Decelerate&#x3C;/div&#x3E;
@@ -78,8 +78,8 @@
     &#x3C;head&#x3E;
         &#x3C;meta http-equiv=&#x22;Content-Type&#x22; content=&#x22;text/html; charset=utf-8&#x22;&#x3E;
         &#x3C;meta http-equiv=&#x22;Content-Security-Policy&#x22; content=&#x22;
-            default-src &#x27;self&#x27; * blob: data: gap: https://ssl.gstatic.com &#x27;unsafe-eval&#x27;; 
-            script-src  &#x27;self&#x27; &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; blob: data: *; 
+            default-src &#x27;self&#x27; * blob: data: gap: https://ssl.gstatic.com &#x27;unsafe-eval&#x27;;
+            script-src  &#x27;self&#x27; &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; blob: data: *;
             style-src   &#x27;self&#x27; &#x27;unsafe-inline&#x27; *&#x22;&#x3E;
         &#x3C;meta name=&#x22;viewport&#x22; content=&#x22;width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no&#x22;&#x3E;
         &#x3C;meta http-equiv=&#x22;X-UA-Compatible&#x22; content=&#x22;IE=edge,chrome=1&#x22;&#x3E;
@@ -114,14 +114,14 @@
 
 
 
-    
+
 
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">...not to be rendered immediately</h1>
         <p>
-          As the mozilla docs state, a template is not to be rendered immediately but may be
+          As the Mozilla docs state, a template is not to be rendered immediately, but may be
           instantiated subsequently during runtime. When you finally embed and use the HTML5
           tag (figure 2 html) representing the screen/world, rendering is triggered immediately by Arc
           during <code>onConnected</code> time (see Figure 3 - JavaScript tab).
@@ -129,8 +129,8 @@
         </p>
         <h3>What happens during render</h3>
         <p>
-          The template is first loaded, processed by Arc, then the fragment handed to the browsers native HTML5 
-          engine which ultimately validates the templates content and uses it as innerHTML at runtime. 90% of the
+          The template is first loaded, processed by Arc, and then the fragment is handed to the browsers native HTML5
+          engine which ultimately validates the template's content and uses it as innerHTML at runtime. 90% of the
           process is handled natively by the DOM, not Arc.
         </p>
         <h3>The final outerHTML of body</h3>
@@ -141,7 +141,7 @@
           <pre class="inline html lang">
             <code class="hljs">
 &#x3C;body namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
-    &#x3C;sat-collision class=&#x22; WebComponent Application World SatCollision&#x22; namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E; 
+    &#x3C;sat-collision class=&#x22; WebComponent Application World SatCollision&#x22; namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
       &#x3C;div&#x3E;
           &#x3C;div&#x3E;
               &#x3C;div&#x3E;&#x3C;b&#x3E;W, S&#x3C;/b&#x3E; - Accelerate/Decelerate&#x3C;/div&#x3E;
@@ -216,11 +216,11 @@ async onConnected() {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Inline <code style="font-size: 20px !important;">&#x3C;template&#x3E;</code></h1>
         <p>
-          The W3C/HTML5 specs allows a custom component to be declared at design time with an inline <code>&#x3C;template&#x3E;</code>, see
+          The W3C/HTML5 specs allows a custom component to be declared at design time with an inline <code>&#x3C;template&#x3E;</code>. See
           <a href="#docs.topics.TemplateSpecificity">Template Specificity</a>.<br/>
           <em>This allows developers the flexibility to reuse components and declare custom layouts</em> in many different ways and
           not rely on the default <code>&#x3C;template&#x3E;</code> packaged by the creator.
-          In addition, load time and rendering speed is cut drastically as Arc does not have to download the 
+          In addition, load time and rendering speed are cut drastically as Arc does not have to download the
           default template asset file (index.html) at runtime, but hands over the inline template instantly to the DOM.
           <br/><br/>
           Note the inline <code>&#x3C;template&#x3E;</code> tag:
@@ -228,7 +228,7 @@ async onConnected() {
             <code class="hljs">
 &#x3C;body namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
     &#x3C;sat-collision&#x3E;
-        &#x3C;template&#x3E; 
+        &#x3C;template&#x3E;
             &#x3C;div&#x3E;
                 &#x3C;div&#x3E;
                     &#x3C;div&#x3E;&#x3C;b&#x3E;W, S&#x3C;/b&#x3E; - Accelerate/Decelerate&#x3C;/div&#x3E;
@@ -254,7 +254,7 @@ async onConnected() {
           <pre class="inline html lang">
             <code class="hljs">
 &#x3C;body namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
-    &#x3C;sat-collision class=&#x22; WebComponent Application World SatCollision&#x22; namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E; 
+    &#x3C;sat-collision class=&#x22; WebComponent Application World SatCollision&#x22; namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
       &#x3C;div&#x3E;
           &#x3C;div&#x3E;
               &#x3C;div&#x3E;&#x3C;b&#x3E;W, S&#x3C;/b&#x3E; - Accelerate/Decelerate&#x3C;/div&#x3E;
@@ -290,13 +290,13 @@ async onConnected() {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Custom tags and their <code style="font-size: 20px !important;">&#x3C;classList&#x3E;</code></h1>
         <p>
-          After custom component tags are rendered, you'll notice additional attributtes, mainly, <code>class</code>
-          and <code>namespace</code> are given values.
+          After custom component tags are rendered, you'll notice additional attributes, mainly <code>class</code>
+          and <code>namespace</code>, are given values.
 
           <pre class="inline html lang">
             <code class="hljs">
 &#x3C;body namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
-    &#x3C;sat-collision class=&#x22; WebComponent Application World SatCollision&#x22; namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E; 
+    &#x3C;sat-collision class=&#x22; WebComponent Application World SatCollision&#x22; namespace=&#x22;display.worlds.SatCollision&#x22;&#x3E;
       ...
     &#x3C;/sat-collision&#x3E;
 &#x3C;/body&#x3E;
@@ -304,7 +304,7 @@ async onConnected() {
           </pre>
         </p>
         <p>
-          The &#x3C;sat-collision&#x3E; tag will have it's <code>namespace</code> attribute set by Arc pointing to it's fully-qualified namespace only as a convenience during debugging or DOM inspection. In addition, it's <code>class</code> attributte will be a list of all JavaScript <code>class{}</code> ancestors that this class inherits from. I'll say that in another way, the <code>class</code> attribute shows all of the super classes that this class (<code>display.worlds.SatCollision</code>) is a sub-class of.
+          The &#x3C;sat-collision&#x3E; tag will have its <code>namespace</code> attribute set by Arc pointing to its fully-qualified namespace only as a convenience during debugging or DOM inspection. In addition, it's <code>class</code> attributte will be a list of all JavaScript <code>class{}</code> ancestors that this class inherits from. In other words, the <code>class</code> attribute shows all of the super classes that this class (<code>display.worlds.SatCollision</code>) is a sub-class of.
         </p>
         <p>
           <em>It should be read backwards, like this:</em><br/>
@@ -326,7 +326,7 @@ async onConnected() {
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Next..</h1>
         <p>
-          Now that you understand how templates work, continue to explore <a href="#docs.topics.TemplateSpecificity">Template Specificity</a> an important topic covering further flexibility and how Arc determines the order of specificity in choosing to load/not-load templates as well as "design-time" vs. run-time template declaration.
+          Now that you understand how templates work, continue to explore <a href="#docs.topics.TemplateSpecificity">Template Specificity</a>- an important topic covering further flexibility and how Arc determines the order of specificity in choosing to load/not-load templates as well as "design-time" vs. run-time template declaration.
         </p>
       </div>
       <div style="width: 50%;display: block;">

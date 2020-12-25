@@ -1,14 +1,14 @@
 <template>
   <div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Rendering Templates</h1>
         <p>
-          A components template is rendered at <code>onConnected()</code> time. By default,
+          A component's template is rendered at <code>onConnected()</code> time. By default,
           the base-class WebComponent implements onConnected() and handles the render.
-        	At minimum, a components class (right-pane) that extends WebComponent will be rendered for you
+        	At minimum, a component's class (right-pane) that extends WebComponent will be rendered for you
         	when the component is used (see: <a href="#docs.topics.ComponentUsage">Component Usage</a>).
         	Essentially, this means your class could be mostly empty while focusing on the HTML/CSS skinning.
         </p>
@@ -22,7 +22,7 @@
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
     class ModalDialog extends WebComponent {
-        
+
     }
 );</code></pre>
         </div>
@@ -37,11 +37,11 @@ namespace \`core.ui\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Render manually</h1>
         <p>
-          <code>onConnected()</code>, in most cases will be overridden in your 
-          components definition to wire-up listeners and manipulate the components
-          local DOM - <em>a W3C recommendation. Do not attempt to access/manipulate the DOM from the <code>constructor</code></em>, as the <code>constructor</code> only fires when a new component instance 
+          <code>onConnected()</code>, in most cases, will be overridden in your
+          component's definition to wire-up listeners and manipulate the component's
+          local DOM - <em>a W3C recommendation. Do not attempt to access/manipulate the DOM from the <code>constructor</code></em>, as the <code>constructor</code> only fires when a new component instance
           is created via the <code>new</code> operator or from the <code>document.createElement()</code>
-          factory method. 
+          factory method.
         </p>
         <p>
           When implementing <code>onConnected()</code>, it is advisable to invoke <code>super.onConnected()</code> before any DOM manipulations so that the <code>WebComponent</code> base-class handles the render call for generating the DOM <strong>before</strong> it can be manipulated. Example (right-pane).
@@ -51,7 +51,7 @@ namespace \`core.ui\` (
         <div class="shell lang"></div>
         <div class="javascript lang">
           <blockquote class="javascript" style="display:block;width: 100%;">
-            When overriding <code>onConnected()</code>, call <code>super.onConnected()</code> to render the components DOM
+            When overriding <code>onConnected()</code>, call <code>super.onConnected()</code> to render the component's DOM
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
@@ -69,8 +69,8 @@ namespace \`core.ui\` (
 
 
           <blockquote class="javascript" style="display:block;width: 100%;">
-            If you override and never call <code>super.onConnected()</code>, the components DOM never
-            renders, it will be an empty shell on screen, with no dom tree. Trying to manipute
+            If you override and never call <code>super.onConnected()</code>, the component's DOM never
+            renders, it will be an empty shell on screen, with no DOM tree. Trying to manipulate
             a non-existing DOM will cause errors:
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
@@ -85,7 +85,7 @@ namespace \`core.ui\` (
 
 
           <blockquote class="javascript" style="display:block;width: 100%;">
-            <code>super.onConnected()</code> does just one thing, it calls <code>this.render()</code> for you. So alternatively, you could also call <code>this.render()</code> yourself.
+            <code>super.onConnected()</code> does just one thing. It calls <code>this.render()</code> for you. So, alternatively, you could also call <code>this.render()</code> yourself.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`core.ui\` (
@@ -110,11 +110,11 @@ namespace \`core.ui\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Rendering Custom DOM</h1>
         <p>
-          It's possible that you may never want to invoke <code>super.onConnected()</code> for template rendering because you intend to generate the DOM manually, i.e: for..loop over an array to
-          create Nodes. 
+          It's possible that you may never want to invoke <code>super.onConnected()</code> for template rendering because you intend to generate the DOM manually, i.e: for loop over an array to
+          create Nodes.
         </p>
         <p>
-        	<em>Alternatively</em>, JSON data could be injected into .render(data) or super.onConnected(data), to generate HTML using any open-source templating engine available (Mustache, Handlebars, ES6 Template Literals) - we'll cover this strategy in <a href="#docs.topics.PluggableTemplateEngines">Pluggable Engines</a>.
+        	<em>Alternatively</em>, JSON data could be injected into .render(data) or super.onConnected(data), to generate HTML using any open-source templating engine available (Mustache, Handlebars, ES6 Template Literals); we'll cover this strategy in <a href="#docs.topics.PluggableTemplateEngines">Template Engines</a>.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -135,7 +135,7 @@ namespace \`core.ui\` (
                 &#x3C;/template&#x3E;&#x60;;
             var age = document.createElement('span');
                 age.innerHTML = &#x60;&#36;{data.age}&#x60;;
-            
+
             //add nodes to DOM
             this.appendChild(name);
             this.appendChild(age);

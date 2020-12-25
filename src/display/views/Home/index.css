@@ -11,7 +11,7 @@
     color:red;
 } */
 
-html,
+/* html,
 body {
     margin: 0;
     padding: 0;
@@ -19,9 +19,9 @@ body {
     font-family: "Quicksand", sans-serif;
     font-size: 62.5%;
     font-size: 10px;
-}
+} */
 
-.home {
+/* .home {
     width: 100%;
     height: 100vh;
     background-image: url("resources/img/mac-bg.webp");
@@ -31,14 +31,14 @@ body {
     flex-direction: column;
     justify-content: center;
     transition: all .7s ease;
-}
+} */
 
-#headerTxt {
+/* #headerTxt {
     margin: auto;
     color: #fff;
-}
+} */
 
-.myH2 {
+/* .myH2 {
 	text-align:center;
     font-size: 4rem;
     font-weight: 100;
@@ -48,10 +48,10 @@ body {
 	padding-left:15%;
 	padding-right:15%;
 	font-size: 20px;
-}
+} */
 
-@media all and (max-width:700px){
+/* @media all and (max-width:700px){
 	.myP {
 		padding:2%;
 	}
-}
+} */

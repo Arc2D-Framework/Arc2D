@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    
+
 
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
@@ -10,8 +10,8 @@
         <p>
           A Watcher will observe and notify you of property/value changes on a source object. This
           mechanism allows for manual control of "bindings". Data Binding is a design-pattern facilitating the synchronization
-          of property values between a source and destination object, so as to mirror the values -- for practicality, to collect and store values from the UI. This pattern
-          is most prevalent and a commonly recurring theme between the UI(HTML User Interface) and it's JavaScript class.
+          of property values between a source and a destination object so as to mirror the values -- for practicality, to collect and store values from the UI. This pattern
+          is most prevalent and a commonly recurring theme between the UI(HTML User Interface) and its JavaScript class.
         </p>
         <img style="width:100%;" src="docs/images/Watchers.png"/>
         <h3 id="api-reference" style="margin-top: 1.7em;">Usage</h3>
@@ -27,8 +27,8 @@ this.watch("#email", 'value', e => this.email = e.val)
         <div class="shell lang"></div>
         <div class="javascript lang">
           <blockquote class="javascript" style="display:block;width: 100%;">
-            <b>Example:</b> Watch and bind values being entered in a components UI (the source). See HTML tab for
-            what the components UI could look like.
+            <b>Example:</b> Watch and bind values being entered in a component's UI (the source). See HTML tab for
+            what the component's UI could look like.
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 namespace \`display.components.UserRegistration\` (
@@ -54,7 +54,7 @@ namespace \`display.components.UserRegistration\` (
         <div class="html lang">
           <blockquote class="html" style="display:block;width: 100%;">
             <b>Example:</b> A simple component template to collect user values. The <code>&#x3C;input/&#x3E;</code>
-            elements will be watched by the components class. See JavaScript tab.
+            elements will be watched by the component's class. See JavaScript tab.
           </blockquote>
           <pre class="highlight html" style="display:block;width: 100%;"><code>
 &#x3C;template&#x3E;
@@ -79,7 +79,7 @@ namespace \`display.components.UserRegistration\` (
 
 
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Agnostic Design</h1>
@@ -94,13 +94,13 @@ namespace \`display.components.UserRegistration\` (
           </ul>
         </p>
         <p>
-          <em>Where "model" is synonymous for a variable/object in JavaScript and "view" is anything in the DOM</em>. Unlike "data binding" implemented in most modern frameworks, bindings in Arc excel because the implementation focuses on:
+          <em>where "model" is synonymous for a variable/object in JavaScript and "view" is anything in the DOM</em>. Unlike "data binding" implemented in most modern frameworks, bindings in Arc excel because the implementation focuses on:
         </p>
         <p>
           <ul>
-              <li><b>Transparency:</b> See directly what is being watched</li>
-              <li><b>Control:</b> Ability to watch, unwatch & transform values easily</li>
-              <li><b>Logic:</b> Separate technologies. No JS in HTML or special HTML attributes to learn</li>
+              <li><b>Transparency:</b> See directly what is being watched.</li>
+              <li><b>Control:</b> Ability to watch, unwatch & transform values easily.</li>
+              <li><b>Logic:</b> Separate technologies. No JS in HTML or special HTML attributes to learn.</li>
               <!-- <li><b>Speed:</b> Direct to-the-metal watcher; no black-box magic.</li> -->
               <li><b>Affordance:</b> Gives us a "binding" mechanism via watchers, bi-directionally between
               any kinds of objects in theory and the ability to swap Watcher Engines out.</li>
@@ -109,7 +109,7 @@ namespace \`display.components.UserRegistration\` (
         </p>
         <p>
           Most important is the agnostic design of the Watcher mechanism in Arc. Developers are able to completely replace
-          the default engine used internally for watching. The Watcher concept is not hard-coded into the Arc Engine, here's
+          the default engine used internally for watching. The Watcher concept is not hard-coded into the Arc Engine. Here's
           the design:
           <img style="width:100%;" src="docs/images/custom_watchers.png"/>
         </p>
@@ -146,7 +146,7 @@ namespace \`system.drivers.watchers\` (
         </p>
         <p>
           The <code>system.drivers.watchers.Watcher</code> is a very simple Watcher implementation that is based
-          on EventTargets publishing change/input events, dom or non-dom objects. If an object does not fire 'change' events, the watch 
+          on EventTargets publishing change/input events, dom or non-dom objects. If an object does not fire 'change' events, the watch
           bindings never fire and may produce an error saying the source object does not support an 'addEventListener'
           function. This implementation forces objects to broadcast 'change' events if they want to be watched. Let's see
           how custom objects could fire these events.
@@ -166,9 +166,9 @@ namespace \`system.drivers.watchers\` (
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Watching Custom Components</h1>
         <p>
-          The default built-in Watcher above relies on 'change' and 'input' events natively fired by form elements. But what
+          The default built-in Watcher above relies on 'change' and 'input' events natively fired by form elements. But, what
           if you wanted to watch a custom component or non-dom object? You'd have to make them participate in
-          Observations and fire the relevant events, here is the custom toggle component firing a custom 'change' event:
+          observations and fire the relevant events, here is the custom toggle component firing a custom 'change' event:
              <pre class="inline javascript lang"><code>
 namespace \`docs.demos.ui\` (
   class ToggleButton extends WebComponent  {
@@ -189,7 +189,7 @@ namespace \`docs.demos.ui\` (
         //rest of code commented for brevity
   }
 )
-        </code></pre>      
+        </code></pre>
         </p>
         <p>
           Usage would be no different. Use the toggle tag in HTML, then watch
@@ -215,15 +215,15 @@ namespace \`docs.topics\` (
   }
 )
           </code></pre>
-        </p> 
+        </p>
         <h3>My Toggle Example:</h3>
         <toggle-button id="my-toggle"></toggle-button>
         Toggle State: <span id="show_state"></span>
         <p>
           <br/>
           The keen eye would notice a 4th boolean argument, this specifices to the Watcher
-          engine whether to force a binding immediately or not. If not specified, <code>flase</code>
-          is default and the bindings won't be detected until a change occurs on the source
+          engine whether to force a binding immediately or not. If not specified, <code>false</code>
+          is default, and the bindings won't be detected until a change occurs on the source
           object.
         </p>
       </div>
@@ -247,7 +247,7 @@ namespace \`docs.topics\` (
         <h1 id="api-reference">Watching Custom Objects</h1>
         <p>
           Non-DOM Classes may implement the <code>Observer</code> trait to participate in
-          watcher observattions by firing custom 'change' eventss as well:
+          watcher observations by firing custom 'change' events as well:
              <pre class="inline javascript lang"><code>
 @trait(new Observer);
 namespace \`domain.entities\` (
@@ -263,7 +263,7 @@ namespace \`domain.entities\` (
     }
   }
 )
-        </code></pre>      
+        </code></pre>
         </p>
         <p>
           Usage would be similar:
@@ -271,7 +271,7 @@ namespace \`domain.entities\` (
 var hungry_catipillar = new domain.entities.Catapilla;
 this.watch(hungry_catipillar, "in_cocoon", e=> alert('Changes'))
           </code></pre>
-        </p> 
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -290,20 +290,20 @@ this.watch(hungry_catipillar, "in_cocoon", e=> alert('Changes'))
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
       <div style="width: 50%;padding: 22px;">
-        <h1 id="api-reference">Wrist Wattch: A Robust Watcher by Andrea Giammarchi</h1>
+        <h1 id="api-reference">Wrist Watch: A Robust Watcher by Andrea Giammarchi</h1>
         <p>
           A custom watcher engine could be used in place of the default via
           a 5th argument:
              <pre class="inline javascript lang"><code>
 this.watch(hungry_catipillar, "in_cocoon", e=> alert('Changes'), [true, [Custom Watcher]]);
-        </code></pre>      
+        </code></pre>
         </p>
         <p>
           Wrist Watch, is a watcher implementation by Andrea Giammarchi that is
           far superior to the built-in watcher. It is available for import from the /src/system/drivers/watchers/
           folder and works on any type of object, dom and non-dom based, without having to
-          fire custom events all the time, or force objects to be observers. Here's how you'd use it:
-        </p> 
+          fire custom events all the time, or forcing objects to be observers. Here's how you'd use it:
+        </p>
         <p>
           <pre class="inline javascript lang"><code>
 import {WristWatch} from '/src/system/drivers/watchers/wrist_watch.js';
@@ -326,12 +326,12 @@ namespace \`display.components.UserRegistration\` (
     this.watch("#terms",      'checked',  e => this.terms = e.val, true, WristWatch);
   }
 )
-        </code></pre> 
+        </code></pre>
         </p>
         <p>
-          <a href="https://github.com/sindresorhus/on-change" target="_new">onChange</a> is another npm library that is a bit more heavy and based on Proxies,
-          try experimenting or writing your own. The built-in solution is usually sufficient,
-          offering more control and is optimized as a result of being lite-weight.
+          <a href="https://github.com/sindresorhus/on-change" target="_new">onChange</a> is another npm library that is a bit heavier and based on Proxies.
+          Try experimenting or writing your own. The built-in solution is usually sufficient,
+          offering more control, and is optimized as a result of being light-weight.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -357,11 +357,11 @@ namespace \`display.components.UserRegistration\` (
         <h1 id="api-reference">Writing a custom Watcher</h1>
         <p>
           A custom watcher should follow the implementation pattern of the
-          built-in Watcher api. So that usage by developers never have to be
+          built-in Watcher API so that usage by developers never has to be
           altered:
              <pre class="inline javascript lang"><code>
 this.watch(hungry_catipillar, "in_cocoon", e=> alert('Changes'), [true, [Custom Watcher]]);
-        </code></pre>      
+        </code></pre>
         </p>
         <p>
           The requirements are that a <code>static watch()</code> be implemented that
@@ -375,7 +375,7 @@ namespace \`system.drivers.watchers\` (
         static watch(source_object, prop_name, callback, force){
             ...
             return {
-              unwatch : function(){ 
+              unwatch : function(){
                 //remove bindings/listeners and free resourcess
               }
             }
@@ -383,13 +383,13 @@ namespace \`system.drivers.watchers\` (
     }
 );
         </code></pre>
-        </p> 
+        </p>
         <p>
-          Finally, the custom watcher should hand back a data object to the callback, with the following
+          Finally, the custom watcher should hand back a data object to the callback with the following
           attributes:
           <table>
             <thead>
-              <th>Attributte</th>
+              <th>Attribute</th>
               <th>Type</th>
               <th>Description</th>
             </thead>
@@ -419,7 +419,7 @@ namespace \`system.drivers.watchers\` (
         </p>
         <p>
           The default Watcher implementation shows this clearly in the <code>data</code> object it maintains. Also
-          notice how <code>force</code> is used to fire the binding immediattely.
+          notice how <code>force</code> is used to fire the binding immediately.
                   <pre class="inline javascript lang"><code>
 namespace \`system.drivers.watchers\` (
     class Watcher {
@@ -483,12 +483,12 @@ this.watch(person, 'firstname', e => console.log(e.val));
                     <code>e</code> - An event passed to callback with what has changed {prop, old, val}
                     <ul>
                         <li><code>prop</code> - the name of the property in this binding</li>
-                        <li><code>old</code> - the propertys old value</li>
-                        <li><code>val</code> - the propertys new value</li>
+                        <li><code>old</code> - the property's old value</li>
+                        <li><code>val</code> - the property's new value</li>
                     </ul>
                 </li>
                 <li>
-                  <code>(optional) force</code> - Whether to force a binding immediately. Ottherwise the
+                  <code>(optional) force</code> - Whether to force a binding immediately. Otherwise, the
                   Watcher is scheduled to fire only after the next change it detects.
                 </li>
                 <li>
@@ -517,7 +517,7 @@ this.watch(person, 'firstname', e => this.onFirstNameChanged(e));
         </p>
 
         <p>
-            Any object and property could be bound to any object and property, in one direction or both. It does not have to be any particular object. Objects can be elements in the View. Elements can be bound to other elements, or an element to a model. This 1:1 mapping is simple enough to combine in interesting ways.
+            Any object and property could be bound to any object and property in one direction or both. It does not have to be any particular object. Objects can be elements in the View. Elements can be bound to other elements, or an element to a model. This 1:1 mapping is simple enough to combine in interesting ways.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -536,7 +536,7 @@ this.watch(person, 'firstname', e => this.onFirstNameChanged(e));
         <h1 id="api-reference">1-Way Binding</h1>
         <p>
             Our View has 2 input fields in this example. Since we are able to bind any 2 things together,
-            let's bind these in 1-direction, so that when source changes in value, destination will reflect the source and stay synchronized with each other. Code example to the right.
+            let's bind these in 1-direction so that when source changes in value, destination will reflect the source and stay synchronized with each other. Code example to the right.
             <view-view-binding bind-type="single">
                 <template>
                     <div>
@@ -548,7 +548,7 @@ this.watch(person, 'firstname', e => this.onFirstNameChanged(e));
                 </template>
             </view-view-binding>
         </p>
-        
+
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -577,7 +577,7 @@ this.watch(source, 'value', e => dest.value = e.val);
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">2-Way Binding</h1>
         <p>
-            Here are the same 2 input elements in the View. Let's bind them bi-directionaly so that either one will reflect its value in the other, synchronizing their values.
+            Here are the same 2 input elements in the View. Let's bind them bi-directionally so that either one will reflect its value in the other, synchronizing their values.
             <view-view-binding bind-type="both">
                 <template>
                     <div>
@@ -589,7 +589,7 @@ this.watch(source, 'value', e => dest.value = e.val);
                 </template>
             </view-view-binding>
         </p>
-        
+
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -619,12 +619,12 @@ this.watch(dest,  'value', e => source.value = e.val);
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">1-Way Binding to a Object</h1>
         <p>
-            Let's say we have a simple object{} having a firstname property, it's in our Controller. We can bind from this model to the input box in the View the same way.
+            Let's say we have a simple object{} having a firstname property. It's in our Controller. We can bind from this model to the input box in the View the same way.
             <view-view-binding bind-type="both">
                 <template>
                     <div>
                     <h3>Example 3: Object -> View (1-way)</h3>
-                    <span style="width:130px;display: inline-block;">OBJECT:</span> 
+                    <span style="width:130px;display: inline-block;">OBJECT:</span>
         <pre class="inline javascript lang"><code>
 var user = {firstname: "Bill"};
         </code></pre>
@@ -635,7 +635,7 @@ var user = {firstname: "Bill"};
                 </template>
             </view-view-binding>
         </p>
-        
+
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -700,11 +700,6 @@ this.watch(source, 'value', e => dest.value = e.val);
     </div> -->
 
 
-    
+
   </div>
 </template>
-
-
-
-
-

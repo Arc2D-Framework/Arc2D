@@ -11,7 +11,7 @@
     color:blue;
 }  */
 
-html,
+/* html,
 body {
     margin: 0;
     padding: 0;
@@ -19,9 +19,9 @@ body {
     font-family: "Quicksand", sans-serif;
     font-size: 62.5%;
     font-size: 10px;
-}
+} */
 
-.contact {
+/* .contact {
     width: 100%;
     height: 100vh;
     background-image: url("resources/img/laptop-bg.webp");
@@ -30,9 +30,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
+} */
 
-#headerTxt {
+/* #headerTxt {
     margin: auto;
     color: #fff;
     font-weight: 100;
@@ -52,4 +52,4 @@ body {
 	.myP {
 		padding:2%;
 	}
-}
+} */
