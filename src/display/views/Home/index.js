@@ -1,6 +1,6 @@
 @tag("home-page");
 namespace `display.views` (
-	class Home extends w3c.ui.WebComponent  {
+	class Home extends WebComponent  {
 		constructor(){
             super();
 		}

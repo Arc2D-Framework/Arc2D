@@ -1,7 +1,7 @@
 
 
 namespace `system.diagnostics.unit` (
-    class Klass extends system.diagnostics.UnitTest  {
+    class Class extends system.diagnostics.UnitTest  {
         constructor(){
             super()
         }
