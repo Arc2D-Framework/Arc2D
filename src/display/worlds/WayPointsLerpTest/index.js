@@ -9,14 +9,15 @@ namespace `display.worlds` (
     class WayPointsLerpTest extends World {
         async onConnected() {
             await super.onConnected();
-            this.coords=this.position = new Vector(250,300);
+            this.coords=this.position = new Vector(0,0);
 
             this.box = this.querySelector("#box")
             this.wayPoints = [
-               new Vector(200,300),
-               new Vector(400,100),
-               new Vector(700,100),
-               new Vector(700,800)
+        
+               new Vector(100,0),
+               // new Vector(100,100),
+               new Vector(0,0)
+
             ];
             this.currentWP = 0;
             this.duration = 200;
@@ -24,53 +25,43 @@ namespace `display.worlds` (
              
         }
 
-        onFixedUpdate = (time,delta) =>{
+        onFixedUpdate = async (time,delta) =>{
             if(!this.box.ismoving){;return}
             if(this.wayPoints.length<=0){
                 return
             }
 
-            var elapsed = (Date.now() - this.starttime);
-            var percent = elapsed / this.duration;
-            this.totaltime+=time;
+            // var elapsed = (Date.now() - this.starttime);
+            // var percent = elapsed / this.duration;
+            // this.totaltime+=time;
             // if(percent > 1){
             //     this.box.ismoving=false;
             // }
 
 
             var waypoint = this.wayPoints[this.currentWP];
-            var distance = waypoint.dist(this.position);
-            if(distance <= 7){
-                // console.log(elapsed)
-                // this.starttime=Date.now();
-                // this.position.x = waypoint.x;
-                // this.position.y = waypoint.y;
+            var pos      = Vector.towards(this.coords,waypoint, 3);
+            var distance = waypoint.distance(this.coords);
+
+            if(distance <= 3){
                 this.currentWP++;
                 if(this.currentWP>=this.wayPoints.length){
                     this.currentWP=0;
-                    this.box.ismoving=false;
-                    // console.log(this.totaltime)
-                    // this.totaltime=0;
                 }
             }
-            var angleDeg = this.getAngle(this.coords,waypoint);
-            console.log("angleDeg",angleDeg)
-            var pos = Vector.moveTowards(this.coords,waypoint, 7);
-            this.coords.x+=pos.x;
-            this.coords.y+=pos.y;
-            // console.log(this.position.x,this.position.y)
-            // this.coords.x = Math.lerp(this.coords.x, waypoint.x, percent,true);
-            // this.coords.y = Math.lerp(this.coords.y, waypoint.y, percent,true);
-
+            else {
+                this.coords.x+=pos.x;
+                this.coords.y+=pos.y;
+            }
         }
-        getAngle = (anchor, point) => Math.atan2(anchor.y - point.y, anchor.x - point.x) * 180 / Math.PI + 180
 
         onUpdate=()=>{
             const dir = KeyBoard.held_directions[0];
             if (dir) {
                 if (dir === KeyBoard.directions.right){
                     this.starttime = Date.now();
-                    this.box.ismoving=true
+                    this.currentWP=0;
+                    this.box.ismoving=true;
                 }
             }
         }

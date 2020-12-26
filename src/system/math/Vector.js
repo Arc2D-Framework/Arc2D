@@ -48,6 +48,10 @@ namespace `system.math` (
             return Math.sqrt( Math.pow((this.x-vector.x), 2) + Math.pow((this.y-vector.y), 2) );
         }
 
+        distance = vector => {
+            return Math.sqrt( Math.pow((this.x-vector.x), 2) + Math.pow((this.y-vector.y), 2) );
+        }
+
         moveTowards = (targetPosition, speed) => {
             let dx = targetPosition.x - this.x;
             let dy = targetPosition.y - this.y;
@@ -94,7 +98,7 @@ namespace `system.math` (
 
         static mag = vector => Math.sqrt(Vector.sqMag(vector));
 
-        static moveTowards = (current, targetPosition, speed) => {
+        static towards = (current, targetPosition, speed) => {
             let dx = targetPosition.x - current.x;
             let dy = targetPosition.y - current.y;
             let angle = Math.atan2(dy, dx);
@@ -102,5 +106,8 @@ namespace `system.math` (
             var y = speed * Math.sin(angle);
             return new Vector(x, y)
         }
+
+
+        static angle = (anchor, point) => Math.atan2(anchor.y - point.y, anchor.x - point.x) * 180 / Math.PI + 180
     }
 )
