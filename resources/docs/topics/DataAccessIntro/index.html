@@ -10,7 +10,7 @@
             <img src="docs/images/data_access_repositories.png" style="margin-top:60px;"/>
         </p>
         <p>
-            The UI is independent of any particular storage media and will not have to be changed when switching your database to another device, well, in theory, and that theory sounds good, it's never perfect though. Repositories sit between the UI and Infastructure. Changes to the infastructure
+            The UI is independent of any particular storage media, and will not have to be changed when switching your database to another device, well, in theory. And, that theory sounds good. It's never perfect though. Repositories sit between the UI and Infastructure. Changes to the infastructure
             should not force the UI or Repository to undergo change.
         </p>
         <p>
@@ -50,15 +50,15 @@ namespace \`core.data\` (
         </p>
         <p>
             It uses RestDB (<a href="www.restdb.io" target="_new">restdb.io</a>) as the NoSQL backend.
-            level. Collections are sub-classes of the Array, supporting all of the <code>Array.prototype</code> methods as well as some others such as <code>find(), remove(), insert() next() and previous()</code> to name a few.
+            level. Collections are sub-classes of the Array, supporting all of the <code>Array.prototype</code> methods as well as some others such as <code>find(), remove(), insert() next() and previous()</code>, to name a few.
         </p>
         <p>
-            Using collections from UI components will resemble calls like the following, with Mongo-style
+            Using collections from UI components will resemble calls like the following with Mongo-style
             queries:
             <pre class="inline javascript lang">
                 <code>
 var cursor = await core.data.Movies.find({
-    query : { 
+    query : {
         genre : "Action"
     },
     skip:0,

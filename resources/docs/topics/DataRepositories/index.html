@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+    <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="how">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Collections</h1>
         <p>
@@ -12,14 +12,14 @@
         <p>
             <h3>Some facts about the Repository:</h3>
             <ul>
-                <li>Increases Testability</li>
+                <li>Increases testability</li>
                 <li>Encapsulates persistance technology</li>
                 <li>Works on aggregate root objects</li>
-                <li>queries are centralized</li>
-                <li>logic is centralized</li>
-                <li>provides an in-memory like collection</li>
+                <li>Queries are centralized</li>
+                <li>Logic is centralized</li>
+                <li>Provides an in-memory collection</li>
             </ul>
-        </p>      
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -38,7 +38,7 @@
 
 <div style="display: flex;flex-direction: row;flex-wrap: nowrap;"></div>
 
-    
+
 
 
 
@@ -58,7 +58,7 @@
                 <code>
 namespace \`core.data\` (
     class Movies extends Collection {
-        
+
     }
 );
                 </code>
@@ -82,7 +82,7 @@ namespace \`core.data\` (
         </p>
         <h3>A note on the Memory Driver</h3>
         <p>
-            And thats all there is to defining a Repository. The memory driver, one of the simplest, uses a temporary hash-table as the data source. It lasts as long as the browser-tab session (unless refreshed) and is meant for unit tests and rapid prototyping, you'd never use this driver in a production environment.
+            And that's all there is to defining a Repository. The memory driver, one of the simplest, uses a temporary hash-table as the data source. It lasts as long as the browser-tab session (unless refreshed) and is meant for unit tests and rapid prototyping, you'd never use this driver in a production environment.
         </p>
         <p>
             With the repository in place and a device driver attached. You can now begin using the repository, try running the following lines in console:
@@ -102,7 +102,7 @@ core.data.Movies.add(movie);
         </pre>
 
         <p>
-            It is promised-based. <CODE>add()</CODE> accepts a callback:
+            It is promise-based. <CODE>add()</CODE> accepts a callback:
             <pre class="inline javascript lang">
                 <code>
 core.data.Movies.add(movie, e=> console.log(movie));
@@ -110,7 +110,7 @@ core.data.Movies.add(movie, e=> console.log(movie));
             </pre>
         </p>
         <p>
-           Or a thenable chained: 
+           Or a thenable chained:
            <pre class="inline javascript lang">
                 <code>
 core.data.Movies.add(movie).then(r => console.log(r));
@@ -146,7 +146,7 @@ var movie = await core.data.Movies.add(movie)
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Seeding a Repository (for testing)</h1>
         <p>
-            Repositories can be seeded with sample data. In ther words, prepopulating the storage device with a small dataset, a crucial feature when <em>Unit Testing</em>, but not practical in a real world application, nor
+            Repositories can be seeded with sample data. In other words, you can prepopulate the storage device with a small dataset, a crucial feature when <em>Unit Testing</em>, but not practical in a real world application, nor
             recommended for anything other than running offline development tests.
         </p>
 
@@ -171,10 +171,10 @@ namespace \`core.data\` (
             </pre>
         </p>
         <p>
-            <code>REPOSITORIES.MOVIES</code> is a declaration defined in the file <code>'/resources/repositories.js'</code>. Have a look at this file later, it's mostly a set of paths to JSON seeding files:
+            <code>REPOSITORIES.MOVIES</code> is a declaration defined in the file <code>'/resources/repositories.js'</code>. Have a look at this file later. It's mostly a set of paths to JSON seeding files:
         <pre class="inline javascript lang">
                 <code>
-REPOSITORIES = {  
+REPOSITORIES = {
     MOVIES: {
         config : {
             table: "movies"
@@ -222,16 +222,16 @@ REPOSITORIES = {
                 </code>
             </pre>
             <p>
-                You could very well point the URI path to an external json service, but that defeats the purpose
-                of the simple Memory storage device in this case, especially for testing. Later we'll look at a RESTFul driver (maybe mongo?) and how that idea then comes into play.
-            </p> 
+                You could very well point the URI path to an external JSON service, but that defeats the purpose
+                of the simple Memory storage device in this case, especially for testing. Later, we'll look at a RESTFul driver (maybe Mongo?) and how that idea then comes into play.
+            </p>
 
             <h3>SEEDING IS NOT AUTOMATIC</h3>
             <p>
-                The steps above, will configure a Repository to support pre-population (seeding). It will not auto-seed. The developer should know when/if to seed. For example, when writing tests, it makes sense to seed. When
+                The steps above will configure a Repository to support pre-population (seeding). It will not autoseed. The developer should know when/if to seed. For example, when writing tests, it makes sense to seed. When
                 developing an app offline, you may not want the app seeded with any data for full regression testing at
-                the UI level. So here's how to explicitly seed the Repository.
-            </p>  
+                the UI level. So, here's how to explicitly seed the Repository.
+            </p>
             <p>Seed and use a Collection with async/await syntax:</p>
             <pre class="inline javascript lang">
                 <code>
@@ -251,12 +251,12 @@ core.data.Movies.seed().then(seeds => console.log("done"))
 //hence, chain the promises
 core.data.Movies.seed().then(res1 => {
     core.data.Movies.find().then(res2 => {
-        console.log("cursor",res2) 
+        console.log("cursor",res2)
     })
 })
                 </code>
-            </pre> 
-                
+            </pre>
+
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -275,8 +275,8 @@ core.data.Movies.seed().then(res1 => {
         <h1 id="api-reference">Queries</h1>
         <p>
             Repositories have a <code>find()</code> method that accepts a <a href="https://docs.mongodb.com/manual/reference/operator/query/" target="_new">Mongo Query</a> and how much to skip and limit. The last two attributes allow pagination on the results cursor.
-            Additional attributes such as grouping and sorting depend on the NoSQL platform.
-        </p> 
+            Additional attributes, such as grouping and sorting, depend on the NoSQL platform.
+        </p>
         <p>
             <pre class="inline javascript lang">
                 <code>
@@ -287,9 +287,9 @@ var cursor = await core.data.Movies.find({
 });
                 </code>
             </pre>
-        </p>  
+        </p>
         <p>
-            More complex mongo queries can be specified. See the mongo docs to learn more.
+            More complex Mongo queries can be specified. See the Mongo docs to learn more.
             <pre class="inline javascript lang">
                 <code>
 var cursor = await core.data.Movies.find({
@@ -302,7 +302,7 @@ var cursor = await core.data.Movies.find({
 });
                 </code>
             </pre>
-        </p>     
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -319,7 +319,7 @@ var cursor = await core.data.Movies.find({
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Cursors</h1>
         <p>
-            Executing queries via the <code>.find()</code> method returns a pointer to the result-set of a NoSQL query, called a cursor. Cursors allow iteration across the results of the query. Cursors also allow query resizing, sorting and grouping. 
+            Executing queries via the <code>.find()</code> method returns a pointer to the result-set of a NoSQL query, called a cursor. Cursors allow iteration across the results of the query. Cursors also allow query resizing, sorting and grouping.
         <p>
             <pre class="inline javascript lang">
                 <code>
@@ -339,7 +339,7 @@ cursor.previous(); //previous 2 records
 cursor.hasNext(); //are there more records?
                 </code>
             </pre>
-        </p>       
+        </p>
       </div>
       <div style="width: 50%;display: block;">
         <div class="shell lang"></div>
@@ -387,7 +387,7 @@ console.log("results",res)
 
 
 
-    
+
 
 
 
@@ -418,7 +418,7 @@ console.log("results",res)
             <tr>
               <td><code>remove(query,cb)</code></td>
               <td>
-                query - mongo query<br/>
+                query - Mongo query<br/>
                 cb - a callback with results (optional)
               </td>
               <td>Removes matches. Returns array of removed items.</td>
@@ -426,7 +426,7 @@ console.log("results",res)
             <tr>
               <td><code>find(query,cb)</code></td>
               <td>
-                query - mongo query<br/>
+                query - Mongo query<br/>
                 cb - a callback with results (optional)
               </td>
               <td>Returns an array of matches.</td>
@@ -465,7 +465,7 @@ console.log("results",res)
         </table>
         </p>
         <p>
-            Any of the base class methods can be customized or overrdden in concrete collection classes. For example, the <code>find()</code> method relies on a mongo-style query. If you are not fimilar with mongo query syntax, see: <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" target="_new">Mongo Queries</a>. Executing the following mongo query:
+            Any of the base class methods can be customized or overrdden in concrete collection classes. For example, the <code>find()</code> method relies on a Mongo-style query. If you are not fimilar with Mongo query syntax, see: <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" target="_new">Mongo Queries</a>. Executing the following Mongo query:
             <pre class="inline javascript lang">
                 <code>
 var result = core.data.Movies.find({title : "Gladiator"});
@@ -479,7 +479,7 @@ SELECT * FROM Movies WHERE title = "Gladiator"
                 </code>
             </pre>
         </p>
-        <p>But the Memory driver we've discussed above, does not rely on SQL or translates to SQL. It literally accepts mongo queries and performs matches against it's simple hash-table of objects.
+        <p>But, the Memory driver we've discussed above does not rely on SQL, nor does it translate to SQL. It literally accepts Mongo queries and performs matches against its simple hash-table of objects.
         </p>
         <p>
             Any method of the base class may be overridden in the concrete collection:
@@ -514,7 +514,7 @@ namespace \`core.data\` (
 
 
 
-    
+
 
 
 
