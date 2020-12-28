@@ -28,7 +28,7 @@ namespace `docs.demos.ui` (
           return true
         }
 
-        inShadow(){return true}
+        inShadow(){return false}
 
         get x() {
             return this.value > 0 ?

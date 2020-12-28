@@ -21,6 +21,8 @@ namespace `display.components` (
             this.rotate();
         }
 
+        // inShadow(){return tttr}
+
         //carousel spin direction
         onRotate(dir){
             this.rotation += this.theta * dir;
