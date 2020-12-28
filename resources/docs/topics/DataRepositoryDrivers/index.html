@@ -1,33 +1,33 @@
 <template>
   <div>
 
-    
+
 
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="intro">
       <div style="width: 50%;padding: 22px;">
         <h1 id="what">What is a Driver?</h1>
         <p>
-            Surely you have had the experience of buying and installing a new Printer. Do you recall having to install software on your computer so it knows how to communicate with the printer? That software is a Driver. Each Printer comes with it's own driver.
+            Surely you have had the experience of buying and installing a new printer. Do you recall having to install software on your computer so it knows how to communicate with the printer? That software is a driver. Each printer comes with it's own driver.
             <img src="docs/images/printer-drivers.png" style="width:100%;margin-top:30px;"/>
         </p>
         <p>
             Installing a printer driver allows the computer to communicate with different printers seamlessly. The Driver collects the data to be printed and encodes/decodes and/or formats it in a particular way that the printer can understand in order to run a print job.
         </p>
         <p>
-            Computers ship with generic printer drivers that work at bare minimum. A user is able to swap printer drivers for a richer print experience easily, without having to change the way they would print from a computer and without changing the computer. The core principal being, "Dependency Inversion", a design feature in software
-            that breaks away from hard low-level dependencies by allowing the system to rely on interfaces. The dependencies then are inverted, depending on the interface (a port) specified by the system, instead of the system depending on every detail of every kind of driver or technology. The system remains
+            Computers ship with generic printer drivers that work at the bare minimum. A user is able to swap printer drivers for a richer print experience, easily, without having to change the way they would print from a computer and without changing the computer. The core principle being, "Dependency Inversion", a design feature in software
+            that breaks away from hard, low-level dependencies by allowing the system to rely on interfaces. The dependencies, then, are inverted depending on the interface (a port) specified by the system instead of the system depending on every detail of every kind of driver or technology. The system remains
             open to change, but closed for modification. Think of this design as "Plug-n-Play". See Ports & Adapters or Hexagonal Architecture, the core and principal design of Arc.
         </p>
         <h3>Storage Drivers</h3>
         <p>
-            Like the printer-driver analogy, Arc's Storage Interface allows developers to write and plug-in new types of drivers to deal with sstorage and retrieval of data on disk, memory or database without
+            Like the printer driver analogy, Arc's storage interface allows developers to write and plug-in new types of drivers to deal with storage and retrieval of data on disk, memory or database without
             having to change much of anything in the application itself. The Application becomes resilient to
             the underlying technology.
             <img src="docs/images/data_access_repositories.png" style="margin-top:60px;">
         </p>
         <p>
             The layered diagram above shows 3 distinct layers of Arc. For brevity, all other details except
-            the storage facilities are shown. The display or UI layer communicates with Collections in the Domain, which rely on an inverted storage interface. Collections rarely have to change when technology specific I/O storage drivers are swapped.
+            the storage facilities are shown. The display or UI layer communicates with Collections in the Domain, which rely on an inverted storage interface. Collections rarely have to change when technology-specific I/O storage drivers are swapped.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -38,13 +38,13 @@
       </div>
     </div>
 
-    
+
     <div style="display: flex;flex-direction: row;flex-wrap: nowrap;" id="switching">
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Switching Drivers</h1>
         <p>
           Modify the <code>driver</code> attribute of the Collection to communicate with
-          a different storage platform/protocol. Here we are switching to the <code>Memory</code> driver
+          a different storage platform/protocol. Here, we are switching to the <code>Memory</code> driver
           which reads/writes data to memory, working just like a Mongo-style NoSQL database:
           <pre class="inline javascript lang">
                 <code>
@@ -59,7 +59,7 @@ namespace \`domain.collections\` (
             </pre>
         </p>
         <p>
-          CouchDB could be configured instead, the Collection is still resilient to the change,
+          CouchDB could be configured instead; the Collection is still resilient to the change,
           and no application code higher up in the layered architecture (the UI) needs modification:
           <pre class="inline javascript lang">
                 <code>
@@ -75,7 +75,7 @@ namespace \`domain.collections\` (
         </p>
         <p>
             From the perspective of the UI layer, components are still able to query
-            for a list of all Movies to render in the same manner and remain further resilient
+            for a list of all Movies to render in the same manner, and remain further resilient
             to changes at the system level:
             <pre class="inline javascript lang">
                 <code>
@@ -101,7 +101,7 @@ var movies = await domain.collections.Movies.find({ title : "Batman"})
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Repository Drivers</h1>
         <p>
-          By default implementation, repository classes you create inherit from <code>core.data.Repository</code> and are driven by a Memory driver, meaning all data is stored temporarily in browser memory. As soon as the application (browser tab) is closed, the data is lost.
+          By default implementation, repository classes you create inherit from <code>core.data.Repository</code> and are driven by a Memory driver, meaning all data is stored, temporarily, in browser memory. As soon as the application (browser tab) is closed, the data is lost.
           <img src="docs/images/data_access_repositories2.png">
         </p>
         <p>
@@ -121,7 +121,7 @@ var movies = await domain.collections.Movies.find({ title : "Batman"})
 
 
 
-    
+
 
 
 
@@ -131,7 +131,7 @@ var movies = await domain.collections.Movies.find({ title : "Batman"})
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">A Database Problem</h1>
         <p>
-            The biggest challenge when creating your first app, learning, or working in an enterprise team will be data connectivity, the database. Building anything worth while requires storing data. Here, many starting developers especially, make their way down the rabbit hole.
+            The biggest challenge when creating your first app, learning, or working in an enterprise team will be data connectivity, the database. Building anything worth-while requires storing data. Here, many starting developers especially, make their way down the rabbit hole.
         </p>
       </div>
       <div style="width: 50%;display: block;">
@@ -150,8 +150,8 @@ var movies = await domain.collections.Movies.find({ title : "Batman"})
       <div style="width: 50%;padding: 22px;">
         <h1 id="api-reference">Example: Implementing a Memory Driver</h1>
         <p>
-            Arc comes with a Memory driver that is available for use during development and 
-            Unit Testing. It is not part of the runtime but can be imported by Collections
+            Arc comes with a Memory driver that is available for use during development and
+            Unit Testing. It is not part of the runtime, but can be imported by Collections
             before declaring it as the device driver:
         </p>
         <p>
@@ -181,7 +181,7 @@ Session.State.db = Session.State.db||{};
             <code>isSeedingEnabled()</code> is a driver-level method that determines if this particular
         storage medium supports the ability to be seeded at start-up with some test data. Handy for writing
         Unit tests. <code>setCollection()</code> simply allocates an entry into the hash for keeping particular
-        kinds of collections grouped by their name. When and if seeding is enabled, the collection will be pre-filled with items specified by the Collection. Collections that are able to seed, should define
+        kinds of collections grouped by their name. When, and if, seeding is enabled, the collection will be pre-filled with items specified by the Collection. Collections that are able to seed should define
         a few more options:
             <pre class="inline javascript lang">
                 <code>
@@ -201,12 +201,12 @@ namespace \`domain.collections\` (
             </pre>
         </p>
         <p>
-            "app/resources/repositories.js" -- is a list of .json paths that hold static seed data, this file
-            is imported by the driver and is available for reference in Collections.
+            "app/resources/repositories.js" -- is a list of .json paths that hold static seed data. This file
+            is imported by the driver, and is available for reference in Collections.
         </p>
         <p>
-            The rest of the methods, <code>add, find, remove, sort</code> etc are the CRUD methods for
-            dealing with the data in storage and you are free to simulate or emulate the details however
+            The rest of the methods, <code>add, find, remove, sort</code> etc., are the CRUD methods for
+            dealing with the data in storage, and you are free to simulate or emulate the details in whatever way
             makes the most sense.
         </p>
       </div>
@@ -215,7 +215,7 @@ namespace \`domain.collections\` (
         <div class="javascript lang">
             <blockquote class="javascript" style="display:block;width: 100%;">
             <b>Memory Driver</b>
-            Implements the contractual methods/api defined by <code>IStorageInterface</code>
+            Implements the contractual methods/API defined by <code>IStorageInterface</code>
           </blockquote>
           <pre class="highlight javascript" style="display:block;width: 100%;"><code>
 import '/src/system/drivers/storage/Cursor.js';
@@ -247,7 +247,7 @@ namespace \`system.drivers.storage\` (
             cb&&cb(obj,null);
             return obj;
         }
-        
+
         find(cb, query){
             var res = Query.query( this.collection, query.query||{});
             var cursor = new core.drivers.storage.Cursor(res,query,this);
@@ -274,7 +274,7 @@ namespace \`system.drivers.storage\` (
         sort(cursor, attrb, order){
             order = order==1?true:false;
             cursor.items.sort(function(a, b) {
-                
+
                 var nameA = a[attrb].toUpperCase(); // ignore upper and lowercase
                 var nameB = b[attrb].toUpperCase(); // ignore upper and lowercase
                 if(order){
@@ -284,7 +284,7 @@ namespace \`system.drivers.storage\` (
                     if (nameA > nameB) {
                         return 1;
                     }
-                
+
                     // names must be equal
                     return 0;
                 } else {
@@ -294,7 +294,7 @@ namespace \`system.drivers.storage\` (
                     if (nameA > nameB) {
                         return -1;
                     }
-                
+
                     // names must be equal
                     return 0;
                 }
