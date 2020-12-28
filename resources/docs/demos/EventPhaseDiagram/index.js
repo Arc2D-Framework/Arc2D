@@ -13,5 +13,9 @@ namespace `docs.demos` (
                 phase.classList.add("visible")
             }
         }
+
+        isComposable(){
+          return true
+        }
     }
 )
