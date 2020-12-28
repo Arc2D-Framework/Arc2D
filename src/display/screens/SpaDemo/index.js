@@ -13,11 +13,10 @@ namespace `display.screens` (
             await super.onConnected();
             this.mainListDiv = this.querySelector("#mainListDiv");
             this.on("click", this.onToggleMenu, false, "nav");
-            application.dispatchEvent("hidesplash")
         }
 
         //toggle if any part of <nav> is clicked
-        onToggleMenu =e=> {
+        onToggleMenu = e=> {
             this.classList.toggle("active");
             this.mainListDiv.classList.toggle("show_list");
             this.mainListDiv.style.display="block"
