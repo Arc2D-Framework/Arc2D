@@ -25,10 +25,17 @@ namespace `display.screens` (
         onEnterActivity(c,scrollToElement){
             console.log("onEnterActivity", c);
             var slot = this.onFindActivitySlot();
+            // debugger;
+            if(this.lastActivity){
+                this.lastActivity.remove();
+                console.log("removing ", this.lastActivity)
+            }
+            else {
                 slot.innerHTML="";
-                slot.appendChild(c);
+            }
+            slot.appendChild(c);
             this.currentActivity = c;
-            this.onEnterActivityRestoreScroll(scrollToElement)
+            this.onEnterActivityRestoreScroll(scrollToElement);
             this.dispatchEvent("onactivityshown",c);
         }
 
