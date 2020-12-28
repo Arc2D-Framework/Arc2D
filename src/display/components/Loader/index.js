@@ -1,7 +1,6 @@
-
+@tag("screen-loader");
 namespace `display.components` (
-    // @tag("splash-loader");
-    class Splash extends w3c.ui.WebComponent {
+    class Loader extends w3c.ui.WebComponent {
         constructor() {
             super();
         }
@@ -12,43 +11,25 @@ namespace `display.components` (
         // 	setTimeout(_=> this.classList.add("fade"), 2000);
         // }
 
-        // onTransitionEnded(e){
-        // 	this.classList.add("hidden");
-        // 	this.classList.remove("fade")
-        // }
-
-        // show(){
-        	// this.classList.remove("hidden");
+        onTransitionEnded(e){
+        	// this.classList.add("hidden");
         	// this.classList.remove("fade")
-        // }
-
-        // onShow(){
-        // 	this.show();
-        // 	this.fade();
-        // }
-
-        // onShowLoader(){
-        //     this.classList.add("loader")
-        // }
-
-        onShow(){
-            this.classList.remove("hidden");
-            this.classList.remove("fade")
         }
 
-        onHide(){
-            setTimeout(e=>{
-                this.classList.add("hidden");
-                this.classList.add("fade")
-            },2000)
+        show(){
+        	this.classList.remove("hidden");
+        	this.classList.remove("fade")
+        }
+
+        onShow(){
+        	this.show();
+        	// this.fade();
         }
 
 
         async onConnected() {
             await this.render();
-            application.addEventListener("showsplash", e => this.onShow(), false);
-            application.addEventListener("hidesplash", e => this.onHide(), false);
-            // application.addEventListener("showloader", e => this.onShowLoader(), false);
+            application.addEventListener("showloader", e => this.onShow(), false);
             // this.addEventListener('transitionend', e => this.onTransitionEnded(e), false);
             // this.fade()
         }

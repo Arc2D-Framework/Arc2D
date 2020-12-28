@@ -1,6 +1,7 @@
+
+
 import 'display.components.Splash';
-import '../../../../resources/js/jquery.3.1.1.min.js';
-import 'display.views.Home';
+import 'display.views.Home'; //start with default <home-page> in <slot>
 
 namespace `display.screens` (
     class SpaDemo extends Application {
@@ -11,30 +12,15 @@ namespace `display.screens` (
         async onConnected() {
             await super.onConnected();
             this.mainListDiv = this.querySelector("#mainListDiv");
-            this.on("click", e => this.toggleMenu(e),false,".navTrigger");
-            this.initLinks();
-            this.shrinkNavBar();
+            this.on("click", this.onToggleMenu, false, "nav");
+            application.dispatchEvent("hidesplash")
         }
 
-        initLinks(){
-            const navLinks = this.querySelectorAll(".navlinks li a");
-                navLinks.forEach(link =>{
-                    link.addEventListener("click", _ => this.toggleMenu(),false);
-                })
-        }
-
-        toggleMenu(){
+        //toggle if any part of <nav> is clicked
+        onToggleMenu =e=> {
             this.classList.toggle("active");
             this.mainListDiv.classList.toggle("show_list");
-            $("#mainListDiv").fadeIn();
-        }
-
-        shrinkNavBar(){ 
-            $(window).scroll(function() { 
-                $(document).scrollTop() > 50 
-                ? $('.nav').addClass('affix') 
-                : $('.nav').removeClass('affix'); 
-            }); 
+            this.mainListDiv.style.display="block"
         }
     }
 );

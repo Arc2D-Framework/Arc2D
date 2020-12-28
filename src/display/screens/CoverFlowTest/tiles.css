@@ -1,0 +1,32 @@
+.tile .item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+}
+.tile .item .photo {
+    display: block;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+.tile .item .emp-info {
+    font-size: 10px;
+    margin: 7px auto auto;
+    z-index: 10;
+    background: white;
+    position: absolute;
+    margin: 2px;
+    bottom: 0;
+    border-radius: 1px;
+    right: 26px;
+    left: 0;
+    min-height: 26px;
+    right: 0;
+}
+.tile .item .emp-position {
+    font-size: 8px;
+}
