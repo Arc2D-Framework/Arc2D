@@ -1,3 +1,4 @@
+
 @tag("splash-loader");
 namespace `display.components` (
     class Splash extends WebComponent {
