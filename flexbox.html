@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
+            style-src   'self' 'unsafe-inline' *">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Flexbox</title>
+        <style>
+            html,body {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            #container {
+                padding: 20px;
+                box-sizing: border-box;
+                height: 100%;
+            }
+            section {
+                width: 100%;
+                min-height: 400px;
+                border: 1px solid lightgray;
+                display: flex;
+                padding: 50px 30px;
+                box-sizing: border-box;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            section .description {
+                width: 70%;
+                flex: 2;
+                background: white;
+                min-width: 200px;
+            }
+            section .info {
+                background: darkblue;
+                min-width: 200px;
+                flex: 1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <section>
+                <div class="description">Private Equity Investor</div>
+                <div class="info"></div>
+            </section>
+            <section>
+                <div class="info"></div>
+                <div class="description">Private Equity Investor</div>
+            </section>
+        </div>
+    </body>
+</html>
