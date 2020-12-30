@@ -1,4 +1,4 @@
-import 'src/system/2d/sat/modules/BVHBranch.js';
+import '/src/system/physics/sat/modules/BVHBranch.js';
 
 /**
  * A Bounding Volume Hierarchy (BVH) used to find potential collisions quickly

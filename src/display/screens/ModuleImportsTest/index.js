@@ -1,4 +1,4 @@
-var {TWEEN} = await import('/src/system/2d/tween.esm.js');
+var {TWEEN} = await import('/src/system/physics/tween.esm.js');
 var {myExport,hello : Hello, runit} = await import('/src/system/libs/sample_modules/a.mjs');
 import {NodeTest} from '/src/system/libs/sample_modules/nodejsmod.js';
 import '/node_modules/sweetalert/dist/sweetalert.min.js';

@@ -6,7 +6,7 @@
     "author": "jaysmith024 <jaysmith024@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "http-server ./ -o resources/doc.html",
+        "start": "http-server ./ -o index.html",
         "seam": "node --inspect node_modules/od-seam/index.js",
         "server": "node node_modules/od-server/main.js 3001",
         "plop": "plop"

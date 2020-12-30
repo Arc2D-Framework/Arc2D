@@ -1,0 +1,130 @@
+
+html, body, :host {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    box-sizing:border-box;
+    background:url('/src/display/worlds/fruits/assets/ui_assets/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+@font-face {
+  font-family: Comic_Serif_Pro;
+  src: url('/src/display/worlds/fruits/assets/font/HVD_Comic_Serif_Pro.otf');
+}
+
+:host {
+    position: absolute;
+    top: 0;
+}
+:host > div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+:host #rays    { /* with animation properties */
+    background: url(/src/display/worlds/fruits/assets/ui_assets/bg_effect_flare2.png) 0 0 no-repeat;
+    position: absolute;
+    left: 50%;
+    margin-left: -1000px;
+    top: 50%;
+    width: 2000px;
+    height: 2000px;
+    transform-origin: center;
+    margin-top: -1000px;
+    animation-name: spin;
+    animation-duration: 40000ms;
+    background-position: center;
+    animation-iteration-count: infinite;
+    background-size: cover;
+    animation-timing-function: linear;
+    z-index: 1;
+}
+
+
+
+:host #game-title{
+    z-index: 100;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    background-position: center;
+    display: inline-block;
+    width: 1024px;
+    transform: translate3d(-50%, -59%, 0);
+    background: url(/src/display/worlds/fruits/assets/ui_assets/game_title.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 1024px;
+}
+:host #controls{
+    z-index: 100;
+    top: 50%;
+    position: absolute;
+    height: 86px;
+    left: 50%;
+    display: flex;
+    transform: translate3d(-56%, 200px, 0);
+}
+
+:host #start-game{
+    font-size: 29px;
+    padding: 38px 36px 30px 36px;
+    display: flex;
+    align-items: center;
+    place-content: center;
+    font-family: Comic_Serif_Pro;
+    background: #fdd535;
+    border-color: #ff0000;
+    border-style: solid;
+    line-height: 0px;
+    cursor: pointer;
+    border-radius: 28px;
+    box-sizing: border-box;
+    border-width: 3px 3px 11px 3px;
+    text-shadow: 0px 0px 1px black;
+    color:white;
+}
+:host #start-game:active {
+    border-width: 3px;
+}
+/*.FruitBowl #fruits {
+    z-index: 100;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    display: flex;
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.FruitBowl #fruits .fruit {
+    width: 256px;
+    display: block;
+    height: 256px;
+    z-index: 1;
+    margin: -15px;
+
+}
+.FruitBowl #fruits .fruit.coconut {
+    background: url(src/display/worlds/FruitBowl/assets/characters/characters_0006.png) 0 0 no-repeat;
+    transform: rotate(-34deg);
+}
+.FruitBowl #fruits .fruit.apple {
+    background: url(src/display/worlds/FruitBowl/assets/characters/characters_0002.png) 0 0 no-repeat;
+    transform: scale(1.5);
+    z-index: 10;
+}
+.FruitBowl #fruits .fruit.orange {
+    background: url(src/display/worlds/FruitBowl/assets/characters/characters_0003.png) 0 0 no-repeat;
+}
+*/
+
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

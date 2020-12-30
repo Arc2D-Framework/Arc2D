@@ -2,7 +2,7 @@ await require('/src/system/drivers/templating/Nunjucks/nunjucks-driver.js');
 import 'display.components.NotificationsToggleSwitch';
 import '../../../-appconfig.js';
 
-namespace `testApps` (
+namespace `display.screens` (
     class NotificationsApp extends w3c.ui.Application {
         constructor(element){
             super(element);

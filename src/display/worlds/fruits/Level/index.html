@@ -1,0 +1,11 @@
+<template>
+	<div id="fruits" style="display: flex;flex-wrap: wrap;width: 50%;">
+		${
+            this.map(fruit => 
+                `<div>
+                    <img src="src/display/worlds/fruits/assets/characters/${fruit.src}"/>
+                </div>`
+            ).join('')
+        }
+	</div>
+</template>

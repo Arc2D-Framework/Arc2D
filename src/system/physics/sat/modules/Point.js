@@ -1,4 +1,4 @@
-import 'src/system/2d/sat/modules/Polygon.js';
+import '/src/system/physics/sat/modules/Polygon.js';
 
 /**
  * A point used to detect collisions

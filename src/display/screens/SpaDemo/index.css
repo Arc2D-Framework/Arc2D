@@ -8,7 +8,7 @@ html, body {
     font-family: "Quicksand", sans-serif;
 }
 .logo {
-    background-image: url("resources/img/Arc2D_logo.png");
+    background-image: url("/resources/img/Arc2D_logo.png");
     width: 72px !important;
     height: 72px !important;
     background-size: cover;
@@ -199,7 +199,7 @@ html, body {
 home-page .home {
     width: 100%;
     height: 100vh;
-    background-image: url("resources/img/mac-bg.webp");
+    background-image: url("/resources/img/mac-bg.webp");
     background-position: center;
     background-size:cover;
     display: flex;
@@ -210,7 +210,7 @@ home-page .home {
 about-page .about {
     width: 100%;
     height: 100vh;
-    background-image: url("resources/img/pc-laptop-bg.webp");
+    background-image: url("/resources/img/pc-laptop-bg.webp");
     background-position: center;
     background-size:cover;
     display: flex;
@@ -220,7 +220,7 @@ about-page .about {
 contact-page .contact {
     width: 100%;
     height: 100vh;
-    background-image: url("resources/img/laptop-bg.webp");
+    background-image: url("/resources/img/laptop-bg.webp");
     background-position: center;
     background-size:cover;
     display: flex;
