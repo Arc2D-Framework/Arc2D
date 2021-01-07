@@ -28,11 +28,23 @@ namespace `system.drivers.storage`(
         add(obj, cb){
             this.data.items.push(obj);
             this.commit();
-            cb(obj,null);
+            cb&&cb(obj,null);
+            return obj;
         }
 
+        update(obj, cb){
+            this.data.items.forEach(item => {
+                if(item._id==obj._id){
+                    Object.assign(item,obj);
+                    this.commit();
+                    cb&&cb(obj,null);
+                    return obj;
+                }
+            })
+        }
+ 
         remove(cb,query){
-            var res = Query.query( this.data.items, query.query||{});
+            var res = Query.query( this.data.items, query.query||query||{});
             var removed=[];
             res.forEach(o => {
                 for(var i=0; i<=this.data.items.length-1; i++){

@@ -207,26 +207,7 @@ home-page .home {
     justify-content: center;
     transition: all .7s ease;
 }
-about-page .about {
-    width: 100%;
-    height: 100vh;
-    background-image: url("/resources/img/pc-laptop-bg.webp");
-    background-position: center;
-    background-size:cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-contact-page .contact {
-    width: 100%;
-    height: 100vh;
-    background-image: url("/resources/img/laptop-bg.webp");
-    background-position: center;
-    background-size:cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+
 #headerTxt {
     margin: auto;
     color: #fff;

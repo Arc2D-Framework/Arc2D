@@ -1,0 +1,6 @@
+:host .todo-list todo-item li {
+    border-bottom: 1px solid #ededed;
+}
+:host .todo-list todo-item:last-child li {
+    border-bottom: none;
+}

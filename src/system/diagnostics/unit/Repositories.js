@@ -1,4 +1,4 @@
-import! 'domain.collections.Movies';
+import '@domain.collections.Movies';
 
 
 namespace `system.diagnostics.unit` (

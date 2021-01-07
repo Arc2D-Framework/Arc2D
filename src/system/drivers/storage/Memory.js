@@ -28,6 +28,16 @@ namespace `system.drivers.storage` (
             cb&&cb(obj,null);
             return obj;
         }
+
+        update(obj, cb){
+            this.collection.forEach(item => {
+                if(item._id==obj._id){
+                    Object.assign(item,obj)
+                    cb&&cb(obj,null);
+                    return obj;
+                }
+            })
+        }
         
         find(cb, query){
             var res = Query.query( this.collection, query.query||{});
@@ -37,7 +47,7 @@ namespace `system.drivers.storage` (
         }
 
         remove(cb,query){
-            var res = Query.query( this.collection, query.query||{});
+            var res = Query.query( this.collection, query.query||query||{});
             var removed=[];
             res.forEach(o => {
                 for(var i=0; i<=this.collection.length-1; i++){

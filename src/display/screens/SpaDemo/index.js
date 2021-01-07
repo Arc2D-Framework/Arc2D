@@ -2,6 +2,8 @@
 
 import 'display.components.Splash';
 import 'display.views.Home'; //start with default <home-page> in <slot>
+import 'display.views.About';
+import 'display.views.Contact';
 
 namespace `display.screens` (
     class SpaDemo extends Application {
@@ -13,6 +15,12 @@ namespace `display.screens` (
             await super.onConnected();
             this.mainListDiv = this.querySelector("#mainListDiv");
             this.on("click", this.onToggleMenu, false, "nav");
+            
+            window.requestIdleCallback(function(){
+                console.log("requestIdleCallback")
+                display.views.About.preload();
+                display.views.Contact.preload();
+            }, {timeout: 5});
         }
 
         //toggle if any part of <nav> is clicked

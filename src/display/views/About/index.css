@@ -1,1 +1,12 @@
 :host{}
+
+:host .about {
+    width: 100%;
+    height: 100vh;
+    background-image: url("/resources/img/pc-laptop-bg.webp");
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

@@ -9,6 +9,10 @@ namespace `display.components` (
             return true
         }
 
+        onLoadInstanceStylesheet(){
+            return false
+        }
+
         inShadow(){
             return true
         }
