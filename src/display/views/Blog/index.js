@@ -1,6 +1,6 @@
-@tag("home-page");
+@tag("blog-page");
 namespace `display.views` (
-	class Home extends WebComponent  {
+	class Blog extends WebComponent  {
 		async onConnected(){
 			await super.onConnected();
 		}

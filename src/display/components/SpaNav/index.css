@@ -1,0 +1,63 @@
+
+  :host {
+    position: sticky;
+    z-index: 10000;
+    left: 0;
+    display: block;
+    top: 0;
+  }
+  
+  :host .topnav {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .8);
+    position: absolute !important;
+    width: 100%;
+    box-shadow: 0px 1px 5px 3px rgba(0,0,0,.5);
+  }
+  
+  :host .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  :host .topnav a:hover {
+    background-color: rgba(0,0,0,.7);
+    color: black;
+    color: green;
+  }
+  
+  :host .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  :host .topnav .icon {
+    display: none;
+  }
+  
+  @media screen and (max-width: 600px) {
+    :host .topnav a:not(:first-child) {display: none;}
+    :host .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    :host.responsive .topnav {position: relative;}
+    :host.responsive .topnav .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    :host.responsive .topnav a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
