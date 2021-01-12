@@ -29,8 +29,8 @@ namespace `display.worlds` (
 
         onUpdate =()=>{
             if(!this.player){return}
-            this.up    && (this.player.velocity += 0.1);
-            this.down  && (this.player.velocity -= 0.1);
+            this.up    && (this.player.velocity += 0.9);
+            this.down  && (this.player.velocity -= 0.9);
             this.left  && (this.player.angle -= 0.04);
             this.right && (this.player.angle += 0.04);
         }

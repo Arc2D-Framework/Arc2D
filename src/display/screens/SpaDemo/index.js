@@ -7,6 +7,7 @@ namespace `display.screens` (
     class SpaDemo extends Application {
         constructor(element){
             super(element);
+            location.hash = location.hash||Config.DEFAULT_VIEW;
         }
         
         async onConnected() {
