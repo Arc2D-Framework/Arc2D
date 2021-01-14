@@ -32,7 +32,7 @@ BY HTML:
 
 BY CLASS:
 var s = new display.components.Splash;
-document.body.appendChild(s);```
+document.body.appendChild(s);
 
 BY DOM API:
 var s = document.createElement("splash-loader");
