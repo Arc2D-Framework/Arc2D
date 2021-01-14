@@ -24,8 +24,7 @@ and builds a tag for use in HTML, example:
 class UpperCase       -->    <upper-case></upper-case>
 class ToggleButton    -->    <toggle-button></toggle-button>
 
-The Splash is just a single word though; the 
-@tag() decorator allows a custom tagName:
+But, it's not a requirement. Take for example:
 
 @tag("splash-loader");
 namespace `display.components` (
@@ -35,6 +34,9 @@ namespace `display.components` (
         }
     }
 );
+
+The class Splash is just a single word; The @tag() decorator allows a custom tag-name:
+
 
 USAGE:
 First import it from anywhere:
