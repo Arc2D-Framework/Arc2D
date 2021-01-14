@@ -6,13 +6,16 @@ Examples of Components are small parts like:
     - popups, modals, dialogs
     - navigation and menus
 
+See:
+<a href="https://www.arc2d.com/resources/doc.html#docs.topics.DefineComponent">Define Component</a>
+
 
 Components are assembled unto screens and other components.
-Components use 3 asset files:
-    - index.html    - the <template>
+Each component has asset files:
+    - index.html    - a <template>
     - index.css     - styling
-    - index.js      - the javascript class
-    - images/       - optional
+    - index.js      - a Class
+
 
 Components should have a Class name in the form:
 UpperCase. Arc replaces the Upper cased letters
