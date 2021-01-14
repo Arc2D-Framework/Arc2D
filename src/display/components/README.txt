@@ -7,7 +7,7 @@ Examples of Components are small parts like:
     - navigation and menus
 
 See:
-<a href="https://www.arc2d.com/resources/doc.html#docs.topics.DefineComponent">Define Component</a>
+https://www.arc2d.com/resources/doc.html#docs.topics.DefineComponent
 
 
 Components are assembled unto screens and other components.
