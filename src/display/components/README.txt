@@ -1,4 +1,4 @@
-Examples of Components are small parts like:
+Components are smaller parts:
     - switches
     - toggles
     - knobs, levers
@@ -18,9 +18,9 @@ Each component has asset files:
 
 
 Components should have a Class name in the form:
-UpperCase. Arc replaces the Upper cased letters
-with dashes "-", to build a w3c HTML5 tag representation 
-in the form:
+UpperCase. Arc relys on this UpperCase convention
+and builds a tag for use in HTML, example:
+
 class UpperCase       -->    <upper-case></upper-case>
 class ToggleButton    -->    <toggle-button></toggle-button>
 
@@ -38,16 +38,16 @@ namespace `display.components` (
 
 USAGE:
 First import it from anywhere:
-```import 'display.components.Splash'```;
+import 'display.components.Splash';
 
 BY HTML:
 <splash-loader></splash-loader>
 
 BY CLASS:
-```var s = new display.components.Splash;
+var s = new display.components.Splash;
 document.body.appendChild(s);```
 
 BY DOM API:
-```var s = document.createElement("splash-loader");
-document.body.appendChild(s);```
+var s = document.createElement("splash-loader");
+document.body.appendChild(s);
 
