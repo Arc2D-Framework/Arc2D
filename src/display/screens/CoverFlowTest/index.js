@@ -1,3 +1,4 @@
+import 'display.components.Splash';
 import 'display.components.CoverFlow';
 import 'display.components.ToggleButton';
 

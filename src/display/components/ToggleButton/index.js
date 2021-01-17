@@ -1,3 +1,5 @@
+
+
 namespace `display.components` (
 	class ToggleButton extends WebComponent  {
         constructor(el){
@@ -14,7 +16,7 @@ namespace `display.components` (
 
         async onStyleComputed(style){
             await wait(100);
-            this.bounds = this.getBoundingClientRect();
+            this.bounds = this.root.getBoundingClientRect();
             this.knob_bounds = this.knob.getBoundingClientRect();
 
             var style = window.getComputedStyle(this.knob);

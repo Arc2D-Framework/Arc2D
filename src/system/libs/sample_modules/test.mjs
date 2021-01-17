@@ -1,4 +1,3 @@
-import {test} from '/src/system/libs/sample_modules/test2.mjs';
 
 
 function myExport() {
@@ -15,4 +14,4 @@ const f = () => {
 }
 
 var age = 21;
-return {myExport,hello,f,age};
+export {myExport,hello,f,age};

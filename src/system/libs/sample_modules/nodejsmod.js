@@ -1,9 +1,7 @@
-import 'display.components.ToggleButton';
 
-class NodeTest {
+export class NodeTest {
     test(){
 
     }
 }
 
-return{NodeTest};

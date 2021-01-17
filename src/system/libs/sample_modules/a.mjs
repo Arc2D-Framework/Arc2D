@@ -1,4 +1,4 @@
-import {runit} from '/src/system/libs/sample_modules/test2.mjs';
+import {sample as samplex} from './test2.mjs';
 
 
 function myExport() {
@@ -15,4 +15,4 @@ const f = () => {
 }
 
 var age = 21;
-export {myExport,hello,f,age,runit};
+export {myExport,hello,f,age,samplex};

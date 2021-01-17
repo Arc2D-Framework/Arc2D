@@ -29,10 +29,6 @@ namespace `display.screens` (
             this.on("toggleit", (e) => this.toggleContent(e), false, "#main-toggle");
             this.bottomContent = this.querySelector("#bottom-content");
             this.allToggleSwitches = Array.from(this.querySelectorAll("notifications-toggle-switch"));
-            // this.container = this.querySelector("#container");
-            // this.emailNode = this.querySelector("#email");
-            // this.notificationsNode = this.querySelector("#notification-node");
-            // this.initApp();
         }
 
         initApp(){

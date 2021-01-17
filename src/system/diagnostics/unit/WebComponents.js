@@ -195,13 +195,16 @@ namespace `system.diagnostics.unit` (
             
 
 
-            this.expected("components to initialized using non-connected DOM node as innerHTML template source, ex: `new system.diagnostics.unit.com.SampleD(aDiv)`, where 'aDiv' is a node, not yet in the DOM -- i.e: doc.createElement();", async (resolve,reject) => {
+            this.expected("components to initialize using non-connected DOM node as innerHTML template source, ex: `new system.diagnostics.unit.com.SampleD(aDiv)`, where 'aDiv' is a node (not in the DOM)", async (resolve,reject) => {
                 await import('/src/system/diagnostics/unit/com/SampleD/index.js');
-                var el = `<div id="sample-d-html-123">Adoption: a custom tag will wrap a new non-connected DIV in the DOM</div>`.toDomElement();
+                var el = `<div id="sample-d-html-123">
+                            Adoption: a custom tag will wrap a new non-connected DIV in the DOM
+                          </div>`.toNode();
+                // debugger;
                 var n = new system.diagnostics.unit.com.SampleD(el);
                 application.appendChild(n);
                 await wait(100);
-                var dampled = application.querySelector("sample-d #sample-d-html-123");
+                var dampled = application.querySelector("#sample-d-html-123");
                 if(dampled){
                     resolve(true)
                 } else {
@@ -230,7 +233,7 @@ namespace `system.diagnostics.unit` (
 
             this.expected("stealth component querySelector() to find child nodes", async (resolve,reject) => {
                 await import('/src/system/diagnostics/unit/com/SampleD/index.js');
-                var el = `<div id="html-123-querySelector1"><div id="test-camo-qs">Camouflaged: QuerySelector test</div></div>`.toDomElement();
+                var el = `<div id="html-123-querySelector1"><div id="test-camo-qs">Camouflaged: QuerySelector test</div></div>`.toNode();
                 application.appendChild(el);
                 var el = document.querySelector("#html-123-querySelector1");
                 var n = new system.diagnostics.unit.com.SampleD(el);

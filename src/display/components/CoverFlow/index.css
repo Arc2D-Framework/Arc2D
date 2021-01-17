@@ -1,9 +1,13 @@
 .CoverFlow {
   display: block;
     height: 300px;
-    margin: 30px auto;
+    /* margin: 30px auto; */
   box-sizing: border-box;
-
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0px);
+  width: 100%;
+  position: absolute;
 }
 
 .CoverFlow .hierarchy-icon {
