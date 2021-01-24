@@ -1,10 +1,11 @@
-
+import 'system.math';
 
 namespace `display.components` (
 	class ToggleButton extends WebComponent  {
         constructor(el){
             super(el);
             this.value = -1;
+            
         }
 		async onConnected(){
             await super.onConnected();
