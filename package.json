@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "http-server": "^0.12.3",
+        "kill-port": "^1.6.1",
         "od-cocoon": "github:Nashorn/od-cocoon#3.0.0",
         "od-paginator": "github:Nashorn/od-paginator#1.0.0",
         "sweetalert": "^2.1.2"

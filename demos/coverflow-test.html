@@ -11,13 +11,89 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title>Arc Framework</title>
-        <!-- <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.3.0/webcomponents-loader.js"></script> -->
-        <!-- <script src="-appconfig.js" charset="utf-8"></script> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
     </head>
 
     <body namespace="display.screens.CoverFlowTest">
         <splash-loader shadow></splash-loader>
-        <cover-flow></cover-flow>
+        
+        <cover-flow style="display: none;">
+            <!------------------- list of tiles --------------------->
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p1.jpg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Caterina</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p2.jpeg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Lotte</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p6.jpg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Rick Grimes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p5.jpg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Pirate</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p3.jpg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Fenna</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p4.jpg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Mr. Starks</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p2.jpeg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Lotte</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p6.jpg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Rick Grimes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" slot="tiles">
+                <div class="item">
+                    <span class="photo" style="background-image:url(/resources/images/coverflow_demo/p5.jpg);"></span>
+                    <div class="emp-info">
+                        <div class="emp-name">Pirate</div>
+                    </div>
+                </div>
+            </div>
+            <!------------------- end of tiles --------------------->
+        </cover-flow>
+        
     </body>
 </html>

@@ -21,6 +21,8 @@ namespace `display.components` (
             this.rotate();
         }
 
+        isComposable(){return true}//to allow slots
+
         //carousel spin direction
         onRotate(dir){
             this.rotation += this.theta * dir;
