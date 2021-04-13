@@ -42,11 +42,14 @@ namespace `display.components` (
 		}
 
 		async onMoviesChanged(e){
-			this.cursor = e.data.results;
-			this.render({items : await this.cursor.next()});
+			debugger;
+			this.cursor = e.data;
+			console.log("cursor",this.cursor)
+			this.render({items : await this.cursor});
 		}
 
 		onTemplateRendered(){
+			
 			this.root.querySelector("#currentpage").innerHTML = this.cursor.pagenumber();
 			this.root.querySelector("#totalpages").innerHTML  = this.cursor.totalpages();
 		}

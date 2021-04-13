@@ -5,7 +5,7 @@ namespace `display.screens` (
     class TodoMvcApplication extends Application {
         async onConnected(element){
             await super.onConnected();
-            location.hash=location.hash||"#/"
+            location.hash=location.hash||"#/";
         }
 
         async onHashChange(e){
@@ -13,5 +13,7 @@ namespace `display.screens` (
             await wait(50);
             this.dispatchEvent("filterchanged", {hash:location.hash,filter:hash})
         }
+
+        onEnableRouting(){ return true }
     }
 );

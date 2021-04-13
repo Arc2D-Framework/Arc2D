@@ -17,6 +17,7 @@ namespace `display.worlds.entities.html` (
                     border: 2px solid black;
                     box-sizing:border-box;
                     z-index:1;
+                    user-select: none;
                 }
                 .Box2DEntity > div {
                     align-items: center;
@@ -25,6 +26,7 @@ namespace `display.worlds.entities.html` (
                     font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
                     font-size: 11px;
                     justify-content: center;
+                    user-select: none;
                 }
             `
         }

@@ -33,7 +33,7 @@ namespace `display.screens` (
         
         onAuthenticated= async (user)=>{
             if(!user){
-                location.href = "login.html"
+                //location.href = "login.html"
             } else {
                 this.user=user;
                 await this.render();

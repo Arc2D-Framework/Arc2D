@@ -1,15 +1,13 @@
 
-import '@system.drivers.storage.Memory';
 import '@system.drivers.storage.LocalStorage';
-
 
 namespace `domain.collections` (
     class Todos extends Collection {
         @public device_driver = "system.drivers.storage.LocalStorage";
-        @public seeds = REPOSITORIES.MOVIES; /*see: app/resources/repositories.js*/
+        // @public seeds = REPOSITORIES.TODOS;
 
         static isSeedable(){
-            return false
+            return false;
         }
 
         static async insert(obj,cb){
@@ -20,7 +18,7 @@ namespace `domain.collections` (
         }
 
         static async update(obj,cb){
-            var results = await this.IRequestStorage.update(obj,cb);
+            var results = await super.update(obj,cb);
             application.dispatchEvent("domain.collections.Todos::changed", results);
             return results;
         }

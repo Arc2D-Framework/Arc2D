@@ -1,6 +1,5 @@
-import {NodeTest} from '/src/system/libs/sample_modules/nodejsmod.js';
 import 'display.components.Splash';
-import! 'domain.collections.Movies';
+import '@domain.collections.Movies';
 import 'display.components.MovieMenu';
 import 'display.components.MoviesList';
 import '/src/system/drivers/templating/Nunjucks/nunjucks-driver.js';
@@ -35,6 +34,8 @@ namespace `display.screens` (
             //store it for later
             this.query = query;
             //execute query, cursor is [] of results.
+            debugger;
+
             var cursor = await domain.collections.Movies.find({
                 query : query,
                 skip:0,
@@ -42,19 +43,19 @@ namespace `display.screens` (
                 totals:true
             }); 
             //update movies list
-            this.onMovieResultsChanged({results : cursor});
+            this.onMovieResultsChanged(cursor);
         }
 
         async onMovieDeleted(e){
             //when movie deleted, re-render
             var cursor = await domain.collections.Movies.find(this.query);//await is synchronous; reuse stored query
             //update movies list
-            this.onMovieResultsChanged({results : cursor});
+            this.onMovieResultsChanged(cursor);
         }
 
-        onMovieResultsChanged(data){
+        onMovieResultsChanged(cursor){
             //core.ui.MoviesList -> handles 'movieschanged'
-            this.dispatchEvent("movieschanged", data);
+            this.dispatchEvent("movieschanged", cursor);
         }
     }
 );

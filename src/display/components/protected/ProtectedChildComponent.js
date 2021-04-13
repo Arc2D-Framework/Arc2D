@@ -1,4 +1,4 @@
-import! 'display.components.protected.ChildComponent';
+import '@display.components.protected.ChildComponent';
 
 namespace `display.components.protected` (
     class ProtectedChildComponent extends display.components.protected.ChildComponent {

@@ -13,8 +13,12 @@ namespace `display.worlds.entities.html` (
 
         async onConnected(){
             await super.onConnected();
-            // await this.render();
-            this.addEventListener("click", this.onClick);
+            // this.addEventListener("click", e=>this.onClick(e));
+            this.addEventListener("mousedown", e=>this.onMouseDown(e));
+            document.addEventListener("mousemove", e=>this.onMouseMove(e));
+            this.addEventListener("mouseup", e=>this.onMouseUp(e));
+
+
             var fixDef = new b2FixtureDef;
                 fixDef.density = 3.0;
                 fixDef.friction = 0.2;
@@ -28,20 +32,49 @@ namespace `display.worlds.entities.html` (
              fixDef.shape.SetAsBox(this.hw,this.hh);
              this.body = this.world.CreateBody(bodyDef);
              this.body.CreateFixture(fixDef);
-             // this.world.CreateBody(bodyDef).CreateFixture(fixDef);
-             // alert(this.body.GetPosition().x)
-
-             // var angle = this.body.GetAngle();
-             // var deg = angle * (180/Math.PI);
-             // this.style.transform = `translate3d(${(bodyDef.position.x-(this.hw))*this.scale}px, ${(bodyDef.position.y-(this.hh))*this.scale}px, 0px)`;
              this.style.width = (this.hw*2)* (this.scale)+"px";
              this.style.height= (this.hh*2)* (this.scale)+"px";
              this.dispatchEvent("connected",{target:this});
         }
 
-        onClick=()=>{
+        onMouseMove(e){
+            if(this.ispressed && this.mouseJoint){
+                this.body.SetAwake(true);
+                this.mouseJoint.SetTarget(new b2Vec2(e.pageX/this.scale, e.pageY/this.scale));
+            }
+        }
+
+        onMouseUp(e){
+            this.ispressed=false;
+            application.world.DestroyJoint(this.mouseJoint);
+            this.mouseJoint = null;
+        }
+        onMouseDown(e){
+            this.ispressed=true;
+            if(!this.mouseJoint){
+            var def = new b2MouseJointDef();
+                def.bodyA = application.world.GetGroundBody();
+                def.bodyB = this.body;
+                def.target.Set(e.pageX/this.scale, e.pageY/this.scale);
+
+
+                def.collideConnected = true;
+                def.maxForce = 100 * this.body.GetMass();
+                def.dampingRatio = 0;
+
+                this.mouseJoint = application.world.CreateJoint(def);
+
+                this.body.SetAwake(true);
+
+            }
+        }
+
+        onClick(e){
             this.body.SetType(b2Body.b2_dynamicBody);
             this.body.SetAwake(true);
+            this.body.SetLinearVelocity( {x: 25, y:5}  );
+            this.body.SetAngularVelocity( -20);
+            this.body.SetAwake(true)
         }
 
         cssStyle(){
@@ -71,6 +104,8 @@ namespace `display.worlds.entities.html` (
             // var rotRad = this.bodyDef.angle;
             // // var shape = body.GetShapeList(); // we only deal with single-shape bodies
             // var rot = rotRad * (180.0/Math.PI);
+            // var trans = this.body.GetTransform();
+            // if(this.ispressed){console.log(trans.position)}
             var pos = this.body.GetPosition();
             var angle = this.body.GetAngle();
             var deg = angle * (180/Math.PI);

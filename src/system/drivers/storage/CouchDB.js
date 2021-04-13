@@ -1,18 +1,16 @@
 import '/src/system/drivers/storage/Cursor.js';
 
-/**
- * @desc Driver for interfacing with CouchDB NoSQL database.
- */
+
 namespace `system.drivers.storage` (
     class CouchDB extends system.drivers.storage.IStorageInterface{
 
         constructor (collection, storage_device){
             super(collection, storage_device);
-            this.setCollection(collection.classname);
+            this.setCollection(collection.prototype.classname);
         }
 
         isSeedingEnabled(){
-            return true;
+            return false;
         }
 
         setCollection(name) {
@@ -50,24 +48,52 @@ namespace `system.drivers.storage` (
             xhr.send(data);
         }
 
-        find(cb, query) {
-            query = query ? {selector:query} : {selector:{}};
-            query = JSON.stringify(query);
-            var xhr = new XMLHttpRequest();
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState == 4) {
-                    var res = this.responseText;
-                    var c = new core.drivers.storage.Cursor({
-                        all: function () {
-                            return JSON.parse(res).docs;
-                        }
-                    });
-                    cb(c, null)
+        find(cb, query, cursor) {
+            return new Promise(async resolve => {
+                debugger;
+                // query = query ? {selector:query.query} : {selector:{}};
+                // query = JSON.stringify(query);
+                var couchQ = this.getTransformedQuery(query);
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("readystatechange", e => {
+                    if (xhr.readyState == 4) {
+                        var res = xhr.responseText;
+                        var data = JSON.parse(res);
+                        debugger;
+                        var res = (data instanceof Array) ? data : data.docs;
+                        var c = cursor||new system.drivers.storage.HttpCursor(res||[],couchQ,this);
+                                    c.total = res.length;
+                                    c.clear();
+                                    c.fill(res);
+                                    resolve(c)
+                                    cb&&cb(c, null)
+                    }
+                });
+                xhr.open("POST", `http://127.0.0.1:5984/${this.collection_name}/_all_docs`);
+                xhr.setRequestHeader("content-type", "application/json");
+                console.log("couch query",JSON.stringify(couchQ))
+                xhr.send(JSON.stringify(couchQ));
+            })
+        }
+
+        getTransformedQuery(query){
+            var newQuery={};
+            for(var key in query){
+                if(key == "query"){
+                    newQuery.selector = query.query||{};
+
                 }
-            });
-            xhr.open("POST", `http://127.0.0.1:5984/${this.collection_name}/_find`);
-            xhr.setRequestHeader("content-type", "application/json");
-            xhr.send(query);
+                if(key == "totals"){
+                    newQuery.execution_stats = query.totals
+
+                }
+                else {
+                    newQuery[key]=query[key]
+                }
+            }
+            delete newQuery.totals;
+            delete newQuery.query;
+            return newQuery;
         }
     }
 );

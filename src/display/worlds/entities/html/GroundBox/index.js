@@ -40,7 +40,7 @@ namespace `display.worlds.entities.html` (
              this.world
                 .CreateBody(bodyDef)
                 .CreateFixture(fixDef);
-
+                this.body=bodyDef;
              this.style.transform = `translate3d(${(bodyDef.position.x-(hw))*this.scale}px, ${(bodyDef.position.y-(hh))*this.scale}px, 0px)`;
              this.style.width = (hw*2)* (this.scale)+"px";
              this.style.height= (hh*2)* (this.scale)+"px";

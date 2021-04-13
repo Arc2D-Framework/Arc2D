@@ -1,6 +1,6 @@
 
 import '/src/system/physics/b2d/Box2D.js';
-import! 'display.worlds.entities.html.Box2DEntity';
+import '@display.worlds.entities.html.Box2DEntity';
 import 'display.worlds.entities.html.GroundBox';
 import 'display.worlds.entities.html.PolygonShape';
 import 'display.worlds.entities.svg.CircleShape';
@@ -16,6 +16,7 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
 ,   b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
 ,   b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
 ,   b2DebugDraw = Box2D.Dynamics.b2DebugDraw
+,   b2MouseJointDef =  Box2D.Dynamics.Joints.b2MouseJointDef
 ;
          
 
@@ -52,6 +53,7 @@ namespace `display.worlds` (
                 this.stage, 
                 this.scale
             );
+            application.ground = ground;
             //add ground to stage
             this.stage.appendChild(ground);
                 

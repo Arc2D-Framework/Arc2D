@@ -3,26 +3,32 @@
 namespace `display.components` (
     class Splash extends WebComponent {
         async onConnected() {
-            await this.render();
-            /*dispatch from any component; ex:
-                application.dispatchEvent("hidesplash")*/
-            application.addEventListener("showsplash", e => this.onShow(), false);
-            application.addEventListener("hidesplash", e => this.onHide(), false);
-            
-            //hide immediatetly
-            this.onHide();
+			await this.render();
+			this.duration = this.getAttribute("duration")||1200;
+            document.addEventListener("showsplash", e => this.onShow(), false);
+			document.addEventListener("hidesplash", e => this.onHide(), false);
+			this.on("transitionend", e=>this.onTransitionEnd(e), false);
+			// this.on("mozTransitionend", e=>this.onTransitionEnd(e));
+			this.fade();
         }
 
-        onShow(){
+		onTransitionEnd(e){
+			e.propertyName=="opacity" && this.onHide()
+		}
+
+		async fade(){
+			await wait(parseInt(this.duration));
+			this.classList.add("fade");//fires 'transitionend'
+		}
+		
+        async onShow(){
             this.classList.remove("hidden");
-            this.classList.remove("fade")
+			this.classList.remove("fade");
+			this.fade();
         }
 
         onHide(){
-            setTimeout(e=>{
-                this.classList.add("hidden");
-                this.classList.add("fade")
-            },2000)
+            this.classList.add("hidden");
         }
 
         //Override. No css file to load, it's baked.
@@ -61,17 +67,18 @@ namespace `display.components` (
     				white;
     				opacity: 1;
     				z-index: 10000000;
-    				transition: opacity .4s;
+    				transition: opacity .7s;
     				box-sizing: border-box;
     			}
 
-    			:host(.fade){
+				:host(.fade),
+				:host.fade{
     				opacity:0;
     			}
 
-    			:host(.hidden){
-    				visibility:hidden;
-    				z-index:-100;
+				:host(.hidden),
+				:host.hidden{
+    				display:none;
     			}
 
     			@keyframes moveup {

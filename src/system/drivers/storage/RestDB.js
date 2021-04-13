@@ -1,11 +1,10 @@
 import '/resources/repositories.js';
-import! 'system.drivers.storage.IStorageInterface';
-import! 'system.drivers.storage.HttpCursor';
+import '@system.drivers.storage.HttpCursor';
+var {IStorageInterface} = system.drivers.storage;
 
 
 namespace `system.drivers.storage` (
-    class RestDB extends system.drivers.storage.IStorageInterface{
-
+    class RestDB extends IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
             this.setCollection(collection.prototype.classname);
@@ -28,20 +27,20 @@ namespace `system.drivers.storage` (
 
         remove(query, cb) {
             var xhr = new XMLHttpRequest();
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    if (this.status == 200) {
-                        cb(query);
-                    } else {
-                        console.error("unable to remove", this)
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        if (this.status == 200) {
+                            cb(query);
+                        } else {
+                            console.error("unable to remove", this)
+                        }
                     }
-                }
-            });
-            xhr.open("DELETE", "https://testing-a837.restdb.io/rest/" + this.collection_name + "/" + query._id, false);
-            xhr.setRequestHeader("content-type", "application/json");
-            xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
-            xhr.setRequestHeader("cache-control", "no-cache");
-            xhr.send(null);
+                });
+                xhr.open("DELETE", "https://testing-a837.restdb.io/rest/" + this.collection_name + "/" + query._id, false);
+                xhr.setRequestHeader("content-type", "application/json");
+                xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
+                xhr.setRequestHeader("cache-control", "no-cache");
+                xhr.send(null);
         }
 
         add(obj, cb) {
@@ -68,50 +67,34 @@ namespace `system.drivers.storage` (
         find(cb, query, cursor) {
             var self=this;
             return new Promise(async resolve => {
-                if(cursor){
-                    var xhr = new XMLHttpRequest();
-                        xhr.addEventListener("readystatechange", _ => {
-                            if (xhr.readyState === 4) {
-                                var data = xhr.responseText;
-                                    data = JSON.parse(data);
-                                var res = (data instanceof Array) ? data : data.data;
-                                    cursor.clear();
-                                    cursor.fill(res);
-                                    resolve(cursor)
-                                    cb&&cb(cursor, null)
-                            }
-                        });
-                        xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?"+this.getTransformedQuery(query));
-                        xhr.setRequestHeader("content-type", "application/json");
-                        xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
-                        xhr.setRequestHeader("cache-control", "no-cache");
-                        xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
-                        xhr.send(null);
-                }
-                else {
-                    var xhr = new XMLHttpRequest();
-                        xhr.addEventListener("readystatechange", _ => {
-                            if (xhr.readyState === 4) {
-                                var data = xhr.responseText;
-                                    data = JSON.parse(data);
-                                var res = (data instanceof Array) ? data : data.data
-                                var c = new system.drivers.storage.HttpCursor([],query,this);
-                                    c.count = data.totals.count;
-                                    resolve(c)
-                                    cb&&cb(c, null)
-                            }
-                        });
-                        xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?"+this.getTransformedQuery(query)+"&totals=true&count=true");
-                        xhr.setRequestHeader("content-type", "application/json");
-                        xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
-                        xhr.setRequestHeader("cache-control", "no-cache");
-                        xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
-                        xhr.send(null);
-                }
+                debugger;
+                var xhr = new XMLHttpRequest();
+                    xhr.addEventListener("readystatechange", _ => {
+                        if (xhr.readyState === 4) {
+                            var data = xhr.responseText;
+                                data = JSON.parse(data);
+                            var res = (data instanceof Array) ? data : data.data
+                            var c = cursor||new system.drivers.storage.HttpCursor(res||[],query,this);
+                                c.total = data.totals.total;
+                                c.clear();
+                                c.fill(res);
+                                resolve(c)
+                                cb&&cb(c, null)
+                                // cb&&cb(cursor, null)
+                                // return cursor;
+                        }
+                    });
+                    xhr.open("GET", "https://testing-a837.restdb.io/rest/" + this.collection_name + "?"+this.getTransformedQuery(query));
+                    xhr.setRequestHeader("content-type", "application/json");
+                    xhr.setRequestHeader("x-apikey", "5bd6ef18cb62286429f4ef19");
+                    xhr.setRequestHeader("cache-control", "no-cache");
+                    xhr.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+                    xhr.send(null);
             })
         }
 
         getTransformedQuery(query){
+            debugger;
             var newQuery={};
             for(var key in query){
                 if(key == "query"){

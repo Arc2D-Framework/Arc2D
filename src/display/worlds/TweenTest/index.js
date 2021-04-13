@@ -1,5 +1,5 @@
-import! 'system.input.KeyBoard';
-import! 'system.math.Utils';
+import '@system.input.KeyBoard';
+import '@system.math.Utils';
 var {Easing} = await import('/src/system/math/Easing.js');
 
 

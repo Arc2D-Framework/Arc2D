@@ -1,10 +1,10 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
-import! 'system.drivers.storage.IStorageInterface';
-import '/src/system/libs/query.js';
+await require('/src/system/drivers/storage/Query.js');
+var {IStorageInterface} = system.drivers.storage;
 
 namespace `system.drivers.storage` (
-    class Memory extends system.drivers.storage.IStorageInterface {
+    class Memory extends IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
             Session.State.db = Session.State.db||{};
@@ -13,6 +13,18 @@ namespace `system.drivers.storage` (
 
         isSeedingEnabled(){
             return true;
+        }
+
+        isSeeded(){
+            return this.collection.seeded;
+        }
+
+        setSeeded(){
+            this.collection.seeded=true;
+        }
+
+        commit(){
+            console.log("Memory Storage Driver: Nothing to commit")
         }
 
         setCollection (name){
@@ -42,6 +54,9 @@ namespace `system.drivers.storage` (
         find(cb, query){
             var res = Query.query( this.collection, query.query||{});
             var cursor = new system.drivers.storage.Cursor(res,query,this);
+            // cursor.clear();
+            // cursor.fill(res);
+            cursor.next();
             cb&&cb(cursor, null)
             return cursor;
         }

@@ -1,12 +1,13 @@
 
-import! 'system.drivers.storage.Memory';
-import! 'system.drivers.storage.LocalStorage';
-import! 'system.drivers.storage.RestDB';
+import '@system.drivers.storage.Memory';
+import '@system.drivers.storage.LocalStorage';
+import '@system.drivers.storage.RestDB';
+import '@system.drivers.storage.CouchDB';
 
 namespace `domain.collections` (
     class Movies extends Collection {
-        @public device_driver = "system.drivers.storage.Memory";
-        @public seeds = REPOSITORIES.MOVIES; /*see: app/resources/repositories.js*/
+        @public device_driver = "system.drivers.storage.LocalStorage";
+        @public seeds = REPOSITORIES.MOVIES;
 
         static isSeedable(){
             return this.IRequestStorage.isSeedingEnabled();

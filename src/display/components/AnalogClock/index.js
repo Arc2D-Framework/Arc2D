@@ -16,6 +16,7 @@ namespace `display.components` (
         }
 
         onUpdate(){
+            if(!this.ready){return}
             this.model.onUpdate();
         }
 

@@ -4,10 +4,12 @@ namespace `display.components` (
     class CoverFlow extends WebComponent {
         async onConnected(){
             await super.onConnected();
-            this.isHorizontal = true;
+
+            var axis = this.getAttribute("axis");
+            this.isHorizontal = (axis=="v")?false:true;
             this.tiles = Array.from(this.querySelectorAll("#carousel .tile"));
             
-            this.panelWidth = this.isHorizontal ? 720 : 420;//TODO: dynamically get tiles width/height
+            this.panelWidth = this.isHorizontal ? 720 : 280;//TODO: dynamically get tiles width/height
             this.panelCount = this.tiles.length;
             this.axis = this.isHorizontal ? 'Y' : 'X';
             this.theta = 360 / this.tiles.length;

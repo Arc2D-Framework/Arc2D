@@ -1,4 +1,4 @@
-System is made up of framework/infastructure facilities.
+System is made up of framework/infastructure.
     - Devices and drivers
     - Engines
     - Parsers

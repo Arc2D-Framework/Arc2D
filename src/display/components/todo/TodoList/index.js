@@ -74,7 +74,8 @@ namespace `display.components.todo` (
                 totals:true
             });
             var items = await cursor.next();
-                items.length && (this.querySelector(".main").style.display="block")
+                // items.length && (this.querySelector(".main").style.display="block");
+                this.querySelector(".main").style.display="block"
             await this.render(items, item => this.ul.appendChild(new display.components.todo.TodoItem(item)), this.ul)
         }
         

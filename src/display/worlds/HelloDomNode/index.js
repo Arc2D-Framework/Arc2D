@@ -1,5 +1,5 @@
 import '/src/system/physics/b2d/Box2D.js';
-import! 'display.worlds.entities.html.Box2DEntity';
+import '@display.worlds.entities.html.Box2DEntity';
 import 'display.worlds.entities.html.GroundBox';
 import 'display.worlds.entities.html.PolygonShape';
 import 'display.worlds.entities.svg.CircleShape';

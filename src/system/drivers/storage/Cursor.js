@@ -9,21 +9,13 @@ namespace `system.drivers.storage`(
                 this.currentPage=0;
                 this.query=query;
                 this.IRequestStorage=IRequestStorage;
-                this.query.skip = -this.query.limit;
+                this.query.skip = this.query.limit;
                 this.items = items;
                 this.paginator = new core.traits.Paginator({
                     data : this.items, pageSize : this.query.limit
                 });
                 this.count = this.items.length;
             }
-        }
-
-        pagenumber(){
-            return this.paginator.pagenumber();
-        }
-
-        totalpages(){
-            return this.paginator.totalpages();
         }
 
         clear(){
@@ -38,6 +30,21 @@ namespace `system.drivers.storage`(
             }
         }
 
+        all(){
+            return this;
+        }
+
+        sort(attrb, order){
+            this.IRequestStorage.sort(this, attrb, order);
+        }
+
+        pagenumber(){
+            return this.paginator.pagenumber();
+        }
+
+        totalpages(){
+            return this.paginator.totalpages();
+        }
 
         next(cb){
             return new Promise((resolve,reject) =>{
@@ -47,21 +54,12 @@ namespace `system.drivers.storage`(
             })
         }
 
-
         previous(cb){
             return new Promise((resolve,reject) =>{
                 this.clear();
                 this.fill(this.paginator.previous())
                 resolve(this)
             })
-        }
-
-        all(){
-            return this;
-        }
-
-        sort(attrb, order){
-            this.IRequestStorage.sort(this, attrb, order);
         }
     }
 );

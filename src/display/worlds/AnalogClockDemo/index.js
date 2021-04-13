@@ -13,7 +13,7 @@ namespace `display.worlds` (
         }
 
         onUpdate=()=>{
-            this.clock.onUpdate()
+            this.ready && this.clock.onUpdate()
         }
 
         onDraw=()=>{

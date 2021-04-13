@@ -2,14 +2,12 @@
 namespace `system.drivers.storage` (
     class HttpCursor extends Array{
         constructor (items, query, IRequestStorage){
-            items = (items&&items.all)?items.all():
-                    (items instanceof Array)?items:[];
-            super(...items);
-
+            super();
+            
             if(IRequestStorage){
                 this.query=query;
+                this.items = items;
                 this.IRequestStorage=IRequestStorage;
-                this.query.skip = -this.query.limit
             }
         }
 
@@ -25,16 +23,21 @@ namespace `system.drivers.storage` (
             }
         }
 
+        all(){
+            return this;
+        }
+
         sort(attrb, order){
             this.IRequestStorage.sort(this, attrb, order);
         }
+
 
         pagenumber(){
             return Math.round(this.query.skip / this.query.limit)+1;
         }
 
         totalpages(){
-            return Math.round(this.count / this.query.limit)
+            return Math.round(this.total / this.query.limit)
         }
 
         async next(cb){

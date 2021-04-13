@@ -5,9 +5,7 @@ import {NodeTest as N} from '/src/system/libs/sample_modules/nodejsmod.js';
 var {NodeTest} = await require('/src/system/libs/sample_modules/nodejsmod.js');
 import '/node_modules/sweetalert/dist/sweetalert.min.js';
 await require('/src/system/libs/sample_modules/introjs.js');
-
-
-
+import {Query} from '/src/system/drivers/storage/Query.js';
 
 namespace `display.screens` (
     class ModuleImportsTest extends Application {
@@ -19,6 +17,7 @@ namespace `display.screens` (
                 console.log("myExport",myExport)
                 console.log("sample x",samplex)
                 console.log("NodeTest",NodeTest)
+                console.log("Query",Query)
                 console.log("WristWatch",WristWatch)
                 console.log("swal",swal);
                 if(TWEEN&&Hello&&myExport&&samplex&&NodeTest&&WristWatch){

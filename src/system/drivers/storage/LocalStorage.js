@@ -1,23 +1,29 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
-import! 'system.drivers.storage.IStorageInterface';
-import '/src/system/libs/query.js';
-
+await require('/src/system/drivers/storage/Query.js');
+var {IStorageInterface} = system.drivers.storage;
 
 namespace `system.drivers.storage`(
-    class LocalStorage extends system.drivers.storage.IStorageInterface {
+    class LocalStorage extends IStorageInterface {
         constructor (collection, storage_device){
             super(collection, storage_device);
             this.setCollection(collection.name);
         }
 
         isSeedingEnabled(){
-            return !(this.data.seeded);
+            return true;
         }
 
-        seeded(){
+        commit(){
+            localStorage.setItem(this.collection_name, JSON.stringify(this.data));
+        }
+
+        isSeeded(){
+            return this.data.seeded==true
+        }
+
+        setSeeded(){
             this.data.seeded=true;
-            this.commit();
         }
 
         setCollection (name){
@@ -62,6 +68,7 @@ namespace `system.drivers.storage`(
         find(cb, query){
             var res = Query.query( this.data.items, query.query||{});
             var cursor = new system.drivers.storage.Cursor(res,query,this);
+            cursor.next();
             cb&&cb(cursor, null)
             return cursor;
         }

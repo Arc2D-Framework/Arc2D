@@ -1,7 +1,8 @@
 
 import 'display.components.Splash';
 import 'display.components.SpaNav';
-
+import '@system.http.HistoryRouter';
+import '@system.http.QueryRouter';
 
 
 namespace `display.screens` (
