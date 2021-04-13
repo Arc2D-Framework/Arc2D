@@ -1,0 +1,44 @@
+body.expanded {
+    padding: 0;
+}
+body.expanded .app{
+    height: 100vh;
+    border-radius: 0;
+}
+
+.content-wrapper a,
+.content-wrapper a:visited {
+    color: #3a6df0;
+    text-decoration: none;
+    font-weight: normal;
+}
+.content-wrapper h2 {
+    font-weight: normal;
+    color: var(--content-title-color);
+}
+
+
+.apps-card {
+    justify-content: space-between;
+    width: 100%;
+}
+.app-card {
+    width: 100%;
+}
+.apps-card .app-card {
+    width: calc(33.3% - 20px);
+}
+
+@media screen and (max-width: 1110px){
+    .apps-card .app-card {
+        width: calc(50% - 10px);
+    }
+}
+
+
+@media screen and (max-width: 565px) {
+    .apps-card .app-card {
+        width: calc(100% - 0px);
+        margin-top: 20px;
+    }
+}

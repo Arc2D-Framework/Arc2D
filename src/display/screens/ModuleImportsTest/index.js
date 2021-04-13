@@ -1,11 +1,11 @@
 import 'display.components.ToggleButton';
 var {TWEEN} = await require('/src/system/physics/tween.esm.js');
-import {WristWatch,myExport,hello as Hello, samplex} from '/src/system/libs/sample_modules/a.mjs';
+import {WristWatch,myExport,hello as Hello, samplex} from 'module-a';
 import {NodeTest as N} from '/src/system/libs/sample_modules/nodejsmod.js';
 var {NodeTest} = await require('/src/system/libs/sample_modules/nodejsmod.js');
 import '/node_modules/sweetalert/dist/sweetalert.min.js';
 await require('/src/system/libs/sample_modules/introjs.js');
-import {Query} from '/src/system/drivers/storage/Query.js';
+import '/src/system/drivers/storage/Query.js';
 
 namespace `display.screens` (
     class ModuleImportsTest extends Application {

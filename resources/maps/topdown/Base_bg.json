@@ -1,0 +1,14 @@
+{ "columns":1,
+ "image":"..\/..\/images\/Base_bg.png",
+ "imageheight":16,
+ "imagewidth":16,
+ "margin":0,
+ "name":"Base_bg",
+ "spacing":0,
+ "tilecount":1,
+ "tiledversion":"1.4.3",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":1.4
+}

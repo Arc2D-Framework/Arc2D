@@ -17,7 +17,8 @@ var Config = window.Config = window.Config||{
     DEFAULT_VIEW : "display.views.Home",
     ROUTER : 'system.http.Router',
     IMPORT_MAPS:true,
-    AUTOLOAD_IMPORT_MAPS : true
+    AUTOLOAD_IMPORT_MAPS : true,
+    ON_AUTO_QUERY_SELECT_IDS: false
 };
 
 Config.FIREBASE = {

@@ -1,0 +1,74 @@
+
+:root {
+  --pixel-size: 6;
+}
+
+:host {
+  /*transform:scale(3);*/
+  position: absolute;
+  top:0;left:0;
+  margin-left: 0;
+  width: 64px;
+  height: 64px;
+  background-image: url("/resources/images/universal-lpc-sprite_male_01_full.png");
+      background-repeat: no-repeat;
+    background-position: 0px 0px;
+    /*border:1px solid;*/
+    /*transform:scale(.5);*/
+    z-index:1;
+    will-change: transform;
+}
+
+
+/* walking */
+.walk-left {
+  animation: walk_left steps(8) 0.7s infinite;
+}
+.walk-down {
+  animation: walk_down steps(8) 0.7s infinite;
+}
+
+.walk-right {
+  animation: walk_right steps(8) 0.7s infinite;
+}
+
+.walk-up {
+  animation: walk_up steps(8) 0.7s infinite;
+}
+
+@keyframes walk_left {
+  from {
+    background-position: 0px -576px;
+  }
+  to {
+    background-position: -512px -576px;
+  }
+}
+
+@keyframes walk_down {
+  from {
+    background-position: 0px -640px;
+  }
+  to {
+    background-position: -512px -640px;
+  }
+}
+
+@keyframes walk_right {
+  from {
+    background-position: 0px -704px;
+  }
+  to {
+    background-position: -512px -704px;
+  }
+}
+
+@keyframes walk_up {
+  from {
+    background-position: 0px -512px;
+  }
+  to {
+    background-position: -512px -512px;
+  }
+}
+

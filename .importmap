@@ -1,0 +1,7 @@
+{
+    "imports": {
+        "moment": "/node_modules/moment/src/moment.js",
+        "lodash": "/node_modules/lodash/lodash.js",
+        "module-a" : "/src/system/libs/sample_modules/a.mjs"
+    }
+}

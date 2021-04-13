@@ -1,0 +1,28 @@
+particle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+:host {
+  padding: 10px;
+}
+
+:host button {
+  position: relative;
+  overflow: hidden;
+  transition: background 400ms;
+  color: #fff;
+  background-color: #176ab3;
+  padding: 1rem 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  outline: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3); /* black with 30% opacity */
+  cursor: pointer;
+}

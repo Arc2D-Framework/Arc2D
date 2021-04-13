@@ -1,0 +1,45 @@
+<template>
+    <div style="height:100%;width:100%;">
+		<div id="bubbles" style="height:100%;width:100%;">
+				<div class="bubble x1 glow"></div>
+				<div class="bubble x2 glow"></div>
+				<div class="bubble x3 glow"></div>
+				<div class="bubble x4 glow"></div>
+				<div class="bubble x5 glow"></div>
+				<div class="bubble x1 glow" style="left:20%;"></div>
+				<div class="bubble x2 glow" style="left:100%;"></div>
+				<div class="bubble x3 glow" style="left:90%;"></div>
+				<div class="bubble x4 glow" style="left:40%;"></div>
+				<div class="bubble x5 glow" style="left:70%;"></div>
+				<div class="bubble x1 glow" style="left:2%;"></div>
+				<div class="bubble x2 glow" style="left:20%;"></div>
+				<div class="bubble x3 glow" style="left:100%;"></div>
+				<div class="bubble x4 glow" style="left:4%;"></div>
+				<div class="bubble x5 glow" style="left:10%;"></div>
+		</div>
+	</div>
+    <cover-flow style=opacity:0;>
+        <!------------------- list of tiles --------------------->
+        <div class="tile" slot="tiles" id="start-game">
+            <div class="item">
+                Start
+            </div>
+        </div>
+        <div class="tile" slot="tiles">
+            <div class="item">
+                Options
+            </div>
+        </div>
+        <div class="tile" slot="tiles">
+            <div class="item">
+                Load
+            </div>
+        </div>
+        <div class="tile" slot="tiles">
+            <div class="item">
+                Credits
+            </div>
+        </div>
+        <!------------------- end of tiles --------------------->
+    </cover-flow>
+</template>
