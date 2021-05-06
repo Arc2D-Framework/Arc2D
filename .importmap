@@ -2,6 +2,13 @@
     "imports": {
         "moment": "/node_modules/moment/src/moment.js",
         "lodash": "/node_modules/lodash/lodash.js",
-        "module-a" : "/src/system/libs/sample_modules/a.mjs"
+        "module-a" : "/src/system/libs/sample_modules/a.mjs",
+        "../../../build/three.module.js" : "/src/system/libs/three.module.js",
+        "3d" : "/src/system/libs/three.module.js",
+        "GLTFLoader" : "/src/system/libs/GLTFLoader.js",
+        "OBJLoader" : "/src/system/libs/OBJLoader.js",
+        "OrbitControls" : "/src/system/libs/OrbitControls.js",
+        "RGBELoader": "/src/system/libs/RGBELoader.js",
+        "dayjs" : "/src/system/libs/sample_modules/day.js"
     }
 }

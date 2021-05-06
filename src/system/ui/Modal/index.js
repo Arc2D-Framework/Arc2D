@@ -5,6 +5,12 @@ namespace `system.ui` (
             super();
         }
 
+        // static get template(){
+        //     var ns = this.prototype.namespace;
+        //     return Config.SRC_PATH + ns.replace(/\./g,"/") + "/index.html"
+        // }
+        
+
         async onConnected() {
             await super.onConnected();
             this.form = this.querySelector("form");

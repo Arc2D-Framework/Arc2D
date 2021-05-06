@@ -1,4 +1,4 @@
-var Session = window.Session||{State:{}};
+var Session = window.Session;
 var Config = window.Config = window.Config||{
     NAMESPACE : null,//"applications.MainApp",
     USE_COMPRESSED_BUILD : false,

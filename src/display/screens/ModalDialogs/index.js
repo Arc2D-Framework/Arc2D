@@ -1,5 +1,7 @@
 import 'display.components.Splash';
 import 'display.components.SampleDialog';
+import 'display.components.SampleDialog2';
+import 'display.components.SampleDialog3';
 import _ from 'lodash';
 import {WristWatch as LL} from '/src/system/libs/sample_modules/a.mjs';
 import {samplex as N} from 'module-a';
@@ -19,7 +21,6 @@ namespace `display.screens` (
 
         async onGetAddress(){
             var result = await this.modal.prompt();
-            // alert("dialog results: " + result)
         }
     }
 );

@@ -1,12 +1,14 @@
 import 'system.ui.Modal';
 //import 'core.ui.ProgressBar';
 
+@cascade(false);
 namespace `display.components` (
     class SampleDialog extends system.ui.Modal {
         constructor() {
             super();
             this.hide();
         }
+
 
         async onConnected() {
             await super.onConnected();
@@ -15,9 +17,6 @@ namespace `display.components` (
             // this.progressbar = this.querySelector("progress-bar");
         }
 
-        onStyleComputed(){
-            console.log(this)
-        }
 
         async prompt(){
             if(!this.parentNode){

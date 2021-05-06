@@ -4,6 +4,7 @@ import 'display.components.ParticleButton';
 import 'display.components.SideBar';
 import 'display.components.Accordion';
 import 'display.components.accordions.BasicAccordion';
+import * as global from 'display.components';
 
 
 namespace `display.screens` (

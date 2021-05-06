@@ -7,14 +7,21 @@ namespace `display.components` (
             this.model = new domain.models.Clock;
         }
 
-        //this.hour is el with <.. id="hour" ..>
+        //ex: sets up this.hour to el <g id="hour" ... >
         onAutoQuerySelectIds(){return true}
 
-        onUpdate(){
+        //runs many times per frame (physics/ai) at 8.333ms intervals
+        onFixedUpdate = (time) =>{
+            //not needed
+        }
+
+        //runs once per frame (handle input/state updates) @16ms-24ms
+        onUpdate(timestamp, delta){
             this.model.onUpdate();
         }
 
-        onDraw(){
+        //runs once per frame (handle interpolation for fps-drop or lag) @16ms-24ms
+        onDraw(interpolation){
             this.hour.style.transform   = `rotate(${this.model.hour}deg)`;
             this.minute.style.transform = `rotate(${this.model.minutes}deg)`;
             this.second.style.transform = `rotate(${this.model.seconds}deg)`;
