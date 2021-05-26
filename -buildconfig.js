@@ -12,7 +12,9 @@ BUILDCONFIG = {
         CompressedPath: "src/display/worlds/TweenTest/index.min.js"
     },
 
-    LoadsAsync : true,
+    Encrypt : true,
+
+	LoadsAsync : true,
 
     Verbos:true,
 

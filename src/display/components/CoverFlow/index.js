@@ -17,8 +17,8 @@ namespace `display.components` (
             this.rotation = 0;
             this.rotation = Math.round( this.rotation / this.theta ) * this.theta;
 
-            this.on('click', e=>this.onRotate(-1), false, ".fa-caret-left");
-            this.on('click', e=>this.onRotate(+1), false, ".fa-caret-right");
+            this.on('click', e=> this.onRotate(-1), false, ".fa-caret-left");
+            this.on('click', e=> this.onRotate(+1), false, ".fa-caret-right");
             this.align();
             this.rotate();
         }

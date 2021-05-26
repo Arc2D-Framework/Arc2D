@@ -7,7 +7,7 @@ namespace `display.components` (
         }
 
         async onConnected(){
-            // await super.onConnected({items:[]});
+            await super.onConnected();
             // document.addEventListener("movieschanged", (e)=>this.onMoviesChanged(e), false);
             application.addEventListener("domain.collections.Movies::changed", e => this.onRenderGenres(), false);
 

@@ -16,11 +16,12 @@ namespace `display.screens` (
         async onConnected() {
             await super.onConnected();
             this.on("click", e=>this.onGetAddress(e), false, "#address-button");
-            this.modal = new display.components.SampleDialog;
+            this.modal = this.querySelector("sample-dialog");//new display.components.SampleDialog;////
         }
 
         async onGetAddress(){
             var result = await this.modal.prompt();
+            console.log(result)
         }
     }
 );

@@ -4,12 +4,12 @@ import {* as ModuleA } from 'module-a';
 import '/src/system/drivers/storage/Query.js';
 import {* as N} from '/src/system/libs/sample_modules/nodejsmod.js';
 var {NodeTest} = await require('/src/system/libs/sample_modules/nodejsmod.js');
-import '/node_modules/sweetalert/dist/sweetalert.min.js';
+// import '/node_modules/sweetalert/dist/sweetalert.min.js';
 await require('/src/system/libs/sample_modules/introjs.js');
 import {* as THREE} from '3d';
 import GLTFLoader from 'GLTFLoader';
-import {* as global} from 'display.components';
 import * as dayjs from 'dayjs';
+import {SampleDialog} from '/src/system/libs/sample_modules/SampleDialog/index.js';
 
 
 namespace `display.screens` (
@@ -26,15 +26,17 @@ namespace `display.screens` (
                 console.log("NodeTest",N.NodeTest)
                 console.log("Query",Query)
                 console.log("WristWatch",ModuleA.WristWatch)
-                console.log("swal",swal);
+                // console.log("swal",swal);
                 if(TWEEN&&ModuleA.hello&&ModuleA.myExport&&ModuleA.samplex&&N.NodeTest&&ModuleA.WristWatch){
-                    swal("Passed: ESM modules and components successfully imported", "All good", "success");
+                    alert("Passed: ESM modules and components successfully imported");
+                    this.modal = new SampleDialog;
+                    this.modal.prompt()
                 }
                 else {
-                    swal("Problems importing a module(s). See console", "All good", "error"); 
+                    alert("Problems importing a module(s). See console"); 
                 }
             } catch(e){
-                swal("Problems importing a module(s). See console", "All good", "error"); 
+                alert("Problems importing a module(s). See console"); 
                 console.error(e.message)
             }
         }

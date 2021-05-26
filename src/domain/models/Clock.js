@@ -7,7 +7,7 @@ namespace `domain.models` (
             let hr  = date.getHours();
             let min = date.getMinutes();
             let sec = date.getSeconds();
-            console.log("Hour: "+hr+ " Minute: "+ min + " Second: "+ sec);
+            // console.log("Hour: "+hr+ " Minute: "+ min + " Second: "+ sec);
 
             //positions
             this.hour    = hr*360/12 + ((min * 360/60)/12) ;

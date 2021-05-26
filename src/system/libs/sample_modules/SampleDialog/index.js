@@ -1,13 +1,12 @@
-import 'system.ui.Modal';
-//import 'core.ui.ProgressBar';
+import '/src/system/ui/Modal/index.js';
 
 
 namespace `display.components` (
     class SampleDialog extends system.ui.Modal {
         constructor() {
             super();
-            try{this.hide();}catch(e){}
-            
+            this.hide();
+            console.log(this.namespace)
         }
 
 
@@ -48,9 +47,7 @@ namespace `display.components` (
         }
 
         hide(){
-            try{
             this.classList.add("hidden");
-            }catch(e){}
         }
 
         show(){
@@ -67,3 +64,5 @@ namespace `display.components` (
         }
     }
 );
+var SampleDialog = display.components.SampleDialog;
+export {SampleDialog}

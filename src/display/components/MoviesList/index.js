@@ -23,6 +23,7 @@ namespace `display.components` (
 		}
 
         async onConnected(){
+			await super.onConnected({items:[]});
         	// for now, dont render anything when connected.
         	// will appear blank/hidden on screen
         }
@@ -49,6 +50,7 @@ namespace `display.components` (
 		}
 
 		onTemplateRendered(){
+			if(!this.cursor){return}
 			
 			this.root.querySelector("#currentpage").innerHTML = this.cursor.pagenumber();
 			this.root.querySelector("#totalpages").innerHTML  = this.cursor.totalpages();

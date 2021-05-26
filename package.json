@@ -12,18 +12,17 @@
         "plop": "plop"
     },
     "dependencies": {
-        "http-server": "^0.12.3",
-        "od-cocoon": "github:Nashorn/od-cocoon#3.0.0",
-        "od-paginator": "github:Nashorn/od-paginator#1.0.0",
-        "sweetalert": "^2.1.2",
+        "od-cocoon": "github:Nashorn/od-cocoon#3.1.2",
+        "od-paginator": "github:Nashorn/od-paginator#1.0.1",
         "todomvc-app-css": "^2.0.1",
         "todomvc-common": "^1.0.2"
     },
     "optionalDependencies": {
+        "http-server": "^0.12.3",
         "od-server": "github:Nashorn/od-server#1.0.0",
         "portfinder": "^1.0.28",
         "od-plopgen-templates": "github:Nashorn/od-plopgen-templates#1.0.0",
-        "od-seam": "github:Nashorn/od-seam#1.0.0",
+        "od-seam": "github:Nashorn/od-seam#1.0.2",
         "od-toolset": "github:Nashorn/od-toolset#1.0.0"
     }
 }

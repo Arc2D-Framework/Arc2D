@@ -1,3 +1,4 @@
+import 'display.loaders.ProgressRing';
 import 'display.components.MenuToggleButton';
 import 'display.components.RippleButton';
 import 'display.components.ParticleButton';
@@ -8,7 +9,7 @@ import * as global from 'display.components';
 
 
 namespace `display.screens` (
-    class ComponentsDemo extends w3c.ui.Application {
+    class ComponentsDemo extends Application {
         constructor(element){
             super(element);
         }

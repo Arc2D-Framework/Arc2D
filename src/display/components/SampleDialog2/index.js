@@ -1,7 +1,7 @@
 import 'system.ui.Modal';
 //import 'core.ui.ProgressBar';
 
-@cascade(false);
+@cascade(true);
 namespace `display.components` (
     class SampleDialog2 extends display.components.SampleDialog {
         

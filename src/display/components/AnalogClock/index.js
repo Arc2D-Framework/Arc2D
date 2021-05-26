@@ -7,6 +7,11 @@ namespace `display.components` (
             this.model = new domain.models.Clock;
         }
 
+        // async onConnected(){
+        //     await super.onConnected();//wait to be connected
+        //     this.ready=true;
+        // }
+
         //ex: sets up this.hour to el <g id="hour" ... >
         onAutoQuerySelectIds(){return true}
 
@@ -22,9 +27,11 @@ namespace `display.components` (
 
         //runs once per frame (handle interpolation for fps-drop or lag) @16ms-24ms
         onDraw(interpolation){
-            this.hour.style.transform   = `rotate(${this.model.hour}deg)`;
-            this.minute.style.transform = `rotate(${this.model.minutes}deg)`;
-            this.second.style.transform = `rotate(${this.model.seconds}deg)`;
+            if(this.isConnected) {
+                this.hour.style.transform   = `rotate(${this.model.hour}deg)`;
+                this.minute.style.transform = `rotate(${this.model.minutes}deg)`;
+                this.second.style.transform = `rotate(${this.model.seconds}deg)`;
+            }
         }
     }
 );
