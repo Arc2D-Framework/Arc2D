@@ -9,6 +9,7 @@
         "OBJLoader" : "/src/system/libs/OBJLoader.js",
         "OrbitControls" : "/src/system/libs/OrbitControls.js",
         "RGBELoader": "/src/system/libs/RGBELoader.js",
-        "dayjs" : "/src/system/libs/sample_modules/day.js"
+        "dayjs" : "/src/system/libs/sample_modules/day.js",
+        "display.components.Label":"/src/display/components/Label/index.js"
     }
 }

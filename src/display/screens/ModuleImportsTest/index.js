@@ -8,7 +8,7 @@ var {NodeTest} = await require('/src/system/libs/sample_modules/nodejsmod.js');
 await require('/src/system/libs/sample_modules/introjs.js');
 import {* as THREE} from '3d';
 import GLTFLoader from 'GLTFLoader';
-import * as dayjs from 'dayjs';
+import * as dayjs from '/src/system/libs/sample_modules/day.js';
 import {SampleDialog} from '/src/system/libs/sample_modules/SampleDialog/index.js';
 
 

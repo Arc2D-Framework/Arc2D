@@ -86,7 +86,7 @@ namespace `display.worlds` (
         }
 
         //make 1 cloud, add it to world
-        createCloud() {
+        async createCloud() {
             var x = 256 - ( Math.random() * 512 );
             var y = 256 - ( Math.random() * 512 );
             var z = 256 - ( Math.random() * 512 );
@@ -119,12 +119,23 @@ namespace `display.worlds` (
                 };
                 var t = 'translateX( ' + x + 'px ) translateY( ' + y + 'px ) translateZ( ' + z + 'px ) rotateZ( ' + a + 'deg ) scale( ' + s + ' )';
                 cloud.style.transform = t;
-                div.appendChild( cloud );
+                // div.appendChild( cloud );
+                await this.append(cloud, div);
                 this.layers.push( cloud );
             }
-            this.world.appendChild(div);
+            await this.append(div, this.world);
             return div;
         }
+
+        //todo:move this method into WebCoponent base class
+        // async append(el, container=this){
+        //     return new Promise(async (resolve,reject) => {
+        //         requestAnimationFrame(async e=>{
+        //             container.appendChild(el)
+        //             resolve(el);
+        //         });
+        //     })
+        // }
     }
 );
 
