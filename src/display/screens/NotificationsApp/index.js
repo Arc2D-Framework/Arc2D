@@ -1,6 +1,5 @@
 await require('/src/system/drivers/templating/Nunjucks/nunjucks-driver.js');
 import 'display.components.NotificationsToggleSwitch';
-import '../../../-appconfig.js';
 
 namespace `display.screens` (
     class NotificationsApp extends w3c.ui.Application {
@@ -31,15 +30,15 @@ namespace `display.screens` (
             this.allToggleSwitches = Array.from(this.querySelectorAll("notifications-toggle-switch"));
         }
 
-        initApp(){
-            setTimeout(() => {
-                if(Config.MOBILEVIEW == true){
-                    this.removeNotificationClasses();
-                    this.hideEmailNode();
-                    this.mobileDemoStyles();
-                }
-            }, 3000);
-        }
+        // initApp(){
+        //     setTimeout(() => {
+        //         if(Config.MOBILEVIEW == true){
+        //             this.removeNotificationClasses();
+        //             this.hideEmailNode();
+        //             this.mobileDemoStyles();
+        //         }
+        //     }, 3000);
+        // }
 
         mobileDemoStyles(){
             this.container.classList.add("mobile");
