@@ -16,7 +16,7 @@ html, body, .NotificationsApp {
     height: 100%;
     align-items: center;
     padding: 20px 40px 0 40px;
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: thin;
     /* margin:auto; */
 }

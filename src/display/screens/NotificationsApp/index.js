@@ -30,28 +30,6 @@ namespace `display.screens` (
             this.allToggleSwitches = Array.from(this.querySelectorAll("notifications-toggle-switch"));
         }
 
-        // initApp(){
-        //     setTimeout(() => {
-        //         if(Config.MOBILEVIEW == true){
-        //             this.removeNotificationClasses();
-        //             this.hideEmailNode();
-        //             this.mobileDemoStyles();
-        //         }
-        //     }, 3000);
-        // }
-
-        mobileDemoStyles(){
-            this.container.classList.add("mobile");
-        }
-
-        hideEmailNode(){
-            this.emailNode.style.display = "none";
-        }
-
-        removeNotificationClasses(){
-            this.notificationsNode.classList.remove("pt-5", "mt-4");
-        }
-
         toggleContent(e){
             e = e.src;
             this.bottomContent.classList.toggle("show");
