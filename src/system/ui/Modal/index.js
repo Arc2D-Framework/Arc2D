@@ -24,9 +24,33 @@ namespace `system.ui` (
             //validation
             this.addEventListener("input",   e => this.setCustomValidity(e), true, "*[required]");
             this.addEventListener("invalid", e => this.setValidityMessage(e), true, "*[required]");
-
+            this.addEventListener("submit", e=> this.onComplete(e));
             // this.addEventListener("change", e => this.setCustomValidity(e), true, "select");
             // this.addEventListener("invalid", e => this.setValidityMessage(e), true, "select");
+        }
+        
+
+        async prompt(){
+            if(!this.parentNode){
+                document.body.appendChild(this);
+                await wait(100);
+            }
+            this.show();
+            return new Promise((resolve,reject)=>{
+                var failCB = e => {
+                    this.removeEventListener("success",succCB,false);
+                    this.removeEventListener("cancel",failCB,false);
+                    resolve(null);
+                }
+                var succCB = e => {
+                    this.removeEventListener("success",succCB,false);
+                    this.removeEventListener("cancel",failCB,false);
+                    resolve(this.value);
+                }
+                // setTimeout(e => {resolve(123);this.hide()}, 2000)
+                this.addEventListener("success",succCB,false);
+                this.addEventListener("cancel",failCB,false)
+            })
         }
 
         onRelease(){
@@ -94,6 +118,20 @@ namespace `system.ui` (
         onCancel(){
             this.dispatchEvent("cancel")
             this.onHide();
+        }
+
+        onHide(){
+            this.hide();
+        }
+
+        hide(){
+            try{
+                this.classList.add("hidden");
+            }catch(e){}
+        }
+
+        show(){
+            this.classList.remove("hidden");
         }
     }
 );

@@ -1,5 +1,4 @@
 import 'system.ui.Modal';
-//import 'core.ui.ProgressBar';
 
 @cascade(true);
 namespace `display.components` (

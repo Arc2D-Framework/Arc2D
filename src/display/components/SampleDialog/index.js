@@ -1,65 +1,30 @@
 import 'system.ui.Modal';
-//import 'core.ui.ProgressBar';
-
 
 namespace `display.components` (
     class SampleDialog extends system.ui.Modal {
         constructor() {
             super();
             try{this.hide();}catch(e){}
-            
         }
-
 
         async onConnected() {
             await super.onConnected();
-            this.firstname = this.querySelector("#first-name");
-            this.addEventListener("submit", e=> this.onComplete(e));
-            // this.progressbar = this.querySelector("progress-bar");
+            this.watch("#first-name", 'value',  e=> this.firstname = e.val);
+            this.watch("#last-name",  'value',  e=> this.lastname  = e.val);
+            this.watch("#fav-color",  'value',  e=> this.color     = e.val);
+            this.watch("#register",  'checked', e=> this.register  = e.val);
         }
 
-
-        async prompt(){
-            if(!this.parentNode){
-                document.body.appendChild(this);
-                await wait(100);
+        get value(){
+            return {
+                firstname : this.firstname,
+                lastname : this.lastname,
+                color : this.color,
+                register_me : this.register
             }
-            this.show();
-            return new Promise((resolve,reject)=>{
-                var failCB = e => {
-                    this.removeEventListener("success",succCB,false);
-                    this.removeEventListener("cancel",failCB,false);
-                    resolve(null);
-                }
-                var succCB = e => {
-                    this.removeEventListener("success",succCB,false);
-                    this.removeEventListener("cancel",failCB,false);
-                    resolve(this.firstname.value);
-                }
-                // setTimeout(e => {resolve(123);this.hide()}, 2000)
-                this.addEventListener("success",succCB,false);
-                this.addEventListener("cancel",failCB,false)
-            })
-        }
-
-        onHide(){
-            this.hide();
-            
-        }
-
-        hide(){
-            try{
-            this.classList.add("hidden");
-            }catch(e){}
-        }
-
-        show(){
-            this.classList.remove("hidden");
         }
 
         async onComplete(e){
-            // alert("onComplete")
-            // this.progressbar.step(0);
             e.preventDefault();
             e.stopPropagation();
             this.onHide();

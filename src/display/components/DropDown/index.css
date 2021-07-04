@@ -1,0 +1,92 @@
+:host {
+    display: block;
+    color: #5e5a55;
+    width: 300px;
+    position: relative;
+    cursor: default;
+    margin: 30px;
+}
+
+:host label {}
+
+:host input[type='text'] {
+    min-height: 38px !important;
+    margin-bottom: 5px;
+    font-family: "Proxima Nova Rg Regular";
+    font-size: 16px;
+    cursor: inherit;
+    color: black;
+    padding-left: 9px !important;
+    border: 2px solid #dddad9 !important;
+    background-color: #fff !important;
+    height: 40px !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: inherit;
+}
+:host(.active) ul {
+    padding: 2px;
+    opacity: 1; visibility: visible;
+    transform: translate3d(0px, 0px, 0px);
+}
+
+:host ul {
+    opacity: 0; visibility: hidden;
+    list-style: none;
+    border: 2px solid #dddad9 !important;
+    padding: 0;
+    border-radius: 5px;
+    margin: 0;
+    margin-top: 1px;
+    color: #5e5a55;
+    transition: all .2s;
+    position: absolute;
+    transition: all .05s;
+    right: 0;
+    left: 0;
+    transform: translate3d(0px, -10px, 0px);
+    background: white;
+    z-index: 1;
+    will-change: transform;
+}
+
+:host ul li {
+    padding: 14px;
+    align-items: center;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+:host ul li:hover {
+    background: #deebff; 
+}
+:host ul li.selected {
+    background: #3874FA;
+    color: white;
+}
+
+:host .icon {
+    font-size: 13px;
+    position: absolute;
+    padding: 10px;
+    top: 22px;
+}
+:host .icon.clear{
+    right: 37px;
+    display: none;
+}
+:host(.has-value) .icon.clear{
+    display: block;
+}
+
+:host .icon.down{
+    right: 10px;
+    pointer-events: none;
+}

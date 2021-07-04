@@ -1,8 +1,9 @@
 namespace `display.components` (
-	class NotificationsToggleSwitch  extends w3c.ui.WebComponent  {
+	class NotificationsToggleSwitch  extends WebComponent  {
 		async onConnected(){
             await super.onConnected();
 
+            debugger;
             this.knob = this.querySelector(".knob");
             this.direction = -1;
             this.addEventListener("click", e => this.onHandleToggleClick(e), false, "notifications-toggle-switch");
@@ -17,7 +18,8 @@ namespace `display.components` (
             this.nameSlot.innerHTML = this.name || this.getAttribute("name");
         }
 
-        onStyleComputed(style){
+        async onStyleComputed(style){
+            await wait(100);
             this.bounds = this.getBoundingClientRect();
             this.knob_bounds = this.knob.getBoundingClientRect();
             var style = window.getComputedStyle(this.knob);

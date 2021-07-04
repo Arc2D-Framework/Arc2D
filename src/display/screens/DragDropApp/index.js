@@ -1,6 +1,6 @@
 
 namespace `display.screens` (
-    class DragDrop extends Application {
+    class DragDropApp extends Application {
         async onConnected() {
             await super.onConnected();
             this.on("dragstart", e=> this.onDragStart(e),   true, ".draggable");

@@ -1,0 +1,13 @@
+<template>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <label>Single Select</label>
+    <input type="text"/>
+    <ul>
+        ${
+            (this.items||[]).map(
+                item => `<li value="${item.value||item.text}" class="${item.selected?'selected':''}">${item.text}</li>`
+            ).join("")
+        }
+    </ul>
+    <i class="icon clear fa fa-times"></i> <i class="icon down fa fa-chevron-down"></i>
+</template>

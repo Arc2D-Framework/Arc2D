@@ -1,5 +1,5 @@
-// import {Label} from 'display.components.Label';
-import 'display.components.Label';
+import {Label} from '/src/display/components/Label/index.js';
+// import 'display.components.Label';
 
 @tag("test-app");
 namespace `apps` (
@@ -14,7 +14,7 @@ namespace `apps` (
             
 
             for(var i=0; i<=1; i++){
-                var l = new display.components.Label;
+                var l = new Label;
 
                 await this.append(l);
             }

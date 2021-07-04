@@ -3,7 +3,7 @@
 namespace `display.components` (
     class Splash extends WebComponent {
         async onConnected() {
-			await this.render();
+			await super.onConnected();
 			this.duration = this.getAttribute("duration")||1200;
             document.addEventListener("showsplash", e => this.onShow(), false);
 			document.addEventListener("hidesplash", e => this.onHide(), false);

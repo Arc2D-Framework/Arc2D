@@ -39,11 +39,11 @@
     color: rgb(228, 228, 51) !important;
   }
   
-:host input+.icon {
+:host .field .icon {
     pointer-events: none;
     position: absolute;
     right: 1px;
-    top: 10px;
+    top: 26px;
     color: #404040;
     background: inherit;
     padding: 0px 11px;
