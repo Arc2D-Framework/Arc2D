@@ -1,0 +1,85 @@
+@font-face{
+    font-family: pixelated;
+    src: url(../../../../resources/fonts/PixelEmulator-xq08.ttf);
+    
+}
+@font-face{
+    font-family: PressStart2P;
+    src: url(../../../../resources/fonts/PressStart2P/PressStart2P.ttf);
+    
+}
+:host {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    color: white;
+    z-index: 100;
+    font-family: PressStart2P;
+}
+
+:host > div {
+    position: absolute;
+    font-size: 8vh;
+    top: 50%;
+    border: 1px solid;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0px);
+    background: rgba(0,0,0,.5);
+    border-radius: 5px;
+    width: 46vw;
+    height: 65vh;
+    box-shadow: 1px 6px 8px 9px rgba(0,0,0,.4);
+    border: none;
+}
+
+:host ui-components-cover-flow {
+    top: 60% !important;
+    transition: top .5s ease-in-out, opacity 1s ease-in;
+}
+:host ui-components-cover-flow .tile {
+    background: transparent !important;
+    /* background: rgba(0,0,0,.06) !important;; */
+    align-items: center;
+    display: flex !important;
+    font-size: 6vh;
+    justify-content: center;
+    border: 0 !important;
+}
+
+:host ui-components-cover-flow .no-backface-visibility .tile{
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden !important;
+    text-shadow: 3px 2px 2px rgba(0,0,0,.5);
+}
+
+:host ui-components-cover-flow #move-left-btn, 
+:host ui-components-cover-flow #move-right-btn{
+    color: #fcfcfc !important;
+    font-size: 10vh !important;
+}
+:host ui-components-cover-flow #move-right-btn{
+    right: 25vw;
+}
+:host ui-components-cover-flow #move-left-btn{
+    left: 25vw;
+}
+
+:host ui-components-cover-flow #move-left-btn:active, 
+:host ui-components-cover-flow #move-right-btn:active{
+    transform: scale(.5) translateY(-100%);
+}
+
+:host ui-components-cover-flow #carousel {
+    /* transition: transform 0.9s cubic-bezier(0, 1.36, 0.06, 1.13) 0s; */
+}
+
+:host.awake ui-components-cover-flow {
+    top: 70% !important;
+    opacity: 1 !important;
+}

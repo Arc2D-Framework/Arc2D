@@ -1,0 +1,212 @@
+
+:host {
+  display: block;
+    width: 220px;
+    margin: 50px;
+}
+
+:host .container {
+    position: relative;
+    margin: 0px auto;
+    padding: 50px 0;
+    clear: both;
+}
+  
+:host nav > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #FFF;
+  border-radius: 2px;
+}
+
+:host nav > ul li {
+  position: relative;
+}
+
+:host nav > ul li a {
+  display: block;
+  text-decoration: none;
+  padding: 12px 20px;
+  color: #777;
+  text-align: left;
+  height: 36px;
+  position: relative;
+  border-bottom: 1px solid #EEE;
+}
+
+:host nav > ul li a i {
+  float: left;
+  font-size: 20px;
+  margin: 0 10px 0 0;
+}
+
+:host nav > ul li a p {
+  float: left;
+  margin: 0 ;
+}
+
+:host nav > ul li a strong {
+  display: block;
+  text-transform: uppercase;
+}
+
+:host nav > ul li a small {
+  display: block;
+  font-size: 10px;
+}
+
+:host nav > ul li:hover > a i {
+    opacity: 1;
+    animation: moveFromTop 300ms ease-in-out;
+}
+:host nav > ul li:hover a strong {
+    opacity: 1;
+    animation: moveFromLeft 300ms ease-in-out;
+}
+:host nav > ul li:hover a small {
+    opacity: 1;
+    animation: moveFromRight 300ms ease-in-out;
+}
+
+:host nav > ul li:hover > a {
+  color: #e67e22;
+}
+
+:host nav > ul li a.active {
+  position: relative;
+  color: #e67e22;
+  border:0;
+  box-shadow: 0 0 5px #DDD;
+  border-left: 4px solid #e67e22;
+  border-right: 4px solid #e67e22;
+  margin: 0 -4px;
+}
+
+:host nav > ul li a.active:before {
+  content: "";
+  position: absolute;
+  top: 42%;
+  left: 0;
+  border-left: 5px solid #e67e22;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+:host nav > ul li a.active:after {
+  content: "";
+  position: absolute;
+  top: 42%;
+  right: 0;
+  border-right: 5px solid #e67e22;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+
+@keyframes moveFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+@keyframes moveFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(200%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+@keyframes moveFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(-200%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+
+
+:host nav > ul li ul,
+:host nav > ul li ul li ul {
+  position: absolute;
+  height: auto;
+  min-width: 200px;
+  padding: 0;
+  margin: 0;
+  background: #FFF;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms linear;
+  z-index: 1000;
+  left:280px;
+  top: 0px;
+  border-left: 4px solid #e67e22;
+  list-style: none;
+}
+:host nav > ul li ul:before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: -9px;
+  border-right: 5px solid #e67e22;
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
+}
+:host nav > ul li:hover > ul,
+:host nav > ul li ul li:hover > ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  list-style: none;
+  left:100%;
+}
+
+:host nav > ul li ul li a {
+  padding: 10px;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid #EEE;
+  height: auto;
+}
+:host nav > ul li ul li a i {
+  font-size: 16px;
+  display: inline-block;
+  margin: 0 10px 0 0;
+}
+:host nav > ul li ul li ul {
+  left: 230px;
+  top: 0;
+  border: 0;
+  border-left: 4px solid #e67e22;
+  list-style: none;
+}  
+:host nav > ul li ul li ul:before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: -9px;
+  border-right: 5px solid #e67e22;
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
+}
+:host nav > ul li ul li:hover > ul {
+  top: 0px;
+  left: 200px;
+  list-style: none;
+}
+
+
+
+
+

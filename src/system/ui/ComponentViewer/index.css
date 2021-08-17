@@ -1,0 +1,13 @@
+:host,html,body {
+    display: block;
+    padding: 0px;
+    margin:0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-family: system-ui, Verdana;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+}

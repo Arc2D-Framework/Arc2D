@@ -1,5 +1,5 @@
 namespace `system.diagnostics.unit.com` (
-	class SampleD extends w3c.ui.WebComponent  {
+	class SampleD extends WebComponent  {
         constructor(el){
             super(el)
         }

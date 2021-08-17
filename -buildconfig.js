@@ -1,15 +1,10 @@
 BUILDCONFIG = {
-    // Input : "src/display/screens/landing/MainScreen/index.js",
-    
-    // Output : {
-    //     SourcePath:"src/display/screens/landing/MainScreen/index.src.js",
-    //     CompressedPath: "src/display/screens/landing/MainScreen/index.min.js"
-    // },
-    Input : "src/display/worlds/TweenTest/index.js",
+    Input : "src/ui/screens/ComponentsDemo/index.js",
     
     Output : {
-        SourcePath:"src/display/worlds/TweenTest/index.src.js",
-        CompressedPath: "src/display/worlds/TweenTest/index.min.js"
+        SourcePath:"src/ui/screens/ComponentsDemo/index.src.js",
+        CompressedPath: "src/ui/screens/ComponentsDemo/index.min.js",
+        EncryptPath: "src/ui/screens/ComponentsDemo/index.encrypt.js",
     },
 
     Encrypt : true,
@@ -27,11 +22,12 @@ BUILDCONFIG = {
     Prefabs : {
         Enabled : true,
         Components : [
-            // "display.worlds.entities.html.GroundBox",
-            // "display.worlds.entities.svg.CircleShape",
-            // "display.worlds.entities.html.PolygonShape"
-            // "display.components.ToggleButton",
-            // "display.worlds.entities.Box2DDemo"
+            'ui.components.MenuToggleButton',
+            'ui.components.RippleButton',
+            'ui.components.ParticleButton',
+            'ui.components.SideBar',
+            'ui.components.Accordion',
+            'ui.components.accordions.BasicAccordion'
         ]
     }
 };

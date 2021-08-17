@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
+            style-src   'self' * blob: 'unsafe-inline' *">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Arc Component Viewer</title>
+        <script src="../../../../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/Nashorn/od-cocoon@3.1.3/framework.src.js" charset="utf-8"></script> -->
+        <!-- <script src="../node_modules/od-cocoon/framework.encrypt.js" charset="utf-8"></script> -->
+        <script>
+            Config.ROOT_PATH = ""
+            Config.SRC_PATH = "/";
+        </script>
+    </head>
+
+    <body namespace="system.ui.ComponentViewer">
+        <splash-loader shadow></splash-loader>
+    </body>
+</html>

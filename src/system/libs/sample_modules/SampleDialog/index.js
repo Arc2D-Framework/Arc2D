@@ -1,7 +1,7 @@
 import '/src/system/ui/Modal/index.js';
 
 
-namespace `display.components` (
+namespace `ui.components` (
     class SampleDialog extends system.ui.Modal {
         constructor() {
             super();
@@ -64,5 +64,5 @@ namespace `display.components` (
         }
     }
 );
-var SampleDialog = display.components.SampleDialog;
+var SampleDialog = ui.components.SampleDialog;
 export {SampleDialog}

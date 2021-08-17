@@ -7,9 +7,8 @@ namespace `domain.models` (
             let hr  = date.getHours();
             let min = date.getMinutes();
             let sec = date.getSeconds();
-            // console.log("Hour: "+hr+ " Minute: "+ min + " Second: "+ sec);
 
-            //positions
+            //position of hands every update
             this.hour    = hr*360/12 + ((min * 360/60)/12) ;
             this.minutes = (min * 360/60) + (sec* 360/60)/60;
             this.seconds = sec * 360/60;

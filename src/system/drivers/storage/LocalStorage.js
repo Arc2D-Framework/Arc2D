@@ -1,10 +1,10 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
 await require('/src/system/drivers/storage/Query.js');
-var {IStorageInterface} = system.drivers.storage;
+
 
 namespace `system.drivers.storage`(
-    class LocalStorage extends IStorageInterface {
+    class LocalStorage extends domain.IStorageDriver {
         constructor (collection, storage_device){
             super(collection, storage_device);
             this.setCollection(collection.name);

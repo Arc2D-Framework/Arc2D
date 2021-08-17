@@ -1,0 +1,97 @@
+:host:not(:defined) {
+  display: none;
+}
+
+:host.hidden .form-content {
+    visibility: hidden;
+}
+
+:host .row .form-holder{
+    align-items: flex-start;
+}
+
+:host textarea {
+    resize: vertical;
+    background: #2f2f2f;
+    padding: 10px;
+    font-family: inherit;
+    font-size: inherit;
+    min-height: 100px;
+}
+
+:host .field {
+    display: flex;
+    flex-flow: column-reverse;
+  }
+  /**
+  * Add a transition to the label and input.
+  * I'm not even sure that touch-action: manipulation works on
+  * inputs, but hey, it's new and cool and could remove the 
+  * pesky delay.
+  */
+  :host .field label, :host .field input {
+    transition: all 0.2s;
+    touch-action: manipulation;
+  }
+  
+  /* :host .field input {
+    font-size: 1.5em;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    font-family: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding: 0;
+    cursor: text;
+  } */
+  
+  /* :host .field input:focus {
+    outline: 0;
+    border-bottom: 1px solid #666;
+  } */
+  
+  :host .field label {
+    /* text-transform: uppercase; */
+    /* letter-spacing: 0.05em; */
+  }
+  /**
+  * Translate down and scale the label up to cover the placeholder,
+  * when following an input (with placeholder-shown support).
+  * Also make sure the label is only on one row, at max 2/3rds of the
+  * field—to make sure it scales properly and doesn't wrap.
+  */
+  :host .field input:placeholder-shown + label {
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(22px, 28px) scale(1);
+  }
+  /**
+  * By default, the placeholder should be transparent. Also, it should 
+  * inherit the transition.
+  */
+  :host .field ::-webkit-input-placeholder,
+  :host .field ::placeholder {
+    opacity: 0;
+    transition: inherit;
+  }
+  /**
+  * Show the placeholder when the input is focused.
+  */
+  :host .field input:focus::-webkit-input-placeholder,
+  :host .field input:focus::placeholder {
+    opacity: 1;
+  }
+  /**
+  * When the element is focused, remove the label transform.
+  * Also, do this when the placeholder is _not_ shown, i.e. when 
+  * there's something in the input at all.
+  */
+  :host .field input:not(:placeholder-shown) + label,
+  :host .field input:focus + label {
+    transform: translate(0, -5px) scale(1);
+    cursor: pointer;
+  }

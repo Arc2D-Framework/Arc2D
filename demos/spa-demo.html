@@ -8,12 +8,13 @@
         <link rel="stylesheet" href="/resources/css/spa-demo-animations.css">
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
-            Config.ROUTER = 'system.http.Router'
+            Config.ROUTER = 'system.http.Router';
+            Config.DEFAULT_VIEW = 'ui.views.Home';
         </script>
     </head>
 
-    <body namespace="display.screens.SpaDemo">
+    <body namespace="ui.screens.SpaDemo">
         <splash-loader shadow></splash-loader>
-        <spa-demo></spa-demo>
+        <ui-screens-spa-demo></ui-screens-spa-demo>
     </body>
 </html>

@@ -24,5 +24,8 @@
         "od-plopgen-templates": "github:Nashorn/od-plopgen-templates#1.0.0",
         "od-seam": "github:Nashorn/od-seam#1.0.2",
         "od-toolset": "github:Nashorn/od-toolset#1.0.0"
+    },
+    "devDependencies": {
+        "javascript-obfuscator": "^2.12.0"
     }
 }

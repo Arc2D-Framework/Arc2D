@@ -10,68 +10,66 @@ namespace `system.diagnostics.unit` (
         test (){
             var self=this;
 
-            namespace `system.diagnostics.unit.com` (
-                class ToggleButton extends WebComponent {
-                    async onConnected(){
-                        await super.onConnected();
-                        // alert("ToggleButton")
+            //========================= BUILD A COMPONENT TO TEST ======================
+                namespace `system.diagnostics.unit.com` (
+                    class ToggleButton extends WebComponent {
+                        async onConnected(){
+                            await super.onConnected();
+                        }
+                        onLoadInstanceStylesheet(){return true}
+                        template(){
+                            return `
+                                <template>
+                                    <div>Toggle</div>
+                                </template>
+                            `
+                        }
+                        cssStyle(){
+                            return `
+                                .ToggleButton {
+                                    display:block;
+                                    width:100px;
+                                    height:50px;
+                                    background-color:blue;
+                                }
+                            `
+                        }
                     }
-                    onLoadInstanceStylesheet(){return true}
-                    
-                    template(){
-                        return `
-                            <template>
-                                <div>Toggle</div>
-                            </template>
-                        `
+                );
+
+                namespace `system.diagnostics.unit.com` (
+                    class ToggleButtonExtended extends system.diagnostics.unit.com.ToggleButton {
+                        cssStyle(){
+                            return `
+                                .ToggleButtonExtended {
+                                    display:block;
+                                    width:200px;
+                                    height:50px;
+                                    background-color:rgb(255, 0, 0);
+                                }
+                            `
+                        }
+                        template(){
+                            return `
+                                <template>
+                                    <div>Toggle Extended!</div>
+                                </template>
+                            `
+                        }
                     }
-
-                    cssStyle(){
-                        return `
-                            .ToggleButton {
-                                display:block;
-                                width:100px;
-                                height:50px;
-                                background-color:blue;
-                            }
-                        `
-                    }
-                }
-            );
+                );
+            //============================== END COMPONENT =============================
 
 
 
-            namespace `system.diagnostics.unit.com` (
-                class ToggleButtonExtended extends system.diagnostics.unit.com.ToggleButton {
-                    async onConnected(){
-                        // await super.onConnected();
-                        await this.render();
-                    }
 
-                    onLoadInstanceStylesheet(){return true}
 
-                    cssStyle(){
-                        return `
-                            .ToggleButtonExtended {
-                                display:block;
-                                width:200px;
-                                height:50px;
-                                background-color:rgb(255, 0, 0);
-                            }
-                        `
-                    }
-                    template(){
-                        return `
-                            <template>
-                                <div>Toggle Extended!</div>
-                            </template>
-                        `
-                    }
-                }
-            );
+
+
+
 
             this.expected("to make an instance of ToggleButtonExtended using createElement", (resolve,reject) => {
-                var b = document.createElement("toggle-button-extended")
+                var b = document.createElement("system-diagnostics-unit-com-toggle-button-extended")
                 if(b) {
                     if(b instanceof system.diagnostics.unit.com.ToggleButton){
                         document.body.appendChild(b)
@@ -87,41 +85,42 @@ namespace `system.diagnostics.unit` (
 
             this.expected(`@tag trait to not re-define a new/custom tag for ToggleButtonExtended class, which is already defined with a tag in CustomElementsRegistrty`, (resolve,reject) => {
 
-                try{
+                try {
                     tag(system.diagnostics.unit.com.ToggleButtonExtended,"toggle-extended")
                 }
-                catch(e){
-                    debugger
+                catch(e){//should throw error which is right
                     resolve(true);
                     return
                 };
             });
 
 
-            this.expected(`@tag trait to define a tag when a Class cannot generate its own from the Class name`, (resolve,reject) => {
-                namespace `system.diagnostics.unit.com` (
-                    class Toggle extends system.diagnostics.unit.com.ToggleButton {
+            // this.expected(`@tag trait to define a tag when a Class cannot generate its own from the Class name`, (resolve,reject) => {
+            //     namespace `system.diagnostics.unit.com` (
+            //         class Toggle extends system.diagnostics.unit.com.ToggleButton {
                         
-                    }
-                );
+            //         }
+            //     );
 
-                try{tag(system.diagnostics.unit.com.Toggle,"toggle-custom")}
-                catch(e){
-                    reject(e)
-                    return
-                };
-                var b = document.createElement("toggle-custom")
+            //     try{
+            //         tag(system.diagnostics.unit.com.Toggle,"toggle-custom");
+            //     }
+            //     catch(e){
+            //         reject(e)
+            //         return
+            //     };
+            //     var b = document.createElement("toggle-custom")
 
-                if(b) {
-                    if(b instanceof system.diagnostics.unit.com.Toggle){
-                        resolve(true)
-                    } else {
-                        reject("the instance created from '<toggle-custom>' tage, is not an instanceof Toggle")
-                    }
-                } else {
-                    reject("tagname '<toggle-custom>', the custom tag, is not working")
-                }
-            });
+            //     if(b) {
+            //         if(b instanceof system.diagnostics.unit.com.Toggle){
+            //             resolve(true)
+            //         } else {
+            //             reject("the instance created from '<toggle-custom>' tage, is not an instanceof Toggle")
+            //         }
+            //     } else {
+            //         reject("tagname '<toggle-custom>', the custom tag, is not working")
+            //     }
+            // });
 
             
             this.expected("the ability to create a simple WebComponent class", (resolve,reject) => {
@@ -298,6 +297,29 @@ namespace `system.diagnostics.unit` (
                     reject("no sample d")
                 }
             });
+
+
+
+
+            this.expected("components to fire 'connected' state event", async (resolve,reject) => {
+                await import('/src/system/diagnostics/unit/com/SampleD/index.js');
+                let fired=false;
+                var n = new system.diagnostics.unit.com.SampleD();
+                    n.on("connected", e=> resolve(true));
+
+                application.appendChild(n);
+                await wait(400);
+                
+                if(!fired){
+                    reject("'connected' event does not fire")
+                } else {
+                    resolve()
+                }
+            });
+
+
+
+
         }
         
     }

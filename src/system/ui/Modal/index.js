@@ -3,6 +3,7 @@ namespace `system.ui` (
     class Modal extends WebComponent {
         constructor() {
             super();
+            try{this.hide();}catch(e){}
         }
 
         // static get template(){
@@ -14,19 +15,20 @@ namespace `system.ui` (
         async onConnected() {
             await super.onConnected();
             this.form = this.querySelector("form");
-            this.formheader = this.querySelector(".form-header");
+            this.formheader = this.querySelector("form > header");
             this.originalTransition = this.form.style.transition;
-            this.on("mousedown", e=> this.onGrab(e), false, ".form-header");
-            this.addEventListener("mousedown", e=>this.onHide(e), false, ".close-button");
+            this.addEventListener("click", e=>this.onCancel(e), false, "#cancel-button");
+            this.addEventListener("submit", e=> this.onComplete(e));
+            this.on("mousedown", e=> this.onGrab(e), false, "form > header");
+            this.addEventListener("click", e=>this.onHide(e), false, ".close-button");
             this.addEventListener("mouseup", e=> this.onRelease(e), false);
             this.addEventListener("mousemove", e=> this.onDrag(e), false);
-            this.addEventListener("click", e=>this.onCancel(e), false, "#cancel-button");
+            // this.addEventListener("click", e=>this.onCancel(e), false, "#cancel-button");
+            // this.addEventListener("submit", e=> this.onComplete(e));
             //validation
             this.addEventListener("input",   e => this.setCustomValidity(e), true, "*[required]");
             this.addEventListener("invalid", e => this.setValidityMessage(e), true, "*[required]");
-            this.addEventListener("submit", e=> this.onComplete(e));
-            // this.addEventListener("change", e => this.setCustomValidity(e), true, "select");
-            // this.addEventListener("invalid", e => this.setValidityMessage(e), true, "select");
+            
         }
         
 
@@ -40,7 +42,7 @@ namespace `system.ui` (
                 var failCB = e => {
                     this.removeEventListener("success",succCB,false);
                     this.removeEventListener("cancel",failCB,false);
-                    resolve(null);
+                    resolve(this.value);
                 }
                 var succCB = e => {
                     this.removeEventListener("success",succCB,false);
@@ -115,12 +117,21 @@ namespace `system.ui` (
             }
         }
 
-        onCancel(){
+        onCancel(e){
+            this.value = false;
             this.dispatchEvent("cancel")
+            this.onHide(e);
+        }
+        
+        async onComplete(e){
+            this.value=true;
+            e.preventDefault();
+            e.stopPropagation();
             this.onHide();
+            this.dispatchEvent("success")
         }
 
-        onHide(){
+        onHide(e){
             this.hide();
         }
 
@@ -132,6 +143,14 @@ namespace `system.ui` (
 
         show(){
             this.classList.remove("hidden");
+        }
+
+        get value(){
+            return this._value
+        }
+        
+        set value(val){
+            this._value = val;
         }
     }
 );

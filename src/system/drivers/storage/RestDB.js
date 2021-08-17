@@ -1,10 +1,9 @@
 import '/resources/repositories.js';
 import '@system.drivers.storage.HttpCursor';
-var {IStorageInterface} = system.drivers.storage;
 
 
 namespace `system.drivers.storage` (
-    class RestDB extends IStorageInterface {
+    class RestDB extends domain.IStorageDriver {
         constructor (collection, storage_device){
             super(collection, storage_device);
             this.setCollection(collection.prototype.classname);

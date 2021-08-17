@@ -1,13 +1,11 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
 await require('/src/system/drivers/storage/Query.js');
-var {IStorageInterface} = system.drivers.storage;
 
-namespace `system.drivers.storage` (
-    class Memory extends IStorageInterface {
+namespace `system.drivers.storage`(
+    class Memory extends domain.IStorageDriver {
         constructor (collection, storage_device){
             super(collection, storage_device);
-            Session.State.db = Session.State.db||{};
             this.setCollection(collection.name);
         }
 
@@ -15,67 +13,68 @@ namespace `system.drivers.storage` (
             return true;
         }
 
+        commit(){
+            sessionStorage.setItem(this.collection_name, JSON.stringify(this.data));
+        }
+
         isSeeded(){
-            return this.collection.seeded;
+            return this.data.seeded==true
         }
 
         setSeeded(){
-            this.collection.seeded=true;
-        }
-
-        commit(){
-            console.log("Memory Storage Driver: Nothing to commit")
+            this.data.seeded=true;
         }
 
         setCollection (name){
-            if(typeof Session.State.db[name] != "object"){
-                Session.State.db[name] = [];
-            }
-            this.collection = Session.State.db[name];
+            this.collection_name = name;
+            this.data = JSON.parse(sessionStorage.getItem(this.collection_name))||{items:[]};
         }
 
-
         add(obj, cb){
-            this.collection.push(obj);
+            this.data.items.push(obj);
+            this.commit();
             cb&&cb(obj,null);
             return obj;
         }
 
         update(obj, cb){
-            this.collection.forEach(item => {
+            this.data.items.forEach(item => {
                 if(item._id==obj._id){
-                    Object.assign(item,obj)
+                    Object.assign(item,obj);
+                    this.commit();
                     cb&&cb(obj,null);
                     return obj;
                 }
             })
         }
-        
+ 
+        remove(cb,query){
+            var res = Query.query( this.data.items, query.query||query||{});
+            var removed=[];
+            res.forEach(o => {
+                for(var i=0; i<=this.data.items.length-1; i++){
+                    if(this.data.items[i]._id == o._id){
+                        this.data.items.splice(i,1);
+                        removed.push(o);
+                    }
+                }
+            });
+            this.commit();
+            cb && cb(removed,null);
+            return removed;
+        }
+
         find(cb, query){
-            var res = Query.query( this.collection, query.query||{});
+            var res = Query.query( this.data.items, query.query||{});
             var cursor = new system.drivers.storage.Cursor(res,query,this);
-            // cursor.clear();
-            // cursor.fill(res);
             cursor.next();
             cb&&cb(cursor, null)
             return cursor;
         }
 
-        remove(cb,query){
-            var res = Query.query( this.collection, query.query||query||{});
-            var removed=[];
-            res.forEach(o => {
-                for(var i=0; i<=this.collection.length-1; i++){
-                    if(this.collection[i]._id == o._id){
-                        this.collection.splice(i,1);
-                        removed.push(o);
-                    }
-                }
-            });
-            cb && cb(removed,null);
-            return removed;
+        commit(){
+            sessionStorage.setItem(this.collection_name, JSON.stringify(this.data));
         }
-
 
         sort(cursor, attrb, order){
             order = order==1?true:false;
@@ -110,4 +109,3 @@ namespace `system.drivers.storage` (
         }
     }
 );
- 

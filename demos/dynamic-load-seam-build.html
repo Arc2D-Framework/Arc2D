@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- DEMO: 
+        See root -buildconfig.js for how this app was configured for running
+        a seam build. At terminal, at root of your project, run:
+            > npm run seam
+        
+    It will build your app from values you set in -buildconfig.js.
+    See also the <HEAD> of this demo:
+
+        The build file is loaded:
+            <script defer src="../src/ui/screens/ComponentsDemo/index.src.js" charset="utf-8"></script>
+        
+        Then DYNAMICLOAD turned off.
+            <script>
+                Config.DYNAMICLOAD=false;
+            </script>
+        ----------------------------------------------
+
+        
+        ALTERNATIVELY:
+            <script>
+                Config.FILENAME = "index.src.js"
+            </script>
+        is all you need after a build. Any require() statements will still
+        load dynamically.
+    -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Build and Load a compressed app</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+        <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+        <!-- <script async src="../src/ui/screens/ComponentsDemo/index.encrypt.js" charset="utf-8"></script> -->
+        <script>
+            Config.ROOTPATH  = "../";
+            Config.DYNAMICLOAD=true;
+            Config.FILENAME = "index.src.js"
+        </script>
+    </head>
+
+    <body namespace="ui.screens.ComponentsDemo">
+        <ui-components-progress-ring shadow progress="100"></ui-components-progress-ring>
+        <ui-screens-components-demo></ui-screens-components-demo>
+    </body>
+</html>

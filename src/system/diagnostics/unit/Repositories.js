@@ -4,16 +4,38 @@ import '@domain.collections.Movies';
 namespace `system.diagnostics.unit` (
     class Repositories extends system.diagnostics.UnitTest {
         constructor(){
-            super()
+            super();
         }
 
 
 
         async test (){
             var self=this;
-            await domain.collections.Movies.seed();
-            
+            await domain.collections.Movies.seed()
 
+            await this.expected("cursor object to be empty[]", async (resolve,reject) => {
+                var cursor = await domain.collections.Movies.find({
+                    query : {},
+                    skip:0,
+                    limit:10,
+                    totals:true
+                    // groupby : "genre"
+                });
+
+                if(cursor && cursor instanceof Array){
+                    if(cursor.length>0){
+                        resolve(true)
+                    }
+                    else {
+                        reject("but cursor had results in its array on initial .find()", cursor)
+                    }
+                }
+                else {
+                    reject("but cursor is is null/undefined", cursor)
+                }
+            });
+
+            
 
             
             this.expected("cursor object after calling .find()", async (resolve,reject) => {
@@ -33,31 +55,6 @@ namespace `system.diagnostics.unit` (
                 }
             });
 
-
-
-
-            this.expected("cursor object to be empty[] on initial .find()", async (resolve,reject) => {
-                var cursor = await domain.collections.Movies.find({
-                    query : {},
-                    skip:0,
-                    limit:10,
-                    totals:true
-                    // groupby : "genre"
-                });
-
-                
-                if(cursor && cursor instanceof Array){
-                    if(cursor.length<=0){
-                        resolve(true)
-                    }
-                    else {
-                        reject("but cursor had results in its array on initial .find()", cursor)
-                    }
-                }
-                else {
-                    reject("but cursor is is null/undefined", cursor)
-                }
-            });
 
 
             

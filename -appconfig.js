@@ -14,7 +14,7 @@ var Config = window.Config = window.Config||{
     TEMPLATE_NAMES_USE_ENGINE_EXTENSION : false,//ex: "index.kruntch.html"
     IMPORTS_CACHE_POLICY : { cache: "force-cache"}, //"default", "no-store", "reload", "no-cache", "force-cache", or "only-if-cached"  (https://fetch.spec.whatwg.org/)
     DEBUG:true,
-    DEFAULT_VIEW : "display.views.Home",
+    DEFAULT_VIEW : "ui.views.Home",
     ROUTER : 'system.http.Router',
     IMPORT_MAPS:true,
     AUTOLOAD_IMPORT_MAPS : true,
