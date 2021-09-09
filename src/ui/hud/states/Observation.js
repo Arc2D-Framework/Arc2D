@@ -39,7 +39,7 @@ namespace `ui.hud.states` (
 
         //Called when machine awakes this component.
         onAwake(){
-            console.log(this.namespace + " Awake");
+            console.log(this.sprite.namespace + " Awake");
             this.isAnimating=false;
             this.sprite.position.x = this.sprite.x;
             this.sprite.position.y = this.sprite.y;
@@ -49,7 +49,7 @@ namespace `ui.hud.states` (
 
         //Machine puts it to sleep.
         onSleep(){
-            console.log(this.namespace + " Sleeping");
+            console.log(this.sprite.namespace + " Sleeping");
             this.isAnimating=false;
             this.stop()
         }
@@ -59,13 +59,13 @@ namespace `ui.hud.states` (
 			if(this.isAnimating){return}
 			this.isAnimating=false;
 			this.isStarted=true;
-            console.log(this.namespace + " Started");
+            console.log(this.sprite.namespace + " Started");
 		}
 
 
         //Machine calls if isFinished is ever true. Destroy self and cleanup. 
         onExit(){
-            console.log(this.namespace + " Exit")
+            console.log(this.sprite.namespace + " Exit")
             this.stop()
         }
 

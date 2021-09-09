@@ -23,7 +23,7 @@ namespace `ui.components.todo` (
         }
 
         async onToggleAll(e){
-            var todos = this.querySelectorAll("todo-item");
+            var todos = this.querySelectorAll("ui-components-todo-todo-item");
                 todos.forEach(item => item.select(e.target.checked));
                 this.onFilter();
         }

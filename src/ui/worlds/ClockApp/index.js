@@ -15,6 +15,7 @@ namespace `ui.worlds` (
             await super.onConnected();//wait to be connected
             this.clock = new ui.components.AnalogClock;
             this.append(this.clock)
+            
             // this.clock defined by onAutoQuerySelectIds(){}
             // this.on("connected", e=> this.ready=true);//wait for clock to connect
         }

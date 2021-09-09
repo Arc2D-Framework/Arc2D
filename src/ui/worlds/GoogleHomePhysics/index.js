@@ -31,7 +31,7 @@ namespace `ui.worlds` (
 
             //make a world
             this.world = new b2World(
-                new b2Vec2(0, 20)    //gravity
+                new b2Vec2(0, 9.8)    //gravity
                 ,true                //allow sleep
             );
         }
@@ -57,7 +57,7 @@ namespace `ui.worlds` (
             //add ground to stage
             this.stage.appendChild(ground);
                 
-            //generate 10 random Polygons
+            //generate 3 random Polygons
             for(var i = 0; i < 3; ++i) {
                 var poly = new ui.worlds.entities.html.PolygonShape(
                     Math.random() + 0.5,

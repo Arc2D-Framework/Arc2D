@@ -35,6 +35,7 @@ namespace `system.machines` (
 
         //called by user to push in a new Component
         push(state){
+            debugger;
             if(this[0]==state){return}
             this[0]&&this[0].onSleep();
             this[0]&&(this[0].isSleeping=true);
@@ -47,18 +48,27 @@ namespace `system.machines` (
 
         //called by machine
         pop(item){
-            var current = this[0];
-            if(current && current==item){
-                if(!current.isFinished){
-                    current.onSleep()
-                    current.isSleeping=true;
+            if(item){
+                var current = this[0];
+                if(current && current==item){
+                    if(!current.isFinished){
+                        current.onSleep()
+                        current.isSleeping=true;
+                    }
+                    else {
+                        current.onExit();
+                        this[0]=null;
+                    }
+                    this.shift();
+                    this[0].onAwake();
+                    this[0].isSleeping=false;
                 }
-                else {
-                    current.onExit();
-                    this[0]=null;
-                }
-                this.shift();
-            }
+            } else {
+                var s = this.shift();
+                    s.onSleep();
+                this[0] && this[0].onAwake()
+                this[0].isSleeping=false;
+            }   
             // this.shift();
         }
     }

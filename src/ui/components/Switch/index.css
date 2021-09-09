@@ -1,0 +1,79 @@
+/* html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(ellipse at center, #1d1d1d 0%, #0b0b0b 60%);
+  overflow: hidden;
+} */
+:host {
+  display: block;
+  width: 60px;
+  height: 90px;
+  box-sizing: border-box;
+}
+.switch {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1d1d1d), color-stop(1, #131313));
+    /* border-radius: 10px; */
+    box-shadow: 0 0.2em 0.1em 0.05em rgb(255 255 255 / 10%) inset, 0 -0.2em 0.1em 0.05em rgb(0 0 0 / 50%) inset, 0 0.5em 0.65em 0 rgb(0 0 0 / 30%);
+    border: solid 0.25em #121212;
+}
+
+button {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(to bottom, #752b22 0%, #f6765f 16%, #180503 19%, #110302 60%, #210706 90%, #110101 95%, #110101 100%);
+  border: 2px solid #0a080a;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0 -5px 5px 1px #040404, 0 2px 5px 1px #040404;
+  outline: none;
+}
+button.on {
+  background: linear-gradient(to bottom, #4d0d04 0%, #842f22 6%, #1f0d07 8%, #58160c 40%, #f65021 75%, #f6765f 86%, #731101 88%, #660c03 100%);
+  border-top: 0px solid #040404;
+  -o-border-image: linear-gradient(to top, rgba(247, 170, 40, 0.1) 0, #e61404 10%, rgba(247, 170, 40, 0.6) 19%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%) 1 100%;
+     border-image: linear-gradient(to top, rgba(247, 170, 40, 0.1) 0, #e61404 10%, rgba(247, 170, 40, 0.6) 19%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%) 1 100%;
+  border-image-width: 2px;
+  box-shadow: 0 5px 5px 1px #040404, 0 -2px 5px 1px #040404;
+}
+button.on::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 100px;
+  background: radial-gradient(ellipse at center, #f5e326 0%, rgba(247, 170, 40, 0.8) 19%, rgba(250, 46, 13, 0.4) 45%, rgba(250, 46, 13, 0) 70%, rgba(250, 46, 13, 0) 100%);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+button.on::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background-image: radial-gradient(rgba(177, 113, 19, 0.2) 10%, rgba(247, 170, 40, 0.2) 25%, transparent 0), radial-gradient(rgba(177, 113, 19, 0.2) 10%, rgba(247, 170, 40, 0.2) 25%, transparent 0);
+  background-size: 4px 4px;
+  background-position: 5px 5px, 10px 10px;
+  z-index: 10;
+}

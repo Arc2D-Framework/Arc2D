@@ -36,7 +36,7 @@ namespace `ui.hud.states` (
 
         //Machine puts it to sleep.Usually hide itself, pause music, animate out.
         onSleep(){
-            console.log(this.namespace + " Sleeping");
+            console.log(this.sprite.namespace + " Sleeping");
             // this.isPatrolling=false;
             // this.stop()
             this.sprite.classList.remove("walking");
@@ -48,13 +48,13 @@ namespace `ui.hud.states` (
             // if(this.isPatrolling){return}
             // this.isPatrolling=true;
             this.isStarted=true;
-            console.log(this.namespace + " Started");
+            console.log(this.sprite.namespace + " Started");
         }
 
 
         //Machine calls if isFinished is ever true. Destroy self and cleanup. 
         onExit(){
-            console.log(this.namespace + " Exit")
+            console.log(this.sprite.namespace + " Exit")
             // this.stop()
         }
 

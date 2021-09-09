@@ -23,7 +23,7 @@ namespace `ui.hud` (
        
         async onConnected() {
             await super.onConnected();
-            this.on("click",  e => this.onStartGame(),      false, "#start-game");
+            this.on("click",  e => this.onStartGame(), false, "#start-game");
         }
 
         onStartGame(){

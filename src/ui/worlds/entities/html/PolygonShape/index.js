@@ -39,8 +39,9 @@ namespace `ui.worlds.entities.html` (
 
         onMouseMove(e){
             if(this.ispressed && this.mouseJoint){
-                this.body.SetAwake(true);
-                this.mouseJoint.SetTarget(new b2Vec2(e.pageX/this.scale, e.pageY/this.scale));
+                this.position = {x:e.pageX, y:e.pageY}
+                // this.body.SetAwake(true);
+                this.mouseJoint.target = (new b2Vec2(e.pageX/this.scale, e.pageY/this.scale));
             }
         }
 
@@ -50,31 +51,45 @@ namespace `ui.worlds.entities.html` (
             this.mouseJoint = null;
         }
         onMouseDown(e){
+            e.preventDefault();
             this.ispressed=true;
+            var point = {
+                x: (e.pageX) / this.scale,
+                y: (e.pageY) / this.scale
+            }
+            // this.body.ApplyImpulse({ x: 300, y: 0 }, this.body.GetWorldCenter());
+            // this.world.QueryPoint(function (fixture) {
+            //     var obj = fixture.GetBody().GetUserData();
+            //     console.log("obj",obj)
+            // }, point);
+            
+            // return
             if(!this.mouseJoint){
-            var def = new b2MouseJointDef();
-                def.bodyA = application.world.GetGroundBody();
-                def.bodyB = this.body;
-                def.target.Set(e.pageX/this.scale, e.pageY/this.scale);
-
-
-                def.collideConnected = true;
-                def.maxForce = 100 * this.body.GetMass();
-                def.dampingRatio = 0;
+                var p2 = new b2Vec2(point.x, point.y);
+                var def = new b2MouseJointDef();
+                    def.bodyA = application.world.GetGroundBody();
+                    def.bodyB = this.body;
+                    // def.target.Set(point.x, point.y);
+                    def.target = p2
+                    // def.SetTarget(p2);
+                    def.maxForce = 100 * this.body.GetMass();
+                    def.collideConnected = true;
+                    def.dampingRatio = 0;
 
                 this.mouseJoint = application.world.CreateJoint(def);
 
                 this.body.SetAwake(true);
 
             }
+            
         }
 
         onClick(e){
-            this.body.SetType(b2Body.b2_dynamicBody);
-            this.body.SetAwake(true);
-            this.body.SetLinearVelocity( {x: 25, y:5}  );
-            this.body.SetAngularVelocity( -20);
-            this.body.SetAwake(true)
+            // this.body.SetType(b2Body.b2_dynamicBody);
+            // this.body.SetAwake(true);
+            // this.body.SetLinearVelocity( {x: 25, y:5}  );
+            // this.body.SetAngularVelocity( -20);
+            // this.body.SetAwake(true)
         }
 
         cssStyle(){
@@ -112,7 +127,13 @@ namespace `ui.worlds.entities.html` (
             // deg = deg<0?0:deg;
             // deg = deg>360?360:deg;
             // if(!this.bodyDef){return}
-            this.style.transform = `translate3d(${(pos.x-(hw))*this.scale}px, ${(pos.y-(hh))*this.scale}px, 0px) rotate(${deg%360}deg)`;
+            if(this.ispressed && this.mouseJoint){
+                // this.position = {x:e.pageX, y:e.pageY}
+                this.body.SetAwake(true);
+                this.mouseJoint.SetTarget(new b2Vec2(this.position.x/this.scale, this.position.y/this.scale));
+            } else {
+                this.style.transform = `translate3d(${(pos.x-(hw))*this.scale}px, ${(pos.y-(hh))*this.scale}px, 0px) rotate(${deg%360}deg)`;
+            }
             // this.style.width = (hw*2)* (this.scale)+"px";
             // this.style.height= (hh*2)* (this.scale)+"px";
         }

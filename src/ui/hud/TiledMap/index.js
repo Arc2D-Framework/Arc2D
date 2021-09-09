@@ -2,11 +2,8 @@
 import '@system.renderers.html.Topdown';
 import  'ui.hud.Max';
 import  'ui.hud.Npc';
-// import  'experiments.tiled.sprites.Npc';
 import '@system.machines.DepthSort';
 import '@system.machines.Collider';
-// import! 'experiments.tiled.input.Keyboard';
-
 import '@system.machines.Camera';
 import '@system.input.Keyboard';
 import '@domain.maps.TiledMap';
