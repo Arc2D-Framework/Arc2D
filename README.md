@@ -4,6 +4,10 @@ for building enterprise grade applications and ui controls. It adheres to the
 WebComponent Specification for crafting Autonomouse Reactive Components (Arc)
 in pure, vanilla JavaScript, HTML5 and CSS3.
 
+- [Website](https://www.arc2d.com)
+- [Documentation](https://www.arc2d.com/resources)
+- [Demos - Sandbox In Progress]()
+ 
 
 # Why
 Arc differs significantly at both language and architectural aspects when compared to other frameworks
