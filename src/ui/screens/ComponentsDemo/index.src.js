@@ -212,6 +212,10 @@ namespace `ui.components` (
                 
 namespace `ui.components` (
 	class RippleButton extends WebComponent  {
+		static get is(){
+			return "ripple-button"
+		}
+
 		async onConnected(){
 			super.onConnected();
 			this.on("click", e=>this.onClick(e), "false", "button");

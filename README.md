@@ -1,87 +1,68 @@
-#### Arc2D Home Page – https://www.arc2d.com/
-#### Arc2D Docs – https://www.arc2d.com/resources
+# Description
+The Arc Engine is a W3C-compliant, ES6/7 Component Framework (not an api) used
+for building enterprise grade applications and ui controls. It adheres to the 
+WebComponent Specification for crafting Autonomouse Reactive Components (Arc)
+in pure, vanilla JavaScript, HTML5 and CSS3.
 
-## Arc2D Framework 🦏
-The Arc2D Framework - An Agnostic, W3C ES6/7 Vanilla JavaScript Compliant 2D World & GUI Engine used
-for building enterprise-class 2D, Web and Mobile Applications.
 
-## Zero Config Setup 📁
-Getting started is easy, add 1 line to your HTML **`<head>`** tag to run the framework.
-Clone from this repository and follow the instructions to get started, visit https://www.arc2d.com/resources/doc
-for Arc2D's full documentation.
+# Why
+Arc differs significantly at both language and architectural aspects when compared to other frameworks
+such as Angular, VUE, React and so on:
+- No Compilers, Dependencies, Pre/Post Processing
+- Class Driven Definitions
+- Namespaces
+- Inheritance For Semanantics
+- Visual Inheritance
+- Component Packages (prefabs)
+- World Game Loop for 2/3D Simulation
+- Composition & Nesting for Screen Assembly
 
-## Multi-App SPA 🎇
-Build multi-connected SPA apps in the same container that load and cache better than React, Angular & Vue.
+## Class Driven Design
+Instead of 'higher-order' functional programming concepts, as used in React, Arc
+relies on 3rd generation class driven aspects of the latest ES6/7 language, keeping the affordance of powerful features found in modern Java/C++ and C#. In Arc, native classes are used to define Autonomous Reactive Components:
 
-## Progressive Enhancement 🖌️
-Stealthfully decorate & enhance existing/legacy pages with Arc, 1 component at a time without altering
-any existing HTML. 
+```javascript
+class ToggleButton extends Component {
 
-## No Compilers 🚫
-No Webpack, Grunt, Babel, Pre or Post Processors needed. Optional dependencies vary on the developer.
+}
+```
 
-## SDK Tools 🛠️
-Arc comes equipped with its own internal build generator which will stitch and seam together multiple
-apps using the Prefab SDK tools.
 
-## Quartz Loop 🔁
-Time sensitive simulation of physics, collision and AI with input, update and render sequence
-at an fixed update.
+## Namespace
+1st, Arc runs in an isolated scope, there are no private/public variables that are leaked into the window except for a handful, like ```Component``` which is submissive, allowing any 3rd party domainating library to have it's way. 2nd, namespaces categorize classes from collision and serves as aliases to the Class. There are no compilers used to allocate namespaces, they are live and direct and runnable from the browser console.
 
-## W3C Web Components ⚙️
-Build true native WebComponents and assemble them on screen following W3C's recommendation.
+```javascript
+namespace `org.ui`
+    class ToggleButton extends Component {
 
-## Namespace Management 🗂️
-Like Java packages, organize complex applications in a folder structure you choose that
-mirrors namespaces.
+    }
+);
+```
 
-## Data Binding 🖧
-Data bind a DOMNode on screen to a class member variable in JavaScript for synchronization
-of values in both directions. 
+In the event that Arcs ```Component``` class cannot be used because a 3rd party api is clobbering the global scope, you are free to leverage Arc's namespace to ```Component```:
+```javascript
+namespace `org.ui`
+    class ToggleButton extends core.ui.Component {
 
-## Agnostic HTML Templating 🌐
-Plug-in your engine of choice (Mustache, Nunjucks, Handlebars & more). No vendor lock-in
-to technologies like React's JSX.
+    }
+);
+```
+\
+\
+*There are several ways to use an Autonomous component*
 
-## Native ES6/7 ❤️‍🔥
-Native ES6/7 without builds. Runs live in NodeJS, Electrton and Cordova/Capacitor. 
+Constructor Usage:
+```javascript
+var toggle = new org.ui.ToggleButton;
+```
+createElement Usage:
+```javascript
+var toggle = document.createElement("org-ui-toggle-button");
+```
+Declarative HTML Usage:
+```html
+<org-ui-toggle-button></org-ui-toggle-button>
+```
 
-## SPA Architecture ✨
-Framework managed SPA architecture. Intuitive, seamless and transparent, no "Router"
-mechanisms or API's to fiddle with.
 
-## Auto-Nav (for SPA) ⚡️
-The Auto-Nav feature handles navigation between multiple "views" or apps of an SPA using
-traditional links in dot notation mirroring namespace folder structure. 
-
-## Tweens 💥
-Tween or animate any object with HTML5 and JavaScript properties.
-
-## Layered Canvas 📊
-Layer HTML, SVG and native Canvas together to build rich HUDs.
-
-## Component Cascade 🧮
-Components auto-cascade their CSS in the right order automatically. 
-
-## A* Path Finding 📐
-2D path finder resolves best path to target on tilemaps with walls/obstacles in the way.
-
-## Agnostic Data Storage 🗄️
-Mongo-like API with swappable data storage drivers for local and remote connectivity.
-
-## State Machine 🎮
-Transition between modes (views) of gameplay with little effort.
-(Example: Splash to Menu ➡️ Level to Game ➡️ Menu to Level).
-
-## FPS Control 🚄
-Frame dropping and interpolation for smooth animation during lags, lockstep or
-slow device spikes. 
-
-## Collisions ☄️
-SAT engine resolves collisions between any convex shapes on Canvas, HTML or SVG.
-
-## 2D Physics 🌟
-Box2D ready, stepped at a fixed physics update by Arcs quartz loop.
-
-## Heroku Ready 🚀
-**git push heroku master** for deployment.
+Readme Still In Progress....Check back soon

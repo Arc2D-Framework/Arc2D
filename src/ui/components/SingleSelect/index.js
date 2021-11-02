@@ -5,6 +5,8 @@ namespace `ui.components` (
             this.items=items;
             this.strPlaceholder = placeholder;
             this.strLabel = label;
+            this.audio = new Audio("/resources/sfx/ES_Beep Tone Signal 14 - SFX Producer.mp3")
+            this.clear = new Audio("/resources/sfx/ES_Multimedia Click - SFX Producer.mp3")
         }
 
         async onConnected(){
@@ -26,6 +28,7 @@ namespace `ui.components` (
 
         onReset(e){
             // debugger;
+            this.clear.play()
             this.onClear();
             this.dispatchEvent("change", {target:this, display:this.input.value, value:this.value});
         }
@@ -58,6 +61,7 @@ namespace `ui.components` (
         }
 
         onSelect(e){
+            this.audio.play();
             this.onClear();
             e.target.classList.add("selected");
             this.value= this.input.value = e.target.getAttribute("value");

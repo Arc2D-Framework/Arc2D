@@ -1,6 +1,6 @@
 
 @tag("splash-loader");
-namespace `ui.components` (
+namespace `ui.loaders` (
     class Circles extends WebComponent {
         async onConnected() {
 			await this.render();

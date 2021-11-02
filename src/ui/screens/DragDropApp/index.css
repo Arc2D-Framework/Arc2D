@@ -21,7 +21,7 @@ html, body, :host {
     background: white;
   }
   .draggable {
-    background-image: url("/src/ui/screens/DragDropApp/my-img.jpeg");
+    background-image: url("../src/ui/screens/DragDropApp/my-img.jpeg");
     width: 100%;
     height: 100%;
   }

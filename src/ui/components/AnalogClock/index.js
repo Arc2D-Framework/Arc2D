@@ -1,37 +1,27 @@
 import '@domain.models.Clock';
 
 namespace `ui.components` (
-    class AnalogClock extends WebComponent {
+    class AnalogClock extends Component {
         constructor(){
             super();
             this.model = new domain.models.Clock;
         }
 
-        // async onConnected(){
-        //     await super.onConnected();//wait to be connected
-        //     this.ready=true;
-        // }
-
-        //ex: sets up this.hour to el <g id="hour" ... >
-        onAutoQuerySelectIds(){return true}
-
-        //runs many times per frame (physics/ai) at 8.333ms intervals
-        onFixedUpdate = (time) =>{
-            //not needed
-        }
+        //runs many times per frame (physics/ai) at 8.333ms intervals. 
+        onFixedUpdate (time) {}
 
         //runs once per frame (handle input/state updates) @16ms-24ms
         onUpdate(timestamp, delta){
             this.model.onUpdate();
         }
 
-        //runs once per frame (handle interpolation for fps-drop or lag) @16ms-24ms
+        //runs once per frame AFTER onUpdate, (handle interpolation for fps-drop or lag) @16ms-24ms
         onDraw(interpolation){
-            if(this.isConnected) {
+            // if(this.isConnected) {
                 this.hour.style.transform   = `rotate(${this.model.hour}deg)`;
                 this.minute.style.transform = `rotate(${this.model.minutes}deg)`;
                 this.second.style.transform = `rotate(${this.model.seconds}deg)`;
-            }
+            // }
         }
     }
 );

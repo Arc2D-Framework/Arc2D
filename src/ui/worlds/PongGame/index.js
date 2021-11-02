@@ -1,6 +1,6 @@
 namespace `ui.worlds` (
-    class PongGame extends core.ui.World {
-        constructor(element){
+    class PongGame extends World {
+        constructor(element) {
             /*Supply core.ui.World with our element*/
             super(element);
 
@@ -12,7 +12,7 @@ namespace `ui.worlds` (
 
             /*Set up all the event listeners*/
             window.addEventListener('keydown', e => this.onKeyInput(e));
-            window.addEventListener('keyup',   e => this.onKeyInput(e));
+            window.addEventListener('keyup', e => this.onKeyInput(e));
             window.addEventListener('resize', e => this.resizeCanvas());
         }
 
@@ -43,7 +43,7 @@ namespace `ui.worlds` (
             this.HUD = this.querySelector("#hud");
 
             /*Find the <canvas> element we are looking for*/
-            this.canvas  = this.querySelector("canvas");
+            this.canvas = this.querySelector("canvas");
 
             /*Set the canvas to the right size*/
             this.canvas.width = this.world.width;
@@ -59,88 +59,88 @@ namespace `ui.worlds` (
             this.startGame();
 
             /*Final checks to make sure everything went smoothly*/
-            if(!this.context) console.error("Could not generate rendering context ")
-            else              this.ready = true;
+            if (!this.context) console.error("Could not generate rendering context ")
+            else this.ready = true;
         }
 
-        onFixedUpdate=(timestep, delta)=>{
+        onFixedUpdate = (timestep, delta) => {
             /*Make sure we are not booting up, or else there will be an error in the console*/
-            if(!this.ready) return;
+            if (!this.ready) return;
 
             /*Get everything from 'this' (shortens code)*/
-            const {keys, world, ball, players} = this;
+            const { keys, world, ball, players } = this;
 
             /*Update the paddles*/
-            if     (keys['w'] && !keys['s']) players.positions[0] -= players.speed;
-            else if(keys['s'] && !keys['w']) players.positions[0] += players.speed;
+            if (keys['w'] && !keys['s']) players.positions[0] -= players.speed;
+            else if (keys['s'] && !keys['w']) players.positions[0] += players.speed;
 
-            if     (keys['arrowup'] && !keys['arrowdown']) players.positions[1] -= players.speed;
-            else if(keys['arrowdown'] && !keys['arrowup']) players.positions[1] += players.speed;
+            if (keys['arrowup'] && !keys['arrowdown']) players.positions[1] -= players.speed;
+            else if (keys['arrowdown'] && !keys['arrowup']) players.positions[1] += players.speed;
 
             /*Clamp both paddles so they stay inside of their predetrimented range*/
-            players.positions[0] = clamp(players.positions[0], world.height/2 - players.range/2, world.height/2 + players.range/2 - players.height);
-            players.positions[1] = clamp(players.positions[1], world.height/2 - players.range/2, world.height/2 + players.range/2 - players.height);
+            players.positions[0] = clamp(players.positions[0], world.height / 2 - players.range / 2, world.height / 2 + players.range / 2 - players.height);
+            players.positions[1] = clamp(players.positions[1], world.height / 2 - players.range / 2, world.height / 2 + players.range / 2 - players.height);
 
             /**Update the ball's position**/
             ball.x += ball.xSpeed;
             ball.y += ball.ySpeed;
 
             /*Detect and resolve top + bottom collisions*/
-            if(ball.y < world.wallWidth + ball.r){
+            if (ball.y < world.wallWidth + ball.r) {
                 ball.y = world.wallWidth + ball.r;
                 ball.ySpeed *= -1;
-            }else if(ball.y > world.height - world.wallWidth - ball.r){
+            } else if (ball.y > world.height - world.wallWidth - ball.r) {
                 ball.y = world.height - world.wallWidth - ball.r;
                 ball.ySpeed *= -1;
             };
 
 
             /*Left/right side collision dectetion and response*/
-            if(ball.x - ball.r < world.wallWidth){
+            if (ball.x - ball.r < world.wallWidth) {
                 /*Left paddle*/
-                if(ball.y + ball.r > players.positions[0] && ball.y - ball.r < players.positions[0] + players.height) onCollideLeft();
+                if (ball.y + ball.r > players.positions[0] && ball.y - ball.r < players.positions[0] + players.height) onCollideLeft();
 
                 /*Small side 'helpers'*/
-                if(Math.abs(world.height/2 - ball.y) > players.range/2) onCollideLeft();
+                if (Math.abs(world.height / 2 - ball.y) > players.range / 2) onCollideLeft();
 
                 /*Declare 'onCollideLeft' function*/
-                function onCollideLeft(){
+                function onCollideLeft() {
                     ball.xSpeed *= -1.1; //1.1 so the ball picks up speed as the round goes on
                     ball.x = world.wallWidth + ball.r;
                 };
-            }else if(ball.x + ball.r > world.width - world.wallWidth){
+            } else if (ball.x + ball.r > world.width - world.wallWidth) {
                 /*Right paddle*/
-                if(ball.y + ball.r > players.positions[1] && ball.y - ball.r < players.positions[1] + players.height) onCollideRight();
+                if (ball.y + ball.r > players.positions[1] && ball.y - ball.r < players.positions[1] + players.height) onCollideRight();
 
                 /*Small side 'helpers'*/
-                if(Math.abs(world.height/2 - ball.y) > players.range/2) onCollideRight();
+                if (Math.abs(world.height / 2 - ball.y) > players.range / 2) onCollideRight();
 
                 /*Declare 'onCollideRight' function*/
-                function onCollideRight(){
+                function onCollideRight() {
                     ball.xSpeed *= -1.1; //1.1 so the ball picks up speed as the round goes on
                     ball.x = world.width - world.wallWidth - ball.r;
                 };
             };
 
             /*Check if the ball is out of bounds, and if so, give the other player points (this also resets the ball)*/
-            if(ball.x < -ball.r || ball.x > ball.r + world.width) this.scoreOn(ball.x < -ball.r ? 1 : 0);
+            if (ball.x < -ball.r || ball.x > ball.r + world.width) this.scoreOn(ball.x < -ball.r ? 1 : 0);
 
 
 
             /*Define that clamp function that was used earlier*/
-            function clamp (value, min, max){
+            function clamp(value, min, max) {
                 value = Math.max(value, min);
                 value = Math.min(value, max);
                 return value;
             }
         }
 
-        onDraw=()=>{
+        onDraw = () => {
             /*Make sure we are not booting up*/
-            if(!this.ready) return;
-            
+            if (!this.ready) return;
+
             /*Get everything from 'this' (shortens code)*/
-            const {context, world, ball, players} = this;
+            const { context, world, ball, players } = this;
 
             /*Prepare the context*/
             context.clearRect(0, 0, world.width, world.height);
@@ -162,7 +162,7 @@ namespace `ui.worlds` (
               (However, it is important to remember this is pong, and preformance [should] not be streched)
               
             */
-           
+
             /**Walls**/
             context.fillStyle = world.wallColor;
             context.fillRect(0, 0, world.width, world.height);
@@ -180,12 +180,12 @@ namespace `ui.worlds` (
 
             /**Ball**/
             context.beginPath();
-            context.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
+            context.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
             context.fill();
 
         }
 
-        onKeyInput(e){
+        onKeyInput(e) {
             /*First we see if the user pressed a key down, or if they relased one*/
             const keydown = e.type === 'keydown';
 
@@ -196,25 +196,25 @@ namespace `ui.worlds` (
             this.keys[key] = keydown;
         }
 
-        startGame(){
+        startGame() {
             this.players.scores = [0, 0];
             this.resetBall();
         }
 
-        scoreOn(number){
+        scoreOn(number) {
             this.players.scores[number]++;
             this.HUD.innerText = `${this.players.scores[0]} : ${this.players.scores[1]}`
             this.resetBall();
         }
 
-        resetBall(){
+        resetBall() {
             /*We need this line so everything is relitive (Changing the world size won't cause the ball to become off center)*/
             const self = this;
 
             /*Decalre the ball*/
             this.ball = {
-                x: self.world.width/2,
-                y: self.world.height/2,
+                x: self.world.width / 2,
+                y: self.world.height / 2,
                 r: self.world.wallWidth,
                 ang: Math.random() * Math.PI * 2,
                 speed: 5,
@@ -231,27 +231,27 @@ namespace `ui.worlds` (
                 this.ball.xSpeed = Math.cos(this.ball.ang) * this.ball.speed;
                 this.ball.ySpeed = Math.sin(this.ball.ang) * this.ball.speed;
             }, 2000);
-            
+
         }
 
-        resizeCanvas(){
+        resizeCanvas() {
             // Get the height and width of the window
             var height = document.documentElement.clientHeight;
-            var width  = document.documentElement.clientWidth;
+            var width = document.documentElement.clientWidth;
 
             let width_height_ratio = this.world.width / this.world.height;
 
             // This makes sure the canvas is resized in a way that maintains the worlds's width / height ratio.
-            if (width / height < width_height_ratio) height = Math.floor(width  / width_height_ratio);
-            else                                         width  = Math.floor(height * width_height_ratio);
+            if (width / height < width_height_ratio) height = Math.floor(width / width_height_ratio);
+            else width = Math.floor(height * width_height_ratio);
 
             // This sets the CSS of the canvas to resize it to the scaled height and width.
             this.context.canvas.style.height = height + 'px';
-            this.context.canvas.style.width  = width  + 'px';
+            this.context.canvas.style.width = width + 'px';
 
             //this centers the canvas
-            this.context.canvas.style.marginTop = (innerHeight/2 - height/2) + 'px';
-            this.context.canvas.style.marginLeft = (innerWidth/2 - width/2) + 'px';
+            this.context.canvas.style.marginTop = (innerHeight / 2 - height / 2) + 'px';
+            this.context.canvas.style.marginLeft = (innerWidth / 2 - width / 2) + 'px';
         }
 
     }

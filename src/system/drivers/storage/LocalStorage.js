@@ -1,6 +1,6 @@
 import '/src/system/drivers/storage/Cursor.js';
 import '/resources/repositories.js';
-await require('/src/system/drivers/storage/Query.js');
+await load('/src/system/drivers/storage/Query.js');
 
 
 namespace `system.drivers.storage`(

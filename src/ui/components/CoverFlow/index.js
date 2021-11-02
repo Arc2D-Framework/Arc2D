@@ -4,7 +4,7 @@ namespace `ui.components` (
     class CoverFlow extends WebComponent {
         async onConnected(){
             await super.onConnected();
-
+            
             var axis = this.getAttribute("axis");
             this.isHorizontal = (axis=="v")?false:true;
             this.tiles = Array.from(this.querySelectorAll("#carousel .tile"));

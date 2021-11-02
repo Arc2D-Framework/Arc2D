@@ -1,9 +1,10 @@
-import meld from '/src/system/libs/aop.js';
 
-namespace `ui.screens` (
-    class DragDropApp extends Application {
+
+namespace `root` (
+    class Main extends Application {
         async onConnected() {
             await super.onConnected();
+            alert("asd")
             window.meld = meld;
             this.on("dragstart", e=> this.onDragStart(e),   true, ".draggable");
             this.on("dragend",   e=> this.onDragEnd(e),     true, ".draggable");
@@ -63,3 +64,5 @@ namespace `ui.screens` (
         }
     }
 );
+var m = root.Main;
+    export {m}

@@ -45,6 +45,7 @@ namespace `ui.components` (
         }
 
         onSelect(e){
+            this.audio.play();
             var li = e.target;
                 li.querySelector("input").checked = li.classList.toggle("selected");
                 // debugger;

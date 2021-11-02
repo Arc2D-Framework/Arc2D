@@ -1,5 +1,5 @@
 
-@tag("splash-loader");
+
 namespace `ui.loaders` (
     class ProgressCircle extends WebComponent {
         async onConnected() {
@@ -10,6 +10,7 @@ namespace `ui.loaders` (
 			this.on("transitionend", e=>this.onTransitionEnd(e), false);
 			// this.on("mozTransitionend", e=>this.onTransitionEnd(e));
 			// this.fade();
+			await wait(200)
 			this.onProgress();
         }
 

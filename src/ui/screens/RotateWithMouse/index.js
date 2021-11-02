@@ -1,3 +1,6 @@
+// import 'ui.loaders.Circles';
+// import 'ui.loaders.ProgressCircle';
+import 'ui.loaders.ProgressRing';
 
 namespace `ui.screens` (
     class RotateWithMouse extends Application {
