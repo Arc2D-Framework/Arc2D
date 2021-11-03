@@ -16,10 +16,10 @@ such as Angular, VUE, React and so on:
 - A Meta-Framework
 - Class Driven Definitions
 - Namespaces
-- Inheritance For Semanantics
+- Inheritance
 - Visual Inheritance
-- Component Packages (prefabs)
-- World Game Loop for 2/3D Simulation
+- Components (prefabs)
+- World Simulation
 - Composition & Nesting for Screen Assembly
 
 # No Compilers, Dependencies
@@ -27,18 +27,18 @@ The Arc Engine is installed into the ```HEAD``` of any existing webpage in one l
 ```html
 <script src="https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@latest/framework.min.js" charset="utf-8"></script>
 ```
-There are NO compilers, pre or post processing runs. NO Webpack, NO Snowpack, Rollup or “Build” tasks. No Babel, Grunt, Browserify or 'Tree Shaking'. There are no 3rdy party api's, npm's or plugins of any kind. You do not need a package.json unless you require it. Zero CLI tools to use, no command line utilities. So how does it work?
+There are NO compilers, pre or post processing runs. No Webpack, Snowpack, Rollup or “Build” tasks. No Babel, Grunt, Browserify or 'Tree Shaking'. There are no 3rd party api's, npm's or plugins of any kind. You do not need a package.json unless required and zero cli tool requirements. So how does it work?
 
 
 # A Meta Framework
-Arc is a self-interpreted meta framework architecture that transpiles minimistically on-the-fly and just-in-time. Zero-config setup means it runs on default settings. No compilers or processors completely eliminate extra toolchains. Your ```src/``` directory remains purely native ES6, absolutely no TypeScript. The ```node_modules``` folder, almost empty. The Arc platform is 100% native EcmaScript and self-executing even in the console.
+Arc is a self-interpreted meta framework architecture that transpiles minimistically on-the-fly and just-in-time. Zero-config setup means it runs on default settings. No compilers or processors completely eliminate extra toolchains. Your ```src/``` directory remains purely native ES6, absolutely no TypeScript. The ```node_modules``` folder, almost empty. The Arc platform is 100% native EcmaScript and self-executing, self-interpreting even in the console.
 
-Being a meta-framework, Arc is able to run itself, the base framework, cocoon, as an application on it's own. Though it has no meaning and will not affect or do anything special, it is able to run as an instance of itself. 2nd, being a meta-framework, developers will be able to craft new types of engines on top of arc (cocoon). Think of ```cocoon``` as a Linux kernel.
+Being a meta-framework, Arc is able to run itself, the base framework, cocoon, as an application on it's own. Though it has no meaning and will not affect or do anything special to a webpage, it is able to run as an instance of itself. 2nd, being a meta-framework, developers will be able to craft new types of engines on top of arc (cocoon). Think of ```cocoon``` as the Linux kernel.
 
 
 # Class Driven Design
 Instead of 'higher-order' functional programming concepts, as used in React, Arc
-relies on 3rd generation class driven aspects of the latest ES6/7 language, keeping the affordance of powerful features found in modern Java/C++ and C#. In Arc, native classes are used to define Autonomous Reactive Components:
+relies on 3rd generation class driven aspects of the latest ES6/7 language, keeping the affordance of powerful features found in modern Java/C++ and C#. In Arc, native classes are used to define Autonomous Reactive Components based on the W3C specification for custom element definition:
 
 ```javascript
 class ToggleButton extends Component {
@@ -48,7 +48,7 @@ class ToggleButton extends Component {
 
 
 # Namespace
-1st, Arc runs in an isolated scope, there are no private/public variables that are leaked into the window except for a handful, such as the ```Component``` Class which is submissive, allowing any 3rd party domainating library to have it's way. 2nd, namespaces categorize classes from collision and serves as aliases to the Class. There are no compilers used to allocate namespaces, they are live and direct and runnable from the browser console.
+1st, Arc runs in an isolated scope, there are no private/public variables that are leaked into the window except for a handful, such as the ```Component``` Class which is submissive, allowing any 3rd party domainating library to have it's way. 2nd, namespaces categorize classes from collision and serves as aliases to the public Class. There are no compilers used to allocate namespaces, they are live and direct and runnable from the browser console.
 
 ```javascript
 namespace `org.ui`
@@ -56,6 +56,9 @@ namespace `org.ui`
 
     }
 );
+
+//accessible at
+org.ui.ToggleButton
 ```
 
 In the event that Arcs ```Component``` class cannot be used because a 3rd party api is clobbering the global scope, you are free to leverage Arc's namespace to Component, ```core.ui.WebComponent```:
@@ -84,12 +87,14 @@ document.body.appendChild(toggle)
 
 Declarative ```HTML``` Usage:
 ```html
-<org-ui-toggle-button></org-ui-toggle-button>
+<body>
+    <org-ui-toggle-button></org-ui-toggle-button>
+</body>
 ```
-
+Tag names are auto-generated by Arc based on the components unique ```namespace```. The Web Component spec is respected, having at minimum 2 words separated by dashes but takes it a step further by guranteeing unique tagNames.
 
 # Inheritance
-Arc leverages inheritance for codifying the semantic gnome within a family of Classes having taxonomic, prototypal similarities. The argument of "inheritance vs. composition" is one based on a lack of experience and wisdom of key differences, or blissful ignorance. While inheritance preserves lineage and traits of the common ancestry within a family, composition is the act of producing new varities through assembly of objects taken from across family trees. In either case, there is code sharing, but this is a side effect of design, not the core argument of "inheritance vs. composition", of which both ideologies are intrinsically established and used in the Arc Engine platform.
+Arc leverages inheritance for codifying the semantic gnome within a family of Classes having taxonomic, prototypal similarities. The argument of "inheritance vs. composition" is one based on a lack of experience and wisdom of key differences, or blissful ignorance. While inheritance preserves lineage and traits of common ancestry within a family, composition is the structural coupling of concrete instances through assembly of objects taken from across family trees. In either case, there is code sharing, but this is a side effect of design, not the core purpose of "inheritance vs. composition", of which both ideologies are intrinsically established and used in the Arc Engine platform.
 
 ```javascript
 namespace `demos.ui`
@@ -153,4 +158,94 @@ namespace `demos.ui`
         
     }
 );
+```
+
+
+# Components
+Components in Arc are pre fabricated (prefabs) packages, where every component is packaged into it's own portable namespaced folder. Each folder holds 3 core assets per component:
+- index.js
+- index.css
+- index.html
+
+React crosses the spearation of concerns boundary and intertwines these into 1 file and not only the mixing of the triad but a defilement, where HTML is no longer interpretable by the DOM without a JSX compiler, CSS is bound to state and no longer CSS without Reacts compiler, and Javascript having a mixture of all and not really JavaScript without build tools and a reinvented Virtual DOM.
+
+Instead of a reinvented 'Virtual DOM', Arc is close-to-the-metal, handing off all work to the native DOM, leveraging the full potential of the Browsers render engine. Speed, Performance and Lite weight. Arc allows a hybrid approach though, where these native technologies in the triad (html, css) can be left separate or inlined into the Components Class for lightening fast load & render times, or even automated to be stitched into a single compressed runtime.
+
+
+
+# World Simulation
+Arc is natively an event-driven architecture, the event loop. User interaction (clicks, taps) triggers event handler callbacks. But there is also a World environment that steps at 60fps using in a "game loop" for time-sensitive fixed updates, relevant to AI, Physics, 2D and 3D simulations. Similar to Unity, Arc's input-update-render game loop is implemented using:
+- ```onUpdate``` - running once per frame for input, state changes
+- ```onFixedUpdate``` - running multiple times at a fixed delta per frame for collisions, ai
+- ```onDraw``` - running once per frame for painting
+
+```javascript
+import '@domain.models.Clock';
+
+namespace `ui.components` (
+    class AnalogClock extends Component {
+        constructor(){
+            super();
+            this.model = new domain.models.Clock; //a model of clock
+        }
+
+        //runs many times per frame (physics/ai) at 8.333ms intervals. 
+        onFixedUpdate (time) {}
+
+        //runs once per frame (handle input/state updates) @16ms-24ms
+        onUpdate(timestamp, delta){
+            this.model.onUpdate();
+        }
+
+        //runs once per frame AFTER onUpdate, (handle interpolation for fps-drop or lag) @16ms-24ms
+        onDraw(interpolation){
+            this.hour.style.transform   = `rotate(${this.model.hour}deg)`;
+            this.minute.style.transform = `rotate(${this.model.minutes}deg)`;
+            this.second.style.transform = `rotate(${this.model.seconds}deg)`;
+        }
+    }
+);
+
+
+
+//The application (World)
+import 'ui.components.AnalogClock';
+
+namespace `ui.worlds` (
+    class ClockApp extends World {
+        async onConnected(){
+            await super.onConnected();
+            this.clock = this.querySelector("ui-components-analog-clock")
+        }
+        onUpdate =(timestamp, delta)=> {
+            this.clock.onUpdate()
+        }
+
+        onFixedUpdate =(time)=> {
+            this.clock.onFixedUpdate()
+        }
+
+        onDraw =(interpolation)=> {
+            this.clock.onDraw()
+        }
+    }
+);
+```
+
+```html
+
+<!-- html shell page, "clock.html" -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Arc Engine : Analog Clock @60fps</title>
+        <script src="https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@latest/framework.min.js" charset="utf-8"></script>
+    </head>
+
+    <body namespace="ui.worlds.ClockApp">
+        <splash-loader shadow></splash-loader>
+        <ui-worlds-clock-app></ui-worlds-clock-app>
+    </body>
+</html>
 ```
