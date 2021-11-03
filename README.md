@@ -13,6 +13,7 @@ in pure, vanilla JavaScript, HTML5 and CSS3.
 Arc differs significantly at both language and architectural aspects when compared to other frameworks
 such as Angular, VUE, React and so on:
 - No Compilers, Dependencies
+- A Meta-Framework
 - Class Driven Definitions
 - Namespaces
 - Inheritance For Semanantics
@@ -27,6 +28,12 @@ The Arc Engine is installed into the ```HEAD``` of any existing webpage in one l
 <script src="https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@latest/framework.min.js" charset="utf-8"></script>
 ```
 There are NO compilers, pre or post processing runs. NO Webpack, NO Snowpack, Rollup or “Build” tasks. No Babel, Grunt, Browserify or 'Tree Shaking'. There are no 3rdy party api's, npm's or plugins of any kind. You do not need a package.json unless you require it. Zero CLI tools to use, no command line utilities. So how does it work?
+
+
+# A Meta Framework
+Arc is a self-interpreted meta framework architecture that transpiles minimistically on-the-fly and just-in-time. Zero-config setup means it runs on default settings. No compilers or processors completely eliminate extra toolchains. Your ```src/``` directory remains purely native ES6, absolutely no TypeScript. The ```node_modules``` folder, almost empty. The Arc platform is 100% native EcmaScript and self-executing even in the console.
+
+Being a meta-framework, Arc is able to run itself, the base framework, cocoon, as an application on it's own. Though it has no meaning and will not affect or do anything special, it is able to run as an instance of itself. 2nd, being a meta-framework, developers will be able to craft new types of engines on top of arc (cocoon). Think of ```cocoon``` as a Linux kernel.
 
 
 # Class Driven Design
