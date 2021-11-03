@@ -7,12 +7,14 @@ in pure, vanilla JavaScript, HTML5 and CSS3.
 - [Website](https://www.arc2d.com)
 - [Documentation](https://www.arc2d.com/resources)
 - [Demos - Sandbox In Progress]()
+    - [Hello World](https://www.arc2d.com/resources/?path=docs/topics/HelloWorldSimple)
  
 
 # Why
 Arc differs significantly at both language and architectural aspects when compared to other frameworks
 such as Angular, VUE, React and so on:
 - No Compilers, Dependencies
+- W3C Components
 - A Meta-Framework
 - Class Driven Definitions
 - Namespaces
@@ -28,6 +30,12 @@ The Arc Engine is installed into the ```HEAD``` of any existing webpage in one l
 <script src="https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@latest/framework.min.js" charset="utf-8"></script>
 ```
 There are NO compilers, pre or post processing runs. No Webpack, Snowpack, Rollup or “Build” tasks. No Babel, Grunt, Browserify or 'Tree Shaking'. There are no 3rd party api's, npm's or plugins of any kind. You do not need a package.json unless required and zero cli tool requirements. So how does it work?
+
+
+# W3C Components
+- [Defining Components](https://www.arc2d.com/resources/?path=docs/topics/DefineComponent)
+- [Using Components](https://www.arc2d.com/resources/?path=docs/topics/ComponentUsage)
+- [Component LifeCycle](https://www.arc2d.com/resources/?path=docs/topics/ComponentLifecycle)
 
 
 # A Meta Framework
@@ -48,6 +56,8 @@ class ToggleButton extends Component {
 
 
 # Namespace
+- [Component Namespaces In Depth](https://www.arc2d.com/resources/?path=docs/topics/ComponentNamespaces)
+
 1st, Arc runs in an isolated scope, there are no private/public variables that are leaked into the window except for a handful, such as the ```Component``` Class which is submissive, allowing any 3rd party domainating library to have it's way. 2nd, namespaces categorize classes from collision and serves as aliases to the public Class. There are no compilers used to allocate namespaces, they are live and direct and runnable from the browser console.
 
 ```javascript
