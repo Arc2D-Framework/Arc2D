@@ -1,0 +1,139 @@
+
+:host {}
+
+:host .row {
+  display: flex;
+  margin-bottom: 18px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:host .row .field {
+  width: 47%;
+  position: relative;
+  display: flex;
+}
+:host .row .field.full {
+  width: 100%;
+  margin: 0;
+}
+
+:host .row .field:last-child {
+  margin-right: 0;
+}
+
+:host textarea {
+  resize: vertical;
+  background: #2f2f2f;
+  padding: 10px;
+  font-family: inherit;
+  font-size: inherit;
+  min-height: 100px;
+}
+
+:host .field {
+  display: flex;
+  flex-flow: column-reverse;
+}
+ 
+:host .field label, 
+:host .field input {
+  transition: all 0.2s;
+  touch-action: manipulation;
+}
+  
+:host .actions li #cancel-button{
+  background: #272727;
+}
+  
+  
+:host .form-control:hover .icon,
+:host .field:hover .icon,
+:host .field:active .icon,
+:host .field input:active .icon
+:host .field input:focus .icon,
+:host .field select:focus .icon{
+    color: rgb(228, 228, 51) !important;
+}
+  
+:host .field .icon {
+    pointer-events: none;
+    position: absolute;
+    right: 1px;
+    top: 26px;
+    color: #404040;
+    background: inherit;
+    padding: 0px 11px;
+    font-size: 19px;
+}
+
+:host select.form-control {
+  cursor: pointer;
+  color: #999; 
+  padding-left: 10px;
+}
+
+:host .form-control {
+    height: 37px;
+    padding-left: 18px;
+    border: none;
+    /* border-bottom: 1px dashed #2f2f2f; */
+    width: 100%;
+    color: #666;
+    padding-right: 42px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+:host section {
+  display: block;
+  padding-bottom: 20px;
+}
+:host label{
+  color: #777777;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+:host input,:host select{
+  transition: opacity .4s;
+  background: #212121;
+  border-radius: 4px;
+}
+
+:host input[type='checkbox']{
+  width: 20px !important;
+  height: 20px;
+  margin-right: 10px;
+  margin-left: 0px;
+  float: left;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+:host input:invalid:required, 
+:host select:invalid:required {
+    color: #c73e05;
+    background: #2f2f2f;
+    border-left: 4px solid #962b00;
+}
+
+:host input:disabled {
+  opacity:.2;
+  pointer-events:none;
+}
+
+:host :focus {
+  outline: none; 
+}
+
+:host textarea {
+  resize: none; 
+}
+
+:host.disabled input[type="submit"] {
+  opacity:.3;
+  pointer-events: none;
+}

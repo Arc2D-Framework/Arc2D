@@ -1,6 +1,6 @@
-@tag("sprite-2d");
+
 namespace `ui.components` (
-	class Sprite extends core.ui.Component2D  {
+	class Sprite extends Component  {
 		onUpdate(){
 			console.log("onUpdate")
 		}
@@ -11,10 +11,5 @@ namespace `ui.components` (
 		
 		onLoadInstanceStylesheets(){return false}
 
-		onAwake(){
-            debugger;
-            window.component2d_instances = window.component2d_instances||[];
-            window.component2d_instances.push(this);
-        }
 	}
 )

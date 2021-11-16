@@ -1,0 +1,34 @@
+<template style="border:1px solid red;">
+        <form>
+            <header class="form-header">
+                <h3 id="project-name">Search Docs</h3>
+                <div class="close-button">
+                    <i class="fa fa-times-circle" style="color: #ff5a52;"></i>
+                    <i class="fa fa-minus-circle" style="color: #e5c02b;"></i>
+                    <i class="fa fa-question-circle" style="color: #52c22b;"></i>
+                </div>
+            </header>
+
+
+            
+            <section>
+                <div class="row">
+                    <div class="full field">
+                        <i class="fa fa-search icon"></i>
+                        <input id="address" required="true" validation-message="Enter Keyword(s)" type="search" placeholder="Keyword(s)" class="form-control">
+                        <label for="address">Enter Keyword(s)</label>
+                    </div>
+                </div>
+            </section>
+
+
+            <footer class="actions">
+                <ul role="menu">
+                    <li><button type="button" class="button" id="cancel-button">Cancel</button></li>
+                    <li><input type="submit" class="button" value="Search" id="create-button"/></li>
+                </ul>
+            </footer>
+            <div></div>
+        </form>
+        
+</template>

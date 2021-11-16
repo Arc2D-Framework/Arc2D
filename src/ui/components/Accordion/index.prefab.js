@@ -70,6 +70,7 @@ namespace `ui.components` (
   :host h1, 
   :host h2 {
     color: #ff6873;
+
   }
   
   :host h1 {
@@ -81,9 +82,8 @@ namespace `ui.components` (
   }
   
   :host h2 {
-    font-size: 26px;
-    line-height: 34px;
-    font-weight: 300;
+    font-size: 17px;
+    font-weight: 100;
     letter-spacing: 1px;
     display: block;
     background-color: #fefffa;
@@ -134,7 +134,7 @@ namespace `ui.components` (
   :host ul li i {
     position: absolute;
     transform: translate(-6px, 0);
-    margin-top: 16px;
+    margin-top: 10px;
     right: 0;
   }
   :host ul li i:before, 
@@ -157,6 +157,7 @@ namespace `ui.components` (
     width: 100%;
     height: 100%;
     z-index: 1;
+    appearance: none;
     opacity: 0;
   }
   :host ul li input[type=checkbox]:checked ~ p {

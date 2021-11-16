@@ -1,3 +1,4 @@
+import 'ui.components.Splash';
 import '@system.machines.UIMachine';
 import 'ui.hud.StartMenu';
 import 'ui.hud.TiledMap';

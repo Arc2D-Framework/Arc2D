@@ -14,6 +14,18 @@
     align-items: center;
     justify-content: center;
 }
+:host *{
+    box-sizing: border-box;
+}
+
+:host:not(:defined) {
+    display: none;
+}
+
+:host.hidden .form-content {
+    visibility: hidden;
+}
+
 :host.hidden{
     visibility:hidden;
     opacity:0;
@@ -30,73 +42,12 @@
 :host .actions li {
     margin-left: 20px;
 }
-:host .actions li #cancel-button{
-    background: #272727;
-}
-
-
-:host .form-control:hover .icon,
-:host .field:hover .icon,
-:host .field:active .icon,
-:host .field input:active .icon
-:host .field input:focus .icon,
-:host .field select:focus .icon{
-    color: rgb(228, 228, 51) !important;
-  }
-  
-:host .field .icon {
-    pointer-events: none;
-    position: absolute;
-    right: 1px;
-    top: 26px;
-    color: #404040;
-    background: inherit;
-    padding: 0px 11px;
-    font-size: 19px;
-}
-
-:host *{
-    box-sizing: border-box;
-}
-
-:host select.form-control {
-  cursor: pointer;
-  color: #999; 
-  padding-left: 10px;
-}
-:host .form-control {
-    height: 37px;
-    padding-left: 18px;
-    border: none;
-    /* border-bottom: 1px dashed #2f2f2f; */
-    width: 100%;
-    color: #666;
-    padding-right: 42px;
-    cursor: pointer;
-    font-size: 15px;
-}
 
 :host.hidden form {
     transform: translateZ(0px) scale(1.4) !important;
     opacity: 0;
 }
-:host #desc {
-    margin-bottom: 30px;
-    display: flex;
-    min-height: 46px;
-    flex-direction: row;
-    color: #777777;
-}
-:host #desc .icon{
-    color: white;
-    float: left;
-    margin-right: 14px;
-    padding: 4px 9px;
-    font-size: 18px;
-    color: white;
-    background: red;
-    border-radius: 2px;
-}
+
 :host form {
     overflow: hidden;
     border-top: 2px solid rgba(255,255,255,.3) !important;
@@ -116,13 +67,6 @@
     opacity: 1;
     transition: all .24s ease-out;
     will-change: transform;
-}
-
-
-
-:host .inner{
-    display: flex;
-    color: white !important;
 }
 
 :host form > header {
@@ -168,61 +112,6 @@
     pointer-events: none;
 }
 
-:host .form-content{
-    position: relative;
-    width: 100%;
-    color: white;
-}
-
-:host .row {
-    display: flex;
-    margin-bottom: 18px;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: space-between;
-}
-
-:host section {
-    display: block;
-    padding-bottom: 20px;
-}
-:host label{
-    color: #777777;
-    display: flex;
-    align-content: center;
-    align-items: center;
-}
-
-:host .row .field {
-    width: 47%;
-    position: relative;
-    display: flex;
-}
-:host .row .field.full {
-    width: 100%;
-    margin: 0;
-}
-
-:host .row .field:last-child {
-    margin-right: 0;
-}
-
-:host input,:host select{
-    transition: opacity .4s;
-    background: #212121;
-    border-radius: 4px;
-}
-
-:host input[type='checkbox']{
-    width: 20px !important;
-    height: 20px;
-    margin-right: 10px;
-    margin-left: 0px;
-    float: left;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-
 :host .actions ul {
     display: inline-flex;
     padding: 0;
@@ -231,13 +120,6 @@
     list-style: none;
     justify-content: flex-end;
     flex: 1;
-}
-
-:host input:invalid:required, 
-:host select:invalid:required {
-    color: #c73e05;
-    background: #2f2f2f;
-    border-left: 4px solid #962b00;
 }
 
 :host .button {
@@ -266,17 +148,6 @@
   background:#207db3;
 }
 
-:host input:disabled {
-    opacity:.2;
-    pointer-events:none;
-  }
-
-
-  :host #overlay {
-    position: absolute;
-    width: 100%;
-}
-
 :host #overlay{
     display: block;
     position: absolute;
@@ -290,164 +161,72 @@
     height: 100%;
 }
 
-
-:host :focus {
-    outline: none; 
-  }
-  
-  :host textarea {
-    resize: none; 
-  }
-
-
-  :host.disabled input[type="submit"] {
-      opacity:.3;
-      pointer-events: none;
-  }
-
-  
-
-  :host .wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center; 
-    }
-
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus,
-    textarea:-webkit-autofill,
-    textarea:-webkit-autofill:hover,
-    textarea:-webkit-autofill:focus,
-    select:-webkit-autofill,
-    select:-webkit-autofill:hover,
-    select:-webkit-autofill:focus {
-      -webkit-text-fill-color: #666;
-      -moz-text-fill-color: #666;
-      -ms-text-fill-color: #666;
-      -o-text-fill-color: #666;
-      background-color: #212121;
-      -webkit-box-shadow: 0 0 0px 1000px #212121 inset;
-      box-shadow: 0 0 0px 1000px #212121 inset;
-      transition: background-color 5000s ease-in-out 0s;
-    }
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #666;
+    -moz-text-fill-color: #666;
+    -ms-text-fill-color: #666;
+    -o-text-fill-color: #666;
+    background-color: #212121;
+    -webkit-box-shadow: 0 0 0px 1000px #212121 inset;
+    box-shadow: 0 0 0px 1000px #212121 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
 
 
 
-    /********************** from sample dialog 2**********/
-    :host:not(:defined) {
-        display: none;
-      }
-      
-      :host.hidden .form-content {
-          visibility: hidden;
-      }
-      
-      :host .row .form-holder{
-          align-items: flex-start;
-      }
-      
-      :host textarea {
-          resize: vertical;
-          background: #2f2f2f;
-          padding: 10px;
-          font-family: inherit;
-          font-size: inherit;
-          min-height: 100px;
-      }
-      
-      :host .field {
-          display: flex;
-          flex-flow: column-reverse;
-        }
-        /**
-        * Add a transition to the label and input.
-        * I'm not even sure that touch-action: manipulation works on
-        * inputs, but hey, it's new and cool and could remove the 
-        * pesky delay.
-        */
-        :host .field label, :host .field input {
-          transition: all 0.2s;
-          touch-action: manipulation;
-        }
-        
-        /* :host .field input {
-          font-size: 1.5em;
-          border: 0;
-          border-bottom: 1px solid #ccc;
-          font-family: inherit;
-          -webkit-appearance: none;
-          border-radius: 0;
-          padding: 0;
-          cursor: text;
-        } */
-        
-        /* :host .field input:focus {
-          outline: 0;
-          border-bottom: 1px solid #666;
-        } */
-        
-        :host .field label {
-          /* text-transform: uppercase; */
-          /* letter-spacing: 0.05em; */
-        }
-        /**
-        * Translate down and scale the label up to cover the placeholder,
-        * when following an input (with placeholder-shown support).
-        * Also make sure the label is only on one row, at max 2/3rds of the
-        * field—to make sure it scales properly and doesn't wrap.
-        */
-        :host .field input:placeholder-shown + label {
-          cursor: text;
-          max-width: 66.66%;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          transform-origin: left bottom;
-          transform: translate(22px, 28px) scale(1);
-        }
-        /**
-        * By default, the placeholder should be transparent. Also, it should 
-        * inherit the transition.
-        */
-        :host .field ::-webkit-input-placeholder,
-        :host .field ::placeholder {
-          opacity: 0;
-          transition: inherit;
-        }
-        /**
-        * Show the placeholder when the input is focused.
-        */
-        :host .field input:focus::-webkit-input-placeholder,
-        :host .field input:focus::placeholder {
-          opacity: 1;
-        }
-        /**
-        * When the element is focused, remove the label transform.
-        * Also, do this when the placeholder is _not_ shown, i.e. when 
-        * there's something in the input at all.
-        */
-        :host .field input:not(:placeholder-shown) + label,
-        :host .field input:focus + label {
-          transform: translate(0, -5px) scale(1);
-          cursor: pointer;
-        }
-        /********************** end sample dialog 2**********/
+/**
+* Translate down and scale the label up to cover the placeholder,
+* when following an input (with placeholder-shown support).
+* Also make sure the label is only on one row, at max 2/3rds of the
+* field—to make sure it scales properly and doesn't wrap.
+*/
+:host .field input:placeholder-shown + label {
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(22px, 28px) scale(1);
+}
+/**
+* By default, the placeholder should be transparent. Also, it should 
+* inherit the transition.
+*/
+:host .field ::-webkit-input-placeholder,
+:host .field ::placeholder {
+    opacity: 0;
+    transition: inherit;
+}
+/**
+* Show the placeholder when the input is focused.
+*/
+:host .field input:focus::-webkit-input-placeholder,
+:host .field input:focus::placeholder {
+    opacity: 1;
+}
+/**
+* When the element is focused, remove the label transform.
+* Also, do this when the placeholder is _not_ shown, i.e. when 
+* there's something in the input at all.
+*/
+:host .field input:not(:placeholder-shown) + label,
+:host .field input:focus + label {
+    transform: translate(0, -5px) scale(1);
+    cursor: pointer;
+}
 
 @keyframes shake {
-    10%, 90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-    
-    20%, 80% {
-      transform: translate3d(2px, 4px, 0);
-    }
-  
-    30%, 50%, 70% {
-      transform: translate3d(-4px, -4px, 0);
-    }
-  
-    40%, 60% {
-      transform: translate3d(4px, 0px, 0);
-    }
-  }
+    10%, 90% {transform: translate3d(-1px, 0, 0);}
+    20%, 80% {transform: translate3d(2px, 4px, 0);}
+    30%, 50%, 70% {transform: translate3d(-4px, -4px, 0);}
+    40%, 60% {transform: translate3d(4px, 0px, 0);}
+}

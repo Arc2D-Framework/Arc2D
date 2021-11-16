@@ -21,6 +21,17 @@
     font-family: PressStart2P;
 }
 
+:host ui-components-cover-flow #move-left-btn, 
+:host ui-components-cover-flow #move-right-btn {
+
+}
+
+
+:host ui-components-cover-flow #move-left-btn, 
+:host ui-components-cover-flow #move-right-btn {
+    background: transparent;
+}
+
 :host > div {
     position: absolute;
     font-size: 8vh;
@@ -28,7 +39,6 @@
     border: 1px solid;
     left: 50%;
     transform: translate3d(-50%, -50%, 0px);
-    background: rgba(0,0,0,.5);
     border-radius: 5px;
     width: 46vw;
     height: 65vh;

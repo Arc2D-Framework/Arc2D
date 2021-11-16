@@ -1,0 +1,23 @@
+{
+  "bundles": [{
+    "name": "level1",
+    "assets": [
+      "/resources/video/trailer.mp4",
+      "/resources/tunes/Rolemusic_-_the_river.mp3",
+      "/resources/sfx/ES_Beep Tone Signal 14 - SFX Producer.mp3",
+      "/resources/sfx/ES_Multimedia Click - SFX Producer.mp3",
+      "/resources/video/trailer.mp4",
+      "/resources/tunes/Rolemusic_-_the_river.mp3",
+      "/resources/sfx/ES_Beep Tone Signal 14 - SFX Producer.mp3",
+      "/resources/sfx/ES_Multimedia Click - SFX Producer.mp3",
+      "/resources/video/trailer.mp4",
+      "/resources/tunes/Rolemusic_-_the_river.mp3",
+      "/resources/sfx/ES_Beep Tone Signal 14 - SFX Producer.mp3",
+      "/resources/sfx/ES_Multimedia Click - SFX Producer.mp3",
+      "/src/ui/components/ParticleButton/index.css",
+      "/src/ui/components/ParticleButton/index.js",
+      "/src/ui/components/ParticleButton/index.html"
+    ]
+  }],
+  "loadBundles" : "level1"
+}

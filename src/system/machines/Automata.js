@@ -35,7 +35,6 @@ namespace `system.machines` (
 
         //called by user to push in a new Component
         push(state){
-            debugger;
             if(this[0]==state){return}
             this[0]&&this[0].onSleep();
             this[0]&&(this[0].isSleeping=true);

@@ -18,19 +18,24 @@ namespace `system.ui` (
             this.formheader = this.querySelector("form > header");
             this.originalTransition = this.form.style.transition;
             this.addEventListener("click", e=>this.onCancel(e), false, "#cancel-button");
-            this.addEventListener("submit", e=> this.onComplete(e));
+            this.addEventListener("submit", e=> this.onComplete(e), true);
             this.on("mousedown", e=> this.onGrab(e), false, "form > header");
             this.addEventListener("click", e=>this.onHide(e), false, ".close-button");
             this.addEventListener("mouseup", e=> this.onRelease(e), false);
             this.addEventListener("mousemove", e=> this.onDrag(e), false);
-            // this.addEventListener("click", e=>this.onCancel(e), false, "#cancel-button");
-            // this.addEventListener("submit", e=> this.onComplete(e));
             //validation
             this.addEventListener("input",   e => this.setCustomValidity(e), true, "*[required]");
             this.addEventListener("invalid", e => this.setValidityMessage(e), true, "*[required]");
+            if(this.isDismissable){
+                this.insertAdjacentHTML('afterbegin', '<div id="overlay"></div>');
+                this.on("click", e=> this.onCancel(e), false, "#overlay");
+            }
             
         }
         
+        get isDismissable(){
+            return false;
+        }
 
         async prompt(){
             if(!this.parentNode){
@@ -42,14 +47,13 @@ namespace `system.ui` (
                 var failCB = e => {
                     this.removeEventListener("success",succCB,false);
                     this.removeEventListener("cancel",failCB,false);
-                    resolve(this.value);
+                    resolve(null);
                 }
                 var succCB = e => {
                     this.removeEventListener("success",succCB,false);
                     this.removeEventListener("cancel",failCB,false);
                     resolve(this.value);
                 }
-                // setTimeout(e => {resolve(123);this.hide()}, 2000)
                 this.addEventListener("success",succCB,false);
                 this.addEventListener("cancel",failCB,false)
             })
@@ -118,17 +122,17 @@ namespace `system.ui` (
         }
 
         onCancel(e){
-            this.value = false;
             this.dispatchEvent("cancel")
             this.onHide(e);
+            return null
         }
         
         async onComplete(e){
-            this.value=true;
             e.preventDefault();
             e.stopPropagation();
             this.onHide();
-            this.dispatchEvent("success")
+            this.dispatchEvent("success");
+            return this.value
         }
 
         onHide(e){
@@ -145,12 +149,12 @@ namespace `system.ui` (
             this.classList.remove("hidden");
         }
 
-        get value(){
-            return this._value
+        set value(data){
+            this.data = data;
         }
-        
-        set value(val){
-            this._value = val;
+
+        get value(){
+            return this.data
         }
     }
 );

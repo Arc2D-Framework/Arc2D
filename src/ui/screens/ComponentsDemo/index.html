@@ -1,10 +1,10 @@
 <template>
-
-	<menu-toggle-button></menu-toggle-button>
+	<ui-components-side-bar></ui-components-side-bar>
+	<!-- <ui-components-menu-toggle-button></ui-components-menu-toggle-button> -->
 	<ripple-button></ripple-button>
-	<particle-button></particle-button>
-	<accordion-list style="width:400px; position:absolute;right:10px;top:10px;"></accordion-list>
-	<basic-accordion>
+	<ui-components-particle-button></ui-components-particle-button>
+	<ui-components-accordion style="width:400px;"></ui-components-accordion>
+	<ui-components-accordions-basic-accordion>
 		<template>
 			<div class="tab" slot="content">
 				<input type="checkbox" id="chck1">
@@ -21,5 +21,5 @@
 				</div>
 			</div>
 		</template>
-	</basic-accordion>
+	</ui-components-accordions-basic-accordion>
 </template>

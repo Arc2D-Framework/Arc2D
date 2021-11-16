@@ -39,13 +39,9 @@ namespace `ui.components` (
 			<!-- sidebar-header  -->
 			<div class="sidebar-search">
 			  <div>
-				<div class="input-group">
+				<div class="input-group search">
 				  <input type="text" class="form-control search-menu" placeholder="Search...">
-				  <div class="input-group-append">
-					<span class="input-group-text">
-					  <i class="fa fa-search" aria-hidden="true"></i>
-					</span>
-				  </div>
+				  <i class="fa fa-search" aria-hidden="true"></i>
 				</div>
 			  </div>
 			</div>
@@ -386,6 +382,32 @@ namespace `ui.components` (
   
   /*----------------------sidebar-menu-------------------------*/
   
+  .sidebar-wrapper .sidebar-brand{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #0470bf;
+    
+  }
+  .sidebar-wrapper .sidebar-brand *{
+    color: white !important;
+  }
+  .sidebar-wrapper .input-group.search {
+    height: 32px;
+    position: relative;
+  }
+  .sidebar-wrapper .input-group.search input {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 14px;
+  }
+  .sidebar-wrapper .input-group.search .fa {
+    position: absolute;
+    top: 9px;
+    right: 11px;
+  }
+
   .sidebar-wrapper .sidebar-menu {
     padding-bottom: 10px;
   }
@@ -403,6 +425,7 @@ namespace `ui.components` (
     text-decoration: none;
     position: relative;
     padding: 8px 30px 8px 20px;
+    box-sizing: border-box;
   }
   
   .sidebar-wrapper .sidebar-menu ul li a i {
@@ -518,8 +541,8 @@ namespace `ui.components` (
   .badge-sonar:after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -2px;
+    left: -2px;
     border: 2px solid #980303;
     opacity: 0;
     border-radius: 50%;
@@ -548,7 +571,7 @@ namespace `ui.components` (
   /*------scroll bar---------------------*/
   
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 0px;
     height: 7px;
   }
   ::-webkit-scrollbar-button {
@@ -649,6 +672,10 @@ namespace `ui.components` (
       background: #3a3f48;
       box-shadow: 0px -1px 5px #282c33;
       border-top: 1px solid #464a52;
+      height: 41px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
   
   .chiller-theme .sidebar-footer>a:first-child {

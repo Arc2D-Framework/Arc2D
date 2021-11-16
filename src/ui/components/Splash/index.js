@@ -11,7 +11,7 @@ namespace `ui.components` (
             document.addEventListener("showsplash", e => this.onShow(), false);
 			document.addEventListener("hidesplash", e => this.onHide(), false);
 			this.on("transitionend", e=>this.onTransitionEnd(e), false);
-			// this.on("mozTransitionend", e=>this.onTransitionEnd(e));
+			this.dispatchEvent("loaded")
 			this.fade();
         }
 
@@ -34,12 +34,10 @@ namespace `ui.components` (
             this.classList.add("hidden");
         }
 
-        //Override. No css file to load, it's baked.
         onLoadInstanceStylesheet(){
             return false
         }
 
-        //template baked: fast loading
         template (){
         	return `
         		<template>
@@ -52,7 +50,6 @@ namespace `ui.components` (
         	`
         }
 
-        //css baked: fast loading
         cssStyle(){
         	return `
             	:host {

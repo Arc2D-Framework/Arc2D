@@ -99,7 +99,7 @@ namespace `ui.worlds` (
             for( var j = 0; j < 5 + Math.round( Math.random() * 10 ); j++ ) {
                 var cloud = document.createElement( 'img' );
                     cloud.style.opacity = .8;
-                    cloud.setAttribute( 'src', '/src/ui/worlds/DomClouds/images/cloud.png' );
+                    cloud.setAttribute( 'src', Config.ROOTPATH + '/src/ui/worlds/DomClouds/images/cloud.png' );
                     cloud.className = 'cloudLayer';
 
                 var x = 256 - ( Math.random() * 512 );

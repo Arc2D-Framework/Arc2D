@@ -2,24 +2,26 @@
 <html lang="en">
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta http-equiv="Content-Security-Policy" content="
-            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
-            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
-            style-src   'self' 'unsafe-inline' *">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <title>Cocoon Framework</title>
+        <title>Testing Splash Loader</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-        <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+        <!-- <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script> -->
+        <script src="https://cdn.jsdelivr.net/gh/Nashorn/od-cocoon@latest/framework.src.js"></script>
         <script>
             Config.ROOTPATH  = "../";
+            Config.SPLASH = "ui.components.SplashLoader";
+            Config.SPLASH_FADE_DELAY = 2000;
+            Config.APP_WAITS_ON_SPLASH = true;
+            Config.NAMESPACE = "ui.screens.ComponentsDemo"
         </script>
     </head>
 
-    <body namespace="ui.screens.ComponentsDemo">
-        <progress-ring shadow progress="100"></progress-ring>
+    <body style="opacity: 1;">
         <ui-screens-components-demo></ui-screens-components-demo>
+        <!-- <ui-components-side-bar></ui-components-side-bar>
+        <ui-components-accordion style="width: 300px;"></ui-components-accordion>
+        <ui-components-particle-button></ui-components-particle-button> -->
     </body>
 </html>

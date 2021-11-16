@@ -3,21 +3,16 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta http-equiv="Content-Security-Policy" content="
-            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
-            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
-            style-src   'self' * blob: data: 'unsafe-inline' *">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="apple-mobile-web-app-capable" content="yes">
         <title>Arc Engine : Modal Dialogs</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script type="importmap" src="../.importmap"></script>
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@latest/framework.min.js" charset="utf-8"></script> -->
     </head>
 
     <body namespace="ui.screens.ModalDialogsDemo">
         <!-- <splash-loader shadow></splash-loader> -->
-        <ui-screens-modal-dialogs-demo></ui-screens-modal-dialogs-demo>
+        <ui-components-registration-dialog></ui-components-registration-dialog>
+	    <button id="open-dialog-btn">Open Dialog</button>
     </body>
 </html>
