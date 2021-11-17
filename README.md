@@ -1,7 +1,13 @@
 # Description
-The Arc Engine is a W3C-compliant, ES6/7 Component Framework (not an api) used
-for building enterprise grade applications and ui controls. It adheres to the 
-WebComponent Specification for crafting Autonomouse Reactive Components (Arc)
+This is a demo repository using the latest Arc2D (Engine):
+```html
+<script src="https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@latest/framework.min.js" charset="utf-8"></script>
+```
+
+
+Arc is a W3C-compliant, ES6/7 Component Framework (not an api) used
+for building enterprise grade applications, ui controls and 2D/3D simulations. It adheres to the 
+W3C WebComponent Specification for crafting Autonomouse Reactive Components (Arc)
 in pure, vanilla JavaScript, HTML5 and CSS3.
 
 - [Website](https://www.arc2d.com)
@@ -13,10 +19,10 @@ in pure, vanilla JavaScript, HTML5 and CSS3.
 # Why
 Arc differs significantly at both language and architectural aspects when compared to other frameworks
 such as Angular, VUE, React and so on:
-- No Compilers, Dependencies
-- W3C Components
-- A Meta-Framework
-- Class Driven Definitions
+- Ultra-thin Kernel
+- The No-Compiler Paradigm
+- The ThumbDrive Paradigm
+- Class Driven Design
 - Namespaces
 - Inheritance
 - Visual Inheritance
@@ -24,29 +30,70 @@ such as Angular, VUE, React and so on:
 - World Simulation
 - Composition & Nesting for Screen Assembly
 
-# No Compilers, Dependencies
+# Ultra-thin Kernel
+Weighing in at 12kb (compressed+unencrypted gzip or 20kb encrypted), The Arc kernel, "cocoon" offers enterprise class features out-the-box with zero npm modules and/or 3rd party apis. Blazing fast, ultra-light and a low memory footprint with no side effects on existing pages. No need to re-write or restructure existing HTML, the progressive upgrade aspects make introducing the kernel unto existing pages that were server-Side-Rendered (SSR) or built from scratch as simple as a script tag. Here's whats available at 12kb:
+ - 2D/3D Physics World: 
+    - For ThressJS, Physics+Collisions
+    - Gaming, AI
+    - Run Box2D, Matter, Bullet and Ammo
+ - W3C Autonomous Components
+    - Visual Component Inheritance
+    - Shadow & Light DOM Componenets (toggle off/on on-demand)
+    - Use Slots in Light & Shadow DOM (not possible natively)
+    - CSS Context Scoping
+    - CSS Transformations (use LESS)
+    - Run Components at 60fps in Worlds
+ - Multi Applications
+ - Namespaces
+ - Runtime ClassLoader (load classes on the fly at runtime)
+ - Static imports, Dynamic Imports
+ - Diagnostics / Unit Testing Engine
+ - .importmaps (for short-name specifiers)
+ - Asset Loader and Splash Screens
+    - For Games
+    - Heavy, media driven apps
+ - Agnostic Data Storage
+    - Swap between localStorage, sessionStorage, memory or mongo/couchdb*
+    - *Write & swap new storage drivers
+ - Collections and Pagination (Repository Design Pattern)
+    - mongo queries
+ - Swappable Template Engines (mustache, literals, nunjucks, handlebars)
+ - 2-way Watchers (more efficient data binding)
+ - SPA and MSPA Architecture (for mobile)
+ - SEO Compliant / Crawlable & Scrapable SPAs (for web; no SSR required)
+ - Zero Config Routing
+
+ 
+
+# No Compilers, No Dependencies
 The Arc Engine is installed into the ```HEAD``` of any existing webpage in one line:
 ```html
 <script src="https://cdn.jsdelivr.net/gh/nashorn/od-cocoon@latest/framework.min.js" charset="utf-8"></script>
 ```
-There are NO compilers, pre or post processing runs. No Webpack, Snowpack, Rollup or “Build” tasks. No Babel, Grunt, Browserify or 'Tree Shaking'. There are no 3rd party api's, npm's or plugins of any kind. You do not need a package.json unless required and zero cli tool requirements. So how does it work?
+There are NO compilers, pre or post processing passes. No Webpack, Snowpack, Rollup or “Build” tasks. No Babel, Grunt, Browserify or 'Tree Shaking'. There are no 3rd party api's, npm's or plugins of any kind. You do not need a package.json unless required for other parts of your software, and zero cli tool requirements. So how does it work? 
+
+Arc uses a 500byte blazing-fast kernel transpiler that has no effect on runtime performance and remains a trade-secret and a milestone in architecture. 
 
 
-# W3C Components
-- [Defining Components](https://www.arc2d.com/resources/?path=docs/topics/DefineComponent)
-- [Using Components](https://www.arc2d.com/resources/?path=docs/topics/ComponentUsage)
-- [Component LifeCycle](https://www.arc2d.com/resources/?path=docs/topics/ComponentLifecycle)
+# Run From a ThumbDrive
+From inception, Arc was designed to run from disk on the file:/// protocol without any server assistance.
+Applications written on Arc can even boot from a Thumdrive -- on Android/iOS drives or any device-platform that grants permission to running js from the disk, such as the Safari browser, Cordova, Capacitor or Electron.
 
+Developers from other communities would say they can do them same in their framework, but a close look at the Network tab shows an immense payload of JavaScript, spanning hundreds of thousands of LoC, megabytes worth of JavaScript, Babel apis, webpack and others to aide the effort -- if it was possible at all, being sometimes over burdening and over engineered to place one button on screen.
 
-# A Meta Framework
-Arc is a self-interpreted meta framework architecture that transpiles minimistically on-the-fly and just-in-time. Zero-config setup means it runs on default settings. No compilers or processors completely eliminate extra toolchains. Your ```src/``` directory remains purely native ES6, absolutely no TypeScript. The ```node_modules``` folder, almost empty. The Arc platform is 100% native EcmaScript and self-executing, self-interpreting even in the console.
+Think carefully, you are really unable to ship code to Android without first compiling a megalith bundle so 
+that all import statements are scrubbed and stitched (as imports won't work on file:/// or Android),
+add TypeScript into the mix and more compilers are necessary for little return and big hurdles, immense investments in time, cost and labor. Arc is living ES6, self interpretable and runs with or without server assistance, no assistance and ZERO compilation.
 
-Being a meta-framework, Arc is able to run itself, the base framework, cocoon, as an application on it's own. Though it has no meaning and will not affect or do anything special to a webpage, it is able to run as an instance of itself. 2nd, being a meta-framework, developers will be able to craft new types of engines on top of arc (cocoon). Think of ```cocoon``` as the Linux kernel.
+<!-- # A Meta Framework
+Arc is a self-interpreted meta framework architecture that transpiles on-the-fly and just-in-time. Zero-config setup means it runs on default settings. No compilers or processors completely eliminate extra toolchains. Your ```src/``` directory remains purely native ES6, absolutely no TypeScript. The ```node_modules``` folder, almost empty. The Arc platform is 100% native EcmaScript and self-executing, self-interpreting all in the browser and console. -->
+
+Being a meta-framework, Arc is able to run itself autonomously. Though it has no meaning and will not affect or do anything special to a webpage, it is able to run as an instance of itself. 2nd, being a meta-framework, developers will be able to craft new types of engines on top of arc (cocoon kernel). Think of ```cocoon``` as the Linux kernel of frameworks.
 
 
 # Class Driven Design
 Instead of 'higher-order' functional programming concepts, as used in React, Arc
-relies on 3rd generation class driven aspects of the latest ES6/7 language, keeping the affordance of powerful features found in modern Java/C++ and C#. In Arc, native classes are used to define Autonomous Reactive Components based on the W3C specification for custom element definition:
+relies on 3rd generation class driven concepts of the latest ES6/7 language, keeping the affordance of powerful features found in modern Java/C#. In Arc, native classes are used to define Autonomous Components based on the W3C specification for custom element definition:
 
 ```javascript
 class ToggleButton extends Component {
@@ -101,7 +148,31 @@ Declarative ```HTML``` Usage:
     <org-ui-toggle-button></org-ui-toggle-button>
 </body>
 ```
+
+## HTML TagNames:
 Tag names are auto-generated by Arc based on the components unique ```namespace```. The Web Component spec is respected, having at minimum 2 words separated by dashes but takes it a step further by guranteeing unique tagNames.
+
+For fine-grained control over tagNames, simply implement ```is()```:
+```javascript
+namespace `org.ui`
+    class ToggleButton extends Component {
+        get is() {
+            return "toggle-button"
+        }
+    }
+);
+
+//accessible at
+org.ui.ToggleButton
+```
+
+And usable in ```HTML``` as:
+```html
+<body>
+    <toggle-button></toggle-button>
+</body>
+```
+
 
 # Inheritance
 Arc leverages inheritance for codifying the semantic gnome within a family of Classes having taxonomic, prototypal similarities. The argument of "inheritance vs. composition" is one based on a lack of experience and wisdom of key differences, or blissful ignorance. While inheritance preserves lineage and traits of common ancestry within a family, composition is the structural coupling of concrete instances through assembly of objects taken from across family trees. In either case, there is code sharing, but this is a side effect of design, not the core purpose of "inheritance vs. composition", of which both ideologies are intrinsically established and used in the Arc Engine platform.
@@ -181,6 +252,11 @@ React crosses the spearation of concerns boundary and intertwines these into 1 f
 
 Instead of a reinvented 'Virtual DOM', Arc is close-to-the-metal, handing off all work to the native DOM, leveraging the full potential of the Browsers render engine. Speed, Performance and Lite weight. Arc allows a hybrid approach though, where these native technologies in the triad (html, css) can be left separate or inlined into the Components Class for lightening fast load & render times, or even automated to be stitched into a single compressed runtime.
 
+See:
+- [Defining Components](https://www.arc2d.com/resources/?path=docs/topics/DefineComponent)
+- [Using Components](https://www.arc2d.com/resources/?path=docs/topics/ComponentUsage)
+- [Component LifeCycle](https://www.arc2d.com/resources/?path=docs/topics/ComponentLifecycle)
+
 
 
 # World Simulation
@@ -199,15 +275,12 @@ namespace `ui.components` (
             this.model = new domain.models.Clock; //a model of clock
         }
 
-        //runs many times per frame (physics/ai) at 8.333ms intervals. 
         onFixedUpdate (time) {}
 
-        //runs once per frame (handle input/state updates) @16ms-24ms
         onUpdate(timestamp, delta){
             this.model.onUpdate();
         }
 
-        //runs once per frame AFTER onUpdate, (handle interpolation for fps-drop or lag) @16ms-24ms
         onDraw(interpolation){
             this.hour.style.transform   = `rotate(${this.model.hour}deg)`;
             this.minute.style.transform = `rotate(${this.model.minutes}deg)`;
@@ -254,8 +327,10 @@ namespace `ui.worlds` (
     </head>
 
     <body namespace="ui.worlds.ClockApp">
-        <splash-loader shadow></splash-loader>
         <ui-worlds-clock-app></ui-worlds-clock-app>
     </body>
 </html>
 ```
+
+
+## At 12kb
