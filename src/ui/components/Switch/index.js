@@ -1,25 +1,15 @@
-import '@system.machines.Automata';
 import '@ui.states.Off';
-import '@ui.states.On';
-
+var {Off} = ui.states;
 
 namespace `ui.components` (
-	class Switch extends WebComponent  {
-		constructor(){
-			super();
-			this.machine = new system.machines.Automata;
-			
-		}
+	class Switch extends Component2D  {
 
 		async onConnected(){
 			await super.onConnected();
-			window.b=this;
 			this.button = this.querySelector("button");
-			this.machine.push(new ui.states.Off(this,this.machine));
+			this.behaviors.push(new Off(this));
 			// this.addEventListener("click", e => this.onToggle(e), true, "button");
-			this.addEventListener("click", e => this.machine.onUpdate(e), true, "button");
-			// this.addEventListener("mousedown", e => this.machine.onUpdate(e), true, "button");
-			// this.addEventListener("mouseup", e => this.machine.onUpdate(e), true, "button");
+			this.addEventListener("click", e => this.behaviors.onUpdate(e), true, "button");
 		}
 
 		// onToggle(e){

@@ -7,7 +7,8 @@ namespace `system.input` (
                up: "up",
                down: "down",
                left: "left",
-               right: "right"
+               right: "right",
+               space: "space"
            }
         }
         static get keys() {
@@ -15,7 +16,8 @@ namespace `system.input` (
                38: this.directions.up,
                37: this.directions.left,
                39: this.directions.right,
-               40: this.directions.down
+               40: this.directions.down,
+               32: this.directions.space
            }
         }
 

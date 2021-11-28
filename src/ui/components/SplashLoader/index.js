@@ -20,6 +20,36 @@ namespace `ui.components` (
 				this.onProgressError.bind(this), 
 				this.onProgress.bind(this)
 			);
+
+			// //v1
+			// GortLoader.load(Config.ROOTPATH+'manifest.json').then(
+			// 	this.onProgressComplete.bind(this), 
+			// 	this.onProgressError.bind(this), 
+			// 	this.onProgress.bind(this)
+			// );
+
+			// //v2
+			// GortLoader.setOptions({
+			// 	manifest : Config.ROOTPATH+'manifest.json',
+			// 	completed : this.onProgressComplete.bind(this),
+			// 	error : this.onProgressError.bind(this),
+			// 	progress : this.onProgress.bind(this),
+			// });
+			// await GortLoader.load();
+
+
+			// //v3 - 'w3c' feel
+			// GortLoader.addEventListener("complete", e => this.onProgressComplete(e));
+			// GortLoader.addEventListener("error", e => this.onProgressError(e));
+			// GortLoader.addEventListener("progress", e => this.onProgress(e));
+			// await GortLoader.load(Config.ROOTPATH+'manifest.json');
+
+
+			// //v4 - 'w3c' feel with load bundle
+			// GortLoader.addEventListener("complete", e => this.onProgressComplete(e));
+			// GortLoader.addEventListener("error", e => this.onProgressError(e));
+			// GortLoader.addEventListener("progress", e => this.onProgress(e));
+			// await GortLoader.load(Config.ROOTPATH+'manifest.json', "level2");
 		}
 
 		async onProgressComplete(error=null){

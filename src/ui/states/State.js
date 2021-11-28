@@ -6,29 +6,6 @@ namespace `ui.states` (
             this.machine = machine;
 		}
 
-		
-
-		stop() {
-
-		}
-
-		clear() {
-
-		}
-
-		
-
-		
-
-
-
-		
-
-
-
-        
-
-
 		//------------------------------MACHINE CALLED----------------------------
 
         //Called when machine awakes this component. Usualy we hide/show onAwake.
@@ -41,7 +18,6 @@ namespace `ui.states` (
         //Machine puts it to sleep.Usually hide itself, pause music, animate out.
         onSleep(){
             console.log(this.namespace + " Sleeping");
-            this.stop()
         }
 
         //Machine calls it once if never started, hence the isStarted flag. Usually,
@@ -49,32 +25,28 @@ namespace `ui.states` (
         onStart(dir) {
 			this.isStarted=true;
             console.log(this.namespace + " Started");
-            // console.log("onStart)")
 		}
 
 
         //Machine calls if isFinished is ever true. Destroy self and cleanup. 
         onExit(){
             console.log(this.namespace + " Exit")
-            this.stop()
         }
 
         //onUpdate, runs 1x per frame. Good place to handle user input
-       	// onUpdate(timestamp, delta){
-        //     // Key.isUp(Key.ESC) && this.dispatchEvent("startmenu")
-        // }
+       	onUpdate(timestamp, delta){
+            // Key.isUp(Key.ESC) && this.dispatchEvent("startmenu")
+        }
 
 
-        //onFixedUpdate, runs many times per frame. Good place for physics/collision/ai
-        // onFixedUpdate(time) {}
-        // lerp(min, max, fraction) {
-        //     return (min-max) * fraction + min
-        // }
+        //runs many times per frame. Good place for physics/collision/ai
+        onFixedUpdate(time) {
 
-        //onDraw, runs 1x per frame. Good place to paint
+        }
+
+        //runs 1x per frame. Good place to paint
         onDraw(interpolation){
             // console.log(!this.sprite.iscolliding)
-			
 		}
     }
 );

@@ -1,12 +1,4 @@
-/* html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(ellipse at center, #1d1d1d 0%, #0b0b0b 60%);
-  overflow: hidden;
-} */
+
 :host {
   display: block;
   width: 60px;
@@ -14,25 +6,16 @@ body {
   box-sizing: border-box;
 }
 .switch {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   padding: 10px;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1d1d1d), color-stop(1, #131313));
-    /* border-radius: 10px; */
     box-shadow: 0 0.2em 0.1em 0.05em rgb(255 255 255 / 10%) inset, 0 -0.2em 0.1em 0.05em rgb(0 0 0 / 50%) inset, 0 0.5em 0.65em 0 rgb(0 0 0 / 30%);
     border: solid 0.25em #121212;
 }
 
 button {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   width: 100%;
   height: 100%;
   position: relative;

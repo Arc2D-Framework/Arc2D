@@ -54,7 +54,7 @@ namespace `ui.hud` (
                 this.machine.push(conversate)
             }
             else {
-                this.machine.push(this.observe);
+                this.machine.push(this.patrol);
             }
             return;
             /*

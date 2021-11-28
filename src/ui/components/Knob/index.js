@@ -1,8 +1,7 @@
 
 namespace `ui.components` (
-	class Knob2 extends WebComponent  {
+	class Knob extends WebComponent  {
 		
-
 		async onConnected(){
 			await super.onConnected();
 			this.knob 		= this.querySelector('.knob');
@@ -34,7 +33,7 @@ namespace `ui.components` (
 			this.angle = (bool && this.angle + 2 <= this.maxangle) 
 				? this.angle + 2 : (!bool && this.angle - 2 >= this.minangle) 
 				? this.angle - 2 : this.angle;
-			this.highlightTicks(true);
+			this.onHighlight(true);
 		}
 
 		onRotate(mouse){
@@ -45,26 +44,21 @@ namespace `ui.components` (
 
 				if(this.angle >= this.minangle && this.angle <= this.maxangle){
 					this.volumeSetting = Math.floor(this.angle / (this.maxangle / 100));
-					this.highlightTicks(true);
-					// this.tickHighlightPosition = Math.round((volumeSetting * 2.7) / 10); //interpolate how many ticks need to be highlighted
+					this.onHighlight(true);
 				}
 			}
         }
 
-		
-		highlightTicks(rotate=false) {
+		onHighlight(rotate=false) {
 			rotate && (
 				this.knob.style.transform = `rotate(${this.angle}deg)`
-			)
-			
+			);
 			var activeTicks = (Math.round(this.angle / 10) + 1);
 				this.ticks.forEach(tick => tick.classList.remove('activetick'))
 				this.ticks.slice(0,activeTicks).forEach(t => t.classList.add('activetick'))
 			
-			// update % value in text
-			// var pc = Math.round((this.angle/270)*100);
-			// console.log("percent", pc)
-			// $('.current-value').text(pc+'%');
+			var percent = Math.ceil((this.angle/270)*100);
+			console.log("percent", percent)
 		}
 	}
 )

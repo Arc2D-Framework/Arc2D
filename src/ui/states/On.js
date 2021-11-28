@@ -1,11 +1,8 @@
-import '@ui.states.State';
-
 
 namespace `ui.states` (
-    class On extends ui.states.State {
+    class On extends MonoBehavior {
         onStart(){
-            // this.off = new ui.states.Off(this.element,this.machine);
-            // this.element.button.classList.add("on")
+
         }
 
         onSleep(){
@@ -20,8 +17,6 @@ namespace `ui.states` (
 
         onUpdate(e){
             this.machine.pop(this)
-            // this.isFinished=true;
-            // this.machine.push(this.off);
         }
     }
-)
+);

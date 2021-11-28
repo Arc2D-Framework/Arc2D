@@ -4,6 +4,7 @@
     display: inline-block;
     width: 100px;
     height: 100px;
+    user-select: none;
   }
   
 :host .knob-surround {

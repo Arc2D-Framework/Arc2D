@@ -1,4 +1,4 @@
-import 'ui.components.Knob2';
+import 'ui.components.Knob';
 import 'ui.components.Switch';
 
 namespace `ui.screens` (
