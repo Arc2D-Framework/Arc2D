@@ -7,19 +7,30 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title>Testing Splash Loader</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-        <!-- <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script> -->
-        <script src="https://cdn.jsdelivr.net/gh/Nashorn/od-cocoon@latest/framework.src.js"></script>
+        <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8" namespace="ui.screens.ComponentsDemo"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/Nashorn/od-cocoon@latest/framework.src.js"></script> -->
         <script>
             Config.ROOTPATH  = "../";
             Config.SPLASH = "ui.components.SplashLoader";
-            Config.SPLASH_FADE_DELAY = 2000;
+            Config.SPLASH_FADE_DELAY = 200;
             Config.APP_WAITS_ON_SPLASH = true;
-            Config.NAMESPACE = "ui.screens.ComponentsDemo"
+            // Config.FILENAME = "index.js"
+            // Config.NAMESPACE = "ui.screens.ComponentsDemo"
         </script>
     </head>
 
     <body style="opacity: 1;">
-        <ui-screens-components-demo></ui-screens-components-demo>
+        <ripple-button>
+            <span slot="label">
+                NO SHADOW
+            </span>
+        </ripple-button>
+        <!-- <div id="ripple-button">
+            <button>NO SHADOW</button>
+        </div> -->
+        <!-- <ui-screens-components-demo></ui-screens-components-demo> -->
+        <!-- <ui-screens-components-demo></ui-screens-components-demo> -->
+        
         <!-- <ui-components-side-bar></ui-components-side-bar>
         <ui-components-accordion style="width: 300px;"></ui-components-accordion>
         <ui-components-particle-button></ui-components-particle-button> -->

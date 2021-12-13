@@ -18,26 +18,17 @@ namespace `ui.components` (
             this.y_velocity = 0;
             this.x_velocity = 0;
             this.direction = 0;
-
             this.behaviors.push(new Idle(this))
         }
 
         async onConnected(options=this.options){
             await super.onConnected();
-
-            // this.canvas = options.canvas||this.querySelector("canvas");
-            // this.context = options.context||this.canvas.getContext("2d");
             this.image = options.image||this.image; // Path to image sprite sheet
             this.x = options.x; // Coordinates on canvas
             this.y = options.y;
             this.width = options.width; // Size of sprite frame
             this.height = options.height;
-            // this.frames = options.frames; // Number of frames in a row
-            // this.frameIndex = options.frameIndex; // Current frame
-            // this.row = options.row; // Row of sprites
-            // this.ticksPerFrame = options.ticksPerFrame; // Speed of animation
-            // this.tickCount = options.tickCount||0; // How much time has passed
-            console.log("onConnected " + this.namespace)
+            // console.log("onConnected " + this.namespace)
         }
 
         async onAwake(){
@@ -70,21 +61,9 @@ namespace `ui.components` (
             this.ticksPerFrame = 1;
         }  
 
-        
-
         onUpdate(timestamp, delta){
             this.renderer && this.renderer.onUpdate(timestamp, delta);
             this.behaviors.onUpdate(timestamp, delta);
-            // if(!this.renderer){return}
-            // this.tickCount += 1;
-            // if (this.tickCount > this.ticksPerFrame) {
-            //     this.tickCount = 0;
-            //     if (this.frameIndex < this.frames - 1) {
-            //         this.frameIndex += 1;
-            //     } else {
-            //         this.frameIndex = 0;
-            //     }
-            // }
         }
 
         async onDraw(interpolation){

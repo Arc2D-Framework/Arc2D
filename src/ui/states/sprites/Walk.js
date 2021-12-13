@@ -1,10 +1,10 @@
-// import '@ui.states.sprites.Idle';
-// var {Idle} = ui.states.sprites;
+import '@ui.states.sprites.Run';
+var {Run} = ui.states.sprites;
 
 namespace `ui.states.sprites` (
     class Walk extends MonoBehavior {
         onStart(){
-            // this.walk = new Idle(this.element);
+            this.run = new Run(this.element);
         }
 
         onSleep(){
@@ -18,8 +18,11 @@ namespace `ui.states.sprites` (
 
         onUpdate(timestamp, delta){
             var dir = Input.getKeyHeld();
-            var run = dir == "space";
-            if(dir){
+            this.lastX = this.element.x;
+            this.lastY = this.element.y;
+            var run = Input.getButtonDown(Input.run);;
+            if(dir && (dir=="left"||dir=="right")){
+                // console.log("dir",dir);
                 if(dir=="left"){
                     this.element.direction=-1;
                 }
@@ -27,10 +30,13 @@ namespace `ui.states.sprites` (
                     this.element.direction=1;
                 }
                 if(run){
-                    
+                    this.machine.push(this.run);
+                    return;
                 }
-                this.element.x_velocity = this.element.velocity*delta + run?40:0;;
+                this.element.x_velocity = this.element.velocity*delta;
                 this.element.x += this.element.x_velocity*this.element.direction;
+                // var velocity = this.element.velocity*delta;
+                // this.element.x += velocity * this.element.direction;
             }
             !dir && this.machine.pop(this);
         }
@@ -38,6 +44,8 @@ namespace `ui.states.sprites` (
         onDraw(interpolation){
             var x = this.element.x;
             var y = this.element.y;
+            // var x = this.lastX + (this.element.x - this.lastX) * interpolation,
+            //     y = this.lastY + (this.element.y - this.lastY) * interpolation;
             this.element.style.transform = `translate3d(${x}px, ${y}px, 0px) scaleX(${this.element.direction})`;
 		}
     }

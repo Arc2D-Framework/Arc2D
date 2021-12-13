@@ -46,8 +46,7 @@ var Input = (function getKeysInput() {
         38: "up",
         37: "left",
         39: "right",
-        40: "down",
-        32: "space"
+        40: "down"
     }
     
 	var keys = {};
@@ -73,7 +72,7 @@ var Input = (function getKeysInput() {
         if(dir && held_directions.indexOf(dir) === -1) {
             held_directions.unshift(dir)
         }
-        console.log(held_directions)
+        // console.log(held_directions)
 	});
 	document.addEventListener("keyup", function (e) {
 		keys[e.keyCode] = false;

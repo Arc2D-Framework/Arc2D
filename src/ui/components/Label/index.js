@@ -1,5 +1,5 @@
 
-
+namespace `ui.components` (
  class Label extends WebComponent {
         async onConnected(){
             this.name="Jay";
@@ -18,9 +18,9 @@
             return false
         }
 
-        inShadow(){
-            return false
-        }
+        // inShadow(){
+        //     return false
+        // }
 
         cssStyle(){return `
             :host {
@@ -34,12 +34,11 @@
         template(){
             return `
                 <template>
-                    <div>${this.name}</div>
-                    <i style="color:orange;"><slot name="title">[label here]</slot></i>
+                    <i><slot name="title">[label here]</slot></i>
                 </template>
             `
         }
     }
-    tag(Label,'ui-components-label');
-    export {Label}
+)
+ 
 

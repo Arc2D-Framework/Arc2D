@@ -40,15 +40,13 @@ namespace `ui.components` (
         }
 
         onScreenClicked(e){
-            var self = this.querySelector(`.${this.classname}`,e);
-                self != this && this.classList.remove("active");
+            e.target != this && this.classList.remove("active")
         }
 
         onSelect(e){
             this.audio.play();
             var li = e.target;
                 li.querySelector("input").checked = li.classList.toggle("selected");
-                // debugger;
                 if(li.querySelector("input").value == "all"){
                     this.selectAll();
                 }
@@ -75,7 +73,6 @@ namespace `ui.components` (
         }
 
         onClear(){
-            debugger;
             var inputs = Array.from(this.querySelectorAll("li input"));
                 inputs.forEach(input => input && (input.checked = false));
             super.onClear();

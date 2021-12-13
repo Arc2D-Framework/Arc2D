@@ -1,15 +1,5 @@
 namespace `ui.components` (
 	class WebComponents extends WebComponent  {
-		static get observedAttributes() {
-			return ['open'];
-		}
-
-		attributeChangedCallback(attrName, oldValue, newValue) {
-			if (oldValue !== newValue) {
-				this[attrName] = this.hasAttribute(attrName);
-			}
-		}
-		
 		async onConnected() {
 			await super.onConnected();
 			this.on('click', e => this.close(e), true, "button");
@@ -17,10 +7,20 @@ namespace `ui.components` (
 			this.open = this.open;
 			this.open =true
 		}
+
+		static get observedAttributes() {
+			return ['open'];
+		}
 		
-		disconnectedCallback() {
-			// this.shadowRoot.querySelector('button').removeEventListener('click', e => this.close(e));
-			// this.shadowRoot.querySelector('.overlay').removeEventListener('click', e => this.close(e));
+		attributeChangedCallback(attrName, oldValue, newValue) {
+			if (oldValue !== newValue) {
+				this[attrName] = this.hasAttribute(attrName);
+			}
+		}
+		
+		async connectedCallback() {
+			await super.connectedCallback();
+			// alert("cool modal")
 		}
 		
 		get open() {

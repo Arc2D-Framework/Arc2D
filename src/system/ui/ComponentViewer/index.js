@@ -1,4 +1,4 @@
-import 'system.ui.Splash';
+// import 'system.ui.Splash';
 
 async function include(ns){
     ns = arguments[1]

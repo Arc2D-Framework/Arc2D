@@ -26,7 +26,7 @@ namespace `system.diagnostics.unit` (
                         }
                         cssStyle(){
                             return `
-                                .ToggleButton {
+                                :host {
                                     display:block;
                                     width:100px;
                                     height:50px;
@@ -41,11 +41,11 @@ namespace `system.diagnostics.unit` (
                     class ToggleButtonExtended extends system.diagnostics.unit.com.ToggleButton {
                         cssStyle(){
                             return `
-                                .ToggleButtonExtended {
+                                :host {
                                     display:block;
                                     width:200px;
                                     height:50px;
-                                    background-color:rgb(255, 0, 0);
+                                    background-color:red;
                                 }
                             `
                         }
@@ -174,8 +174,9 @@ namespace `system.diagnostics.unit` (
                 application.appendChild(b);
                 
 
-                await wait(500);
+                await wait(1000);
                 try{
+                    // debugger;
                     var style = window.getComputedStyle(b)
                     var bg=style.getPropertyValue('background-color');
 
@@ -195,15 +196,22 @@ namespace `system.diagnostics.unit` (
 
 
             this.expected("components to initialize using non-connected DOM node as innerHTML template source, ex: `new system.diagnostics.unit.com.SampleD(aDiv)`, where 'aDiv' is a node (not in the DOM)", async (resolve,reject) => {
+
                 await import('/src/system/diagnostics/unit/com/SampleD/index.js');
                 var el = `<div id="sample-d-html-123">
                             Adoption: a custom tag will wrap a new non-connected DIV in the DOM
                           </div>`.toNode();
                 // debugger;
+                document.body.appendChild(el);
+
                 var n = new system.diagnostics.unit.com.SampleD(el);
-                application.appendChild(n);
+                
+                console.log(n)
+                // document.body.appendChild(n);
+                // n.adopts(el)
                 await wait(100);
-                var dampled = application.querySelector("#sample-d-html-123");
+                console.log(n)
+                var dampled = document.querySelector("#sample-d-html-123");
                 if(dampled){
                     resolve(true)
                 } else {
@@ -215,14 +223,14 @@ namespace `system.diagnostics.unit` (
 
             this.expected("components to be stealth initialized: using already connected DOM node as is: `new system.diagnostics.unit.com.SampleD(aDomDiv)`, where 'aDomDiv' is an existing node already in the DOM", async (resolve,reject) => {
                 await import('/src/system/diagnostics/unit/com/SampleD/index.js');
-                var el = `<div id="html-123" class="mybox">Camouflaged: Uses existing Dom-Connected Div as is, no wrapping or physical decoration apparent</div>`.toDomElement();
+                var el = `<div id="html-123" class="mybox">Camouflaged: Uses existing Dom-Connected Div as is, no wrapping or physical decoration apparent</div>`.toNode();
                 application.appendChild(el);
                 var el = application.querySelector("#html-123");
                 var n = new system.diagnostics.unit.com.SampleD(el);
                 
                 await wait(100);
                 
-                if(n && application.querySelector("#html-123")){
+                if(n && n.element == el){
                     resolve(true)
                 } else {
                     reject("no sample d")

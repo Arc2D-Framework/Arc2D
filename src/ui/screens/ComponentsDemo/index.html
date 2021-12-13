@@ -1,25 +1,13 @@
 <template>
-	<ui-components-side-bar></ui-components-side-bar>
-	<!-- <ui-components-menu-toggle-button></ui-components-menu-toggle-button> -->
-	<ripple-button></ripple-button>
-	<ui-components-particle-button></ui-components-particle-button>
-	<ui-components-accordion style="width:400px;"></ui-components-accordion>
-	<ui-components-accordions-basic-accordion>
-		<template>
-			<div class="tab" slot="content">
-				<input type="checkbox" id="chck1">
-				<label class="tab-label" for="chck1">Tab Item 1</label>
-				<div class="tab-content">
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, reiciendis!
-				</div>
-			</div>
-			<div class="tab" slot="content">
-				<input type="checkbox" id="chck2">
-				<label class="tab-label" for="chck2">Tab Item 2</label>
-				<div class="tab-content">
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, reiciendis!
-				</div>
-			</div>
-		</template>
-	</ui-components-accordions-basic-accordion>
+	<ripple-button>
+		<span slot="label">
+			NO SHADOW
+		</span>
+	</ripple-button>
+	<ripple-button shadow="true">
+		<span slot="label">
+			SHADOW
+			<ui-components-label shadow="true"></ui-components-label>
+		</span>
+	</ripple-button>
 </template>

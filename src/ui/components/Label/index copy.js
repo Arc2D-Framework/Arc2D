@@ -1,6 +1,6 @@
 
 
-    export class Label extends WebComponent {
+ class Label extends WebComponent {
         async onConnected(){
             this.name="Jay";
             await super.onConnected();
@@ -40,4 +40,6 @@
             `
         }
     }
-    tag(Label,'label-output');
+    tag(Label,'ui-components-label');
+    export {Label}
+

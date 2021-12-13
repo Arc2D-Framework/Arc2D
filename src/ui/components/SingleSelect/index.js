@@ -1,5 +1,5 @@
 namespace `ui.components` (
-    class SingleSelect extends WebComponent {
+    class SingleSelect extends Component {
         constructor(label,placeholder="",items){
             super();
             this.items=items;
