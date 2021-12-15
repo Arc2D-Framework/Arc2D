@@ -3,7 +3,7 @@ namespace `ui.components` (
 		async onConnected(){
             await super.onConnected();
 			
-			this.on("click", (e) => this.onModalBtnClick(e), false, '#modal_open-btn');
+			this.on("click", (e) => this.onModalBtnClick(e), false, 'label.modal-button');
 		}
 
 		onModalBtnClick(e) {
