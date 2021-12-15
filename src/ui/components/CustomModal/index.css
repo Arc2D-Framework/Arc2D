@@ -1,0 +1,127 @@
+.CustomModal {
+    display:inline-flex;
+}
+
+.CustomModal label {
+    width: 125px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    line-height: 1em;
+    min-height: 3rem;
+    font-size: .875rem;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+}
+
+.CustomModal label.btn-secondary {
+    background: #2a2e37;
+}
+
+.CustomModal label.btn-primary {
+    background-color: #4168db;
+}
+
+.CustomModal label:focus {
+    animation: buttonpop 0.3s ease-out;
+}
+
+.CustomModal label:active {
+    animation: none;
+}
+
+.CustomModal input.modal-toggle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+}
+
+.CustomModal .modal {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.43);
+    transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+    transition-duration: .15s;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    align-items: center;
+}
+
+.CustomModal .modal-box {
+    opacity: 1;
+    background-color: #3d4451;
+    padding: 1.5rem;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+    max-width: 32rem;
+}
+
+.CustomModal .modal-open, 
+.CustomModal .modal-toggle:checked + .modal, 
+.CustomModal .modal:target {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.CustomModal :is(.modal-toggle:checked) + .modal > .modal-box{
+    animation-name: fadeInDown;
+    animation-duration: .8s;
+}
+
+.CustomModal .modal-box p {
+    font-weight: 300;
+}
+
+.CustomModal label,
+.CustomModal .modal-box p,
+.CustomModal .modal-box label {
+    color: #e3e3e3;
+}
+
+.CustomModal .modal-action {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+}
+
+.CustomModal label.modal-button,
+.CustomModal .modal-action label.btn-primary:hover {
+    background-color: #358a4f;
+}
+
+.CustomModal label.modal-button:hover,
+.CustomModal .modal-action label.btn-secondary:hover {
+    background-color: #d22121;
+}
+
+@media only screen and (min-width: 320px) and (max-width:480px){
+    .CustomModal .modal-box {
+        margin:0 20px;
+    }
+}
+
+@-webkit-keyframes fadeInDown { from { opacity: 0; -webkit-transform: translate3d(0, -100%, 0); transform: translate3d(0, -100%, 0); } to { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); } } @keyframes fadeInDown { from { opacity: 0; -webkit-transform: translate3d(0, -100%, 0); transform: translate3d(0, -100%, 0); } to { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); } }

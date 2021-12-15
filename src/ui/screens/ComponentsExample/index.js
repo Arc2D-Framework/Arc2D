@@ -1,6 +1,7 @@
+import 'ui.components.CustomModal';
 
 namespace `ui.screens` (
-    class CardApp extends Application {
+    class ComponentsExample extends Application {
         constructor(element){
             super(element);
         }
