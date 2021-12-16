@@ -1,4 +1,5 @@
 import 'ui.components.CustomModal';
+import 'ui.components.ContextMenu';
 
 namespace `ui.screens` (
     class ComponentsExample extends Application {

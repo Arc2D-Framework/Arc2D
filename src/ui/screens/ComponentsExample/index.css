@@ -11,11 +11,36 @@ html, body, .ComponentsExample {
 .ComponentsExample #container {
     margin: 50px 50px 0 50px;
     height: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.ComponentsExample section.component {
+    margin: 0 20px 20px 0;
 }
 
 .ComponentsExample h3 {
     color: #58b0ff;
 }
+
+.ComponentsExample h3 {
+    padding: 30px 0 8px;
+    position: relative;
+    z-index: 1;
+}
+  
+.ComponentsExample h3::before {
+    content: "";
+    position: absolute;
+    left: 125px;
+    bottom: 6px;
+    width: 250px;
+    height: 14px;
+    transform: skew(-24deg) translateX(-50%);
+    background: linear-gradient(90deg, rgba(59, 95, 204, 0.53) 0%, rgba(118, 59, 204, 0.53) 35%, rgba(0, 255, 76, 0.16) 100%);
+    z-index: -1;
+}  
 
 .ComponentsExample p {
     color: #e3e3e3;
@@ -25,4 +50,9 @@ html, body, .ComponentsExample {
     padding-bottom:15px;
     font-weight: 300;
     font-size: 14px;
+}
+
+.ComponentsExample section.component .a_links{
+    font-weight: 400;
+    color: #ff8921;
 }

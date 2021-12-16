@@ -1,0 +1,138 @@
+.ContextMenu .menu-container {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    height: 300px;
+    border: 2px solid #6993e3;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.ContextMenu h1,
+.ContextMenu h2 {
+    color: #e3e3e3;
+}
+
+.ContextMenu .menu {
+    position: absolute;
+    width: 200px;
+    padding: 2px;
+    margin: 0;
+    border: 1px solid #bbb;
+    background: #eee;
+    background: linear-gradient(to bottom, #fff 0%, #e5e5e5 100px, #e5e5e5 100%);
+    z-index: 100;
+    border-radius: 3px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,.2);
+    opacity: 0;
+    transform: translate(0, 15px) scale(.95);
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    pointer-events: none;
+}
+
+.ContextMenu .menu-item {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.ContextMenu .menu-btn { 
+    display: block;
+    color: #444;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 8px;
+    border-radius: 3px;
+}
+
+.ContextMenu button.menu-btn {
+    background: none;
+    line-height: normal;
+    overflow: visible;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    width: 100%;
+    text-align: left;
+}
+
+.ContextMenu a.menu-btn {
+    outline: 0 none;
+    text-decoration: none;
+}
+
+.ContextMenu .menu-text {
+    margin-left: 25px;
+}
+
+.ContextMenu .menu-btn .fa {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ContextMenu .menu-item:hover > .menu-btn { 
+    color: #fff; 
+    outline: none; 
+    background-color: #2E3940;
+    background: linear-gradient(to bottom, #5D6D79, #2E3940);
+    border: 1px solid #2E3940;
+}
+
+.ContextMenu .menu-item-disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.ContextMenu .menu-item-disabled .menu-btn {
+    cursor: default;
+}
+
+.ContextMenu .menu-separator {
+    display:block;
+    margin: 7px 5px;
+    height:1px;
+    border-bottom: 1px solid #fff;
+    background-color: #aaa;
+}
+
+.ContextMenu .menu-item-submenu::after {
+    content: "";
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: #808080; 
+}
+
+.ContextMenu .menu-item-submenu:hover::after {
+    border-left-color: #fff;
+}
+
+.ContextMenu .menu .menu {
+    top: 4px;
+    left: 99%;
+}
+
+.ContextMenu .menu-show,
+.ContextMenu .menu-item:hover > .menu {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    pointer-events: auto;
+}
+
+.ContextMenu .menu-item:hover > .menu {
+    transition-delay: 300ms;
+}
