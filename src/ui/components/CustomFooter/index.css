@@ -1,0 +1,158 @@
+.CustomFooter .main-container {
+	background-color: rgb(17, 24, 39);
+    border-radius: 10px;
+}
+
+.CustomFooter .footer-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1536px;
+}
+
+.CustomFooter .sub-wrapper {
+    padding-top: 2.5rem;
+    gap: 3rem;
+    display: grid;
+    margin-bottom: 4rem;
+}
+
+.CustomFooter .logo_social-container {
+    grid-column: 1/-1;
+}
+
+.CustomFooter .company_logo_wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.CustomFooter .company_logo_link {
+    color: rgb(243, 244, 246);
+    font-weight: 700;
+    gap: .5rem;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.CustomFooter .company_logo_wrapper svg {
+    position: absolute;
+    left: 75px;
+    top: -9px;
+    width: 45px;
+    height: 45px;
+    color: rgb(99, 102, 241);
+}
+
+.CustomFooter .footer-note {
+    margin-bottom: 1.5rem;
+}
+
+.CustomFooter .social_icons-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.CustomFooter .social_icons-wrapper a {
+    transition-duration: .1s;
+    color: rgb(156, 163, 175);
+}
+
+.CustomFooter .social_icons-wrapper a:hover {
+    color: #6366f1;
+}
+
+.CustomFooter .social_icons-wrapper a svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.CustomFooter .footer_nav-title {
+    color: rgb(243, 244, 246);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.CustomFooter .footer_nav-title + nav {
+    gap: 1rem;
+    flex-direction: column;
+    display: flex;
+}
+
+.CustomFooter .footer_nav-title + nav a {
+    transition-duration: .1s;
+    color: rgb(156, 163, 175);
+    text-decoration: none;
+}
+
+.CustomFooter .footer_nav-title + nav a:hover {
+    color: #6366f1;
+}
+
+.CustomFooter .footer-copyright {
+    color: rgb(156, 163, 175);
+    font-size: .875rem;
+    line-height: 1.25rem;
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-color: rgb(31, 41, 55);
+    border-top-width: 1px;
+}
+
+/* -=-=-=--==-=-=-=-=-=-=-=-=-=-=-= */
+
+@media only screen and (min-width:640px) {
+    .CustomFooter .footer-note {
+        padding-right: 2rem;
+    }   
+}
+
+/* -=-=-=--==-=-=-=-=-=-=-=-=-=-=-= */
+
+@media only screen and (max-width:767px) {
+    .CustomFooter .footer-wrapper {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .CustomFooter .sub-wrapper {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+/* -=-=-=--==-=-=-=-=-=-=-=-=-=-=-= */
+
+@media only screen and (min-width:768px) {
+    .CustomFooter .footer-wrapper {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .CustomFooter .sub-wrapper {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .CustomFooter .company_logo_link {
+        line-height: 2rem;
+    }
+}
+
+/* -=-=-=--==-=-=-=-=-=-=-=-=-=-=-= */
+
+@media only screen and (min-width:1024px) {
+    .CustomFooter .sub-wrapper {
+        padding-top: 3rem;
+        gap: 2rem;
+        grid-template-columns: repeat(6,minmax(0,1fr));
+    }
+
+    .CustomFooter .logo_social-container {
+        grid-column: span 2/span 2;
+    }
+
+    .CustomFooter .company_logo_wrapper {
+        margin-top:-.5rem;
+    }
+}
