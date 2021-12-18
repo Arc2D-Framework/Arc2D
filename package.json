@@ -21,7 +21,7 @@
         "http-server": "^0.12.3",
         "od-server": "github:Nashorn/od-server#1.0.0",
         "portfinder": "^1.0.28",
-        "od-plopgen-templates": "github:Nashorn/od-plopgen-templates#1.0.0",
+        "od-plopgen-templates": "github:Nashorn/od-plopgen-templates#1.0.1",
         "od-seam": "github:Nashorn/od-seam#1.0.2",
         "od-toolset": "github:Nashorn/od-toolset#1.0.0"
     },

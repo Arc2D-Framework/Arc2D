@@ -43,6 +43,13 @@ module.exports = function (plop) {
 		return tag
 	});
 
+	plop.addHelper('FQNS_to_NSTagName', function (fqns) {
+		// var parts = fqns.split(".");
+		// var className = parts.pop();
+		var tag = fqns.replace(/\./gm,"-").replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
+		return tag
+	});
+
     // create your generators here
     plop.setGenerator('component', {
         description: 'Generates a UI Component',

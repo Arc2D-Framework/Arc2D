@@ -14,30 +14,30 @@ namespace `ui.components` (
             return true
         }
 
-        onLoadInstanceStylesheet(){
-            return false
-        }
+        // onLoadInstanceStylesheet(){
+        //     return false
+        // }
 
         // inShadow(){
         //     return false
         // }
 
-        cssStyle(){return `
-            :host {
-                border:1px solid green;
-            }
-            :host(.active) {
-                border:3px solid red;
-            }
-        `}
+        // cssStyle(){return `
+        //     :host span{
+        //         color:red;
+        //     }
+        //     :host(.active) {
+        //         border:3px solid red;
+        //     }
+        // `}
 
-        template(){
-            return `
-                <template>
-                    <i><slot name="title">[label here]</slot></i>
-                </template>
-            `
-        }
+        // template(){
+        //     return `
+        //         <template>
+        //             <i><slot name="label">[label here]</slot></i>
+        //         </template>
+        //     `
+        // }
     }
 )
  
