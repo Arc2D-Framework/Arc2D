@@ -1,6 +1,7 @@
 import 'ui.components.CustomModal';
 import 'ui.components.ContextMenu';
 import 'ui.components.CustomFooter';
+import 'ui.components.ProductGrid';
 
 namespace `ui.screens` (
     class ComponentsExample extends Application {
@@ -11,5 +12,6 @@ namespace `ui.screens` (
         async onConnected() {
             await super.onConnected();
         }
+
     }
 );
