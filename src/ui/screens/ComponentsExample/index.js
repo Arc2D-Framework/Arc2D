@@ -1,4 +1,5 @@
 import 'ui.components.CustomModal';
+import 'ui.components.GooeyNav';
 import 'ui.components.ContextMenu';
 import 'ui.components.CustomFooter';
 import 'ui.components.ProductGrid';

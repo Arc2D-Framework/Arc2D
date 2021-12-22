@@ -1,7 +1,8 @@
 .ProductGrid .outer-wrapper {
     padding-top: 1.5rem;
+    border-radius: 10px;
     padding-bottom: 1.5rem;
-    background: linear-gradient(180deg, rgba(64,64,29,0.9499999829033176) 20%, rgba(225,158,62,0.8267506831834296) 70%, rgba(81,199,183,0.65) 100%);
+    background: linear-gradient(43deg, rgba(111, 170, 38, 0.43) 5%, rgba(32, 34, 162, 0.3) 65%, rgba(30, 32, 31, 0.6) 100%);
 }
 
 .ProductGrid .inner-wrapper {
@@ -20,7 +21,7 @@
 }
 
 .ProductGrid .product_grid-title {
-    color: #e3e3e3;
+    color: #fff;
     font-weight: 700;
     font-size: 1.5rem;
     line-height: 2rem;
@@ -44,10 +45,12 @@
     border-radius: .5rem;
     display: inline-block;
     text-decoration: none;
+    font-weight: 500;
 }
 
 .ProductGrid .show-more:hover {
-    background-color: rgb(243, 244, 246);
+    background-color: #49d740;
+    color: #fff;
 }
 
 .ProductGrid .product-container {
@@ -192,4 +195,31 @@
     }
 }
 
-@-webkit-keyframes shadow-drop-2-center { 0% { -webkit-transform: translateZ(0); transform: translateZ(0); -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); } 100% { -webkit-transform: translateZ(50px); transform: translateZ(50px); -webkit-box-shadow: 0 0 20px 0px rgb(211, 255, 54); box-shadow: 0 0 20px 0px rgb(211, 255, 54); } } @keyframes shadow-drop-2-center { 0% { -webkit-transform: translateZ(0); transform: translateZ(0); -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); } 100% { -webkit-transform: translateZ(50px); transform: translateZ(50px); -webkit-box-shadow: 0 0 20px 0px rgb(211, 255, 54); box-shadow: 0 0 20px 0px rgb(211, 255, 54); } }
+@-webkit-keyframes shadow-drop-2-center {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px #49d740;
+        box-shadow: 0 0 20px 0px #49d740;
+    }
+}
+@keyframes shadow-drop-2-center {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px #49d740;
+        box-shadow: 0 0 20px 0px #49d740;
+    }
+}

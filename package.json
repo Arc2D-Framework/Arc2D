@@ -14,16 +14,17 @@
     "dependencies": {
         "od-cocoon": "github:Nashorn/od-cocoon#4.1.3",
         "od-paginator": "github:Nashorn/od-paginator#1.0.1",
+        "plop": "^3.0.5",
         "todomvc-app-css": "^2.0.1",
         "todomvc-common": "^1.0.2"
     },
     "optionalDependencies": {
         "http-server": "^0.12.3",
-        "od-server": "github:Nashorn/od-server#1.0.0",
-        "portfinder": "^1.0.28",
         "od-plopgen-templates": "github:Nashorn/od-plopgen-templates#1.0.1",
         "od-seam": "github:Nashorn/od-seam#1.0.2",
-        "od-toolset": "github:Nashorn/od-toolset#1.0.0"
+        "od-server": "github:Nashorn/od-server#1.0.0",
+        "od-toolset": "github:Nashorn/od-toolset#1.0.0",
+        "portfinder": "^1.0.28"
     },
     "devDependencies": {
         "javascript-obfuscator": "^2.12.0"

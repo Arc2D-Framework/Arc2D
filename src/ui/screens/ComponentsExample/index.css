@@ -2,9 +2,13 @@ html, body, .ComponentsExample {
     padding: 0;
     display: block;
     box-sizing:border-box;
-    background: #3d4451;
+    background:linear-gradient(45deg, rgba(244, 116, 59, 0.59) 0%, rgba(82, 170, 94, 0.6) 40%, rgba(18, 76, 166, 0.5) 100%);
     font-family: 'Poppins', sans-serif;
-    width:100%;
+    border-radius: 10px;
+}
+
+body {
+    margin: 3rem;
 }
 
 .ComponentsExample #container {
@@ -17,13 +21,14 @@ html, body, .ComponentsExample {
 .ComponentsExample section.component {
     margin: 0 20px 20px 0;
     flex: 0 1 auto;
+    width:992px;
     max-width: 992px;
-    width: 992px;
     margin:25px;
 }
 
-.ComponentsExample h3 {
-    color: #58b0ff;
+.ComponentsExample h3,
+.ComponentsExample p {
+    color: #fff;
 }
 
 .ComponentsExample h3 {
@@ -40,13 +45,9 @@ html, body, .ComponentsExample {
     width: 250px;
     height: 14px;
     transform: skew(-24deg) translateX(-50%);
-    background: linear-gradient(90deg, rgba(59, 95, 204, 0.53) 0%, rgba(118, 59, 204, 0.53) 35%, rgba(0, 255, 76, 0.16) 100%);
+    background: linear-gradient(45deg, rgba(255, 135, 7, 0.26) 0%, rgba(82, 170, 94, 0.6) 40%, rgba(18, 76, 166, 0.5) 100%);
     z-index: -1;
 }  
-
-.ComponentsExample p {
-    color: #e3e3e3;
-}
 
 .ComponentsExample p {
     padding-bottom:15px;
@@ -56,5 +57,39 @@ html, body, .ComponentsExample {
 
 .ComponentsExample section.component .a_links{
     font-weight: 400;
-    color: #ff8921;
+    color: #47ff21;
+    text-decoration: none;
+}
+
+.ComponentsExample section.component code {
+    color: #47ff21;
+    font-weight: 600;
+}
+
+.ComponentsExample .contextmenu-container {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    height: 300px;
+    border: 2px solid #e3a869;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.ComponentsExample .contextmenu-container h1,
+.ComponentsExample .contextmenu-container h2{
+    color:#fff;
+}
+
+@media only screen and (max-width:480px){
+    html, body, .ComponentsExample {
+        border-radius:0;
+    }
+    body {
+        margin:0;
+    }
 }

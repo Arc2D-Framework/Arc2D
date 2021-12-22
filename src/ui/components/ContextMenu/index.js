@@ -17,7 +17,13 @@ namespace `ui.components` (
 
 		async onConnected() {
             await super.onConnected();
-			this.on("mousedown", e=> this.hide(e), true);
+			this.menuContainer = document.querySelector('.contextmenu-container');
+			this.menuContainer.addEventListener("contextmenu", e=> this.show(e), false);
+			this.subMenuItems = Array.from(this.querySelectorAll('.menu-item.submenu ul .menu-item'));
+			this.subMenuItems.forEach((item) =>{
+				item.addEventListener("mousedown", (e) => this.hide(e), false);
+			});
+			// this.on("mousedown", e=> this.hide(e), true);
 			this.menu = this.querySelector('.menu');
 			// await this.render(items, item => this.ul.appendChild(new ui.components.todo.TodoItem(item)), this.ul)
 
@@ -50,7 +56,7 @@ namespace `ui.components` (
 			this.menu.style.left = e.pageX + 'px';
 			this.menu.style.top = e.pageY + 'px';
 			this.menu.classList.add('menu-show');
-			this.classList.add("visible")
+			this.classList.add("visible");
 		}
 
 		hide(e){
@@ -59,10 +65,10 @@ namespace `ui.components` (
 			this.classList.remove("visible")
 		}
 
-		toggle(e){
-			e.preventDefault();
-			this.menu.classList.toggle('menu-show');
-			this.classList.toggle("visible")
-		}
+		// toggle(e){
+		// 	e.preventDefault();
+		// 	this.menu.classList.toggle('menu-show');
+		// 	this.classList.toggle("visible")
+		// }
 	}
 )
