@@ -19,13 +19,13 @@ namespace `ui.components` (
             await super.onConnected();
 			this.menuContainer = document.querySelector('.contextmenu-container');
 			this.menuContainer.addEventListener("contextmenu", e=> this.show(e), false);
-			this.subMenuItems = Array.from(this.querySelectorAll('.menu-item.submenu ul .menu-item'));
-			this.subMenuItems.forEach((item) =>{
-				item.addEventListener("mousedown", (e) => this.hide(e), false);
-			});
-			// this.on("mousedown", e=> this.hide(e), true);
+			// this.subMenuItems = Array.from(this.querySelectorAll('.menu-item.submenu ul .menu-item'));
+			// this.subMenuItems.forEach((item) =>{
+			// 	item.addEventListener("mousedown", (e) => this.hide(e), false);
+			// });
+
+			this.on("mousedown", e=> this.hide(e), true); // hide menu on any click, anywhere
 			this.menu = this.querySelector('.menu');
-			// await this.render(items, item => this.ul.appendChild(new ui.components.todo.TodoItem(item)), this.ul)
 
         }
 

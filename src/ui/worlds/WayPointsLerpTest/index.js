@@ -28,7 +28,7 @@ namespace `ui.worlds` (
                new Vector(99,77),
                new Vector(0,0)
             ];
-            this.velocity=.7;
+            this.velocity=1;
             this.currentWP = 0;
             this.wayptNav = new WaypointNavigator(this);
             

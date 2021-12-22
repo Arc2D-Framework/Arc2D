@@ -10,7 +10,7 @@ namespace `ui.worlds` (
 
             this.coords = {x: 0, y: 0};
             this.box = this.querySelector("#box")
-            this.dest = {x: 300, y: 200};
+            this.dest = {x: 0, y: 200};
             this.duration = 500;
              
         }
