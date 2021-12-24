@@ -1,4 +1,3 @@
-// import '@system.input.Keyboard';
 import '@system.input.Gamepad';
 import '@ui.states.sprites.Idle';
 var {Idle} = ui.states.sprites;
@@ -28,7 +27,6 @@ namespace `ui.components` (
             this.y = options.y;
             this.width = options.width; // Size of sprite frame
             this.height = options.height;
-            // console.log("onConnected " + this.namespace)
         }
 
         async onAwake(){

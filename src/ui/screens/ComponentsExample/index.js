@@ -1,8 +1,4 @@
-import 'ui.components.CustomModal';
 import 'ui.components.GooeyNav';
-import 'ui.components.ContextMenu';
-import 'ui.components.CustomFooter';
-import 'ui.components.ProductGrid';
 
 namespace `ui.screens` (
     class ComponentsExample extends Application {
@@ -13,7 +9,7 @@ namespace `ui.screens` (
         async onConnected() {
             await super.onConnected();
             this.contextmenu = this.querySelector("ui-components-context-menu");
-            this.on('contextmenu', (e) => this.onContextMenu(e), false);
+            // this.on('contextmenu', (e) => this.onContextMenu(e), false);
             // this.on("mousedown", e => this.onToggleMenu(e))
         }
 

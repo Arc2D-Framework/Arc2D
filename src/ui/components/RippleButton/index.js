@@ -36,6 +36,7 @@ namespace `ui.components` (
 		isComposable(){return true}
 
 		async onClick(e){
+			debugger;
 			this.thread.postMessage(100);//send to worker
 			const button = e.target;
 

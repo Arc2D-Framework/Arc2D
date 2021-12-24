@@ -3,7 +3,7 @@
 namespace `ui.states.sprites` (
     class Run extends MonoBehavior {
         onStart(){
-            // this.run = new Run(this.element);
+
         }
 
         onSleep(){
@@ -17,8 +17,8 @@ namespace `ui.states.sprites` (
 
         onUpdate(timestamp, delta){
             var dir = Input.getKeyHeld();
-            this.lastX = this.element.x;
-            this.lastY = this.element.y;
+            // this.lastX = this.element.x;
+            // this.lastY = this.element.y;
             var run = Input.getButtonDown(Input.run);;
             if(run && dir){
                 if(dir=="left"||dir=="right"){
