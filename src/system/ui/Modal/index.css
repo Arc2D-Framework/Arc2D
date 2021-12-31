@@ -50,17 +50,17 @@
 
 :host form {
     overflow: hidden;
-    border-top: 2px solid rgba(255,255,255,.3) !important;
+    /* border-top: 2px solid rgba(255,255,255,.3) !important;
     border-bottom: 3px solid rgba(0,0,0,0.3) !important;
-    border-radius: 5px;
+    border-radius: 5px; */
     overflow-y: scroll;
     box-shadow: 0px 6px 11px 0px rgba(0,0,0,.5);
     width: 620px;
     position: relative;
     background: #181818 !important;
     display: flex;
-    padding: 27px;
-    padding-top: 75px;
+    /* padding: 27px;
+    padding-top: 75px; */
     flex-direction: column;
     backface-visibility: hidden;
     transform: translateZ(0px) scale(1);
