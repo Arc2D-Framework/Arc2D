@@ -1,3 +1,5 @@
+[![](https://data.jsdelivr.com/v1/package/gh/Nashorn/od-cocoon/badge)](https://www.jsdelivr.com/package/gh/Nashorn/od-cocoon)
+
 # Description
 This is a demo repository using the latest Arc2D (Engine):
 ```html
