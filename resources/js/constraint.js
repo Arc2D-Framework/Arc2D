@@ -1,32 +1,41 @@
-// import {ctx} from '../../src/ui/components/TearableCloth.js';
-// import remove_constraint from './point.js';
 
 export default class Constraint {
-    constructor(p1, p2){
-        this.p1     = p1;
-        this.p2     = p2;
-        this.length = spacing; // cloth class uses the spacing variable
-    }
+  constructor (p1, p2, ctx) {
+    this.ctx = ctx;
+    this.p1 = p1
+    this.p2 = p2
+    this.length = spacing
+  }
 
-    resolve() {
-        var diff_x  = this.p1.x - this.p2.x,
-            diff_y  = this.p1.y - this.p2.y,
-            dist    = Math.sqrt(diff_x * diff_x + diff_y * diff_y),
-            diff    = (this.length - dist) / dist;
-    
-        if (dist > tear_distance) this.p1.remove_constraint(this); // remove_constraint method lives in point.js class
-    
-        var px = diff_x * diff * 0.5;
-        var py = diff_y * diff * 0.5;
-    
-        this.p1.x += px;
-        this.p1.y += py;
-        this.p2.x -= px;
-        this.p2.y -= py;
-    }
+  resolve () {
+    let dx = this.p1.x - this.p2.x
+    let dy = this.p1.y - this.p2.y
+    let dist = Math.sqrt(dx * dx + dy * dy)
 
-    draw() {
-        ctx.moveTo(this.p1.x, this.p1.y); // ctx variable lives in src/ui/components/TearableCloth.js class
-        ctx.lineTo(this.p2.x, this.p2.y);
-    }
+    if (dist < this.length) return
+
+    let diff = (this.length - dist) / dist
+
+    if (dist > tearDist) this.p1.free(this)
+
+    let mul = diff * 0.5 * (1 - this.length / dist)
+
+    let px = dx * mul
+    let py = dy * mul
+
+    !this.p1.pinX && (this.p1.x += px)
+    !this.p1.pinY && (this.p1.y += py)
+    !this.p2.pinX && (this.p2.x -= px)
+    !this.p2.pinY && (this.p2.y -= py)
+
+    return this
+  }
+
+  draw () {
+    this.ctx.moveTo(this.p1.x, this.p1.y)
+    this.ctx.lineTo(this.p2.x, this.p2.y)
+  }
 }
+
+
+export {Constraint}

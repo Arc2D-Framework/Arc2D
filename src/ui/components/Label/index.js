@@ -10,9 +10,9 @@ namespace `ui.components` (
         onClick(){
             this.classList.toggle("active")
         }
-        isComposable(){
-            return true
-        }
+        // isComposable(){
+        //     return true
+        // }
 
         // onLoadInstanceStylesheet(){
         //     return false

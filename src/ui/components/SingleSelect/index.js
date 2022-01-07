@@ -22,8 +22,18 @@ namespace `ui.components` (
             this.onSetDefaults();
         }
 
+        // querySelector(cssSel, e){
+        //     return (this.inShadow()||this.element) ? 
+        //         this.root.querySelector(cssSel) : super.querySelector(cssSel)
+        // }
+
+        // querySelectorAll(cssSel, deep){
+        //     return (this.inShadow()||this.element) ?
+        //         this.root.querySelectorAll(cssSel) : super.querySelectorAll(cssSel)
+        // }
+
         inShadow(){
-            return true
+            return false
         }
 
         onReset(e){
@@ -63,11 +73,12 @@ namespace `ui.components` (
         onSelect(e){
             this.audio.play();
             this.onClear();
-            e.target.classList.add("selected");
-            this.value= this.input.value = e.target.getAttribute("value");
+            e.matchedTarget.classList.add("selected");
+            this.value= this.input.value = e.matchedTarget.getAttribute("value");
         }
 
         onClear(){
+            debugger;
             this.value = null;
             this.input.value = "";
             var items = Array.from(this.querySelectorAll("li.selected"));

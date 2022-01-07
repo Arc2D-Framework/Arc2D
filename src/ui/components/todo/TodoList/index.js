@@ -87,7 +87,7 @@ namespace `ui.components.todo` (
         }
 
         onCreate(e){
-            if(e.src.key=="Enter"){
+            if(e.key=="Enter"){
                 Todos.insert({
                     title : e.target.value, 
                     completed : 

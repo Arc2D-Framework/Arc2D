@@ -45,7 +45,7 @@ namespace `ui.components` (
 
         onSelect(e){
             this.audio.play();
-            var li = e.target;
+            var li = e.matchedTarget;
                 li.querySelector("input").checked = li.classList.toggle("selected");
                 if(li.querySelector("input").value == "all"){
                     this.selectAll();

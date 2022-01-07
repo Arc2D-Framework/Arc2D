@@ -52,8 +52,8 @@ namespace `ui.components` (
 		onTemplateRendered(){
 			if(!this.cursor){return}
 			
-			this.root.querySelector("#currentpage").innerHTML = this.cursor.pagenumber();
-			this.root.querySelector("#totalpages").innerHTML  = this.cursor.totalpages();
+			this.querySelector("#currentpage").innerHTML = this.cursor.pagenumber();
+			this.querySelector("#totalpages").innerHTML  = this.cursor.totalpages();
 		}
 	}
 );
