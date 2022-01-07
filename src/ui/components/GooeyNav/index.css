@@ -20,7 +20,7 @@
 }
   
 :host nav {
-    /* filter: url("#goo"); */
+    filter: url("#goo");
 }
   
 :host .menu-item, label {

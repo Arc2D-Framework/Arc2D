@@ -1,0 +1,41 @@
+.TearableCloth {
+    margin: 0;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.TearableCloth #cloth {
+    display: block;
+    margin: 20px auto 0;
+}
+
+.TearableCloth #net {
+  text-align:center;
+  white-space:nowrap;
+  font-size:19px;
+  background:rgba(0,0,0,0.1);
+  padding:8px 12px;
+  border-radius:8px;
+  display:block;
+  color:#888;
+}
+
+.TearableCloth #net > span {
+  color:#3377ee;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  text-decoration:none;
+}
+
+.bull {
+  opacity: 0.3;
+  margin: 0 6px;
+  font-size: 14px;
+}
