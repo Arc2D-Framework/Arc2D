@@ -13,8 +13,8 @@ namespace `ui.components` (
 			this.init_frames();
 
 			window.onload = () => {
-				export var canvas  = document.getElementById('cloth');
-				export var ctx     = this.canvas.getContext('2d');
+				var canvas  = document.getElementById('cloth');
+				var ctx     = this.canvas.getContext('2d');
 
 				this.canvas = canvas;
 				this.ctx = ctx;
@@ -28,8 +28,8 @@ namespace `ui.components` (
 
 		setupVariables() {
 			this.physics_accuracy  = 3;
-			export var mouse_influence   = 20;
-			export var mouse_cut         = 5;
+			var mouse_influence   = 20;
+			var mouse_cut         = 5;
 			this.gravity           = 1200;
 			this.cloth_height      = 30;
 			this.cloth_width       = 50;
@@ -40,7 +40,7 @@ namespace `ui.components` (
 			this.cloth,
 			this.boundsx,
 			this.boundsy
-			export var mouse = {
+			var mouse = {
 					  down: false,
 					  button: 1,
 					  x: 0,
