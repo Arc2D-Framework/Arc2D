@@ -1,4 +1,4 @@
-import 'ui.components.TearableCloth';
+import 'ui.components.ShoppingCart';
 import 'ui.components.CustomModal';
 import 'ui.components.GooeyNav';
 import 'ui.components.ContextMenu';
