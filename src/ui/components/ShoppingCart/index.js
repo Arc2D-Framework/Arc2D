@@ -52,29 +52,21 @@ namespace `ui.components` (
 			this.tax = this.calculateTax(this.subtotal);
 			this.total = this.calculateTotal(this.subtotal);
 
-			const first = `
+			const calculatedBlockEl = `
 				<p class="cart-math-item">
 					<span class="cart-math-header">Subtotal:</span>
 					<span class="g-price subtotal">$${this.formattedSubtotal}</span>
 				</p>
-			`.toNode();
-
-			const second = `
 				<p class="cart-math-item">
 					<span class="cart-math-header">Tax:</span>
 					<span class="g-price tax">$${this.tax}</span>
-				</p>`.toNode();
-
-			const third = `
+				</p>
 				<p class="cart-math-item">
 					<span class="cart-math-header">Total:</span>
 					<span class="g-price total">$${this.total}</span>
 				</p>
 			`.toNode();
-			this.cartMathContainer.appendChild(first);
-			this.cartMathContainer.appendChild(second);
-			this.cartMathContainer.appendChild(third);	
-			
+			this.cartMathContainer.appendChild(calculatedBlockEl);
 			// $('.cart-math').html(`
 			// 	<p class="cart-math-item">
 			// 	<span class="cart-math-header">Subtotal:</span>
