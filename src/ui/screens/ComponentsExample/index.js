@@ -1,4 +1,6 @@
-import 'ui.components.ShoppingCart';
+import 'ui.components.food.Menu';
+import 'ui.components.food.Cart';
+
 import 'ui.components.CustomModal';
 import 'ui.components.GooeyNav';
 import 'ui.components.ContextMenu';

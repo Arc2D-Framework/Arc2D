@@ -1,9 +1,5 @@
-namespace `ui.components` (
-	class ShoppingCart extends WebComponent  {
-		constructor(element){
-            super(element);
-        }
-
+namespace `ui.components.food` (
+	class Menu extends Component  {
         async onConnected() {
             await super.onConnected();
 
@@ -28,7 +24,17 @@ namespace `ui.components` (
 		}
 
 		addToCart(e){
-			this.cartMathContainer.innerHTML = "";
+			var item = e.target.parentNode;
+				item = item.cloneNode(true);
+			this.dispatchEvent("request:additem", {item})
+		}
+
+
+
+
+
+
+			/*this.cartMathContainer.innerHTML = "";
 			const title = e.target.getAttribute('data-title');
 			const price = e.target.getAttribute('data-price');
 			const imgLink = this.getImgLink(title);
@@ -80,8 +86,8 @@ namespace `ui.components` (
 			// 	<span class="cart-math-header">Total:</span>
 			// 	<span class="g-price total">$${total}</span>
 			// 	</p>
-			// `);
-		}
+			// `);*/
+		// }
 
 		getImgLink = title => {
 			let imgLink;
