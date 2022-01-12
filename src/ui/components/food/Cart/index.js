@@ -10,10 +10,17 @@ namespace `ui.components.food` (
             var item = e.data.item;
             this.items.push(item);
             console.log("I now have these items", this.items);
-            this.onCalculate();
+            this.onCalculateSubTotal();
+            this.onCalculateTax();
+            this.onCalculateGrandTotal();
         }
 
-        onCalculate(){
+        onCalculateGrandTotal(){
+            var grand = this.subtotal + this.tax
+            this.querySelector("#grandtotal").innerHTML = grand.toFixed(2)
+        }
+
+        onCalculateSubTotal(){
             var subtotal = 0;
             for(let item of this.items){
                 var price = item.querySelector(".g-price").textContent;
@@ -21,7 +28,13 @@ namespace `ui.components.food` (
                     price = parseFloat(price); //convert to a floating point number with decimals.
                     subtotal +=price;
             }
-            alert(subtotal)
+            this.subtotal = subtotal;
+            this.querySelector("#subtotal").innerHTML = subtotal;
+        }
+
+        onCalculateTax(){
+            this.tax = (this.subtotal * 0.07)
+            this.querySelector("#tax").innerHTML = this.tax.toFixed(2);
         }
 
         onRequestToRemove(){

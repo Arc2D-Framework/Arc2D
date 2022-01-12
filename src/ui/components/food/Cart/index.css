@@ -14,7 +14,15 @@
     font-weight: 700;
     margin-bottom: 50px;
 }
-
+:host label {
+    display: block;
+    position: relative;
+    float: left;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+}
 :host .g-price {
     margin: 8px 0;
 }
