@@ -32,9 +32,9 @@ namespace `ui.screens` (
             this.bounds = this.canvas.getBoundingClientRect();
             this.cloth = new Cloth(this.canvas, clothX, clothY)
 
-            this.canvas.addEventListener("mousedown", e=> this.onMouseDown(e), false);
-            this.canvas.addEventListener("mouseup", e=> this.onMouseUp(e), false);
-            this.canvas.addEventListener("mousemove", e=> this.onMouseMove(e), false);
+            this.canvas.addEventListener("mousedown",   e=> this.onMouseDown(e), false);
+            this.canvas.addEventListener("mouseup",     e=> this.onMouseUp(e), false);
+            this.canvas.addEventListener("mousemove",   e=> this.onMouseMove(e), false);
             this.canvas.addEventListener("contextmenu", e=> this.onContextMenu(e), false);
         }
 
