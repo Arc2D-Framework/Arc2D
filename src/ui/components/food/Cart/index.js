@@ -12,9 +12,9 @@ namespace `ui.components.food` (
 
         onRequestToAdd(e){
             var item = e.data.item;
-            console.log(e.data.item);
             this.items.push(item);
             console.log("I now have these items", this.items);
+            
             this.onClearDefaultText();
             this.onComputeCartItem(e);
             this.onCalculateSubTotal();
@@ -24,13 +24,11 @@ namespace `ui.components.food` (
 
         onComputeCartItem(e){
             const title = e.data.item.lastElementChild.getAttribute('data-title');
+            const product_id = e.data.item.id;
 			const price = e.data.item.lastElementChild.getAttribute('data-price');
 			const imgLink = e.data.item.firstElementChild.attributes[0].nodeValue;
-
-            console.log({title}, "\n", {price}, "\n");
-
             const cartItem = `
-				<li class="cart-item">
+				<li id="${product_id}" class="cart-item">
                     <span class="fa fa-minus-circle" aria-hidden="true" style="opacity:0;visibility: hidden;"></span>
 					<img src="${imgLink}" alt="${title}">
 					<div class="cart-item-dets">
@@ -42,8 +40,6 @@ namespace `ui.components.food` (
 
             this.cartItemsContainer.appendChild(cartItem);
             this.cartBasket.push(cartItem);
-            console.log("this.cartBasket", this.cartBasket);
-
         }
 
         onClearDefaultText(){
@@ -80,8 +76,14 @@ namespace `ui.components.food` (
             //TODO
         }
 
-        onRequestToRemove(){
-            this.cartItemsContainer.removeChild(this.cartBasket.pop());
+        onRequestToRemove(e){
+            const productNode = e.matchedTarget.parentNode;
+            const filteredItem = this.cartBasket.filter(item =>{
+                return item == productNode;
+            })
+            this.cartBasket.splice(filteredItem,1);
+            this.cartItemsContainer.removeChild(productNode);
+            console.log("filtered Item", filteredItem);
             console.log("this.cartBasket", this.cartBasket);
             // this.onSubtractSubtotal();
         }
