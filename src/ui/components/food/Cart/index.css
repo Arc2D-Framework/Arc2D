@@ -131,6 +131,7 @@
     margin-bottom: 25px;
     border-bottom: 1px solid #d7d7f9;
     animation: fadeIn 0.3s;
+    position: relative;
 }
 :host .cart-item:last-child {
     border-bottom: 5px solid #d7d7f9;
@@ -173,4 +174,21 @@
 }
 :host .cart-math-item .g-price {
     width: 40%;
+}
+
+:host .hide{
+    display:none;
+}
+
+:host .cart-item + span {
+    position: absolute;
+    right: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #f25454;
+    transition: all .5s ease;
+}
+
+:host .cart-item:hover + span {
+    visibility: visible !important;
 }
