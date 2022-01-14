@@ -180,15 +180,16 @@
     display:none;
 }
 
-:host .cart-item + span {
+:host .cart-item span {
     position: absolute;
     right: 5px;
     font-size: 18px;
     cursor: pointer;
     color: #f25454;
-    transition: all .5s ease;
+    transition: all .3s ease-in-out;
 }
 
-:host .cart-item:hover + span {
+:host .cart-item:hover span {
+    opacity:1 !important;
     visibility: visible !important;
 }

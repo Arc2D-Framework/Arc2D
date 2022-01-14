@@ -3,6 +3,7 @@ namespace `ui.components.food` (
         async onConnected() {
             await super.onConnected();
             application.on("request:additem", e => this.onRequestToAdd(e), false);
+            this.on("click", (e) => this.onRequestToRemove(e),false, ".cart-item > span");
             this.cartItemsContainer = this.querySelector(".cart-items");
             this.defaultCartText = this.querySelector(".cart-math p");
             this.items = [];
@@ -30,7 +31,7 @@ namespace `ui.components.food` (
 
             const cartItem = `
 				<li class="cart-item">
-                    <span class="fa fa-minus-circle" aria-hidden="true" style="visibility: hidden;"></span>
+                    <span class="fa fa-minus-circle" aria-hidden="true" style="opacity:0;visibility: hidden;"></span>
 					<img src="${imgLink}" alt="${title}">
 					<div class="cart-item-dets">
 						<p class="cart-item-heading">${title}</p>
@@ -41,14 +42,8 @@ namespace `ui.components.food` (
 
             this.cartItemsContainer.appendChild(cartItem);
             this.cartBasket.push(cartItem);
-            // console.log(this.cartBasket);
-            
+            console.log("this.cartBasket", this.cartBasket);
 
-            // setTimeout(() => {
-            //     this.cartItemsContainer.removeChild(this.cartBasket.pop());
-            //     // this.cartBasket.pop();
-            //     console.log(this.cartBasket)
-            // }, 3000);
         }
 
         onClearDefaultText(){
@@ -86,10 +81,9 @@ namespace `ui.components.food` (
         }
 
         onRequestToRemove(){
-            //TODO
             this.cartItemsContainer.removeChild(this.cartBasket.pop());
-            console.log(this.cartBasket)
-            this.onSubtractSubtotal();
+            console.log("this.cartBasket", this.cartBasket);
+            // this.onSubtractSubtotal();
         }
 	}
 )
