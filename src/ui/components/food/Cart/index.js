@@ -14,7 +14,7 @@ namespace `ui.components.food` (
             var item = e.data.item;
             this.items.push(item);
             console.log("I now have these items", this.items);
-            
+
             this.onClearDefaultText();
             this.onComputeCartItem(e);
             this.onCalculateSubTotal();
@@ -39,7 +39,9 @@ namespace `ui.components.food` (
 			`.toNode();
 
             this.cartItemsContainer.appendChild(cartItem);
-            this.cartBasket.push(cartItem);
+            // console.log(this.items)
+            // this.cartBasket.push(cartItem);
+
         }
 
         onClearDefaultText(){
@@ -64,7 +66,16 @@ namespace `ui.components.food` (
         }
 
         onSubtractSubtotal(){
-
+            // console.log("onSubtractSubtotal",this.items);
+            // for(let item of this.items){
+            //     var price = item.querySelector(".g-price").textContent;
+            //         price = price.replace(/\$/g, ""); //remove $
+            //         price = parseFloat(price); //convert to a floating point number with decimals.
+            //         subtotal -=price;
+            // }
+            // this.subtotal = subtotal;
+            // console.log("SUBTOTAL:",this.subtotal)
+            // this.querySelector("#subtotal").innerHTML = this.subtotal;
         }
 
         onCalculateTax(){
@@ -72,20 +83,27 @@ namespace `ui.components.food` (
             this.querySelector("#tax").innerHTML = this.tax.toFixed(2);
         }
 
-        onSubtractTax(){
+        onSubtractTax(e){
             //TODO
+            // console.log("onSubtractTax",e);
+            // console.log("this.subtotal",this.subtotal)
+            // console.log("this.tax", this.tax)
+            
         }
 
-        onRequestToRemove(e){
+        async onRequestToRemove(e){
+            console.log("this.items BEFORE REMOVE", this.items);
             const productNode = e.matchedTarget.parentNode;
-            const filteredItem = this.cartBasket.filter(item =>{
-                return item == productNode;
+            const filteredItem = this.items.filter(p =>{
+                return p == productNode;
             })
-            this.cartBasket.splice(filteredItem,1);
+            // this.onSubtractTax(e)
+            // this.onSubtractSubtotal(e);
+            this.items.splice(filteredItem,1);
             this.cartItemsContainer.removeChild(productNode);
-            console.log("filtered Item", filteredItem);
-            console.log("this.cartBasket", this.cartBasket);
-            // this.onSubtractSubtotal();
+            console.log("this.items AFTER REMOVE", this.items);
+
+            
         }
 	}
 )
