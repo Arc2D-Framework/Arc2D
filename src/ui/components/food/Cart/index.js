@@ -92,14 +92,14 @@ namespace `ui.components.food` (
             const filteredItem = this.items.filter(p =>{
                 return p == productNode;
             })
+            this.items.splice(filteredItem,1);
+            this.cartItemsContainer.removeChild(productNode);
             // this.onSubtractTax(e)
             // this.onSubtractSubtotal(e);
             this.onCalculateSubTotal();
             this.onCalculateTax();
             this.onCalculateGrandTotal();
-
-            this.items.splice(filteredItem,1);
-            this.cartItemsContainer.removeChild(productNode);
+            
             console.log("this.items AFTER REMOVE", this.items);
         }
 
