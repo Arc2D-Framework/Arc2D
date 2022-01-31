@@ -7,8 +7,6 @@ namespace `ui.components.food` (
             this.cartItemsContainer = this.querySelector(".cart-items");
             this.defaultCartText = this.querySelector(".cart-math p");
             this.items = [];
-            this.subtotal = 0;
-            this.grandtotal = 0;
         }
 
         onRequestToAdd(e){
@@ -47,59 +45,45 @@ namespace `ui.components.food` (
         }
 
         onCalculateSubTotal(){
-            // var subtotal = 0;
+            var subtotal = 0;
             for(let item of this.items){
                 var price = item.querySelector(".g-price").textContent;
                     price = price.replace(/\$/g, ""); //remove $
                     price = parseFloat(price); //convert to a floating point number with decimals.
-                    // subtotal -=price;
-                    if(this._wasItemAdded){
-                        this.subtotal +=price;
-                    }else{
-                        this.subtotal -=price;
-                        
-                    }
+                    subtotal +=price;
             }
-            // this.subtotal = subtotal;
-            this.querySelector("#subtotal").innerHTML = this.subtotal;
+            this.subtotal = subtotal;
+            this.querySelector("#subtotal").innerHTML = subtotal;
         }
 
         onCalculateTax(){
-            var sum = (this.subtotal * 0.07);
-            if(this._wasItemAdded){
-                this.tax = sum;
-            }else{
-                this.tax = sum - sum;
-            }
+            this.tax = (this.subtotal * 0.07);
             // this.tax = (this.subtotal * 0.07);
             console.log("THIS.TAX",this.tax.toFixed(2))
             this.querySelector("#tax").innerHTML = this.tax.toFixed(2);
         }
 
         onCalculateGrandTotal(){
-            if(this._wasItemAdded){
-                this.grandtotal = this.subtotal + this.tax;
-            }else{
-                this.grandtotal = this.subtotal - this.tax;
-            }
-            this.querySelector("#grandtotal").innerHTML = this.grandtotal.toFixed(2)
+            var grandtotal = this.subtotal + this.tax;
+            this.querySelector("#grandtotal").innerHTML = grandtotal.toFixed(2)
         }
 
         onRequestToRemove(e){
-            this._wasItemAdded = false;
             console.log("this.items BEFORE REMOVE", this.items);
             const productNode = e.matchedTarget.parentNode;
             const filteredItem = this.items.filter(p =>{
                 return p == productNode;
             })
-            this.items.splice(filteredItem,1);
-            this.cartItemsContainer.removeChild(productNode);
+            
             // this.onSubtractTax(e)
             // this.onSubtractSubtotal(e);
             this.onCalculateSubTotal();
             this.onCalculateTax();
             this.onCalculateGrandTotal();
-            
+
+            this.items.splice(filteredItem,1);
+            this.cartItemsContainer.removeChild(productNode);
+
             console.log("this.items AFTER REMOVE", this.items);
         }
 
