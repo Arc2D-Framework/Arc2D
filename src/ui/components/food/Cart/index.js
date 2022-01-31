@@ -7,7 +7,6 @@ namespace `ui.components.food` (
             this.cartItemsContainer = this.querySelector(".cart-items");
             this.defaultCartText = this.querySelector(".cart-math p");
             this.items = [];
-            this.cartBasket = [];
             this.subtotal = 0;
             this.grandtotal = 0;
         }
@@ -84,27 +83,6 @@ namespace `ui.components.food` (
                 this.grandtotal = this.subtotal - this.tax;
             }
             this.querySelector("#grandtotal").innerHTML = this.grandtotal.toFixed(2)
-        }
-
-        onSubtractSubtotal(e){
-            console.log("onSubtractSubtotal",this.items);
-            for(let item of this.items){
-                var price = item.querySelector(".g-price").textContent;
-                    price = price.replace(/\$/g, ""); //remove $
-                    price = parseFloat(price); //convert to a floating point number with decimals.
-                    this.subtotal -=price;
-            }
-            // this.subtotal = subtotal;
-            console.log("SUBTOTAL:",this.subtotal)
-            this.querySelector("#subtotal").innerHTML = this.subtotal;
-        }
-
-        onSubtractTax(e){
-            //TODO
-            // console.log("onSubtractTax",e);
-            // console.log("this.subtotal",this.subtotal)
-            // console.log("this.tax", this.tax)
-            
         }
 
         onRequestToRemove(e){
