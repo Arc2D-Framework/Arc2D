@@ -4,7 +4,6 @@ import {* as ModuleA } from 'module-a';
 import '/src/system/drivers/storage/Query.js';
 import {* as N} from '/src/system/libs/sample_modules/nodejsmod.js';
 var {NodeTest} = await require('/src/system/libs/sample_modules/nodejsmod.js');
-// import '/node_modules/sweetalert/dist/sweetalert.min.js';
 await require('/src/system/libs/sample_modules/introjs.js');
 import {* as THREE} from '3d';
 import GLTFLoader from 'GLTFLoader';

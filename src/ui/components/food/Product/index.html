@@ -1,5 +1,8 @@
-<!-- <template>
-	<div>
-		template for Product
-	</div>
-</template> -->
+<template>
+	<slot name="content">
+		<!-- populate from outside -->
+	</slot>
+	<input class="count"/>
+	<button class="add-button">Add</button>
+	<button class="remove-button">Remove</button>
+</template>

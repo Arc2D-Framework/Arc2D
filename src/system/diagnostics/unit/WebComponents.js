@@ -328,6 +328,24 @@ namespace `system.diagnostics.unit` (
 
 
 
+
+
+            this.expected("'system.diagnostics.unit.com.ShadowDOM' to use shadowDOM", async (resolve,reject) => {
+                await import('/src/system/diagnostics/unit/com/ShadowDOM/index.js');
+                var el = new system.diagnostics.unit.com.ShadowDOM;
+                document.body.appendChild(el);
+                if(el.shadowRoot){
+                    resolve(true)
+                }
+                else {
+                    reject("it failed, its .shadowRoot property is missing")
+                    // console.info(el)
+                }
+            })
+
+
+            
+
         }
         
     }

@@ -10,16 +10,10 @@ namespace `ui.screens` (
         constructor(element){
             super(element);
             Config.DEBUG=false;
-            // alert(NodeTest)
-            //sow seeds for mock/testing (optional)
-            // domain.collections.Movies.seed();
-            
             //listen to core.ui.Menu -> 'genrechanged' event
             this.addEventListener("genrechanged", (e)=>this.onGenreChanged(e), false);
             //listen to core.ui.MovieList -> 'moviedeleted' event
             this.addEventListener("moviedeleted", (e)=>this.onMovieDeleted(e), false);
-            //listen to MainApp -> 'click', only from div#nowhere
-            // this.addEventListener("click", (e)=> this.onShowErrorScreen(e), false, "#nowhere");
         }
 
         onConfigure(){
@@ -37,17 +31,18 @@ namespace `ui.screens` (
         async onGenreChanged(e){
             //core.ui.Menu's event passes genre in event data{}
             var g = e.data.genre;
+
             //use null for All, mongo behavior for getting all
             var query = (g=="All") ? {} : {genre: g};
+
             //store it for later
             this.query = query;
-            //execute query, cursor is [] of results.
-            debugger;
 
+            //execute query, cursor is [] of results.
             var cursor = await domain.collections.Movies.find({
                 query : query,
                 skip:0,
-                limit:2,
+                limit:3,
                 totals:true
             }); 
             //update movies list

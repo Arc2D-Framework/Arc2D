@@ -46,7 +46,7 @@ namespace `ui.components` (
         // }
 
         onClick (e){
-            var li = e.target;
+            var li = e.matchedTarget;
             this.highlight(li)
             var genre = li.getAttribute("data-genre");
             this.dispatchEvent("genrechanged", {genre: genre});

@@ -4,6 +4,9 @@
     margin: 10px; */
 }
 
+.sm:pl-4 {
+    color:red;
+}
 
 :host i{
     /* color: red; */

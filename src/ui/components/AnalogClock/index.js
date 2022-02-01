@@ -15,6 +15,11 @@ namespace `ui.components` (
             this.model.onUpdate();
         }
 
+        // static preview(){
+        //     var ns = this.prototype.namespace;
+        //     window.open("/src/system/ui/ComponentViewer/index.html?ns="+ns)
+        // }
+
         //runs once per frame AFTER onUpdate, (handle interpolation for fps-drop or lag) @16ms-24ms
         onDraw(interpolation){
             // if(this.isConnected) {

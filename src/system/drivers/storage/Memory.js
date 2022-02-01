@@ -1,6 +1,5 @@
 import '/src/system/drivers/storage/Cursor.js';
-// import '/resources/repositories.js';
-import '/resources/food_repository.js';
+import '/resources/repositories.js';
 await load('/src/system/drivers/storage/Query.js');
 
 namespace `system.drivers.storage`(

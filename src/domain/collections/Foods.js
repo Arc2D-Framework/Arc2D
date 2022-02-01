@@ -1,8 +1,8 @@
 import '@system.drivers.storage.Memory';
 
 namespace `domain.collections` (
-    class Movies extends Collection {
-        @public seeds  = REPOSITORY.FOODS;
+    class Foods extends Collection {
+        @public seeds  = REPOSITORIES.FOODS;
         @public driver = system.drivers.storage.Memory;
     }
 );
