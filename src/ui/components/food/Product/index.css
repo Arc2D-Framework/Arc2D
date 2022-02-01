@@ -1,0 +1,50 @@
+:host .menu-item {
+    background: #e4f0fd;
+    border-radius: 20px 0 0 20px;
+    margin: 30px 0;
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    position: relative;
+}
+:host .menu-item:nth-child(2n) {
+    background: #fbe4f0;
+}
+:host .menu-item:nth-child(3n) {
+    background: #f7f7fe;
+}
+:host .menu-item:nth-child(4n) {
+    background: #e4fdf1;
+}
+:host .menu-item img {
+    width: 150px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+}
+:host .menu-item .add-button {
+    position: absolute;
+    border: none;
+    background: #6b00f5;
+    padding: 6px 20px 4px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    bottom: -10px;
+    left: 150px;
+    transition: all 0.3s;
+}
+:host .menu-item .add-button:hover {
+    background: #5815ae;
+}
+
+:host .menu-item-dets {
+    margin-left: 150px;
+    padding-bottom: 15px;
+}
+
+:host .menu-item-heading {
+    font-size: 18px;
+    margin: 10px 0 12px;
+}

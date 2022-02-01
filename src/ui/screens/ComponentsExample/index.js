@@ -1,4 +1,5 @@
 import 'ui.components.food.Menu';
+import 'ui.components.food.Product';
 import 'ui.components.food.Cart';
 
 import 'ui.components.CustomModal';

@@ -3,12 +3,68 @@ namespace `ui.components.food` (
         async onConnected() {
             await super.onConnected();
 
+			this.items = [];
 			this.subtotal = 0;
 			this.cartItemContainer = this.querySelector("ul.cart-items");
 			this.cartMathContainer = this.querySelector(".cart-math");
 
 			this.on("click", (e) => this.addToCart(e), false , '.add-button');
+			this.onFetchData();
         }
+
+		onFetchData(){
+			fetch(Config.ROOTPATH + '/resources/data/menu_products.json')
+				.then(response => {
+					if (!response.ok) {
+						throw new Error("HTTP error " + response.status);
+					}
+					return response.json();
+				})
+				.then(data => {
+					// debugger;
+					console.log("JSON DATA",data.menu_items);
+		
+					return `
+						${
+							data.menu_items.map(
+								item =>	
+									`<ui-components-food-product>
+										<template>
+											<li id="${item.id}" class="menu-item">
+												<img src="${item.img_src}" alt="${item.title}" class="menu-image" />
+												<div class="menu-item-dets">
+													<p class="menu-item-heading">${item.title}</p>
+													<p class="g-price">${item.price}</p>
+												</div>
+												<button class="add-button" data-title="${item.title}" data-price="${item.price}">Add to Cart</button>
+											</li>
+										</template>
+									</ui-components-food-product>`
+							).join("")
+						}
+					`
+				});
+		}
+
+		renderItems(items){
+			this.items = items;
+			console.log("data",this.items);
+			return `
+				${
+					items.map(
+						item =>	
+							`<li id="${item.id}" class="menu-item">
+								<img src="${item.img_src}" alt="${item.title}" class="menu-image" />
+								<div class="menu-item-dets">
+									<p class="menu-item-heading">${item.title}</p>
+									<p class="g-price">${item.price}</p>
+								</div>
+								<button class="add-button" data-title="${item.title}" data-price="${item.price}">Add to Cart</button>
+							</li>`
+					).join("")
+				}
+			`
+		}
 
 		calculateTax(subtotal) {
 			const tax = subtotal * 0.13;

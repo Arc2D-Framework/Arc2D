@@ -1,0 +1,35 @@
+{
+    "table" : "foods",
+    "menu_items": [
+        {
+            "id" : "french_fries",
+            "img_src" : "../resources/img/plate__french-fries.webp",
+            "title" : "French Fries with Ketchup",
+            "price" : "2.23"
+        },
+        {
+            "id" : "salmon_veggies",
+            "img_src" : "../resources/img/plate__salmon-vegetables.webp",
+            "title" : "Salmon and Vegetables",
+            "price" : "8.99"
+        },
+        {
+            "id" : "spaghetti",
+            "img_src" : "../resources/img/plate__spaghetti-meat-sauce.webp",
+            "title" : "Spaghetti with Sauce",
+            "price" : "7.89"
+        },
+        {
+            "id" : "tortellini",
+            "img_src" : "../resources/img/plate__tortellini.webp",
+            "title" : "Tortellini",
+            "price" : "8.99"
+        },
+        {
+            "id" : "chicken_salad",
+            "img_src" : "../resources/img/plate__chicken-salad.webp",
+            "title" : "Chicken Salad",
+            "price" : "5.75"
+        }
+    ]
+}
