@@ -1,4 +1,4 @@
-import '/src/system/drivers/templating/EJS/index.js';
+import * from 'ejs';
 
 namespace `ui.components` (
 	class MoviesList extends w3c.ui.WebComponent {
