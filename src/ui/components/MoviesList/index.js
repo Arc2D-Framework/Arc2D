@@ -1,4 +1,4 @@
-// import 'ui.components.Label';
+import '/src/system/drivers/templating/EJS/index.js';
 
 namespace `ui.components` (
 	class MoviesList extends w3c.ui.WebComponent {
@@ -41,6 +41,10 @@ namespace `ui.components` (
 		async onPrevious(e){
 			this.render({items : await this.cursor.previous()});
 		}
+
+		getTemplateEngine() {
+            return window.customTemplateEngines.getEngineByMimeType("template/ejs")
+        }
 
 		async onMoviesChanged(e){
 			debugger;
