@@ -6,6 +6,7 @@
         "../../../build/three.module.js" : "/src/system/libs/three.module.js",
         "3d" : "/src/system/libs/three.module.js",
         "GLTFLoader" : "/src/system/libs/GLTFLoader.js",
+        "FBXLoader" : "/src/system/libs/FBXLoader.js",
         "OBJLoader" : "/src/system/libs/OBJLoader.js",
         "OrbitControls" : "/src/system/libs/OrbitControls.js",
         "RGBELoader": "/src/system/libs/RGBELoader.js",

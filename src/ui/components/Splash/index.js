@@ -1,7 +1,7 @@
 
 
 namespace `ui.components` (
-    class Splash extends WebComponent {
+    class Splash extends Component {
 		static get is(){
 			return "splash-loader"
 		}
@@ -13,7 +13,12 @@ namespace `ui.components` (
 			this.on("transitionend", e=>this.onTransitionEnd(e), false);
 			this.dispatchEvent("loaded")
 			this.fade();
+			
         }
+
+		inShadow(){
+			return true
+		}
 
 		onTransitionEnd(e){
 			e.propertyName=="opacity" && this.onHide()
@@ -31,7 +36,10 @@ namespace `ui.components` (
         }
 
         onHide(){
+			var fauxOverlay = document.querySelector("#demo-loader");
+				fauxOverlay && (fauxOverlay.style.opacity=0);
             this.classList.add("hidden");
+			setTimeout(e=> fauxOverlay && fauxOverlay.remove(),600)
         }
 
         onLoadInstanceStylesheet(){
@@ -66,7 +74,7 @@ namespace `ui.components` (
     				color:
     				white;
     				opacity: 1;
-    				z-index: 10000000;
+    				z-index: 20000000 !important;
     				transition: opacity .7s;
     				box-sizing: border-box;
     			}

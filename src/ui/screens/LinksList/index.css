@@ -1,0 +1,184 @@
+
+html, body, :host {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+
+    
+}
+body {
+    background: #202e38;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  h1 {
+    margin: 2em auto 0;
+    font: 700 3em "Poppins", sans-serif;
+    color: #f1f5f6;
+    text-align: center;
+  }
+  
+  h5 {
+    margin: 0 auto 2em;
+    font: 400 1.3em "Poppins", sans-serif;
+    color: #f1f5f6;
+    text-align: center;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  
+  
+  .periodic-table {
+    display: grid;
+    grid-template-columns: repeat(9, 100px);
+    grid-template-rows: repeat(4, 100px);
+    grid-gap: 10px;
+    margin: auto;
+    max-width: 1200px;
+    justify-content: center;
+  }
+  
+  .box {
+    padding: 4px;
+    position: relative;
+    z-index: 1;
+    cursor: default;
+    transition: all 0.3s ease;
+  }
+  .box .content {
+    background: #202e38;
+    padding: 10px 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 20px);
+    transition: inherit;
+  }
+  .box .title {
+    font: 700 34px/1.3 "Poppins", sans-serif;
+    margin: 0.3em 0 0;
+    transition: 0.8s ease 600ms;
+  }
+  .box .description {
+    font: 500 12px "Poppins", sans-serif;
+    margin-top: -0.2em;
+  }
+  .box:after {
+    z-index: 10;
+    content: attr(data-description);
+    background: #f9f8f7;
+    color: #333;
+    width: 180px;
+    position: absolute;
+    top: 80%;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.3s, top 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+    height: auto;
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 10px;
+    margin: 0 0 0 -50px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .box:hover {
+    transform: scale(1.12);
+    z-index: 10;
+  }
+  .box:hover .content {
+    background: transparent;
+  }
+  .box:hover .title,
+  .box:hover .description {
+    -webkit-text-fill-color: #222;
+  }
+  .box:hover:after {
+    top: 105%;
+    opacity: 1;
+  }
+  
+  a.box {
+    cursor: pointer;
+  }
+  
+  .social-media {
+    background: linear-gradient(to bottom right, #f3f9a6 0%, #cbc634 100%);
+  }
+  .social-media .title,
+  .social-media .description {
+    background: -webkit-linear-gradient(#f3f9a6, #cbc634);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .fun-stuff {
+    background: linear-gradient(to bottom right, #ff616d 0%, #ffc171 100%);
+  }
+  .fun-stuff .title,
+  .fun-stuff .description {
+    background: -webkit-linear-gradient(#ff616d, #ffc171);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .just-trying {
+    background: linear-gradient(to bottom right, #37cfdc 0%, #5a88e5 100%);
+  }
+  .just-trying .title,
+  .just-trying .description {
+    background: -webkit-linear-gradient(#37cfdc, #5a88e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .intense-work {
+    background: linear-gradient(to bottom right, #58ac30 0%, #a7df62 100%);
+  }
+  .intense-work .title,
+  .intense-work .description {
+    background: -webkit-linear-gradient(#58ac30, #a7df62);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .legend-table {
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    margin: 2em auto 0;
+  }
+  .legend-table__marker {
+    width: 25px;
+    height: 25px;
+    margin: 5px 5px 10px;
+    display: inline-block;
+    vertical-align: middle;
+    box-shadow: 0.5px 1px rgba(0, 0, 0, 0.15);
+  }
+  .legend-table__text {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 25px 5px 5px;
+    background: -webkit-linear-gradient(#ccc, #eee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .legend-table__direction {
+    display: inline-block;
+    margin: 10px 15px 10px 10px;
+    background: -webkit-linear-gradient(#ccc, #eee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .empty-spacer-1 {
+    grid-column: 3/span 4;
+    grid-row: 1;
+  }
+  .empty-spacer-2 {
+    grid-column: 1;
+    grid-row: 4;
+  }

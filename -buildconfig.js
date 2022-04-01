@@ -22,12 +22,7 @@ BUILDCONFIG = {
     Prefabs : {
         Enabled : true,
         Components : [
-            'ui.components.MenuToggleButton',
-            'ui.components.RippleButton',
-            'ui.components.ParticleButton',
-            'ui.components.SideBar',
-            'ui.components.Accordion',
-            'ui.components.accordions.BasicAccordion'
+            'ui.components.RippleButton'
         ]
     }
 };

@@ -1,0 +1,22 @@
+<template>
+	<div class="community">
+		<div id="ccc" class="col">
+			<h3 class="ban"><a href="https://lakeland.craigslist.org/search/ccc" class="ccc"
+					data-alltitle="all community" data-cat="ccc"><span class="txt">${this.title}<sup
+							class="c"></sup></span></a></h3>
+			<div class="cats">
+				<ul id="ccc0" class="left">
+					${
+						this.links.map(link =>
+							`<li>
+								<a href="${link.href}" class="act" data-cat="act">
+									<span class="txt">${link.title}<sup class="c"></sup></span>
+								</a>
+							</li>`
+						).join("")
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</template>

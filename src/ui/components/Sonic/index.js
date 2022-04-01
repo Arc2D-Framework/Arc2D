@@ -22,7 +22,7 @@ namespace `ui.components` (
 
         async onConnected(options=this.options){
             await super.onConnected();
-            this.image = options.image||this.image; // Path to image sprite sheet
+            // this.image = options.image||this.image; // Path to image sprite sheet
             this.x = options.x; // Coordinates on canvas
             this.y = options.y;
             this.width = options.width; // Size of sprite frame

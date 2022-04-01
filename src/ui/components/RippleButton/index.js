@@ -61,10 +61,5 @@ namespace `ui.components` (
 			console.log("removed",this)
 		}
 
-		cssStyle(){
-			return `
-				:host button {border:1px solid red}
-			`
-		}
 	}
 )

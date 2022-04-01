@@ -24,7 +24,7 @@ namespace `ui.components` (
                 };
 
                 ui.components.MenuToggleButton.prototype.cssStyle = function(){
-                    return `:host .nav-icon {
+                    return super.cssStyle() + `:host .nav-icon {
   margin: 1em;
   width: 40px;
 }

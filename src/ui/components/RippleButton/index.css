@@ -1,5 +1,5 @@
 /* :host {min-width: 200px;} */
-:host {display: inline-block;}
+:host {display: inline-block;border:1px solid red}
 :host button {
   width: 100%;
     position: relative;

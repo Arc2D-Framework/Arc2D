@@ -22,6 +22,7 @@ namespace `ui.states.sprites` (
             var run = Input.getButtonDown(Input.run);;
             if(run && dir){
                 if(dir=="left"||dir=="right"){
+                    
                     if(dir=="left"){
                         this.element.direction=-1;
                     }
@@ -29,6 +30,9 @@ namespace `ui.states.sprites` (
                         this.element.direction=1;
                     }
                     this.element.x += (run?25:0)*this.element.direction;
+                }
+                else {
+                    this.machine.pop(this);
                 }
             } else {
                 this.machine.pop(this);

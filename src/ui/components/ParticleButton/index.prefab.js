@@ -64,7 +64,7 @@ namespace `ui.components` (
                 };
 
                 ui.components.ParticleButton.prototype.cssStyle = function(){
-                    return `particle {
+                    return super.cssStyle() + `particle {
   position: fixed;
   left: 0;
   top: 0;

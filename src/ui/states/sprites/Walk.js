@@ -26,7 +26,7 @@ namespace `ui.states.sprites` (
                 if(dir=="left"){
                     this.element.direction=-1;
                 }
-                if(dir=="right"){
+                else if(dir=="right"){
                     this.element.direction=1;
                 }
                 if(run){
@@ -37,6 +37,9 @@ namespace `ui.states.sprites` (
                 this.element.x += this.element.x_velocity*this.element.direction;
                 // var velocity = this.element.velocity*delta;
                 // this.element.x += velocity * this.element.direction;
+            }
+            else {
+                dir = null
             }
             !dir && this.machine.pop(this);
         }

@@ -57,7 +57,7 @@ namespace `ui.components` (
 				this.ticks.forEach(tick => tick.classList.remove('activetick'))
 				this.ticks.slice(0,activeTicks).forEach(t => t.classList.add('activetick'))
 			
-			var percent = Math.ceil((this.angle/270)*100);
+			var percent = Math.ceil((this.angle/this.maxangle)*100);
 			console.log("percent", percent)
 		}
 	}

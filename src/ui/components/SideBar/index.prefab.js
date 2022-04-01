@@ -211,7 +211,7 @@ namespace `ui.components` (
                 };
 
                 ui.components.SideBar.prototype.cssStyle = function(){
-                    return `
+                    return super.cssStyle() + `
   body {
     font-size: 0.9rem;
   }

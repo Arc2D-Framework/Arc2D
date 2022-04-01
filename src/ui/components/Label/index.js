@@ -1,26 +1,25 @@
 
 namespace `ui.components` (
  class Label extends WebComponent {
+        constructor(){
+            debugger;
+            super()
+        }
         async onConnected(){
+            debugger;
             this.name="Jay";
             await super.onConnected();
             this.on("click", e=>this.onClick(e), true)
         }
 
-        onClick(){
+        onClick(e){
             this.classList.toggle("active")
+            console.log(e.target)
         }
-        // isComposable(){
-        //     return true
-        // }
 
-        // onLoadInstanceStylesheet(){
-        //     return false
-        // }
-
-        // inShadow(){
-        //     return false
-        // }
+        inShadow(){
+            return false
+        }
 
         // cssStyle(){return `
         //     :host span{

@@ -37,7 +37,7 @@ namespace `ui.components` (
                 };
 
                 ui.components.Accordion.prototype.cssStyle = function(){
-                    return `.transition, ul li i:before, ul li i:after, p {
+                    return super.cssStyle() + `.transition, ul li i:before, ul li i:after, p {
     transition: all 0.25s ease-in-out;
   }
   

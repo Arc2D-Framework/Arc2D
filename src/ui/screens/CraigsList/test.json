@@ -1,0 +1,56 @@
+{
+    "Categories" : [
+        {
+            "title" : "Portal",
+            "links" : [
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Other",
+            "links" : [
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Something",
+            "links" : [
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Portal",
+            "links" : [
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Google",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        }
+    ]
+}

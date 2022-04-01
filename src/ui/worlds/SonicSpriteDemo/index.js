@@ -23,14 +23,14 @@ namespace `ui.worlds` (
             await this.append(this.sonic);
             // this.sonic.idle()
 
-            // this.sonic2 = new ui.components.Sonic(null,{
-            //     x:0, 
-            //     y: 0,
-            //     width: 114,
-            //     height: 120,
-            //     renderer : ui.renderers.CanvasRenderer
-            // });
-            // await this.append(this.sonic2);
+            this.sonic2 = new ui.components.Sonic(null,{
+                x:0, 
+                y: 0,
+                width: 114,
+                height: 120,
+                renderer : ui.renderers.CanvasRenderer
+            });
+            await this.append(this.sonic2);
             // this.sonic2.idle();
 
 
@@ -54,7 +54,7 @@ namespace `ui.worlds` (
         onUpdate=(timestamp, delta)=>{
             if(this.isConnected) {
                 this.sonic.onUpdate(timestamp, delta);
-                // this.sonic2.onUpdate(timestamp, delta);
+                this.sonic2.onUpdate(timestamp, delta);
                 // this.sonic3.onUpdate(timestamp, delta);
             }
         }
@@ -62,7 +62,7 @@ namespace `ui.worlds` (
          onDraw = async (interpolation) => {
             if(this.isConnected) {
                 this.sonic.onDraw(interpolation)
-                // this.sonic2.onDraw(interpolation)
+                this.sonic2.onDraw(interpolation)
                 // this.sonic3.onDraw(interpolation)
             }
         }

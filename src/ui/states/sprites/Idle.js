@@ -22,7 +22,7 @@ namespace `ui.states.sprites` (
 
         onUpdate(e){
             var dir = Input.getKeyHeld();
-                dir && this.machine.push(this.walk)
+                dir && (dir=="left"||dir=="right") && this.machine.push(this.walk)
         }
     }
 );

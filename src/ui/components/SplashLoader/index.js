@@ -14,6 +14,10 @@ namespace `ui.components` (
 			this.on("transitionend", e=>this.onTransitionEnd(e), false);
         }
 
+		inShadow(){
+			return true
+		}
+
 		load(){
 			kontra.loadManifest(Config.ROOTPATH+'manifest.json').then(
 				this.onProgressComplete.bind(this), 

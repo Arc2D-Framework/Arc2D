@@ -32,7 +32,7 @@ namespace `ui.components.accordions` (
                 };
 
                 ui.components.accordions.BasicAccordion.prototype.cssStyle = function(){
-                    return `
+                    return super.cssStyle() + `
 /* 
 h1 {
   margin: 0;

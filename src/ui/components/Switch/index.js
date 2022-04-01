@@ -2,7 +2,7 @@ import '@ui.states.Off';
 var {Off} = ui.states;
 
 namespace `ui.components` (
-	class Switch extends Component2D  {
+	class Switch extends Component2D {
 
 		async onConnected(){
 			await super.onConnected();
