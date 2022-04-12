@@ -13,7 +13,7 @@ namespace `ui.states.sprites` (
 
         onAwake(){
             console.log(this.namespace + " Awake");
-            this.element.idle()
+            this.element.idle();
         }
 
         onDraw(){

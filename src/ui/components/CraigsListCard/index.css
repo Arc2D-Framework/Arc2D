@@ -1,1 +1,11 @@
-:host {}
+:host {
+    display: inline-block;
+}
+
+:host .col ul {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    max-width: unset !important;
+    float: unset !important;
+    grid-column-gap: 7px;
+}

@@ -15,9 +15,9 @@ BUILDCONFIG = {
 
     CompilationLevel : "WHITESPACE_ONLY",
 
-    InputLanguage : "ECMASCRIPT_2018",
+    InputLanguage : "STABLE", //2019
 
-    OutputLanguage : "ECMASCRIPT_2018",
+    OutputLanguage : "NO_TRANSPILE",
 
     Prefabs : {
         Enabled : true,

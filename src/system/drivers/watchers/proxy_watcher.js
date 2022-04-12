@@ -5,7 +5,11 @@ const onChange = (objToWatch, onChangeFunction) => {
   const handler = {
     get(target, property, receiver) {
       onChangeFunction();
-      return Reflect.get(target, property, receiver);
+      const value = Reflect.get(target, property, receiver);
+      if (typeof value === 'object') {
+        return new Proxy(value, handler);
+      }
+      return value;
     },
     set(target, property, value) {
       onChangeFunction();

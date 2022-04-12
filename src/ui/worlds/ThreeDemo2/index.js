@@ -18,18 +18,18 @@ namespace `ui.worlds` (
             const roughnessMipmapper = new RoughnessMipmapper( renderer );
             
             //HDR LIGHTING
-            new RGBELoader()
-                .setDataType( THREE.UnsignedByteType )
-                .setPath( '/resources/3d/textures/equirectangular/' )
-                .load( 'quarry_01_1k.hdr', function ( texture ) {
-                    var pmremGenerator = new THREE.PMREMGenerator( renderer );
-                        pmremGenerator.compileEquirectangularShader();
-                    const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
-                    scene.background  = envMap;
-                    scene.environment = envMap;
-                    texture.dispose();
-                    pmremGenerator.dispose();
-                });
+            // new RGBELoader()
+            //     .setDataType( THREE.UnsignedByteType )
+            //     .setPath( '/resources/3d/textures/equirectangular/' )
+            //     .load( 'quarry_01_1k.hdr', function ( texture ) {
+            //         var pmremGenerator = new THREE.PMREMGenerator( renderer );
+            //             pmremGenerator.compileEquirectangularShader();
+            //         const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+            //         scene.background  = envMap;
+            //         scene.environment = envMap;
+            //         texture.dispose();
+            //         pmremGenerator.dispose();
+            //     });
                     
             
             //MODEL

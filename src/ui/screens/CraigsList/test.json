@@ -1,7 +1,28 @@
 {
     "Categories" : [
         {
-            "title" : "Portal",
+            "title" : "Portals",
+            "links" : [
+                {
+                    "title": "CarleyNET",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Deltek",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Jira",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "IT/Helpdesk",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Documentation",
             "links" : [
                 {
                     "title": "Google",
@@ -14,7 +35,75 @@
             ]
         },
         {
-            "title" : "Other",
+            "title" : "Standards & Specs",
+            "links" : [
+                {
+                    "title": "Animate Styleguide",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Unity Styleguide",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Developer Tips",
+            "links" : [
+                {
+                    "title": "ICW3 API Cheatsheet",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Unity Codedrops",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Animate Codedrops",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "ICW3 API Cheatsheet",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Unity Codedrops",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Animate Codedrops",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Asset Locations",
+            "links" : [
+                {
+                    "title": "Graphics",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "Textures",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Spreadsheets",
+            "links" : [
+                {
+                    "title": "DelTek Charge Codes",
+                    "href" : "http://www.google.com"
+                },
+                {
+                    "title": "MELD JobAide",
+                    "href" : "http://www.google.com"
+                }
+            ]
+        },
+        {
+            "title" : "Documentation",
             "links" : [
                 {
                     "title": "Google",
@@ -27,27 +116,14 @@
             ]
         },
         {
-            "title" : "Something",
+            "title" : "Target Dates",
             "links" : [
                 {
-                    "title": "Google",
+                    "title": "Gov Review",
                     "href" : "http://www.google.com"
                 },
                 {
-                    "title": "Google",
-                    "href" : "http://www.google.com"
-                }
-            ]
-        },
-        {
-            "title" : "Portal",
-            "links" : [
-                {
-                    "title": "Google",
-                    "href" : "http://www.google.com"
-                },
-                {
-                    "title": "Google",
+                    "title": "Upcoming QA",
                     "href" : "http://www.google.com"
                 }
             ]

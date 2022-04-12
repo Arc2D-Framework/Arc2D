@@ -40,7 +40,11 @@ namespace `ui.renderers` (
                 this.y,// The y coordinate
                 this.element.width, // The width to draw the image
                 this.element.height // The width to draw the image
-            )
+            );
+            // this.element.style.transform = `
+            //     translate3d(${this.element.x}px, ${this.element.y}px, 0px) 
+            //     scaleX(${this.element.direction})
+            // `;
         }
     }
 )

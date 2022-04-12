@@ -16,7 +16,8 @@ namespace `ui.components` (
             this.velocity = .3;
             this.y_velocity = 0;
             this.x_velocity = 0;
-            this.direction = 0;
+            this.direction = 1;
+            this.speed=20;
             this.behaviors.push(new Idle(this))
         }
 
@@ -43,6 +44,68 @@ namespace `ui.components` (
             this.frameIndex = 0;
             this.row = 1;
             this.ticksPerFrame = 60;
+            this.animation = {
+                name : "walk",
+                frames : [
+                    {
+                        x:20,
+                        y:125,
+                        width:114,
+                        height:120,
+                        ticks:80
+                    },
+                    {
+                        x:117,
+                        y:125,
+                        width:114,
+                        height:120,
+                        ticks:80
+                    },
+                    {
+                        x:231,
+                        y:125,
+                        width:114,
+                        height:120,
+                        ticks:80
+                    },
+                    {
+                        x:363,
+                        y:125,
+                        width:114,
+                        height:120,
+                        ticks:80
+                    },
+                    {
+                        x:477,
+                        y:125,
+                        width:114,
+                        height:120,
+                        ticks:80
+                    },
+                    {
+                        x:573,
+                        y:125,
+                        width:114,
+                        height:120,
+                        ticks:80
+                    },
+                    {
+                        x:696,
+                        y:125,
+                        width:114,
+                        height:120,
+                        ticks:80
+                    }
+                ]
+            }
+            // [
+            //     {
+            //         x:300,
+            //         y:400,
+            //         width:100,
+            //         height:100
+            //     }
+            // ]
         }
 
         idle() {
@@ -50,6 +113,74 @@ namespace `ui.components` (
             this.frameIndex = 0;
             this.row = 0;
             this.ticksPerFrame = 260;
+            this.animation = {
+                name : "idle",
+                frames : [
+                    {
+                        x:8,
+                        y:3,
+                        width:96,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:120,
+                        y:3,
+                        width:96,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:228,
+                        y:3,
+                        width:96,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:342,
+                        y:3,
+                        width:96,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:456,
+                        y:3,
+                        width:96,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:570,
+                        y:3,
+                        width:96,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:684,
+                        y:3,
+                        width:96,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:798,
+                        y:3,
+                        width:99,
+                        height:117,
+                        ticks:260
+                    },
+                    {
+                        x:912,
+                        y:3,
+                        width:108,
+                        height:117,
+                        ticks:1000
+                    }
+                ]
+            }
         } 
 
         run() {

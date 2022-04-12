@@ -48,10 +48,10 @@ namespace `ui.worlds` (
 
             this.context.strokeStyle = '#FFFFFF';
             this.context.beginPath();
-            this.player.draw(this.context);
-            this.circle1.draw(this.context);
-            this.circle2.draw(this.context);
-            // this.collisions.draw(this.context);
+            // this.player.draw(this.context);
+            // this.circle1.draw(this.context);
+            // this.circle2.draw(this.context);
+            this.collisions.draw(this.context);
             this.context.stroke();
 
             if(this.bvh_checkbox.checked) {
@@ -134,10 +134,10 @@ namespace `ui.worlds` (
 
         createMap() {
             // World bounds
-            // this.collisions.createPolygon(0, 0, [[0, 0], [this.width, 0]]);
-            // this.collisions.createPolygon(0, 0, [[this.width, 0], [this.width, this.height]]);
-            // this.collisions.createPolygon(0, 0, [[this.width, this.height], [0, this.height]]);
-            // this.collisions.createPolygon(0, 0, [[0, this.height], [0, 0]]);
+            this.collisions.createPolygon(0, 0, [[0, 0], [this.width, 0]]);
+            this.collisions.createPolygon(0, 0, [[this.width, 0], [this.width, this.height]]);
+            this.collisions.createPolygon(0, 0, [[this.width, this.height], [0, this.height]]);
+            this.collisions.createPolygon(0, 0, [[0, this.height], [0, 0]]);
 
             // Factory
             // this.collisions.createPolygon(100, 100, [[-50, -50], [50, -50], [50, 50], [-50, 50],], 0.4);
@@ -148,7 +148,7 @@ namespace `ui.worlds` (
             // this.collisions.createCircle(145, 165, 8);
 
             // // Airstrip
-            // this.collisions.createPolygon(230, 50, [[-150, -30], [150, -30], [150, 30], [-150, 30],], 0.4);
+            this.collisions.createPolygon(230, 50, [[-150, -30], [150, -30], [150, 30], [-150, 30],], 0.4);
 
             // // HQ
             // this.collisions.createPolygon(100, 500, [[-40, -50], [40, -50], [50, 50], [-50, 50],], 0.2);
@@ -159,7 +159,7 @@ namespace `ui.worlds` (
             this.collisions.insert(this.circle1)
             this.collisions.insert(this.circle2)
             // // Barracks
-            // this.collisions.createPolygon(400, 500, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 1.7);
+            this.collisions.createPolygon(400, 500, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 1.7);
             // this.collisions.createPolygon(350, 494, [[-60, -20], [60, -20], [60, 20], [-60, 20]], 1.7);
 
             // // Mountains
