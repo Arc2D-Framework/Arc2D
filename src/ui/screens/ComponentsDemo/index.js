@@ -11,6 +11,7 @@ namespace `ui.screens` (
         async onConnected(){
             await super.onConnected()
             var c = new ui.components.RippleButton();
+            debugger
                 c.assignSlot(`<span slot="label">Hello There</span>`.toNode());
             await this.append(c);
         }

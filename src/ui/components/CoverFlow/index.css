@@ -1,4 +1,4 @@
-.CoverFlow {
+:host {
   display: block;
     height: 300px;
     /* margin: 30px auto; */
@@ -10,13 +10,13 @@
   position: absolute;
 }
 
-.CoverFlow .hierarchy-icon {
+:host .hierarchy-icon {
     display: block;
     position: absolute;
     right: 20px;
     top: -30px;
 }
-.CoverFlow .container {
+:host .container {
   width: 100%;
   height: 100%;
   padding: 0 !important;
@@ -27,7 +27,7 @@
   perspective: 800px;
 }
 
-.CoverFlow #carousel {
+:host #carousel {
     display: block;
     height: 100%;
     margin: auto;
@@ -43,7 +43,7 @@
               transform-style: preserve-3d;
 }
 
-.CoverFlow #carousel .tile {
+:host #carousel .tile {
   display: block;
   position: absolute;
   width: 100%;
@@ -53,8 +53,8 @@
   background: rgba(255,255,255,.9);
 }
 
-.CoverFlow #move-left-btn,
-.CoverFlow #move-right-btn{
+:host #move-left-btn,
+:host #move-right-btn{
   cursor: pointer;
   padding: 24px;
   position: absolute;
@@ -68,14 +68,14 @@
   background: white;
 }
 
-.CoverFlow #move-right-btn{
+:host #move-right-btn{
   right: 30px;
 }
-.CoverFlow #move-left-btn{
+:host #move-left-btn{
   left: 30px;
 }
 
-.CoverFlow #carousel.no-backface-visibility .tile {
+:host #carousel.no-backface-visibility .tile {
   -webkit-backface-visibility: visible;
          -moz-backface-visibility: visible;
            -o-backface-visibility: visible;

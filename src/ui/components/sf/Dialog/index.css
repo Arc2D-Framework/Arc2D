@@ -7,12 +7,7 @@
     font-family: inherit;
 }
 
-:host section {
-    width: 90%;
-}
-:host section {
-    width: 90%;
-}
+
 :host section .fa-caret-down {
     display: block;
     position: absolute;

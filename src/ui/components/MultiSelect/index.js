@@ -14,6 +14,10 @@ namespace `ui.components` (
             this.extractedValues=[];
         }
 
+        get theme(){
+			return null
+		}
+
         async onConnected(){
             await super.onConnected();
             application.addEventListener("click", e=> this.onScreenClicked(e));

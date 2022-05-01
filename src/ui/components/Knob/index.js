@@ -1,7 +1,10 @@
 
+
+
 namespace `ui.components` (
+	
+	@theme("metal");
 	class Knob extends WebComponent  {
-		
 		async onConnected(){
 			await super.onConnected();
 			this.knob 		= this.querySelector('.knob');
@@ -9,6 +12,9 @@ namespace `ui.components` (
 			this.angle 		= 0;
 			this.minangle 	= 0;
 			this.maxangle 	= 270;
+			this.startangle = -135;
+			this.spacing	= 10;
+			this.draw();
 
 			//mouse events
 			this.addEventListener("mousedown", e => this.onPress(e), true);
@@ -53,12 +59,35 @@ namespace `ui.components` (
 			rotate && (
 				this.knob.style.transform = `rotate(${this.angle}deg)`
 			);
-			var activeTicks = (Math.round(this.angle / 10) + 1);
+			var activeTicks = (Math.round(this.angle / this.spacing) + 1);
 				this.ticks.forEach(tick => tick.classList.remove('activetick'))
 				this.ticks.slice(0,activeTicks).forEach(t => t.classList.add('activetick'))
 			
 			var percent = Math.ceil((this.angle/this.maxangle)*100);
 			console.log("percent", percent)
 		}
+
+		draw(count) {
+			/*let ticks = this.querySelector(".ticks")
+			for(var i=0; i<count; i++) {
+				ticks.append(
+					`<div class='tick' style='transform:rotate(${this.startangle}deg)'></div>`.toNode()
+				);
+				this.startangle += this.spacing;
+			}
+		  	this.ticks 		= Array.from(this.querySelectorAll('.tick'));
+          	this.startangle = -135; //reset*/
+
+			let ticks = this.querySelector(".ticks")
+			while(this.startangle <= Math.abs(this.maxangle-this.startangle)){
+
+				ticks.append(
+					`<div class='tick' style='transform:rotate(${this.startangle}deg)'></div>`.toNode()
+				);
+				this.startangle += this.spacing;
+			}
+			this.ticks 		= Array.from(this.querySelectorAll('.tick'));
+          	this.startangle = -135;
+      	}
 	}
 )

@@ -9,6 +9,10 @@ namespace `ui.components` (
             this.clear = new Audio("/resources/sfx/ES_Multimedia Click - SFX Producer.mp3")
         }
 
+        get theme(){
+			return "test"
+		}
+
         async onConnected(){
             await super.onConnected();
             this.input = this.querySelector("input[type='text']");
@@ -78,7 +82,6 @@ namespace `ui.components` (
         }
 
         onClear(){
-            debugger;
             this.value = null;
             this.input.value = "";
             var items = Array.from(this.querySelectorAll("li.selected"));
