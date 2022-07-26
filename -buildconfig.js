@@ -7,7 +7,7 @@ BUILDCONFIG = {
         EncryptPath: "src/ui/screens/ComponentsDemo/index.encrypt.js",
     },
 
-    Encrypt : true,
+    Encrypt : false,
 
 	LoadsAsync : true,
 

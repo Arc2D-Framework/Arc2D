@@ -6,7 +6,7 @@
     cursor: default;
     margin: 0px;
     margin-bottom: 5px;
-    font-family: "Proxima Nova Lt Bold" !important;
+    font-family: inherit;
     font-weight: normal !important;
     font-size: 14px;
     padding: 0px;
@@ -21,7 +21,7 @@
     text-overflow: ellipsis;
     min-height: 38px !important;
     margin-bottom: 5px;
-    font-family: "Proxima Nova Rg Regular";
+    font-family: inherit;
     font-size: 16px;
     cursor: inherit;
     color: black;

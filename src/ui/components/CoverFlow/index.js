@@ -25,10 +25,9 @@ namespace `ui.components` (
 
         isComposable(){return true}//to allow slots
         
-        async render(data={}, t=this._template, outputEl) {
-            debugger;
-            await super.render(data, t, outputEl)
-        }
+        // async render(data={}, t=this._template, outputEl) {
+        //     await super.render(data, t, outputEl)
+        // }
         //carousel spin direction
         onRotate(dir){
             this.rotation += this.theta * dir;

@@ -6,6 +6,15 @@ namespace `ui.components` (
 			this.on('click', e => this.close(e), true, ".overlay");
 			this.open = this.open;
 			this.open =true
+
+			// window.select = this.find.bind(this);
+			// this.select `.wrapper`
+			
+		}
+
+		find(sel){
+			sel = sel[0];
+			return this.querySelector(sel)
 		}
 
 		static get observedAttributes() {
@@ -18,10 +27,10 @@ namespace `ui.components` (
 			}
 		}
 		
-		async connectedCallback() {
-			await super.connectedCallback();
-			// alert("cool modal")
-		}
+		// async connectedCallback() {
+		// 	await super.connectedCallback();
+		// 	// alert("cool modal")
+		// }
 		
 		get open() {
 			return this.hasAttribute('open');
@@ -31,6 +40,9 @@ namespace `ui.components` (
 		set open(isOpen) {
 			this.querySelector('.wrapper').classList.toggle('open', isOpen);
 			this.querySelector('.wrapper').setAttribute('aria-hidden', !isOpen);
+			
+			
+
 			if (isOpen) {
 				this._wasFocused = document.activeElement;
 				this.setAttribute('open', '');
@@ -50,8 +62,6 @@ namespace `ui.components` (
 			if (this.open !== false) {
 				this.open = false;
 			}
-			const closeEvent = new CustomEvent('dialog-closed');
-			this.dispatchEvent(closeEvent);
 		}
 		
 		cancel(e) {

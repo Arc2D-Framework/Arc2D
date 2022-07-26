@@ -1,10 +1,11 @@
 
 
 
+// stylesheets(["./knobstyle1.css","./knobstyle2.css"]);
 namespace `ui.components` (
-	
-	@theme("metal");
-	class Knob extends WebComponent  {
+	class Knob extends Component  {
+		static skin  = "metal";
+		
 		async onConnected(){
 			await super.onConnected();
 			this.knob 		= this.querySelector('.knob');
@@ -17,13 +18,12 @@ namespace `ui.components` (
 			this.draw();
 
 			//mouse events
-			this.addEventListener("mousedown", e => this.onPress(e), true);
-			document.addEventListener("mousemove", e => this.onRotate(e), true);
-			document.addEventListener("mouseup", e => this.onRelease(e), true);
-			
+			this.addEventListener("mousedown", 		e => this.onPress(e), true);
+			document.addEventListener("mousemove", 	e => this.onRotate(e), true);
+			document.addEventListener("mouseup", 	e => this.onRelease(e), true);
 			//mouse wheel
 			this.addEventListener("DOMMouseScroll", e => this.onScroll(e.wheelDelta > 0), true);
-			this.addEventListener("mousewheel", e => this.onScroll(e.wheelDelta > 0), {passive:true});
+			this.addEventListener("mousewheel", 	e => this.onScroll(e.wheelDelta > 0), {passive:true});
 		}
 
 		onPress(){
@@ -68,16 +68,6 @@ namespace `ui.components` (
 		}
 
 		draw(count) {
-			/*let ticks = this.querySelector(".ticks")
-			for(var i=0; i<count; i++) {
-				ticks.append(
-					`<div class='tick' style='transform:rotate(${this.startangle}deg)'></div>`.toNode()
-				);
-				this.startangle += this.spacing;
-			}
-		  	this.ticks 		= Array.from(this.querySelectorAll('.tick'));
-          	this.startangle = -135; //reset*/
-
 			let ticks = this.querySelector(".ticks")
 			while(this.startangle <= Math.abs(this.maxangle-this.startangle)){
 

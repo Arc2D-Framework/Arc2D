@@ -75,6 +75,11 @@
   left: 30px;
 }
 
+:host [slot='tiles'] {
+  display: inherit;
+    transform-style: preserve-3d;
+}
+
 :host #carousel.no-backface-visibility .tile {
   -webkit-backface-visibility: visible;
          -moz-backface-visibility: visible;
