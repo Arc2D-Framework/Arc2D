@@ -2,7 +2,7 @@
 namespace `ui.screens` (
     class BaseApplication extends Application {
         
-        static skin = "sample";
+        static skin = "";
 
       
 

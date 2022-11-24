@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
+            style-src   'self' 'unsafe-inline' *">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>screens.ShiningForce</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/font-awesome.min.css">
+    <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+    <script>
+        Config.ROOTPATH = "../";
+        Config.SPLASH = "ui.components.SplashLoader2";
+        Config.SPLASH_FADE_DELAY = 2000;
+        Config.APP_WAITS_ON_SPLASH = false;
+    </script>
+</head>
+
+<body namespace="ui.screens.Hud2">
+    <ui-screens-hud-2>
+        <template>
+            <ui-components-hud-menu></ui-components-hud-menu>
+        </template>
+    </ui-screens-hud-2>
+</body>
+
+</html>

@@ -16,6 +16,7 @@ html, body, :host {
 }
 :host ripple-button {
     min-width: 230px;
+    margin: 20px;
 }
 :host {
     transition: opacity .5s;

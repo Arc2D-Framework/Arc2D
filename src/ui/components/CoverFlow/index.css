@@ -1,12 +1,12 @@
 :host {
   display: block;
-    height: 300px;
+    height: 80vh;
     /* margin: 30px auto; */
   box-sizing: border-box;
   left: 50%;
   top: 50%;
   transform: translate3d(-50%, -50%, 0px);
-  width: 100%;
+  width: 100vw;
   position: absolute;
 }
 
@@ -30,17 +30,15 @@
 :host #carousel {
     display: block;
     height: 100%;
+    width: 50%;
     margin: auto;
     overflow: visible !important;
     transform: rotateY(0deg);
     transform-style: preserve-3d;
-    transition: transform 0.4s ease-out 0s;
+    transition: transform 0.4s ease-in-out 0s;
     will-change:transform;
-  box-sizing: border-box;
-  -webkit-transform-style: preserve-3d;
-         -moz-transform-style: preserve-3d;
-           -o-transform-style: preserve-3d;
-              transform-style: preserve-3d;
+    box-sizing: border-box;
+    transform-style: preserve-3d;
 }
 
 :host #carousel .tile {

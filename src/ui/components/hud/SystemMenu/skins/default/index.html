@@ -1,0 +1,36 @@
+<template>
+    <div class="title-bar">
+        <label
+            style="color: white;font-size: 25px;line-height: 70px;display: block;height: 100%;box-sizing: border-box;position: absolute;left: 138px;background: url(../../../resources/images/hud/title_dots_bg.png);background-position: left center;background-size: 59% 119%;overflow: visible;background-repeat: no-repeat;padding-left: 54px;color: #d5ebf9;">Step
+            3: Engage Throttle</label>
+        <div id="back-btn">
+            <i class="fa-solid fa-circle-xmark"
+                style="color: #173051;font-size: 33px;display: block;padding: 22px;transform: skewX(-326deg);text-align: center;"></i>
+        </div>
+        <div style="position: absolute;background: url(../../../resources/images/hud/close-btn-bg.png);background-position: center;width: 70px;height: 30px;background-size: contain;background-repeat: no-repeat;position: absolute;right: 0;top: 0;"></div>
+    </div>
+    <div class="content">
+        <div class="col" id="primary">
+            <ul id="menu">
+                <li class="active"
+                    style="background: url(../../../resources/images/hud/menu_button_bg_active.png);background-repeat: no-repeat;background-position: left;background-size: contain;">
+                    Mrc</li>
+                <li>Inventory</li>
+                <li>Advisory</li>
+                <li>Settings</li>
+            </ul>
+        </div>
+        <div class="col" id="secondary" style="">
+            <label
+                style="background: url(../../../resources/images/hud/main_title_bg.png);display: block;background-size: contain;background-repeat: no-repeat;text-align: center;color: #ffcc00;padding: 20px;background-position: center;">GUIDED
+                PRACTICE</label>
+            <div
+                style="background: url(../../../resources/images/hud/avatar.png);/* width: 300px; */height: 80%;background-size: contain;overflow: visible;background-repeat: no-repeat;background-position: center;">
+            </div>
+        </div>
+
+        <div class="col" id="tertiary">
+            <ui-components-hud-inventory-menu style="width: 100%;"></ui-components-hud-inventory-menu>
+        </div>
+    </div>
+</template>

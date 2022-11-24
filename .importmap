@@ -12,6 +12,7 @@
         "RGBELoader": "/src/system/libs/RGBELoader.js",
         "dayjs" : "/src/system/libs/sample_modules/day.js",
         "ui.components.Label":"/src/ui/components/Label/index.js",
-        "ejs" : "/src/system/drivers/templating/EJS/index.js"
+        "ejs" : "/src/system/drivers/templating/EJS/index.js",
+        "ui-components-switch" : "ui.components.Switch"
     }
 }

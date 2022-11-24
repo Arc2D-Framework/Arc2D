@@ -1,4 +1,4 @@
-@import url(./testapp.css);
+
 
 @font-face {
     font-family: 'Open Sans';
@@ -36,3 +36,10 @@ html, body, :host {
 }
 
 
+:host .test {
+  width: 100px;
+  height: 50px;
+  border: 1px solid red;
+  position: absolute !important;
+  bottom: 100px;
+}

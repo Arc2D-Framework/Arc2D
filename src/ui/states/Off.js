@@ -14,7 +14,8 @@ namespace `ui.states` (
 
         onAwake(){
             console.log(this.namespace + " Awake");
-            this.element.button.classList.add("off")
+            this.element.button.classList.add("off");
+            this.element.dispatchEvent("changed", {on:false})
         }
 
         onUpdate(e){

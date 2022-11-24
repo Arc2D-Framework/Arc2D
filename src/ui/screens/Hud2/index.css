@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(../../../../resources/fonts/Ubuntu-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+html, body, :host {
+  width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    font-family: "Ubuntu", Verdana, Geneva, Tahoma, sans-serif !important;
+    overflow: hidden;
+    position: relative;
+    min-height: 0;
+    padding: 0;
+}

@@ -36,8 +36,8 @@ namespace `ui.renderers` (
         }
 
         onDraw() {
-            // this.element.style.width = `${this.currentFrame.width}px`
-            // this.element.style.height = `${this.currentFrame.height}px`
+            this.element.style.width = `${this.currentFrame.width}px`
+            this.element.style.height = `${this.currentFrame.height}px`
 
             this.element.style.backgroundPosition = `
                 -${this.currentFrame.x}px -${this.currentFrame.y}px

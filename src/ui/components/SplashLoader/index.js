@@ -18,6 +18,10 @@ namespace `ui.components` (
 			return true
 		}
 
+		hasOwnSkin(){
+			return false
+		}
+
 		load(){
 			kontra.loadManifest(Config.ROOTPATH+'manifest.json').then(
 				this.onProgressComplete.bind(this), 

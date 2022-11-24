@@ -16,6 +16,7 @@ namespace `ui.components` (
         }
 
         async onRenderGenres(){
+            debugger
             await domain.collections.Movies.seed();//seed with test data
             var cursor = await domain.collections.Movies.find({
                 query : {},

@@ -8,8 +8,9 @@ namespace `ui.components` (
             var axis = this.getAttribute("axis");
             this.isHorizontal = (axis=="v")?false:true;
             this.tiles = Array.from(this.querySelectorAll("#carousel .tile"));
-            
-            this.panelWidth = this.isHorizontal ? 720 : 280;//TODO: dynamically get tiles width/height
+            await sleep(200);
+            // debugger
+            this.panelWidth = this.isHorizontal ? this.getBoundingClientRect().width : 280;//TODO: dynamically get tiles width/height
             this.panelCount = this.tiles.length;
             this.axis = this.isHorizontal ? 'Y' : 'X';
             this.theta = 360 / this.tiles.length;
@@ -19,6 +20,12 @@ namespace `ui.components` (
 
             this.on('click', e=> this.onRotate(-1), false, ".fa-caret-left");
             this.on('click', e=> this.onRotate(+1), false, ".fa-caret-right");
+            this.align();
+            this.rotate();
+            window.addEventListener("resize", e=> this.onResize(e), false)
+        }
+
+        onResize(){
             this.align();
             this.rotate();
         }

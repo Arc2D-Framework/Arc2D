@@ -10,6 +10,7 @@ namespace `ui.screens` (
         constructor(element){
             super(element);
             Config.DEBUG=false;
+            debugger
             //listen to core.ui.Menu -> 'genrechanged' event
             this.addEventListener("genrechanged", (e)=>this.onGenreChanged(e), false);
             //listen to core.ui.MovieList -> 'moviedeleted' event
@@ -23,6 +24,7 @@ namespace `ui.screens` (
 
         async onConnected() {
             // this.onConfigure();
+            debugger
             await domain.collections.Movies.seed();
             await super.onConnected();
         }

@@ -40,10 +40,10 @@ namespace `ui.components` (
         }
 
         walk() {
-            this.frames = 8;
+            this.frames = 7;
             this.frameIndex = 0;
             this.row = 1;
-            this.ticksPerFrame = 60;
+            this.ticksPerFrame = 80;
             this.animation = {
                 name : "walk",
                 frames : [
@@ -109,7 +109,7 @@ namespace `ui.components` (
         }
 
         idle() {
-            this.frames = 9;
+            this.frames = 8;
             this.frameIndex = 0;
             this.row = 0;
             this.ticksPerFrame = 260;
@@ -118,66 +118,66 @@ namespace `ui.components` (
                 frames : [
                     {
                         x:8,
-                        y:3,
+                        y:0,
                         width:96,
                         height:117,
                         ticks:260
                     },
                     {
                         x:120,
-                        y:3,
+                        y:0,
                         width:96,
                         height:117,
                         ticks:260
                     },
                     {
                         x:228,
-                        y:3,
+                        y:0,
                         width:96,
                         height:117,
                         ticks:260
                     },
                     {
                         x:342,
-                        y:3,
+                        y:0,
                         width:96,
                         height:117,
                         ticks:260
                     },
                     {
                         x:456,
-                        y:3,
+                        y:0,
                         width:96,
                         height:117,
                         ticks:260
                     },
                     {
                         x:570,
-                        y:3,
+                        y:0,
                         width:96,
                         height:117,
                         ticks:260
                     },
                     {
                         x:684,
-                        y:3,
+                        y:0,
                         width:96,
                         height:117,
                         ticks:260
                     },
                     {
                         x:798,
-                        y:3,
+                        y:0,
                         width:99,
                         height:117,
                         ticks:260
                     },
                     {
                         x:912,
-                        y:3,
+                        y:0,
                         width:108,
                         height:117,
-                        ticks:1000
+                        ticks:260
                     }
                 ]
             }

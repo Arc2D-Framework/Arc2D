@@ -1,0 +1,36 @@
+#tertiary-menu {
+    height: auto;
+      min-height: 60px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-family: inherit;
+      color: #6e86a8;
+      overflow-y: auto;
+      background: linear-gradient(180deg, #1f2b4d, transparent);
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      border-image: radial-gradient(rgb(255 255 255 / 66%), rgb(255 255 255 / 0%)) 1;
+      border-right-width: 2px;
+      border-right-style: solid;
+      margin-left: 0px;
+      background: #172036;
+      flex-direction: row;
+      padding-left: 0;
+  }
+  
+  #icon-grid {
+    overflow-y: auto;
+  }
+  
+  #tertiary-menu li {
+    padding: 20px 30px 20px 30px;
+    font-family: inherit;
+    border-bottom-width: 2px;
+    border-right-width: 0;
+    border-image: radial-gradient(rgb(255 255 255 / 22%), rgb(30 43 77 / 17%)) 1;
+    border-left-width: 0;
+    font-size: 17px;
+    border-top-width: 0;
+  }

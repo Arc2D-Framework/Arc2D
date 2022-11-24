@@ -2,7 +2,7 @@ import 'ui.components.Splash';
 import 'ui.components.CoverFlow';
 import 'ui.components.ToggleButton';
 
-@stylesheets(['/src/./tiles.css']);
+@stylesheets(['./tiles.css', "./test2.css"]);
 namespace `ui.screens` (
     class CoverFlowTest extends Application {
         async onConnected(){

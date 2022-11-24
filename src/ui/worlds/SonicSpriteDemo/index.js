@@ -16,7 +16,7 @@ namespace `ui.worlds` (
             this.sonic = new ui.components.Sonic(null,{
                 x:0, 
                 y: 0,
-                width: 114,
+                width: 107,
                 height: 120,
                 renderer : ui.renderers.StyleRenderer
             });

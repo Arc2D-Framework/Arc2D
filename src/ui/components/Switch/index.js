@@ -12,6 +12,8 @@ namespace `ui.components` (
 			this.addEventListener("click", e => this.behaviors.onUpdate(e), true, "button");
 		}
 
+		inShadow() { return true}
+
 		// onToggle(e){
 		// 	if(e.target.classList.contains("on")){
 		// 		debugger;

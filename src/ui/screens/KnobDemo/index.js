@@ -10,34 +10,26 @@ namespace `ui.screens` (
 
         async onConnected() {
             await super.onConnected();
+            this.on("changed", e=> this.onStartTour(e), false, "#btn-toggle-a")
+            this.on("changed", e=> this.onSwitchFlipped(e), false, "#btn-toggle-b")
         }
 
-
-        defineAncestralStyleList(){
-            // debugger
-            // var stylesheets = this.prototype["stylesheets"] = this.prototype["stylesheets"]||[];
-            // if(this.onLoadInstanceStylesheet()){
-            //     stylesheets.push(this.getNSStyleSheet(this.namespace))
-            // }
-            // stylesheets.push(...this.prototype["@stylesheets"]||[]);
-            // var ancestor = this.__proto.ancestor;
-            // if(ancestor==HTMLElement){
-            //     ancestor = WebComponent
-            // }
-            // while(ancestor) {
-                // if(ancestor.name =="_mixin_"){break}
-                // if( ancestor != WebComponent && 
-                //     ancestor != Application  &&
-                //     ancestor != World        &&
-                //     ancestor.prototype.onLoadInstanceStylesheet() ){
-            //         stylesheets.unshift(...ancestor.prototype["@stylesheets"]||[]);
-            //         stylesheets.unshift(this.getNSStyleSheet(ancestor.prototype.namespace));
-            //         if(!ancestor.prototype['@cascade']){break}
-            //         ancestor = ancestor.prototype.ancestor;
-            //     } else { break }
-            // }
+        onStartTour(e) {
+            if(e.data.on){ window.tg.show(HELP.intro) }
         }
 
-        
+        async onSwitchFlipped(e){
+            if(e.data.on){
+                var d = `<div class="test"><span>Hello</span></div>`.toNode()
+                // d.innerHTML = "test";
+                // d.classList.add("test");
+                // await sleep(1000) 
+                this.append(d);
+                this.last=d;
+            }
+            else {
+                this.last && this.last.remove()
+            }
+        }
     }
 );

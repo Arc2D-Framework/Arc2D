@@ -1,0 +1,117 @@
+:host {
+    display: block;
+    width: 66%;
+    flex: 1;
+    overflow: auto;
+}
+:host button {
+    /* background-image: url(../../../../resources/images/hud/button-off.png); */
+    width: 74px;
+    height: 74px;
+    box-sizing: border-box;
+    margin: 8px;
+    text-align: center;
+    background-position: center;
+    appearance: none;
+    outline: none;
+    border: none;
+    background-color: #1e355e;
+    display: flex;
+    background-size: contain;
+    cursor: pointer;
+    transition: all .5s;
+    color: #597585;
+    font-size: 30px;
+    text-shadow: 4px 1px 5px rgb(0 0 0 / 50%);
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    font-family: inherit;
+    border: 1px solid #3c7bc2;
+    box-shadow: inset 0px 0px 19px #090b15;
+}
+
+:host button label {
+    font-size: 13px;
+    color: #4b5963;
+    position: absolute;
+    bottom: -22px;
+    align-self: center;
+    align-content: center;
+}
+:host button:before {
+    transition: all .7s;
+}
+
+:host button:hover,
+:host button.active {
+    /* background-image: url(../../../../resources/images/hud/button-on.png); */
+    color: white;
+    text-shadow: 4px 1px 5px rgb(0 0 0 / 50%);
+}
+:host button:hover label,
+:host button.active label {
+    color: white;
+}
+
+:host button.active:before,
+:host button:hover:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translate3d(-50%, -50%, 0px);
+    top: 50%;
+    left: 50%;
+    background: #f64c0000;
+    box-shadow: 0px 0px 12px 8px rgb(11 201 235 / 23%);
+    border: 0;
+}
+
+:host section{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding-top: 25px;
+}
+
+.label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 17px);
+}
+
+.label > .text {
+    line-height: 20px;
+    color: #5baeee;
+    margin: 0 0 0 8px;
+    font-size: 20px;
+}
+
+.line {
+    position: relative;
+    display: block;
+    width: 100%;
+    left: 0px;
+    height: 14px;
+    border-left: 2px solid #1d354e;
+    transform: skewX(26deg);
+    margin-top: -4px;
+    border-bottom: 2px solid #1d354e;
+}
+.line::before {
+    content: "";
+    display: block;
+    bottom: 0;
+    position: absolute;
+    height: 4px;
+    width: 40%;
+    background: #1d354e;
+}
