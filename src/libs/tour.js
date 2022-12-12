@@ -1,9 +1,10 @@
 import {
     querySelectorAllDeep,
     querySelectorDeep,
-  } from "/src/libs/deep.mjs";
+} from "./deep.mjs";
 
 
+let OVERLAY_ZINDEX = 999999999;
 class TourGuide extends HTMLElement {
     constructor() {
         super();
@@ -28,14 +29,15 @@ class TourGuide extends HTMLElement {
                     max-width: 320px;
                     min-width: 320px;
                     display: block;
-                    font-size: .8rem;
-                    z-index: 1000;
+                    font-size: 14px;
                     padding: 11px;
                     border: 1px solid gray;
                     border-radius: 4px;
                     box-shadow: 0px 0px 8px 0px rgb(0 0 0 / 50%);
-                    z-index:110;
+                    z-index:${OVERLAY_ZINDEX + 3};
                     transition : transform .3s;
+                    pointer-events:auto !important;
+                    will-change:transform;
                   }
 
                  
@@ -44,6 +46,15 @@ class TourGuide extends HTMLElement {
                     content: "";
                     position: absolute;
                   }
+                  /*:host:after {
+                    background : green;
+                    content: "";
+                    position: absolute;
+                    left:0;
+                    top:0;
+                    width:100%;
+                    height:100%;
+                  }*/
                   
                   :host(.bottom):before {
                     top: -16px;
@@ -95,6 +106,10 @@ class TourGuide extends HTMLElement {
                     max-height: 100px;
                     overflow-y: auto;
                     color: gray;
+                    font-size:inherit;
+                  }
+                  :host #help-tour-text.larger-font {
+                    font-size: 16px;
                   }
                   :host #help-tour-nav{
                     background: #80808021;
@@ -131,18 +146,35 @@ class TourGuide extends HTMLElement {
                     color: #dd0000;
                     text-decoration: underline;
                     cursor: pointer;
+                    text-transform: capitalize;
+                  }
+
+                  :host #help-tour-nav button.skip[disabled] {
+                      opacity:.4;
+                      pointer-events:none;
+                  }
+                  :host #help-tour-options button.active {
+                    background: #00cf00;
+                    color: white;
+                    border: 1px solid gray;
+                    border-radius: 2px;
                   }
             </style>
             <h3 id="help-tour-title">Title Here</h3>
             <div id="help-tour-text">Description Here</div>
+            <nav id="help-tour-options" style="display: flex;flex-flow: row nowrap;justify-content: end;margin-bottom: 10px;font-size: 9px;">
+                <button class="option" id="options-tint-level-btn" style="font-size: inherit;margin-right: 5px;">◑</button>
+                <button class="option" id="options-fontsize-btn" style="font-size: inherit;">Aa</button>
+            </nav>
             <nav id="help-tour-nav">
                 <button class="skip">Skip</button>
                 <button class="next">Next</button>
             </nav>
         `;
-        
+
         this.root.appendChild(template.content.cloneNode(true));
         this.injectStyle();
+        HELP && this.load(HELP)
     }
 
     injectStyle() {
@@ -155,45 +187,145 @@ class TourGuide extends HTMLElement {
                 right: 0;
                 bottom: 0;
                 left: 0;
-                z-index: 100;
+                z-index: ${OVERLAY_ZINDEX};
                 /* background: rgba(0,0,0,0.75); */
+                pointer-events:auto;
+                inset:0;
+                pointer-events:none;
             }
             #tour-guide-element-overlay{
                 position: fixed;
-                z-index: 101;
-                border: 2px solid red;
+                z-index: ${OVERLAY_ZINDEX + 2};
+                border: 3px solid #00ff4c;
                 box-sizing: border-box;
-                box-shadow: rgb(33 33 33 / 80%) 0px 0px 1px 2px, rgb(0 0 0 / 34%) 0px 0px 0px 5000px;
+                box-shadow: rgb(33 33 33 / 80%) 0px 0px 1px 2px, rgb(0 0 0 / 68%) 0px 0px 0px 5000px;
                 pointer-events: none;
             }
+
+            #tour-guide-element-overlay.less-tint {
+                box-shadow: rgb(33 33 33 / 80%) 0px 0px 1px 2px, rgb(0 0 0 / 30%) 0px 0px 0px 5000px;
+            }
+
+            @keyframes tour-guide-element-overlay-flash {
+                0% {
+                   background: transparent;
+                }
+                50% {
+                    background: white;
+                }
+                100% {
+                    background: transparent;
+                }
+             }
+
+             .tour-guide-element-overlay-flash {
+                animation: tour-guide-element-overlay-flash linear .2s 3;
+                animation-delay:.4;
+             }
         `;
 
         document.head.appendChild(style);
     }
-    
+
     connectedCallback() {
-        window.tg=this;
+        window.tg = this;
         this.titleEl = this.root.querySelector("h3");
         this.textEl = this.root.querySelector("#help-tour-text");
         this.btnNext = this.root.querySelector("button.next");
-        this.btnNext.addEventListener("click", e=>this.onNext(e), false);
+        this.btnNext.addEventListener("click", e => this.onNext(e), false);
 
-        this.btnPrevious = this.root.querySelector("button.skip");
-        this.btnPrevious.addEventListener("click", e=>this.onPrevious(e), false);
-        // this.iterator = this.getIterator(HELP.items);
+        this.btnSkip = this.root.querySelector("button.skip");
+        this.btnSkip.addEventListener("click", e => this.onSkip(e), false);
+
+        this.optionsFontsizeBtn = this.root.querySelector("button#options-fontsize-btn");
+        this.optionsFontsizeBtn.addEventListener("click", e => this.onToggleFontSize(e), false);
+
+        this.optionsTintBtn = this.root.querySelector("button#options-tint-level-btn");
+        this.optionsTintBtn.addEventListener("click", e => this.onToggleTint(e), false);
+
+        //window.addEventListener("resize", e=> this.onResize(e), true)
+        
     }
 
-    async waitForElm(selector) {
-        var f = function(string) {
-            return (new Function( `return ${string}`)());
+    onResize(){
+        
+    }
+
+    onToggleFontSize() {
+        this.textEl.classList.toggle("larger-font");
+        this.optionsFontsizeBtn.classList.toggle("active");
+        this.setPosition(this.current)
+    }
+
+    onToggleTint() {
+        this.target_overlay.classList.toggle("less-tint");
+        this.optionsTintBtn.classList.toggle("active");
+    }
+
+    async waitForVisibility(el, step) {
+        var t1, t2;
+        var elapsed = 0;
+        var totalTime = step.waitfor || 500;
+
+        return new Promise((resolve, reject) => {
+            t1 = setTimeout(_t1 => {
+                clearInterval(t2); clearTimeout(t1); resolve(null);
+            }, totalTime);
+
+            t2 = setInterval(_t2 => {
+                elapsed += 100;
+                if (this.isVisible(el)) {
+                    clearInterval(t2);
+                    clearTimeout(t1);
+                    resolve(el);
+                }
+                if (elapsed >= totalTime) {
+                    clearInterval(t2);
+                    clearTimeout(t1);
+                    resolve(null);
+                }
+                console.log("waiting for visibility:", elapsed + "ms")
+            }, 100);
+        });
+    }
+
+    isVisible(elem) {
+        if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');
+        const style = getComputedStyle(elem);
+        if (style.display === 'none') return false;
+        if (style.visibility !== 'visible') return false;
+        if (style.opacity < 0.1) return false;
+        if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height +
+            elem.getBoundingClientRect().width === 0) {
+            return false;
+        }
+        const elemCenter = {
+            x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,
+            y: elem.getBoundingClientRect().top + elem.offsetHeight / 2
+        };
+        if (elemCenter.x < 0) return false;
+        if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;
+        if (elemCenter.y < 0) return false;
+        if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;
+        //let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);
+        // do {
+        //     if (pointContainer === elem) return true;
+        // } while (pointContainer = pointContainer.parentNode);
+        // return false;
+        return true
+    }
+
+    async waitForElm(selector, step) {
+        var f = function (string) {
+            return (new Function(`return ${string}`)());
         }
 
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             var elm = /\.querySelector/.test(selector) ? f(selector) : querySelectorDeep(selector);
             if (elm) {
                 return resolve(elm);
             }
-    
+
             const observer = new MutationObserver(mutations => {
                 var elm = /\.querySelector/.test(selector) ? f(selector) : querySelectorDeep(selector);
                 if (elm) {
@@ -201,21 +333,27 @@ class TourGuide extends HTMLElement {
                     observer.disconnect();
                 }
             });
-    
+
             observer.observe(document.body, {
                 childList: true,
                 subtree: true
             });
+
+            var tid = setTimeout(_t => resolve(null), step.waitfor || 1000)
         });
     }
 
+    load(obj) {
+        this.data = obj;
+    }
+
     show(items) {
-        this.current=null;
+        this.current = null;
         this.nextStep = null;
         this.setOverlay();
         this.classList.add("active");
         // if(!this.current) {
-            this.iterator = this.getIterator(items);
+        this.iterator = this.getIterator(items instanceof Array ? items : this.data[items]);
         // }
         this.next()
     }
@@ -224,7 +362,8 @@ class TourGuide extends HTMLElement {
         this.removeOverlay();
         this.classList.remove("active");
     }
-    
+
+
     onFinish() {
         this.unsetTarget();
         this.hide();
@@ -232,33 +371,67 @@ class TourGuide extends HTMLElement {
         this.target_overlay = null;
     }
 
-    * getIterator (array) {
+    onSkip() {
+        this.next(true);
+    }
+
+    * getIterator(array) {
         for (var item of array) {
+            item.success = false;
             yield item;
-            if(item.items) {
-                for(let subitem of item.items) {
-                    subitem.clicked=false; 
+            if (item.items) {
+                for (let subitem of item.items) {
+                    subitem.success = false;
                     yield subitem;
                 }
             }
         }
     }
 
-    async next() {
-        if(this?.current?.next=="click" && !this?.current?.clicked==true){
-            alert("Click to continue"); 
+    async next(skip = false) {
+        if (skip) {
+            if (this?.current?.skipto || this?.current?.next) {
+                this.show(this.current.skipto || this.current.next);
+                return;
+            }
+            else {
+                this.current = this.nextStep = this.iterator.next().value
+            }
+        }
+        if (this?.current?.onadvance == "valid") {
+            if (!this.target.checkValidity()) {
+                alert("Invalid Input");
+                return;
+            }
+            else {
+                this.current.success = true;
+            }
+        }
+        if (this?.current?.onadvance && !this?.current?.success == true && !skip) {
+            alert("Click to continue");
             return;
         }
+        if (this?.current?.next) {
+            this.show(this.current.next);
+            return
+        }
 
-        this.current = this.nextStep||this.iterator.next().value;
+        this.current = this.nextStep || this.iterator.next().value;
         this.update();
         var step = this.current;
-        if(step) {
+        if (step) {
             this.unsetTarget();
-            await this.setTarget(step);
-            this.setTitle(step.title);
-            this.setText(step.text);
-            setTimeout(e=>this.setPosition(step), 100);
+            var el = await this.setTarget(step);
+            if (el) {
+                this.setTitle(step.title);
+                this.setText(step.text);
+                setTimeout(e => this.setPosition(step), 100);
+            }
+            else {
+                console.warn(`'target node' for step not found. Skipping Step "${step.title}"`, step.target, step);
+                this.next(true);
+                return
+            }
         }
         else {
             this.onFinish();
@@ -269,17 +442,19 @@ class TourGuide extends HTMLElement {
 
 
     update() {
-        if(!this.current||!this.nextStep){
+        if (!this.current || (!this.nextStep && !this?.current?.next)) {
             this.btnNext.innerHTML = "Finish"
         }
         else {
             this.btnNext.innerHTML = "Next";
-            // if(this.current.type=="clickable") {
-            //     this.btnNext.disabled = true;
-            // }
-            // else {
-            //     this.btnNext.disabled = false;
-            // }
+        }
+        if (this?.current?.skipto || this?.current?.next && !this.current.onadvance) {
+            this.btnSkip.removeAttribute("disabled");
+            this.btnSkip.innerHTML = "Skip To: " + (this.current.skipto || this.current.next)
+        }
+        else {
+            this.btnSkip.setAttribute("disabled", true);
+            this.btnSkip.innerHTML = "Skip"
         }
     }
 
@@ -298,157 +473,177 @@ class TourGuide extends HTMLElement {
 
     getVerticalPositionOn(step, target_coords, label_coords) {
         var VOFFSET = 8;
-        var dir = step.vpos||"top";
-        this.classList.remove("top","bottom", "middle");
+        var dir = step.vpos || "top";
+        this.classList.remove("top", "bottom", "middle");
         this.classList.add(dir)
-        if(dir=="top"){
-            return target_coords.top-label_coords.height - VOFFSET;
+        if (dir == "top") {
+            return target_coords.top - label_coords.height - VOFFSET;
         }
-        else if(dir == "bottom"){
+        else if (dir == "bottom") {
             return target_coords.top + target_coords.height + VOFFSET
         }
-        else if(dir == "middle"){
-            return ((target_coords.top+target_coords.height/2))
+        else if (dir == "middle") {
+            return ((target_coords.top + target_coords.height / 2))
         }
     }
 
     getHorizontalPositionOn(step, target_coords, label_coords) {
-        var dir = step.hpos||"left";
-        this.classList.remove("left","right", "center");
+        var dir = step.hpos || "left";
+        this.classList.remove("left", "right", "center");
         this.classList.add(dir)
-        if(dir=="left"){
+        if (dir == "left") {
             return target_coords.left;
         }
-        else if(dir == "right"){
-            return ((target_coords.left+target_coords.width)-label_coords.width)
+        else if (dir == "right") {
+            return ((target_coords.left + target_coords.width) - label_coords.width)
         }
-        else if(dir == "center"){
-            return ((target_coords.left+target_coords.width/2)-label_coords.width/2)
+        else if (dir == "center") {
+            return ((target_coords.left + target_coords.width / 2) - label_coords.width / 2)
         }
     }
 
-    makeOveryFroTarget(step, el){
+    makeOverlayForTarget(step, el) {
         var coords = el.getBoundingClientRect();
         var d;
-        if(!this.target_overlay) {
+        if (!this.target_overlay) {
             d = document.createElement("div");
-            d.id="tour-guide-element-overlay";
+            d.id = "tour-guide-element-overlay";
             d.style.width = coords.width + "px";
-            d.style.height = coords.height+"px";
+            d.style.height = coords.height + "px";
             d.style.top = coords.top + "px";
             d.style.left = coords.left + "px";
             this.target_overlay = d;
-            document.body.append(d)
+            document.body.append(d);
         }
         else {
             d = this.target_overlay;
             d.style.width = coords.width + "px";
-            d.style.height = coords.height+"px";
+            d.style.height = coords.height + "px";
             d.style.top = coords.top + "px";
             d.style.left = coords.left + "px";
         }
+        d.classList.remove("tour-guide-element-overlay-flash");
 
-        if(step.interactive) {
-            d.style.pointerEvents = "none"
+        if (step.interactive) {
+            d.style.pointerEvents = "none";
+            d.classList.remove("tour-guide-element-overlay-flash");
+            setTimeout(e => d.classList.add("tour-guide-element-overlay-flash"), 300);
+            this.hideOverlay();
         }
         else {
-            d.style.pointerEvents = "auto"
+            d.style.pointerEvents = "auto";
+            d.classList.remove("tour-guide-element-overlay-flash");
+            this.showOverlay();
         }
+
+        if(this.optionsTintBtn.classList.contains("active")){
+            d.classList.add("less-tint")
+        }
+        else {
+            d.classList.remove("less-tint")
+        }
+
         return d;
     }
 
     async setTarget(step) {
-        this.target = await this.waitForElm(step.target);
-        if(this.target) {
-            this.makeOveryFroTarget(step, this.target);
-            if(step.next=="click"){
-                let func = e=> {
-                    // debugger
-                    step.clicked=true;
-                    this.next();
-                    this.target.removeEventListener("click", func, false)
+        this.target = await this.waitForElm(step.target, step);
+        if (this.target) {
+            var isVisible = await this.waitForVisibility(this.target, step);
+            if (!isVisible) { return false }
+            this.makeOverlayForTarget(step, this.target);
+            this.target.focus && this.target.focus();
+            if (step.onadvance && step.onadvance != "valid") {
+                let func = async e => {
+                    step.success = true;
+                    setTimeout(e => this.next(), step.waitfor || 500);
+                    this.target.removeEventListener(step.onadvance, func, true);
                 };
-                this.target.addEventListener("click", func, false)
+                this.target.addEventListener(step.onadvance, func, true)
             }
-            
-            //TODO: Handle 'fixed' targets
-            //this.lastTarget = this.target;
-            // this.target.originalZ = this.target.style.zIndex;
-            // this.target.originalP = this.target.style.position;
-            // this.target.style.zIndex = 101;
-            // this.target.style.position = this.target.style.position||"relative";
-            this.lastTarget = this.target;
 
-            let target = this.lastTarget;
-            // debugger;
-            while(target) {
-                // if(target.style.zIndex) {
-                    target.originalZ = target.style.zIndex;
-                    target.originalP = target.style.position;
-                    target.style.zIndex = 101;
-                    target.style.position = target.style.position||"relative";
-                // }
-                target = target.parentElement||target?.parentNode?.host;
+            let target = this.lastTarget = this.target;
+            while (target) {
+                const style = window.getComputedStyle(target);
+                target.originalZ = style.getPropertyValue("z-index");
+                target.originalP = style.getPropertyValue("position");
+                if (target == this.target) { target.style.zIndex = OVERLAY_ZINDEX + 1; }
+                else { target.style.zIndex = "auto"; }
+                target.style.position = target.originalP == "static" ? "relative" : target.originalP;
+                target.originalPointerEvents = style.getPropertyValue("pointer-events");
+                if (target == this.target) {
+                    if (step.interactive) {
+                        target.style.pointerEvents = "auto"
+                    }
+                    else {
+                        target.style.pointerEvents = "initial"
+                    }
+                }
+                else {
+                    target.style.pointerEvents = "initial"
+                }
+                target = target.parentElement || target?.parentNode?.host;
             }
+            return true
+        }
+
+        else {
+            return false
         }
     }
 
 
     unsetTarget() {
-        if(this.lastTarget) {
-            // this.lastTarget.style.zIndex = this.lastTarget.originalZ;
-            // this.lastTarget.style.position = this.lastTarget.originalP;
+        if (this.lastTarget) {
             let target = this.lastTarget;
-            while(target) {
-                // if(target.style.zIndex) {
-                    target.style.zIndex = target.originalZ;
-                    target.style.position = target.originalP;
-                    
-                // }
-                target = target.parentElement||target?.parentNode?.host;
+            while (target) {
+                target.style.zIndex = target.originalZ;
+                target.style.position = target.originalP;
+                target.style.pointerEvents = target.originalPointerEvents || "auto";
+                target = target.parentElement || target?.parentNode?.host;
             }
         }
-        this.lastTarget=null;
+        this.lastTarget = null;
     }
     setTitle(str) {
-        var title = str||this.target.getAttribute("data-tour-title");
-        this.titleEl.innerHTML = title||"Title Here";
+        var title = str || this.target.getAttribute("data-tour-title");
+        this.titleEl.innerHTML = title || "Title Here";
     }
 
-    setText(str){
-        var text = str||this.target.getAttribute("data-tour-text");
-        this.textEl.innerHTML = text||"Title Here";
+    setText(str) {
+        var text = str || this.target.getAttribute("data-tour-text");
+        this.textEl.innerHTML = text || "Title Here";
     }
 
     setOverlay() {
-        this.overlay = this.overlay||document.createElement("div");
+        this.overlay = this.overlay || document.createElement("div");
         this.overlay.id = "tour-guide-overlay";
         document.body.append(this.overlay)
     }
 
     removeOverlay() {
-        if(this.overlay) {
+        if (this.overlay) {
             this.overlay.remove();
             this.overlay = null;
         }
     }
 
     hideOverlay() {
-        if(this.overlay) {
+        if (this.overlay) {
             this.overlay.style.pointerEvents = "none"
         }
     }
     showOverlay() {
-        if(this.overlay) {
+        if (this.overlay) {
             this.overlay.style.pointerEvents = "auto"
         }
     }
 
-    onload(e){
+    onload(e) {
         // setTimeout(e => {
 
         // }, 1000)
-        
+
     }
 }
 

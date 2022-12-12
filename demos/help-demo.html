@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>WebComponents</title>
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
-        <script src="../src/libs/tour.js" type="module"></script>
+        
         <script>
             var HELP = {
                 "intro" : [
@@ -13,9 +13,10 @@
                         "target" : "#btn-toggle-b",
                         "text" : "Finalizes item",
                         "hpos" : "right",
+                        "skipto" : "age",
                         "items" : [
                             {
-                                "next" : "click",
+                                "onadvance" : "click",
                                 "interactive" : true,
                                 "hpos" : "center",
                                 "target":"document.querySelector(\"#btn-toggle-b\").shadowRoot.querySelector(\"div > button\")", 
@@ -29,12 +30,14 @@
                         "hpos" : "left",
                         "target" : ".test",
                         "text" : "Finalizes item",
+                        "waitfor": 1000,
                         "items" : [
                             {
                                 "hpos" : "left",
                                 "target":".test > span", 
                                 "title" : "Step C.2",  
-                                "text": "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text"
+                                "text": "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text",
+                                "next" : "age"
                             }
                         ]
                     }
@@ -48,27 +51,28 @@
                         "target" : "input#age",
                         "text" : "Enter age",
                         "interactive" : true,
+                        "onadvance" : "valid",
                         "items" : [
                             {
                                 "target" : "#age-submit-btn",
                                 "title" : "Submission", 
-                                "text": "Completes the age verification process" 
+                                "text": "Completes the age verification process",
+                                "interactive" : true,
+                                "next" : "intro",
+                                "onadvance" : "click"
                             }
                         ]
                     }
                 ]
             };
         </script>
+        <script src="../src/libs/tour.js" type="module"></script>
     </head>
 
     <body namespace="ui.screens.KnobDemo">
         <ui-components-switch import style="z-index: 20;width: 90px;" id="btn-toggle-a"></ui-components-switch>
-        
-        <div style="z-index: 1;"><ui-components-switch id="btn-toggle-b"></ui-components-switch></div>
-
-        <div style="z-index: 1;">
-            <input id="age" type="number" style="z-index: 10; width: 50px; height: 40px;"> <a href="javascript:void(null);" onclick="tg.show(HELP.age)">(?)</a>
+            <ui-components-switch id="btn-toggle-b"></ui-components-switch>
+            <input required="true" id="age" type="number" style="z-index: 10; width: 50px; height: 40px;"> <a href="javascript:void(null);" onclick="tg.show(HELP.age)">(?)</a>
             <button style="display: block;" id="age-submit-btn">Submit</button>
-        </div>
     </body>
 </html>

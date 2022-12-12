@@ -1,10 +1,10 @@
 BUILDCONFIG = {
-    Input : "src/ui/screens/ComponentsDemo/index.js",
+    Input : "tour.js",
     
     Output : {
-        SourcePath:"src/ui/screens/ComponentsDemo/index.src.js",
-        CompressedPath: "src/ui/screens/ComponentsDemo/index.min.js",
-        EncryptPath: "src/ui/screens/ComponentsDemo/index.encrypt.js",
+        SourcePath:"tour.src.js",
+        CompressedPath: "tour.min.js",
+        EncryptPath: "tour.encrypt.js",
     },
 
     Encrypt : false,

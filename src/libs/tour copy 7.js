@@ -1,9 +1,10 @@
 import {
     querySelectorAllDeep,
     querySelectorDeep,
-  } from "/src/libs/deep.mjs";
+} from "./deep.mjs";
 
 
+let OVERLAY_ZINDEX = 999999999;
 class TourGuide extends HTMLElement {
     constructor() {
         super();
@@ -29,13 +30,13 @@ class TourGuide extends HTMLElement {
                     min-width: 320px;
                     display: block;
                     font-size: .8rem;
-                    z-index: 1000;
                     padding: 11px;
                     border: 1px solid gray;
                     border-radius: 4px;
                     box-shadow: 0px 0px 8px 0px rgb(0 0 0 / 50%);
-                    z-index:110;
+                    z-index:${OVERLAY_ZINDEX+3};
                     transition : transform .3s;
+                    pointer-events:auto !important;
                   }
 
                  
@@ -44,6 +45,15 @@ class TourGuide extends HTMLElement {
                     content: "";
                     position: absolute;
                   }
+                  /*:host:after {
+                    background : green;
+                    content: "";
+                    position: absolute;
+                    left:0;
+                    top:0;
+                    width:100%;
+                    height:100%;
+                  }*/
                   
                   :host(.bottom):before {
                     top: -16px;
@@ -155,15 +165,18 @@ class TourGuide extends HTMLElement {
                 right: 0;
                 bottom: 0;
                 left: 0;
-                z-index: 100;
+                z-index: ${OVERLAY_ZINDEX};
                 /* background: rgba(0,0,0,0.75); */
+                pointer-events:auto;
+                inset:0;
+                pointer-events:none;
             }
             #tour-guide-element-overlay{
                 position: fixed;
-                z-index: 101;
-                border: 2px solid red;
+                z-index: ${OVERLAY_ZINDEX+2};
+                border: 3px solid #00ff4c;
                 box-sizing: border-box;
-                box-shadow: rgb(33 33 33 / 80%) 0px 0px 1px 2px, rgb(0 0 0 / 34%) 0px 0px 0px 5000px;
+                box-shadow: rgb(33 33 33 / 80%) 0px 0px 1px 2px, rgb(0 0 0 / 68%) 0px 0px 0px 5000px;
                 pointer-events: none;
             }
         `;
@@ -209,6 +222,10 @@ class TourGuide extends HTMLElement {
         });
     }
 
+    load(obj) {
+        
+    }
+
     show(items) {
         this.current=null;
         this.nextStep = null;
@@ -234,6 +251,7 @@ class TourGuide extends HTMLElement {
 
     * getIterator (array) {
         for (var item of array) {
+            item.clicked=false;
             yield item;
             if(item.items) {
                 for(let subitem of item.items) {
@@ -245,7 +263,8 @@ class TourGuide extends HTMLElement {
     }
 
     async next() {
-        if(this?.current?.next=="click" && !this?.current?.clicked==true){
+        // debugger
+        if(this?.current?.onadvance && !this?.current?.clicked==true){
             alert("Click to continue"); 
             return;
         }
@@ -338,7 +357,7 @@ class TourGuide extends HTMLElement {
             d.style.top = coords.top + "px";
             d.style.left = coords.left + "px";
             this.target_overlay = d;
-            document.body.append(d)
+            document.body.append(d);
         }
         else {
             d = this.target_overlay;
@@ -348,12 +367,17 @@ class TourGuide extends HTMLElement {
             d.style.left = coords.left + "px";
         }
 
+
         if(step.interactive) {
-            d.style.pointerEvents = "none"
+            d.style.pointerEvents = "none";
+            this.hideOverlay();
         }
         else {
-            d.style.pointerEvents = "auto"
+            d.style.pointerEvents = "auto";
+            this.showOverlay();
         }
+
+        
         return d;
     }
 
@@ -361,33 +385,35 @@ class TourGuide extends HTMLElement {
         this.target = await this.waitForElm(step.target);
         if(this.target) {
             this.makeOveryFroTarget(step, this.target);
-            if(step.next=="click"){
-                let func = e=> {
-                    // debugger
+            if(step.onadvance){
+                let func = async e=> {
                     step.clicked=true;
-                    this.next();
-                    this.target.removeEventListener("click", func, false)
+                    setTimeout(e=>this.next(),step.delay||500);
+                    this.target.removeEventListener(step.onadvance, func, true)
                 };
-                this.target.addEventListener("click", func, false)
+                this.target.addEventListener(step.onadvance, func, true)
             }
             
-            //TODO: Handle 'fixed' targets
-            //this.lastTarget = this.target;
-            // this.target.originalZ = this.target.style.zIndex;
-            // this.target.originalP = this.target.style.position;
-            // this.target.style.zIndex = 101;
-            // this.target.style.position = this.target.style.position||"relative";
-            this.lastTarget = this.target;
-
-            let target = this.lastTarget;
-            // debugger;
+            let target = this.lastTarget = this.target;
             while(target) {
-                // if(target.style.zIndex) {
-                    target.originalZ = target.style.zIndex;
-                    target.originalP = target.style.position;
-                    target.style.zIndex = 101;
-                    target.style.position = target.style.position||"relative";
-                // }
+                const style = window.getComputedStyle(target);
+                target.originalZ = style.getPropertyValue("z-index");
+                target.originalP = style.getPropertyValue("position");
+                if(target == this.target) {target.style.zIndex = OVERLAY_ZINDEX+1;}
+                else { target.style.zIndex = "auto";}
+                target.style.position = target.originalP == "static" ? "relative":target.originalP;
+                target.originalPointerEvents = style.getPropertyValue("pointer-events");
+                if(target == this.target){
+                    if(step.interactive) {
+                        target.style.pointerEvents = "auto"
+                    }
+                    else {
+                        target.style.pointerEvents = "initial"
+                    }
+                }
+                else {
+                    target.style.pointerEvents = "initial"
+                }
                 target = target.parentElement||target?.parentNode?.host;
             }
         }
@@ -396,16 +422,12 @@ class TourGuide extends HTMLElement {
 
     unsetTarget() {
         if(this.lastTarget) {
-            // this.lastTarget.style.zIndex = this.lastTarget.originalZ;
-            // this.lastTarget.style.position = this.lastTarget.originalP;
             let target = this.lastTarget;
             while(target) {
-                // if(target.style.zIndex) {
                     target.style.zIndex = target.originalZ;
                     target.style.position = target.originalP;
-                    
-                // }
-                target = target.parentElement||target?.parentNode?.host;
+                    target.style.pointerEvents = target.originalPointerEvents||"auto";
+                    target = target.parentElement||target?.parentNode?.host;
             }
         }
         this.lastTarget=null;

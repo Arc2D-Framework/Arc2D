@@ -1,9 +1,9 @@
-import '@system.drivers.storage.Memory';
+import '/src/system/drivers/storage/Memory.js';
 
 namespace `domain.collections` (
     class Movies extends Collection {
-        @public seeds  = REPOSITORIES.MOVIES;
-        @public driver = system.drivers.storage.Memory;
+        static seeds  = REPOSITORIES.MOVIES;
+        static driver = system.drivers.storage.Memory;
     }
 );
 

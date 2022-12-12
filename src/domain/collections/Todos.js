@@ -3,8 +3,7 @@ import '@system.drivers.storage.LocalStorage';
 
 namespace `domain.collections` (
     class Todos extends Collection {
-        @public device_driver = "system.drivers.storage.LocalStorage";
-        // @public seeds = REPOSITORIES.TODOS;
+        static driver = system.drivers.storage.LocalStorage;
 
         static isSeedable(){
             return false;
