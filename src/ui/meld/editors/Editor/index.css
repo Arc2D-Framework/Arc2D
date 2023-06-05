@@ -4,6 +4,14 @@
     background: white;
 }
 
+:host(.minimized) {
+  height: auto;
+}
+
+:host(.minimized) > section {
+  display: none;
+}
+
 :host > nav {
   height: clamp(40px, 40px, 40px);
     display: flex;
@@ -11,11 +19,24 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     background: gray;
-    padding: 0 10px;
+    padding: 0 5px 0 10px;
     color: white;
 }
 
 :host > section {
   height: calc(100% - 40px);/*40px -> nav height*/
   display: block;
+}
+
+:host > nav i {
+  padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    background: #707070;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+:host > nav i:hover {
+  background: #5b5b5b;
 }
