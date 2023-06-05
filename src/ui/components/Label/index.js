@@ -13,9 +13,13 @@ namespace `ui.components` (
             console.log(e.target)
         }
 
-        inShadow(){
+        hasOwnTemplate() {
             return false
         }
+
+        // inShadow(){
+        //     return true
+        // }
 
         // cssStyle(){return `
         //     :host span{

@@ -1,0 +1,64 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+:host > ul#frames {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-right: 1px solid #c3c3c3dd;
+}
+
+:host > ul#frames li {
+  padding: 10px;
+    border-left: 6px solid #e8e8e8;
+}
+
+:host > ul#frames li.active {
+  border: 1px solid #c3c3c3dd;
+    border-left: 6px solid #ffffff;
+    box-shadow: 0px 5px 4px -4px rgba(0,0,0,.2);
+    margin-right: -1px;
+    border-right: 1px solid #ffffff;
+    z-index: 10000;
+    font-weight: 400;
+    position: relative;
+    background: repeating-linear-gradient( 45deg, #ffffff, #ffffff 10px, #f0f0f0 10px, #f0f0f0 20px );
+}
+
+:host > ul#objects {
+  list-style: none;
+    margin: 0;
+    padding: 8px;
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+    width: clamp(80px,80px,80px);
+    height: 100%;
+    border-right: 1px solid #dddddd;
+}
+
+:host > ul#objects li {
+  text-align: center;
+    padding: 4px;
+    border: 1px solid #c5c5c5;
+    border-radius: 2px;
+    background: radial-gradient(#ffffff, #ececec);
+}
+
+:host > ul#objects li i {
+  align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+    font-size: 16px;
+}
+
+:host > ul#objects li label {
+  font-size: 10px;
+    line-height: 12px;
+    display: block;
+}

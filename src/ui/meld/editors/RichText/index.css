@@ -1,0 +1,11 @@
+:host {
+  height: 300px;
+}
+
+:host .ql-toolbar {
+  height: 40px;
+}
+
+:host .ql-container {
+  height: calc(100% - 40px);
+}

@@ -1,0 +1,13 @@
+:host{}
+
+:host {
+    width: 100%;
+    height: 100vh;
+    background-image: url("/resources/img/nature_river.webp");
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all .7s ease;
+}

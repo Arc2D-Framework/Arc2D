@@ -1,0 +1,8 @@
+:host {
+  height: 100%;
+  display: block;
+}
+
+:host .editor {
+  height: 100%;
+}

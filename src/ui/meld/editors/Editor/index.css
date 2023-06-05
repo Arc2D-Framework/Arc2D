@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+    flex-flow: column;
+    background: white;
+}
+
+:host > nav {
+  height: clamp(40px, 40px, 40px);
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    background: gray;
+    padding: 0 10px;
+    color: white;
+}
+
+:host > section {
+  height: calc(100% - 40px);/*40px -> nav height*/
+  display: block;
+}

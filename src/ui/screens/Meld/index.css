@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Electrolize";
+    src: url(../../../../resources/fonts/Electrolize-Regular.ttf);
+}
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    box-sizing:border-box;
+    font-family: "Electrolize", "Quicksand", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+} 
+body {
+    
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    padding: 10px;
+}
