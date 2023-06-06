@@ -2,10 +2,14 @@
   display: flex;
     flex-flow: column;
     background: white;
+    border: 1px solid #cacaca;
+    margin-bottom: 1px;
 }
 
 :host(.minimized) {
-  height: auto;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
 }
 
 :host(.minimized) > section {
@@ -13,7 +17,9 @@
 }
 
 :host > nav {
-  height: clamp(40px, 40px, 40px);
+  min-height: 40px;
+    max-height: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     flex-flow: row nowrap;
@@ -26,6 +32,7 @@
 :host > section {
   height: calc(100% - 40px);/*40px -> nav height*/
   display: block;
+  padding: 10px;
 }
 
 :host > nav i {

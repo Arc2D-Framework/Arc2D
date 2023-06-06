@@ -5,9 +5,10 @@ namespace `ui.meld.editors` (
         
         async onConnected() {
             await super.onConnected();
+            
             var quill = new Quill(this.querySelector("#editor"), {
                 theme: 'snow'
-              });
+            });
         }
     }
 );

@@ -4,8 +4,16 @@
 
 :host .ql-toolbar {
   height: 40px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #ccc;
 }
 
 :host .ql-container {
   height: calc(100% - 40px);
+  border: 1px solid transparent;
+}
+
+
+:host > section {
+  padding: 0px;
 }

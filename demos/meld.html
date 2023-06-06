@@ -39,6 +39,7 @@
             }
             #editors > div {
                 width: 50%;
+                position: relative;
             }
 
             #title {
@@ -96,7 +97,16 @@
             </div>
             <div id="editors">
                 <div>
-                    <rich-text-editor></rich-text-editor>
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        width: 100%;
+                        overflow-y: scroll;
+                    ">
+                        <rich-text-editor></rich-text-editor>
+                        <branches-editor></branches-editor>
+                    </div>
                 </div>
                 <div>
                     <code-editor></code-editor>

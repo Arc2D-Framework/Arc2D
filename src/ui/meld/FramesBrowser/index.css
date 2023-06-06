@@ -11,11 +11,11 @@
 :host > ul#frames {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 0;
   margin: 0;
   list-style: none;
-  border-right: 1px solid #c3c3c3dd;
+  margin-right: -1px;
 }
 
 :host > ul#frames li {
@@ -33,6 +33,7 @@
     font-weight: 400;
     position: relative;
     background: repeating-linear-gradient( 45deg, #ffffff, #ffffff 10px, #f0f0f0 10px, #f0f0f0 20px );
+    border-bottom-color: #bcbcbc;
 }
 
 :host > ul#objects {
@@ -45,6 +46,7 @@
     width: clamp(80px,80px,80px);
     height: 100%;
     border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
 }
 
 :host > ul#objects li {
