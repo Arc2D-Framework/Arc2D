@@ -3,7 +3,7 @@ namespace `ui.meld.editors` (
     class Editor extends WebComponent {
         async onConnected() {
             await super.onConnected();
-            this.minimizeBtn = this.querySelector("nav > i");
+            this.minimizeBtn = this.querySelector(".title > i");
             this.minimizeBtn.addEventListener("click", e=> this.onToggleMinimize(e), false);
         }
 

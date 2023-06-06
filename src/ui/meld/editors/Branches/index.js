@@ -5,6 +5,13 @@ namespace `ui.meld.editors` (
         
         async onConnected() {
             await super.onConnected();
+            this.on("click", e=> this.onBranchSelected(e), false, ".branch")
+        }
+
+        onBranchSelected(e){
+            this.last && this.last.classList.remove("active");
+            this.last = e.matchedTarget;
+            this.last.classList.add("active");
         }
     }
 );

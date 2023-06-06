@@ -6,6 +6,7 @@
   height: 40px;
   border: 1px solid transparent;
   border-bottom: 1px solid #ccc;
+  background: #edfdff;
 }
 
 :host .ql-container {

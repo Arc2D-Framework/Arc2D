@@ -1,3 +1,30 @@
 :host {
   height: 300px;
 }
+
+:host .branch {
+  padding: 10px;
+  background: #ececec;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+}
+
+:host .branch input {
+  width: 100%;
+  height: 40px;
+  font-family: inherit;
+  padding: 10px;
+}
+
+:host .branch input.index {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+
+:host .branch.active {
+  background: orange;
+}

@@ -12,11 +12,12 @@
   max-height: 40px;
 }
 
-:host(.minimized) > section {
-  display: none;
+:host(.minimized) > section,
+:host(.minimized) > nav {
+  display: none !important;
 }
 
-:host > nav {
+:host > .title {
   min-height: 40px;
     max-height: 40px;
     height: 40px;
@@ -29,13 +30,27 @@
     color: white;
 }
 
-:host > section {
-  height: calc(100% - 40px);/*40px -> nav height*/
-  display: block;
-  padding: 10px;
+:host > nav {
+  padding: 12px;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 20px;
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  color: #444;
+  background: #edfdff;
 }
 
-:host > nav i {
+:host > section {
+  height: calc(100% - 40px);/*40px -> .title height*/
+  display: flex;
+  padding: 10px;
+  overflow-y: auto;
+  flex-flow: column;
+  gap: 10px;
+}
+
+:host > .title i {
   padding: 10px 16px;
     display: flex;
     align-items: center;
@@ -44,6 +59,6 @@
     border-radius: 3px;
 }
 
-:host > nav i:hover {
+:host > .title i:hover {
   background: #5b5b5b;
 }

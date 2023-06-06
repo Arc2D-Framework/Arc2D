@@ -1,16 +1,43 @@
 <template>
-  <nav>
+  <div class="title">
     <label>Branches</label>
     <i class="fas fa-angle-up"></i>
+  </div>
+  <nav>
+    <i class="fas fa-plus"></i>
+    <i class="far fa-trash-alt"></i>
   </nav>
   <section>
-    <div class="editor">
+    <div class="branch">
+      <i class="fas fa-grip-vertical" style="font-size: 18px;color: #cfcfcf;"></i>
+      <input type="text" class="index">
       <input type="text" list="branches"/>
-      <datalist id="branches">
-        <option value="Branch 1">Branch 1</option>
-        <option value="Branch 2">Branch 2</option>
-        <option value="Branch 3">Branch 3</option>
-      </datalist>
+    </div>
+    <div class="branch">
+      <i class="fas fa-grip-vertical" style="font-size: 18px;color: #cfcfcf;"></i>
+      <input type="text" class="index">
+      <input type="text" list="branches"/>
+    </div>
+    <div class="branch">
+      <i class="fas fa-grip-vertical" style="font-size: 18px;color: #cfcfcf;"></i>
+      <input type="text" class="index">
+      <input type="text" list="branches"/>
+    </div>
+    <div class="branch">
+      <i class="fas fa-grip-vertical" style="font-size: 18px;color: #cfcfcf;"></i>
+      <input type="text" class="index">
+      <input type="text" list="branches"/>
+    </div>
+    <div class="branch">
+      <i class="fas fa-grip-vertical" style="font-size: 18px;color: #cfcfcf;"></i>
+      <input type="text" class="index">
+      <input type="text" list="branches"/>
     </div>
   </section>
+
+  <datalist id="branches">
+    <option value="Branch 1">Branch 1</option>
+    <option value="Branch 2">Branch 2</option>
+    <option value="Branch 3">Branch 3</option>
+  </datalist>
 </template>
