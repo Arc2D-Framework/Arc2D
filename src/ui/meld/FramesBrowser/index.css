@@ -6,6 +6,7 @@
   bottom: 0;
   display: flex;
   flex-flow: row nowrap;
+  background: #5e5e5e;
 }
 
 :host > ul#frames {
@@ -20,20 +21,22 @@
 
 :host > ul#frames li {
   padding: 10px;
-    border-left: 6px solid #e8e8e8;
+  border-left: 6px solid transparent;
 }
 
 :host > ul#frames li.active {
   border: 1px solid #c3c3c3dd;
-    border-left: 6px solid #ffffff;
+  border-left: 6px solid #31c9ff;
     box-shadow: 0px 5px 4px -4px rgba(0,0,0,.2);
     margin-right: -1px;
     border-right: 1px solid #ffffff;
     z-index: 10000;
     font-weight: 400;
     position: relative;
-    background: repeating-linear-gradient( 45deg, #ffffff, #ffffff 10px, #f0f0f0 10px, #f0f0f0 20px );
+    /* background: repeating-linear-gradient( 45deg, #ffffff, #ffffff 10px, #f0f0f0 10px, #f0f0f0 20px ); */
+    background: #333333;
     border-bottom-color: #bcbcbc;
+    color: white;
 }
 
 :host > ul#objects {
@@ -47,6 +50,7 @@
     height: 100%;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
+    background: #333333;
 }
 
 :host > ul#objects li {
