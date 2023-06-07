@@ -23,8 +23,8 @@ namespace `ui.meld.editors` (
 
         async onDragStart(e) {
 
-            this.item = e.matchedTarget;
-            // console.log(e.matchedTarget)
+            this.item = e.target;
+            console.log(e.matchedTarget)
         }
 
         onDragEnd(e) {
@@ -32,14 +32,6 @@ namespace `ui.meld.editors` (
 
         onDragOver(e) {
             e.preventDefault();
-            if(e.matchedTarget == this.item) {
-                return
-            }
-            else {
-                this.lastEntered && this.lastEntered.classList.remove("dragenter");
-                this.lastEntered = e.matchedTarget;
-                this.lastEntered.classList.add("dragenter");
-            }
         }
 
         onDragEnter(e) {
@@ -51,26 +43,26 @@ namespace `ui.meld.editors` (
         }
 
         onDragLeave(e) {
-            console.log("leaving", e.matchedTarget)
-            e.matchedTarget.classList.remove("dragenter");
+            e.target.classList.remove("dragenter");
         }
 
         onDrop(e) {
-            if(e.matchedTarget.draggable && e.matchedTarget != this.item){
+            debugger
+            if(e.target.draggable && e.target != this.item){
                 let items = Array.from(this.querySelectorAll(".branch"));
                 let current = this.item;
                 let currentpos = 0, droppedpos = 0;
                 for (let it=0; it<items.length; it++) {
                     if (current == items[it]) { currentpos = it; }
-                    if (e.matchedTarget == items[it]) { droppedpos = it; }
+                    if (e.target == items[it]) { droppedpos = it; }
                 }
                 if (currentpos < droppedpos) {
-                    e.matchedTarget.parentNode.insertBefore(this.item, e.matchedTarget.nextSibling);
+                    e.target.parentNode.insertBefore(this.item, e.target.nextSibling);
                 } else {
-                    e.matchedTarget.parentNode.insertBefore(this.item, e.matchedTarget);
+                    e.target.parentNode.insertBefore(this.item, e.target);
                 }
 
-                e.matchedTarget.classList.remove("dragenter");
+                e.target.classList.remove("dragenter");
             }
         }
 

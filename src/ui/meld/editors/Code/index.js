@@ -27,5 +27,9 @@ namespace `ui.meld.editors` (
             });
             `);
         }
+
+        inShadow() {
+            return false
+        }
     }
 );

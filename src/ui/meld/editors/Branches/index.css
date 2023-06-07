@@ -1,5 +1,9 @@
 :host {
-  height: 300px;
+
+}
+
+:host * {
+  box-sizing: inherit;
 }
 
 :host .branch {
@@ -27,6 +31,8 @@
   width: 40px;
   height: 40px;
   text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
 }
 
 
@@ -36,15 +42,15 @@
 
 :host .branch .drag-handle {
   font-size: 18px;
-  color: #cfcfcf;
+  color: rgb(142 142 142);
 }
 :host .branch.active .drag-handle {
-  color: #c58000;
+  color: white;
 }
 
-:host .branch.hovered {
+:host .branch.dragenter {
   background: gray;
 }
-:host .branch.hovered * {
+:host .branch.dragenter * {
   pointer-events: none;
 }
