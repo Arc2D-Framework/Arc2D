@@ -53,6 +53,14 @@
     background: #333333;
 }
 
+:host > ul#objects .drag-handle {
+  text-align: center;
+  color: #606060;
+  cursor: ew-resize;
+  font-size: 16px;
+  background: #2a2a2a;
+}
+
 :host > ul#objects li {
   text-align: center;
     padding: 4px;
