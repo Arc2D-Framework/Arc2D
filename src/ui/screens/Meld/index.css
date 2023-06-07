@@ -20,6 +20,6 @@ body {
     
     display: flex;
     flex-flow: column;
-    gap: 10px;
-    padding: 10px;
+    /* gap: 10px; */
+    /* padding: 10px; */
 }

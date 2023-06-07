@@ -25,7 +25,7 @@
     align-items: center;
     flex-flow: row nowrap;
     justify-content: space-between;
-    background: gray;
+    background: #333333;
     padding: 0 5px 0 10px;
     color: white;
 }
@@ -54,11 +54,11 @@
   padding: 10px 16px;
     display: flex;
     align-items: center;
-    background: #707070;
+    background: #3b3b3b;
     cursor: pointer;
     border-radius: 3px;
 }
 
 :host > .title i:hover {
-  background: #5b5b5b;
+  background: #4a4a4a;
 }

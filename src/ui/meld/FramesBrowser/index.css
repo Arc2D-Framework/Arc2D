@@ -25,17 +25,17 @@
 }
 
 :host > ul#frames li.active {
-  border: 1px solid #c3c3c3dd;
-  border-left: 6px solid #31c9ff;
-    box-shadow: 0px 5px 4px -4px rgba(0,0,0,.2);
+  border: 1px solid #757575;
+    border-left: 6px solid #31c9ff;
+    box-shadow: 0px 0px 16px 1px rgba(0,0,0,.2);
     margin-right: -1px;
     border-right: 1px solid #ffffff;
     z-index: 10000;
     font-weight: 400;
     position: relative;
     /* background: repeating-linear-gradient( 45deg, #ffffff, #ffffff 10px, #f0f0f0 10px, #f0f0f0 20px ); */
-    background: #333333;
-    border-bottom-color: #bcbcbc;
+    background: linear-gradient(90deg, #5e5e5e 33%, #333333);
+    border-bottom-color: #757575;
     color: white;
 }
 
@@ -48,24 +48,25 @@
     gap: 8px;
     width: clamp(80px,80px,80px);
     height: 100%;
-    border-right: 1px solid #dddddd;
-    border-left: 1px solid #dddddd;
+    border-right: 1px solid #757575;
+    border-left: 1px solid #757575;
     background: #333333;
 }
 
 :host > ul#objects li {
   text-align: center;
     padding: 4px;
-    border: 1px solid #c5c5c5;
+    border: 1px solid #636262;
     border-radius: 2px;
-    background: radial-gradient(#ffffff, #ececec);
+    background: #4e4e4e;
+    color: white;
 }
 
 :host > ul#objects li.active {
-  background: #333333;
-    border: 1px solid #1fb4ff;
-    color: #ffffff;
-    box-shadow: 0px 0px 9px -1px #37d2ff;
+  background: #32c9ff;
+  border: 1px solid #05ffef;
+  color: #ffffff;
+  box-shadow: 0px 0px 9px -1px #37d2ff;
 }
 
 :host > ul#objects li i {
