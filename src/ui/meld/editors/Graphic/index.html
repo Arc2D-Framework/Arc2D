@@ -1,0 +1,30 @@
+<template>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+  <div class="title">
+    <label>Graphic</label>
+    <i class="fas fa-angle-up  minimize-btn"></i>
+  </div>
+  <nav>
+    <i class="far fa-image"></i>
+    <i class="far fa-trash-alt"></i>
+  </nav>
+  <section>
+    <label class="help-text">
+      <i class="far fa-question-circle"></i>
+      Create a list of branches that can be used in your rich text content. For example use <code>$branch_1</code> to create an inline link to branch 1.
+    </label>
+    
+    <div class="form-row">
+      <label>File Name</label>
+      <input type="text" id="graphic"/>
+    </div>
+    
+    <div class="form-row">
+      <label>Alternative Text</label>
+      <input type="text" id="graphic_alt"/>
+    </div>
+
+    <img src="/resources/images/placeholder.jpg"/>
+  </section>
+</template>

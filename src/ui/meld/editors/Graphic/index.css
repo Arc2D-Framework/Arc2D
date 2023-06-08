@@ -1,0 +1,100 @@
+:host {
+
+}
+
+:host * {
+  box-sizing: inherit;
+}
+
+
+:host .branch {
+  padding: 10px;
+  background: #ececec;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+}
+
+:host .branch .drag-handle {
+  cursor: move;
+}
+
+:host .branch .branch-name {
+  background: rgb(209 209 209);
+  padding: 4px 4px;
+  border-radius: 3px;
+  border-left: 4px solid #eb5200;
+  min-width: 80px;
+  text-align: center;
+  border: 1px solid #b9b9b9;
+  border-left: 4px solid #32c9ff;
+}
+
+:host .branch input {
+  width: 100%;
+  height: 40px;
+  font-family: inherit;
+  padding: 10px;
+}
+
+:host .branch input.index {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+
+:host .branch.active {
+  background: orange;
+}
+
+:host .branch .drag-handle {
+  font-size: 18px;
+  color: rgb(142 142 142);
+}
+:host .branch.active .drag-handle {
+  color: white;
+}
+
+:host .branch.active .branch-name {
+  background: #fffd00;
+}
+
+:host .branch.active input.index {
+  background: white;
+}
+
+:host .branch.active input[list] {
+  background: repeating-linear-gradient( 45deg, #ffffff, #ffffff 10px, #f0f0f0 10px, #f0f0f0 20px );
+}
+
+:host .branch.dragenter {
+  background: gray;
+}
+:host .branch.dragenter * {
+  pointer-events: none;
+}
+
+
+
+
+:host > section > .help-text {
+  padding: 10px 30px;
+  font-size: 12px;
+  background: #efefef;
+}
+:host > section > .help-text code {
+  padding: 2px 5px;
+  background: #d8d8d8;
+  border-radius: 3px;
+}
+
+:host > section > .help-text > i{
+  font-size: 24px;
+    float: left;
+    margin-right: 12px;
+}

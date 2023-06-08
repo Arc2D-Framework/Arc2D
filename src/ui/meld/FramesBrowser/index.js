@@ -12,16 +12,8 @@ namespace `ui.meld` (
             this.setDefault();
         }
 
-        // onResizeNav(e) {
-        //     const compStyles = window.getComputedStyle(this.nav);
-        //     var w = parseInt(compStyles.getPropertyValue("min-width"));
-        //     console.log("w",w)
-        //     this.nav.style.minWidth = (e.detail.delta) + "px"
-        // }
-
         onMouseUp(){
             document.removeEventListener("mousemove", this.onMouseMove, false);
-            // this.dispatchEvent("resize-pane-end", {delta})
         }
         onMouseDown(e){
             const compStyles = window.getComputedStyle(this.nav);
@@ -36,7 +28,6 @@ namespace `ui.meld` (
             var deltaX = e.pageX - this.startX;
             var width = this.startWidth + deltaX;
             this.nav.style.minWidth = `${width}px`
-            // this.dispatchEvent("resize-pane", {delta})
         }
 
         setDefault(){

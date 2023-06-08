@@ -6,6 +6,7 @@ import 'ui.meld.editors.Editor';
 import 'ui.meld.editors.Code';
 import 'ui.meld.editors.RichText';
 import 'ui.meld.editors.Branches';
+import 'ui.meld.editors.Graphic';
 
 namespace `ui.screens` (
     class Meld extends Application {
