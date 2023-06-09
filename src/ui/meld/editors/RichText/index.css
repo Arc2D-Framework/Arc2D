@@ -1,5 +1,5 @@
 :host {
-  height: 300px;
+  height: 400px;
 }
 
 :host .ql-toolbar {
@@ -17,4 +17,5 @@
 
 :host > section {
   padding: 0px;
+  gap: 0;
 }

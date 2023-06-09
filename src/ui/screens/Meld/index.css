@@ -15,6 +15,7 @@ html,body {
     box-sizing:border-box;
     font-family: "Electrolize", "Quicksand", Helvetica, Arial, sans-serif;
     font-size: 12px;
+    overflow: hidden;
 } 
 body {
     

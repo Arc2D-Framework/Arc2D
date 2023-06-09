@@ -22,6 +22,16 @@
 :host > ul#frames li {
   padding: 10px;
   border-left: 6px solid transparent;
+  color: rgb(193, 193, 193);
+  transition: all 0.4s ease 0s;
+  background: transparent;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+}
+
+:host > ul#frames li:hover {
+  background: rgb(83 83 83);
 }
 
 :host > ul#frames li.active {

@@ -1,5 +1,5 @@
 
-import 'ui.components.Splash';
+import '/src/domain/services/Meld.js';
 import 'ui.components.SpaNav';
 import 'ui.meld.FramesBrowser';
 import 'ui.meld.editors.Editor';
