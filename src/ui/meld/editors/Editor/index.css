@@ -3,7 +3,7 @@
     flex-flow: column;
     background: white;
     border: 1px solid #cacaca;
-    margin-bottom: 1px;
+    margin-bottom: 30px;
 
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
@@ -14,6 +14,7 @@
   height: 40px;
   min-height: 40px;
   max-height: 40px;
+  margin-bottom: 1px;
 }
 
 :host(.minimized) > section,

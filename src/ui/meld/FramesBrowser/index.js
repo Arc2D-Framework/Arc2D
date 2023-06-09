@@ -10,11 +10,11 @@ namespace `ui.meld` (
             this.on("mouseup", e=> this.onMouseUp(e), false)
             this.nav = document.querySelector("#nav");
             await this.onLoadLessonFrames();
-            await this.onLoadFrameObjects()
+            await this.onLoadObjectsMenu()
             this.setDefault();
         }
 
-        onLoadFrameObjects() {
+        onLoadObjectsMenu() {
             var ul = this.querySelector("ul#objects");
                 ul.innerHTML = "";
             var resize_handle = `<i class="fas fa-grip-vertical drag-handle"></i>`.toNode();
@@ -23,7 +23,7 @@ namespace `ui.meld` (
             for(var key in Config.OBJECT_TYPES) {
                 var o = Config.OBJECT_TYPES[key];
                 var li = `
-                    <li data-type="${key}">
+                    <li data-type="${key}" data-namespace="${o.editor.namespace}">
                         <i class="fas ${o.icon}"></i>
                         <label>${o.label}</label>
                     </li>`.toNode();
@@ -82,20 +82,33 @@ namespace `ui.meld` (
             this.last && this.last.classList.remove("active");
             this.last=e.matchedTarget;
             this.last.classList.add("active");
-            this.onUpdateAllowedObjects()
+            this.onUpdateObjectsMenu()
         }
 
         getSelectedFrame() {
             return this.last;
         }
 
-        onUpdateAllowedObjects() {
+        async onUpdateObjectsMenu() {
+            this.disableAllObjects()
             var frame = this.getSelectedFrame()?.frame;
             if(frame){
-                var template = frame.Template;
-
+                var allowed_objects = Config.TEMPLATE_TYPES[frame.Template];
+                if(allowed_objects?.length) {
+                    // await allowed_objects.forEach(async o => {
+                    for(let o of allowed_objects){
+                        var li = this.querySelector(`ul#objects li[data-namespace="${o.editor.namespace}"]`);
+                        li && li.classList.remove("disabled");
+                        await sleep (200)
+                    }
+                }
             }
 
+        }
+
+        disableAllObjects() {
+            var items = this.querySelectorAll("ul#objects li");
+            items.forEach(item => item.classList.add("disabled"))
         }
 
         // allowed() {
