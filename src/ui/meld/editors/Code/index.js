@@ -26,6 +26,16 @@ namespace `ui.meld.editors` (
                 console.log(code);
             });
             `);
+            this.editor = jar;
+        }
+
+        clear() {
+            this.editor.updateCode("//Code Here")
+        }
+
+        append(code) {
+            var current = this.editor.toString()
+            this.editor.updateCode(current + "\n" + code)
         }
 
         inShadow() {

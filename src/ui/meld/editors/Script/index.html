@@ -1,0 +1,21 @@
+<template>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+  <div class="title">
+    <label>Custom Script</label>
+    <i class="fas fa-angle-up  minimize-btn"></i>
+  </div>
+  <nav>
+    <i class="fas fa-code"></i>
+    <i class="fas fa-eraser" id="erase-btn"></i>
+  </nav>
+  <section>
+    <div class="form-row">
+      <label>Quick Snippets</label>
+      <select id="snippets">
+        <option>- Choose -</option>
+      </select>
+    </div>
+    <code-editor></code-editor>
+  </section>
+</template>

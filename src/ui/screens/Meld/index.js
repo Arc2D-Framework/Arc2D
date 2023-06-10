@@ -4,6 +4,7 @@ import 'ui.components.SpaNav';
 import 'ui.meld.FramesBrowser';
 import 'ui.meld.editors.Editor';
 import 'ui.meld.editors.Code';
+import 'ui.meld.editors.Script';
 import 'ui.meld.editors.RichText';
 import 'ui.meld.editors.Branches';
 import 'ui.meld.editors.Graphic';

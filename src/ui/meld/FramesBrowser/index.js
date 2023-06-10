@@ -99,7 +99,7 @@ namespace `ui.meld` (
                     for(let o of allowed_objects){
                         var li = this.querySelector(`ul#objects li[data-namespace="${o.editor.namespace}"]`);
                         li && li.classList.remove("disabled");
-                        await sleep (200)
+                        // await sleep (200)
                     }
                 }
             }

@@ -82,7 +82,9 @@
   display: flex;
   flex-flow: column;
 }
-:host section input {
+:host section input,
+:host section select
+ {
   width: 100%;
   height: 40px;
   font-family: inherit;

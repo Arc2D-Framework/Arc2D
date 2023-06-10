@@ -20,12 +20,21 @@ var Config = window.Config = window.Config||{
 };
 
 Config.OBJECT_TYPES = {
+    "SCRIPT": {
+        "label" : "Custom Script", 
+        "icon": "fa-code", 
+        "editor" : {
+            "namespace" : "ui.meld.editors.Script", "options" : null
+        },
+        "enabled" : true
+    },
     "TEXT": {
         "label" : "Rich Text", 
         "icon": "fa-font", 
         "editor" : {
             "namespace" : "ui.meld.editors.RichText", "options" : null
         },
+        "example" : "var text='text content here';\n",
         "enabled" : true
     },
     "GRAPHIC": {
@@ -106,11 +115,14 @@ Config.TEMPLATE_TYPES = {
     "GRAPHIC_RIGHT" : [
         Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.GRAPHIC
     ],
+    "GRAPHIC_RIGHT_LARGE" : [
+        Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.GRAPHIC
+    ],
     "GRAPHIC_LEFT" : [
         Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.GRAPHIC
     ],
     "BRANCHING_MENU_LARGE" : [
-        Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.BRANCHING_MENU
+        Config.OBJECT_TYPES.SCRIPT, Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.BRANCHING_MENU
     ],
     "BRANCHING_MENU_SMALL" : [
         Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.BRANCHING_MENU

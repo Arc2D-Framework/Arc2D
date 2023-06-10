@@ -101,7 +101,8 @@
 :host > ul#objects li.disabled {
   opacity: .4;
   pointer-events: none;
-  filter: blur(0.8px);
+  /* filter: blur(0.8px); */
+  display: none;
 }
 
 :host > ul#objects li i {
