@@ -5,7 +5,20 @@ namespace `ui.meld.editors` (
         
         async onConnected() {
             await super.onConnected();
-            this.on("click", e=>this.onChooseFile(e), false, ".fa-image")
+            this.on("click", e=>this.onChooseFile(e), false, ".fa-image");
+        }
+
+        setData(d) {
+            debugger
+            this.data = d;
+        }
+
+        onRenderData() {
+            if(this.data) {
+                this.querySelector("section input#src").value = this.data.src;
+                this.querySelector("section input#alt").value = this.data.alt;
+                this.querySelector("section #mediaDescription").value = this.data.mediaDescription;
+            }
         }
 
         async onChooseFile(e){
@@ -13,8 +26,8 @@ namespace `ui.meld.editors` (
             console.log(file.name)
             // var img = `<img src="${URL.createObjectURL(file)}" style="width: 100px; height: 100px;">`.toNode();
             this.querySelector("section img").src = URL.createObjectURL(file);
-            this.querySelector("section input#graphic").value = file.name;
-            this.querySelector("section input#graphic_alt").value = "Alt text for " + file.name;
+            this.querySelector("section input#src").value = file.name;
+            this.querySelector("section input#alt").value = "Alt text for " + file.name;
             //contentElement.innerHTML = files.map(file => `<img src="${URL.createObjectURL(file)}" style="width: 100px; height: 100px;">`).join('');
         }
 

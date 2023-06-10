@@ -1,51 +1,51 @@
-// var frame_data = {
-//     graphic : {
-//         src : "graphic1.png",
-//         mediaDescription : "graphic 1 media desc",
-//         alt : "graphic 1 alt"
-//     },
-//     text : {
-//         "value" : "text here, visit ${branch_1} and then ${swap_2} <br/> ${branches} ${swaps}"
-//     },
-//     branches: [
-//         {
-//             label : "Branch 1"
-//         },
-//         {
-//             label : "Branch 2"
-//         }
-//     ],
-//     swaps : [
-//         {label : "Graphic 1 Swap", graphic: "picture_swap1.png", alt: "alt text swap 1", mediaDescription: "swap 1 desc"},
-//         {label : "Graphic 2 Swap", graphic: "picture_swap2.png", alt: "alt text swap 2", mediaDescription: "swap 2 desc"}
-//     ],
-//     wcn : [
-//         {type: "w", label: "warning note 1"},
-//         {type: "w", label: "warning note 2"},
-//         {type: "c", label: "caution note"},
-//         {type: "n", label: "regular note"}
-//     ],
-//     menuitems : [
-//         {graphic: "image1.png", label:"label 1", branch: "branch label 1"},
-//         {graphic: "image2.png", label:"label 2", branch: "branch label 2"},
-//         {graphic: "image3.png", label:"label 3", branch: "branch label 3"}
-//     ],
-//     tabs : [
-//         {
-//             label:"Tab 1", 
-//             text : {
-//                 "value" : "text here, visit ${branch_1} and then ${swap_2} <br/> ${swaps}${branches}"
-//             }, 
-//             selected:false, 
-//             graphic:"tab1_graphic.png", 
-//             mediaDescription:"media desc tab 1", 
-//             alt:"alt desc tab 1"
-//         }
-//     ],
-//     flashcards : [
-//         {graphic:"flashcard_1.png", label:"flashcard 1 label", img_in_front:true, mediaDescription:"flashcard 1 media desc", alt:"flashcard 1 alt"}
-//     ]
-// }
+var frame_data = {
+    graphic : {
+        src : "graphic1.png",
+        mediaDescription : "graphic 1 media desc",
+        alt : "graphic 1 alt"
+    },
+    text : {
+        "value" : "text here, visit ${branch_1} and then ${swap_2} <br/> ${branches} ${swaps}"
+    },
+    branches: [
+        {
+            label : "Branch 1"
+        },
+        {
+            label : "Branch 2"
+        }
+    ],
+    swaps : [
+        {label : "Graphic 1 Swap", graphic: "picture_swap1.png", alt: "alt text swap 1", mediaDescription: "swap 1 desc"},
+        {label : "Graphic 2 Swap", graphic: "picture_swap2.png", alt: "alt text swap 2", mediaDescription: "swap 2 desc"}
+    ],
+    wcn : [
+        {type: "w", label: "warning note 1"},
+        {type: "w", label: "warning note 2"},
+        {type: "c", label: "caution note"},
+        {type: "n", label: "regular note"}
+    ],
+    menuitems : [
+        {graphic: "image1.png", label:"label 1", branch: "branch label 1"},
+        {graphic: "image2.png", label:"label 2", branch: "branch label 2"},
+        {graphic: "image3.png", label:"label 3", branch: "branch label 3"}
+    ],
+    tabs : [
+        {
+            label:"Tab 1", 
+            text : {
+                "value" : "text here, visit ${branch_1} and then ${swap_2} <br/> ${swaps}${branches}"
+            }, 
+            selected:false, 
+            graphic:"tab1_graphic.png", 
+            mediaDescription:"media desc tab 1", 
+            alt:"alt desc tab 1"
+        }
+    ],
+    flashcards : [
+        {graphic:"flashcard_1.png", label:"flashcard 1 label", img_in_front:true, mediaDescription:"flashcard 1 media desc", alt:"flashcard 1 alt"}
+    ]
+}
 
 function define_inline_branch(item, index) {
     return `<a href='javascript:void(0);' id='link${index+1}' onclick=\"parent.launchBranch('branch_${index+1}', this);\">${item.label}</a>`
@@ -158,44 +158,40 @@ function define_text_statement(str, item, frame_data) {
     });
     return str;
 }
+var src = "";
+
+for(var key in frame_data) {
+    var item = frame_data[key];
+    if(key == "graphic") {
+        src += define_graphic_statements(item)
+    }
+    if(key == "text") {
+        src +=  define_text_statement(`var ${key} = \`${item.value}\``, item, frame_data);
+
+        src += ";\n";
+        
+        if(frame_data.swaps?.length) {
+            src += define_swap_statement(frame_data.swaps)
+        }
+
+        if(frame_data.branches?.length) {
+            src += define_branch_statements(frame_data.branches)
+        }
+    }
+    if(key == "wcn") {
+        src += define_wcn_statements(item)
+    }
+    if(key == "menuitems") {
+        src += define_menuitem_statements(item)
+    }
+    if(key == "tabs") {
+        src += define_tab_statements(item, frame_data)
+    }
+    if(key == "flashcards") {
+        src += define_flashcard_statements(item)
+    }
+};
 
 
-function parse(frame_data) {
-    var src = "";
-
-    for(var key in frame_data) {
-        var item = frame_data[key];
-        if(key == "graphic") {
-            src += define_graphic_statements(item)
-        }
-        if(key == "text") {
-            src +=  define_text_statement(`var ${key} = \`${item.value}\``, item, frame_data);
-
-            src += ";\n";
-            
-            if(frame_data.swaps?.length) {
-                src += define_swap_statement(frame_data.swaps)
-            }
-
-            if(frame_data.branches?.length) {
-                src += define_branch_statements(frame_data.branches)
-            }
-        }
-        if(key == "wcn") {
-            src += define_wcn_statements(item)
-        }
-        if(key == "menuitems") {
-            src += define_menuitem_statements(item)
-        }
-        if(key == "tabs") {
-            src += define_tab_statements(item, frame_data)
-        }
-        if(key == "flashcards") {
-            src += define_flashcard_statements(item)
-        }
-    };
-    return src;
-}
-
-export {parse}
+console.log(src);
 

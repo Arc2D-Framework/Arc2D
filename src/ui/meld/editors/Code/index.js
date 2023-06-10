@@ -38,6 +38,11 @@ namespace `ui.meld.editors` (
             this.editor.updateCode(current + "\n" + code)
         }
 
+        setValue(str) {
+            this.clear();
+            this.editor.updateCode(str)
+        }
+
         inShadow() {
             return false
         }
