@@ -12,7 +12,7 @@ namespace `domain.services` (
         }
 
         static async GetMuseFrameData(frameID) {
-            return await (await fetch(`/resources/meld/services/GetLessonData_${frameID}.asmx?frameID=${frameID}`, {
+            return await (await fetch(`/resources/meld/services/GetMuseFrameData_${frameID}.asmx?frameID=${frameID}`, {
                 method: "GET",
                 cache: "no-cache",
                 headers: {

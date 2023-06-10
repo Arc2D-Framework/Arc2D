@@ -14,7 +14,6 @@ namespace `ui.meld.editors` (
         onPopulateSnippets() {
             var select = this.querySelector("select#snippets");
             for(var key in Config.OBJECT_TYPES) {
-                // debugger
                 var o = Config.OBJECT_TYPES[key];
                 if(o.example && o.enabled) {
                     var option = document.createElement("option");

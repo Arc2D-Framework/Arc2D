@@ -19,7 +19,7 @@ var frame_data = {
         {label : "Graphic 1 Swap", graphic: "picture_swap1.png", alt: "alt text swap 1", mediaDescription: "swap 1 desc"},
         {label : "Graphic 2 Swap", graphic: "picture_swap2.png", alt: "alt text swap 2", mediaDescription: "swap 2 desc"}
     ],
-    wcns : [
+    wcn : [
         {type: "w", label: "warning note 1"},
         {type: "w", label: "warning note 2"},
         {type: "c", label: "caution note"},
@@ -178,7 +178,7 @@ for(var key in frame_data) {
             src += define_branch_statements(frame_data.branches)
         }
     }
-    if(key == "wcns") {
+    if(key == "wcn") {
         src += define_wcn_statements(item)
     }
     if(key == "menuitems") {

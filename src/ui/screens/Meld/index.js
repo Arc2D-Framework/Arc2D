@@ -9,6 +9,7 @@ import 'ui.meld.editors.RichText';
 import 'ui.meld.editors.Branches';
 import 'ui.meld.editors.Graphic';
 
+
 namespace `ui.screens` (
     class Meld extends Application {
         constructor(element){
@@ -19,10 +20,32 @@ namespace `ui.screens` (
         async onConnected() {
             await super.onConnected();
             this.nav = this.querySelector("#nav");
-            // this.addEventListener("resize-pane", e => this.onResizeNav(e), false)
-            // this.addEventListener("resize-pane-end", e => this.onResizeNavEnd(e), false)
-            // var draghandle = this.querySelector(".FramesBrowser >>> .drag-handle")
-            // debugger
+            this.subscribe("frameselected", e=> this.onFrameSelected(e), false);
+            this.editors_container = this.querySelector("#editors-container");
+        }
+
+        async onFrameSelected(e) {
+            var frame = e.detail;
+            var json = frame.Muse;
+            var script = frame.Script;
+
+            if(json) {
+                this.editors_container.innerHTML = "";
+                for(var key in json){
+                    if(key == "id") {continue}
+                    var data = json[key];
+                    var ns = Config.OBJECT_TYPES[key.toUpperCase()]?.editor?.namespace;
+                    if(ns) {
+                        var cl = new system.http.ClassLoader;
+                        await cl.import(ns);
+                        var Class = NSRegistry[ns];
+                        if(Class){
+                            var editor = new Class;
+                            this.editors_container.append(editor)
+                        }
+                    }
+                }
+            }
         }
 
         // onResizeNavEnd(){

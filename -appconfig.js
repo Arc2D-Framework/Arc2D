@@ -34,7 +34,7 @@ Config.OBJECT_TYPES = {
         "editor" : {
             "namespace" : "ui.meld.editors.RichText", "options" : null
         },
-        "example" : "var text='text content here';\n",
+        "example" : "var text=`\n\tMultiline rich <b>text content here</b>.\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.`;\n",
         "enabled" : true
     },
     "GRAPHIC": {
@@ -43,6 +43,7 @@ Config.OBJECT_TYPES = {
         "editor" : {
             "namespace" : "ui.meld.editors.Graphic", "options" : null
         },
+        "example" : "var graphic='image_name_here.png';\nvar graphic_alt='alt text here'",
         "enabled" : true
     },
     "BRANCHES": {
@@ -53,7 +54,7 @@ Config.OBJECT_TYPES = {
         },
         "enabled" : true
     },
-    "FLASH_CARDS": {
+    "FLASHCARDS": {
         "label" : "Flash Cards", 
         "icon": "fa-portrait",
         "editor" : {
@@ -65,7 +66,7 @@ Config.OBJECT_TYPES = {
         "label" : "Swaps", 
         "icon": "fa-images",
         "editor" : {
-            "namespace" : "ui.meld.editors.ImageSwaps", "options" : null
+            "namespace" : "ui.meld.editors.Swaps", "options" : null
         },
         "enabled" : false
     },
@@ -93,7 +94,7 @@ Config.OBJECT_TYPES = {
         },
         "enabled" : false
     },
-    "BRANCHING_MENU" : {
+    "MENUITEMS" : {
         "label" : "Branching Menu", 
         "icon": "fa-th-large",
         "editor" : {
@@ -122,10 +123,10 @@ Config.TEMPLATE_TYPES = {
         Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.GRAPHIC
     ],
     "BRANCHING_MENU_LARGE" : [
-        Config.OBJECT_TYPES.SCRIPT, Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.BRANCHING_MENU
+        Config.OBJECT_TYPES.SCRIPT, Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.MENUITEMS
     ],
     "BRANCHING_MENU_SMALL" : [
-        Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.BRANCHING_MENU
+        Config.OBJECT_TYPES.TEXT, Config.OBJECT_TYPES.MENUITEMS
     ],
     "TITLE" : [
         Config.OBJECT_TYPES.TITLE

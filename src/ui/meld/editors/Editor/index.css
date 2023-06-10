@@ -91,6 +91,26 @@
   padding: 10px;
 }
 
+
+
+:host > section > .help-text {
+  padding: 10px 30px;
+  font-size: 12px;
+  background: #efefef;
+}
+:host > section > .help-text code {
+  padding: 2px 5px;
+  background: #d8d8d8;
+  border-radius: 3px;
+}
+
+:host > section > .help-text > i{
+  font-size: 24px;
+    float: left;
+    margin-right: 12px;
+}
+
+
 :host section input:focus {
   background: repeating-linear-gradient(45deg, rgb(255, 255, 255), rgb(255, 255, 255) 10px, rgb(240, 240, 240) 10px, rgb(240, 240, 240) 20px);
 }

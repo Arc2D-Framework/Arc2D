@@ -47,7 +47,7 @@ namespace `ui.meld` (
                 ul.innerHTML = "";
             for(let frame of data) {
                 var li = `<li data-id="${frame.ID}" data-template="${frame.Template}">${frame.Title}</li>`.toNode();
-                li.frame = frame;
+                li.data = frame;
                 ul.append(li)
             }
         }
@@ -76,13 +76,18 @@ namespace `ui.meld` (
             this.last = li;
         }
 
-        onFrameSelected(e){
+        async onFrameSelected(e){
             e.preventDefault();
             e.stopPropagation();
             this.last && this.last.classList.remove("active");
             this.last=e.matchedTarget;
             this.last.classList.add("active");
-            this.onUpdateObjectsMenu()
+            this.onUpdateObjectsMenu();
+            var musedata = await domain.services.Meld.GetMuseFrameData(this.last.data.ID);
+            if(musedata){
+                this.last.data.Muse = musedata;
+            }
+            this.fire("frameselected", this.last.data)
         }
 
         getSelectedFrame() {
@@ -91,7 +96,7 @@ namespace `ui.meld` (
 
         async onUpdateObjectsMenu() {
             this.disableAllObjects()
-            var frame = this.getSelectedFrame()?.frame;
+            var frame = this.getSelectedFrame()?.data;
             if(frame){
                 var allowed_objects = Config.TEMPLATE_TYPES[frame.Template];
                 if(allowed_objects?.length) {
