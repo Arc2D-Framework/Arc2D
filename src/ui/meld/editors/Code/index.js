@@ -27,20 +27,24 @@ namespace `ui.meld.editors` (
             });
             `);
             this.editor = jar;
+            this.editor.onUpdate(code => this.dispatchEvent("codechanged", {value: this.editor.toString()}))
         }
 
         clear() {
-            this.editor.updateCode("//Code Here")
+            this.editor.updateCode("");
+            this.dispatchEvent("codechanged", {value: this.editor.toString()})
         }
 
         append(code) {
             var current = this.editor.toString()
-            this.editor.updateCode(current + "\n" + code)
+            this.editor.updateCode(current + "\n" + code);
+            this.dispatchEvent("codechanged", {value: this.editor.toString()})
         }
 
         setValue(str) {
             this.clear();
-            this.editor.updateCode(str)
+            this.editor.updateCode(str);
+            this.dispatchEvent("codechanged", {value: this.editor.toString()})
         }
 
         inShadow() {

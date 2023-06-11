@@ -6,29 +6,39 @@ namespace `ui.meld.editors` (
         async onConnected() {
             await super.onConnected();
             this.on("click", e=>this.onChooseFile(e), false, ".fa-image");
+// 
+            // debugger
+            this.fields = {
+                // "src" : this.querySelector("section input#src"),
+                // "alt" : this.querySelector("section input#alt"),
+                // "mediaDescription" : this.querySelector("section #mediaDescription")
+            }
         }
 
-        setData(d) {
-            debugger
-            this.data = d;
-        }
 
-        onRenderData() {
-            if(this.data) {
-                this.querySelector("section input#src").value = this.data.src;
-                this.querySelector("section input#alt").value = this.data.alt;
-                this.querySelector("section #mediaDescription").value = this.data.mediaDescription;
+        onBind() {
+            if(this.museobject) {
+                for (let [key, value] of Object.entries(this.museobject)) { 
+                    this.fields[key] = this.querySelector(`section .input#${key}`);
+                    // debugger
+                    this.fields[key].value = value;
+                    this.watch(this.fields[key], "value", e=> {
+                        // debugger
+                        this.museobject[e.object.id] = e.value;
+                        this.fire("framechanged", this.museframe)
+                    }, true)
+                }
             }
         }
 
         async onChooseFile(e){
             let file = await this.selectFile("image/*", false);
             console.log(file.name)
-            // var img = `<img src="${URL.createObjectURL(file)}" style="width: 100px; height: 100px;">`.toNode();
+
             this.querySelector("section img").src = URL.createObjectURL(file);
-            this.querySelector("section input#src").value = file.name;
-            this.querySelector("section input#alt").value = "Alt text for " + file.name;
-            //contentElement.innerHTML = files.map(file => `<img src="${URL.createObjectURL(file)}" style="width: 100px; height: 100px;">`).join('');
+            this.fields["src"].value = file.name;
+            this.fields["src"].dispatchEvent(new Event("change"))
+            this.fields["alt"].value = "Alt text for " + file.name;
         }
 
         selectFile (contentType, multiple){

@@ -11,10 +11,10 @@
 }
 
 :host(.minimized) {
-  height: 40px;
-  min-height: 40px;
-  max-height: 40px;
-  margin-bottom: 1px;
+  height: 42px;
+  min-height: 42px;
+  max-height: 42px;
+  margin-bottom: 0px;
 }
 
 :host(.minimized) > section,
@@ -25,6 +25,8 @@
 :host(.minimized) > .title .minimize-btn {
   transform: rotate(-180deg);
 }
+
+
 
 :host > .title {
   min-height: 40px;
@@ -38,11 +40,17 @@
     padding: 0 5px 0 10px;
     color: white;
     cursor: pointer;
+    transition: background .2s;
 }
 
+:host(.active) > .title,
 :host > .title:active {
-  background: rgb(79 79 79);
+  background: linear-gradient(135deg, #2ab0ed 0%, #9fd8ef 50%, #bfe8f9 50%, #e4f5fc 120%);
 }
+
+/* :host > .title:active {
+  background: rgb(79 79 79);
+} */
 
 :host > nav {
   padding: 12px;
@@ -90,9 +98,21 @@
   height: 40px;
   font-family: inherit;
   padding: 10px;
+  resize: vertical;
 }
 
-
+:host section .form-row > label {
+  background: #efefef;
+    display: inline;
+    width: auto;
+    align-self: start;
+    padding: 4px;
+    border: 1px solid rgb(138, 138, 138);
+    border-radius: 2px;
+    margin-bottom: -2px;
+    min-width: 120px;
+    border-left: 6px solid #83cbe7;
+}
 
 :host > section > .help-text {
   padding: 10px 30px;

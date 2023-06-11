@@ -6,9 +6,22 @@ namespace `ui.meld.editors` (
         async onConnected() {
             await super.onConnected();
             this.editor = this.querySelector("code-editor");
+            this.on("codechanged", e=> this.onCodeChanged(e), false);
             this.on("click",    e=> this.onErase(e), false, "nav #erase-btn");
             this.on("change",   e=> this.onSnippetsChanged(e), false, "select#snippets");
-            this.onPopulateSnippets()
+            this.onPopulateSnippets();
+        }
+
+        onCodeChanged(e){
+            // console.log("CODE CHANGED", e);
+            this.museobject.value = e.detail.value;
+            this.fire("framechanged", this.museframe)
+        }
+
+        onBind() {
+            if(this.museobject){
+                this.editor.setValue(this.museobject.value);
+            }
         }
 
         onPopulateSnippets() {
@@ -29,7 +42,6 @@ namespace `ui.meld.editors` (
         }
 
         onSnippetsChanged(e){
-
             this.editor.append(e.matchedTarget.value)
         }
 

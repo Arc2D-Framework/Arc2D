@@ -6,6 +6,7 @@ namespace `ui.meld` (
             await super.onConnected();
             this.onMouseMove = this.onMouseMove.bind(this);
             this.on("click", e=>this.onFrameSelected(e), true, "#frames li");
+            this.on("click", e=>this.onObjectSelected(e), true, "#objects li");
             this.on("mousedown", e=> this.onMouseDown(e), false, ".drag-handle");
             this.on("mouseup", e=> this.onMouseUp(e), false)
             this.nav = document.querySelector("#nav");
@@ -22,6 +23,7 @@ namespace `ui.meld` (
 
             for(var key in Config.OBJECT_TYPES) {
                 var o = Config.OBJECT_TYPES[key];
+                if(!o.enabled||!o.editor) { continue }
                 var li = `
                     <li data-type="${key}" data-namespace="${o.editor.namespace}">
                         <i class="fas ${o.icon}"></i>
@@ -83,11 +85,22 @@ namespace `ui.meld` (
             this.last=e.matchedTarget;
             this.last.classList.add("active");
             this.onUpdateObjectsMenu();
+            // debugger
             var musedata = await domain.services.Meld.GetMuseFrameData(this.last.data.ID);
             if(musedata){
                 this.last.data.Muse = musedata;
             }
+            
             this.fire("frameselected", this.last.data)
+        }
+
+        onObjectSelected(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.lastObject && this.lastObject.classList.remove("active");
+            this.lastObject=e.matchedTarget;
+            this.lastObject.classList.add("active");
+            this.dispatchEvent("objectselected", {namespace:this.lastObject.dataset.namespace})
         }
 
         getSelectedFrame() {

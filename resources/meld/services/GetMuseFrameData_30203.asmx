@@ -1,13 +1,17 @@
 {
     "id" : 30203,
     
+    "script" : {
+        "value" : "parent.isIFIT=true;"
+    },
+
     "graphic" : {
         "src" : "graphic1.png",
         "mediaDescription" : "graphic 1 media desc",
         "alt" : "graphic 1 alt"
     },
     "text" : {
-        "value" : "text here, visit ${branch_1} and then ${swap_2} <br/> ${branches} ${swaps}"
+        "value" : "<h2>Hello World</h2><br/>text here, visit ${branch_1} and then ${swap_2} <br/> ${branches} ${swaps}"
     },
     "branches": [
         {

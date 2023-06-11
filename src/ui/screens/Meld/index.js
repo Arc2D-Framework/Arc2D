@@ -21,16 +21,23 @@ namespace `ui.screens` (
             await super.onConnected();
             this.nav = this.querySelector("#nav");
             this.subscribe("frameselected", e=> this.onFrameSelected(e), false);
+            this.subscribe("framechanged", e=> this.onFrameChanged(e), false);
+            this.subscribe("objectselected", e=> this.onObjectSelected(e), false)
             this.editors_container = this.querySelector("#editors-container");
+            this.code_editor = this.querySelector("#code-output-container code-editor");
+        }
+
+        async onFrameChanged(e) {
+            this.outputScript(e.detail)
         }
 
         async onFrameSelected(e) {
+            this.clear()
             var frame = e.detail;
             var json = frame.Muse;
             var script = frame.Script;
 
             if(json) {
-                this.editors_container.innerHTML = "";
                 for(var key in json){
                     if(key == "id") {continue}
                     var data = json[key];
@@ -40,31 +47,36 @@ namespace `ui.screens` (
                         await cl.import(ns);
                         var Class = NSRegistry[ns];
                         if(Class){
-                            var editor = new Class;
-                            editor.setData(data);
+                            var editor = new Class(data, json);
+                                // editor.setData(data,json);
                             this.editors_container.append(editor)
                         }
                     }
                 }
-
                 this.outputScript(json)
             }
         }
 
-        outputScript(json) {
-            var code_editor = this.querySelector("#code-output-container code-editor");
-                code_editor.setValue(parse(json))
+        onObjectSelected(e) {
+            var ns = e.detail.namespace;
+            if(ns) {
+                var editor = this.querySelector(`#editors-container > *[namespace='${ns}']`);
+                if(editor) {
+                    this.lastEditor && this.lastEditor.classList.remove("active");
+                    this.lastEditor = editor;
+                    this.lastEditor.classList.add("active")
+                }
+            }
         }
 
-        // onResizeNavEnd(){
+        clear() {
+            this.editors_container.innerHTML = "";
+            this.code_editor.clear();
+        }
 
-        // }
-        // onResizeNav(e) {
-            // const compStyles = window.getComputedStyle(this.nav);
-            // var w = parseInt(compStyles.getPropertyValue("min-width"));
-        //     console.log("w",w)
-        //     this.nav.style.minWidth = (e.detail.delta) + "px"
-        // }
+        outputScript(json) {
+            this.code_editor.setValue(parse(json))
+        }
 
         inShadow(){return false}
     }

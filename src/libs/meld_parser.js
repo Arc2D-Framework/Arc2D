@@ -107,8 +107,8 @@ function define_wcn_statements(items){
 function define_graphic_statements(item) {
     var src = "";
         src += `var graphic = "${item.src}";\n`
-        src += item.alt? `var graphic_alt = "${item.alt}";\n`:'';
-        src += item.mediaDescription? `var mediaDescription = "${item.mediaDescription||""}";\n`:'';
+        src += item.alt? `var graphic_alt = \`${item.alt}\`;\n`:'';
+        src += item.mediaDescription? `var mediaDescription = \`${item.mediaDescription||""}\`;\n`:'';
     return src;
 }
 
@@ -136,6 +136,12 @@ function define_flashcard_statements(items){
         var item = items[i];
         src += `newFlashcard("${item.graphic}", "${item.label}", ${item.img_in_front}, "${item.graphic}", ${item.mediaDescription?"'"+item.mediaDescription+"'":null}, "${item.alt}");\n`;
     }
+    return src;
+}
+
+function define_script_statements(item) {
+    var src = "";
+        src += `${item.value}\n`
     return src;
 }
 
@@ -192,6 +198,9 @@ function parse(frame_data) {
         }
         if(key == "flashcards") {
             src += define_flashcard_statements(item)
+        }
+        if(key == "script") {
+            src += define_script_statements(item)
         }
     };
     return src;

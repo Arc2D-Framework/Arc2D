@@ -19,6 +19,18 @@ var Config = window.Config = window.Config||{
     AUTOLOAD_IMPORT_MAPS : true
 };
 
+// Config.SCRIPT_SNIPPETS = {
+//     "IFIT" : {
+//         "name" : "iFIT Setting"
+//         "value" : "parent.isIFIT=true"
+//     },
+//     "IFIT" : {
+//         "name" : "iFIT Setting"
+//         "value" : "parent.isIFIT=true"
+//     }
+// };
+
+
 Config.OBJECT_TYPES = {
     "SCRIPT": {
         "label" : "Custom Script", 
@@ -26,6 +38,13 @@ Config.OBJECT_TYPES = {
         "editor" : {
             "namespace" : "ui.meld.editors.Script", "options" : null
         },
+        "enabled" : true
+    },
+    "IFIT": {
+        "label" : "iFit Setting", 
+        "icon": "fa-code", 
+        "editor" : null,
+        "example" : "parent.isIFIT=true",
         "enabled" : true
     },
     "TEXT": {
