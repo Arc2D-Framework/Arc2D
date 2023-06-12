@@ -5,14 +5,17 @@ namespace `ui.meld` (
         async onConnected(){
             await super.onConnected();
             this.onMouseMove = this.onMouseMove.bind(this);
+            
             this.on("click", e=>this.onFrameSelected(e), true, "#frames li");
             this.on("click", e=>this.onObjectSelected(e), true, "#objects li");
             this.on("mousedown", e=> this.onMouseDown(e), false, ".drag-handle");
             this.on("mouseup", e=> this.onMouseUp(e), false);
             document.addEventListener("editorselected", e=> this.onEditorSelected(e), false)
             this.nav = document.querySelector("#nav");
+            this.toolbar = this.querySelector("tool-bar");
             await this.onLoadLessonFrames();
-            await this.onLoadObjectsMenu()
+            this.toolbar.subscribe("connected", e=> this.onLoadObjectsMenu(), false)
+            await sleep (500)
             this.setDefault();
         }
 
@@ -28,7 +31,7 @@ namespace `ui.meld` (
 
         onLoadObjectsMenu() {
             var ul = this.querySelector("#objects");
-                ul.innerHTML = "";
+                // ul.innerHTML = "";
             var resize_handle = `<i class="fas fa-grip-vertical drag-handle"></i>`.toNode();
             ul.appendChild(resize_handle)
 

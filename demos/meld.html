@@ -23,7 +23,7 @@
                 height: 100%;
                 display: flex;
                 flex-flow: row;
-                gap: 10px;
+                /* gap: 10px; */
             }
 
             #nav {
@@ -33,12 +33,27 @@
             }
 
             #editors {
-                /* background: red; */
                 width: 100%;
                 display: flex;
-                flex-flow: row;
-                gap:10px;
+                flex-flow: column;
+                /* gap: 10px;*/
             }
+
+            #editors > tool-bar {
+
+            }
+
+            #editors > tool-bar ul {
+                flex-flow: row nowrap;
+                border: 0;
+                background: #434b54;
+            }
+
+            #editors > tool-bar ul li {
+                background: #32609c;
+                border: 1px solid #353a42;
+            }
+
             #editors > div {
                 width: 50%;
                 position: relative;
@@ -99,17 +114,44 @@
                 <ui-meld-frames-browser></ui-meld-frames-browser>
             </div>
             <div id="editors">
-                <div>
-                    <div id="editors-container" style="position: absolute;top: 0;bottom: 0;width: 100%;overflow-y: scroll;padding: 8px 0;">
-                        <!-- <script-editor></script-editor>
-                        <rich-text-editor></rich-text-editor>
-                        <branches-editor></branches-editor>
-                        <graphic-editor></graphic-editor> -->
+                    <tool-bar style="
+                    
+                        width: 100%;
+                        background: slategray;
+                        border: 1px solid #949494;
+                    ">
+                        <li>
+                            <i class="fas fa-save"></i>
+                            <label>Save</label>
+                        </li>
+                        <li>
+                            <i class="fas fa-angle-double-up"></i>
+                            <label>Collapse All</label>
+                        </li>
+                        <li>
+                            <i class="fas fa-sync-alt"></i>
+                            <label>Refresh</label>
+                        </li>
+                    </tool-bar>
+
+                <div style="
+                    width: 100%;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    gap: 10px;
+                    height: 100%;">
+                    <div style="width: 50%;position: relative;">
+                        <div id="editors-container" style="position: absolute;top: 0;bottom: 0;width: 100%;overflow-y: scroll;padding: 8px 8px;">
+                            <!-- <script-editor></script-editor>
+                            <rich-text-editor></rich-text-editor>
+                            <branches-editor></branches-editor>
+                            <graphic-editor></graphic-editor> -->
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div id="code-output-container" style="position: absolute;top: 0;bottom: 0;width: 100%;overflow-y: scroll;padding: 8px 8px;">
-                        <code-editor></code-editor>
+                    <div style="width: 50%;position: relative;">
+                        <div id="code-output-container" style="position: absolute;top: 0;bottom: 0;width: 100%;overflow-y: scroll;padding: 8px 8px;">
+                            <code-editor></code-editor>
+                        </div>
                     </div>
                 </div>
             </div>
