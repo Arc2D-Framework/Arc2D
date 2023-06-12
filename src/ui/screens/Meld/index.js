@@ -22,7 +22,8 @@ namespace `ui.screens` (
             this.nav = this.querySelector("#nav");
             this.subscribe("frameselected", e=> this.onFrameSelected(e), false);
             this.subscribe("framechanged", e=> this.onFrameChanged(e), false);
-            this.subscribe("objectselected", e=> this.onObjectSelected(e), false)
+            this.subscribe("objectselected", e=> this.onObjectSelected(e), false);
+            this.on("editorselected", e=> this.onEditorSelected(e), false)
             this.editors_container = this.querySelector("#editors-container");
             this.code_editor = this.querySelector("#code-output-container code-editor");
         }
@@ -64,9 +65,16 @@ namespace `ui.screens` (
                 if(editor) {
                     this.lastEditor && this.lastEditor.classList.remove("active");
                     this.lastEditor = editor;
-                    this.lastEditor.classList.add("active")
+                    this.lastEditor.classList.add("active");
+                    this.lastEditor.scrollIntoView({ behavior: "smooth", block: "start"});
                 }
             }
+        }
+
+        onEditorSelected(e) {
+            this.lastEditor && this.lastEditor.classList.remove("active");
+            this.lastEditor = e.detail.editor;
+            this.lastEditor.classList.add("active")
         }
 
         clear() {

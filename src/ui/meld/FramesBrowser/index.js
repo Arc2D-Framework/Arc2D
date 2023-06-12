@@ -8,11 +8,22 @@ namespace `ui.meld` (
             this.on("click", e=>this.onFrameSelected(e), true, "#frames li");
             this.on("click", e=>this.onObjectSelected(e), true, "#objects li");
             this.on("mousedown", e=> this.onMouseDown(e), false, ".drag-handle");
-            this.on("mouseup", e=> this.onMouseUp(e), false)
+            this.on("mouseup", e=> this.onMouseUp(e), false);
+            document.addEventListener("editorselected", e=> this.onEditorSelected(e), false)
             this.nav = document.querySelector("#nav");
             await this.onLoadLessonFrames();
             await this.onLoadObjectsMenu()
             this.setDefault();
+        }
+
+        onEditorSelected(e){
+            var ns = e.detail.namespace;
+            var o = this.querySelector(`ul#objects li[data-namespace='${ns}']`)
+            if(o) {
+                this.lastObject && this.lastObject.classList.remove("active");
+                this.lastObject = o;
+                this.lastObject.classList.add("active");
+            }
         }
 
         onLoadObjectsMenu() {

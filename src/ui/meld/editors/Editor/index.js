@@ -13,9 +13,14 @@ namespace `ui.meld.editors` (
             this.minimizeBtn = this.querySelector(".title .minimize-btn");
             this.minimizeBtn.addEventListener("click", e=> this.onToggleMinimize(e), false);
             this.on("dblclick", e=> this.onToggleMinimize(e), false, ".title");
-            this.on("editorchange", e=> this.onEditorChanged(e), true)
+            this.on("editorchange", e=> this.onEditorChanged(e), true);
+            this.on("click", e=> this.onSelected(e), false);
             this.onToggleMinimize();
             //this.onRenderData();
+        }
+
+        onSelected(e) {
+            this.dispatchEvent("editorselected", {editor:this, namespace:this.namespace})
         }
 
         onRendered() {
