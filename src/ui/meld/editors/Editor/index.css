@@ -41,6 +41,20 @@
     color: white;
     cursor: pointer;
     transition: background .2s;
+    gap: 10px;
+}
+
+:host > .title > label {
+  width: 100%;
+  cursor: inherit;
+}
+
+:host > .title > .ns {
+  color: rgb(96, 96, 96);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  cursor: inherit;
 }
 
 :host(.active) > .title,
@@ -72,7 +86,7 @@
   gap: 10px;
 }
 
-:host > .title i {
+:host > .title > i {
   padding: 10px 16px;
     display: flex;
     align-items: center;
@@ -81,7 +95,7 @@
     border-radius: 3px;
 }
 
-:host > .title i:hover {
+:host > .title > i:hover {
   background: #4a4a4a;
 }
 

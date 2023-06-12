@@ -1,13 +1,13 @@
 
 import '/src/domain/services/Meld.js';
-import 'ui.components.SpaNav';
+import 'ui.meld.ToolBar';
 import 'ui.meld.FramesBrowser';
 import 'ui.meld.editors.Editor';
 import 'ui.meld.editors.Code';
-import 'ui.meld.editors.Script';
-import 'ui.meld.editors.RichText';
-import 'ui.meld.editors.Branches';
-import 'ui.meld.editors.Graphic';
+// import 'ui.meld.editors.Script';
+// import 'ui.meld.editors.RichText';
+// import 'ui.meld.editors.Branches';
+// import 'ui.meld.editors.Graphic';
 import {parse} from "/src/libs/meld_parser.js";
 
 namespace `ui.screens` (
@@ -20,12 +20,14 @@ namespace `ui.screens` (
         async onConnected() {
             await super.onConnected();
             this.nav = this.querySelector("#nav");
+            this.editors_container = this.querySelector("#editors-container");
+            this.code_editor = this.querySelector("#code-output-container code-editor");
+            
             this.subscribe("frameselected", e=> this.onFrameSelected(e), false);
             this.subscribe("framechanged", e=> this.onFrameChanged(e), false);
             this.subscribe("objectselected", e=> this.onObjectSelected(e), false);
             this.on("editorselected", e=> this.onEditorSelected(e), false)
-            this.editors_container = this.querySelector("#editors-container");
-            this.code_editor = this.querySelector("#code-output-container code-editor");
+            
         }
 
         async onFrameChanged(e) {
@@ -66,7 +68,8 @@ namespace `ui.screens` (
                     this.lastEditor && this.lastEditor.classList.remove("active");
                     this.lastEditor = editor;
                     this.lastEditor.classList.add("active");
-                    this.lastEditor.scrollIntoView({ behavior: "smooth", block: "start"});
+                    // this.lastEditor.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'});
+                    this.editors_container.scroll({top: this.lastEditor.offsetTop-10, behavior: 'smooth'});
                 }
             }
         }

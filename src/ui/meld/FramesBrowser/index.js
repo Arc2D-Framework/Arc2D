@@ -18,7 +18,7 @@ namespace `ui.meld` (
 
         onEditorSelected(e){
             var ns = e.detail.namespace;
-            var o = this.querySelector(`ul#objects li[data-namespace='${ns}']`)
+            var o = this.querySelector(`#objects li[data-namespace='${ns}']`)
             if(o) {
                 this.lastObject && this.lastObject.classList.remove("active");
                 this.lastObject = o;
@@ -27,10 +27,10 @@ namespace `ui.meld` (
         }
 
         onLoadObjectsMenu() {
-            var ul = this.querySelector("ul#objects");
+            var ul = this.querySelector("#objects");
                 ul.innerHTML = "";
             var resize_handle = `<i class="fas fa-grip-vertical drag-handle"></i>`.toNode();
-            ul.append(resize_handle)
+            ul.appendChild(resize_handle)
 
             for(var key in Config.OBJECT_TYPES) {
                 var o = Config.OBJECT_TYPES[key];
@@ -41,7 +41,7 @@ namespace `ui.meld` (
                         <label>${o.label}</label>
                     </li>`.toNode();
                     li.data = o;
-                ul.append(li);
+                ul.appendChild(li);
             }
 
             
@@ -83,10 +83,12 @@ namespace `ui.meld` (
             this.nav.style.minWidth = `${width}px`
         }
 
-        setDefault(){
+        async setDefault(){
             var li = this.querySelector("#frames li");
                 li.classList.add("active");
             this.last = li;
+            await sleep (300)
+            this.last.click()
         }
 
         async onFrameSelected(e){
@@ -126,7 +128,7 @@ namespace `ui.meld` (
                 if(allowed_objects?.length) {
                     // await allowed_objects.forEach(async o => {
                     for(let o of allowed_objects){
-                        var li = this.querySelector(`ul#objects li[data-namespace="${o.editor.namespace}"]`);
+                        var li = this.querySelector(`#objects li[data-namespace="${o.editor.namespace}"]`);
                         li && li.classList.remove("disabled");
                         // await sleep (200)
                     }
@@ -136,7 +138,7 @@ namespace `ui.meld` (
         }
 
         disableAllObjects() {
-            var items = this.querySelectorAll("ul#objects li");
+            var items = this.querySelectorAll("#objects li");
             items.forEach(item => item.classList.add("disabled"))
         }
 
@@ -151,7 +153,7 @@ namespace `ui.meld` (
         // }
 
         inShadow(){
-            return true
+            return false
         }
     }
 );
