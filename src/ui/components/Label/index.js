@@ -17,18 +17,18 @@ namespace `ui.components` (
             return false
         }
 
-        // inShadow(){
-        //     return true
-        // }
+        inShadow(){
+            return true
+        }
 
-        // cssStyle(){return `
-        //     :host span{
-        //         color:red;
-        //     }
-        //     :host(.active) {
-        //         border:3px solid red;
-        //     }
-        // `}
+        cssStyle(){return `
+            :host span{
+                color:red;
+            }
+            :host(.active) {
+                color:red;
+            }
+        `}
 
         // template(){
         //     return `

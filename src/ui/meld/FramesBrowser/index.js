@@ -12,11 +12,15 @@ namespace `ui.meld` (
             this.on("click", e=>this.onObjectSelected(e), true, "#objects li");
             this.on("mousedown", e=> this.onMouseDown(e), false, ".drag-handle");
             this.on("mouseup", e=> this.onMouseUp(e), false);
-            document.on("editorselected", e=> this.onEditorSelected(e), false)
+            application.on("editorselected", e=> this.onEditorSelected(e), false)
             await this.onLoadLessonFrames();
             this.toolbar.subscribe("connected", e=> this.onLoadObjectsMenu(), false)
             await sleep (500)
             this.setDefault();
+        }
+
+        get application() {
+            return true
         }
 
         onEditorSelected(e){

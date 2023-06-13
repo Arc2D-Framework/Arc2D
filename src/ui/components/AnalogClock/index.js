@@ -7,6 +7,14 @@ namespace `ui.components` (
             this.model = new domain.models.Clock;
         }
 
+        async onConnected() {
+            await super.onConnected();
+            alert(application)
+            this.hour = this.querySelector("#hour");
+            this.minute = this.querySelector("#minute");
+            this.second = this.querySelector("#second");
+        }
+
         //runs many times per frame (physics/ai) at 8.333ms intervals. 
         onFixedUpdate (time) {}
 

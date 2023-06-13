@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Arc2D Demo - Single Page Applications (SPA)</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-        <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/agate.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/agate.min.css">
         <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
 
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -17,6 +17,9 @@
         <script>
             Config.ROUTER = 'system.http.Router';
             Config.DEFAULT_VIEW = 'ui.views.meld.LessonBrowser';
+            Config.SPLASH = "ui.components.Splash";
+            Config.SPLASH_FADE_DELAY = 500;
+            Config.APP_WAITS_ON_SPLASH = false;
         </script>
         <style>
             #shell {

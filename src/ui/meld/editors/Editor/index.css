@@ -8,7 +8,10 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    transition: all .3s;
+    will-change: height, min-height, max-height;
 }
+
 
 :host(.minimized) {
   height: 42px;

@@ -14,13 +14,17 @@ html,body {
     margin: 0;
     box-sizing:border-box;
     font-family: "Electrolize", "Quicksand", Helvetica, Arial, sans-serif;
-    font-size: 12px;
+    /* font-size: 12px; */
     overflow: hidden;
 } 
 body {
-    
     display: flex;
     flex-flow: column;
     /* gap: 10px; */
     /* padding: 10px; */
+}
+
+
+#shell, #title {
+    font-size: 12px;
 }

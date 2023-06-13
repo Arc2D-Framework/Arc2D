@@ -19,7 +19,7 @@ namespace `ui.worlds` (
         // runs many times per frame (collision/physics/ai) at 8.333ms intervals within 1 "frame"
         onFixedUpdate = (time) =>{
             // if(this.isConnected) {
-                this.component2d_instances && this.component2d_instances.forEach(c => c.onFixedUpdate(time))
+                document.component2d_instances && document.component2d_instances.forEach(c => c.onFixedUpdate(time))
             // }
         }
 
@@ -30,7 +30,8 @@ namespace `ui.worlds` (
             // console.log(delta)
             // if(this.isConnected) {
                 // this.clock.onUpdate()
-                this.component2d_instances && this.component2d_instances.forEach(c => c.onUpdate(timestamp, delta))
+                // debugger
+                document.component2d_instances && document.component2d_instances.forEach(c => c.onUpdate(timestamp, delta))
             // }
         }
 
@@ -40,7 +41,7 @@ namespace `ui.worlds` (
             // this.isConnected && this.clock.onDraw()
             // if(this.isConnected) {
                 // this.clock.onUpdate()
-                this.component2d_instances && this.component2d_instances.forEach(c => c.onDraw(interpolation))
+                document.component2d_instances && document.component2d_instances.forEach(c => c.onDraw(interpolation))
             // }
         }
     }

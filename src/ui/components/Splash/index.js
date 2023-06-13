@@ -42,7 +42,7 @@ namespace `ui.components` (
 			setTimeout(e=> fauxOverlay && fauxOverlay.remove(),600)
         }
 
-        onLoadInstanceStylesheet(){
+        hasOwnSkin(){
             return false
         }
 
