@@ -68,17 +68,17 @@ namespace `ui.meld` (
         //         return super.appendChild(li)
         //     }
         // }
-        appendChild(n, slotted){
-            if(!this.inShadow()) {
-                var defaultSlot = this.querySelector("slot")||this;
-                    defaultSlot && defaultSlot.appendChild(n)
-            }
-            else {
-                return this.element && n!= this.element ? 
-                    this.root.appendChild(n):
-                    super.appendChild(n)
-                // return super.appendChild(n)
-            }
-        }
+        // appendChild(n, slotted){
+        //     if(!this.inShadow()) {
+        //         var defaultSlot = this.querySelector("slot")||this;
+        //             defaultSlot && defaultSlot.appendChild(n)
+        //     }
+        //     else {
+        //         return this.element && n!= this.element ? 
+        //             this.root.appendChild(n):
+        //             super.appendChild(n)
+        //         // return super.appendChild(n)
+        //     }
+        // }
     }
 );

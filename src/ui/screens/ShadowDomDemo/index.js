@@ -9,6 +9,11 @@ namespace `ui.screens` (
 
         async onConnected() {
             await super.onConnected();
+            this.label = this.querySelector("ui-components-label");
+
+            var d = `<h1>HELLO WORLD</h1>`.toNode();
+            debugger
+            this.label.appendChild(d)
         }
     }
 );
