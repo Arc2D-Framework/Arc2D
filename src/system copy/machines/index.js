@@ -1,0 +1,1 @@
+import '/src/system/machines/WaypointNavigator.js';
