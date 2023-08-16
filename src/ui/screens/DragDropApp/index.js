@@ -1,4 +1,4 @@
-import meld from '/src/system/libs/aop.js';
+import {meld, instrumentation} from '/src/system/libs/aop-simple.js';
 
 namespace `ui.screens` (
     class DragDropApp extends Application {
@@ -20,6 +20,16 @@ namespace `ui.screens` (
             // this.before('onDrop', e => {
             //     console.log("onDrop",e)
             // })
+
+            // meld(this, (...args) => {
+            //     debugger
+            //     console.log("== Calling the logger function ==")
+            //     console.log(args[0].type)
+            // }, "before", "method", "onDrop")
+
+            instrumentation.measure(this, "onDrop", (timing) => {
+                console.log(timing)
+            });
         }
 
         around(method,func){
@@ -58,6 +68,7 @@ namespace `ui.screens` (
         }
 
         onDrop(e) {
+            // debugger
             e.target.classList.remove("hovered");
             e.target.append(this.item);
         }

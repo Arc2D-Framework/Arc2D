@@ -93,14 +93,14 @@ class TourGuide extends HTMLElement {
                     justify-content: space-between;
                     align-items: center;
                   }
-                  :host #help-tour-title > #close-btn {
+                  :host #help-tour-title:after {
+                    content: "\\274C";
                     display: inline-block;
                     float: right;
                     color: black;
                     font-size: 10px;
                     padding: 6px;
                     background: #80808017;
-                    cursor: pointer;
                   }
                   :host #help-tour-text {
                     max-height: 100px;
@@ -160,10 +160,7 @@ class TourGuide extends HTMLElement {
                     border-radius: 2px;
                   }
             </style>
-            <h3 id="help-tour-title">
-                <span id="title-label"></span>
-                <span id="close-btn">✕</span>
-            </h3>
+            <h3 id="help-tour-title">Title Here</h3>
             <div id="help-tour-text">Description Here</div>
             <nav id="help-tour-options" style="display: flex;flex-flow: row nowrap;justify-content: end;margin-bottom: 10px;font-size: 9px;">
                 <button class="option" id="options-tint-level-btn" style="font-size: inherit;margin-right: 5px;">◑</button>
@@ -232,11 +229,11 @@ class TourGuide extends HTMLElement {
 
     connectedCallback() {
         window.tg = this;
-        this.titleEl = this.root.querySelector("h3 #title-label");
+        this.titleEl = this.root.querySelector("h3");
         this.textEl = this.root.querySelector("#help-tour-text");
         this.btnNext = this.root.querySelector("button.next");
         this.btnNext.addEventListener("click", e => this.onNext(e), false);
-        this.closeBtn = this.root.querySelector("#help-tour-title #close-btn");
+
         this.btnSkip = this.root.querySelector("button.skip");
         this.btnSkip.addEventListener("click", e => this.onSkip(e), false);
 
@@ -246,13 +243,8 @@ class TourGuide extends HTMLElement {
         this.optionsTintBtn = this.root.querySelector("button#options-tint-level-btn");
         this.optionsTintBtn.addEventListener("click", e => this.onToggleTint(e), false);
 
-        this.closeBtn.addEventListener("click", e => this.onDismiss(e), false);
         //window.addEventListener("resize", e=> this.onResize(e), true)
         
-    }
-
-    onDismiss(e) {
-        this.onFinish()
     }
 
     onResize(){
@@ -626,7 +618,7 @@ class TourGuide extends HTMLElement {
     setOverlay() {
         this.overlay = this.overlay || document.createElement("div");
         this.overlay.id = "tour-guide-overlay";
-        document.body.append(this.overlay);
+        document.body.append(this.overlay)
     }
 
     removeOverlay() {
