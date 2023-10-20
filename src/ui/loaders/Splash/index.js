@@ -1,16 +1,24 @@
 
-@tag("splash-loader");
-namespace `ui.components` (
-    class Splash extends WebComponent {
+
+namespace `ui.loaders` (
+    class Splash extends Component {
+		static get is(){
+			return "splash-loader"
+		}
         async onConnected() {
-			await this.render();
+			await super.onConnected();
 			this.duration = this.getAttribute("duration")||1200;
             document.addEventListener("showsplash", e => this.onShow(), false);
 			document.addEventListener("hidesplash", e => this.onHide(), false);
 			this.on("transitionend", e=>this.onTransitionEnd(e), false);
-			// this.on("mozTransitionend", e=>this.onTransitionEnd(e));
+			this.dispatchEvent("loaded")
 			this.fade();
+			
         }
+
+		inShadow(){
+			return true
+		}
 
 		onTransitionEnd(e){
 			e.propertyName=="opacity" && this.onHide()
@@ -28,15 +36,16 @@ namespace `ui.components` (
         }
 
         onHide(){
+			var fauxOverlay = document.querySelector("#demo-loader");
+				fauxOverlay && (fauxOverlay.style.opacity=0);
             this.classList.add("hidden");
+			setTimeout(e=> fauxOverlay && fauxOverlay.remove(),600)
         }
 
-        //Override. No css file to load, it's baked.
-        onLoadInstanceStylesheet(){
+        hasOwnSkin(){
             return false
         }
 
-        //template baked: fast loading
         template (){
         	return `
         		<template>
@@ -49,7 +58,6 @@ namespace `ui.components` (
         	`
         }
 
-        //css baked: fast loading
         cssStyle(){
         	return `
             	:host {
@@ -66,7 +74,7 @@ namespace `ui.components` (
     				color:
     				white;
     				opacity: 1;
-    				z-index: 10000000;
+    				z-index: 20000000 !important;
     				transition: opacity .7s;
     				box-sizing: border-box;
     			}

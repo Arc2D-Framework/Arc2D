@@ -7,9 +7,9 @@ var {NodeTest} = await require('/src/system/libs/sample_modules/nodejsmod.js');
 await require('/src/system/libs/sample_modules/introjs.js');
 import {* as THREE} from '3d';
 import GLTFLoader from 'GLTFLoader';
-import * from 'dayjs';
+import {* as dayjs} from 'dayjs';
 import {SampleDialog} from '/src/system/libs/sample_modules/SampleDialog/index.js';
-import * from 'ejs';
+import {* as ejs} from 'ejs';
 
 namespace `ui.screens` (
     class ModuleImportsTest extends Application {
@@ -19,6 +19,7 @@ namespace `ui.screens` (
         constructor(element){
             super(element);
             try{
+                debugger
                 const loader = new GLTFLoader();
                 console.log("GLTFLoader",GLTFLoader)
                 console.log("TWEEN",TWEEN)
@@ -50,3 +51,5 @@ namespace `ui.screens` (
         }
     }
 );
+
+

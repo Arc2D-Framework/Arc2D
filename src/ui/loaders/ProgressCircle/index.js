@@ -3,7 +3,7 @@
 namespace `ui.loaders` (
     class ProgressCircle extends WebComponent {
         async onConnected() {
-			await this.render();
+			await super.onConnected();
 			this.duration = this.getAttribute("duration")||1200;
             document.addEventListener("showsplash", e => this.onShow(), false);
 			document.addEventListener("hidesplash", e => this.onHide(), false);
@@ -42,7 +42,7 @@ namespace `ui.loaders` (
 				ctx.beginPath();
 				ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
 				ctx.strokeStyle = color;
-				ctx.lineCap = 'round'; // butt, round or square
+				ctx.lineCap = 'butt'; // butt, round or square
 				ctx.lineWidth = lineWidth
 				ctx.stroke();
 			};

@@ -27,8 +27,15 @@ namespace `ui.components` (
             this.on("blur",     e => this.onBlur(e),    true, "input[type='text']");
             this.on("click",    e => this.onSelect(e),  true, "li");
             this.on("change",   e => this.onChange(e));
+            this.on("click", e=> this.onTestClosest(e), false)
             this.onSetDefaults();
             // alert(`${this.namespace}:  ${this.skin}`)
+        }
+
+        onTestClosest(e){
+            debugger;
+            var el = e.target.closest("ul");
+
         }
 
         // inShadow(){
@@ -93,8 +100,8 @@ namespace `ui.components` (
             }
         }
 
-        // inShadow(){
-        //     return false
-        // }        
+        inShadow(){
+            return true
+        }        
     }
 );
