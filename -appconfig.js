@@ -19,18 +19,6 @@ var Config = window.Config = window.Config||{
     AUTOLOAD_IMPORT_MAPS : true
 };
 
-// Config.SCRIPT_SNIPPETS = {
-//     "IFIT" : {
-//         "name" : "iFIT Setting"
-//         "value" : "parent.isIFIT=true"
-//     },
-//     "IFIT" : {
-//         "name" : "iFIT Setting"
-//         "value" : "parent.isIFIT=true"
-//     }
-// };
-
-
 
 // try{export {Session, Config};}catch(e){}
 try{module.exports = Config;}catch(e){}
