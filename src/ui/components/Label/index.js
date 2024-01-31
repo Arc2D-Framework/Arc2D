@@ -4,7 +4,6 @@ namespace `ui.components` (
        
         async onConnected(){
             this.name="Jay";
-            debugger
             await super.onConnected();
             this.on("click", e=>this.onClick(e), true)
             console.log(this.root instanceof ShadowRoot)
@@ -19,40 +18,39 @@ namespace `ui.components` (
             return true
         }
 
-        assignSlots(temNode) {
-            debugger
-            if(!temNode) { return}
-            if (!this.inShadow() && this.isComposable()) {
-                var defaultSlot = temNode.querySelector("slot:not([name])");
-                if(defaultSlot){
-                    let nodes = Array.from(this.children);
-                    for(let n of nodes){
-                        if(n instanceof HTMLTemplateElement) { continue}
-                        var slotName = n.getAttribute('slot');
-                        var ph = !slotName?
-                            defaultSlot : temNode.querySelector(`slot[name="${slotName}"]`)||defaultSlot;
-                        if( ph && !ph.emptied){
-                            (ph.innerHTML="");
-                            (ph.emptied=true);
-                        }
-                        // ph ? (ph).appendChild(n) : slotName?n.remove():null;
-                        ph&&ph.appendChild(n);
-                    }
-                }
+        // assignSlots(temNode) {
+        //     if(!temNode) { return}
+        //     if (!this.inShadow() && this.isComposable()) {
+        //         var defaultSlot = temNode.querySelector("slot:not([name])");
+        //         if(defaultSlot){
+        //             let nodes = Array.from(this.children);
+        //             for(let n of nodes){
+        //                 if(n instanceof HTMLTemplateElement) { continue}
+        //                 var slotName = n.getAttribute('slot');
+        //                 var ph = !slotName?
+        //                     defaultSlot : temNode.querySelector(`slot[name="${slotName}"]`)||defaultSlot;
+        //                 if( ph && !ph.emptied){
+        //                     (ph.innerHTML="");
+        //                     (ph.emptied=true);
+        //                 }
+        //                 // ph ? (ph).appendChild(n) : slotName?n.remove():null;
+        //                 ph&&ph.appendChild(n);
+        //             }
+        //         }
                 
-            }
-            this.root.innerHTML = "";
-			this.root.appendChild(temNode);
+        //     }
+        //     this.root.innerHTML = "";
+		// 	this.root.appendChild(temNode);
             
-            // if(this.inShadow()){
-            //     // this.root.innerHTML = "";
-            //     this.root.appendChild(temNode);
-            // }
-            // else {
-            //     // this.root.innerHTML = "";
-			//     super.appendChild(temNode);
-            // }
-        }
+        //     // if(this.inShadow()){
+        //     //     // this.root.innerHTML = "";
+        //     //     this.root.appendChild(temNode);
+        //     // }
+        //     // else {
+        //     //     // this.root.innerHTML = "";
+		// 	//     super.appendChild(temNode);
+        //     // }
+        // }
 
         // inShadow(){
         //     return true

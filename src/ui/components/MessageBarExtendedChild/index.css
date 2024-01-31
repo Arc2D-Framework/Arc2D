@@ -1,0 +1,7 @@
+:host {
+	color: rgb(173, 33, 255);
+}
+
+:host ::slotted(h3) {
+    color: lightgreen;
+}

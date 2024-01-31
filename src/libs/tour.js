@@ -1,8 +1,13 @@
-import {
-    querySelectorAllDeep,
-    querySelectorDeep,
-} from "./deep.mjs";
+// import {
+//     querySelectorAllDeep,
+//     querySelectorDeep,
+// } from "./deep.mjs";
 
+var querySelectorDeep = function (selector) {
+    debugger
+    return document.querySelector(selector);
+    // alert("querySelectorDeep is not implemented")
+}
 
 let OVERLAY_ZINDEX = 999999999;
 class TourGuide extends HTMLElement {

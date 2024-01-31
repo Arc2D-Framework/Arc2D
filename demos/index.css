@@ -1,0 +1,7 @@
+body {
+    background: gray;
+}
+
+:host ::slotted(h3) {
+    color: purple;
+}
