@@ -4,18 +4,20 @@ import 'ui.components.MessageBarExtendedChild';
 namespace `ui.screens` (
     class ShadowDomDemo extends Application {
         
-
         constructor(element){
             super(element);
         }
 
         async onConnected() {
             await super.onConnected();
-            // this.label = this.querySelector("ui-components-label");
+            var div = document.querySelector("div#test1");
+            var messageBar = new ui.components.MessageBar(div);
+            // this.subscribe("connected", e=>this.onMessage(e));
+            
+        }
 
-            // var d = `<h1>HELLO WORLD</h1>`.toNode();
-            // debugger
-            // this.label.appendChild(d)
+        onMessage(e){
+            console.log("Message received",e);
         }
     }
 );

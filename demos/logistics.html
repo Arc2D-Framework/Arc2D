@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>United Ground Logistics: Employee Registration</title>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Nashorn/od-cocoon@latest/framework.src.js" namespace="ui.screens.ShadowDomDemo" charset="utf-8"></script> -->
+    <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+    <script>
+        Config.ROOTPATH = "../"
+        // Config.IMPORT_MAPS=false;
+    </script>
+    <!-- <link rel="stylesheet" href="index.css" id="style-test"> -->
+    <style>
+        :not(:defined) {
+            display: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body namespace="ui.screens.UnitedLogistics">
+
+    <nav style="
+            padding: 10px;
+            background: #000000bd;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: 13px;
+            position: sticky;
+            top: 0;
+        ">
+        <div class="logo" style="
+            display: flex;
+            flex-flow: row;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        ">
+            <div>
+                <h4 style="
+            /* font-family: &quot;Montserrat&quot;, sans-serif; */
+            font-size: inherit;
+            margin: 3px 0px;
+            font-weight: bold;
+        ">United Ground Logistics</h4>
+                <div style="
+    font-size: 10px;
+    text-transform: capitalize;
+">Employee Payroll Setup</div>
+            </div>
+            <i class="fa fa-bars" style="
+            font-size: 20px;
+        "></i>
+        </div>
+        <!-- <ul class="nav-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul> -->
+    </nav>
+
+    <div style="height: 100%;padding-bottom: 86px;overflow: scroll;">
+        <employee-setup-form></employee-setup-form>
+    </div>
+
+    <footer style="
+    /* height: 60px; */
+    background: #000000bd;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+">
+        <div style="
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+">
+            <button style="
+    /* padding: 10px; */
+">Submit</button>
+        </div>
+    </footer>
+</body>
+
+</html>

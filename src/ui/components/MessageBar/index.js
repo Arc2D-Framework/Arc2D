@@ -1,57 +1,71 @@
 
+import {XsltTransformer} from 'xslt-transformer';
+import {TemplateLiterals2} from 'template-iterals2';
 
 namespace `ui.components` (
 	class MessageBar extends HtmlComponent  {
 		static is = "message-bar"
 
-        constructor() {
-            super();
+        // constructor(el, options) {
+        //     super(el, options);
+            
+        // }
+
+		async onConnected() { 
             this._countries = [
-                // {name:"United States", code:"US"},
+                {name:"United States", code:"US"},
                 {name:"Canada", code:"CA"},
                 {name:"Afghanistan", code:"AF"},
                 {name:"Albania", code:"AL"}
             ]
+            await super.onConnected({countries:this._countries});
+
+            this.dispatchEvent("test", {message:"MessageBar test"});
         }
-		async onConnected() { 
-            await super.onConnected();
-            
-            // await sleep (3000)
-            // this.dispatchEvent("countries:updated");
-            new Proxy(this, {
-                set: (target, property, value) => {
-                    target[property] = value;
-                    debugger
-                    // this.notify(property, value); // Notify observers about the change
-                    return true; // Indicate success
-                }
-            });
-        }
+
+     
 
         addCountry(country) {
             this._countries.push(country);
         }
 
+        getTemplateEngine() {
+            return new TemplateLiterals2
+            // return XsltTransformer
+            
+            // return window.customTemplateEngines.getEngineByMimeType("template/xslt")
+        }
 
         get countries() {
             return this._countries;
         }
 
 		// inShadow() {
+        //     // debugger
 		// 	return false
 		// }
 
-		// attachShadow() {
-		// 	return false
-		// }
-
-		// attachInternals() {
-		// 	return false
-		// }
 
 		hasOwnTemplate() {
 			return true
 		}
+
+        test_prop() {
+            return `color: red;`
+        }
+
+        cssStyle() {
+            return `
+                :host {
+                    ${this.test_prop()};
+                    background-color: #f2f2f2;
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    margin-bottom: 20px;
+                }
+            `
+        }
 
 		// template = () => 
 		// `
@@ -61,4 +75,4 @@ namespace `ui.components` (
 		// 	</template>
 		// `
 	}
-)
+);

@@ -1,0 +1,149 @@
+
+:host {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+	padding: 10px;
+}
+
+:host input {
+	outline: none !important;
+}
+
+:host h1 {
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 40px;
+	font-weight: 700;
+}
+
+
+:host .brand {
+	padding: 20px;
+	background: url(https://goo.gl/A0ynht);
+	background-size: cover;
+	background-position: center center;
+	color: #fff;
+	min-height: 540px;
+	position: relative;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+	transition: all 0.6s cubic-bezier(1, -0.375, 0.285, 0.995);
+	z-index: 9999;
+}
+
+
+
+
+
+
+
+:host h2 {
+	font-size: 70px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 0;
+	font-size: 25px;
+}
+
+
+:host .form {
+	position: relative;
+}
+
+:host form {
+	background: #fff;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    color: #bbbbbb;
+    transition: all 0.9s cubic-bezier(1, -0.375, 0.285, 0.995);
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+
+:host form .form-group {
+	margin-bottom: 5px;
+	position: relative;
+}
+
+:host form .form-group.hasError input {
+	border-color: #f95959 !important;
+}
+
+:host form .form-group.hasError label {
+	color: #f95959 !important;
+}
+
+:host form label {
+	font-size: 12px;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-family: "Montserrat", sans-serif;
+	transform: translateY(35px);
+	transition: all 0.4s;
+	cursor: text;
+	z-index: -1;
+}
+
+:host form label.active {
+	transform: translateY(10px);
+	font-size: 10px;
+}
+
+:host form label.fontSwitch {
+	font-family: "Raleway", sans-serif !important;
+	font-weight: 600;
+}
+
+:host form input:not([type=submit]) {
+	background: none;
+	outline: none;
+	border: none;
+	display: block;
+	padding: 10px 0;
+	width: 100%;
+	border-bottom: 1px solid #eee;
+	color: #444;
+	font-size: 15px;
+	font-family: "Montserrat", sans-serif;
+	z-index: 1;
+}
+
+:host form .form-group:has(input:focus) label {
+	transform: translateY(10px);
+}
+:host form .form-group:has(input.has-value) label {
+
+	transform: translateY(10px)
+}
+
+:host form input:not([type=submit]).hasError {
+	border-color: #f95959;
+}
+
+:host form span.error {
+	color: #f95959;
+	font-family: "Montserrat", sans-serif;
+	font-size: 12px;
+	position: absolute;
+	bottom: -20px;
+	right: 0;
+	display: none;
+}
+
+:host form input[type=password] {
+	color: #f95959;
+}
+
+
+
+
+@media (max-width: 768px) {
+	
+}
+
+@media (max-width: 480px) {
+	
+}

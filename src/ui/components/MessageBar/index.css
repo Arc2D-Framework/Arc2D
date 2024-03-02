@@ -2,3 +2,6 @@
 	color: blue;
 	display: block;
 }
+:host ::slotted(h3) {
+    color: rgb(227, 132, 0);
+}

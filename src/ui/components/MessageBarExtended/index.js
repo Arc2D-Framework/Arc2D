@@ -1,37 +1,53 @@
+import {TemplateLiterals2} from 'template-iterals2';
 import 'ui.components.MessageBar';
 
 namespace `ui.components` (
 	class MessageBarExtended extends ui.components.MessageBar  {
-		static get is(){
-			return "message-bar-extended"
-		}
-
+		static is = "message-bar-extended";
 		static skin = inherit;
-
-		constructor() {
-			super();
-			var style = document.querySelector("link#style-test");
-			// this.stylesheets.add(style.sheet);
-			//(async () => {
-			// 	debugger
-			// 	await await this.defineAncestralStylesheets()
-			//})();
-			
-		}
 	
 		async onConnected() {
 			await super.onConnected();
+            // alert(this.querySelector("h3").innerHTML)
 			this.on("click", e=> this.onClick(e), false, "h3")
-			console.log(this.stylesheets)
+            // debugger
+            // this.find("aadsd").test();
 		}
+
+		getTemplateEngine() {
+            return new TemplateLiterals2
+        }
+
 
 		onClick(e) {
 			console.log(e.matchedTarget)
 		}
 
-		hasOwnTemplate() {
-            return false
+        find(cssSel) {
+            debugger
+            super.find(cssSel)
         }
+
+
+		hasOwnTemplate() {
+            return true
+        }
+
+        // async render(data=this.data) {
+        //     if(!this.element && this.hasOwnTemplate()){
+        //         var engine = this.getTemplateEngine();
+        //         debugger
+        //         var template = this.__proto.constructor.__template__||await this.loadTemplate()
+        //         this.__proto.constructor.__template__ = template;
+        //         var fragment = await engine.parse(template.decode(), data, this);
+        //             fragment = !(fragment instanceof DocumentFragment) ? 
+        //             fragment.toNode()?.content : 
+        //             fragment;
+                
+        //         this.shadowRoot.innerHTML = ""; 
+        //         this.shadowRoot.appendChild(fragment);
+        //     }
+		// }
 
 		// inShadow() {
 		// 	return false
@@ -46,10 +62,7 @@ namespace `ui.components` (
 		// 	return false
 		// }
 
-		// hasOwnTemplate() {
-		// 	return false
-		// }
-
+	
 		// template = () => 
 		// `
 		// 	<template>

@@ -9,7 +9,7 @@
         <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
             Config.ROOTPATH = "../"
-            Config.IMPORT_MAPS=false;
+            // Config.IMPORT_MAPS=false;
         </script>
         <!-- <link rel="stylesheet" href="index.css" id="style-test"> -->
         <style>
@@ -20,32 +20,114 @@
     </head>
 
     <body namespace="ui.screens.ShadowDomDemo">
-        <!-- <message-bar-extended-child>
-            message-bar-extended-child 1
-        </message-bar-extended-child> -->
-        <!-- <message-bar-extended>
+        <!-- <message-bar-extended class="test123">
             <template shadowrootmode="open">
                 <div>
                     Declarative ShadowDom
                     <h3>
                         <slot></slot>
+                        <slot></slot>
+                        <slot name="icons"></slot>
                     </h3>
                 </div>
             </template>
-            <template>
-                xxx
+            <h3>Test 1</h3>
+            <h3>Test 2</h3>
+            <h3 slot="icons">Test 3 Icon</h3>
+        </message-bar-extended>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar-extended>
+            <template shadowrootmode="open">
+                <div>
+                    Declarative ShadowDom
+                    <h3>
+                        <slot></slot>
+                        <slot></slot>
+                        <slot name="icons"></slot>
+                    </h3>
+                </div>
             </template>
-            <h3>Test</h3>
-        </message-bar-extended> -->
-        
+            <h3>Test 1</h3>
+            <h3>Test 2</h3>
+            <h3 slot="icons">Test 3 Icon</h3>
+        </message-bar-extended>
+
+        <div id="test1">
+            <h3>Hello DIV</h3>
+        </div>
         
         <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar>
+            asdsadasdas
+        </message-bar>
+        <message-bar-extended>
+            <template shadowrootmode="open">
+                <div>
+                    Declarative ShadowDom
+                    <h3>
+                        <slot></slot>
+                        <slot></slot>
+                        <slot name="icons"></slot>
+                    </h3>
+                </div>
+            </template>
+            <h3>Test 1</h3>
+            <h3>Test 2</h3>
+            <h3 slot="icons">Test 3 Icon</h3>
+        </message-bar-extended> -->
+        <!-- <core-ui-html-component>
+            <template shadowrootmode="open"></template>
+            <h1>hello world</h1>
+        </core-ui-html-component> -->
+        
+        <!-- <message-bar>
+            <template shadowrootmode="open">
+                <mark>
+                    <slot></slot>
+                </mark>
+            </template>
             <h3>H3 Header 1 </h3>
         </message-bar>
+        <message-bar>
+            <template shadowrootmode="open">
+                <mark>
+                    <slot></slot>
+                </mark>
+            </template>
+            <h3>H3 Header 2 </h3>
+        </message-bar> -->
         <!-- <message-bar-extended-child>
             message-bar-extended-child 1
         </message-bar-extended-child> -->
         
+        <div id="test1">
+            <h3>Hello DIV</h3>  
+        </div>
 
 
     </body>
