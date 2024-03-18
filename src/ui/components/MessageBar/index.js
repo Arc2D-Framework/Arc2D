@@ -29,6 +29,25 @@ namespace `ui.components` (
             this._countries.push(country);
         }
 
+        // async render(data=this.data) {
+        //     if(!this.constructor.extends) {
+		// 		debugger
+        //         if((!this.element && !this.hasDSD) || this.hasOwnTemplate()){
+        //             var engine   = this.getTemplateEngine();
+        //             var template = await this.loadTemplate(true);
+        //             var fragment = await engine.parse(template.decode(), data, this);
+        //                 fragment = !(fragment instanceof DocumentFragment) ? 
+        //                 fragment.toNode()?.content : fragment;
+                    
+        //             this.root.innerHTML = ""; 
+        //             this.root.appendChild(fragment);
+        //         }
+        //         // if(!this.hasDSD && !this.hasOwnTemplate()) {
+		// 		// 	this.root.innerHTML = `<slot></slot>`
+		// 		// }
+        //     }
+		// }
+
         getTemplateEngine() {
             return new TemplateLiterals2
             // return XsltTransformer
@@ -40,10 +59,10 @@ namespace `ui.components` (
             return this._countries;
         }
 
-		// inShadow() {
-        //     // debugger
-		// 	return false
-		// }
+		inShadow() {
+            // debugger
+			return true
+		}
 
 
 		hasOwnTemplate() {
@@ -54,18 +73,18 @@ namespace `ui.components` (
             return `color: red;`
         }
 
-        cssStyle() {
-            return `
-                :host {
-                    ${this.test_prop()};
-                    background-color: #f2f2f2;
-                    padding: 20px;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    margin-bottom: 20px;
-                }
-            `
-        }
+        // cssStyle() {
+        //     return `
+        //         :host {
+        //             ${this.test_prop()};
+        //             background-color: #f2f2f2;
+        //             padding: 20px;
+        //             border: 1px solid #ccc;
+        //             border-radius: 5px;
+        //             margin-bottom: 20px;
+        //         }
+        //     `
+        // }
 
 		// template = () => 
 		// `

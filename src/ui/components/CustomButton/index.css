@@ -1,9 +1,6 @@
 :host {
 	color: blue;
 	display: block;
-	background-color: rgb(234, 234, 234);
-	border-bottom: 1px solid blue;
-	margin: 10px;
 }
 :host ::slotted(h3) {
     color: rgb(227, 132, 0);

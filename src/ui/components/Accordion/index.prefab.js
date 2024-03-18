@@ -2,7 +2,7 @@
                 
 @tag('accordion-list');
 namespace `ui.components` (
-	class Accordion extends WebComponent  {
+	class Accordian extends WebComponent  {
 		
 	}
 )
@@ -10,7 +10,7 @@ namespace `ui.components` (
 
 
 
-                ui.components.Accordion.prototype.template = function(){
+                ui.components.Accordian.prototype.template = function(){
                     return `<template>
 	<ul>
 		<li>
@@ -36,7 +36,7 @@ namespace `ui.components` (
 `
                 };
 
-                ui.components.Accordion.prototype.cssStyle = function(){
+                ui.components.Accordian.prototype.cssStyle = function(){
                     return super.cssStyle() + `.transition, ul li i:before, ul li i:after, p {
     transition: all 0.25s ease-in-out;
   }
@@ -199,4 +199,4 @@ namespace `ui.components` (
 `
                 };
 
-                ui.components.Accordion.prototype.onLoadInstanceStylesheet = function(){ return false }
+                ui.components.Accordian.prototype.onLoadInstanceStylesheet = function(){ return false }
