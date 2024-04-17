@@ -5,7 +5,12 @@ import {TemplateLiterals2} from 'template-iterals2';
 namespace `ui.components` (
 	class MessageBar extends HtmlComponent  {
 		static is = "message-bar"
-
+        static synchronous = true;
+        
+        // static skin = "test";
+        lazy = this.getAttribute("lazy") || false;
+        
+        
         // constructor(el, options) {
         //     super(el, options);
             
@@ -19,40 +24,48 @@ namespace `ui.components` (
                 {name:"Albania", code:"AL"}
             ]
             await super.onConnected({countries:this._countries});
-
+            // alert(this.synchronous)
             this.dispatchEvent("test", {message:"MessageBar test"});
         }
 
      
+        // async render(data=this.data) {
+        //     debugger
+        //     if((!this.hasDeclarativeTemplate) || this.hasOwnTemplate()){
+        //         debugger
+        //         var engine   = await this.getTemplateEngine();
+        //         var template = await this.loadTemplate(true);
+        //         var fragment = await engine.parse(template.decode(), data, this);
+				
+		// 		if(typeof fragment == "string"){
+		// 			this.shadowRoot.appendChild(fragment.toNode().content);
+		// 			// this.root.setHTMLUnsafe  && this.root.setHTMLUnsafe(fragment);
+		// 			// !this.root.setHTMLUnsafe && (this.root.innerHTML = fragment);
+		// 		}
+		// 		else {
+		// 			this.root.innerHTML = "";
+		// 			this.root.appendChild(fragment);
+		// 			// fragment = !(fragment instanceof DocumentFragment) ? 
+        //             // 	fragment.toNode()?.content : fragment;
+		// 			// this.root.innerHTML = ""; 
+		// 			// this.root.appendChild(fragment);
+		// 		}
+		// 		this.onRendered();
+        //     }
+		// }
 
         addCountry(country) {
             this._countries.push(country);
         }
 
-        // async render(data=this.data) {
-        //     if(!this.constructor.extends) {
-		// 		debugger
-        //         if((!this.element && !this.hasDSD) || this.hasOwnTemplate()){
-        //             var engine   = this.getTemplateEngine();
-        //             var template = await this.loadTemplate(true);
-        //             var fragment = await engine.parse(template.decode(), data, this);
-        //                 fragment = !(fragment instanceof DocumentFragment) ? 
-        //                 fragment.toNode()?.content : fragment;
-                    
-        //             this.root.innerHTML = ""; 
-        //             this.root.appendChild(fragment);
-        //         }
-        //         // if(!this.hasDSD && !this.hasOwnTemplate()) {
-		// 		// 	this.root.innerHTML = `<slot></slot>`
-		// 		// }
-        //     }
-		// }
+        
 
         getTemplateEngine() {
-            return new TemplateLiterals2
+            
+            // return new TemplateLiterals2
             // return XsltTransformer
             
-            // return window.customTemplateEngines.getEngineByMimeType("template/xslt")
+            return window.customTemplateEngines.default;
         }
 
         get countries() {
@@ -66,7 +79,7 @@ namespace `ui.components` (
 
 
 		hasOwnTemplate() {
-			return true
+			return false
 		}
 
         test_prop() {

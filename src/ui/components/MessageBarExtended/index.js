@@ -4,81 +4,69 @@ import 'ui.components.MessageBar';
 namespace `ui.components` (
 	class MessageBarExtended extends ui.components.MessageBar  {
 		static is = "message-bar-extended";
-		static skin = inherit;
+		// static skin = inherit;
+
+
+        constructor(el, options) {
+            super(el, options);
+            console.log(this,this.getAttribute("lazy"))
+        }
 
 		async onConnected() {
 			await super.onConnected();
-			// debugger
-			// await sleep (1000)
-            // console.log("MessageBarExtended <h3>", this.find("h3"))
-			// await this.render();
-			this.on("click", e=> this.onClick(e), false, "h3")
-			// console.log("dsd", [this.hasDSD, this])
+            
+            try {
+                this.internals?.states.add("connected");
+            } 
+			catch {
+                this.internals?.states.add("--connected");
+            }
+			//this.internals?.states.add("connected");
+
+				this.on("click", e=> this.onClick(e), false, "h3");
 		}
+
+		// async render(data=this.data) {
+        //     debugger
+        //     if((!this.hasDeclarativeTemplate) || this.hasOwnTemplate()){
+        //         debugger
+        //         var engine   = await this.getTemplateEngine();
+        //         var template = await this.loadTemplate(true);
+        //         var fragment = await engine.parse(template.decode(), data, this);
+				
+		// 		if(typeof fragment == "string"){
+		// 			this.shadowRoot.appendChild(fragment.toNode().content);
+		// 			// this.root.setHTMLUnsafe  && this.root.setHTMLUnsafe(fragment);
+		// 			// !this.root.setHTMLUnsafe && (this.root.innerHTML = fragment);
+		// 		}
+		// 		else {
+		// 			this.root.innerHTML = "";
+		// 			this.root.appendChild(fragment);
+		// 			// fragment = !(fragment instanceof DocumentFragment) ? 
+        //             // 	fragment.toNode()?.content : fragment;
+		// 			// this.root.innerHTML = ""; 
+		// 			// this.root.appendChild(fragment);
+		// 		}
+		// 		this.onRendered();
+        //     }
+		// }
 
 		onRendered() {
 			console.log("MessageBarExtended <h3>", this.find("h3"))
 		}
-		
-
-		// async initialize(el,options) {
-        //     this.options        = options||this;
-        //     this.element        = el;
-        //     this.__proto        = this.constructor.prototype;
-        //     globalThis._eventObjects = globalThis._eventObjects||[];
-		// 	debugger
-		// 	this.hasDeclarativeTemplate = this.shadowRoot||this.element?.shadowRoot;
-        //     this._eventData     = {};
-        //     this._eventFired    = {};
-        //     this._eventObjects  = {};
-            
-        //     if(this.element && this.isExistingDomNode(this.element)){
-        //         this.root = this.element
-        //         if(this.inShadow()) {
-        //             this.root = this.hasDeclarativeTemplate||this.element.attachShadow({mode:'open'});
-        //             !this.hasDeclarativeTemplate && (this.root.innerHTML = `<slot></slot>`);
-        //         }
-		// 		await this.render(this.data);
-        //         this.connectedCallback();
-        //     }
-        //     else {
-        //         this.root = !this.constructor.extends && (
-		// 			this.attachInternals()?.shadowRoot||
-		// 			this.attachShadow({mode:'open'})  || this
-		// 		)||this;
-		// 		await this.render(this.data);
-        //     }
-        // }
-
-		// async render(data=this.data) {
-        //     if(!this.constructor.extends) {
-		// 		debugger
-        //         if((!this.hasDeclarativeTemplate) || this.hasOwnTemplate()){
-        //             var engine   = this.getTemplateEngine();
-        //             var template = await this.loadTemplate(true);
-        //             var fragment = await engine.parse(template.decode(), data, this);
-        //                 fragment = !(fragment instanceof DocumentFragment) ? 
-        //                 fragment.toNode()?.content : fragment;
-                    
-        //             this.root.innerHTML = ""; 
-        //             this.root.appendChild(fragment);
-        //         }
-        //         // if(!this.hasDSD && !this.hasOwnTemplate()) {
-		// 		// 	this.root.innerHTML = `<slot></slot>`
-		// 		// }
-        //     }
-		// }
 
 		getTemplateEngine() {
             return new TemplateLiterals2
+			// return window.customTemplateEngines.getEngineByMimeType("template/literals")
         }
 
 		onClick(e) {
-			console.log(e.matchedTarget)
+			console.log(e.matchedTarget);
+            // this.internals.states.add("--clicked");
 		}
 
 		hasOwnTemplate() {
-            return false
+            return true
         }
 	}
 )

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Declarative Shadow DOM Components</title>
+        
+        <script>
+            // setTimeout(_=> {
+            
+            class AutonomousComponentA extends HTMLElement {
+                constructor() {
+                    super();
+                    // this.attachShadow({mode: 'open'});
+                    this.internals = this.attachInternals();
+                    this.root = (
+                        this.internals?.shadowRoot||
+                        this.attachShadow({mode:'open'})  || this
+                    )||this;
+                }
+
+                connectedCallback() {
+                    debugger
+                    // this.shadowRoot.innerHTML = `
+                    //     <div>
+                    //         <p>Component A Template!</p>    
+                    //     </div>
+                    // `;
+                }
+            }
+
+            class AutonomousComponentB extends HTMLElement {
+                constructor() {
+                    super();
+                    debugger
+                    // this.attachShadow({mode: 'open'});
+                    this.internals = this.attachInternals();
+                    this.root = (
+                        this.internals?.shadowRoot||
+                        this.attachShadow({mode:'open'})  || this
+                    )||this;
+                }
+
+                connectedCallback() {
+                    debugger
+                    var html = `<p>Hello, I'm an autonomous component B!</p>
+                                    <autonomous-component-a>
+                                        <template shadowrootmode="open">
+                                            <p>Component A DSD!</p>
+                                            <slot></slot>
+                                        </template>    
+                                    </autonomous-component-a>`
+
+                    var template = document.createElement('template');
+                        template.setHTMLUnsafe(html);
+                    this.root.appendChild(template.content);              
+                    // this.shadowRoot.setHTMLUnsafe(html);
+                    debugger
+                }
+            }
+
+
+            window.customElements.define('autonomous-component-a', AutonomousComponentA);
+            window.customElements.define('autonomous-component-b', AutonomousComponentB);
+
+        // }, 2000);
+        </script>
+    </head>
+
+    <body>
+        <!-- <autonomous-component-a>
+            <p>Hello, I'm a slot!</p>
+        </autonomous-component-a> -->
+        <autonomous-component-b></autonomous-component-b>
+    </body>
+    
+</html>

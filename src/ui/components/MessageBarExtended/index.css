@@ -2,3 +2,9 @@
 	color: teal;
 }
 
+
+
+:host(:is(:--connected, :state(connected))) {
+	visibility: visible !important;
+	border: 3px solid red !important;
+}

@@ -12,11 +12,43 @@
             Config.ENABLE_TRANSPILER = false;
             // Config.IMPORT_MAPS=false;
         </script>
+        <script>
+           
+            var startTime;
+            document.addEventListener("file:loaded", e => {
+                console.log("loaded", e.detail.path);
+                startTime = Date.now();
+            }, false);
+
+        </script>
+        <style>
+
+            message-bar,
+            message-bar-extended,
+            message-bar-extended-child{
+                display: block;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                height: 300px;
+            }
+
+            message-bar-extended,
+            sdf-focus-pane {
+                visibility: hidden;
+            }
+        </style>
+        <!-- <script>
+            document.on("connected", e=> {
+                console.log("connected", e);
+            }, false)
+        </script> -->
+
         <!-- <link rel="stylesheet" href="index.css" id="style-test"> -->
         <style>
-            :not(:defined) { 
+            /* :not(:defined) { 
                 display: none;
-            }
+            } */
 
             message-bar-extended #light-dom-el{
                 color: red;
@@ -27,16 +59,30 @@
     </head>
 
     <body namespace="ui.screens.ShadowDomDemo">
-        <span id="test3" is="my-button">
+        <!-- <span id="test3" is="my-button">
             <template shadowrootmode="open">
-                Inline shadowrootmode
+                SPAN TAG -- Inline shadowrootmode
                 <slot></slot>
             </template>
             test
-        </span>
-        <div id="test1">
-            <h3>Hello DIV 1</h3>  
-        </div>
+        </span> -->
+        <message-bar-extended>
+            <div>Jason</div>
+        </message-bar-extended>
+        <!-- <message-bar></message-bar> -->
+        <!-- <message-bar-extended lazy="true"></message-bar-extended>
+        <message-bar></message-bar>
+        <message-bar></message-bar>
+        <message-bar></message-bar>
+        <message-bar></message-bar>
+        <message-bar></message-bar>
+        <message-bar></message-bar>
+        <message-bar></message-bar> -->
+        <!-- <message-bar-extended-child lazy="true"></message-bar-extended-child>
+        
+        
+        
+        
 
         <message-bar-extended></message-bar-extended>
 
@@ -57,11 +103,20 @@
                 <h3>Hello DIV ShadowDOM Template</h3>
                 <slot></slot>
             </template>
-            <h3>Hello DIV 2</h3>  
-        </div>
+            <h3>Hello DIV TAG 2</h3>  
+        </div> -->
         
-        
-       <message-bar-extended>
+       <!-- <message-bar-extended-child lazy="true"></message-bar-extended-child>
+       <message-bar-extended-child lazy="true"></message-bar-extended-child> -->
+       <!-- <message-bar lazy="true"></message-bar>
+       <message-bar lazy="true"></message-bar>
+       <message-bar lazy="true"></message-bar>
+       <message-bar lazy="true"></message-bar>
+       <message-bar lazy="true"></message-bar>
+       <message-bar lazy="true"></message-bar> -->
+       <!-- <message-bar-extended-child lazy="true"></message-bar-extended-child> -->
+
+       <!-- <message-bar-extended lazy="true">
             <template shadowrootmode="open">
                 <div>
                     Declarative ShadowDom
@@ -75,8 +130,14 @@
             <h3>test 1</h3>
             <h3>test 2</h3>
             <h3 slot="icons">Test 3 Icon</h3>
-        </message-bar-extended> 
+        </message-bar-extended>  -->
+        <!-- <message-bar-extended lazy="true">
+            <h3>xxx</h3>
+        </message-bar-extended> -->
+        <!-- <message-bar lazy="true"></message-bar> -->
 
+        
+        
          <!-- <message-bar>
             asdsadasdas
         </message-bar>
@@ -172,6 +233,12 @@
         <!-- <div id="test2">
             <h3>Hello DIV 2</h3>  
         </div> -->
+
+
+        <!-- <message-bar-extended lazy="true"></message-bar-extended>
+        <message-bar-extended lazy="true"></message-bar-extended>
+        <message-bar-extended lazy="true"></message-bar-extended>
+        <message-bar-extended lazy="true"></message-bar-extended> -->
 
         
     </body>

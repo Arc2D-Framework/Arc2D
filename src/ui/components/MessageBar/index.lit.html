@@ -10,7 +10,6 @@
           }
       %>
 
-      <template data-id="countries" data-update-event="countries:updated">
           <optgroup>
             <%
               return this.countries.map( country => 
@@ -25,7 +24,6 @@
               ).join("")
             %>
           </optgroup>
-      </template>
   </select>
   <slot></slot>
 </template>

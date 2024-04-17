@@ -1,6 +1,6 @@
 
 namespace `ui.components` (
- class Label extends WebComponent {
+ class Label extends HtmlComponent {
        
         async onConnected(){
             this.name="Jay";

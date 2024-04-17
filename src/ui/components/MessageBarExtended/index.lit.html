@@ -1,5 +1,21 @@
 <template>
-  Message Bar index.html
-  <h3>Hello World</h3>
-  <slot>asdasda</slot>
+  <%= `<b>${JSON.stringify(this)}</b>` %>
+  <slot></slot>
+  <message-bar></message-bar>
+  <message-bar>
+    <template shadowrootmode="open">
+      Message Bar index.html DSD
+      <h3>Hello World</h3>
+      <slot>asdasda</slot>
+      <message-bar>
+        <template shadowrootmode="open">
+          Message Bar index.html DSD yyy
+          <h3>Hello World <%= `<b>${JSON.stringify(this)}</b>` %></h3>
+          <slot></slot>
+        </template>
+        yyy
+      </message-bar>
+    </template>
+    xxx
+  </message-bar>
 </template>

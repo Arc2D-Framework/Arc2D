@@ -1,5 +1,7 @@
 
-import 'ui.components.MessageBarExtendedChild';
+import 'ui.components.MessageBarExtended';
+import 'ui.components.Label';
+// import 'ui.components.MessageBarExtendedChild';
 import CustomButton from 'ui.components.CustomButton';
 
 
@@ -10,6 +12,9 @@ namespace `ui.screens` (
             await super.onConnected();
             // return;
 
+            // debugger
+            // application.subscribe("connected", e=> this.onComponentConnected(e), false)
+            // document.addEventListener("loaded", e=> this.onComponentConnected(e), false)
 
             var div1 = document.querySelector("div#test1");
             var div2 = document.querySelector("div#test2");
@@ -33,6 +38,10 @@ namespace `ui.screens` (
 
             // var messageBar5 = new ui.components.MessageBarExtendedChild;
             // document.body.appendChild(messageBar5);
+        }
+
+        onComponentConnected(e) {
+            console.log("onComponentConnected", e.detail.path)
         }
 
         onMessage(e){

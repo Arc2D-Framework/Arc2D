@@ -12,7 +12,7 @@ export default namespace `ui.components` (
 
         async onConnected() {
 			await super.onConnected();
-            this.on("click", e=>this.onClick(e))
+            this.on("click", e=>this.onClick(e));
 		}
 
         // hasOwnTemplate() { return true }
