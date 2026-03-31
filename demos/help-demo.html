@@ -89,18 +89,22 @@
             } from '../src/libs/aivoice.js';
 
             document.addEventListener('DOMContentLoaded', async () => {
+                const fallbackSpeechRenderer = new BrowserSpeechRenderer({
+                    rate: 1,
+                    pitch: 1,
+                    volume: 1
+                });
+                const elevenLabsApiKey = localStorage.getItem('ELEVENLABS_API_KEY') || '';
                 const aiVoice = new AIVoice({
                     transcriber: new BrowserSpeechTranscriber(),
-                    speechRenderer: new ElevenLabsSpeechRenderer({
-                        apiKey: '62f79ed759a9b46b5675f32839ba46f686b7ad2afac1064cf6fb81c791d86027',
-                        voiceId: 'Xkem7o24n3aQyiwIXNeT',
-                        modelId: 'eleven_flash_v2_5',
-                        fallbackRenderer: new BrowserSpeechRenderer({
-                            rate: 1,
-                            pitch: 1,
-                            volume: 1
+                    speechRenderer: elevenLabsApiKey
+                        ? new ElevenLabsSpeechRenderer({
+                            apiKey: elevenLabsApiKey,
+                            voiceId: 'Xkem7o24n3aQyiwIXNeT',
+                            modelId: 'eleven_flash_v2_5',
+                            fallbackRenderer: fallbackSpeechRenderer
                         })
-                    }),
+                        : fallbackSpeechRenderer,
                     chatProvider: new HttpChatProvider({
                         endpoint: '/api/chat',
                         model: localStorage.getItem('OPENAI_MODEL') || 'gpt-5-mini',
