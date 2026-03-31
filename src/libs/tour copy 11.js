@@ -20,241 +20,6 @@ b.buffer=p;b.connect(zzfxX.destination);b.start()}
 
 
 let OVERLAY_ZINDEX = 999999999;
-
-class TourVoiceVisualizer extends HTMLElement {
-    constructor() {
-        super();
-        this.root = this.attachShadow({ mode: 'open' });
-        this.audioContext = null;
-        this.analyser = null;
-        this.mediaStream = null;
-        this.freqs = null;
-        this.animationFrame = null;
-        this.isListening = false;
-        this.useFallbackAnimation = false;
-        this.phase = 0;
-
-        this.opts = {
-            smoothing: 0.6,
-            fft: 64,
-            minDecibels: -70,
-            glow: 16,
-            lineWidth: 1.5,
-            fillOpacity: 0.42,
-            color1: [203, 36, 128],
-            color2: [41, 200, 192],
-            color3: [24, 137, 218],
-            shift: 28,
-            amp: 1.45
-        };
-    }
-
-    connectedCallback() {
-        this.root.innerHTML = `
-            <style>
-                :host {
-                    display: block;
-                    inline-size: 100%;
-                }
-                .wrap {
-                    position: relative;
-                    inline-size: 100%;
-                    block-size: 74px;
-                    border-radius: 4px;
-                    overflow: hidden;
-                    background:
-                        radial-gradient(circle at 50% 8%, rgb(38 54 140 / 85%), transparent 54%),
-                        linear-gradient(180deg, rgb(4 5 23 / 96%), rgb(7 11 31 / 98%));
-                }
-                canvas {
-                    display: block;
-                    inline-size: 100%;
-                    block-size: 100%;
-                }
-                .label {
-                    position: absolute;
-                    inset-inline: 8px;
-                    inset-block-end: 6px;
-                    padding: 4px 8px;
-                    font-size: 12px;
-                    line-height: 1.25;
-                    color: #cbb76d;
-                    background: rgb(3 4 20 / 44%);
-                    border: 1px solid rgb(203 183 109 / 16%);
-                    border-radius: 999px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    backdrop-filter: blur(6px);
-                }
-            </style>
-            <div class="wrap">
-                <canvas></canvas>
-                <div class="label"></div>
-            </div>
-        `;
-
-        this.canvas = this.root.querySelector('canvas');
-        this.labelEl = this.root.querySelector('.label');
-        this.ctx = this.canvas.getContext('2d');
-        this.resizeObserver = new ResizeObserver(() => this._resizeCanvas());
-        this.resizeObserver.observe(this);
-        this._resizeCanvas();
-        this._drawIdle();
-    }
-
-    disconnectedCallback() {
-        this.resizeObserver?.disconnect();
-        cancelAnimationFrame(this.animationFrame);
-        this.animationFrame = null;
-    }
-
-    setStatus(text = '') {
-        if (this.labelEl) this.labelEl.textContent = text;
-    }
-
-    async setListening(isListening) {
-        this.isListening = Boolean(isListening);
-        if (this.isListening) {
-            await this._ensureAnalyser();
-            this._startAnimation();
-            return;
-        }
-        this._stopAnimation();
-        this._drawIdle();
-    }
-
-    async _ensureAnalyser() {
-        if (this.analyser || this.useFallbackAnimation) return;
-
-        try {
-            const getUserMedia = navigator.mediaDevices?.getUserMedia?.bind(navigator.mediaDevices);
-            if (!getUserMedia) throw new Error('getUserMedia is unavailable.');
-
-            this.mediaStream = this.mediaStream || await getUserMedia({ audio: true });
-            this.audioContext = this.audioContext || new (window.AudioContext || window.webkitAudioContext)();
-            const input = this.audioContext.createMediaStreamSource(this.mediaStream);
-            this.analyser = this.audioContext.createAnalyser();
-            this.analyser.fftSize = this.opts.fft;
-            this.analyser.smoothingTimeConstant = this.opts.smoothing;
-            this.analyser.minDecibels = this.opts.minDecibels;
-            input.connect(this.analyser);
-            this.freqs = new Uint8Array(this.analyser.frequencyBinCount);
-        } catch (error) {
-            console.warn('[TourVoiceVisualizer] Falling back to synthetic animation.', error);
-            this.useFallbackAnimation = true;
-        }
-    }
-
-    _resizeCanvas() {
-        if (!this.canvas) return;
-        const rect = this.canvas.getBoundingClientRect();
-        const dpr = window.devicePixelRatio || 1;
-        this.canvas.width = Math.max(1, Math.round(rect.width * dpr));
-        this.canvas.height = Math.max(1, Math.round(rect.height * dpr));
-        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        if (!this.isListening) this._drawIdle();
-    }
-
-    _startAnimation() {
-        if (this.animationFrame) return;
-        const tick = () => {
-            this.animationFrame = requestAnimationFrame(tick);
-            this._drawFrame();
-        };
-        tick();
-    }
-
-    _stopAnimation() {
-        cancelAnimationFrame(this.animationFrame);
-        this.animationFrame = null;
-    }
-
-    _drawIdle() {
-        if (!this.ctx || !this.canvas) return;
-        const width = this.canvas.width / (window.devicePixelRatio || 1);
-        const height = this.canvas.height / (window.devicePixelRatio || 1);
-        this.ctx.clearRect(0, 0, width, height);
-        this.ctx.globalCompositeOperation = 'source-over';
-        this._drawWave(0, [24, 137, 218], width, height, () => 0.09);
-        this._drawWave(1, [41, 200, 192], width, height, () => 0.075);
-        this._drawWave(2, [203, 36, 128], width, height, () => 0.06);
-    }
-
-    _drawFrame() {
-        const width = this.canvas.width / (window.devicePixelRatio || 1);
-        const height = this.canvas.height / (window.devicePixelRatio || 1);
-        this.ctx.clearRect(0, 0, width, height);
-        this.ctx.globalCompositeOperation = 'screen';
-
-        if (this.analyser && this.freqs) {
-            this.analyser.getByteFrequencyData(this.freqs);
-        }
-
-        this._drawWave(0, this.opts.color1, width, height, index => this._getAmplitude(0, index));
-        this._drawWave(1, this.opts.color2, width, height, index => this._getAmplitude(1, index));
-        this._drawWave(2, this.opts.color3, width, height, index => this._getAmplitude(2, index));
-        this.phase += 0.025;
-    }
-
-    _getAmplitude(channel, index) {
-        if (this.freqs?.length) {
-            const shuffle = [1, 3, 0, 4, 2];
-            const band = Math.min(this.freqs.length - 1, 2 * channel + shuffle[index] * 3);
-            return (this.freqs[band] / 255) * this.opts.amp;
-        }
-
-        const oscillation = Math.sin(this.phase * 2.2 + index * 0.7 + channel) * 0.5 + 0.5;
-        return 0.18 + oscillation * 0.32;
-    }
-
-    _drawWave(channel, color, width, height, amplitudeForIndex) {
-        const points = 5;
-        const margin = width * 0.04;
-        const usableWidth = width - margin * 2;
-        const step = usableWidth / (points - 1);
-        const centerY = height * 0.5;
-        const shift = (channel - 1) * this.opts.shift * 0.22;
-        const pathPoints = [];
-
-        for (let i = 0; i < points; i++) {
-            const x = margin + i * step + shift;
-            const direction = i % 2 === 0 ? -1 : 1;
-            const amp = amplitudeForIndex(i) * height * 0.48;
-            const y = centerY + direction * amp;
-            pathPoints.push({ x, y });
-        }
-
-        this.ctx.beginPath();
-        this.ctx.moveTo(0, centerY);
-        this.ctx.lineTo(pathPoints[0].x, pathPoints[0].y);
-
-        for (let i = 0; i < pathPoints.length - 1; i++) {
-            const current = pathPoints[i];
-            const next = pathPoints[i + 1];
-            const controlX = (current.x + next.x) / 2;
-            this.ctx.quadraticCurveTo(controlX, current.y, next.x, next.y);
-        }
-
-        this.ctx.lineTo(width, centerY);
-        this.ctx.lineTo(width, height);
-        this.ctx.lineTo(0, height);
-        this.ctx.closePath();
-
-        this.ctx.shadowBlur = this.opts.glow;
-        this.ctx.shadowColor = `rgb(${color.join(',')})`;
-        this.ctx.fillStyle = `rgba(${color.join(',')}, ${this.opts.fillOpacity})`;
-        this.ctx.strokeStyle = `rgb(${color.join(',')})`;
-        this.ctx.lineWidth = this.opts.lineWidth;
-        this.ctx.fill();
-        this.ctx.stroke();
-    }
-}
-
-if (!customElements.get('tour-voice-visualizer')) {
-    customElements.define('tour-voice-visualizer', TourVoiceVisualizer);
-}
-
 class TourGuide extends HTMLElement {
     constructor() {
         super();
@@ -264,24 +29,11 @@ class TourGuide extends HTMLElement {
         this.historyIndex = -1;
         this.initialDomAttributes = new Map();
         this.isPositioning = false;
-        this.launcherVoiceChatMenuItem = null;
-        this.launcherVoiceChatStatusEl = null;
-        this.launcherVoiceChatVisualizerEl = null;
-        this.voiceChatStatus = '';
-        this.isVoiceThinking = false;
-        this.isVoiceChatReady = false;
-        this.isVoiceSpeaking = false;
-        this.queuedVoiceAction = null;
 
         // this.addEventListener("click", e => {
         //     e.stopPropagation();
         //     e.preventDefault();
         // }, false);
-
-        this.aiVoice = null;
-        this._aiVoiceStateChangeHandler = null;
-        this.voiceChatState = 'idle';
-        this.lastVoiceChatRequestText = '';
 
         this.isMuted = false;
         this.sounds = {
@@ -301,7 +53,6 @@ class TourGuide extends HTMLElement {
                 --tourguide-default-font-family: var(--tourguide-font-family, inherit);
                 --tourguide-default-font-size: var(--tourguide-font-size, 14px);
                 --tourguide-default-title-color: var(--tourguide-title-color, var(--tourguide-font-color, #777777));
-                --tourguide-default-step-label-color: var(--tourguide-step-label-color, var(--tourguide-font-color, #777777));
             }
 
             :host {
@@ -332,7 +83,7 @@ class TourGuide extends HTMLElement {
                 top : 0px;
                 position: fixed;
                 background-color: var(--tourguide-default-bg-color);
-                max-width: 360px;
+                max-width: 320px;
                 min-width: 320px;
                 display: block;
                 font-family: var(--tourguide-default-font-family);
@@ -351,6 +102,7 @@ class TourGuide extends HTMLElement {
 
             }
 
+            :host(.no-controls) #help-tour-nav,
             :host(.no-controls) #progress-bar,
             :host(.no-controls) #help-tour-options{
                 display:none !important;
@@ -417,72 +169,33 @@ class TourGuide extends HTMLElement {
 
             :host #help-tour-title {
                 color: var(--tourguide-default-title-color);
-                font-size: calc(var(--tourguide-default-font-size) *1.55);
+                font-size: calc(var(--tourguide-default-font-size) *1.35);
                 display: flex;
                 flex-flow: row nowrap;
                 justify-content: space-between;
                 align-items: center;
-                font-weight: 100;
+                font-weight: 400;
                 margin: 5px 0px 0;
-                border-left: 4px solid #a58215;
-                padding-left: 4px;
-                gap: 20px;
             }
             :host #help-tour-title #step-label {
                 font-size: calc(var(--tourguide-default-font-size) * 1.2);
-                font-weight: 400;
-                color: var(--tourguide-default-step-label-color);
+                font-weight: 100;
             }
             :host #help-tour-title > #close-btn {
                 display: inline-block;
+                float: right;
                 color: var(--tourguide-default-font-color);
                 font-size: 10px;
+                padding: 6px;
                 background: color-mix(in srgb, var(--tourguide-default-base-color), var(--tourguide-default-bg-color) 93%);
                 cursor: pointer;
                 border-radius: 4px;
-                align-self: start;
-                height: 24px;
-                width: 24px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
 
             :host #tour-container{
                 height: 100%;
                 display: flex;
                 flex-flow: column;
-            }
-
-            :host #tour-content-overlay {
-                position: absolute;
-                inset: 0;
-                background: var(--tourguide-default-bg-color);
-                border-radius: 4px;
-                padding: 10px 12px 8px;
-                display: flex;
-                flex-flow: column;
-                gap: 6px;
-                z-index: 10;
-            }
-
-            :host #tour-content-overlay .overlay-close {
-                align-self: flex-end;
-                background: transparent;
-                border: none;
-                cursor: pointer;
-                font-size: 11px;
-                color: var(--tourguide-default-font-color);
-                opacity: 0.6;
-                padding: 2px 4px;
-                line-height: 1;
-            }
-            :host #tour-content-overlay .overlay-close:hover {
-                opacity: 1;
-            }
-
-            :host #tour-content-overlay .overlay-body {
-                flex: 1;
             }
 
             :host #tour-content {
@@ -576,7 +289,7 @@ class TourGuide extends HTMLElement {
                 font-size: 16px;
             }
             :host #help-tour-nav{
-                background: linear-gradient(45deg, var(--tourguide-default-bg-color) 63%, #ff000000 53%), color-mix(in srgb, var(--tourguide-default-base-color), var(--tourguide-default-bg-color) 93%);
+                background: linear-gradient(45deg, var(--tourguide-default-bg-color) 57%, #ff000000 53%), color-mix(in srgb, var(--tourguide-default-base-color), var(--tourguide-default-bg-color) 93%);
                 padding: 11px;
                 text-align: center;
                 border-radius: 3px;
@@ -628,57 +341,11 @@ class TourGuide extends HTMLElement {
                 justify-content: center;
                 text-align: center;
                 content: "";
-                background: var(--tourguide-default-progress-bg-color);
-                color: var(--tourguide-default-progress-font-color);
             }
             :host #help-tour-nav.iconic button.previous,
             :host #help-tour-nav.iconic button.next {
                 content: attr(data-icon);
             }
-
-            :host #tour-menu-btn {
-                anchor-name: --tour-menu-btn;
-            }
-
-            :host #tour-nav-menu {
-                position: absolute;
-                inset: unset;
-                position-anchor: --tour-menu-btn;
-                position-area: top span-right;
-                margin-bottom: 6px;
-                background: var(--tourguide-default-bg-color);
-                border: 1px solid var(--tourguide-progress-bg-color);
-                border-radius: 3px;
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-                padding: 4px 0;
-                min-width: 180px;
-                color: var(--tourguide-default-font-color);
-                font-family: var(--tourguide-default-font-family);
-                font-size: var(--tourguide-default-font-size);
-                z-index: ${OVERLAY_ZINDEX + 10};
-            }
-
-            :host #tour-nav-menu::backdrop {
-                background: transparent;
-            }
-
-            :host #tour-menu-list {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
-
-            :host #tour-menu-list li {
-                padding: 8px 14px;
-                cursor: pointer;
-                white-space: nowrap;
-            }
-
-            :host #tour-menu-list li:hover:not(.menu-divider) {
-                background: color-mix(in srgb, var(--tourguide-default-base-color), var(--tourguide-default-bg-color) 80%);
-            }
-
-
 
             :host #help-tour-nav button.previous {
                 background: var(--tourguide-default-progress-bg-color);
@@ -690,7 +357,13 @@ class TourGuide extends HTMLElement {
                 color: var(--tourguide-default-progress-font-color);
             }      
             
-            
+            :host #help-tour-nav button.skip {
+                color: #464646;
+                border: 1px solid #cfcfcf;
+                &:hover {
+                    background: color-mix(in srgb, var(--tourguide-default-base-color), var(--tourguide-default-bg-color) 83%);
+                }
+            }
 
             :host #help-tour-options{
                 display: flex;
@@ -712,7 +385,12 @@ class TourGuide extends HTMLElement {
                 color: inherit;
             }
 
-           
+            :host #help-tour-nav button.skip[disabled] {
+                opacity: .2;
+                pointer-events: none;
+                cursor: not-allowed;
+                color: white;
+            }
             :host #help-tour-options button.active {
                 background: #00cf00;
                 color: white;
@@ -893,13 +571,22 @@ class TourGuide extends HTMLElement {
 
             <!-- Navigation Section -->
             <nav id="help-tour-nav" class="iconic">
-                <button id="tour-menu-btn" aria-label="More" popovertarget="tour-nav-menu">≡</button>
-                <div id="tour-nav-menu" popover>
-                    <ul id="tour-menu-list"></ul>
-                </div>
+                <button 
+                class="skip" 
+                aria-label="Skip to the next step">
+                ≡
+                </button>
                 <span class="fill-space" aria-hidden="true" style="width:100%;"></span>
-                <button class="previous" aria-label="Go to the previous step">❮</button>
-                <button class="next" aria-label="Go to the next step"> ❯ </button>
+                <button 
+                class="previous" 
+                aria-label="Go to the previous step">
+                ❮
+                </button>
+                <button 
+                class="next" 
+                aria-label="Go to the next step">
+                ❯
+                </button>
             </nav>
             </div>
 
@@ -925,7 +612,6 @@ class TourGuide extends HTMLElement {
     //when clicked, it will expand itself and show a list of all tours from .json file entries
     async install(options){
         this.install_options = options || {};
-        this.setAIVoice(this.install_options.ai_voice || null);
         if(this.install_options.data) {
             await this.load(this.install_options.data);
         }
@@ -960,7 +646,6 @@ class TourGuide extends HTMLElement {
                     --tourguide-default-font-family: var(--tourguide-font-family, inherit);
                     --tourguide-default-font-size: var(--tourguide-font-size, 14px);
                     --tourguide-default-title-color: var(--tourguide-title-color, var(--tourguide-font-color, #777777));
-                    --tourguide-default-step-label-color: var(--tourguide-step-label-color, var(--tourguide-font-color, #777777));
                     width: fit-content;
                 }
                 :host {
@@ -980,18 +665,6 @@ class TourGuide extends HTMLElement {
                     display: flex;
                     justify-content: space-between;
                 }
-                :host #voice-chat-status {
-                    display: none;
-                    margin: 8px 0 10px;
-                    min-height: 68px;
-                    padding: 0;
-                    border: 1px solid rgb(203 183 109 / 25%);
-                    border-radius: 4px;
-                    overflow: hidden;
-                }
-                :host #voice-chat-status.active {
-                    display: block;
-                }
                 :host #tour-launch-button {
                     cursor: pointer;
                 }
@@ -1007,11 +680,6 @@ class TourGuide extends HTMLElement {
                     background: #3e3e3e;
                     padding: 5px 12px;
                     cursor: pointer;
-                }
-                :host ul li[aria-disabled="true"] {
-                    opacity: 0.55;
-                    cursor: progress;
-                    pointer-events: none;
                 }
                 :host ul li:hover {
                     background: #234671;
@@ -1041,40 +709,17 @@ class TourGuide extends HTMLElement {
 
         if(this.install_options.show_tour_listing) {
             button.classList.add("expanded");
-            const voiceChatStatus = document.createElement('div');
-                voiceChatStatus.id = 'voice-chat-status';
-            const voiceChatVisualizer = document.createElement('tour-voice-visualizer');
-            voiceChatStatus.appendChild(voiceChatVisualizer);
-            this.launcherVoiceChatStatusEl = voiceChatStatus;
-            this.launcherVoiceChatVisualizerEl = voiceChatVisualizer;
-            button.shadowRoot.appendChild(voiceChatStatus);
             //populate tour listing inside the button from this.data
             const tourList = document.createElement('ul');
-            const voiceChatItem = document.createElement('li');
-                voiceChatItem.textContent = 'Voice Chat';
-                voiceChatItem.setAttribute('role', 'button');
-                voiceChatItem.setAttribute('data-action', 'voice-chat');
-                voiceChatItem.addEventListener('click', e => {
-                    e.stopPropagation();
-                    this.toggleVoiceChat();
-                }, false);
-            this.launcherVoiceChatMenuItem = voiceChatItem;
-            tourList.appendChild(voiceChatItem);
-
+            debugger
             for (var key in this.data) {
                 const tour = this.data[key];
-                var listItem = document.createElement('li');
-                    listItem.textContent = prettifyName(key);
-                    listItem.setAttribute('role', 'button');
-                    listItem.setAttribute('tour-title', key);
-                    listItem.addEventListener('click', e => {
-                        this.show(e.target.getAttribute('tour-title'));
-                    }, false);
+                const listItem = document.createElement('li');
+                listItem.textContent = prettifyName(key);
+                listItem.addEventListener('click', () => this.show(key));
                 tourList.appendChild(listItem);
             }
             button.shadowRoot.appendChild(tourList);
-            this._updateLauncherVoiceChatLabel();
-            this._updateLauncherVoiceChatStatus();
         }
     }
 
@@ -1260,22 +905,8 @@ class TourGuide extends HTMLElement {
 
         this.closeBtn.addEventListener("click", e => this.onDismiss(e), false);
         window.addEventListener("resize", e=> this.onResize(e), true)
-
-        // ✅ Menu popover
-        this.menuBtn = this.root.querySelector('#tour-menu-btn');
-        this.navMenu = this.root.querySelector('#tour-nav-menu');
-        this.menuList = this.root.querySelector('#tour-menu-list');
-        this.navMenu.addEventListener('toggle', e => {
-            if (e.newState === 'open') this._populateMenu();
-        });
-        this.menuList.addEventListener('click', e => this._onMenuAction(e));
-
         // ✅ Automatically restore tour state after navigation
         this.restoreState();
-    }
-
-    disconnectedCallback() {
-        this.setAIVoice(null);
     }
 
   
@@ -1432,7 +1063,6 @@ class TourGuide extends HTMLElement {
         if(typeof obj == "object") {
             this.data = obj;
             this.setHighlights();
-            this._syncAIVoiceContext(this.currentTourKey, this.currentTourKey ? this.data?.[this.currentTourKey] : null);
         }
         else if(this.isValidUrl(obj)){
             const response = await fetch(obj);
@@ -1451,13 +1081,12 @@ class TourGuide extends HTMLElement {
         document.body.classList.add('tour-active');
         // !this.initialDomAttributes.size && this.setDomAttributes();
     
-        const sourceTour = items instanceof Array ? items : this.data[items];
-        if (!sourceTour) {
+        items = items instanceof Array ? items : this.data[items];
+        if (!items) {
             console.warn(`TourGuide: Tour "${items}" not found.`);
             return;
         }
-        this._syncAIVoiceContext(this.currentTourKey, sourceTour);
-        items = this.flattenSteps(sourceTour);
+        items = this.flattenSteps(items);
     
         this.activeTour = items;
         this.history = [...items]; // ✅ This should populate history[]
@@ -1799,18 +1428,29 @@ class TourGuide extends HTMLElement {
                         element.setAttribute('anchor-name', anchorName);
                         var pulse = document.createElement('div');
                         pulse.classList.add('pulse');
-                        pulse.setAttribute('data-tour-step', item.title);
                         document.body.appendChild(pulse);
                         pulse.style.positionAnchor = anchorName;
                         pulse.style.animation = "pulse 2s infinite";
                         pulse.style.pointerEvents = "auto";
-                        var _tour_title = key;
-                        pulse.addEventListener("click", (e) => {
+                        
+                        // Fallback for positioning
+                            // const rect = element.getBoundingClientRect();
+                            // const parentRect = this.getBoundingClientRect(); // If appended to the component
+                            // pulse.style.position = "absolute";
+                            // pulse.style.top = `${rect.top}px`; // Center vertically
+                            // pulse.style.left = `${rect.left}px`; // Center horizontally
+                            // pulse.style.zIndex = "10";
+                            // pulse.style.animation = "pulse 2s infinite";
+                        //END
+
+                        pulse.addEventListener("click", e => {
                             debugger
                             e.stopPropagation();
                             e.preventDefault();
-                            this.show(_tour_title, index);
-                        }, {capture: true});
+                            this.show(key, index);
+                        }, {
+                            capture: true
+                        });
                     }   
                 }
             }
@@ -1879,324 +1519,6 @@ class TourGuide extends HTMLElement {
     }
     
     
-
-    _populateMenu() {
-        if (!this.menuList) return;
-
-        const items = [
-            { action: 'save-exit', label: '💾 Save & Exit' },
-            { action: 'shortcuts', label: '⌨ Shortcuts' }
-        ];
-
-        this.menuList.replaceChildren(
-            ...items.map(item => {
-                const li = document.createElement('li');
-                li.dataset.action = item.action;
-                li.textContent = item.label;
-                return li;
-            })
-        );
-    }
-
-    _onMenuAction(e) {
-        const action = e.target.dataset.action;
-        if (!action) return;
-        this.navMenu.hidePopover();
-
-        if (action === 'save-exit') {
-            sessionStorage.setItem('activeTourKey', this.currentTourKey);
-            sessionStorage.setItem('activeTourStepIndex', this.historyIndex);
-            this.onFinish();
-        }
-        else if (action === 'voice-chat') {
-            this.toggleVoiceChat();
-        }
-        else if (action === 'shortcuts') {
-            this.showMenuOverlay(`
-                <div style="font-size:0.9em;line-height:2.2">
-                    <div><kbd>→</kbd> &nbsp;Next step</div>
-                    <div><kbd>←</kbd> &nbsp;Previous step</div>
-                    <div><kbd>Esc</kbd> &nbsp;Exit tour</div>
-                </div>`);
-        }
-    }
-
-    setAIVoice(aiVoice) {
-        if (this.aiVoice && this._aiVoiceStateChangeHandler) {
-            this.aiVoice.removeEventListener('transcriberstatechange', this._aiVoiceStateChangeHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatAvailabilityHandler) {
-            this.aiVoice.removeEventListener('chatavailabilitychange', this._aiVoiceChatAvailabilityHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatDownloadProgressHandler) {
-            this.aiVoice.removeEventListener('chatdownloadprogress', this._aiVoiceChatDownloadProgressHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatSessionCreatingHandler) {
-            this.aiVoice.removeEventListener('chatsessioncreating', this._aiVoiceChatSessionCreatingHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatSessionReadyHandler) {
-            this.aiVoice.removeEventListener('chatsessionready', this._aiVoiceChatSessionReadyHandler);
-        }
-        if (this.aiVoice && this._aiVoiceResponseHandler) {
-            this.aiVoice.removeEventListener('response', this._aiVoiceResponseHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatRequestStartHandler) {
-            this.aiVoice.removeEventListener('chatrequeststart', this._aiVoiceChatRequestStartHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatRequestEndHandler) {
-            this.aiVoice.removeEventListener('chatrequestend', this._aiVoiceChatRequestEndHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatPrepareStartHandler) {
-            this.aiVoice.removeEventListener('chatpreparestart', this._aiVoiceChatPrepareStartHandler);
-        }
-        if (this.aiVoice && this._aiVoiceChatPrepareReadyHandler) {
-            this.aiVoice.removeEventListener('chatprepareready', this._aiVoiceChatPrepareReadyHandler);
-        }
-        if (this.aiVoice && this._aiVoiceSpeechStartHandler) {
-            this.aiVoice.removeEventListener('speechstart', this._aiVoiceSpeechStartHandler);
-        }
-        if (this.aiVoice && this._aiVoiceSpeechEndHandler) {
-            this.aiVoice.removeEventListener('speechend', this._aiVoiceSpeechEndHandler);
-        }
-
-        this.aiVoice = aiVoice;
-        this._aiVoiceStateChangeHandler = null;
-        this._aiVoiceChatAvailabilityHandler = null;
-        this._aiVoiceChatDownloadProgressHandler = null;
-        this._aiVoiceChatSessionCreatingHandler = null;
-        this._aiVoiceChatSessionReadyHandler = null;
-        this._aiVoiceResponseHandler = null;
-        this._aiVoiceChatRequestStartHandler = null;
-        this._aiVoiceChatRequestEndHandler = null;
-        this._aiVoiceChatPrepareStartHandler = null;
-        this._aiVoiceChatPrepareReadyHandler = null;
-        this._aiVoiceSpeechStartHandler = null;
-        this._aiVoiceSpeechEndHandler = null;
-
-        if (!this.aiVoice) {
-            this.voiceChatState = 'idle';
-            this.voiceChatStatus = '';
-            this.isVoiceThinking = false;
-            this.isVoiceChatReady = false;
-            this.isVoiceSpeaking = false;
-            this.queuedVoiceAction = null;
-            this.lastVoiceChatRequestText = '';
-            this._updateLauncherVoiceChatLabel();
-            this._updateLauncherVoiceChatStatus();
-            this._populateMenu();
-            return;
-        }
-
-        this.isVoiceChatReady = false;
-        this.voiceChatStatus = 'Preparing voice chat...';
-        this.queuedVoiceAction = null;
-        this.lastVoiceChatRequestText = '';
-
-        this._aiVoiceStateChangeHandler = event => {
-            this.voiceChatState = event.detail.state;
-            if (this.voiceChatState === 'listening') {
-                this.isVoiceThinking = false;
-                this.isVoiceSpeaking = false;
-                this.voiceChatStatus = 'Listening...';
-                this._updateLauncherVoiceChatStatus();
-            } else if (this.voiceChatState === 'stopping') {
-                this.voiceChatStatus = 'Stopping voice chat...';
-                this._updateLauncherVoiceChatStatus();
-            } else if (this.voiceChatState === 'idle' && !this.isVoiceThinking && !this.isVoiceSpeaking) {
-                this.voiceChatStatus = this.isVoiceChatReady ? 'Voice chat is ready.' : '';
-                this._updateLauncherVoiceChatStatus();
-            }
-            this._updateLauncherVoiceChatLabel();
-            this._populateMenu();
-        };
-        this._aiVoiceChatAvailabilityHandler = event => {
-            const availability = event.detail.availability;
-            if (availability === 'downloadable') {
-                this.voiceChatStatus = 'Preparing local AI download...';
-            } else if (availability === 'downloading') {
-                this.voiceChatStatus = 'Downloading local AI model...';
-            } else if (availability === 'available') {
-                this.voiceChatStatus = 'Local AI model available.';
-            } else if (availability === 'unavailable') {
-                this.voiceChatStatus = 'Local AI unavailable. Using fallback.';
-            }
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceChatDownloadProgressHandler = event => {
-            this.voiceChatStatus = `Downloading local AI model... ${Math.round(event.detail.percent)}%`;
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceChatSessionCreatingHandler = () => {
-            this.voiceChatStatus = 'Warming up local AI...';
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceChatSessionReadyHandler = () => {
-            this.voiceChatStatus = 'Voice chat is ready.';
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceResponseHandler = event => {
-            if (event.detail.response?.provider === 'chrome-nano') {
-                this.voiceChatStatus = 'Voice chat is ready.';
-            } else if (event.detail.response?.provider?.includes('fallback')) {
-                this.voiceChatStatus = 'Using fallback assistant.';
-            }
-            const nextAction = event.detail.response?.nextAction;
-            const targetTourKey = event.detail.response?.targetTourKey;
-
-            if (nextAction === 'start_tour' && targetTourKey && !(this.currentTourKey === targetTourKey && this.isRunning)) {
-                this.queuedVoiceAction = {
-                    type: 'start_tour',
-                    tourKey: targetTourKey
-                };
-            } else if (nextAction === 'continue_tour' && this.isRunning) {
-                this.queuedVoiceAction = {
-                    type: 'continue_tour'
-                };
-            } else {
-                this.queuedVoiceAction = null;
-            }
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceChatRequestStartHandler = event => {
-            this.lastVoiceChatRequestText = event.detail?.text || '';
-            this.isVoiceThinking = true;
-            this.isVoiceSpeaking = false;
-            this.voiceChatStatus = 'Thinking...';
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceChatRequestEndHandler = () => {
-            this.isVoiceThinking = false;
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceChatPrepareStartHandler = () => {
-            this.isVoiceChatReady = false;
-            this.voiceChatStatus = 'Preparing voice chat...';
-            this._updateLauncherVoiceChatLabel();
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceChatPrepareReadyHandler = event => {
-            this.isVoiceChatReady = Boolean(event.detail.ready);
-            if (this.isVoiceChatReady) {
-                this.voiceChatStatus = 'Voice chat is ready.';
-            } else if (event.detail.error) {
-                this.voiceChatStatus = 'Voice chat setup failed.';
-            }
-            this._updateLauncherVoiceChatLabel();
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceSpeechStartHandler = () => {
-            this.isVoiceSpeaking = true;
-            this.voiceChatStatus = 'Speaking...';
-            this._updateLauncherVoiceChatStatus();
-        };
-        this._aiVoiceSpeechEndHandler = event => {
-            this.isVoiceSpeaking = false;
-            this.voiceChatStatus = 'Voice chat is ready.';
-            this._updateLauncherVoiceChatStatus();
-            if (event.detail?.response?.provider === 'tour-guide-navigation') return;
-            const queuedAction = this.queuedVoiceAction;
-            this.queuedVoiceAction = null;
-            if (!queuedAction) return;
-            setTimeout(() => {
-                if (queuedAction.type === 'start_tour' && queuedAction.tourKey && !(this.currentTourKey === queuedAction.tourKey && this.isRunning)) {
-                    this.show(queuedAction.tourKey);
-                    return;
-                }
-                if (queuedAction.type === 'continue_tour' && this.isRunning) {
-                    this.next();
-                }
-            }, 120);
-        };
-
-        this.aiVoice.addEventListener('transcriberstatechange', this._aiVoiceStateChangeHandler);
-        this.aiVoice.addEventListener('chatavailabilitychange', this._aiVoiceChatAvailabilityHandler);
-        this.aiVoice.addEventListener('chatdownloadprogress', this._aiVoiceChatDownloadProgressHandler);
-        this.aiVoice.addEventListener('chatsessioncreating', this._aiVoiceChatSessionCreatingHandler);
-        this.aiVoice.addEventListener('chatsessionready', this._aiVoiceChatSessionReadyHandler);
-        this.aiVoice.addEventListener('response', this._aiVoiceResponseHandler);
-        this.aiVoice.addEventListener('chatrequeststart', this._aiVoiceChatRequestStartHandler);
-        this.aiVoice.addEventListener('chatrequestend', this._aiVoiceChatRequestEndHandler);
-        this.aiVoice.addEventListener('chatpreparestart', this._aiVoiceChatPrepareStartHandler);
-        this.aiVoice.addEventListener('chatprepareready', this._aiVoiceChatPrepareReadyHandler);
-        this.aiVoice.addEventListener('speechstart', this._aiVoiceSpeechStartHandler);
-        this.aiVoice.addEventListener('speechend', this._aiVoiceSpeechEndHandler);
-        this.voiceChatState = this.aiVoice.getTranscriberState?.() || 'idle';
-        this._syncAIVoiceContext(this.currentTourKey, this.currentTourKey ? this.data?.[this.currentTourKey] : null);
-        this._updateLauncherVoiceChatLabel();
-        this._updateLauncherVoiceChatStatus();
-        this._populateMenu();
-        this.aiVoice.prepareChat();
-    }
-
-    _syncAIVoiceContext(tourKey, tourData) {
-        if (!this.aiVoice?.setContext) return;
-        const clone = value => typeof structuredClone === 'function'
-            ? structuredClone(value)
-            : JSON.parse(JSON.stringify(value));
-
-        this.aiVoice.setContext({
-            availableTours: this.data ? clone(this.data) : null,
-            activeTourKey: tourKey || null,
-            activeTour: tourData ? clone(tourData) : null,
-            activeStep: this.current ? clone(this.current) : null,
-            activeStepIndex: this.historyIndex >= 0 ? this.historyIndex : null,
-            totalSteps: Array.isArray(this.activeTour) ? this.activeTour.length : null,
-            voiceState: this.voiceChatState
-        });
-    }
-
-    _updateLauncherVoiceChatLabel() {
-        if (!this.launcherVoiceChatMenuItem) return;
-        const isListening = this.voiceChatState === 'listening' || this.voiceChatState === 'starting';
-        this.launcherVoiceChatMenuItem.textContent = isListening
-            ? 'Stop Voice Chat'
-            : (this.isVoiceChatReady ? 'Voice Chat' : 'Voice Chat (Preparing...)');
-        this.launcherVoiceChatMenuItem.setAttribute('aria-disabled', this.isVoiceChatReady ? 'false' : 'true');
-    }
-
-    _updateLauncherVoiceChatStatus() {
-        if (!this.launcherVoiceChatStatusEl) return;
-        this.launcherVoiceChatVisualizerEl?.setStatus?.(this.voiceChatStatus || '');
-        this.launcherVoiceChatVisualizerEl?.setListening?.(this.voiceChatState === 'listening');
-        this.launcherVoiceChatStatusEl.classList.toggle('active', Boolean(this.voiceChatStatus));
-    }
-
-    async toggleVoiceChat() {
-        if (!this.aiVoice) {
-            console.warn('[TourGuide Voice] No AI Voice API has been configured.');
-            return;
-        }
-        if (!this.isVoiceChatReady) {
-            console.warn('[TourGuide Voice] Voice chat is still preparing.');
-            return;
-        }
-
-        if (this.aiVoice.getTranscriberState?.() === 'unsupported') {
-            console.warn('[TourGuide Voice] Speech recognition is not supported in this browser.');
-            return;
-        }
-
-        try {
-            const isListening = await this.aiVoice.toggleListening();
-            console.log(`[TourGuide Voice] ${isListening ? 'Listening started.' : 'Listening stopped.'}`);
-        } catch (error) {
-            console.error('[TourGuide Voice] Unable to toggle voice chat.', error);
-            this.voiceChatState = 'error';
-            this._populateMenu();
-        }
-    }
-
-    showMenuOverlay(html) {
-        this.root.querySelector('#tour-content-overlay')?.remove();
-        const overlay = document.createElement('div');
-        overlay.id = 'tour-content-overlay';
-        overlay.innerHTML = `
-            <button class="overlay-close" aria-label="Close">✕ close</button>
-            <div class="overlay-body">${html}</div>
-        `;
-        overlay.querySelector('.overlay-close').addEventListener('click', () => overlay.remove());
-        this.contentEl.appendChild(overlay);
-    }
 
     onNext(e) {
         this.createRipple(e)

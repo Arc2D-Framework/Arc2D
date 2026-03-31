@@ -79,80 +79,12 @@
         </style>
 
         <script type="module">
-            import TourGuide from '../src/libs/tour.js';
-            import AIVoice, {
-                BrowserSpeechRenderer,
-                BrowserSpeechTranscriber,
-                ElevenLabsSpeechRenderer,
-                EchoChatProvider,
-                HttpChatProvider
-            } from '../src/libs/aivoice.js';
-
+            import TourGuide from '../src/libs/tour.js'; 
             document.addEventListener('DOMContentLoaded', async () => {
-                const aiVoice = new AIVoice({
-                    transcriber: new BrowserSpeechTranscriber(),
-                    speechRenderer: new ElevenLabsSpeechRenderer({
-                        apiKey: '62f79ed759a9b46b5675f32839ba46f686b7ad2afac1064cf6fb81c791d86027',
-                        voiceId: 'Xkem7o24n3aQyiwIXNeT',
-                        modelId: 'eleven_flash_v2_5',
-                        fallbackRenderer: new BrowserSpeechRenderer({
-                            rate: 1,
-                            pitch: 1,
-                            volume: 1
-                        })
-                    }),
-                    chatProvider: new HttpChatProvider({
-                        endpoint: '/api/chat',
-                        model: localStorage.getItem('OPENAI_MODEL') || 'gpt-5-mini',
-                        fallbackProvider: new EchoChatProvider(),
-                        systemPrompt: 'You are a friendly spoken sales and support rep for the company on this website. Sound natural, warm, and confident. Help people understand services, guide them toward the next best action, and use tours only when they would genuinely help. Answer using the provided site and tour context.'
-                    }),
-                    systemPrompt: 'You are a friendly spoken sales and support rep for the company on this website. Sound natural, warm, and confident. Help people understand services, guide them toward the next best action, and use tours only when they would genuinely help. Answer using the provided site and tour context.',
-                    autoSubmitFinalTranscript: true,
-                    autoSpeakResponses: true
-                });
-
-                aiVoice.addEventListener('partialtranscript', event => {
-                    console.log('[TourGuide Voice][partial]', event.detail.text);
-                });
-
-                aiVoice.addEventListener('finaltranscript', event => {
-                    console.log('[TourGuide Voice][final]', event.detail.text);
-                });
-
-                aiVoice.addEventListener('response', event => {
-                    console.log(`[TourGuide Voice][response:${event.detail.response.provider || 'unknown'}]`, event.detail.text);
-                });
-
-                aiVoice.addEventListener('action', event => {
-                    console.log('[TourGuide Voice][action]', event.detail.action, event.detail.response?.targetTourKey || null);
-                });
-
-                aiVoice.addEventListener('chatavailabilitychange', event => {
-                    console.log('[TourGuide Voice][chat availability]', event.detail.availability);
-                });
-
-                aiVoice.addEventListener('chatdownloadprogress', event => {
-                    console.log('[TourGuide Voice][chat download %]', Math.round(event.detail.percent));
-                });
-
-                aiVoice.addEventListener('chatsessioncreating', () => {
-                    console.log('[TourGuide Voice][chat session] creating');
-                });
-
-                aiVoice.addEventListener('chatsessionready', () => {
-                    console.log('[TourGuide Voice][chat session] ready');
-                });
-
-                aiVoice.addEventListener('error', event => {
-                    console.error('[TourGuide Voice][error]', event.detail.error);
-                });
-
                 const tour = new TourGuide();
                 await tour.install({
                     data : "./help-demo.json",
-                    show_tour_listing: true,
-                    ai_voice: aiVoice
+                    show_tour_listing: true
                 });
                 // await tour.load("./help-demo.json");
                 // document.body.append(tour);

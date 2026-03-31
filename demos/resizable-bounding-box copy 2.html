@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resizable Div Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .item {
+            height: 50px;
+            width: 50px;
+            position: absolute;
+            pointer-events: none; 
+            background: transparent; /* No fill, just border */
+            border: 2px dashed orange;
+            box-sizing: border-box;
+        }
+        .drag-handle {
+            position: absolute;
+            top: -19px;
+            left: 0;
+            width: 100%;
+            height: 14px;
+            background: rgb(255 165 0 / 6%);
+            cursor: move;
+            pointer-events: auto;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #b35b00;
+            user-select: none;
+        }
+        .resizer {
+        position: absolute;
+        height: 10px;
+        width: 10px;
+        background-color: #606060;
+        z-index: 2;
+        pointer-events: auto;
+        }
+        .resizer.nw{
+        top: -1px;
+        left: -1px;
+        cursor: nw-resize;
+        }
+        .resizer.ne{
+        top: -1px;
+        right: -1px;
+        cursor: ne-resize;
+        }
+        .resizer.sw{
+        bottom: -1px;
+        left: -1px;
+        cursor: sw-resize;
+        }
+        .resizer.se{
+        bottom: -1px;
+        right: -1px;
+        cursor: se-resize;
+        }
+        
+    </style>
+
+    <script>
+    class Resizable {
+        /**
+         * If element is null, enables draw-to-create mode on the body.
+         * Otherwise, makes the element resizable and draggable.
+         */
+        constructor(element = null) {
+            this.el = element;
+            this.isResizing = false;
+            this.currentResizer = null;
+            this.prevX = 0;
+            this.prevY = 0;
+            // Pre-bind handlers that do not require arguments
+            this.onHandleMouseMove = this.onHandleMouseMove.bind(this);
+            this.onHandleMouseUp = this.onHandleMouseUp.bind(this);
+            this.onResizeMouseMove = this.onResizeMouseMove.bind(this);
+            this.onResizeMouseUp = this.onResizeMouseUp.bind(this);
+            this.onBodyMouseMove = this.onBodyMouseMove.bind(this);
+            this.onBodyMouseUp = this.onBodyMouseUp.bind(this);
+            if (this.el) {
+                this.init();
+            } else {
+                this.enableDrawMode();
+            }
+        }
+
+        /**
+         * Static helper to start the Resizable logic for the page.
+         * If a .item exists, makes it resizable. Otherwise, enables draw-to-create mode.
+         */
+        static bootstrap() {
+            let box = document.querySelector('.item');
+            if (box) {
+                return new Resizable(box);
+            } else {
+                return new Resizable();
+            }
+        }
+
+        /**
+         * Enables draw-to-create mode on the body. Only one box at a time.
+         */
+        enableDrawMode() {
+            this._drawHandler = this.onBodyMouseDown.bind(this);
+            document.body.addEventListener('mousedown', this._drawHandler);
+        }
+
+        onBodyMouseDown(e) {
+            if (document.querySelector('.item')) return;
+            if (e.button !== 0) return;
+            if (e.target.closest('button,input,.test-block,.test-block2,my-shadow-el')) return;
+            this.isDrawing = true;
+            this.startX = e.clientX;
+            this.startY = e.clientY;
+            this.el = document.createElement('div');
+            this.el.className = 'item';
+            this.el.style.left = this.startX + 'px';
+            this.el.style.top = this.startY + 'px';
+            this.el.style.width = '1px';
+            this.el.style.height = '1px';
+            this.el.innerHTML = `
+                <div class="drag-handle">Drag</div>
+                <div class="resizer ne"></div>
+                <div class="resizer nw"></div>
+                <div class="resizer sw"></div>
+                <div class="resizer se"></div>
+            `;
+            document.body.appendChild(this.el);
+            window.addEventListener('mousemove', this.onBodyMouseMove);
+            window.addEventListener('mouseup', this.onBodyMouseUp);
+            e.preventDefault();
+        }
+
+        onBodyMouseMove(e) {
+            if (!this.isDrawing || !this.el) return;
+            let x = Math.min(e.clientX, this.startX);
+            let y = Math.min(e.clientY, this.startY);
+            let w = Math.abs(e.clientX - this.startX);
+            let h = Math.abs(e.clientY - this.startY);
+            this.el.style.left = x + 'px';
+            this.el.style.top = y + 'px';
+            this.el.style.width = w + 'px';
+            this.el.style.height = h + 'px';
+        }
+
+        onBodyMouseUp(e) {
+            if (!this.isDrawing || !this.el) return;
+            this.isDrawing = false;
+            window.removeEventListener('mousemove', this.onBodyMouseMove);
+            window.removeEventListener('mouseup', this.onBodyMouseUp);
+            if (parseInt(this.el.style.width) < 10 || parseInt(this.el.style.height) < 10) {
+                this.el.remove();
+                this.el = null;
+                return;
+            }
+            // Now make the box resizable
+            document.body.removeEventListener('mousedown', this._drawHandler);
+            this.init();
+        }
+
+        /**
+         * Returns the bounding client rect of the bounding box (same as native API)
+         */
+        getBoundingClientRect() {
+            return this.el.getBoundingClientRect();
+        }
+
+        /**
+         * Returns an array of all elements in the document that are fully inside the bounding box
+         * (excluding the bounding box itself and its children)
+         */
+        getElementsWithinBounds({ selector = '*' } = {}) {
+            const boxRect = this.getBoundingClientRect();
+            // Exclude the bounding box and its children
+            const all = Array.from(document.querySelectorAll(selector)).filter(el =>
+                el !== this.el && !this.el.contains(el)
+            );
+            return all.filter(el => {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.left >= boxRect.left &&
+                    rect.right <= boxRect.right &&
+                    rect.top >= boxRect.top &&
+                    rect.bottom <= boxRect.bottom
+                );
+            });
+        }
+
+        init() {
+            // Drag handle
+            this.handle = this.el.querySelector('.drag-handle');
+            if (this.handle) {
+                this.handle.addEventListener('mousedown', this.onHandleMouseDown.bind(this));
+            }
+            // Resizers
+            const resizers = this.el.querySelectorAll('.resizer');
+            resizers.forEach(resizer => {
+                resizer.addEventListener('mousedown', this.onResizeMouseDown.bind(this, resizer));
+            });
+        }
+
+        onHandleMouseDown(e) {
+            e.preventDefault();
+            this.isResizing = false;
+            this.prevX = e.clientX;
+            this.prevY = e.clientY;
+            window.addEventListener('mousemove', this.onHandleMouseMove);
+            window.addEventListener('mouseup', this.onHandleMouseUp);
+        }
+
+        onHandleMouseMove(e) {
+            if (this.isResizing) return;
+            const rect = this.el.getBoundingClientRect();
+            let newX = this.prevX - e.clientX;
+            let newY = this.prevY - e.clientY;
+            this.el.style.left = rect.left - newX + 'px';
+            this.el.style.top = rect.top - newY + 'px';
+            this.prevX = e.clientX;
+            this.prevY = e.clientY;
+        }
+
+        onHandleMouseUp() {
+            window.removeEventListener('mousemove', this.onHandleMouseMove);
+            window.removeEventListener('mouseup', this.onHandleMouseUp);
+        }
+
+        onResizeMouseDown(resizer, e) {
+            e.preventDefault();
+            this.isResizing = true;
+            this.currentResizer = resizer;
+            this.prevX = e.clientX;
+            this.prevY = e.clientY;
+            window.addEventListener('mousemove', this.onResizeMouseMove);
+            window.addEventListener('mouseup', this.onResizeMouseUp);
+        }
+
+        onResizeMouseMove(e) {
+            const rect = this.el.getBoundingClientRect();
+            let style = window.getComputedStyle(this.el);
+            let left = parseFloat(style.left) || rect.left;
+            let top = parseFloat(style.top) || rect.top;
+            let width = rect.width;
+            let height = rect.height;
+            let dx = e.clientX - this.prevX;
+            let dy = e.clientY - this.prevY;
+            var classList = this.currentResizer.classList;
+            let newLeft = left, newTop = top, newWidth = width, newHeight = height;
+            const minSize = 10;
+
+            if (classList.contains('se')) {
+                newWidth = width + dx;
+                newHeight = height + dy;
+            } else if (classList.contains('sw')) {
+                newWidth = width - dx;
+                newHeight = height + dy;
+                newLeft = left + dx;
+            } else if (classList.contains('ne')) {
+                newWidth = width + dx;
+                newHeight = height - dy;
+                newTop = top + dy;
+            } else if (classList.contains('nw')) {
+                newWidth = width - dx;
+                newHeight = height - dy;
+                newLeft = left + dx;
+                newTop = top + dy;
+            }
+
+            if (newWidth <= minSize || newHeight <= minSize) {return; }
+
+
+            this.el.style.left    = newLeft + 'px';
+            this.el.style.top     = newTop + 'px';
+            this.el.style.width   = newWidth + 'px';
+            this.el.style.height  = newHeight + 'px';
+
+            this.prevX = e.clientX;
+            this.prevY = e.clientY;
+        }
+
+        onResizeMouseUp() {
+            window.removeEventListener('mousemove', this.onResizeMouseMove);
+            window.removeEventListener('mouseup', this.onResizeMouseUp);
+            this.isResizing = false;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        Resizable.bootstrap();
+    });
+    </script>
+
+</head>
+<body>
+    <button onclick="alert('Clicked through div')">Show Resizable Div</button>
+    <div class="test-block" style="position:relative; margin:40px 0 0 60px; padding:8px; background:#e0f7fa; border-radius:6px; width:120px;">Test Block 1</div>
+    <button class="test-btn" style="margin:20px 0 0 200px;">Test Button</button>
+    <input class="test-input" style="margin:20px 0 0 40px;" placeholder="Test Input" />
+    <div class="test-block2" style="position:relative; margin:60px 0 0 180px; padding:8px; background:#ffe0b2; border-radius:6px; width:100px;">Test Block 2</div>
+    <my-shadow-el style="display:block; margin:30px 0 0 120px; width:80px; height:40px; background:#c8e6c9; border:1px solid #388e3c; text-align:center; line-height:40px;">Shadow Host</my-shadow-el>
+    <!-- <div class="item"> 
+        <div class="drag-handle">Drag</div>
+        <div class="resizer ne"></div>
+        <div class="resizer nw"></div>
+        <div class="resizer sw"></div>
+        <div class="resizer se"></div>
+    </div> -->
+
+    <script>
+    // Simple shadow DOM test element
+    class MyShadowEl extends HTMLElement {
+      constructor() {
+        super();
+        const root = this.attachShadow({mode:'open'});
+        root.innerHTML = `<span style="color:#388e3c; font-size:12px;">Shadow Content</span>`;
+      }
+    }
+    customElements.define('my-shadow-el', MyShadowEl);
+    </script>
+</body>
+</html>

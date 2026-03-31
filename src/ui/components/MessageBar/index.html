@@ -1,7 +1,9 @@
 <template>
+  <%= await this.hello() %>
   <%= `<b>${this.countries.length} countries</b>` %>
   <select>
       <%
+      debugger;
           var list = this.countries;
           if (list.length >= 3) {
               return `<option value="0">Select from ${this.countries.length} Countries </option>`;

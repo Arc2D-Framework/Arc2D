@@ -7,23 +7,23 @@ namespace `ui.components` (
 		// static skin = inherit;
 
 
-        constructor(el, options) {
-            super(el, options);
-            console.log(this,this.getAttribute("lazy"))
-        }
+        // constructor(el, options) {
+        //     super(el, options);
+        //     console.log(this,this.getAttribute("lazy"))
+        // }
 
 		async onConnected() {
 			await super.onConnected();
             
-            try {
-                this.internals?.states.add("connected");
-            } 
-			catch {
-                this.internals?.states.add("--connected");
-            }
-			//this.internals?.states.add("connected");
+            // try {
+            //     this.internals?.states.add("connected");
+            // } 
+			// catch {
+            //     this.internals?.states.add("--connected");
+            // }
+			// //this.internals?.states.add("connected");
 
-				this.on("click", e=> this.onClick(e), false, "h3");
+			// 	this.on("click", e=> this.onClick(e), false, "h3");
 		}
 
 		// async render(data=this.data) {
@@ -51,23 +51,31 @@ namespace `ui.components` (
         //     }
 		// }
 
-		onRendered() {
-			console.log("MessageBarExtended <h3>", this.find("h3"))
+		async onRendered() {
+			console.log("MessageBarExtended <h3>", await this.find("h3"))
 		}
 
-		getTemplateEngine() {
-            return new TemplateLiterals2
-			// return window.customTemplateEngines.getEngineByMimeType("template/literals")
-        }
+		// getTemplateEngine() {
+        //     return new TemplateLiterals2
+		// 	// return window.customTemplateEngines.getEngineByMimeType("template/literals")
+        // }
 
 		onClick(e) {
 			console.log(e.matchedTarget);
             // this.internals.states.add("--clicked");
 		}
 
-		hasOwnTemplate() {
-            return true
-        }
+		// hasOwnTemplate() {
+        //     return true
+        // }
+
+		css() {
+			return `
+				:host {
+					border: 3px solid pink;
+				}
+			`
+		}
 	}
 )
 

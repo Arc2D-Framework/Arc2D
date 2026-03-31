@@ -1,5 +1,5 @@
 
-import 'ui.components.Splash';
+// import 'ui.components.Splash';
 import '@domain.collections.Movies';
 import 'ui.components.MovieMenu';
 import 'ui.components.MoviesList';

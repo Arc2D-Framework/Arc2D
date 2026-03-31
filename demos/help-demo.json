@@ -1,0 +1,71 @@
+
+{
+    "UPS Package Delivery Options": [
+        {
+            "title": "Introduction",
+            "target": "#step-1 > div > select",
+            "content": [
+                "Select a nearby UPS Access Point™ to pick up your package at your convenience — available at local businesses, UPS Stores, and lockers. Access Points are open early, late, and on weekends so you never miss a delivery.",
+                "https://www.w3schools.com/html/mov_bbb.mp4"
+            ],
+            "hpos": "left",
+            "vpos": "top",
+            "activator" : true,
+            "interactive": true,
+            "onadvance": "change",
+            "options": {
+                "controls": true,
+                "dismissable": true,
+                "highlight": true
+            }
+        },
+        {
+            "target": "#step-2",
+            "title": "Step 2: Instructions",
+            "content": "This is step 2. Follow the instructions carefully to proceed to the next step.",
+            "hpos": "left",
+            "interactive": true,
+            "onadvance": "click",
+            "options": {
+                "controls": false,
+                "dismissable": true,
+                "highlight": false
+            }
+        },
+        {
+            "target": "#step-3",
+            "title": "Choose an Access Point",
+            "content": "Select a nearby UPS Access Point™ to pick up your package at your convenience — available at local businesses, UPS Stores, and lockers. Access Points are open early, late, and on weekends so you never miss a delivery.",
+            "hpos": "right",
+            "vpos":"bottom",
+            "interactive": true
+        },
+        {
+            "target": "#step-4",
+            "title": "Step 4: Review Information",
+            "content": "This is step 4. Review all the information provided before proceeding.",
+            "hpos": "left"
+        },
+        {
+            "target": "#step-5",
+            "title": "Step 5: Final Confirmation",
+            "content": "This is the final step. Please confirm your information before submitting.",
+            "hpos": "right",
+            "nextLabel": "Finish"
+        }
+    ],
+    "Tooltip Example": [
+        {
+            "target": "#btn-tooltip-1",
+            "title": "Tooltip Example",
+            "content": "This is a tooltip example. It provides additional information about the button.",
+            "hpos": "right",
+            "vpos": "top",
+            "options": {
+                "dismissable": true,
+                "highlight": false,
+                "pointer": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
+<img id="photo" src="https://media.gettyimages.com/id/1436398636/photo/sofa-with-coffee-table-by-window-in-living-room.jpg?s=612x612&w=gi&k=20&c=UndBK_a2_KX--6u_N1drKtektpkTwyfQp_TYO-FBLEQ="/>
+<canvas id="overlay" style="position:absolute; top:0; left:0;"></canvas>
+
+<script>
+  const img = document.getElementById('photo');
+  const canvas = document.getElementById('overlay');
+  const ctx = canvas.getContext('2d');
+
+  async function detect() {
+    const model = await cocoSsd.load();
+    const predictions = await model.detect(img);
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    for (const pred of predictions) {
+      const [x, y, width, height] = pred.bbox;
+      ctx.strokeStyle = "lime";
+      ctx.strokeRect(x, y, width, height);
+      ctx.font = "14px sans-serif";
+      ctx.fillStyle = "lime";
+      ctx.fillText(pred.class, x + 4, y + 14);
+
+      // Store hit region for later tap/clicks
+      pred.rect = { x, y, width, height };
+    }
+
+    // Simple tap detection
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      for (const pred of predictions) {
+        const { x, y, width, height } = pred.rect;
+        if (
+          clickX >= x &&
+          clickX <= x + width &&
+          clickY >= y &&
+          clickY <= y + height
+        ) {
+          alert(`Tapped on: ${pred.class}`);
+        }
+      }
+    });
+  }
+
+document.addEventListener("DOMContentLoaded", () => {
+  detect();
+});
+</script>

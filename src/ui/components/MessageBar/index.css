@@ -2,7 +2,7 @@
 	color: blue;
 	display: block;
 	background-color: rgb(234, 234, 234);
-	border-bottom: 1px solid blue;
+	border: 3px solid blue;
 	margin: 10px;
 }
 :host ::slotted(h3) {

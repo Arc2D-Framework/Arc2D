@@ -1,13 +1,16 @@
 
 import 'ui.components.MessageBarExtended';
-import 'ui.components.Label';
-// import 'ui.components.MessageBarExtendedChild';
-import CustomButton from 'ui.components.CustomButton';
 
 
 namespace `ui.screens` (
     class ShadowDomDemo extends Application {
         
+        styles = ["test.css"];
+
+        hasOwnSkin() {
+            return true
+        }
+
         async onConnected() {
             await super.onConnected();
             // return;

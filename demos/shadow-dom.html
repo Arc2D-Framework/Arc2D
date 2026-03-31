@@ -6,241 +6,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Arc Engine : Drag Drop</title>
         <!-- <script src="https://cdn.jsdelivr.net/gh/Nashorn/od-cocoon@latest/framework.src.js" namespace="ui.screens.ShadowDomDemo" charset="utf-8"></script> -->
-        <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
+         <!-- <link rel="preload" as="style" href="http://127.0.0.1:8080//src/ui/screens/ShadowDomDemo/shared.css" onload="this.rel='stylesheet'"> -->
+        <script 
+            src="../node_modules/od-cocoon/framework.src.js" 
+            charset="utf-8"
+            data-kernel
+            data-rootpath="../"
+            data-namespace="ui.screens.ShadowDomDemo"
+            data-adopted-stylesheet="shared.css"
+            data-src-path="/src/"
+        ></script>
         <script>
-            Config.ROOTPATH = "../";
-            Config.ENABLE_TRANSPILER = false;
+            // Config.CONTROLLER = "index.js"
+            // Config.ROOTPATH = "../"
+            // Config.CSSFILENAME = "shared.css";
             // Config.IMPORT_MAPS=false;
         </script>
-        <script>
-           
-            var startTime;
-            document.addEventListener("file:loaded", e => {
-                console.log("loaded", e.detail.path);
-                startTime = Date.now();
-            }, false);
-
-        </script>
-        <style>
-
-            message-bar,
-            message-bar-extended,
-            message-bar-extended-child{
-                display: block;
-                margin: 10px;
-                padding: 10px;
-                border: 1px solid #ccc;
-                height: 300px;
-            }
-
-            message-bar-extended,
-            sdf-focus-pane {
-                visibility: hidden;
-            }
-        </style>
-        <!-- <script>
-            document.on("connected", e=> {
-                console.log("connected", e);
-            }, false)
-        </script> -->
-
         <!-- <link rel="stylesheet" href="index.css" id="style-test"> -->
-        <style>
-            /* :not(:defined) { 
+        <!-- <style>
+            :not(:defined) { 
                 display: none;
-            } */
-
-            message-bar-extended #light-dom-el{
-                color: red;
-                font-size: large;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
             }
-        </style>
+        </style> -->
     </head>
 
-    <body namespace="ui.screens.ShadowDomDemo">
-        <!-- <span id="test3" is="my-button">
-            <template shadowrootmode="open">
-                SPAN TAG -- Inline shadowrootmode
-                <slot></slot>
-            </template>
-            test
-        </span> -->
-        <message-bar-extended>
-            <div>Jason</div>
-        </message-bar-extended>
-        <!-- <message-bar></message-bar> -->
-        <!-- <message-bar-extended lazy="true"></message-bar-extended>
-        <message-bar></message-bar>
-        <message-bar></message-bar>
-        <message-bar></message-bar>
-        <message-bar></message-bar>
-        <message-bar></message-bar>
-        <message-bar></message-bar>
-        <message-bar></message-bar> -->
-        <!-- <message-bar-extended-child lazy="true"></message-bar-extended-child>
-        
-        
-        
+    <body >
+        <!-- <message-bar-extended-child>
+            <h3>Extended Child Header</h3>
+        </message-bar-extended-child> -->
+        <!-- <message-bar>
+            <h3>H3 Header XXXXXXXXX </h3>
+            <%= await this.hello() %>
+        </message-bar> -->
         
 
-        <message-bar-extended></message-bar-extended>
-
-        <message-bar-extended>
-            <div>
-                <h3>Light DOM</h3>
-                <div id="light-dom-el">
-                    Light DOM Element
-                </div>
-            </div>
-        </message-bar-extended>
-
-        
-
-
-        <div id="test2">
-            <template shadowrootmode="open">
-                <h3>Hello DIV ShadowDOM Template</h3>
-                <slot></slot>
-            </template>
-            <h3>Hello DIV TAG 2</h3>  
-        </div> -->
-        
-       <!-- <message-bar-extended-child lazy="true"></message-bar-extended-child>
-       <message-bar-extended-child lazy="true"></message-bar-extended-child> -->
-       <!-- <message-bar lazy="true"></message-bar>
-       <message-bar lazy="true"></message-bar>
-       <message-bar lazy="true"></message-bar>
-       <message-bar lazy="true"></message-bar>
-       <message-bar lazy="true"></message-bar>
-       <message-bar lazy="true"></message-bar> -->
-       <!-- <message-bar-extended-child lazy="true"></message-bar-extended-child> -->
-
-       <!-- <message-bar-extended lazy="true">
-            <template shadowrootmode="open">
-                <div>
-                    Declarative ShadowDom
-                    <h3>
-                        <slot>test 1 slot</slot>
-                        <slot>test 2 slot</slot>
-                        <slot name="icons"></slot>
-                    </h3>
-                </div>
-            </template>
-            <h3>test 1</h3>
-            <h3>test 2</h3>
-            <h3 slot="icons">Test 3 Icon</h3>
-        </message-bar-extended>  -->
-        <!-- <message-bar-extended lazy="true">
-            <h3>xxx</h3>
-        </message-bar-extended> -->
-        <!-- <message-bar lazy="true"></message-bar> -->
-
-        
-        
-         <!-- <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar-extended>
-            <template shadowrootmode="open">
-                <div>
-                    Declarative ShadowDom
-                    <h3>
-                        <slot></slot>
-                        <slot></slot>
-                        <slot name="icons"></slot>
-                    </h3>
-                </div>
-            </template>
-            <h3>Test 1</h3>
-            <h3>Test 2</h3>
-            <h3 slot="icons">Test 3 Icon</h3>
-        </message-bar-extended>
-
-        <div id="test1">
-            <h3>Hello DIV</h3>
-        </div>
-        
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar>
-            asdsadasdas
-        </message-bar>
-        <message-bar-extended>
-            <template shadowrootmode="open">
-                <div>
-                    Declarative ShadowDom
-                    <h3>
-                        <slot></slot>
-                        <slot></slot>
-                        <slot name="icons"></slot>
-                    </h3>
-                </div>
-            </template>
-            <h3>Test 1</h3>
-            <h3>Test 2</h3>
-            <h3 slot="icons">Test 3 Icon</h3>
-        </message-bar-extended> -->
-        <!-- <core-ui-html-component>
-            <template shadowrootmode="open"></template>
-            <h1>hello world</h1>
-        </core-ui-html-component> -->
-        
         <!-- <message-bar>
             <template shadowrootmode="open">
-                <mark>
-                    <slot></slot>
-                </mark>
+                <message-bar-extended>
+                    Hello
+                </message-bar-extended>
             </template>
-            <h3>H3 Header 1 </h3>
-        </message-bar>
-        <message-bar>
-            <template shadowrootmode="open">
-                <mark>
-                    <slot></slot>
-                </mark>
-            </template>
-            <h3>H3 Header 2 </h3>
         </message-bar> -->
-        <!-- <message-bar-extended-child>
-            message-bar-extended-child 1
-        </message-bar-extended-child> -->
-        
-        
 
-        <!-- <div id="test2">
-            <h3>Hello DIV 2</h3>  
-        </div> -->
-
-
-        <!-- <message-bar-extended lazy="true"></message-bar-extended>
-        <message-bar-extended lazy="true"></message-bar-extended>
-        <message-bar-extended lazy="true"></message-bar-extended>
-        <message-bar-extended lazy="true"></message-bar-extended> -->
-
-        
+        <message-bar-extended>
+                <h3>H3 Header XXXXXXXXX </h3>
+                <%= await this.hello() %>
+        </message-bar-extended>
     </body>
     
 </html>

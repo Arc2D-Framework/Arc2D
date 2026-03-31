@@ -1,23 +1,12 @@
 {
     "imports": {
-        "moment": "/node_modules/moment/src/moment.js",
-        "lodash": "/node_modules/lodash/lodash.js",
-        "module-a" : "/src/system/libs/sample_modules/a.mjs",
-        "../../../build/three.module.js" : "/src/system/libs/three.module.js",
-        "3d" : "/src/system/libs/three.module.js",
-        "GLTFLoader" : "/src/system/libs/GLTFLoader.js",
-        "FBXLoader" : "/src/system/libs/FBXLoader.js",
-        "OBJLoader" : "/src/system/libs/OBJLoader.js",
-        "OrbitControls" : "/src/system/libs/OrbitControls.js",
-        "RGBELoader": "/src/system/libs/RGBELoader.js",
-        "dayjs" : "/src/system/libs/sample_modules/day.js",
-        "ui.components.Label":"/src/ui/components/Label/index.js",
-        "ejs" : "/src/system/drivers/templating/EJS/index.js",
-        "ui.components.MessageBar" : "/src/ui/components/MessageBar/index.js",
-        "ui.components.MessageBarExtended" : "/src/ui/components/MessageBarExtended/index.js",
-        "ui.components.MessageBarExtendedChild" : "/src/ui/components/MessageBarExtendedChild/index.js",
-        "ui.components.CustomButton" : "/src/ui/components/CustomButton/index.js",
-        "xslt-transformer" : "/src/system/drivers/templating/XsltTransformer/driver.js",
-        "template-iterals2" : "/src/system/drivers/templating/TemplateLiterals/driver.js"
+        "ui.components.MessageBar" : "../src/ui/components/MessageBar/index.js",
+        "ui.components.MessageBarExtended" : "../src/ui/components/MessageBarExtended/index.js",
+        "ui.components.MessageBarExtendedChild" : "../src/ui/components/MessageBarExtendedChild/index.js",
+        "ui.components.CustomButton" : "../src/ui/components/CustomButton/index.js",
+        "xslt-transformer" : "../src/system/drivers/templating/XsltTransformer/driver.js",
+        "template-iterals2" : "../src/system/drivers/templating/TemplateLiterals/driver.js",
+        "@domain.collections.Movies" : "../src/domain/collections/Movies.js",
+        "ui.components.Label" : "../src/ui/components/Label/index.js"
     }
 }
