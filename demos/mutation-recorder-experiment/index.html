@@ -216,6 +216,16 @@
       border: 1px solid #9ed8c2;
     }
 
+    .dynamic-shadow-zone {
+      display: grid;
+      gap: 10px;
+      min-height: 52px;
+      padding: 10px;
+      border: 1px dashed #b8c3d4;
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
     .modal-backdrop {
       position: absolute;
       inset: 0;
@@ -335,6 +345,7 @@
           <button id="mutate-attr" class="ghost">Toggle Attribute</button>
           <button id="mutate-remove" class="ghost">Remove Last Item</button>
           <button id="open-modal" class="ghost">Open Modal</button>
+          <button id="spawn-shadow-dropdown" class="ghost">Add Shadow Dropdown</button>
           <button id="run-sequence" class="ghost">Run Mixed Sequence</button>
         </div>
 
@@ -372,6 +383,10 @@
             <h2>Shadow DOM Lab</h2>
             <p class="muted">The host below creates an open shadow root with a nested open shadow root inside it.</p>
             <div id="shadow-host"></div>
+            <p class="muted">Dynamic shadow components mount here.</p>
+            <div id="dynamic-shadow-zone" class="dynamic-shadow-zone">
+              <span class="muted">No dynamic shadow component added.</span>
+            </div>
           </div>
 
           <div class="card">
@@ -485,6 +500,7 @@
       document.getElementById('mutate-attr').addEventListener('click', toggleCardAttribute);
       document.getElementById('mutate-remove').addEventListener('click', removeLastPill);
       document.getElementById('open-modal').addEventListener('click', openModal);
+      document.getElementById('spawn-shadow-dropdown').addEventListener('click', addShadowDropdownComponent);
       document.getElementById('run-sequence').addEventListener('click', runMixedSequence);
       document.getElementById('name-input').addEventListener('input', () => addFeed(`Input changed to "${document.getElementById('name-input').value}"`));
     }
@@ -597,6 +613,149 @@
       nestedRoot.getElementById('nested-change').addEventListener('click', () => {
         nestedRoot.getElementById('nested-label').textContent = `Nested text changed @ ${new Date().toLocaleTimeString()}`;
       });
+    }
+
+    function addShadowDropdownComponent() {
+      const zone = document.getElementById('dynamic-shadow-zone');
+      if (!zone || document.getElementById('dynamic-shadow-dropdown-host')) return;
+
+      zone.textContent = '';
+      const host = document.createElement('div');
+      host.id = 'dynamic-shadow-dropdown-host';
+      host.setAttribute('data-component', 'shadow-dropdown');
+      zone.appendChild(host);
+
+      const root = host.attachShadow({ mode: 'open' });
+      root.innerHTML = `
+        <style>
+          :host { display:block; }
+          .wrap { position:relative; display:inline-block; min-width:240px; }
+          button {
+            min-height:34px;
+            border:1px solid #8aa8c8;
+            border-radius:6px;
+            background:white;
+            color:#17202a;
+            cursor:pointer;
+            padding:7px 10px;
+          }
+          .menu {
+            display:none;
+            position:absolute;
+            z-index:20;
+            top:calc(100% + 6px);
+            left:0;
+            width:280px;
+            padding:8px;
+            border:1px solid #b8c3d4;
+            border-radius:8px;
+            background:white;
+            box-shadow:0 18px 38px rgba(16, 42, 67, 0.18);
+          }
+          .wrap[open] .menu { display:block; }
+          .menu button {
+            display:block;
+            width:100%;
+            text-align:left;
+            border:0;
+            background:transparent;
+          }
+          .menu button:hover { background:#eef5ff; }
+          .hint { display:block; margin-top:8px; color:#667085; font-size:12px; }
+        </style>
+        <div class="wrap">
+          <button id="shadow-dropdown-toggle" aria-expanded="false">Shadow Dropdown</button>
+          <div class="menu" role="menu">
+            <button id="shadow-open-modal" type="button">Open Shadow Modal Component</button>
+            <button id="shadow-mark-choice" type="button">Mark Dropdown Choice</button>
+          </div>
+          <span id="shadow-dropdown-status" class="hint">Waiting for selection.</span>
+        </div>
+      `;
+
+      const wrap = root.querySelector('.wrap');
+      const toggle = root.getElementById('shadow-dropdown-toggle');
+      toggle.addEventListener('click', () => {
+        const open = !wrap.hasAttribute('open');
+        wrap.toggleAttribute('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+
+      root.getElementById('shadow-open-modal').addEventListener('click', () => {
+        wrap.removeAttribute('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        root.getElementById('shadow-dropdown-status').textContent = 'Shadow modal requested.';
+        openShadowModalComponent();
+      });
+
+      root.getElementById('shadow-mark-choice').addEventListener('click', () => {
+        wrap.removeAttribute('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        root.getElementById('shadow-dropdown-status').textContent = `Choice marked @ ${new Date().toLocaleTimeString()}`;
+      });
+
+      addFeed('Shadow dropdown component added');
+    }
+
+    function openShadowModalComponent() {
+      if (document.getElementById('dynamic-shadow-modal-host')) return;
+
+      const host = document.createElement('div');
+      host.id = 'dynamic-shadow-modal-host';
+      host.setAttribute('data-component', 'shadow-modal');
+      stage.appendChild(host);
+
+      const root = host.attachShadow({ mode: 'open' });
+      root.innerHTML = `
+        <style>
+          :host {
+            position:absolute;
+            inset:0;
+            z-index:35;
+            display:grid;
+            place-items:center;
+            background:rgba(16, 42, 67, 0.28);
+            padding:24px;
+          }
+          .modal {
+            width:min(440px, 100%);
+            border:1px solid #d8dee8;
+            border-radius:8px;
+            background:white;
+            box-shadow:0 28px 70px rgba(16, 42, 67, 0.28);
+            padding:18px;
+            color:#17202a;
+            font:14px/1.4 Inter, ui-sans-serif, system-ui, sans-serif;
+          }
+          h2 { margin:0 0 8px; font-size:18px; }
+          p { margin:0 0 12px; color:#667085; }
+          button {
+            min-height:34px;
+            border:1px solid #8aa8c8;
+            border-radius:6px;
+            background:white;
+            cursor:pointer;
+            margin-right:8px;
+            padding:7px 10px;
+          }
+        </style>
+        <div class="modal" role="dialog" aria-modal="true">
+          <h2>Shadow Modal Component</h2>
+          <p id="shadow-modal-copy">Created from an option inside a shadow-root dropdown.</p>
+          <button id="shadow-modal-change">Change Shadow Modal Text</button>
+          <button id="shadow-modal-close">Close Shadow Modal</button>
+        </div>
+      `;
+
+      root.getElementById('shadow-modal-change').addEventListener('click', () => {
+        root.getElementById('shadow-modal-copy').textContent = `Shadow modal text changed @ ${new Date().toLocaleTimeString()}`;
+      });
+
+      root.getElementById('shadow-modal-close').addEventListener('click', () => {
+        host.remove();
+      });
+
+      addFeed('Shadow modal component opened');
     }
 
     function addPill() {
