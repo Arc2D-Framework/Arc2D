@@ -541,7 +541,7 @@ class MutationRecorderNextGen {
     this.isApplying = true;
     try {
       for (const event of events) {
-        if (event.kind !== 'mutation') {
+        if (event.kind && event.kind !== 'mutation') {
           continue;
         }
         summary.replayable += 1;
@@ -1119,36 +1119,181 @@ class MutationRecorderNextGen {
   }
 
   exportRecording() {
-    return {
+    return this.compactObject({
       version: 1,
       id: this.context.id || `recording-${this.startedAt || Date.now()}`,
       name: this.context.name || 'Untitled Recording',
       url: this.context.url || location.href,
-      snapshotId: this.context.snapshotId || null,
-      namespace: this.context.namespace || null,
+      snapshotId: this.context.snapshotId || undefined,
+      namespace: this.context.namespace || undefined,
       createdAt: this.startedAt ? new Date(this.startedAt).toISOString() : new Date().toISOString(),
-      stoppedAt: this.stoppedAt ? new Date(this.stoppedAt).toISOString() : null,
+      stoppedAt: this.stoppedAt ? new Date(this.stoppedAt).toISOString() : undefined,
       recorder: {
         kind: this.options.recorderKind,
-        version: 1,
-        options: {
-          idleMs: this.options.idleMs,
-          recordMouseMoves: this.options.recordMouseMoves
-        }
+        version: 1
       },
-      viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-        dpr: window.devicePixelRatio || 1
-      },
-      roots: { ...this.rootMeta },
-      events: this.events.slice(),
-      clips: this.clips.map(clip => ({
-        ...clip,
-        events: clip.events.slice(),
-        meta: { ...clip.meta }
-      }))
-    };
+      clips: this.clips.map(clip => this.exportClip(clip))
+    });
+  }
+
+  exportClip(clip) {
+    return this.compactObject({
+      id: clip.id,
+      name: clip.name,
+      trigger: this.exportTrigger(clip.trigger),
+      events: (clip.events || [])
+        .filter(event => event.kind === 'mutation')
+        .map(event => this.exportMutationEvent(event))
+        .filter(Boolean)
+    });
+  }
+
+  exportTrigger(trigger = {}) {
+    return this.compactObject({
+      event: trigger.event,
+      target: this.exportLocator(trigger.target),
+      key: trigger.key || undefined
+    });
+  }
+
+  exportMutationEvent(event) {
+    if (!event || event.kind !== 'mutation') {
+      return null;
+    }
+
+    if (event.type === 'attributes') {
+      return this.compactObject({
+        type: event.type,
+        target: this.exportLocator(event.target),
+        name: event.name,
+        namespace: event.namespace || undefined,
+        newValue: event.newValue
+      });
+    }
+
+    if (event.type === 'characterData') {
+      return this.compactObject({
+        type: event.type,
+        target: this.exportLocator(event.target),
+        newValue: event.newValue
+      });
+    }
+
+    if (event.type === 'childList') {
+      return this.compactObject({
+        type: event.type,
+        target: this.exportLocator(event.target),
+        adds: (event.adds || []).map(item => this.exportChildListItem(item, false)).filter(Boolean),
+        removes: (event.removes || []).map(item => this.exportChildListItem(item, true)).filter(Boolean)
+      });
+    }
+
+    if (event.type === 'property') {
+      return this.compactObject({
+        type: event.type,
+        target: this.exportLocator(event.target),
+        property: event.property,
+        value: event.value
+      });
+    }
+
+    return null;
+  }
+
+  exportChildListItem(item, isRemove) {
+    if (!item) {
+      return null;
+    }
+
+    return this.compactObject({
+      node: this.exportNodeSnapshot(item.node),
+      target: isRemove ? this.exportLocator(item.target) : undefined,
+      previousSibling: this.exportLocator(item.previousSibling),
+      nextSibling: this.exportLocator(item.nextSibling)
+    });
+  }
+
+  exportNodeSnapshot(node) {
+    if (!node) {
+      return undefined;
+    }
+
+    if (node.nodeType === Node.TEXT_NODE || node.nodeType === Node.COMMENT_NODE) {
+      return {
+        nodeType: node.nodeType,
+        textContent: node.textContent || ''
+      };
+    }
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      return this.compactObject({
+        nodeType: node.nodeType,
+        tag: node.tag,
+        namespaceURI: node.namespaceURI && node.namespaceURI !== 'http://www.w3.org/1999/xhtml'
+          ? node.namespaceURI
+          : undefined,
+        attributes: node.attributes && Object.keys(node.attributes).length ? node.attributes : undefined,
+        children: (node.children || []).map(child => this.exportNodeSnapshot(child)).filter(Boolean),
+        shadowRoot: node.shadowRoot ? this.exportShadowRootSnapshot(node.shadowRoot) : undefined
+      });
+    }
+
+    if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+      return this.compactObject({
+        nodeType: node.nodeType,
+        children: (node.children || []).map(child => this.exportNodeSnapshot(child)).filter(Boolean)
+      });
+    }
+
+    return { nodeType: node.nodeType };
+  }
+
+  exportShadowRootSnapshot(shadowRoot) {
+    if (!shadowRoot) {
+      return undefined;
+    }
+
+    return this.compactObject({
+      mode: shadowRoot.mode,
+      children: (shadowRoot.children || []).map(child => this.exportNodeSnapshot(child)).filter(Boolean)
+    });
+  }
+
+  exportLocator(locator) {
+    if (!locator) {
+      return undefined;
+    }
+
+    if (typeof locator === 'string') {
+      return locator;
+    }
+
+    if (locator.kind === 'element') {
+      return locator.selector || undefined;
+    }
+
+    return this.compactObject({
+      selector: locator.selector,
+      childIndex: locator.childIndex,
+      nodeType: locator.nodeType,
+      textHint: locator.textHint || undefined
+    });
+  }
+
+  compactObject(value) {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) {
+      return value;
+    }
+
+    return Object.fromEntries(Object.entries(value).filter(([, entry]) => {
+      if (typeof entry === 'undefined' || entry === null) {
+        return false;
+      }
+      if (Array.isArray(entry) && entry.length === 0) {
+        return false;
+      }
+      return true;
+    }));
   }
 
   destroy() {

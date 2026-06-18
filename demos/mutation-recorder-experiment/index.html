@@ -707,7 +707,7 @@
 
     function renderRecorderState() {
       const recording = recorder.exportRecording();
-      document.getElementById('event-count').textContent = recording.events.length;
+      document.getElementById('event-count').textContent = countRecordingEvents(recording);
       document.getElementById('clip-count').textContent = recording.clips.length;
       document.getElementById('locator-count').textContent = countRecordingLocators(recording);
       output.textContent = JSON.stringify(getDisplayRecording(recording), null, 2);
@@ -721,16 +721,26 @@
 
       return {
         status: 'recording',
-        events: recording.events.length,
+        id: recording.id,
+        name: recording.name,
+        events: countRecordingEvents(recording),
         clips: recording.clips.map(clip => ({
           id: clip.id,
           name: clip.name,
           trigger: clip.trigger,
-          mutationCount: clip.meta.mutationCount,
+          mutationCount: countClipMutations(clip),
           eventCount: clip.events.length
         })),
         locators: countRecordingLocators(recording)
       };
+    }
+
+    function countRecordingEvents(recording) {
+      return (recording.clips || []).reduce((sum, clip) => sum + (clip.events || []).length, 0);
+    }
+
+    function countClipMutations(clip) {
+      return (clip.events || []).filter(event => event.type).length;
     }
 
     function countRecordingLocators(recording) {
@@ -750,17 +760,19 @@
         }
       };
 
-      for (const event of recording.events || []) {
-        addLocator(event.target);
-        for (const item of event.adds || []) {
-          addLocator(item.previousSibling);
-          addLocator(item.nextSibling);
-        }
-        for (const item of event.removes || []) {
-          addLocator(item.target);
-          addLocator(item.parent);
-          addLocator(item.previousSibling);
-          addLocator(item.nextSibling);
+      for (const clip of recording.clips || []) {
+        addLocator(clip.trigger?.target);
+        for (const event of clip.events || []) {
+          addLocator(event.target);
+          for (const item of event.adds || []) {
+            addLocator(item.previousSibling);
+            addLocator(item.nextSibling);
+          }
+          for (const item of event.removes || []) {
+            addLocator(item.target);
+            addLocator(item.previousSibling);
+            addLocator(item.nextSibling);
+          }
         }
       }
 
@@ -773,7 +785,7 @@
       for (const clip of clips) {
         const option = document.createElement('option');
         option.value = clip.id;
-        option.textContent = `${clip.name} (${clip.meta.mutationCount} mutations)`;
+        option.textContent = `${clip.name} (${countClipMutations(clip)} mutations)`;
         clipSelect.appendChild(option);
       }
       if (selected && clips.some(clip => clip.id === selected)) {
