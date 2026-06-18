@@ -1,12 +1,11 @@
-import 'ui.components.Splash';
-import './options.js';
+import DebugOptions from './options.js';
 
 
 namespace `ui.worlds` (
-    class Dom3d extends World.with(DebugOptions) {
+    class Dom3d extends World {
+
         async onConnected(){
             await super.onConnected();
-            this.debug();
             this.lastMouseX=0;
             this.lastMouseY=0;
             this.rotX=0;
@@ -50,6 +49,10 @@ namespace `ui.worlds` (
                     rotateX(${-this.rotX}deg)
                 `
             }
+        }
+
+        hasOwnTemplate() {
+            return true;
         }
     }
 );

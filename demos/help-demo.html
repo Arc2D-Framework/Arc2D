@@ -79,39 +79,106 @@
         </style>
 
         <script type="module">
+            import OpenAI from 'https://cdn.jsdelivr.net/npm/openai@latest/+esm';
             import TourGuide from '../src/libs/tour.js';
             import AIVoice, {
                 BrowserSpeechRenderer,
                 BrowserSpeechTranscriber,
+                ChromeNanoChatProvider,
                 ElevenLabsSpeechRenderer,
                 EchoChatProvider,
-                HttpChatProvider
+                HttpChatProvider,
+                NullChatProvider,
+                OpenAIChatProvider
             } from '../src/libs/aivoice.js';
 
             document.addEventListener('DOMContentLoaded', async () => {
+                const demoConfig = {
+                    openAIApiKey: '',
+                    openAIModel: 'gpt-5-mini',
+                    elevenLabsApiKey: '',
+                    elevenLabsVoiceId: 'Xkem7o24n3aQyiwIXNeT',
+                    voiceChatVisualizer: {
+                        mode: 'avatar-video',
+                        src: '../resources/videos/Avatar_Video.mp4',
+                        label: 'AI voice guide avatar'
+                    },
+                    activeProviders: {
+                        transcriber: 'browser',
+                        speechRenderer: 'elevenlabs',
+                        chatProvider: 'openaiDirect'
+                    }
+                };
+                const voiceSystemPrompt = 'You are a friendly spoken sales and support rep for the company on this website. Sound natural, warm, and confident. Help people understand services, guide them toward the next best action, and use tours only when they would genuinely help. Answer using the provided site and tour context.';
                 const fallbackSpeechRenderer = new BrowserSpeechRenderer({
                     rate: 1,
                     pitch: 1,
                     volume: 1
                 });
-                const elevenLabsApiKey = localStorage.getItem('ELEVENLABS_API_KEY') || '';
-                const aiVoice = new AIVoice({
-                    transcriber: new BrowserSpeechTranscriber(),
-                    speechRenderer: elevenLabsApiKey
+                const openAIApiKey = demoConfig.openAIApiKey || localStorage.getItem('OPENAI_API_KEY') || '';
+                const openAIModel = demoConfig.openAIModel || localStorage.getItem('OPENAI_MODEL') || 'gpt-5-mini';
+                const elevenLabsApiKey = demoConfig.elevenLabsApiKey || localStorage.getItem('ELEVENLABS_API_KEY') || '62f79ed759a9b46b5675f32839ba46f686b7ad2afac1064cf6fb81c791d86027';
+                const openAIClient = openAIApiKey
+                    ? new OpenAI({
+                        apiKey: openAIApiKey,
+                        dangerouslyAllowBrowser: true
+                    })
+                    : null;
+                const transcribers = {
+                    browser: new BrowserSpeechTranscriber()
+                };
+                const speechRenderers = {
+                    browser: fallbackSpeechRenderer,
+                    elevenlabs: elevenLabsApiKey
                         ? new ElevenLabsSpeechRenderer({
                             apiKey: elevenLabsApiKey,
-                            voiceId: 'Xkem7o24n3aQyiwIXNeT',
+                            voiceId: demoConfig.elevenLabsVoiceId,
                             modelId: 'eleven_flash_v2_5',
                             fallbackRenderer: fallbackSpeechRenderer
                         })
-                        : fallbackSpeechRenderer,
-                    chatProvider: new HttpChatProvider({
+                        : fallbackSpeechRenderer
+                };
+                const chatProviders = {
+                    http: new HttpChatProvider({
                         endpoint: '/api/chat',
-                        model: localStorage.getItem('OPENAI_MODEL') || 'gpt-5-mini',
+                        model: openAIModel,
                         fallbackProvider: new EchoChatProvider(),
-                        systemPrompt: 'You are a friendly spoken sales and support rep for the company on this website. Sound natural, warm, and confident. Help people understand services, guide them toward the next best action, and use tours only when they would genuinely help. Answer using the provided site and tour context.'
+                        systemPrompt: voiceSystemPrompt
                     }),
-                    systemPrompt: 'You are a friendly spoken sales and support rep for the company on this website. Sound natural, warm, and confident. Help people understand services, guide them toward the next best action, and use tours only when they would genuinely help. Answer using the provided site and tour context.',
+                    echo: new EchoChatProvider(),
+                    none: new NullChatProvider(),
+                    chromeNano: new ChromeNanoChatProvider({
+                        fallbackProvider: new EchoChatProvider(),
+                        systemPrompt: voiceSystemPrompt
+                    }),
+                    openaiDirect: new OpenAIChatProvider({
+                        client: openAIClient,
+                        model: openAIModel,
+                        fallbackProvider: new EchoChatProvider(),
+                        systemPrompt: voiceSystemPrompt
+                    })
+                };
+
+                const activeTranscriber = transcribers[demoConfig.activeProviders.transcriber] || transcribers.browser;
+                const activeSpeechRenderer = speechRenderers[demoConfig.activeProviders.speechRenderer] || speechRenderers.browser;
+                const activeChatProvider = chatProviders[demoConfig.activeProviders.chatProvider] || chatProviders.http;
+
+                console.log('[TourGuide Voice][providers]', {
+                    transcribers: Object.keys(transcribers),
+                    speechRenderers: Object.keys(speechRenderers),
+                    chatProviders: Object.keys(chatProviders),
+                    active: {
+                        transcriber: Object.entries(transcribers).find(([, provider]) => provider === activeTranscriber)?.[0] || 'custom',
+                        speechRenderer: Object.entries(speechRenderers).find(([, provider]) => provider === activeSpeechRenderer)?.[0] || 'custom',
+                        chatProvider: Object.entries(chatProviders).find(([, provider]) => provider === activeChatProvider)?.[0] || 'custom'
+                    }
+                });
+
+                const aiVoice = new AIVoice({
+                    transcriber: activeTranscriber,
+                    speechRenderer: activeSpeechRenderer,
+                    chatProvider: activeChatProvider,
+                    systemPrompt: voiceSystemPrompt,
                     autoSubmitFinalTranscript: true,
                     autoSpeakResponses: true
                 });
@@ -153,9 +220,22 @@
                 });
 
                 const tour = new TourGuide();
+                const cleanupVoice = () => {
+                    try {
+                        tour.setAIVoice?.(null);
+                    } catch {}
+                    try {
+                        aiVoice.destroy?.();
+                    } catch {}
+                };
+
+                window.addEventListener('pagehide', cleanupVoice, { once: true });
+                window.addEventListener('beforeunload', cleanupVoice, { once: true });
+
                 await tour.install({
                     data : "./help-demo.json",
                     show_tour_listing: true,
+                    voice_chat_visualizer: demoConfig.voiceChatVisualizer,
                     ai_voice: aiVoice
                 });
                 // await tour.load("./help-demo.json");

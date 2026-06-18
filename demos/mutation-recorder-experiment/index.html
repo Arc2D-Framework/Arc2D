@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mutation Recorder NextGen Lab</title>
+  <script src="mRecorderNextGen.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ink: #17202a;
+      --muted: #667085;
+      --line: #d8dee8;
+      --panel: #f7f8fb;
+      --accent: #0b6bcb;
+      --accent-strong: #074f97;
+      --good: #11845b;
+      --warn: #b54708;
+      --danger: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #edf1f7;
+    }
+
+    header {
+      padding: 18px 24px;
+      color: white;
+      background: linear-gradient(120deg, #102a43, #0b4f6c);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 14px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 430px;
+      gap: 16px;
+      padding: 16px;
+      min-height: calc(100vh - 82px);
+    }
+
+    section,
+    aside {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(16, 42, 67, 0.08);
+    }
+
+    .stage-wrap {
+      padding: 16px;
+      overflow: auto;
+    }
+
+    .toolbar,
+    .control-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    button,
+    select {
+      border: 1px solid #b8c3d4;
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      min-height: 36px;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+    }
+
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    button.primary:hover {
+      background: var(--accent-strong);
+    }
+
+    button.danger {
+      color: white;
+      background: var(--danger);
+      border-color: var(--danger);
+    }
+
+    button.ghost {
+      background: #f4f6fa;
+    }
+
+    #recording-stage {
+      position: relative;
+      min-height: 680px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(11,107,203,0.04) 1px, transparent 1px),
+        linear-gradient(rgba(11,107,203,0.04) 1px, transparent 1px),
+        #fff;
+      background-size: 22px 22px;
+    }
+
+    .workbench-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.92);
+      padding: 14px;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .custom-dropdown {
+      position: relative;
+      display: inline-block;
+      min-width: 220px;
+    }
+
+    .dropdown-panel {
+      display: none;
+      position: absolute;
+      z-index: 40;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 260px;
+      padding: 8px;
+      background: white;
+      border: 1px solid #b8c3d4;
+      border-radius: 8px;
+      box-shadow: 0 18px 38px rgba(16, 42, 67, 0.18);
+    }
+
+    .custom-dropdown.open .dropdown-panel {
+      display: block;
+    }
+
+    .dropdown-panel button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+    }
+
+    .dropdown-panel button:hover {
+      background: #eef5ff;
+    }
+
+    .pill-row,
+    #activity-feed {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 40px;
+      padding: 10px;
+      border: 1px dashed #b8c3d4;
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #e6f4ef;
+      color: #075e45;
+      font-size: 13px;
+      border: 1px solid #9ed8c2;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      background: rgba(16, 42, 67, 0.35);
+      padding: 24px;
+    }
+
+    .modal {
+      width: min(420px, 100%);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 28px 70px rgba(16, 42, 67, 0.28);
+      padding: 18px;
+    }
+
+    .field-row {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .field-row input {
+      min-height: 36px;
+      border: 1px solid #b8c3d4;
+      border-radius: 6px;
+      padding: 7px 9px;
+    }
+
+    .recorder-panel {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .recorder-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .recorder-head h2 {
+      margin: 0 0 4px;
+      font-size: 17px;
+    }
+
+    .recorder-body {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      overflow: auto;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: var(--panel);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 20px;
+    }
+
+    pre {
+      margin: 0;
+      max-height: 420px;
+      overflow: auto;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #d6e4ff;
+      background: #111827;
+      font-size: 12px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    #status {
+      min-height: 36px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1060px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mutation Recorder NextGen Lab</h1>
+    <p>Custom DOM recorder POC for DemoGeeni: recorder ids, gesture clips, replay, and nested open shadow roots.</p>
+  </header>
+
+  <main>
+    <section class="stage-wrap">
+      <div id="recording-stage">
+        <div class="toolbar">
+          <button id="mutate-add" class="ghost">Add List Item</button>
+          <button id="mutate-text" class="ghost">Change Text</button>
+          <button id="mutate-attr" class="ghost">Toggle Attribute</button>
+          <button id="mutate-remove" class="ghost">Remove Last Item</button>
+          <button id="open-modal" class="ghost">Open Modal</button>
+          <button id="run-sequence" class="ghost">Run Mixed Sequence</button>
+        </div>
+
+        <div class="workbench-grid">
+          <div class="card" id="profile-card" data-state="idle">
+            <h2 id="headline">Customer Dashboard</h2>
+            <p id="summary-text" class="muted">Ready for recording. Mutate this text, attributes, and nearby nodes.</p>
+
+            <div class="custom-dropdown" id="account-dropdown">
+              <button id="account-menu-button" aria-expanded="false">Account Menu</button>
+              <div class="dropdown-panel" role="menu">
+                <button type="button" data-choice="profile">Profile Settings</button>
+                <button type="button" data-choice="billing">Billing Center</button>
+                <button type="button" data-choice="logout">Sign Out</button>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <label for="name-input">Editable input</label>
+              <input id="name-input" value="Jason Smith">
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Dynamic Content</h2>
+            <div id="pill-list" class="pill-row">
+              <span class="pill">Initial Pill</span>
+            </div>
+            <div id="activity-feed" style="margin-top: 12px;">
+              <span class="muted">Activity feed is empty.</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Shadow DOM Lab</h2>
+            <p class="muted">The host below creates an open shadow root with a nested open shadow root inside it.</p>
+            <div id="shadow-host"></div>
+          </div>
+
+          <div class="card">
+            <h2>Replay Notes</h2>
+            <p class="muted">Record interactions, stop, restore baseline, then replay one clip or all clips.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="recorder-panel" data-recorder-control>
+      <div class="recorder-head">
+        <h2>Recorder Controls</h2>
+        <div class="muted">Auto clips are named Clip1, Clip2, Clip3...</div>
+      </div>
+      <div class="recorder-body">
+        <div class="control-grid">
+          <button id="start-recording" class="primary">Start Recording</button>
+          <button id="stop-recording" class="danger">Stop</button>
+          <button id="smoke-test">Smoke Test</button>
+          <button id="restore-baseline">Restore Baseline</button>
+          <button id="play-all">Play All Clips</button>
+        </div>
+
+        <div class="control-grid">
+          <select id="clip-select" aria-label="Clip selection"></select>
+          <button id="play-clip">Play Selected Clip</button>
+          <button id="clear-output">Clear Output</button>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat"><span class="muted">Events</span><b id="event-count">0</b></div>
+          <div class="stat"><span class="muted">Clips</span><b id="clip-count">0</b></div>
+          <div class="stat"><span class="muted">Locators</span><b id="locator-count">0</b></div>
+        </div>
+
+        <div id="status">Idle.</div>
+        <pre id="recording-output">{}</pre>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const recorder = new MutationRecorderNextGen({
+      idleMs: 3000,
+      recordMouseMoves: false
+    });
+
+    const stage = document.getElementById('recording-stage');
+    const output = document.getElementById('recording-output');
+    const statusEl = document.getElementById('status');
+    const clipSelect = document.getElementById('clip-select');
+    let itemCount = 1;
+    let sequenceRunning = false;
+
+    setupDropdown();
+    setupShadowLab();
+    bindControls();
+    renderRecorderState();
+
+    function bindControls() {
+      document.getElementById('start-recording').addEventListener('click', () => {
+        recorder.start(stage, {
+          name: 'Mutation Recorder Lab',
+          namespace: 'demos.mutationRecorderExperiment',
+          url: location.href
+        });
+        setStatus('Recording started. Interact with the stage.');
+        renderRecorderState();
+      });
+
+      document.getElementById('stop-recording').addEventListener('click', () => {
+        recorder.stop();
+        setStatus('Recording stopped.');
+        renderRecorderState();
+      });
+
+      document.getElementById('restore-baseline').addEventListener('click', () => {
+        recorder.restoreBaseline();
+        setupDropdown();
+        setStatus('Stage restored to recorded baseline.');
+        renderRecorderState();
+      });
+
+      document.getElementById('smoke-test').addEventListener('click', runSmokeTest);
+
+      document.getElementById('play-all').addEventListener('click', () => {
+        recorder.restoreBaseline();
+        const summary = recorder.playAllClips();
+        setupDropdown();
+        setStatus(`Restored baseline, then played all clips. ${summarizeReplay(summary)}`);
+        renderRecorderState();
+      });
+
+      document.getElementById('play-clip').addEventListener('click', () => {
+        const id = clipSelect.value;
+        if (!id) return;
+        const summary = recorder.playClip(id);
+        setupDropdown();
+        setStatus(`Played ${id} against the current stage. ${summarizeReplay(summary)}`);
+        renderRecorderState();
+      });
+
+      document.getElementById('clear-output').addEventListener('click', () => {
+        output.textContent = '{}';
+        setStatus('Output cleared.');
+      });
+
+      document.getElementById('mutate-add').addEventListener('click', addPill);
+      document.getElementById('mutate-text').addEventListener('click', changeText);
+      document.getElementById('mutate-attr').addEventListener('click', toggleCardAttribute);
+      document.getElementById('mutate-remove').addEventListener('click', removeLastPill);
+      document.getElementById('open-modal').addEventListener('click', openModal);
+      document.getElementById('run-sequence').addEventListener('click', runMixedSequence);
+      document.getElementById('name-input').addEventListener('input', () => addFeed(`Input changed to "${document.getElementById('name-input').value}"`));
+    }
+
+    function setupDropdown() {
+      const dropdown = document.getElementById('account-dropdown');
+      const button = document.getElementById('account-menu-button');
+      if (!dropdown || !button || button.dataset.bound === 'true') return;
+      button.dataset.bound = 'true';
+      button.addEventListener('click', () => {
+        const open = !dropdown.classList.contains('open');
+        dropdown.classList.toggle('open', open);
+        button.setAttribute('aria-expanded', String(open));
+        addFeed(open ? 'Dropdown opened' : 'Dropdown closed');
+      });
+
+      dropdown.querySelectorAll('[data-choice]').forEach(choice => {
+        choice.addEventListener('click', () => {
+          addFeed(`Dropdown choice: ${choice.dataset.choice}`);
+          dropdown.classList.remove('open');
+          button.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    function setupShadowLab() {
+      const host = document.getElementById('shadow-host');
+      if (!host || host.shadowRoot) return;
+      const root = host.attachShadow({ mode: 'open' });
+      root.innerHTML = `
+        <style>
+          :host { display:block; }
+          .shadow-card {
+            border: 1px solid #b8c3d4;
+            border-radius: 8px;
+            padding: 12px;
+            background: #f8fbff;
+          }
+          button {
+            min-height: 32px;
+            border: 1px solid #8aa8c8;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            margin-right: 6px;
+          }
+          .shadow-note {
+            margin-top: 10px;
+            color: #37546d;
+          }
+          .badge {
+            display:inline-flex;
+            margin: 8px 6px 0 0;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background:#dbeafe;
+            color:#174ea6;
+          }
+        </style>
+        <div class="shadow-card">
+          <strong>Open Shadow Root</strong>
+          <div style="margin-top:10px;">
+            <button id="shadow-toggle">Toggle Shadow Note</button>
+            <button id="shadow-add">Add Shadow Badge</button>
+          </div>
+          <div id="shadow-note" class="shadow-note" hidden>Shadow note is visible.</div>
+          <div id="shadow-badges"></div>
+          <div id="nested-shadow-host" style="margin-top:12px;"></div>
+        </div>
+      `;
+
+      const nestedHost = root.getElementById('nested-shadow-host');
+      const nestedRoot = nestedHost.attachShadow({ mode: 'open' });
+      nestedRoot.innerHTML = `
+        <style>
+          .nested {
+            border:1px dashed #7aa2c7;
+            border-radius:8px;
+            padding:10px;
+            background:white;
+          }
+          button {
+            border:1px solid #8aa8c8;
+            border-radius:6px;
+            background:#f6fbff;
+            min-height:30px;
+          }
+        </style>
+        <div class="nested">
+          <span id="nested-label">Nested shadow root ready.</span>
+          <button id="nested-change">Change Nested Text</button>
+        </div>
+      `;
+
+      let badgeCount = 0;
+      root.getElementById('shadow-toggle').addEventListener('click', () => {
+        const note = root.getElementById('shadow-note');
+        note.hidden = !note.hidden;
+        note.textContent = note.hidden ? 'Shadow note hidden.' : `Shadow note visible @ ${new Date().toLocaleTimeString()}`;
+      });
+
+      root.getElementById('shadow-add').addEventListener('click', () => {
+        badgeCount += 1;
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = `Shadow Badge ${badgeCount}`;
+        root.getElementById('shadow-badges').appendChild(badge);
+      });
+
+      nestedRoot.getElementById('nested-change').addEventListener('click', () => {
+        nestedRoot.getElementById('nested-label').textContent = `Nested text changed @ ${new Date().toLocaleTimeString()}`;
+      });
+    }
+
+    function addPill() {
+      itemCount += 1;
+      const pill = document.createElement('span');
+      pill.className = 'pill';
+      pill.textContent = `Dynamic Pill ${itemCount}`;
+      pill.dataset.index = String(itemCount);
+      document.getElementById('pill-list').appendChild(pill);
+      addFeed(`Added Dynamic Pill ${itemCount}`);
+    }
+
+    function changeText() {
+      const summary = document.getElementById('summary-text');
+      summary.textContent = `Text changed at ${new Date().toLocaleTimeString()}`;
+      addFeed('Changed summary text');
+    }
+
+    function toggleCardAttribute() {
+      const card = document.getElementById('profile-card');
+      const active = card.dataset.state !== 'active';
+      card.dataset.state = active ? 'active' : 'idle';
+      card.style.borderColor = active ? '#11845b' : '';
+      addFeed(`Card state: ${card.dataset.state}`);
+    }
+
+    function removeLastPill() {
+      const list = document.getElementById('pill-list');
+      const last = list.querySelector('.pill:last-child');
+      if (last) {
+        addFeed(`Removed ${last.textContent}`);
+        last.remove();
+      }
+    }
+
+    function openModal() {
+      if (document.getElementById('demo-modal-backdrop')) return;
+      const backdrop = document.createElement('div');
+      backdrop.id = 'demo-modal-backdrop';
+      backdrop.className = 'modal-backdrop';
+      backdrop.innerHTML = `
+        <div class="modal" role="dialog" aria-modal="true">
+          <h2>Recorded Modal</h2>
+          <p class="muted">This modal was inserted into the DOM and can be replayed as a childList mutation.</p>
+          <div class="field-row">
+            <label for="modal-input">Modal input</label>
+            <input id="modal-input" value="Modal value">
+          </div>
+          <div style="margin-top:12px;">
+            <button id="modal-change">Change Modal Text</button>
+            <button id="modal-close">Close Modal</button>
+          </div>
+        </div>
+      `;
+      stage.appendChild(backdrop);
+      backdrop.querySelector('#modal-change').addEventListener('click', () => {
+        backdrop.querySelector('p').textContent = `Modal text changed @ ${new Date().toLocaleTimeString()}`;
+      });
+      backdrop.querySelector('#modal-close').addEventListener('click', () => {
+        backdrop.remove();
+      });
+      addFeed('Modal opened');
+    }
+
+    async function runMixedSequence() {
+      if (sequenceRunning) return;
+      sequenceRunning = true;
+      try {
+        addPill();
+        await delay(500);
+        changeText();
+        await delay(500);
+        toggleCardAttribute();
+        await delay(500);
+        openModal();
+      } finally {
+        sequenceRunning = false;
+      }
+    }
+
+    async function runSmokeTest() {
+      recorder.start(stage, {
+        name: 'Smoke Test Recording',
+        namespace: 'demos.mutationRecorderExperiment',
+        url: location.href
+      });
+      document.getElementById('account-menu-button').click();
+      await delay(80);
+      recorder.stop();
+      recorder.restoreBaseline();
+      const summary = recorder.playClip('clip-1');
+      setupDropdown();
+      setStatus(`Smoke test complete. ${summarizeReplay(summary)}`);
+      renderRecorderState();
+    }
+
+    function addFeed(message) {
+      const feed = document.getElementById('activity-feed');
+      if (feed.querySelector('.muted')) {
+        feed.textContent = '';
+      }
+      const item = document.createElement('span');
+      item.className = 'pill';
+      item.textContent = message;
+      feed.appendChild(item);
+      renderRecorderState();
+    }
+
+    function renderRecorderState() {
+      const recording = recorder.exportRecording();
+      document.getElementById('event-count').textContent = recording.events.length;
+      document.getElementById('clip-count').textContent = recording.clips.length;
+      document.getElementById('locator-count').textContent = countRecordingLocators(recording);
+      output.textContent = JSON.stringify(getDisplayRecording(recording), null, 2);
+      renderClipSelect(recording.clips);
+    }
+
+    function getDisplayRecording(recording) {
+      if (!recorder.isRecording) {
+        return recording;
+      }
+
+      return {
+        status: 'recording',
+        events: recording.events.length,
+        clips: recording.clips.map(clip => ({
+          id: clip.id,
+          name: clip.name,
+          trigger: clip.trigger,
+          mutationCount: clip.meta.mutationCount,
+          eventCount: clip.events.length
+        })),
+        locators: countRecordingLocators(recording)
+      };
+    }
+
+    function countRecordingLocators(recording) {
+      const locators = new Set();
+      const addLocator = locator => {
+        if (!locator) {
+          return;
+        }
+        if (typeof locator === 'string') {
+          locators.add(locator);
+          return;
+        }
+        if (locator.selector) {
+          locators.add(locator.kind === 'element'
+            ? locator.selector
+            : `${locator.selector}::child(${locator.childIndex})`);
+        }
+      };
+
+      for (const event of recording.events || []) {
+        addLocator(event.target);
+        for (const item of event.adds || []) {
+          addLocator(item.previousSibling);
+          addLocator(item.nextSibling);
+        }
+        for (const item of event.removes || []) {
+          addLocator(item.target);
+          addLocator(item.parent);
+          addLocator(item.previousSibling);
+          addLocator(item.nextSibling);
+        }
+      }
+
+      return locators.size;
+    }
+
+    function renderClipSelect(clips) {
+      const selected = clipSelect.value;
+      clipSelect.innerHTML = '';
+      for (const clip of clips) {
+        const option = document.createElement('option');
+        option.value = clip.id;
+        option.textContent = `${clip.name} (${clip.meta.mutationCount} mutations)`;
+        clipSelect.appendChild(option);
+      }
+      if (selected && clips.some(clip => clip.id === selected)) {
+        clipSelect.value = selected;
+      }
+    }
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+      renderRecorderState();
+    }
+
+    function summarizeReplay(summary) {
+      if (Array.isArray(summary)) {
+        const applied = summary.reduce((sum, item) => sum + (item.applied || 0), 0);
+        const replayable = summary.reduce((sum, item) => sum + (item.replayable || 0), 0);
+        const missing = summary.flatMap(item => item.missingTargets || []);
+        return `Applied ${applied}/${replayable} mutations${missing.length ? `; missing ${missing.join(', ')}` : ''}.`;
+      }
+
+      if (!summary || summary.ok === false) {
+        return `Replay failed: ${summary?.error || 'unknown'}.`;
+      }
+
+      return `Applied ${summary.applied}/${summary.replayable} mutations${summary.missingTargets?.length ? `; missing ${summary.missingTargets.join(', ')}` : ''}.`;
+    }
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    setInterval(() => {
+      if (recorder.isRecording) {
+        renderRecorderState();
+      }
+    }, 750);
+  </script>
+</body>
+</html>

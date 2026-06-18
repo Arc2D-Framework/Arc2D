@@ -7,6 +7,7 @@
         "xslt-transformer" : "../src/system/drivers/templating/XsltTransformer/driver.js",
         "template-iterals2" : "../src/system/drivers/templating/TemplateLiterals/driver.js",
         "@domain.collections.Movies" : "../src/domain/collections/Movies.js",
-        "ui.components.Label" : "../src/ui/components/Label/index.js"
+        "ui.components.Label" : "../src/ui/components/Label/index.js",
+        "ui.worlds.Dom3d" : "../src/ui/worlds/Dom3d/index.js"
     }
 }

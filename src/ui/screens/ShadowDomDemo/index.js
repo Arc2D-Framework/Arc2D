@@ -1,32 +1,40 @@
 
 import 'ui.components.MessageBarExtended';
+import 'ui.components.MessageBarExtendedChild';
 
 
 namespace `ui.screens` (
     class ShadowDomDemo extends Application {
         
-        styles = ["test.css"];
+        // styles = ["test.css"];
 
         hasOwnSkin() {
             return true
+        }
+
+        constructor(el, options) {
+            super(el, options);
+            this.stylesheets.add("test.css");
         }
 
         async onConnected() {
             await super.onConnected();
             // return;
 
+            var h3 = await this.find("html > body > message-bar >>> message-bar-extended >>> message-bar-extended-child >>> h3");
+            console.log("h3", h3)
             // debugger
             // application.subscribe("connected", e=> this.onComponentConnected(e), false)
             // document.addEventListener("loaded", e=> this.onComponentConnected(e), false)
 
-            var div1 = document.querySelector("div#test1");
-            var div2 = document.querySelector("div#test2");
+            // var div1 = document.querySelector("div#test1");
+            // var div2 = document.querySelector("div#test2");
             // var span = document.querySelector("span#test3");
             // await sleep(1000);
             // span && span.setAttribute("is", "my-button");
 
-            div1 && new ui.components.MessageBarExtended(div1);
-            div2 && new ui.components.MessageBarExtended(div2);
+            // div1 && new ui.components.MessageBarExtended(div1);
+            // div2 && new ui.components.MessageBarExtended(div2);
             
             
             // var messageBar3 = document.createElement("message-bar-extended");

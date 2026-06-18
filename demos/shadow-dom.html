@@ -7,7 +7,7 @@
         <title>Arc Engine : Drag Drop</title>
         <!-- <script src="https://cdn.jsdelivr.net/gh/Nashorn/od-cocoon@latest/framework.src.js" namespace="ui.screens.ShadowDomDemo" charset="utf-8"></script> -->
          <!-- <link rel="preload" as="style" href="http://127.0.0.1:8080//src/ui/screens/ShadowDomDemo/shared.css" onload="this.rel='stylesheet'"> -->
-        <script 
+        <!-- <script 
             src="../node_modules/od-cocoon/framework.src.js" 
             charset="utf-8"
             data-kernel
@@ -15,12 +15,64 @@
             data-namespace="ui.screens.ShadowDomDemo"
             data-adopted-stylesheet="shared.css"
             data-src-path="/src/"
-        ></script>
+            data-controller="index.js"
+        ></script> -->
+        <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script>
         <script>
-            // Config.CONTROLLER = "index.js"
-            // Config.ROOTPATH = "../"
-            // Config.CSSFILENAME = "shared.css";
-            // Config.IMPORT_MAPS=false;
+            Config.FILENAME = "index.js"
+            Config.ROOTPATH = "../"
+        </script>
+        <script>
+            (function createMemoryBackedStylesheets() {
+                function createMemoryStyle(id, rules) {
+                    const style = document.createElement("style");
+                    style.id = id;
+                    style.setAttribute("data-memory-backed-test", "true");
+                    document.head.appendChild(style);
+
+                    rules.forEach(rule => {
+                        try {
+                            style.sheet.insertRule(rule, style.sheet.cssRules.length);
+                        } catch (error) {
+                            console.warn("Unable to insert memory stylesheet test rule", rule, error);
+                        }
+                    });
+                }
+
+                createMemoryStyle("memory-backed-style-a", [
+                    ".memory-backed-test { border: 2px solid #d24b4b; padding: 12px; margin: 16px 0; background: #fff7d6; color: #222; font: 14px/1.4 system-ui, sans-serif; }",
+                    ".memory-backed-test strong { color: #7a2f8f; }",
+                    "@media (min-width: 700px) { .memory-backed-test { max-width: 520px; } }"
+                ]);
+
+                createMemoryStyle("memory-backed-style-b", [
+                    "@keyframes memory-backed-pulse { from { box-shadow: 0 0 0 0 rgba(210, 75, 75, 0.55); } to { box-shadow: 0 0 0 8px rgba(210, 75, 75, 0); } }",
+                    ".memory-backed-test::after { content: ' memory stylesheet active'; display: block; margin-top: 6px; font-size: 12px; color: #555; }",
+                    ".memory-backed-test { animation: memory-backed-pulse 1.8s ease-out infinite alternate; }"
+                ]);
+
+                createMemoryStyle("base64-image-fixture-style", [
+                    ".base64-image-fixture { display: grid; grid-template-columns: repeat(4, minmax(90px, 1fr)); gap: 10px; max-width: 620px; margin: 16px 0; font: 12px/1.4 system-ui, sans-serif; color: #222; }",
+                    ".base64-image-fixture figure { margin: 0; padding: 8px; border: 1px solid #bbb; background: #f7f7f7; }",
+                    ".base64-image-fixture img { display: block; width: 100%; height: 76px; object-fit: cover; background: #ddd; }",
+                    ".base64-background-fixture { min-height: 76px; border: 1px solid #777; background-image: url('../resources/images/placeholder.jpg'); background-size: cover; background-position: center; }",
+                    ".base64-layered-background-fixture { min-height: 76px; border: 1px solid #777; background-image: linear-gradient(rgba(255,255,255,.2), rgba(0,0,0,.2)), url('../resources/img/nature.jpg'); background-size: cover; background-position: center; }"
+                ]);
+
+                const memoryBackedCount = Array.from(document.styleSheets).filter(sheet =>
+                    sheet.ownerNode instanceof HTMLStyleElement &&
+                    sheet.cssRules.length &&
+                    !sheet.ownerNode.textContent
+                ).length;
+                console.log("[Arc2D demo] memory-backed stylesheet fixtures ready:", memoryBackedCount);
+
+                window.addEventListener("load", () => {
+                    const base64Candidates = Array.from(document.querySelectorAll("img")).filter(img =>
+                        img.src && !img.src.startsWith("data:")
+                    ).length + Array.from(document.querySelectorAll(".base64-background-fixture, .base64-layered-background-fixture")).length;
+                    console.log("[Arc2D demo] base64 image fixtures ready:", base64Candidates);
+                });
+            })();
         </script>
         <!-- <link rel="stylesheet" href="index.css" id="style-test"> -->
         <!-- <style>
@@ -30,7 +82,7 @@
         </style> -->
     </head>
 
-    <body >
+    <body namespace="ui.screens.ShadowDomDemo">
         <!-- <message-bar-extended-child>
             <h3>Extended Child Header</h3>
         </message-bar-extended-child> -->
@@ -40,18 +92,49 @@
         </message-bar> -->
         
 
-        <!-- <message-bar>
+        <div class="memory-backed-test">
+            <strong>Memory-backed stylesheet fixture:</strong>
+            these styles come from empty style owner nodes populated through CSSOM insertRule().
+        </div>
+
+        <section class="base64-image-fixture" aria-label="Base64 image export fixtures">
+            <figure>
+                <img src="../resources/img/Arc2D_270x237.png" alt="Arc2D logo fixture">
+                <figcaption>img png</figcaption>
+            </figure>
+            <figure>
+                <img src="../resources/images/placeholder.jpg" alt="Placeholder jpg fixture">
+                <figcaption>img jpg</figcaption>
+            </figure>
+            <figure>
+                <div class="base64-background-fixture"></div>
+                <figcaption>background jpg</figcaption>
+            </figure>
+            <figure>
+                <div class="base64-layered-background-fixture"></div>
+                <figcaption>layered background</figcaption>
+            </figure>
+        </section>
+
+        <message-bar>
             <template shadowrootmode="open">
                 <message-bar-extended>
-                    Hello
+                    <template shadowrootmode="open">
+                        <message-bar-extended-child>
+                            <template shadowrootmode="open">
+                                <h3>H3 Header XXXXXXXXX </h3>
+                                <%= await this.hello() %>
+                            </template>
+                        </message-bar-extended-child>
+                    </template>
                 </message-bar-extended>
             </template>
-        </message-bar> -->
+        </message-bar>
 
-        <message-bar-extended>
+        <!-- <message-bar-extended>
                 <h3>H3 Header XXXXXXXXX </h3>
                 <%= await this.hello() %>
-        </message-bar-extended>
+        </message-bar-extended> -->
     </body>
     
 </html>

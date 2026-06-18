@@ -42,6 +42,8 @@ const port = Number(process.env.PORT || 3000);
 const openAIKey = process.env.OPENAI_API_KEY || '';
 const openAIModel = process.env.OPENAI_MODEL || 'gpt-5-mini';
 const openAIBaseUrl = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1/responses';
+const liveAvatarKey = process.env.LIVEAVATAR_API_KEY || '';
+const liveAvatarBaseUrl = process.env.LIVEAVATAR_BASE_URL || 'https://api.liveavatar.com';
 
 const MIME_TYPES = {
     '.css': 'text/css; charset=utf-8',
@@ -162,6 +164,150 @@ async function handleChatRequest(request, response) {
     }
 }
 
+async function liveAvatarRequest(pathname, { method = 'GET', body, apiKey } = {}) {
+    const resolvedApiKey = apiKey || liveAvatarKey;
+    if (!resolvedApiKey) {
+        throw new Error('LIVEAVATAR_API_KEY is not configured on the server.');
+    }
+
+    const upstream = await fetch(`${liveAvatarBaseUrl}${pathname}`, {
+        method,
+        headers: {
+            'X-API-KEY': resolvedApiKey,
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: body ? JSON.stringify(body) : undefined
+    });
+
+    const rawResponse = await upstream.json().catch(() => null);
+    if (!upstream.ok) {
+        const message = rawResponse?.message || rawResponse?.error?.message || 'LiveAvatar request failed.';
+        const error = new Error(`${message}`);
+        error.status = upstream.status;
+        error.rawResponse = rawResponse;
+        throw error;
+    }
+
+    return rawResponse;
+}
+
+async function handleLiveAvatarSessionRequest(request, response) {
+    try {
+        const rawBody = await readRequestBody(request);
+        const body = rawBody ? JSON.parse(rawBody) : {};
+        const apiKey = typeof body.apiKey === 'string' && body.apiKey ? body.apiKey : '';
+        const avatarId = typeof body.avatarId === 'string' ? body.avatarId : '';
+        const contextId = typeof body.contextId === 'string' ? body.contextId : '';
+        const voiceId = typeof body.voiceId === 'string' ? body.voiceId : '';
+        const language = typeof body.language === 'string' && body.language ? body.language : 'en';
+        const isSandbox = Boolean(body.isSandbox);
+        const prompt = typeof body.instructions === 'string' ? body.instructions : '';
+        const openingText = typeof body.openingText === 'string' ? body.openingText : '';
+        const contextName = typeof body.contextName === 'string' ? body.contextName : '';
+
+        if (!avatarId || !contextId || !voiceId) {
+            sendJson(response, 400, { error: 'avatarId, contextId, and voiceId are required.' });
+            return;
+        }
+
+        if (prompt || openingText || contextName) {
+            const contextBody = {};
+            if (contextName) contextBody.name = contextName;
+            if (prompt) contextBody.prompt = prompt;
+            if (openingText) contextBody.opening_text = openingText;
+
+            await liveAvatarRequest(`/v1/contexts/${contextId}`, {
+                method: 'PATCH',
+                body: contextBody,
+                apiKey
+            });
+        }
+
+        const tokenPayload = await liveAvatarRequest('/v1/sessions/token', {
+            method: 'POST',
+            body: {
+                mode: 'FULL',
+                avatar_id: avatarId,
+                is_sandbox: isSandbox,
+                avatar_persona: {
+                    voice_id: voiceId,
+                    context_id: contextId,
+                    language
+                }
+            },
+            apiKey
+        });
+
+        const sessionToken = tokenPayload?.session_token || tokenPayload?.data?.session_token;
+        const sessionId = tokenPayload?.session_id || tokenPayload?.data?.session_id || null;
+        if (!sessionToken) {
+            sendJson(response, 502, { error: 'LiveAvatar did not return a session token.', rawResponse: tokenPayload });
+            return;
+        }
+
+        const startResponse = await fetch(`${liveAvatarBaseUrl}/v1/sessions/start`, {
+            method: 'POST',
+            headers: {
+                'authorization': `Bearer ${sessionToken}`,
+                'accept': 'application/json'
+            }
+        });
+        const sessionPayload = await startResponse.json().catch(() => null);
+        if (!startResponse.ok) {
+            sendJson(response, startResponse.status, {
+                error: sessionPayload?.message || sessionPayload?.error?.message || 'LiveAvatar session start failed.',
+                rawResponse: sessionPayload
+            });
+            return;
+        }
+
+        const liveKitUrl = sessionPayload?.livekit_url || sessionPayload?.data?.livekit_url || '';
+        const liveKitToken = sessionPayload?.livekit_client_token || sessionPayload?.data?.livekit_client_token || '';
+        const url = liveKitUrl && liveKitToken
+            ? `https://meet.livekit.io/custom?liveKitUrl=${encodeURIComponent(liveKitUrl)}&token=${encodeURIComponent(liveKitToken)}`
+            : '';
+
+        sendJson(response, 200, {
+            url,
+            sessionId,
+            liveKitUrl,
+            liveKitToken,
+            rawResponse: {
+                token: tokenPayload,
+                session: sessionPayload
+            }
+        });
+    } catch (error) {
+        sendJson(response, error?.status || 500, {
+            error: error?.message || String(error),
+            rawResponse: error?.rawResponse || null
+        });
+    }
+}
+
+async function handleLiveAvatarTranscriptRequest(requestUrl, response) {
+    const sessionId = requestUrl.pathname.split('/').pop() || '';
+    const apiKey = requestUrl.searchParams.get('apiKey') || '';
+    if (!sessionId) {
+        sendJson(response, 400, { error: 'Missing session id.' });
+        return;
+    }
+
+    try {
+        const transcriptPayload = await liveAvatarRequest(`/v1/sessions/${sessionId}/transcript`, {
+            method: 'GET',
+            apiKey
+        });
+        sendJson(response, 200, transcriptPayload);
+    } catch (error) {
+        sendJson(response, error?.status || 500, {
+            error: error?.message || String(error),
+            rawResponse: error?.rawResponse || null
+        });
+    }
+}
+
 function resolveStaticPath(urlPathname) {
     const decodedPath = decodeURIComponent(urlPathname.split('?')[0]);
     let relativePath = decodedPath === '/' ? '/index.html' : decodedPath;
@@ -208,6 +354,16 @@ const server = http.createServer(async (request, response) => {
 
     if (request.method === 'POST' && requestUrl.pathname === '/api/chat') {
         await handleChatRequest(request, response);
+        return;
+    }
+
+    if (request.method === 'POST' && requestUrl.pathname === '/api/liveavatar/session') {
+        await handleLiveAvatarSessionRequest(request, response);
+        return;
+    }
+
+    if (request.method === 'GET' && requestUrl.pathname.startsWith('/api/liveavatar/transcript/')) {
+        await handleLiveAvatarTranscriptRequest(requestUrl, response);
         return;
     }
 

@@ -45,9 +45,9 @@ namespace `ui.components` (
 		}
 
 
-		hasOwnTemplate() {
-			return true
-		}
+		// hasOwnTemplate() {
+		// 	return true
+		// }
 
         css() {
 			return `

@@ -92,25 +92,32 @@ class BaseVoiceActivityDetector extends EventTarget {
 class BrowserSpeechTranscriber extends BaseTranscriber {
     constructor(options = {}) {
         super();
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        this.SpeechRecognitionClass = window.SpeechRecognition || window.webkitSpeechRecognition;
+        this.options = options;
+        this._stopRequested = false;
+        this.recognition = null;
 
-        if (!SpeechRecognition) {
+        if (!this.SpeechRecognitionClass) {
             this.recognition = null;
             this.setState('unsupported');
             return;
         }
 
-        this.recognition = new SpeechRecognition();
-        this.recognition.continuous = options.continuous ?? true;
-        this.recognition.interimResults = options.interimResults ?? true;
-        this.recognition.lang = options.lang || document.documentElement.lang || 'en-US';
-        this._stopRequested = false;
+        this._createRecognition();
+    }
 
-        this.recognition.addEventListener('start', () => {
+    _createRecognition() {
+        if (!this.SpeechRecognitionClass) return null;
+        const recognition = new this.SpeechRecognitionClass();
+        recognition.continuous = this.options.continuous ?? true;
+        recognition.interimResults = this.options.interimResults ?? true;
+        recognition.lang = this.options.lang || document.documentElement.lang || 'en-US';
+
+        recognition.addEventListener('start', () => {
             this.setState('listening');
         });
 
-        this.recognition.addEventListener('result', event => {
+        recognition.addEventListener('result', event => {
             let partialTranscript = '';
 
             for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -129,7 +136,7 @@ class BrowserSpeechTranscriber extends BaseTranscriber {
             if (partial) this.emitPartialTranscript(partial, event);
         });
 
-        this.recognition.addEventListener('error', event => {
+        recognition.addEventListener('error', event => {
             if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
                 this.emitError(event);
                 this.setState('error');
@@ -146,7 +153,7 @@ class BrowserSpeechTranscriber extends BaseTranscriber {
             this.setState('error');
         });
 
-        this.recognition.addEventListener('end', () => {
+        recognition.addEventListener('end', () => {
             if (this._stopRequested) {
                 this.setState('idle');
                 return;
@@ -154,7 +161,7 @@ class BrowserSpeechTranscriber extends BaseTranscriber {
 
             if (this.state === 'listening') {
                 try {
-                    this.recognition.start();
+                    recognition.start();
                 } catch (error) {
                     this.emitError(error);
                     this.setState('error');
@@ -166,12 +173,27 @@ class BrowserSpeechTranscriber extends BaseTranscriber {
                 this.setState('idle');
             }
         });
+
+        this.recognition = recognition;
+        return recognition;
+    }
+
+    _releaseRecognition() {
+        if (!this.recognition) return;
+        try {
+            this.recognition.abort();
+        } catch {}
+        this.recognition = null;
     }
 
     async start() {
-        if (!this.recognition) {
+        if (!this.SpeechRecognitionClass) {
             this.setState('unsupported');
             throw new Error('Speech recognition is not supported in this browser.');
+        }
+
+        if (!this.recognition) {
+            this._createRecognition();
         }
 
         if (this.state === 'listening' || this.state === 'starting') return;
@@ -191,17 +213,19 @@ class BrowserSpeechTranscriber extends BaseTranscriber {
 
         this._stopRequested = true;
         this.setState('stopping');
-        this.recognition.stop();
-    }
-
-    destroy() {
-        if (!this.recognition) return;
-        this._stopRequested = true;
         try {
             this.recognition.abort();
         } catch (error) {
             this.emitError(error);
         }
+        this._releaseRecognition();
+        this.setState('idle');
+    }
+
+    destroy() {
+        if (!this.recognition) return;
+        this._stopRequested = true;
+        this._releaseRecognition();
         this.setState('idle');
     }
 }
@@ -294,6 +318,25 @@ class BrowserVoiceActivityDetector extends BaseVoiceActivityDetector {
         tick();
     }
 
+    async _releaseMediaResources() {
+        try {
+            this.source?.disconnect?.();
+        } catch {}
+        this.source = null;
+        this.analyser = null;
+        this.data = null;
+
+        this.mediaStream?.getTracks?.().forEach(track => track.stop());
+        this.mediaStream = null;
+
+        if (this.audioContext) {
+            try {
+                await this.audioContext.close();
+            } catch {}
+        }
+        this.audioContext = null;
+    }
+
     async stop() {
         cancelAnimationFrame(this.animationFrame);
         this.animationFrame = null;
@@ -303,22 +346,14 @@ class BrowserVoiceActivityDetector extends BaseVoiceActivityDetector {
             this._isSpeechActive = false;
             this.emitSpeechEnd({ rms: 0 });
         }
+        await this._releaseMediaResources();
         this.setState('idle');
     }
 
-    destroy() {
+    async destroy() {
         cancelAnimationFrame(this.animationFrame);
         this.animationFrame = null;
-        try {
-            this.source?.disconnect?.();
-        } catch {}
-        this.source = null;
-        this.analyser = null;
-        this.data = null;
-        this.mediaStream?.getTracks?.().forEach(track => track.stop());
-        this.mediaStream = null;
-        this.audioContext?.close?.();
-        this.audioContext = null;
+        await this._releaseMediaResources();
         this.setState('idle');
     }
 }

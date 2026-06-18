@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "id": "recording-1781789418255",
+  "name": "Mutation Recorder Lab",
+  "url": "http://127.0.0.1:8084/",
+  "snapshotId": null,
+  "namespace": "demos.mutationRecorderExperiment",
+  "createdAt": "2026-06-18T13:30:18.255Z",
+  "stoppedAt": "2026-06-18T13:30:21.438Z",
+  "recorder": {
+    "kind": "custom-dom",
+    "version": 1,
+    "options": {
+      "idleMs": 3000,
+      "recordMouseMoves": false
+    }
+  },
+  "viewport": {
+    "width": 1710,
+    "height": 651,
+    "dpr": 2
+  },
+  "roots": {
+    "document": {
+      "id": "document",
+      "kind": "document",
+      "hostSelector": null,
+      "observedTarget": {
+        "kind": "element",
+        "selector": "body > main > section > div#recording-stage"
+      }
+    },
+    "shadow:body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host": {
+      "id": "shadow:body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host",
+      "kind": "shadow-root",
+      "hostSelector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host",
+      "observedTarget": null
+    },
+    "shadow:body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host": {
+      "id": "shadow:body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host",
+      "kind": "shadow-root",
+      "hostSelector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host",
+      "observedTarget": null
+    }
+  },
+  "events": [
+    {
+      "kind": "system",
+      "type": "recording-started",
+      "data": {
+        "target": {
+          "kind": "element",
+          "selector": "body > main > section > div#recording-stage"
+        },
+        "url": "http://127.0.0.1:8084/"
+      },
+      "timestamp": 1781789418258
+    },
+    {
+      "kind": "gesture",
+      "type": "click",
+      "target": {
+        "kind": "element",
+        "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > button#nested-change"
+      },
+      "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > button#nested-change",
+      "key": null,
+      "value": "",
+      "x": 378,
+      "y": 407,
+      "timestamp": 1781789419572
+    },
+    {
+      "kind": "mutation",
+      "type": "childList",
+      "target": {
+        "kind": "element",
+        "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > span#nested-label"
+      },
+      "adds": [
+        {
+          "node": {
+            "nodeType": 3,
+            "textContent": "Nested text changed @ 9:30:19 AM"
+          },
+          "previousSibling": null,
+          "nextSibling": null
+        }
+      ],
+      "removes": [
+        {
+          "node": {
+            "nodeType": 3,
+            "textContent": "Nested shadow root ready."
+          },
+          "target": null,
+          "parent": {
+            "kind": "element",
+            "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > span#nested-label"
+          },
+          "previousSibling": null,
+          "nextSibling": null
+        }
+      ],
+      "timestamp": 1781789419573
+    },
+    {
+      "kind": "system",
+      "type": "recording-stopped",
+      "data": {},
+      "timestamp": 1781789421438
+    }
+  ],
+  "clips": [
+    {
+      "id": "clip-1",
+      "name": "Clip1",
+      "trigger": {
+        "event": "click",
+        "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > button#nested-change",
+        "target": {
+          "kind": "element",
+          "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > button#nested-change"
+        },
+        "x": 378,
+        "y": 407,
+        "key": null
+      },
+      "startTime": 1781789419572,
+      "endTime": 1781789421438,
+      "eventRange": [
+        1,
+        2
+      ],
+      "events": [
+        {
+          "kind": "gesture",
+          "type": "click",
+          "target": {
+            "kind": "element",
+            "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > button#nested-change"
+          },
+          "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > button#nested-change",
+          "key": null,
+          "value": "",
+          "x": 378,
+          "y": 407,
+          "timestamp": 1781789419572
+        },
+        {
+          "kind": "mutation",
+          "type": "childList",
+          "target": {
+            "kind": "element",
+            "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > span#nested-label"
+          },
+          "adds": [
+            {
+              "node": {
+                "nodeType": 3,
+                "textContent": "Nested text changed @ 9:30:19 AM"
+              },
+              "previousSibling": null,
+              "nextSibling": null
+            }
+          ],
+          "removes": [
+            {
+              "node": {
+                "nodeType": 3,
+                "textContent": "Nested shadow root ready."
+              },
+              "target": null,
+              "parent": {
+                "kind": "element",
+                "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(3) > div#shadow-host >>> div > div#nested-shadow-host >>> div > span#nested-label"
+              },
+              "previousSibling": null,
+              "nextSibling": null
+            }
+          ],
+          "timestamp": 1781789419573
+        }
+      ],
+      "meta": {
+        "status": "suggested",
+        "mutationCount": 1,
+        "activityEndedBy": "stop",
+        "idleMs": 3000
+      }
+    }
+  ]
+}

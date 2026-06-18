@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="origin-trial" content="A1EzYcW6lPMR20iRRKto6uXJsePz9unwAO+4NIGj6ek00ZF/djKvhfrrek8uJHoIl4XoJ7rGa+ukQAn3nKo/EwcAAABleyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiVHJhbnNsYXRpb25BUEkiLCJleHBpcnkiOjE3NTc5ODA4MDAsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=">
+        <title>WebComponents</title>
+        <!-- <script src="../node_modules/od-cocoon/framework.src.js" charset="utf-8"></script> -->
+      
+        <style>
+            html, body, :host {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                display: block;
+                box-sizing:border-box;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 100%;
+                font-family: "Open Sans", sans-serif;
+                color: #aaa;
+                text-align: center;
+            }
+
+            /* .pulse {
+                height: 24px;
+                width: 24px;
+                background: linear-gradient(#8a82fb, #407ed7);
+                position: absolute;
+                border-radius: 50%;
+                font-size: 50px;
+                color: #ffffff;
+                position-area: center;
+                z-index: 10;
+                place-items: center;
+                place-content: center;
+                display: flex;
+                pointer-events: none;
+            }
+
+            .pulse:after,
+            .pulse:before {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background-color: #8a82fb;
+                border-radius: 50%;
+                z-index: -1;
+                opacity: 0.7;
+                animation: pulse 2s 1s ease-out infinite;
+            }
+
+            .pulse:before {
+                animation: pulse 2s ease-out infinite;
+            }
+
+            @keyframes pulse {
+                100% {
+                    transform: scale(1.7);
+                    opacity: 0;
+                }
+            } */
+
+            :root {
+                --tourguide-bg-color: rgb(43 43 43);
+                --tourguide-font-color: #afafaf;
+                --tourguide-progress-bg-color: #4a4a4a;
+                --tourguide-base-color: #ffb700;
+                --tourguide-title-color: #a5820e;
+                --tourguide-border-color: #dadada;
+                --tourguide-font-family: "Open Sans", sans-serif;
+                --tourguide-font-size: inherit;
+                --tourguide-step-label-color: #c8c8c8;
+                 /* Set a default font size */
+            }
+        </style>
+
+        <script type="module">
+            import * as LiveKit from 'https://cdn.jsdelivr.net/npm/livekit-client@2.17.2/+esm';
+            import TourGuide from '../src/libs/tour.js';
+            import LiveAvatarVoiceAgent, {
+                LiveAvatarBrowserService,
+                LiveAvatarProxyService
+            } from '../src/libs/aivoice2.js';
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                const demoConfig = {
+                    liveAvatarApiKey: '9da8fa52-2f59-11f1-8d28-066a7fa2e369',
+                    avatarId: '65f9e3c9-d48b-4118-b73a-4ae2e3cbb8f0',
+                    contextId: '65315879-21e9-4a64-ad86-dc810091ef65',
+                    voiceId: 'b2bd6569-a537-4342-aeca-a1f15d2a2c97',
+                    systemPrompt: 'You are a friendly spoken sales and support rep for the company on this website. Sound natural, warm, and confident. Help people understand services, guide them toward the next best action, and use tours only when they would genuinely help.',
+                    instructions: 'Use the current TourGuide context to answer questions about the page and the tours. Mention relevant tours when helpful, but always ask before starting one. Keep your replies concise and conversational. If the user confirms they want a tour, reply with one short sentence only and do not describe the tour steps or contents because the TourGuide UI will take over.',
+                    openingText: 'Hi there, I am here to help you explore this page and walk you through anything you would like to see.',
+                    isSandbox: true,
+                    voiceChatVisualizer: {
+                        mode: 'embed-frame',
+                        label: 'Live avatar guide',
+                        placeholder: 'Start voice chat to load the LiveAvatar agent.'
+                    },
+                    activeService: 'proxy',
+                    proxySessionEndpoint: '/api/liveavatar/session',
+                    proxyTranscriptEndpointBase: '/api/liveavatar/transcript'
+                };
+
+                const services = {
+                    browser: new LiveAvatarBrowserService({
+                        apiKey: demoConfig.liveAvatarApiKey
+                    }),
+                    proxy: new LiveAvatarProxyService({
+                        apiKey: demoConfig.liveAvatarApiKey,
+                        sessionEndpoint: demoConfig.proxySessionEndpoint,
+                        transcriptEndpointBase: demoConfig.proxyTranscriptEndpointBase
+                    })
+                };
+                const activeService = services[demoConfig.activeService] || services.browser;
+
+                console.log('[TourGuide LiveAvatar][services]', {
+                    services: Object.keys(services),
+                    active: Object.entries(services).find(([, service]) => service === activeService)?.[0] || 'custom'
+                });
+
+                const aiVoice = new LiveAvatarVoiceAgent({
+                    service: activeService,
+                    liveKit: LiveKit,
+                    apiKey: demoConfig.liveAvatarApiKey,
+                    avatarId: demoConfig.avatarId,
+                    contextId: demoConfig.contextId,
+                    voiceId: demoConfig.voiceId,
+                    isSandbox: demoConfig.isSandbox,
+                    systemPrompt: demoConfig.systemPrompt,
+                    instructions: demoConfig.instructions,
+                    openingText: demoConfig.openingText,
+                    visualizerLabel: demoConfig.voiceChatVisualizer.label,
+                    visualizerPlaceholder: demoConfig.voiceChatVisualizer.placeholder
+                });
+
+                aiVoice.addEventListener('transcriberstatechange', event => {
+                    console.log('[TourGuide LiveAvatar][state]', event.detail.state);
+                });
+
+                aiVoice.addEventListener('chatpreparestart', () => {
+                    console.log('[TourGuide LiveAvatar][prepare] starting');
+                });
+
+                aiVoice.addEventListener('chatprepareready', event => {
+                    console.log('[TourGuide LiveAvatar][prepare] ready', event.detail.ready);
+                });
+
+                aiVoice.addEventListener('finaltranscript', event => {
+                    console.log('[TourGuide LiveAvatar][final]', event.detail.text);
+                });
+
+                aiVoice.addEventListener('response', event => {
+                    console.log(`[TourGuide LiveAvatar][response:${event.detail.response?.provider || 'unknown'}]`, event.detail.text);
+                });
+
+                aiVoice.addEventListener('action', event => {
+                    console.log('[TourGuide LiveAvatar][action]', event.detail.action, event.detail.response?.targetTourKey || null);
+                });
+
+                aiVoice.addEventListener('speechstart', event => {
+                    console.log('[TourGuide LiveAvatar][speechstart]', event.detail.text);
+                });
+
+                aiVoice.addEventListener('speechend', event => {
+                    console.log('[TourGuide LiveAvatar][speechend]', event.detail.text);
+                });
+
+                aiVoice.addEventListener('visualizerchange', event => {
+                    console.log('[TourGuide LiveAvatar][visualizer]', event.detail.config);
+                });
+
+                aiVoice.addEventListener('error', event => {
+                    console.error('[TourGuide LiveAvatar][error]', event.detail.error);
+                });
+
+                const tour = new TourGuide();
+                const cleanupVoice = () => {
+                    try {
+                        tour.setAIVoice?.(null);
+                    } catch {}
+                    try {
+                        aiVoice.destroy?.();
+                    } catch {}
+                };
+
+                window.addEventListener('pagehide', cleanupVoice, { once: true });
+                window.addEventListener('beforeunload', cleanupVoice, { once: true });
+
+                await tour.install({
+                    data : "./help-demo.json",
+                    show_tour_listing: true,
+                    voice_chat_visualizer: demoConfig.voiceChatVisualizer,
+                    ai_voice: aiVoice
+                });
+            });
+        </script>
+        
+    </head>
+
+    <body >
+
+        <div>
+            <div id="step-1" style="z-index:10;">
+                <div style="height: 200px;border: 1px solid black;">
+                    <select style="margin-top: 40px;">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div><div id="step-2" style="color: red;">Step 2</div></div>
+        <div id="step-3">Step 3</div>
+        <div id="step-4">Step 4</div>
+        <div id="step-5">Step 5</div>
+        <a href="javascript:void(null);" onclick="tg.show('test-sequence',3)">(?)</a>
+
+        <ui-components-switch import style="z-index: 20;width: 90px;" id="btn-toggle-a"></ui-components-switch>
+            <ui-components-switch id="btn-toggle-b"></ui-components-switch>
+            <input value="24" required="true" id="age" type="number" style="z-index: 10; width: 50px; height: 40px;"> <a href="javascript:void(null);" onclick="tg.show('Payroll Management')">(?)</a>
+            <button style="display: block;" id="age-submit-btn">Submit</button>
+
+        
+            <button id="btn-tooltip-1" onclick="tg.show('tooltip-1')">Show Tooltip 1</button>
+        
+        <script>
+            var step1 = document.getElementById('step-3');
+            step1.style.color = 'blue';
+        </script>
+    </body>
+</html>

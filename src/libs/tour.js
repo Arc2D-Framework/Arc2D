@@ -25,14 +25,26 @@ class TourVoiceVisualizer extends HTMLElement {
     constructor() {
         super();
         this.root = this.attachShadow({ mode: 'open' });
+        this.mode = 'wave';
+        this.config = {};
         this.audioContext = null;
         this.analyser = null;
         this.mediaStream = null;
         this.freqs = null;
         this.animationFrame = null;
         this.isListening = false;
+        this.isSpeaking = false;
+        this.isThinking = false;
         this.useFallbackAnimation = false;
         this.phase = 0;
+        this.avatarReady = false;
+        this.lastAvatarState = 'idle';
+        this.embedReady = false;
+        this.remoteVideoTrack = null;
+        this.remoteAudioTrack = null;
+        this.liveMediaMuted = false;
+        this.voiceActive = false;
+        this.voiceToggleHandler = null;
 
         this.opts = {
             smoothing: 0.6,
@@ -50,7 +62,537 @@ class TourVoiceVisualizer extends HTMLElement {
     }
 
     connectedCallback() {
-        this.root.innerHTML = `
+        this.mode = this.getAttribute('mode') || this.mode || 'wave';
+        this._render();
+        this.resizeObserver = new ResizeObserver(() => this._resizeCanvas());
+        this.resizeObserver.observe(this);
+        this._resizeCanvas();
+        const state = this._applyState();
+        if (this.mode === 'avatar-video') {
+            this._syncAvatarPlayback(state);
+        } else if (this.mode === 'embed-frame') {
+            this._syncEmbedSource();
+        } else if (this.mode === 'live-media') {
+            this._syncLiveMediaState();
+        } else {
+            this._drawIdle();
+        }
+    }
+
+    disconnectedCallback() {
+        this.resizeObserver?.disconnect();
+        cancelAnimationFrame(this.animationFrame);
+        this.animationFrame = null;
+    }
+
+    configure(config = {}) {
+        this.config = { ...this.config, ...config };
+        if (config.mode) this.mode = config.mode;
+        if (typeof config.onVoiceToggle === 'function') {
+            this.voiceToggleHandler = config.onVoiceToggle;
+        }
+        if (!this.isConnected) return;
+        this._render();
+        this._resizeCanvas();
+        const state = this._applyState();
+        if (this.mode === 'avatar-video') {
+            this._syncAvatarPlayback(state);
+        } else if (this.mode === 'embed-frame') {
+            this._syncEmbedSource();
+        } else if (this.mode === 'live-media') {
+            this._syncLiveMediaState();
+        } else if (!this.isListening) {
+            this._drawIdle();
+        }
+    }
+
+    setStatus(text = '') {
+        if (this.labelEl) this.labelEl.textContent = text;
+    }
+
+    setVoiceActive(isActive) {
+        this.voiceActive = Boolean(isActive);
+        this.toggleAttribute('data-voice-active', this.voiceActive);
+        this._syncVoiceToggleUI();
+    }
+
+    async setListening(isListening) {
+        this.isListening = Boolean(isListening);
+        const state = this._applyState();
+        if (this.mode === 'avatar-video') {
+            await this._syncAvatarPlayback(state);
+        } else if (this.mode === 'embed-frame') {
+            this._syncEmbedSource();
+        } else if (this.mode === 'live-media') {
+            this._syncLiveMediaState();
+            return;
+        }
+        if (this.isListening) {
+            await this._ensureAnalyser();
+            this._startAnimation();
+            return;
+        }
+        this._stopAnimation();
+        this._drawIdle();
+    }
+
+    setSpeaking(isSpeaking) {
+        this.isSpeaking = Boolean(isSpeaking);
+        const state = this._applyState();
+        if (this.mode === 'avatar-video') {
+            this._syncAvatarPlayback(state);
+        }
+    }
+
+    setThinking(isThinking) {
+        this.isThinking = Boolean(isThinking);
+        const state = this._applyState();
+        if (this.mode === 'avatar-video') {
+            this._syncAvatarPlayback(state);
+        }
+    }
+
+    _render() {
+        this.root.innerHTML = this.mode === 'avatar-video'
+            ? `
+            <style>
+                :host {
+                    display: block;
+                    inline-size: 100%;
+                }
+                .wrap {
+                    position: relative;
+                    inline-size: 100%;
+                    block-size: 100px;
+                    border-radius: 0px;
+                    overflow: hidden;
+                    background:
+                        radial-gradient(circle at 50% 10%, rgb(255 181 77 / 30%), transparent 38%),
+                        radial-gradient(circle at 50% 100%, rgb(23 34 68 / 88%), rgb(8 10 19 / 98%));
+                    border: 1px solid rgb(255 255 255 / 8%);
+                    box-shadow:
+                        0 22px 48px rgb(0 0 0 / 38%),
+                        inset 0 1px 0 rgb(255 255 255 / 7%);
+                }
+                video {
+                    display: block;
+                    inline-size: 100%;
+                    block-size: 100%;
+                    object-fit: cover;
+                    filter: saturate(0.9) brightness(0.74);
+                    opacity: 0.72;
+                    transform: scale(1.02);
+                    transition:
+                        opacity 220ms ease,
+                        filter 220ms ease,
+                        transform 220ms ease;
+                    background: rgb(7 10 22);
+                }
+                .shade {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background:
+                        linear-gradient(180deg, rgb(3 6 18 / 8%), rgb(4 6 18 / 42%)),
+                        radial-gradient(circle at 50% 115%, rgb(17 22 46 / 72%), transparent 52%);
+                    pointer-events: none;
+                }
+                .pulse {
+                    position: absolute;
+                    bottom: 12px;
+                    left: 14px;
+                    inline-size: 12px;
+                    block-size: 12px;
+                    border-radius: 999px;
+                    background: rgb(143 160 188 / 76%);
+                    box-shadow: 0 0 0 0 rgb(143 160 188 / 42%);
+                    transition: background 160ms ease, box-shadow 160ms ease;
+                }
+                .label {
+                    position: absolute;
+                    right: 16px;
+                    bottom: 12px;
+                    left: 16px;
+                    padding: 7px 12px 7px 32px;
+                    font-size: 12px;
+                    line-height: 1.35;
+                    color: #f5e8c5;
+                    text-align: left;
+                    background: rgb(3 5 18 / 52%);
+                    border: 1px solid rgb(255 255 255 / 10%);
+                    border-radius: 999px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    backdrop-filter: blur(8px);
+                }
+                :host([data-voice-state="inactive"]) video,
+                :host([data-voice-state="idle"]) video {
+                    filter: saturate(0.75) brightness(0.68);
+                    opacity: 0.66;
+                }
+                :host([data-voice-state="listening"]) video {
+                    filter: saturate(0.98) brightness(0.84);
+                    opacity: 0.9;
+                    transform: scale(1.03);
+                }
+                :host([data-voice-state="thinking"]) video {
+                    filter: saturate(0.88) brightness(0.8);
+                    opacity: 0.86;
+                }
+                :host([data-voice-state="speaking"]) video {
+                    filter: saturate(1.08) brightness(0.98);
+                    opacity: 1;
+                    transform: scale(1.045);
+                }
+                :host([data-voice-state="listening"]) .pulse {
+                    background: #48d8ff;
+                    box-shadow: 0 0 0 10px rgb(72 216 255 / 0%);
+                    animation: tour-voice-avatar-pulse 1.6s ease-out infinite;
+                }
+                :host([data-voice-state="thinking"]) .pulse {
+                    background: #ffd36a;
+                    box-shadow: 0 0 16px rgb(255 211 106 / 42%);
+                }
+                :host([data-voice-state="speaking"]) .pulse {
+                    background: #67ffb0;
+                    box-shadow:
+                        0 0 0 7px rgb(103 255 176 / 12%),
+                        0 0 20px rgb(103 255 176 / 46%);
+                }
+                @keyframes tour-voice-avatar-pulse {
+                    0% {
+                        box-shadow: 0 0 0 0 rgb(72 216 255 / 42%);
+                    }
+                    100% {
+                        box-shadow: 0 0 0 16px rgb(72 216 255 / 0%);
+                    }
+                }
+            </style>
+            <div class="wrap">
+                <video
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"
+                    ${this.config.src ? `src="${this.config.src}"` : ''}
+                    ${this.config.poster ? `poster="${this.config.poster}"` : ''}
+                    aria-label="${this.config.label || 'Voice assistant avatar'}"
+                ></video>
+                <div class="shade"></div>
+                <div class="pulse"></div>
+                <div class="label"></div>
+            </div>
+        `
+            : this.mode === 'embed-frame'
+                ? `
+            <style>
+                :host {
+                    display: block;
+                    inline-size: 100%;
+                }
+                .wrap {
+                    position: relative;
+                    inline-size: 100%;
+                    block-size: 100px;
+                    border-radius: 0px;
+                    overflow: hidden;
+                    background:
+                        radial-gradient(circle at 50% 8%, rgb(255 199 95 / 18%), transparent 32%),
+                        linear-gradient(180deg, rgb(5 7 18 / 96%), rgb(7 10 24 / 98%));
+                    border: 1px solid rgb(255 255 255 / 8%);
+                    box-shadow:
+                        0 22px 48px rgb(0 0 0 / 38%),
+                        inset 0 1px 0 rgb(255 255 255 / 7%);
+                }
+                iframe {
+                    display: block;
+                    inline-size: 100%;
+                    block-size: 100%;
+                    border: 0;
+                    background: rgb(7 10 22);
+                }
+                .empty {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                    color: rgb(233 221 188 / 82%);
+                    font-size: 13px;
+                    line-height: 1.45;
+                    text-align: center;
+                    background:
+                        radial-gradient(circle at 50% 0%, rgb(255 199 95 / 14%), transparent 38%),
+                        linear-gradient(180deg, rgb(5 7 18 / 38%), rgb(5 8 18 / 62%));
+                    transition: opacity 180ms ease;
+                }
+                .empty[hidden] {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+                .voice-toggle {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    inline-size: 78px;
+                    block-size: 78px;
+                    border: 0;
+                    border-radius: 999px;
+                    background: linear-gradient(180deg, #38d37f, #1d9b5c);
+                    color: #ffffff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    z-index: 3;
+                    box-shadow:
+                        0 22px 42px rgb(0 0 0 / 35%),
+                        0 0 0 1px rgb(255 255 255 / 12%);
+                    transition:
+                        top 220ms ease,
+                        right 220ms ease,
+                        left 220ms ease,
+                        transform 220ms ease,
+                        inline-size 220ms ease,
+                        block-size 220ms ease,
+                        background 220ms ease,
+                        box-shadow 220ms ease;
+                }
+                .voice-toggle:hover {
+                    filter: brightness(1.05);
+                }
+                .voice-toggle .icon {
+                    font-size: 30px;
+                    line-height: 1;
+                }
+                .voice-toggle .state {
+                    display: none;
+                }
+                .label {
+                    position: absolute;
+                    right: 16px;
+                    bottom: 12px;
+                    left: 16px;
+                    padding: 7px 12px;
+                    font-size: 12px;
+                    line-height: 1.35;
+                    color: #f5e8c5;
+                    text-align: left;
+                    background: rgb(3 5 18 / 52%);
+                    border: 1px solid rgb(255 255 255 / 10%);
+                    border-radius: 999px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    backdrop-filter: blur(8px);
+                }
+                :host([data-voice-state="listening"]) .wrap {
+                    box-shadow:
+                        0 22px 48px rgb(0 0 0 / 38%),
+                        0 0 0 1px rgb(72 216 255 / 16%),
+                        inset 0 1px 0 rgb(255 255 255 / 7%);
+                }
+                :host([data-voice-state="speaking"]) .wrap {
+                    box-shadow:
+                        0 22px 48px rgb(0 0 0 / 38%),
+                        0 0 0 1px rgb(103 255 176 / 20%),
+                        inset 0 1px 0 rgb(255 255 255 / 7%);
+                }
+                :host([data-voice-active]) .voice-toggle {
+                    top: 12px;
+                    right: 12px;
+                    left: auto;
+                    transform: none;
+                    inline-size: 42px;
+                    block-size: 42px;
+                    background: linear-gradient(180deg, #ff7e76, #d3413a);
+                }
+                :host([data-voice-active]) .voice-toggle .icon {
+                    font-size: 18px;
+                }
+                :host([data-voice-active]) .voice-toggle .state {
+                    display: none;
+                }
+                :host(:not([data-voice-active])) iframe,
+                :host(:not([data-voice-active])) .empty,
+                :host(:not([data-voice-active])) .label {
+                    display: none;
+                }
+            </style>
+            <div class="wrap">
+                <iframe allow="microphone; camera; autoplay"></iframe>
+                <div class="empty">${this.config.placeholder || 'Start voice chat to load the avatar agent.'}</div>
+                <button type="button" class="voice-toggle" data-action="voice-toggle" aria-label="Start voice chat">
+                    <span class="icon">🎙</span>
+                    <span class="state">On</span>
+                </button>
+                <div class="label"></div>
+            </div>
+        `
+                : this.mode === 'live-media'
+                    ? `
+            <style>
+                :host {
+                    display: block;
+                    inline-size: 100%;
+                }
+                .wrap {
+                    position: relative;
+                    inline-size: 100%;
+                    block-size: 164px;
+                    border-radius: 0px;
+                    overflow: hidden;
+                    background:
+                        radial-gradient(circle at 50% 8%, rgb(255 199 95 / 18%), transparent 32%),
+                        linear-gradient(180deg, rgb(5 7 18 / 96%), rgb(7 10 24 / 98%));
+                    border: 1px solid rgb(255 255 255 / 8%);
+                    box-shadow:
+                        0 22px 48px rgb(0 0 0 / 38%),
+                        inset 0 1px 0 rgb(255 255 255 / 7%);
+                }
+                video {
+                    display: block;
+                    inline-size: 100%;
+                    block-size: 100%;
+                    object-fit: cover;
+                    background: rgb(7 10 22);
+                }
+                audio {
+                    display: none;
+                }
+                .empty {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                    color: rgb(233 221 188 / 82%);
+                    font-size: 13px;
+                    line-height: 1.45;
+                    text-align: center;
+                    background:
+                        radial-gradient(circle at 50% 0%, rgb(255 199 95 / 14%), transparent 38%),
+                        linear-gradient(180deg, rgb(5 7 18 / 38%), rgb(5 8 18 / 62%));
+                    transition: opacity 180ms ease;
+                }
+                .empty[hidden] {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+                .voice-toggle {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    inline-size: 78px;
+                    block-size: 78px;
+                    border: 0;
+                    border-radius: 999px;
+                    background: linear-gradient(180deg, #38d37f, #1d9b5c);
+                    color: #ffffff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    z-index: 3;
+                    box-shadow:
+                        0 22px 42px rgb(0 0 0 / 35%),
+                        0 0 0 1px rgb(255 255 255 / 12%);
+                    transition:
+                        top 220ms ease,
+                        right 220ms ease,
+                        left 220ms ease,
+                        transform 220ms ease,
+                        inline-size 220ms ease,
+                        block-size 220ms ease,
+                        background 220ms ease,
+                        box-shadow 220ms ease;
+                }
+                .voice-toggle:hover {
+                    filter: brightness(1.05);
+                }
+                .voice-toggle .icon {
+                    font-size: 30px;
+                    line-height: 1;
+                }
+                .voice-toggle .state {
+                    display: none;
+                }
+                .label {
+                    position: absolute;
+                    right: 16px;
+                    bottom: 12px;
+                    left: 16px;
+                    padding: 7px 12px;
+                    font-size: 12px;
+                    line-height: 1.35;
+                    color: #f5e8c5;
+                    text-align: left;
+                    background: rgb(3 5 18 / 52%);
+                    border: 1px solid rgb(255 255 255 / 10%);
+                    border-radius: 999px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    backdrop-filter: blur(8px);
+                }
+                :host([data-voice-state="listening"]) .wrap {
+                    box-shadow:
+                        0 22px 48px rgb(0 0 0 / 38%),
+                        0 0 0 1px rgb(72 216 255 / 16%),
+                        inset 0 1px 0 rgb(255 255 255 / 7%);
+                }
+                :host([data-voice-state="speaking"]) .wrap {
+                    box-shadow:
+                        0 22px 48px rgb(0 0 0 / 38%),
+                        0 0 0 1px rgb(103 255 176 / 20%),
+                        inset 0 1px 0 rgb(255 255 255 / 7%);
+                }
+                :host([data-voice-active]) .voice-toggle {
+                    top: 12px;
+                    right: 12px;
+                    left: auto;
+                    transform: none;
+                    inline-size: 42px;
+                    block-size: 42px;
+                    background: linear-gradient(180deg, #ff7e76, #d3413a);
+                }
+                :host([data-voice-active]) .voice-toggle .icon {
+                    font-size: 18px;
+                }
+                :host([data-voice-active]) .voice-toggle .state {
+                    display: none;
+                }
+                :host(:not([data-voice-active])) video,
+                :host(:not([data-voice-active])) audio,
+                :host(:not([data-voice-active])) .empty,
+                :host(:not([data-voice-active])) .label {
+                    display: none;
+                }
+            </style>
+            <div class="wrap">
+                <video playsinline autoplay muted></video>
+                <audio autoplay></audio>
+                <div class="empty">${this.config.placeholder || 'Start voice chat to load the avatar agent.'}</div>
+                <button type="button" class="voice-toggle" data-action="voice-toggle" aria-label="Start voice chat">
+                    <span class="icon">🎙</span>
+                </button>
+                <div class="label"></div>
+            </div>
+        `
+                : `
             <style>
                 :host {
                     display: block;
@@ -73,8 +615,9 @@ class TourVoiceVisualizer extends HTMLElement {
                 }
                 .label {
                     position: absolute;
-                    inset-inline: 8px;
-                    inset-block-end: 6px;
+                    right: 8px;
+                    bottom: 6px;
+                    left: 8px;
                     padding: 4px 8px;
                     font-size: 12px;
                     line-height: 1.25;
@@ -87,44 +630,151 @@ class TourVoiceVisualizer extends HTMLElement {
                     text-overflow: ellipsis;
                     backdrop-filter: blur(6px);
                 }
+                :host([data-voice-state="speaking"]) .label {
+                    color: #ffe6a0;
+                    border-color: rgb(255 201 79 / 34%);
+                }
             </style>
             <div class="wrap">
                 <canvas></canvas>
                 <div class="label"></div>
             </div>
         `;
-
-        this.canvas = this.root.querySelector('canvas');
         this.labelEl = this.root.querySelector('.label');
-        this.ctx = this.canvas.getContext('2d');
-        this.resizeObserver = new ResizeObserver(() => this._resizeCanvas());
-        this.resizeObserver.observe(this);
-        this._resizeCanvas();
-        this._drawIdle();
+        this.canvas = this.root.querySelector('canvas');
+        this.ctx = this.canvas?.getContext('2d') || null;
+        this.avatarVideoEl = this.root.querySelector('video');
+        this.liveMediaVideoEl = this.mode === 'live-media' ? this.root.querySelector('video') : null;
+        this.liveMediaAudioEl = this.root.querySelector('audio');
+        this.embedFrameEl = this.root.querySelector('iframe');
+        this.embedEmptyEl = this.root.querySelector('.empty');
+        this.voiceToggleButtonEl = this.root.querySelector('[data-action="voice-toggle"]');
+        this.voiceToggleButtonEl?.addEventListener('click', event => {
+            event.stopPropagation();
+            this.voiceToggleHandler?.();
+        });
+        this._syncVoiceToggleUI();
     }
 
-    disconnectedCallback() {
-        this.resizeObserver?.disconnect();
-        cancelAnimationFrame(this.animationFrame);
-        this.animationFrame = null;
+    _applyState() {
+        const nextState = !this.voiceActive
+            ? 'inactive'
+            : this.isSpeaking
+            ? 'speaking'
+            : (this.isThinking
+                ? 'thinking'
+                : (this.isListening ? 'listening' : 'idle'));
+        this.setAttribute('data-voice-state', nextState);
+        return nextState;
     }
 
-    setStatus(text = '') {
-        if (this.labelEl) this.labelEl.textContent = text;
+    async _ensureAvatarPlayback() {
+        const video = this.avatarVideoEl;
+        if (!video) return;
+        try {
+            if (video.paused) await video.play();
+            this.avatarReady = true;
+        } catch (error) {
+            if (!this.avatarReady) {
+                console.warn('[TourVoiceVisualizer] Avatar video playback could not start automatically.', error);
+            }
+        }
     }
 
-    async setListening(isListening) {
-        this.isListening = Boolean(isListening);
-        if (this.isListening) {
-            await this._ensureAnalyser();
-            this._startAnimation();
+    async _syncAvatarPlayback(state = this.lastAvatarState) {
+        if (this.mode !== 'avatar-video') return;
+        const video = this.avatarVideoEl;
+        if (!video) return;
+
+        this.lastAvatarState = state;
+
+        if (state === 'speaking') {
+            await this._ensureAvatarPlayback();
             return;
         }
-        this._stopAnimation();
-        this._drawIdle();
+
+        video.pause();
+        if (Number.isFinite(this.config.pauseTime)) {
+            video.currentTime = Math.max(0, Number(this.config.pauseTime));
+            return;
+        }
+        try {
+            video.currentTime = 0;
+        } catch {}
     }
 
+    _syncEmbedSource() {
+        if (this.mode !== 'embed-frame') return;
+        const frame = this.embedFrameEl;
+        if (!frame) return;
+        const src = this.config.src || '';
+        const hasSource = Boolean(src);
+
+        if (frame.getAttribute('src') !== src) {
+            if (hasSource) {
+                frame.setAttribute('src', src);
+            } else {
+                frame.removeAttribute('src');
+            }
+        }
+
+        this.embedReady = hasSource;
+        if (this.embedEmptyEl) {
+            this.embedEmptyEl.hidden = hasSource;
+        }
+    }
+
+    setMediaTracks(media = {}) {
+        if (this.mode !== 'live-media') return;
+        const nextVideoTrack = media.videoTrack || null;
+        const nextAudioTrack = media.audioTrack || null;
+
+        if (this.remoteVideoTrack && this.remoteVideoTrack !== nextVideoTrack && this.liveMediaVideoEl) {
+            this.remoteVideoTrack.detach?.(this.liveMediaVideoEl);
+        }
+        if (this.remoteAudioTrack && this.remoteAudioTrack !== nextAudioTrack && this.liveMediaAudioEl) {
+            this.remoteAudioTrack.detach?.(this.liveMediaAudioEl);
+        }
+
+        this.remoteVideoTrack = nextVideoTrack;
+        this.remoteAudioTrack = nextAudioTrack;
+
+        if (this.remoteVideoTrack && this.liveMediaVideoEl) {
+            this.remoteVideoTrack.attach?.(this.liveMediaVideoEl);
+            this.liveMediaVideoEl.play?.().catch(() => {});
+        }
+        if (this.remoteAudioTrack && this.liveMediaAudioEl) {
+            this.remoteAudioTrack.attach?.(this.liveMediaAudioEl);
+            this.liveMediaAudioEl.muted = this.liveMediaMuted;
+            this.liveMediaAudioEl.play?.().catch(() => {});
+        }
+
+        this._syncLiveMediaState();
+    }
+
+    _syncLiveMediaState() {
+        if (this.mode !== 'live-media') return;
+        const hasMedia = Boolean(this.remoteVideoTrack || this.remoteAudioTrack);
+        if (this.embedEmptyEl) {
+            this.embedEmptyEl.hidden = hasMedia;
+        }
+        if (this.liveMediaAudioEl) {
+            this.liveMediaAudioEl.muted = this.liveMediaMuted;
+        }
+    }
+
+    _syncVoiceToggleUI() {
+        if (!this.voiceToggleButtonEl) return;
+        this.toggleAttribute('data-voice-active', this.voiceActive);
+        this.voiceToggleButtonEl.setAttribute('aria-label', this.voiceActive ? 'Stop voice chat' : 'Start voice chat');
+        this.voiceToggleButtonEl.setAttribute('title', this.voiceActive ? 'Stop voice chat' : 'Start voice chat');
+        const stateLabel = this.voiceToggleButtonEl.querySelector('.state');
+        if (stateLabel) {
+            stateLabel.textContent = this.voiceActive ? 'Off' : 'On';
+        }
+    }
     async _ensureAnalyser() {
+        if (this.mode === 'avatar-video') return;
         if (this.analyser || this.useFallbackAnimation) return;
 
         try {
@@ -268,6 +918,7 @@ class TourGuide extends HTMLElement {
         this.launcherVoiceChatStatusEl = null;
         this.launcherVoiceChatVisualizerEl = null;
         this.voiceChatStatus = '';
+        this.isVoiceSessionActive = false;
         this.isVoiceThinking = false;
         this.isVoiceChatReady = false;
         this.isVoiceSpeaking = false;
@@ -456,7 +1107,10 @@ class TourGuide extends HTMLElement {
 
             :host #tour-content-overlay {
                 position: absolute;
-                inset: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
                 background: var(--tourguide-default-bg-color);
                 border-radius: 4px;
                 padding: 10px 12px 8px;
@@ -642,7 +1296,10 @@ class TourGuide extends HTMLElement {
 
             :host #tour-nav-menu {
                 position: absolute;
-                inset: unset;
+                top: auto;
+                right: auto;
+                bottom: auto;
+                left: auto;
                 position-anchor: --tour-menu-btn;
                 position-area: top span-right;
                 margin-bottom: 6px;
@@ -989,7 +1646,7 @@ class TourGuide extends HTMLElement {
                     border-radius: 4px;
                     overflow: hidden;
                 }
-                :host #voice-chat-status.active {
+                :host(.expanded) #voice-chat-status.active {
                     display: block;
                 }
                 :host #tour-launch-button {
@@ -1007,6 +1664,7 @@ class TourGuide extends HTMLElement {
                     background: #3e3e3e;
                     padding: 5px 12px;
                     cursor: pointer;
+                    border-radius: 10px;
                 }
                 :host ul li[aria-disabled="true"] {
                     opacity: 0.55;
@@ -1022,7 +1680,7 @@ class TourGuide extends HTMLElement {
                     padding: 0;
                     text-align: left;
                     flex-flow: column;
-                    gap: 1px;
+                    gap: 8px;
                 }
 
                 :host(.expanded) ul {
@@ -1040,26 +1698,21 @@ class TourGuide extends HTMLElement {
         document.body.append(this);
 
         if(this.install_options.show_tour_listing) {
-            button.classList.add("expanded");
             const voiceChatStatus = document.createElement('div');
                 voiceChatStatus.id = 'voice-chat-status';
             const voiceChatVisualizer = document.createElement('tour-voice-visualizer');
+            const visualizerOptions = {
+                ...(this.install_options.voice_chat_visualizer || {}),
+                onVoiceToggle: () => this.toggleVoiceChat()
+            };
+            voiceChatVisualizer.configure?.(visualizerOptions);
             voiceChatStatus.appendChild(voiceChatVisualizer);
             this.launcherVoiceChatStatusEl = voiceChatStatus;
             this.launcherVoiceChatVisualizerEl = voiceChatVisualizer;
             button.shadowRoot.appendChild(voiceChatStatus);
             //populate tour listing inside the button from this.data
             const tourList = document.createElement('ul');
-            const voiceChatItem = document.createElement('li');
-                voiceChatItem.textContent = 'Voice Chat';
-                voiceChatItem.setAttribute('role', 'button');
-                voiceChatItem.setAttribute('data-action', 'voice-chat');
-                voiceChatItem.addEventListener('click', e => {
-                    e.stopPropagation();
-                    this.toggleVoiceChat();
-                }, false);
-            this.launcherVoiceChatMenuItem = voiceChatItem;
-            tourList.appendChild(voiceChatItem);
+            this.launcherVoiceChatMenuItem = null;
 
             for (var key in this.data) {
                 const tour = this.data[key];
@@ -1153,7 +1806,6 @@ class TourGuide extends HTMLElement {
                 left: 0;
                 z-index: ${OVERLAY_ZINDEX};
                 pointer-events:auto;
-                inset:0;
                 cursor: not-allowed;
             }
             #tour-guide-element-overlay{
@@ -1958,6 +2610,12 @@ class TourGuide extends HTMLElement {
         if (this.aiVoice && this._aiVoiceSpeechEndHandler) {
             this.aiVoice.removeEventListener('speechend', this._aiVoiceSpeechEndHandler);
         }
+        if (this.aiVoice && this._aiVoiceVisualizerChangeHandler) {
+            this.aiVoice.removeEventListener('visualizerchange', this._aiVoiceVisualizerChangeHandler);
+        }
+        if (this.aiVoice && this._aiVoiceVisualizerMediaChangeHandler) {
+            this.aiVoice.removeEventListener('visualizermediachange', this._aiVoiceVisualizerMediaChangeHandler);
+        }
 
         this.aiVoice = aiVoice;
         this._aiVoiceStateChangeHandler = null;
@@ -1972,10 +2630,13 @@ class TourGuide extends HTMLElement {
         this._aiVoiceChatPrepareReadyHandler = null;
         this._aiVoiceSpeechStartHandler = null;
         this._aiVoiceSpeechEndHandler = null;
+        this._aiVoiceVisualizerChangeHandler = null;
+        this._aiVoiceVisualizerMediaChangeHandler = null;
 
         if (!this.aiVoice) {
             this.voiceChatState = 'idle';
             this.voiceChatStatus = '';
+            this.isVoiceSessionActive = false;
             this.isVoiceThinking = false;
             this.isVoiceChatReady = false;
             this.isVoiceSpeaking = false;
@@ -1988,21 +2649,32 @@ class TourGuide extends HTMLElement {
         }
 
         this.isVoiceChatReady = false;
+        this.isVoiceSessionActive = false;
         this.voiceChatStatus = 'Preparing voice chat...';
         this.queuedVoiceAction = null;
         this.lastVoiceChatRequestText = '';
 
         this._aiVoiceStateChangeHandler = event => {
             this.voiceChatState = event.detail.state;
+            if (this.voiceChatState === 'starting' || this.voiceChatState === 'listening') {
+                this.isVoiceSessionActive = true;
+            }
             if (this.voiceChatState === 'listening') {
                 this.isVoiceThinking = false;
                 this.isVoiceSpeaking = false;
                 this.voiceChatStatus = 'Listening...';
                 this._updateLauncherVoiceChatStatus();
             } else if (this.voiceChatState === 'stopping') {
-                this.voiceChatStatus = 'Stopping voice chat...';
+                this.isVoiceSessionActive = false;
+                this.isVoiceThinking = false;
+                this.isVoiceSpeaking = false;
+                this.voiceChatState = 'inactive';
+                this.voiceChatStatus = this.isVoiceChatReady ? 'Voice chat is ready.' : '';
                 this._updateLauncherVoiceChatStatus();
             } else if (this.voiceChatState === 'idle' && !this.isVoiceThinking && !this.isVoiceSpeaking) {
+                if (!this.isVoiceSessionActive) {
+                    this.voiceChatState = 'inactive';
+                }
                 this.voiceChatStatus = this.isVoiceChatReady ? 'Voice chat is ready.' : '';
                 this._updateLauncherVoiceChatStatus();
             }
@@ -2091,7 +2763,9 @@ class TourGuide extends HTMLElement {
         };
         this._aiVoiceSpeechEndHandler = event => {
             this.isVoiceSpeaking = false;
-            this.voiceChatStatus = 'Voice chat is ready.';
+            this.voiceChatStatus = this.voiceChatState === 'listening'
+                ? 'Listening...'
+                : 'Voice chat is ready.';
             this._updateLauncherVoiceChatStatus();
             if (event.detail?.response?.provider === 'tour-guide-navigation') return;
             const queuedAction = this.queuedVoiceAction;
@@ -2107,6 +2781,12 @@ class TourGuide extends HTMLElement {
                 }
             }, 120);
         };
+        this._aiVoiceVisualizerChangeHandler = event => {
+            this.launcherVoiceChatVisualizerEl?.configure?.(event.detail?.config || {});
+        };
+        this._aiVoiceVisualizerMediaChangeHandler = event => {
+            this.launcherVoiceChatVisualizerEl?.setMediaTracks?.(event.detail || {});
+        };
 
         this.aiVoice.addEventListener('transcriberstatechange', this._aiVoiceStateChangeHandler);
         this.aiVoice.addEventListener('chatavailabilitychange', this._aiVoiceChatAvailabilityHandler);
@@ -2120,6 +2800,8 @@ class TourGuide extends HTMLElement {
         this.aiVoice.addEventListener('chatprepareready', this._aiVoiceChatPrepareReadyHandler);
         this.aiVoice.addEventListener('speechstart', this._aiVoiceSpeechStartHandler);
         this.aiVoice.addEventListener('speechend', this._aiVoiceSpeechEndHandler);
+        this.aiVoice.addEventListener('visualizerchange', this._aiVoiceVisualizerChangeHandler);
+        this.aiVoice.addEventListener('visualizermediachange', this._aiVoiceVisualizerMediaChangeHandler);
         this.voiceChatState = this.aiVoice.getTranscriberState?.() || 'idle';
         this._syncAIVoiceContext(this.currentTourKey, this.currentTourKey ? this.data?.[this.currentTourKey] : null);
         this._updateLauncherVoiceChatLabel();
@@ -2158,6 +2840,13 @@ class TourGuide extends HTMLElement {
         if (!this.launcherVoiceChatStatusEl) return;
         this.launcherVoiceChatVisualizerEl?.setStatus?.(this.voiceChatStatus || '');
         this.launcherVoiceChatVisualizerEl?.setListening?.(this.voiceChatState === 'listening');
+        this.launcherVoiceChatVisualizerEl?.setThinking?.(this.isVoiceThinking);
+        this.launcherVoiceChatVisualizerEl?.setSpeaking?.(this.isVoiceSpeaking);
+        this.launcherVoiceChatVisualizerEl?.setVoiceActive?.(
+            this.isVoiceSessionActive
+            || this.voiceChatState === 'starting'
+            || this.voiceChatState === 'stopping'
+        );
         this.launcherVoiceChatStatusEl.classList.toggle('active', Boolean(this.voiceChatStatus));
     }
 
@@ -2178,6 +2867,13 @@ class TourGuide extends HTMLElement {
 
         try {
             const isListening = await this.aiVoice.toggleListening();
+            this.isVoiceSessionActive = Boolean(isListening);
+            if (!isListening) {
+                this.voiceChatState = 'inactive';
+                this.isVoiceThinking = false;
+                this.isVoiceSpeaking = false;
+            }
+            this._updateLauncherVoiceChatStatus();
             console.log(`[TourGuide Voice] ${isListening ? 'Listening started.' : 'Listening stopped.'}`);
         } catch (error) {
             console.error('[TourGuide Voice] Unable to toggle voice chat.', error);

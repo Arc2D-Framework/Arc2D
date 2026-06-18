@@ -1,6 +1,6 @@
 
 
-class DebugOptions {
+export default class DebugOptions {
     debug(){
         this.on("click", e=> this.onSmoothTransitionsClick(e), true, "input#smooth_transitions")
         this.on("click", e=> this.onDisableHoverClick(e), true, "input#disable_hover")
