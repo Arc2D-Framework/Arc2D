@@ -28,6 +28,7 @@ class MutationRecorderNextGen {
       idleMs: 3000,
       recorderKind: 'custom-dom',
       recordMouseMoves: false,
+      includeUndo: false,
       ignoreSelector: '[data-recorder-control]',
       ...options
     };
@@ -47,9 +48,12 @@ class MutationRecorderNextGen {
     this.listenerDisposers = [];
     this.listenerRoots = new WeakSet();
     this.handledGestureEvents = new WeakSet();
+    this.handledFormEvents = new WeakSet();
+    this.elementState = new WeakMap();
     this.events = [];
     this.clips = [];
     this.activeClip = null;
+    this.currentPlaybackIndex = -1;
     this.idleTimer = null;
     this.baseline = null;
     this.startedAt = null;
@@ -68,6 +72,7 @@ class MutationRecorderNextGen {
     this.context = context || {};
     this.startedAt = Date.now();
     this.baseline = this.serializeNode(target);
+    this.rememberTreeState(target);
     this.observeTree(target);
     this.installGestureListeners(document);
 
@@ -227,11 +232,15 @@ class MutationRecorderNextGen {
 
     if (record.type === 'childList') {
       const adds = Array.from(record.addedNodes || [])
-        .map(node => ({
-          node: this.serializeNode(node),
-          previousSibling: this.getNodeLocator(record.previousSibling),
-          nextSibling: this.getNodeLocator(record.nextSibling)
-        }));
+        .map(node => {
+          const serialized = this.serializeNode(node);
+          this.rememberTreeState(node);
+          return {
+            node: serialized,
+            previousSibling: this.getNodeLocator(record.previousSibling),
+            nextSibling: this.getNodeLocator(record.nextSibling)
+          };
+        });
       const removes = Array.from(record.removedNodes || [])
         .map(node => ({
           node: this.serializeNode(node),
@@ -267,8 +276,8 @@ class MutationRecorderNextGen {
       ['click', event => this.onHardGesture(event), true],
       ['dblclick', event => this.onHardGesture(event), true],
       ['keydown', event => this.onHardGesture(event), true],
-      ['input', event => this.onHardGesture(event), true],
-      ['change', event => this.onHardGesture(event), true],
+      ['input', event => this.onFormStateEvent(event), true],
+      ['change', event => this.onFormStateEvent(event), true],
       ['submit', event => this.onHardGesture(event), true],
       ['scroll', event => this.onActivity(event, { store: true, type: 'scroll' }), true],
       ['mousemove', event => this.onActivity(event, { store: this.options.recordMouseMoves, type: 'mousemove' }), true],
@@ -307,6 +316,32 @@ class MutationRecorderNextGen {
     const gesture = this.createGestureEvent(event, target);
     this.startClip(gesture);
     this.recordEvent(gesture);
+    this.bumpActivity();
+  }
+
+  onFormStateEvent(event) {
+    if (!this.isRecording || this.isApplying || this.shouldIgnoreEvent(event)) {
+      return;
+    }
+
+    if (this.handledFormEvents.has(event)) {
+      return;
+    }
+    this.handledFormEvents.add(event);
+
+    this.flushPendingMutations();
+
+    const target = this.getComposedTarget(event);
+    if (!this.isInsideTarget(target)) {
+      return;
+    }
+
+    if (!this.activeClip) {
+      const gesture = this.createGestureEvent(event, target);
+      this.startClip(gesture);
+      this.recordEvent(gesture);
+    }
+
     this.recordInputStateMutation(event, target);
     this.bumpActivity();
   }
@@ -316,20 +351,33 @@ class MutationRecorderNextGen {
       return;
     }
 
-    if (!('value' in target) && !('checked' in target)) {
+    const state = this.getFormState(target);
+    if (!state) {
       return;
     }
 
-    const property = target.type === 'checkbox' || target.type === 'radio'
-      ? 'checked'
-      : 'value';
+    const oldState = this.elementState.get(target) || {};
+    const oldValue = oldState.form ? oldState.form.value : undefined;
+    const oldSelection = oldState.form ? oldState.form.selection : undefined;
+    if (oldState.form && this.valuesEqual(oldValue, state.value) && this.valuesEqual(oldSelection, state.selection)) {
+      return;
+    }
+
+    this.elementState.set(target, {
+      ...oldState,
+      form: this.cloneData(state)
+    });
 
     this.recordEvent({
       kind: 'mutation',
       type: 'property',
       target: this.getNodeLocator(target),
-      property,
-      value: property === 'checked' ? !!target.checked : target.value,
+      property: state.property,
+      oldValue,
+      newValue: state.value,
+      value: state.value,
+      oldSelection,
+      newSelection: state.selection,
       timestamp: Date.now()
     });
   }
@@ -346,7 +394,9 @@ class MutationRecorderNextGen {
 
     this.bumpActivity();
 
-    if (options.store) {
+    if (options.type === 'scroll') {
+      this.recordScrollStateMutation(target);
+    } else if (options.store) {
       this.recordEvent({
         kind: 'activity',
         type: options.type || event.type,
@@ -356,6 +406,36 @@ class MutationRecorderNextGen {
         timestamp: Date.now()
       });
     }
+  }
+
+  recordScrollStateMutation(target) {
+    if (!target || !('scrollTop' in target) || !('scrollLeft' in target)) {
+      return;
+    }
+
+    const state = {
+      scrollTop: target.scrollTop,
+      scrollLeft: target.scrollLeft
+    };
+    const oldState = this.elementState.get(target) || {};
+    const previous = oldState.scroll || { scrollTop: 0, scrollLeft: 0 };
+    if (previous.scrollTop === state.scrollTop && previous.scrollLeft === state.scrollLeft) {
+      return;
+    }
+
+    this.elementState.set(target, {
+      ...oldState,
+      scroll: this.cloneData(state)
+    });
+
+    this.recordEvent({
+      kind: 'mutation',
+      type: 'scroll',
+      target: this.getNodeLocator(target),
+      oldValue: previous,
+      newValue: state,
+      timestamp: Date.now()
+    });
   }
 
   flushPendingMutations() {
@@ -449,7 +529,28 @@ class MutationRecorderNextGen {
     clip.meta.activityEndedBy = reason;
     this.activeClip = null;
     this.clearIdleTimer();
+
+    if (!this.hasExportableMutations(clip)) {
+      this.discardClip(clip);
+      return null;
+    }
+
     return clip;
+  }
+
+  hasExportableMutations(clip) {
+    return !!clip && (clip.events || []).some(event => event.kind === 'mutation');
+  }
+
+  discardClip(clip) {
+    const index = this.clips.indexOf(clip);
+    if (index !== -1) {
+      this.clips.splice(index, 1);
+    }
+
+    if (clip?.id === `clip-${this.nextClipNumber - 1}`) {
+      this.nextClipNumber = Math.max(1, this.nextClipNumber - 1);
+    }
   }
 
   bumpActivity() {
@@ -513,7 +614,37 @@ class MutationRecorderNextGen {
       };
     }
 
-    return this.applyEvents(clip.events || [], options);
+    const summary = this.applyEvents(clip.events || [], options);
+    const index = this.clips.indexOf(clip);
+    if (index !== -1 && summary.ok) {
+      this.currentPlaybackIndex = index;
+    }
+    return summary;
+  }
+
+  playClipAt(index, options = {}) {
+    if (!Number.isInteger(index) || index < 0 || index >= this.clips.length) {
+      return {
+        ok: false,
+        error: 'clip-index-out-of-range',
+        index,
+        totalClips: this.clips.length
+      };
+    }
+
+    return {
+      clipId: this.clips[index].id,
+      index,
+      ...this.playClip(this.clips[index], options)
+    };
+  }
+
+  playNextClip(options = {}) {
+    return this.playClipAt(this.currentPlaybackIndex + 1, options);
+  }
+
+  getCurrentClipIndex() {
+    return this.currentPlaybackIndex;
   }
 
   playAllClips(options = {}) {
@@ -524,10 +655,11 @@ class MutationRecorderNextGen {
         ...this.playClip(clip, options)
       });
     }
+    this.currentPlaybackIndex = this.clips.length ? this.clips.length - 1 : -1;
     return summaries;
   }
 
-  applyEvents(events = []) {
+  applyEvents(events = [], options = {}) {
     const summary = {
       ok: true,
       total: events.length,
@@ -629,11 +761,24 @@ class MutationRecorderNextGen {
 
     if (event.type === 'property') {
       const target = this.findNode(event.target);
-      if (target && event.property in target) {
-        target[event.property] = event.value;
+      if (target && this.applyPropertyValue(target, event.property, 'newValue' in event ? event.newValue : event.value)) {
         return { ok: true };
       }
       return { ok: false, reason: 'missing-target' };
+    }
+
+    if (event.type === 'scroll') {
+      const target = this.findNode(event.target);
+      if (!target || !event.newValue) {
+        return { ok: false, reason: 'missing-target' };
+      }
+      if ('scrollTop' in target) {
+        target.scrollTop = event.newValue.scrollTop || 0;
+      }
+      if ('scrollLeft' in target) {
+        target.scrollLeft = event.newValue.scrollLeft || 0;
+      }
+      return { ok: true };
     }
 
     if (event.type === 'shadowRoot') {
@@ -641,6 +786,33 @@ class MutationRecorderNextGen {
     }
 
     return { ok: false, reason: 'unsupported-event-type' };
+  }
+
+  applyPropertyValue(target, property, value) {
+    if (!target || !property) {
+      return false;
+    }
+
+    if (property === 'selectedValues' && target instanceof HTMLSelectElement) {
+      const values = Array.isArray(value) ? new Set(value.map(String)) : new Set();
+      for (const option of Array.from(target.options || [])) {
+        option.selected = values.has(option.value);
+      }
+      return true;
+    }
+
+    if (property === 'selectedIndex' && target instanceof HTMLSelectElement) {
+      const index = Number(value);
+      target.selectedIndex = Number.isFinite(index) ? index : -1;
+      return true;
+    }
+
+    if (property in target) {
+      target[property] = value;
+      return true;
+    }
+
+    return false;
   }
 
   restoreBaseline() {
@@ -652,15 +824,19 @@ class MutationRecorderNextGen {
     try {
       this.clearRuntimeState();
       this.restoreElementFromSnapshot(this.target, this.baseline);
+      this.rememberTreeState(this.target);
       this.observeTree(this.target);
     } finally {
       this.isApplying = false;
     }
+
+    this.currentPlaybackIndex = -1;
   }
 
   clearRuntimeState() {
     this.rootToId = new WeakMap();
     this.rootMeta = {};
+    this.elementState = new WeakMap();
     for (const observer of this.observers) {
       observer.observer.disconnect();
     }
@@ -812,6 +988,113 @@ class MutationRecorderNextGen {
     const children = node.childNodes ? Array.from(node.childNodes) : [];
     for (const child of children) {
       this.walk(child, callback);
+    }
+  }
+
+  rememberTreeState(node) {
+    this.walk(node, current => {
+      if (current.nodeType === Node.ELEMENT_NODE) {
+        this.rememberElementState(current);
+        if (current.shadowRoot) {
+          this.rememberTreeState(current.shadowRoot);
+        }
+      }
+    });
+  }
+
+  rememberElementState(element) {
+    if (!(element instanceof Element)) {
+      return;
+    }
+
+    const state = {};
+    const form = this.getFormState(element);
+    if (form) {
+      state.form = this.cloneData(form);
+    }
+    if ('scrollTop' in element && 'scrollLeft' in element) {
+      state.scroll = {
+        scrollTop: element.scrollTop,
+        scrollLeft: element.scrollLeft
+      };
+    }
+
+    if (Object.keys(state).length) {
+      this.elementState.set(element, state);
+    }
+  }
+
+  getFormState(element) {
+    if (!(element instanceof Element)) {
+      return null;
+    }
+
+    if (element instanceof HTMLSelectElement) {
+      if (element.multiple) {
+        return {
+          property: 'selectedValues',
+          value: Array.from(element.selectedOptions || []).map(option => option.value),
+          selection: { selectedIndex: element.selectedIndex }
+        };
+      }
+
+      return {
+        property: 'value',
+        value: element.value,
+        selection: { selectedIndex: element.selectedIndex }
+      };
+    }
+
+    if (element instanceof HTMLInputElement && (element.type === 'checkbox' || element.type === 'radio')) {
+      return {
+        property: 'checked',
+        value: !!element.checked
+      };
+    }
+
+    if ('value' in element) {
+      return {
+        property: 'value',
+        value: element.value,
+        selection: this.getTextSelectionState(element)
+      };
+    }
+
+    return null;
+  }
+
+  getTextSelectionState(element) {
+    if (!element || typeof element.selectionStart !== 'number' || typeof element.selectionEnd !== 'number') {
+      return undefined;
+    }
+
+    return this.compactObject({
+      start: element.selectionStart,
+      end: element.selectionEnd,
+      direction: element.selectionDirection || undefined
+    });
+  }
+
+  cloneData(value) {
+    if (typeof structuredClone === 'function') {
+      try {
+        return structuredClone(value);
+      } catch (error) {}
+    }
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  valuesEqual(left, right) {
+    if (left === right) {
+      return true;
+    }
+    if (typeof left !== typeof right) {
+      return false;
+    }
+    try {
+      return JSON.stringify(left) === JSON.stringify(right);
+    } catch (error) {
+      return false;
     }
   }
 
@@ -1119,7 +1402,7 @@ class MutationRecorderNextGen {
   }
 
   exportRecording() {
-    return this.compactObject({
+    const recording = this.compactObject({
       version: 1,
       id: this.context.id || `recording-${this.startedAt || Date.now()}`,
       name: this.context.name || 'Untitled Recording',
@@ -1130,22 +1413,27 @@ class MutationRecorderNextGen {
       stoppedAt: this.stoppedAt ? new Date(this.stoppedAt).toISOString() : undefined,
       recorder: {
         kind: this.options.recorderKind,
-        version: 1
-      },
-      clips: this.clips.map(clip => this.exportClip(clip))
+        version: 1,
+        undo: this.options.includeUndo ? true : undefined
+      }
     });
+    recording.clips = this.clips
+      .filter(clip => this.hasExportableMutations(clip))
+      .map(clip => this.exportClip(clip));
+    return recording;
   }
 
   exportClip(clip) {
-    return this.compactObject({
+    const exportedClip = this.compactObject({
       id: clip.id,
       name: clip.name,
-      trigger: this.exportTrigger(clip.trigger),
-      events: (clip.events || [])
-        .filter(event => event.kind === 'mutation')
-        .map(event => this.exportMutationEvent(event))
-        .filter(Boolean)
+      trigger: this.exportTrigger(clip.trigger)
     });
+    exportedClip.events = (clip.events || [])
+      .filter(event => event.kind === 'mutation')
+      .map(event => this.exportMutationEvent(event))
+      .filter(Boolean);
+    return exportedClip;
   }
 
   exportTrigger(trigger = {}) {
@@ -1167,6 +1455,7 @@ class MutationRecorderNextGen {
         target: this.exportLocator(event.target),
         name: event.name,
         namespace: event.namespace || undefined,
+        oldValue: this.options.includeUndo ? event.oldValue : undefined,
         newValue: event.newValue
       });
     }
@@ -1175,6 +1464,7 @@ class MutationRecorderNextGen {
       return this.compactObject({
         type: event.type,
         target: this.exportLocator(event.target),
+        oldValue: this.options.includeUndo ? event.oldValue : undefined,
         newValue: event.newValue
       });
     }
@@ -1193,7 +1483,19 @@ class MutationRecorderNextGen {
         type: event.type,
         target: this.exportLocator(event.target),
         property: event.property,
-        value: event.value
+        oldValue: this.options.includeUndo ? event.oldValue : undefined,
+        newValue: 'newValue' in event ? event.newValue : event.value,
+        oldSelection: this.options.includeUndo ? event.oldSelection : undefined,
+        newSelection: this.options.includeUndo ? event.newSelection : undefined
+      });
+    }
+
+    if (event.type === 'scroll') {
+      return this.compactObject({
+        type: event.type,
+        target: this.exportLocator(event.target),
+        oldValue: this.options.includeUndo ? event.oldValue : undefined,
+        newValue: event.newValue
       });
     }
 
@@ -1286,7 +1588,7 @@ class MutationRecorderNextGen {
     }
 
     return Object.fromEntries(Object.entries(value).filter(([, entry]) => {
-      if (typeof entry === 'undefined' || entry === null) {
+      if (typeof entry === 'undefined') {
         return false;
       }
       if (Array.isArray(entry) && entry.length === 0) {

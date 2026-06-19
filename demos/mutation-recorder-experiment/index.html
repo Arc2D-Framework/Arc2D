@@ -258,6 +258,36 @@
       padding: 7px 9px;
     }
 
+    .field-row select {
+      min-height: 36px;
+      border: 1px solid #b8c3d4;
+      border-radius: 6px;
+      padding: 7px 9px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    .scroll-fixture {
+      height: 92px;
+      overflow: auto;
+      border: 1px dashed #b8c3d4;
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 10px;
+    }
+
+    .scroll-fixture-content {
+      display: grid;
+      gap: 8px;
+      min-height: 260px;
+    }
+
     .recorder-panel {
       display: flex;
       flex-direction: column;
@@ -346,6 +376,7 @@
           <button id="mutate-remove" class="ghost">Remove Last Item</button>
           <button id="open-modal" class="ghost">Open Modal</button>
           <button id="spawn-shadow-dropdown" class="ghost">Add Shadow Dropdown</button>
+          <button id="scroll-undo-fixture" class="ghost">Scroll Fixture</button>
           <button id="run-sequence" class="ghost">Run Mixed Sequence</button>
         </div>
 
@@ -390,6 +421,42 @@
           </div>
 
           <div class="card">
+            <h2>Undo State Fixtures</h2>
+            <p class="muted">Use these to verify old/new form, selection, multi-select, checked, and scroll payloads.</p>
+            <label class="checkbox-row">
+              <input id="undo-checkbox" type="checkbox">
+              Enable undo checkbox
+            </label>
+            <div class="field-row">
+              <label for="undo-select">Single select</label>
+              <select id="undo-select">
+                <option value="alpha">Alpha</option>
+                <option value="beta">Beta</option>
+                <option value="gamma">Gamma</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <label for="undo-multi-select">Multi select</label>
+              <select id="undo-multi-select" multiple size="3">
+                <option value="north" selected>North</option>
+                <option value="east">East</option>
+                <option value="west">West</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <label for="undo-scroll-panel">Scrollable panel</label>
+              <div id="undo-scroll-panel" class="scroll-fixture" tabindex="0">
+                <div class="scroll-fixture-content">
+                  <span class="pill">Top marker</span>
+                  <span class="pill">Undo scroll middle marker</span>
+                  <span class="pill">Undo scroll lower marker</span>
+                  <span class="pill">Bottom marker</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
             <h2>Replay Notes</h2>
             <p class="muted">Record interactions, stop, restore baseline, then replay one clip or all clips.</p>
           </div>
@@ -414,6 +481,7 @@
         <div class="control-grid">
           <select id="clip-select" aria-label="Clip selection"></select>
           <button id="play-clip">Play Selected Clip</button>
+          <button id="play-next">Play Next Clip</button>
           <button id="clear-output">Clear Output</button>
         </div>
 
@@ -432,7 +500,8 @@
   <script>
     const recorder = new MutationRecorderNextGen({
       idleMs: 3000,
-      recordMouseMoves: false
+      recordMouseMoves: false,
+      includeUndo: true
     });
 
     const stage = document.getElementById('recording-stage');
@@ -490,6 +559,19 @@
         renderRecorderState();
       });
 
+      document.getElementById('play-next').addEventListener('click', () => {
+        const summary = recorder.playNextClip();
+        setupDropdown();
+        if (!summary.ok) {
+          setStatus('No next clip to play.');
+          renderRecorderState();
+          return;
+        }
+        clipSelect.value = summary.clipId;
+        setStatus(`Played ${summary.clipId} at index ${recorder.getCurrentClipIndex()}. ${summarizeReplay(summary)}`);
+        renderRecorderState();
+      });
+
       document.getElementById('clear-output').addEventListener('click', () => {
         output.textContent = '{}';
         setStatus('Output cleared.');
@@ -501,8 +583,15 @@
       document.getElementById('mutate-remove').addEventListener('click', removeLastPill);
       document.getElementById('open-modal').addEventListener('click', openModal);
       document.getElementById('spawn-shadow-dropdown').addEventListener('click', addShadowDropdownComponent);
+      document.getElementById('scroll-undo-fixture').addEventListener('click', scrollUndoFixture);
       document.getElementById('run-sequence').addEventListener('click', runMixedSequence);
       document.getElementById('name-input').addEventListener('input', () => addFeed(`Input changed to "${document.getElementById('name-input').value}"`));
+      document.getElementById('undo-checkbox').addEventListener('change', event => addFeed(`Undo checkbox: ${event.target.checked}`));
+      document.getElementById('undo-select').addEventListener('change', event => addFeed(`Undo select: ${event.target.value}`));
+      document.getElementById('undo-multi-select').addEventListener('change', event => {
+        const values = Array.from(event.target.selectedOptions).map(option => option.value).join(', ');
+        addFeed(`Undo multi-select: ${values || 'none'}`);
+      });
     }
 
     function setupDropdown() {
@@ -729,6 +818,13 @@
           }
           h2 { margin:0 0 8px; font-size:18px; }
           p { margin:0 0 12px; color:#667085; }
+          .nested-slot {
+            margin:14px 0;
+            border:1px dashed #b8c3d4;
+            border-radius:8px;
+            background:#f8fbff;
+            padding:10px;
+          }
           button {
             min-height:34px;
             border:1px solid #8aa8c8;
@@ -744,6 +840,9 @@
           <p id="shadow-modal-copy">Created from an option inside a shadow-root dropdown.</p>
           <button id="shadow-modal-change">Change Shadow Modal Text</button>
           <button id="shadow-modal-close">Close Shadow Modal</button>
+          <div class="nested-slot">
+            <div id="shadow-modal-nested-host"></div>
+          </div>
         </div>
       `;
 
@@ -755,7 +854,145 @@
         host.remove();
       });
 
+      setupShadowModalNestedControls(root);
       addFeed('Shadow modal component opened');
+    }
+
+    function setupShadowModalNestedControls(modalRoot) {
+      const nestedHost = modalRoot.getElementById('shadow-modal-nested-host');
+      if (!nestedHost || nestedHost.shadowRoot) return;
+
+      const nestedRoot = nestedHost.attachShadow({ mode: 'open' });
+      nestedRoot.innerHTML = `
+        <style>
+          :host { display:block; }
+          .panel {
+            border:1px solid #c7d7ea;
+            border-radius:8px;
+            background:white;
+            padding:10px;
+          }
+          h3 { margin:0 0 8px; font-size:14px; color:#17202a; }
+          p { margin:0 0 10px; color:#667085; }
+          button {
+            min-height:30px;
+            border:1px solid #8aa8c8;
+            border-radius:6px;
+            background:white;
+            cursor:pointer;
+            margin:0 6px 8px 0;
+            padding:5px 8px;
+          }
+          .chips {
+            display:flex;
+            flex-wrap:wrap;
+            gap:6px;
+            min-height:28px;
+            margin-top:6px;
+          }
+          .chip {
+            border:1px solid #94d3bd;
+            border-radius:999px;
+            background:#e9fbf4;
+            color:#075e45;
+            padding:4px 8px;
+          }
+          .panel[data-state="armed"] {
+            border-color:#11845b;
+            box-shadow:0 0 0 3px rgba(17, 132, 91, 0.12);
+          }
+          .deep-slot {
+            margin-top:10px;
+            border:1px dashed #c7d7ea;
+            border-radius:8px;
+            background:#fbfcff;
+            padding:8px;
+          }
+        </style>
+        <div id="modal-nested-panel" class="panel" data-state="idle">
+          <h3>Nested Modal Shadow Controls</h3>
+          <p id="modal-nested-status">Nested modal shadow root ready.</p>
+          <button id="modal-nested-toggle">Toggle Nested State</button>
+          <button id="modal-nested-add">Add Nested Chip</button>
+          <div id="modal-nested-chips" class="chips"></div>
+          <div class="deep-slot">
+            <div id="shadow-modal-deep-host"></div>
+          </div>
+        </div>
+      `;
+
+      const deepHost = nestedRoot.getElementById('shadow-modal-deep-host');
+      const deepRoot = deepHost.attachShadow({ mode: 'open' });
+      deepRoot.innerHTML = `
+        <style>
+          :host { display:block; }
+          .deep {
+            border:1px solid #d9b8f1;
+            border-radius:8px;
+            background:#fcf8ff;
+            padding:9px;
+          }
+          h4 { margin:0 0 8px; color:#43256d; font-size:13px; }
+          button {
+            min-height:28px;
+            border:1px solid #b58add;
+            border-radius:6px;
+            background:white;
+            cursor:pointer;
+            margin:0 6px 8px 0;
+            padding:5px 8px;
+          }
+          .line { margin:0 0 8px; color:#684a8d; }
+          .deep-list {
+            display:flex;
+            flex-wrap:wrap;
+            gap:6px;
+          }
+          .deep-token {
+            border:1px solid #caa7ea;
+            border-radius:999px;
+            background:white;
+            color:#43256d;
+            padding:3px 7px;
+          }
+        </style>
+        <div class="deep">
+          <h4>Deep Shadow Controls</h4>
+          <p id="modal-deep-copy" class="line">Deep nested shadow root ready.</p>
+          <button id="modal-deep-change">Change Deep Text</button>
+          <button id="modal-deep-add">Add Deep Token</button>
+          <div id="modal-deep-list" class="deep-list"></div>
+        </div>
+      `;
+
+      let nestedChipCount = 0;
+      nestedRoot.getElementById('modal-nested-toggle').addEventListener('click', () => {
+        const panel = nestedRoot.getElementById('modal-nested-panel');
+        const armed = panel.dataset.state !== 'armed';
+        panel.dataset.state = armed ? 'armed' : 'idle';
+        nestedRoot.getElementById('modal-nested-status').textContent = `Nested modal state: ${panel.dataset.state}`;
+      });
+
+      nestedRoot.getElementById('modal-nested-add').addEventListener('click', () => {
+        nestedChipCount += 1;
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.textContent = `Nested Chip ${nestedChipCount}`;
+        nestedRoot.getElementById('modal-nested-chips').appendChild(chip);
+      });
+
+      let deepTokenCount = 0;
+      deepRoot.getElementById('modal-deep-change').addEventListener('click', () => {
+        deepRoot.getElementById('modal-deep-copy').textContent = `Deep text changed @ ${new Date().toLocaleTimeString()}`;
+      });
+
+      deepRoot.getElementById('modal-deep-add').addEventListener('click', () => {
+        deepTokenCount += 1;
+        const token = document.createElement('span');
+        token.className = 'deep-token';
+        token.textContent = `Deep Token ${deepTokenCount}`;
+        deepRoot.getElementById('modal-deep-list').appendChild(token);
+      });
     }
 
     function addPill() {
@@ -789,6 +1026,14 @@
         addFeed(`Removed ${last.textContent}`);
         last.remove();
       }
+    }
+
+    function scrollUndoFixture() {
+      const panel = document.getElementById('undo-scroll-panel');
+      if (!panel) return;
+      const nextTop = panel.scrollTop < 80 ? 180 : 0;
+      panel.scrollTo({ top: nextTop, left: 0, behavior: 'auto' });
+      addFeed(`Undo scrollTop: ${nextTop}`);
     }
 
     function openModal() {
@@ -866,11 +1111,12 @@
 
     function renderRecorderState() {
       const recording = recorder.exportRecording();
+      const clips = recording.clips || [];
       document.getElementById('event-count').textContent = countRecordingEvents(recording);
-      document.getElementById('clip-count').textContent = recording.clips.length;
+      document.getElementById('clip-count').textContent = clips.length;
       document.getElementById('locator-count').textContent = countRecordingLocators(recording);
       output.textContent = JSON.stringify(getDisplayRecording(recording), null, 2);
-      renderClipSelect(recording.clips);
+      renderClipSelect(clips);
     }
 
     function getDisplayRecording(recording) {
@@ -883,12 +1129,12 @@
         id: recording.id,
         name: recording.name,
         events: countRecordingEvents(recording),
-        clips: recording.clips.map(clip => ({
+        clips: (recording.clips || []).map(clip => ({
           id: clip.id,
           name: clip.name,
           trigger: clip.trigger,
           mutationCount: countClipMutations(clip),
-          eventCount: clip.events.length
+          eventCount: (clip.events || []).length
         })),
         locators: countRecordingLocators(recording)
       };
@@ -940,6 +1186,7 @@
 
     function renderClipSelect(clips) {
       const selected = clipSelect.value;
+      clips = clips || [];
       clipSelect.innerHTML = '';
       for (const clip of clips) {
         const option = document.createElement('option');
