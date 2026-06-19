@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mutation Recorder NextGen Lab</title>
-  <script src="mRecorderNextGen.js"></script>
+  <script src="DomMutationPlayer.js"></script>
+  <script src="DomMutationRecorder.js"></script>
   <style>
     :root {
       color-scheme: light;
@@ -498,10 +499,11 @@
   </main>
 
   <script>
-    const recorder = new MutationRecorderNextGen({
+    const recorder = new DomMutationRecorder({
       idleMs: 3000,
       recordMouseMoves: false,
-      includeUndo: true
+      includeUndo: true,
+      trustedGesturesOnly: true
     });
 
     const stage = document.getElementById('recording-stage');

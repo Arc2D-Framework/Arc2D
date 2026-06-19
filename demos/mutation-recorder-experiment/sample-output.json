@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "id": "recording-1781868344743",
+  "id": "recording-1781873817350",
   "name": "Mutation Recorder Lab",
   "url": "http://127.0.0.1:8084/demos/mutation-recorder-experiment/",
   "namespace": "demos.mutationRecorderExperiment",
-  "createdAt": "2026-06-19T11:25:44.743Z",
-  "stoppedAt": "2026-06-19T11:25:48.658Z",
+  "createdAt": "2026-06-19T12:56:57.350Z",
+  "stoppedAt": "2026-06-19T12:57:07.266Z",
   "recorder": {
     "kind": "custom-dom",
     "version": 1,
@@ -17,41 +17,35 @@
       "name": "Clip1",
       "trigger": {
         "event": "click",
-        "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(4) > label > input#undo-checkbox"
-      },
-      "events": []
-    },
-    {
-      "id": "clip-2",
-      "name": "Clip2",
-      "trigger": {
-        "event": "input",
-        "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(4) > label > input#undo-checkbox"
+        "target": "body > main > section > div#recording-stage > div:nth-of-type(1) > button#mutate-add"
       },
       "events": [
         {
-          "type": "property",
-          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(4) > label > input#undo-checkbox",
-          "property": "checked",
-          "oldValue": false,
-          "newValue": true
-        }
-      ]
-    },
-    {
-      "id": "clip-3",
-      "name": "Clip3",
-      "trigger": {
-        "event": "change",
-        "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(4) > label > input#undo-checkbox"
-      },
-      "events": [
-        {
-          "type": "property",
-          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(4) > label > input#undo-checkbox",
-          "property": "checked",
-          "oldValue": true,
-          "newValue": true
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#pill-list",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "span",
+                "attributes": {
+                  "class": "pill",
+                  "data-index": "2"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "Dynamic Pill 2"
+                  }
+                ]
+              },
+              "previousSibling": {
+                "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#pill-list",
+                "childIndex": 2,
+                "nodeType": 3
+              }
+            }
+          ]
         },
         {
           "type": "childList",
@@ -100,9 +94,586 @@
                 "children": [
                   {
                     "nodeType": 3,
-                    "textContent": "Undo checkbox: true"
+                    "textContent": "Added Dynamic Pill 2"
                   }
                 ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip-2",
+      "name": "Clip2",
+      "trigger": {
+        "event": "click",
+        "target": "body > main > section > div#recording-stage > div:nth-of-type(1) > button#mutate-text"
+      },
+      "events": [
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div#profile-card > p#summary-text",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 3,
+                "textContent": "Text changed at 8:56:59 AM"
+              }
+            }
+          ],
+          "removes": [
+            {
+              "node": {
+                "nodeType": 3,
+                "textContent": "Ready for recording. Mutate this text, attributes, and nearby nodes."
+              }
+            }
+          ]
+        },
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "span",
+                "attributes": {
+                  "class": "pill"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "Changed summary text"
+                  }
+                ]
+              },
+              "previousSibling": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed > span:nth-of-type(1)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip-3",
+      "name": "Clip3",
+      "trigger": {
+        "event": "click",
+        "target": "body > main > section > div#recording-stage > div:nth-of-type(1) > button#mutate-attr"
+      },
+      "events": [
+        {
+          "type": "attributes",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div#profile-card",
+          "name": "data-state",
+          "oldValue": "idle",
+          "newValue": "active"
+        },
+        {
+          "type": "attributes",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div#profile-card",
+          "name": "style",
+          "oldValue": null,
+          "newValue": "border-color: rgb(17, 132, 91);"
+        },
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "span",
+                "attributes": {
+                  "class": "pill"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "Card state: active"
+                  }
+                ]
+              },
+              "previousSibling": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed > span:nth-of-type(2)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip-4",
+      "name": "Clip4",
+      "trigger": {
+        "event": "click",
+        "target": "body > main > section > div#recording-stage > div:nth-of-type(1) > button#mutate-remove"
+      },
+      "events": [
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "span",
+                "attributes": {
+                  "class": "pill"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "Removed Dynamic Pill 2"
+                  }
+                ]
+              },
+              "previousSibling": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed > span:nth-of-type(3)"
+            }
+          ]
+        },
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#pill-list",
+          "removes": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "span",
+                "attributes": {
+                  "class": "pill",
+                  "data-index": "2"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "Dynamic Pill 2"
+                  }
+                ]
+              },
+              "previousSibling": {
+                "selector": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#pill-list",
+                "childIndex": 2,
+                "nodeType": 3
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip-5",
+      "name": "Clip5",
+      "trigger": {
+        "event": "click",
+        "target": "body > main > section > div#recording-stage > div:nth-of-type(1) > button#open-modal"
+      },
+      "events": [
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "div",
+                "attributes": {
+                  "id": "demo-modal-backdrop",
+                  "class": "modal-backdrop"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "\n        "
+                  },
+                  {
+                    "nodeType": 1,
+                    "tag": "div",
+                    "attributes": {
+                      "class": "modal",
+                      "role": "dialog",
+                      "aria-modal": "true"
+                    },
+                    "children": [
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "h2",
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "Recorded Modal"
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "p",
+                        "attributes": {
+                          "class": "muted"
+                        },
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "This modal was inserted into the DOM and can be replayed as a childList mutation."
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "div",
+                        "attributes": {
+                          "class": "field-row"
+                        },
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "label",
+                            "attributes": {
+                              "for": "modal-input"
+                            },
+                            "children": [
+                              {
+                                "nodeType": 3,
+                                "textContent": "Modal input"
+                              }
+                            ]
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "input",
+                            "attributes": {
+                              "id": "modal-input",
+                              "value": "Modal value"
+                            }
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n          "
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "div",
+                        "attributes": {
+                          "style": "margin-top:12px;"
+                        },
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "button",
+                            "attributes": {
+                              "id": "modal-change"
+                            },
+                            "children": [
+                              {
+                                "nodeType": 3,
+                                "textContent": "Change Modal Text"
+                              }
+                            ]
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "button",
+                            "attributes": {
+                              "id": "modal-close"
+                            },
+                            "children": [
+                              {
+                                "nodeType": 3,
+                                "textContent": "Close Modal"
+                              }
+                            ]
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n          "
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n        "
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": 3,
+                    "textContent": "\n      "
+                  }
+                ]
+              },
+              "previousSibling": {
+                "selector": "body > main > section > div#recording-stage",
+                "childIndex": 4,
+                "nodeType": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "span",
+                "attributes": {
+                  "class": "pill"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "Modal opened"
+                  }
+                ]
+              },
+              "previousSibling": "body > main > section > div#recording-stage > div:nth-of-type(2) > div:nth-of-type(2) > div#activity-feed > span:nth-of-type(4)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip-6",
+      "name": "Clip6",
+      "trigger": {
+        "event": "click",
+        "target": "body > main > section > div#recording-stage > div#demo-modal-backdrop > div > div:nth-of-type(2) > button#modal-change"
+      },
+      "events": [
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage > div#demo-modal-backdrop > div > p",
+          "adds": [
+            {
+              "node": {
+                "nodeType": 3,
+                "textContent": "Modal text changed @ 8:57:05 AM"
+              }
+            }
+          ],
+          "removes": [
+            {
+              "node": {
+                "nodeType": 3,
+                "textContent": "This modal was inserted into the DOM and can be replayed as a childList mutation."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clip-7",
+      "name": "Clip7",
+      "trigger": {
+        "event": "click",
+        "target": "body > main > section > div#recording-stage > div#demo-modal-backdrop > div > div:nth-of-type(2) > button#modal-close"
+      },
+      "events": [
+        {
+          "type": "childList",
+          "target": "body > main > section > div#recording-stage",
+          "removes": [
+            {
+              "node": {
+                "nodeType": 1,
+                "tag": "div",
+                "attributes": {
+                  "id": "demo-modal-backdrop",
+                  "class": "modal-backdrop"
+                },
+                "children": [
+                  {
+                    "nodeType": 3,
+                    "textContent": "\n        "
+                  },
+                  {
+                    "nodeType": 1,
+                    "tag": "div",
+                    "attributes": {
+                      "class": "modal",
+                      "role": "dialog",
+                      "aria-modal": "true"
+                    },
+                    "children": [
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "h2",
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "Recorded Modal"
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "p",
+                        "attributes": {
+                          "class": "muted"
+                        },
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "Modal text changed @ 8:57:05 AM"
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "div",
+                        "attributes": {
+                          "class": "field-row"
+                        },
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "label",
+                            "attributes": {
+                              "for": "modal-input"
+                            },
+                            "children": [
+                              {
+                                "nodeType": 3,
+                                "textContent": "Modal input"
+                              }
+                            ]
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "input",
+                            "attributes": {
+                              "id": "modal-input",
+                              "value": "Modal value"
+                            }
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n          "
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n          "
+                      },
+                      {
+                        "nodeType": 1,
+                        "tag": "div",
+                        "attributes": {
+                          "style": "margin-top:12px;"
+                        },
+                        "children": [
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "button",
+                            "attributes": {
+                              "id": "modal-change"
+                            },
+                            "children": [
+                              {
+                                "nodeType": 3,
+                                "textContent": "Change Modal Text"
+                              }
+                            ]
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n            "
+                          },
+                          {
+                            "nodeType": 1,
+                            "tag": "button",
+                            "attributes": {
+                              "id": "modal-close"
+                            },
+                            "children": [
+                              {
+                                "nodeType": 3,
+                                "textContent": "Close Modal"
+                              }
+                            ]
+                          },
+                          {
+                            "nodeType": 3,
+                            "textContent": "\n          "
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": 3,
+                        "textContent": "\n        "
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": 3,
+                    "textContent": "\n      "
+                  }
+                ]
+              },
+              "previousSibling": {
+                "selector": "body > main > section > div#recording-stage",
+                "childIndex": 4,
+                "nodeType": 3
               }
             }
           ]
