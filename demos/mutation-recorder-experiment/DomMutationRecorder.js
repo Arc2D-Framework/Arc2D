@@ -9,10 +9,15 @@ class DomMutationRecorder extends DomMutationPlayer {
   static attachShadowPatched = false;
   static nativeAttachShadow = null;
 
+  // Tags that must NEVER be recorded in any mode: replaying a captured <script>
+  // re-executes page JS against globals absent from the snapshot (e.g. Adobe
+  // Launch's _satellite) and throws. Always dropped, for every recorder.
+  static ALWAYS_IGNORE_TAGS = ['script'];
+
   // Resource/script-loader tags that never contribute to a visible replay on a
   // static snapshot. Dropped from the export when `finalStateOnly` is on (and
   // always droppable via the `ignoreNodeTags` option).
-  static DEFAULT_NOISE_TAGS = ['script', 'link', 'meta', 'noscript', 'template'];
+  static DEFAULT_NOISE_TAGS = ['noscript', 'template'];
 
   static installGlobalHooks() {
     if (DomMutationRecorder.attachShadowPatched || typeof Element === 'undefined') {
@@ -57,9 +62,11 @@ class DomMutationRecorder extends DomMutationPlayer {
     DomMutationRecorder.installGlobalHooks();
     DomMutationRecorder.instances.add(this);
 
-    // Tags filtered from the recording in real time. `ignoreNodeTags` always
-    // applies; `finalStateOnly` additionally drops the resource-node defaults.
+    // Tags filtered from the recording in real time. ALWAYS_IGNORE_TAGS apply
+    // unconditionally; `ignoreNodeTags` is the caller opt-in; `finalStateOnly`
+    // additionally drops the resource-node defaults.
     this._noiseTagSet = new Set([
+      ...DomMutationRecorder.ALWAYS_IGNORE_TAGS,
       ...(this.options.ignoreNodeTags || []),
       ...(this.options.finalStateOnly ? DomMutationRecorder.DEFAULT_NOISE_TAGS : [])
     ].map(tag => String(tag).toLowerCase()));
