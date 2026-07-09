@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arc Marketing Landing Page</title>
+    <script 
+        src="../../node_modules/od-cocoon/framework.src.js" 
+        charset="utf-8"
+        data-kernel
+        data-rootpath="../../"
+        data-namespace="ui.screens.ArcMarketing"
+        data-adopted-stylesheet="shared.css"
+        data-src-path="/src/"
+        data-controller="index.js"
+    ></script>
+</head>
+<body namespace="ui.screens.ArcMarketing">
+    <main class="page-shell">
+        <section class="hero-stage" id="hero">
+            <nav class="topbar" aria-label="Primary">
+                <div class="topbar-inner landing-shell">
+                    <a class="brand" href="#hero">arc</a>
+                    <div class="topbar-links">
+                        <a href="#motions">Features</a>
+                        <a href="#growth">Architecture</a>
+                        <a href="#stories">Examples</a>
+                        <a href="marketing%20content.md">Learn</a>
+                    </div>
+                    <div class="topbar-cta">
+                        <a href="../../README.md" class="topbar-link-muted">Readme</a>
+                        <a href="marketing%20content.md" class="topbar-link-muted">Notes</a>
+                        <a href="#final-cta" class="topbar-button">Start Building</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="hero-shell landing-shell">
+                <header class="hero-copy">
+                    <p class="hero-pill">The browser is the runtime</p>
+                    <h1>Build the application. <span>Keep the platform.</span></h1>
+                    <p class="lede">Launch native web applications with HTML, CSS, and JavaScript. Arc keeps the browser model intact, scales from component to application, and stays readable to developers and agents.</p>
+                    <div class="actions hero-actions">
+                        <a href="marketing%20content.md">Read strategy</a>
+                        <a href="../../README.md" class="ghost">Read docs</a>
+                    </div>
+                    <p class="hero-meta">No virtual DOM · No mandatory compile step · Native imports · Agent-friendly structure</p>
+                </header>
+
+                <section class="hero-duo" id="motions" aria-label="Arc feature overview">
+                    <article class="duo-card">
+                        <span class="card-kicker">Native by design</span>
+                        <div class="duo-visual duo-visual-browser">
+                            <div class="orb orb-large"></div>
+                            <div class="orb orb-small"></div>
+                            <div class="browser-frame">
+                                <div class="browser-bar"></div>
+                                <div class="browser-line strong"></div>
+                                <div class="browser-line"></div>
+                                <div class="browser-tags">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>Native applications</h2>
+                        <p>Arc uses real browser primitives end to end instead of layering a synthetic render model over the platform.</p>
+                        <div class="chip-row">
+                            <span>Native imports</span>
+                            <span>Declarative shadow DOM</span>
+                            <span>No VDOM</span>
+                        </div>
+                    </article>
+
+                    <article class="duo-card">
+                        <span class="card-kicker">Readable by agents</span>
+                        <div class="duo-visual duo-visual-ai">
+                            <div class="folder-card">
+                                <strong>/CustomModal</strong>
+                                <span>index.js</span>
+                                <span>index.html</span>
+                                <span>index.css</span>
+                            </div>
+                            <div class="code-float">
+                                <div class="code-dot"></div>
+                                <div class="code-dot"></div>
+                                <div class="code-dot"></div>
+                                <div class="code-snippet">class Modal extends HTMLElement.with(IHtmlComponent)</div>
+                            </div>
+                        </div>
+                        <h2>Website companions for humans and AI</h2>
+                        <p>Arc keeps templates, styles, and behavior explicit so prompts, developers, and tooling can reason about the same files.</p>
+                        <div class="chip-row">
+                            <span>3-file anatomy</span>
+                            <span>Class-oriented</span>
+                            <span>Prompt-to-app friendly</span>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="trust-band" aria-label="Arc proof and trust markers">
+                    <div class="trust-ratings">
+                        <div class="rating-pill"><strong>13</strong><span>core architectural strengths</span></div>
+                        <div class="rating-pill"><strong>3</strong><span>pillar marketing story</span></div>
+                        <div class="rating-pill"><strong>1</strong><span>model from component to app</span></div>
+                    </div>
+                    <p class="trust-copy">15+ years of browser standards · progressive delivery · typed component families · trusted by teams building on the platform itself</p>
+                    <div class="logo-row" aria-label="Arc platform proof">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Custom Elements</span>
+                        <span>Shadow DOM</span>
+                        <span>Native Imports</span>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="process-section landing-shell" aria-labelledby="process-title">
+            <div class="section-heading center">
+                <h2 id="process-title">From component to application, surprisingly fast</h2>
+                <p>Arc keeps one architectural model from small UI components through routed applications and world-driven experiences.</p>
+            </div>
+            <div class="process-grid">
+                <article class="process-card">
+                    <div class="process-visual visual-files"></div>
+                    <span class="process-step">01</span>
+                    <h3>Define the component</h3>
+                    <p>Start with native files and explicit behavior instead of a hidden render layer.</p>
+                </article>
+                <article class="process-card">
+                    <div class="process-visual visual-runtime"></div>
+                    <span class="process-step">02</span>
+                    <h3>Compose the application</h3>
+                    <p>Expand the same model into routing, progressive delivery, and screen-level orchestration.</p>
+                </article>
+                <article class="process-card">
+                    <div class="process-visual visual-world"></div>
+                    <span class="process-step">03</span>
+                    <h3>Extend into worlds</h3>
+                    <p>Move into update, fixed-update, and draw lifecycles without abandoning the original architecture.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="growth-section" id="growth" aria-labelledby="growth-title">
+            <div class="landing-shell">
+                <div class="section-heading center narrow">
+                    <h2 id="growth-title">Your architecture for serious browser-native growth</h2>
+                </div>
+
+                <div class="feature-stack">
+                    <article class="feature-row">
+                        <div class="feature-copy">
+                            <span class="feature-number">01</span>
+                            <h3>Native by Design</h3>
+                            <p>Arc keeps HTML, CSS, JavaScript, the DOM, and native imports first-class, so the browser stays the runtime instead of just the target.</p>
+                        </div>
+                        <div class="feature-media media-native">
+                            <div class="media-panel browser-ui"></div>
+                        </div>
+                    </article>
+
+                    <article class="feature-row reverse">
+                        <div class="feature-copy">
+                            <span class="feature-number">02</span>
+                            <h3>One Model From Component to Application</h3>
+                            <p>Components, applications, and worlds belong to the same family, reducing conceptual switching as the system grows.</p>
+                        </div>
+                        <div class="feature-media media-application">
+                            <div class="media-panel app-ui"></div>
+                        </div>
+                    </article>
+
+                    <article class="feature-row">
+                        <div class="feature-copy">
+                            <span class="feature-number">03</span>
+                            <h3>Behavior and Skin, Inherited Together</h3>
+                            <p>Arc lets component families inherit logic and visual identity structurally, making design systems more architectural and less ritual-driven.</p>
+                        </div>
+                        <div class="feature-media media-inheritance">
+                            <div class="media-panel inheritance-ui"></div>
+                        </div>
+                    </article>
+
+                    <article class="feature-row reverse">
+                        <div class="feature-copy">
+                            <span class="feature-number">04</span>
+                            <h3>Readable by Humans. Followable by AI.</h3>
+                            <p>Arc keeps files explicit and browser-faithful, so prompts, agents, and developers can scaffold and debug against the same visible structure.</p>
+                        </div>
+                        <div class="feature-media media-ai">
+                            <div class="media-panel ai-ui"></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="stories-section landing-shell" id="stories" aria-labelledby="stories-title">
+            <div class="stories-layout">
+                <div class="stories-copy">
+                    <p class="eyebrow">Architecture proof</p>
+                    <h2 id="stories-title">The architecture speaks for itself</h2>
+                    <p>Arc replaces fake social proof with platform proof: explicit runtime behavior, predictable file anatomy, progressive delivery, and a single model that scales from component to application.</p>
+                    <a class="story-link" href="marketing%20content.md">Read the full messaging notes</a>
+                </div>
+                <div class="stories-panel">
+                    <div class="story-tabs">
+                        <button type="button" class="story-tab active">LLM-ready</button>
+                        <button type="button" class="story-tab">Fractal apps</button>
+                        <button type="button" class="story-tab">Inheritance</button>
+                    </div>
+                    <blockquote class="story-quote">Arc keeps the browser as the runtime, not just the target. The same files remain readable to the developer, inspectable in the DOM, and scaffoldable by an agent.</blockquote>
+                    <p class="story-source">Source of truth: marketing content, README, and component anatomy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-stage" id="final-cta">
+            <div class="landing-shell cta-stage-inner">
+                <h2>Start building that native application today.</h2>
+                <p>Use the marketing notes, the README, and starter examples to turn Arc’s architecture into concrete apps, demos, and benchmarkable proof.</p>
+                <div class="actions cta-actions">
+                    <a href="../../README.md">Read docs</a>
+                    <a href="marketing%20content.md" class="ghost">Open content notes</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a class="brand footer-brandmark" href="#hero">arc</a>
+                    <p>Create standards-first native web applications with HTML, CSS, and JavaScript. Arc keeps the browser model explicit for developers and agents.</p>
+                    <div class="footer-social" aria-label="Arc links">
+                        <a href="../../README.md">Docs</a>
+                        <a href="marketing%20content.md">Notes</a>
+                        <a href="#growth">Architecture</a>
+                        <a href="#stories">Proof</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <a href="#motions">Features</a>
+                    <a href="#growth">Architecture</a>
+                    <a href="#final-cta">Get started</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <a href="marketing%20content.md">Marketing content</a>
+                    <a href="../../README.md">README</a>
+                    <a href="../../src/ui/screens/ArcMarketing/index.js">Screen controller</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Principles</h3>
+                    <a href="#hero">Native by design</a>
+                    <a href="#growth">Fractal model</a>
+                    <a href="#stories">AI-ready</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Source</h3>
+                    <a href="../../LICENSE.txt">License</a>
+                    <a href="#hero">Top</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">Arc marketing demo for a standards-first native web architecture.</p>
+                <p class="footer-thesis">Readable by developers. Followable by agents. Native to the browser.</p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
