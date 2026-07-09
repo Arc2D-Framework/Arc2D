@@ -111,9 +111,25 @@ class TourVoiceVisualizer extends HTMLElement {
     }
 
     setVoiceActive(isActive) {
+        const wasActive = this.voiceActive;
         this.voiceActive = Boolean(isActive);
         this.toggleAttribute('data-voice-active', this.voiceActive);
         this._syncVoiceToggleUI();
+        if (this.mode === 'live-media') {
+            // When the session ends, release any tracks held through idle gaps so the
+            // placeholder can return; setMediaTracks otherwise ignores null updates.
+            if (wasActive && !this.voiceActive) {
+                if (this.remoteVideoTrack && this.liveMediaVideoEl) {
+                    this.remoteVideoTrack.detach?.(this.liveMediaVideoEl);
+                }
+                if (this.remoteAudioTrack && this.liveMediaAudioEl) {
+                    this.remoteAudioTrack.detach?.(this.liveMediaAudioEl);
+                }
+                this.remoteVideoTrack = null;
+                this.remoteAudioTrack = null;
+            }
+            this._syncLiveMediaState();
+        }
     }
 
     async setListening(isListening) {
@@ -729,6 +745,15 @@ class TourVoiceVisualizer extends HTMLElement {
         const nextVideoTrack = media.videoTrack || null;
         const nextAudioTrack = media.audioTrack || null;
 
+        // HeyGen unpublishes the avatar's tracks whenever it goes idle (e.g. right
+        // after a tour handoff) and republishes them when it next speaks. Ignore
+        // these transient all-null updates while the session is still active so the
+        // last video frame stays on screen instead of flashing the cold placeholder.
+        // When the tracks are republished this method runs again and re-attaches them.
+        if (this.voiceActive && !nextVideoTrack && !nextAudioTrack) {
+            return;
+        }
+
         if (this.remoteVideoTrack && this.remoteVideoTrack !== nextVideoTrack && this.liveMediaVideoEl) {
             this.remoteVideoTrack.detach?.(this.liveMediaVideoEl);
         }
@@ -756,7 +781,10 @@ class TourVoiceVisualizer extends HTMLElement {
         if (this.mode !== 'live-media') return;
         const hasMedia = Boolean(this.remoteVideoTrack || this.remoteAudioTrack);
         if (this.embedEmptyEl) {
-            this.embedEmptyEl.hidden = hasMedia;
+            // Keep the cold "Start voice chat" prompt hidden while a session is live;
+            // only reveal it when voice chat is actually off. During an active session
+            // a momentary track gap should never fall back to the not-started prompt.
+            this.embedEmptyEl.hidden = hasMedia || this.voiceActive;
         }
         if (this.liveMediaAudioEl) {
             this.liveMediaAudioEl.muted = this.liveMediaMuted;

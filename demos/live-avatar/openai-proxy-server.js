@@ -192,6 +192,70 @@ async function liveAvatarRequest(pathname, { method = 'GET', body, apiKey } = {}
     return rawResponse;
 }
 
+async function stopLiveAvatarSession(sessionId, apiKey) {
+    return liveAvatarRequest('/v1/sessions/stop', {
+        method: 'POST',
+        body: { session_id: sessionId },
+        apiKey
+    });
+}
+
+async function stopActiveLiveAvatarSessions(apiKey) {
+    try {
+        const list = await liveAvatarRequest('/v1/sessions?type=active', { apiKey });
+        const sessions = list?.data?.results || [];
+        for (const session of sessions) {
+            if (!session?.id || session.is_sandbox === false) continue;
+            try {
+                await stopLiveAvatarSession(session.id, apiKey);
+                console.log('[openai-proxy-server] stopped stale LiveAvatar session', session.id);
+            } catch (error) {
+                console.warn('[openai-proxy-server] could not stop session', session.id, error?.message);
+            }
+        }
+    } catch (error) {
+        console.warn('[openai-proxy-server] could not list active sessions', error?.message);
+    }
+}
+
+async function handleLiveAvatarStopRequest(request, response) {
+    try {
+        const rawBody = await readRequestBody(request);
+        const body = rawBody ? JSON.parse(rawBody) : {};
+        const sessionId = typeof body.sessionId === 'string' ? body.sessionId : '';
+        const apiKey = typeof body.apiKey === 'string' && body.apiKey ? body.apiKey : '';
+        if (!sessionId) {
+            sendJson(response, 400, { error: 'sessionId is required.' });
+            return;
+        }
+        await stopLiveAvatarSession(sessionId, apiKey);
+        sendJson(response, 200, { ok: true });
+    } catch (error) {
+        sendJson(response, error?.status || 500, { error: error?.message || String(error) });
+    }
+}
+
+async function handleLiveAvatarKeepAliveRequest(request, response) {
+    try {
+        const rawBody = await readRequestBody(request);
+        const body = rawBody ? JSON.parse(rawBody) : {};
+        const sessionId = typeof body.sessionId === 'string' ? body.sessionId : '';
+        const apiKey = typeof body.apiKey === 'string' && body.apiKey ? body.apiKey : '';
+        if (!sessionId) {
+            sendJson(response, 400, { error: 'sessionId is required.' });
+            return;
+        }
+        await liveAvatarRequest('/v1/sessions/keep-alive', {
+            method: 'POST',
+            body: { session_id: sessionId },
+            apiKey
+        });
+        sendJson(response, 200, { ok: true });
+    } catch (error) {
+        sendJson(response, error?.status || 500, { error: error?.message || String(error) });
+    }
+}
+
 async function handleLiveAvatarSessionRequest(request, response) {
     try {
         const rawBody = await readRequestBody(request);
@@ -203,7 +267,10 @@ async function handleLiveAvatarSessionRequest(request, response) {
         const language = typeof body.language === 'string' && body.language ? body.language : 'en';
         const isSandbox = Boolean(body.isSandbox);
         const prompt = typeof body.instructions === 'string' ? body.instructions : '';
-        const openingText = typeof body.openingText === 'string' ? body.openingText : '';
+        // Distinguish "not provided" (keep existing) from an explicit "" (suppress the
+        // greeting) — a reconnect sends "" so the resumed avatar doesn't re-greet.
+        const openingProvided = typeof body.openingText === 'string';
+        const openingText = openingProvided ? body.openingText : '';
         const contextName = typeof body.contextName === 'string' ? body.contextName : '';
 
         if (!avatarId || !contextId || !voiceId) {
@@ -211,57 +278,88 @@ async function handleLiveAvatarSessionRequest(request, response) {
             return;
         }
 
-        if (prompt || openingText || contextName) {
-            const contextBody = {};
-            if (contextName) contextBody.name = contextName;
-            if (prompt) contextBody.prompt = prompt;
-            if (openingText) contextBody.opening_text = openingText;
+        if (prompt || openingProvided || contextName) {
+            // LiveAvatar's context PATCH requires name, prompt, AND opening_text — omitting
+            // any one makes the API reject the whole request and kill the session. Fetch the
+            // current context and merge the caller's overrides on top so every required field
+            // is always present (a caller may legitimately send only a subset).
+            const existing = await liveAvatarRequest(`/v1/contexts/${contextId}`, { apiKey });
+            const current = existing?.data || existing || {};
 
             await liveAvatarRequest(`/v1/contexts/${contextId}`, {
                 method: 'PATCH',
-                body: contextBody,
+                body: {
+                    name: contextName || current.name || 'Live Avatar Session',
+                    prompt: prompt || current.prompt || '',
+                    opening_text: openingProvided ? openingText : (current.opening_text || '')
+                },
                 apiKey
             });
         }
 
-        const tokenPayload = await liveAvatarRequest('/v1/sessions/token', {
-            method: 'POST',
-            body: {
-                mode: 'FULL',
-                avatar_id: avatarId,
-                is_sandbox: isSandbox,
-                avatar_persona: {
-                    voice_id: voiceId,
-                    context_id: contextId,
-                    language
-                }
-            },
-            apiKey
-        });
-
-        const sessionToken = tokenPayload?.session_token || tokenPayload?.data?.session_token;
-        const sessionId = tokenPayload?.session_id || tokenPayload?.data?.session_id || null;
-        if (!sessionToken) {
-            sendJson(response, 502, { error: 'LiveAvatar did not return a session token.', rawResponse: tokenPayload });
-            return;
-        }
-
-        const startResponse = await fetch(`${liveAvatarBaseUrl}/v1/sessions/start`, {
-            method: 'POST',
-            headers: {
-                'authorization': `Bearer ${sessionToken}`,
-                'accept': 'application/json'
-            }
-        });
-        const sessionPayload = await startResponse.json().catch(() => null);
-        if (!startResponse.ok) {
-            sendJson(response, startResponse.status, {
-                error: sessionPayload?.message || sessionPayload?.error?.message || 'LiveAvatar session start failed.',
-                rawResponse: sessionPayload
+        // One attempt at the full token → start handshake. Throws (with .status /
+        // .rawResponse) on any failure so the caller can decide whether to retry.
+        const runTokenAndStart = async () => {
+            const tokenPayload = await liveAvatarRequest('/v1/sessions/token', {
+                method: 'POST',
+                body: {
+                    mode: 'FULL',
+                    avatar_id: avatarId,
+                    is_sandbox: isSandbox,
+                    avatar_persona: {
+                        voice_id: voiceId,
+                        context_id: contextId,
+                        language
+                    }
+                },
+                apiKey
             });
-            return;
+
+            const sessionToken = tokenPayload?.session_token || tokenPayload?.data?.session_token;
+            const sessionId = tokenPayload?.session_id || tokenPayload?.data?.session_id || null;
+            if (!sessionToken) {
+                const error = new Error('LiveAvatar did not return a session token.');
+                error.status = 502;
+                error.rawResponse = tokenPayload;
+                throw error;
+            }
+
+            const startResponse = await fetch(`${liveAvatarBaseUrl}/v1/sessions/start`, {
+                method: 'POST',
+                headers: {
+                    'authorization': `Bearer ${sessionToken}`,
+                    'accept': 'application/json'
+                }
+            });
+            const sessionPayload = await startResponse.json().catch(() => null);
+            if (!startResponse.ok) {
+                const error = new Error(sessionPayload?.message || sessionPayload?.error?.message || 'LiveAvatar session start failed.');
+                error.status = startResponse.status;
+                error.rawResponse = sessionPayload;
+                throw error;
+            }
+            return { sessionId, tokenPayload, sessionPayload };
+        };
+
+        // The sandbox allows a single concurrent session, so a leftover session (dropped
+        // renderer, closed tab, crashed test) blocks every new one — and the limit is
+        // enforced at the /start step, not /token. On a concurrency failure, clear stale
+        // sandbox sessions and retry once. Gated on isSandbox so real sessions are safe.
+        let result;
+        try {
+            result = await runTokenAndStart();
+        } catch (error) {
+            if (isSandbox && /concurrency/i.test(error?.message || '')) {
+                console.log('[openai-proxy-server] concurrency limit hit — clearing stale sessions and retrying.');
+                await stopActiveLiveAvatarSessions(apiKey);
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                result = await runTokenAndStart();
+            } else {
+                throw error;
+            }
         }
 
+        const { sessionId, tokenPayload, sessionPayload } = result;
         const liveKitUrl = sessionPayload?.livekit_url || sessionPayload?.data?.livekit_url || '';
         const liveKitToken = sessionPayload?.livekit_client_token || sessionPayload?.data?.livekit_client_token || '';
         const url = liveKitUrl && liveKitToken
@@ -362,6 +460,16 @@ const server = http.createServer(async (request, response) => {
         return;
     }
 
+    if (request.method === 'POST' && requestUrl.pathname === '/api/liveavatar/session/stop') {
+        await handleLiveAvatarStopRequest(request, response);
+        return;
+    }
+
+    if (request.method === 'POST' && requestUrl.pathname === '/api/liveavatar/session/keep-alive') {
+        await handleLiveAvatarKeepAliveRequest(request, response);
+        return;
+    }
+
     if (request.method === 'GET' && requestUrl.pathname.startsWith('/api/liveavatar/transcript/')) {
         await handleLiveAvatarTranscriptRequest(requestUrl, response);
         return;
@@ -377,5 +485,5 @@ const server = http.createServer(async (request, response) => {
 
 server.listen(port, () => {
     console.log(`[openai-proxy-server] Listening on http://localhost:${port}`);
-    console.log(`[openai-proxy-server] Demo: http://localhost:${port}/demos/help-demo.html`);
+    console.log(`[openai-proxy-server] Live avatar: http://localhost:${port}/demos/live-avatar/live-avatar.html`);
 });
