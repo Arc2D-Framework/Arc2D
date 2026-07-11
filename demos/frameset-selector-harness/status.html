@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>System Status Bar</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0; height: 100vh; display: flex; align-items: center;
+        background: #c8d3e0; border-top: 2px outset #eef2f7;
+        font: 12px Verdana, Geneva, sans-serif; color: #2a3648;
+    }
+    #status-bar { display: flex; align-items: center; gap: 14px; width: 100%; padding: 0 14px; }
+    .lamp { display: inline-flex; align-items: center; gap: 5px; }
+    .lamp .bulb { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #7a8a9e; }
+    .bulb.green { background: #35c24d; }
+    .bulb.amber { background: #e8b325; }
+    #ticker { flex: 1; overflow: hidden; white-space: nowrap; color: #51637c; font-style: italic; }
+    button#ack-btn {
+        font: 11px Verdana, sans-serif; padding: 3px 12px;
+        background: #e6ecf3; border: 2px outset #f4f8fc; cursor: pointer;
+    }
+    button#ack-btn:active { border-style: inset; }
+</style>
+</head>
+<body>
+    <div id="status-bar">
+        <span class="lamp"><span class="bulb green"></span> Mainframe</span>
+        <span class="lamp"><span class="bulb green"></span> Payroll</span>
+        <span class="lamp"><span class="bulb amber"></span> Tape backup</span>
+        <span id="ticker">All systems nominal. Scheduled maintenance Sunday 02:00–04:00. Please submit timecards by Friday EOD.</span>
+        <button id="ack-btn">Acknowledge</button>
+    </div>
+    <script>
+        // Recordable mutation inside a nested-frameset frame document.
+        document.getElementById('ack-btn').addEventListener('click', (e) => {
+            e.target.textContent = 'Acknowledged ✓';
+            e.target.disabled = true;
+            setTimeout(() => { e.target.textContent = 'Acknowledge'; e.target.disabled = false; }, 1500);
+        });
+    </script>
+</body>
+</html>

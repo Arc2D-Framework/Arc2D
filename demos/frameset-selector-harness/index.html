@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Acme Legacy Portal — Frameset Harness</title>
+<!--
+    Frameset selector test harness.
+
+    A classic HTML4 frameset page (no <body> — only <frameset> renders) that
+    EMBEDS the modern iframe-selector-harness in its main frame, composing:
+
+        frameset > frame ::doc ... > iframe ::doc ... > component >>> node
+
+    Cases (expected selector shapes; legend lives in the nav frame):
+      F1 — node in a top-level frame:
+           html > frameset > frame#nav-frame ::doc html > body > ...
+      F2 — node in a NESTED frameset's frame:
+           html > frameset > frameset > frame#status-frame ::doc html > body > ...
+      F3 — THE GAUNTLET: through frame, into the embedded iframe harness,
+           through an iframe, into a shadow component:
+           html > frameset > frameset > frame#main-frame ::doc html > body >
+             div.shell > main > section#editor-panel > div:nth-of-type(2) >
+             iframe#editor ::doc html > body > main > editor-toolbar >>> button.save
+      F4 — known-suspect: does the breadcrumb strip / pin marker even RENDER
+           when the top document is a frameset (no body)? Observe, don't assume.
+-->
+</head>
+<frameset cols="230,*" frameborder="1" border="4">
+    <frame id="nav-frame" name="nav" src="nav.html" scrolling="auto" noresize>
+    <frameset rows="*,90" frameborder="1" border="4">
+        <frame id="main-frame" name="main" src="../iframe-selector-harness/index.html" scrolling="auto">
+        <frame id="status-frame" name="status" src="status.html" scrolling="no">
+    </frameset>
+    <noframes>
+        <body>
+            <p>Your browser does not support frames. (What year is it?)</p>
+        </body>
+    </noframes>
+</frameset>
+</html>

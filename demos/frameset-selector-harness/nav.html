@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Portal Navigation</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0; padding: 12px 10px; background: #1e3a5f; color: #dbe6f3; min-height: 100vh;
+        font: 13px/1.5 Verdana, Geneva, sans-serif;
+    }
+    h1 { font-size: 14px; margin: 0 0 2px; color: #fff; }
+    .tagline { font-size: 10px; color: #8fb0d4; margin-bottom: 14px; }
+    h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #8fb0d4; margin: 16px 0 6px; border-bottom: 1px solid #35597f; padding-bottom: 3px; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { margin: 2px 0; }
+    a { display: block; color: #dbe6f3; text-decoration: none; padding: 4px 8px; border-radius: 3px; }
+    a:hover { background: #2c4d78; }
+    a.active { background: #3b6ff0; color: #fff; }
+    .legend { margin-top: 18px; font-size: 10px; }
+    .legend code {
+        display: block; background: #10233c; color: #9fd0ff; padding: 4px 6px; margin: 3px 0 8px;
+        border-radius: 3px; font: 9px/1.5 monospace; word-break: break-all; white-space: normal;
+    }
+    .legend b { color: #fff; }
+</style>
+</head>
+<body>
+    <h1>Acme Legacy Portal</h1>
+    <div class="tagline">Intranet v2.3 — est. 1999</div>
+
+    <h2>Applications</h2>
+    <ul id="app-nav">
+        <li><a href="../iframe-selector-harness/index.html" target="main" class="active" id="nav-dashboard">Metrics Dashboard</a></li>
+        <li><a href="status.html" target="main" id="nav-status">System Status</a></li>
+        <li><a href="#" id="nav-timecard">Timecard Entry</a></li>
+        <li><a href="#" id="nav-directory">Employee Directory</a></li>
+    </ul>
+
+    <h2>Quick Links</h2>
+    <ul>
+        <li><a href="#" id="quick-payroll">Payroll</a></li>
+        <li><a href="#" id="quick-helpdesk">Helpdesk</a></li>
+    </ul>
+
+    <div class="legend" id="frameset-legend">
+        <h2>Frameset legend</h2>
+        <b>F1 — node in a frame</b>
+        <code>html > frameset > frame#nav-frame ::doc html > body > ul#app-nav > li:nth-of-type(1) > a</code>
+        <b>F2 — nested frameset's frame</b>
+        <code>html > frameset > frameset > frame#status-frame ::doc html > body > div#status-bar > button#ack-btn</code>
+        <b>F3 — the gauntlet (frame → iframe → shadow)</b>
+        <code>html > frameset > frameset > frame#main-frame ::doc html > body > div.shell > main > section#editor-panel > div:nth-of-type(2) > iframe#editor ::doc html > body > main > editor-toolbar >>> button:nth-of-type(5)</code>
+        <b>F4 — observe: breadcrumb/marker rendering on a frameset top document (no body!)</b>
+    </div>
+</body>
+</html>
