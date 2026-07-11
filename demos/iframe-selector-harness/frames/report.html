@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Weekly Report (iframe hosted inside a shadow root)</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0; padding: 12px 14px; background: #fff; color: #1c2333;
+        font: 13px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    h2 { font-size: 14px; margin: 0 0 10px; }
+    section#kpis { display: flex; gap: 10px; }
+    section#kpis > div {
+        flex: 1; border: 1px solid #e3e7ef; border-radius: 8px; padding: 10px 12px;
+    }
+    .kpi-label { color: #6b7487; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+    .kpi-value { font-size: 19px; font-weight: 700; margin-top: 2px; }
+    .bars { display: flex; align-items: flex-end; gap: 5px; height: 70px; margin-top: 14px; }
+    .bars > span { flex: 1; background: #7ea2ff; border-radius: 3px 3px 0 0; }
+    .bars > span:nth-of-type(odd) { background: #3b6ff0; }
+    button#refresh-report {
+        margin-top: 12px; border: 1px solid #d7ddea; background: #f4f6fb;
+        border-radius: 6px; padding: 5px 12px; cursor: pointer; font: 600 12px -apple-system, sans-serif;
+    }
+</style>
+</head>
+<body>
+    <!-- CASE 6 targets: this document is loaded by <embedded-report>'s SHADOW iframe.
+         Expected: … > embedded-report >>> iframe#report ::doc body > section#kpis > div:nth-of-type(1) -->
+    <h2>Week 28 — Traffic &amp; conversion</h2>
+    <section id="kpis">
+        <div>
+            <div class="kpi-label">Sessions</div>
+            <div class="kpi-value">21,904</div>
+        </div>
+        <div>
+            <div class="kpi-label">Signups</div>
+            <div class="kpi-value">612</div>
+        </div>
+        <div>
+            <div class="kpi-label">Conversion</div>
+            <div class="kpi-value">2.8%</div>
+        </div>
+    </section>
+    <div class="bars" aria-hidden="true">
+        <span style="height:35%"></span><span style="height:55%"></span><span style="height:42%"></span>
+        <span style="height:70%"></span><span style="height:62%"></span><span style="height:88%"></span>
+        <span style="height:76%"></span>
+    </div>
+    <button id="refresh-report">Refresh</button>
+    <script>
+        document.getElementById('refresh-report').addEventListener('click', (e) => {
+            e.target.textContent = 'Refreshing…';
+            setTimeout(() => e.target.textContent = 'Refresh', 900);
+        });
+    </script>
+</body>
+</html>

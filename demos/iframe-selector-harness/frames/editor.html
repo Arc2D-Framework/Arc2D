@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Campaign Editor (iframe level 1)</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0; background: #fbfcfe; color: #1c2333;
+        font: 13px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { padding: 12px 14px; }
+    .editor-grid { display: flex; gap: 12px; margin-top: 10px; }
+    section#compose-pane { flex: 1.2; }
+    section#preview-pane { flex: 1; }
+    label { display: block; font-size: 12px; color: #6b7487; margin: 10px 0 3px; }
+    input[type="text"], textarea, select {
+        width: 100%; padding: 7px 9px; border: 1px solid #dde2ec; border-radius: 6px; font: inherit;
+    }
+    textarea { height: 90px; resize: vertical; }
+    h2.pane-title { font-size: 13px; margin: 0 0 4px; color: #4b5468; text-transform: uppercase; letter-spacing: .6px; }
+    iframe#preview {
+        display: block; width: 100%; height: 190px;
+        border: 1px solid #dde2ec; border-radius: 6px; background: #fff;
+    }
+</style>
+</head>
+<body>
+<main>
+    <!-- CASE 4 target: shadow component inside this iframe document.
+         Expected: … > iframe#editor ::doc body > main > editor-toolbar >>> button.save -->
+    <editor-toolbar></editor-toolbar>
+
+    <div class="editor-grid">
+        <section id="compose-pane">
+            <h2 class="pane-title">Compose</h2>
+            <label for="subject">Subject line</label>
+            <input type="text" id="subject" value="July product update 🎉">
+            <label for="audience">Audience</label>
+            <select id="audience">
+                <option>All subscribers</option>
+                <option>Trial users</option>
+                <option>Churn risk</option>
+            </select>
+            <label for="body-copy">Body</label>
+            <textarea id="body-copy">Hi {{first_name}}, here's what shipped in July…</textarea>
+        </section>
+
+        <section id="preview-pane">
+            <h2 class="pane-title">Live preview</h2>
+            <!-- CASE 5 target: iframe nested inside this iframe (::doc … ::doc) -->
+            <iframe id="preview" src="preview.html" title="Message preview"></iframe>
+        </section>
+    </div>
+</main>
+
+<script>
+    // <editor-toolbar> — shadow component INSIDE the iframe document.
+    class EditorToolbar extends HTMLElement {
+        connectedCallback() {
+            const root = this.attachShadow({ mode: 'open' });
+            root.innerHTML = `
+                <style>
+                    :host { display: block; }
+                    .bar {
+                        display: flex; align-items: center; gap: 6px;
+                        background: #fff; border: 1px solid #dde2ec; border-radius: 8px; padding: 6px 8px;
+                    }
+                    .bar .spacer { flex: 1; }
+                    button {
+                        border: 1px solid #d7ddea; background: #f4f6fb; border-radius: 6px;
+                        padding: 5px 11px; cursor: pointer; font: 600 12px -apple-system, sans-serif; color: #1c2333;
+                    }
+                    button:hover { background: #e9effc; }
+                    button.save { background: #3b6ff0; border-color: #3b6ff0; color: #fff; }
+                    button.save:hover { background: #2f5dd4; }
+                </style>
+                <div class="bar">
+                    <button class="fmt" data-cmd="bold" title="Bold"><b>B</b></button>
+                    <button class="fmt" data-cmd="italic" title="Italic"><i>I</i></button>
+                    <button class="fmt" data-cmd="link" title="Link">🔗</button>
+                    <span class="spacer"></span>
+                    <button class="preview-btn">Preview</button>
+                    <button class="save">Save draft</button>
+                </div>
+            `;
+            root.querySelector('button.save').addEventListener('click', () => {
+                root.querySelector('button.save').textContent = 'Saved ✓';
+                setTimeout(() => root.querySelector('button.save').textContent = 'Save draft', 1200);
+            });
+        }
+    }
+    customElements.define('editor-toolbar', EditorToolbar);
+</script>
+</body>
+</html>

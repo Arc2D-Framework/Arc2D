@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Message Preview (iframe level 2 — nested)</title>
+<style>
+    body {
+        margin: 0; padding: 14px 16px; background: #fff; color: #1c2333;
+        font: 13px/1.55 Georgia, "Times New Roman", serif;
+    }
+    article { max-width: 420px; }
+    h1#preview-title { font-size: 17px; margin: 0 0 8px; }
+    p { margin: 0 0 10px; }
+    a.cta {
+        display: inline-block; background: #3b6ff0; color: #fff; text-decoration: none;
+        font: 600 12px -apple-system, sans-serif; padding: 8px 16px; border-radius: 6px;
+    }
+    footer { margin-top: 14px; color: #98a1b3; font: 11px -apple-system, sans-serif; }
+</style>
+</head>
+<body>
+    <!-- CASE 5 target: node in the NESTED iframe.
+         Expected: … > iframe#editor ::doc body > main > … > iframe#preview ::doc body > article > h1#preview-title -->
+    <article>
+        <h1 id="preview-title">July product update 🎉</h1>
+        <p>Hi Dana, here's what shipped in July…</p>
+        <p>We rebuilt the funnel explorer, added CSV exports, and cut dashboard load times in half.</p>
+        <a class="cta" href="#" id="preview-cta">Read the changelog</a>
+        <footer>Sent with AcmeMetrics · <a href="#" id="unsub">Unsubscribe</a></footer>
+    </article>
+</body>
+</html>
