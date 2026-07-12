@@ -1,0 +1,42 @@
+#query-tests #query-summary {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    border-radius: 7px;
+    background: #eef1f7;
+    font-weight: 700;
+}
+
+#query-tests #query-summary.running { color: #3b6ff0; }
+#query-tests #query-summary.passed { color: #2e9e5b; background: #e5f6ec; }
+#query-tests #query-summary.failed { color: #b42318; background: #fee4e2; }
+#query-results { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+#query-results li {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 10px;
+    align-items: baseline;
+    padding: 7px 9px;
+    border: 1px solid #e3e7ef;
+    border-radius: 6px;
+}
+#query-results b { font-size: 10px; letter-spacing: .06em; }
+#query-results .pass b { color: #2e9e5b; }
+#query-results .fail b, #query-results .fail em { color: #b42318; }
+#query-results span > strong { display: block; color: #1c2333; font-weight: 700; }
+#query-results small { color: #6b7487; }
+#query-results code {
+    display: block;
+    margin-top: 2px;
+    color: #526078;
+    font: 11px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    overflow-wrap: anywhere;
+}
+#query-results mark {
+    border-radius: 3px;
+    padding: 0 3px;
+    font: inherit;
+    font-weight: 800;
+}
+#query-results .shadow-operator { color: #6941c6; background: #f4ebff; }
+#query-results .document-operator { color: #026aa2; background: #e0f2fe; }
+#query-results em { grid-column: 2 / -1; font-size: 12px; font-style: normal; }

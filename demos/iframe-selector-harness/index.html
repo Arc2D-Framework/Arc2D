@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Acme Metrics — Dashboard (iframe selector harness)</title>
+<script
+    src="../../node_modules/od-cocoon/framework.src.js"
+    charset="utf-8"
+    data-kernel
+    data-rootpath="../../"
+    data-namespace="ui.screens.IframeSelectorHarness"
+    data-src-path="/src/"
+    data-controller="index.js"
+></script>
 <style>
     :root {
         --bg: #f4f6fa;
@@ -150,7 +159,7 @@
     section#harness-legend .case b { font-size: 13px; }
 </style>
 </head>
-<body>
+<body namespace="ui.screens.IframeSelectorHarness">
 
 <header class="app-header">
     <div class="brand">Acme<em>Metrics</em></div>
@@ -225,7 +234,7 @@
             </div>
         </section>
 
-        <!-- CASE: iframe (::doc), containing a shadow component (::doc … >>>) and a nested iframe (::doc … ::doc) -->
+        <!-- CASE: iframe (::document), containing a shadow component (::document … >>>) and a nested iframe (::document … ::document) -->
         <section class="panel" id="editor-panel">
             <div class="panel-head">
                 <h2>Campaign editor</h2>
@@ -236,7 +245,7 @@
             </div>
         </section>
 
-        <!-- CASE: iframe inside a shadow root (>>> … ::doc) -->
+        <!-- CASE: iframe inside a shadow root (>>> … ::document) -->
         <section class="panel" id="report-panel">
             <div class="panel-head">
                 <h2>Weekly report</h2>
@@ -268,7 +277,7 @@
             </div>
         </section>
 
-        <!-- CASE: srcdoc iframe (document with no URL) -->
+        <!-- CASE: srcdoc iframe (::document on a document with no URL) -->
         <section class="panel" id="promo-panel">
             <div class="panel-head">
                 <h2>Partner promo</h2>
@@ -286,7 +295,7 @@
             </div>
         </section>
 
-        <!-- CASE: iframe nested under THREE shadow roots (>>> >>> >>> … ::doc) -->
+        <!-- CASE: iframe nested under THREE shadow roots (>>> >>> >>> … ::document) -->
         <section class="panel" id="support-panel">
             <div class="panel-head">
                 <h2>Support</h2>
@@ -297,13 +306,15 @@
             </div>
         </section>
 
-        <!-- CASE: CROSS-ORIGIN iframes (third-party domains) — ::doc must NOT cross -->
+        <!-- CASE: CROSS-ORIGIN iframes (third-party domains) — ::document must NOT cross -->
         <section class="panel" id="xorigin-panel">
             <div class="panel-head">
                 <h2>Office &amp; status</h2>
                 <span class="hint">cross-origin iframes (third-party domains) — boundary is NOT crossable. Note: google.com itself refuses framing (X-Frame-Options: SAMEORIGIN)</span>
             </div>
             <div class="panel-body">
+                <!-- Deterministic opaque-origin boundary for the automated suite. -->
+                <iframe id="opaque-frame" sandbox srcdoc="<body><p id='private-target'>Private</p></body>" hidden></iframe>
                 <div class="xorigin-row">
                     <div>
                         <p class="hint" style="margin-top:0">HQ location (openstreetmap.org)</p>
@@ -338,28 +349,28 @@
                     <code>… > user-card:nth-of-type(2) >>> status-badge >>> span#dot</code>
                 </div>
                 <div class="case">
-                    <b>4 — iframe (::doc), component inside it (::doc … &gt;&gt;&gt;) — the canonical example</b>
-                    <code>… > section#editor-panel … > iframe#editor ::doc body > main > editor-toolbar >>> button.save</code>
+                    <b>4 — iframe (::document), component inside it (::document … &gt;&gt;&gt;) — the canonical example</b>
+                    <code>… > section#editor-panel … > iframe#editor ::document body > main > editor-toolbar >>> button.save</code>
                 </div>
                 <div class="case">
-                    <b>5 — nested iframe (::doc … ::doc)</b>
-                    <code>… > iframe#editor ::doc body > main > section#preview-pane > iframe#preview ::doc body > article > h1#preview-title</code>
+                    <b>5 — nested iframe (::document … ::document)</b>
+                    <code>… > iframe#editor ::document body > main > section#preview-pane > iframe#preview ::document body > article > h1#preview-title</code>
                 </div>
                 <div class="case">
-                    <b>6 — iframe inside shadow root (&gt;&gt;&gt; … ::doc)</b>
-                    <code>… > section#report-panel … > embedded-report >>> iframe#report ::doc body > section#kpis > div:nth-of-type(1)</code>
+                    <b>6 — iframe inside shadow root (&gt;&gt;&gt; … ::document)</b>
+                    <code>… > section#report-panel … > embedded-report >>> iframe#report ::document body > section#kpis > div:nth-of-type(1)</code>
                 </div>
                 <div class="case">
-                    <b>7 — srcdoc iframe (::doc on a URL-less document)</b>
-                    <code>… > section#promo-panel … > iframe#ad-banner ::doc body > button#promo-cta</code>
+                    <b>7 — srcdoc iframe (::document on a URL-less document)</b>
+                    <code>… > section#promo-panel … > iframe#ad-banner ::document body > button#promo-cta</code>
                 </div>
                 <div class="case">
                     <b>8 — CROSS-ORIGIN iframes (openstreetmap.org / example.com) — boundary must NOT cross</b>
-                    <code>… > section#xorigin-panel … > iframe#office-map   (deepest pickable node; no ::doc — contentDocument is inaccessible)</code>
+                    <code>… > section#xorigin-panel … > iframe#office-map   (deepest pickable node; no ::document — contentDocument is inaccessible)</code>
                 </div>
                 <div class="case">
-                    <b>9 — iframe under THREE shadow roots (&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; … ::doc)</b>
-                    <code>… > section#support-panel … > support-widget >>> chat-panel >>> chat-frame >>> iframe#chat ::doc html > body > form#composer > button#send-btn</code>
+                    <b>9 — iframe under THREE shadow roots (&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; … ::document)</b>
+                    <code>… > section#support-panel … > support-widget >>> chat-panel >>> chat-frame >>> iframe#chat ::document html > body > form#composer > button#send-btn</code>
                 </div>
             </div>
         </section>
@@ -449,7 +460,7 @@
         }
     }
 
-    // <embedded-report> — an iframe living INSIDE a shadow root (>>> … ::doc case).
+    // <embedded-report> — an iframe living INSIDE a shadow root (>>> … ::document case).
     class EmbeddedReport extends HTMLElement {
         connectedCallback() {
             const root = this.attachShadow({ mode: 'open' });
@@ -479,7 +490,7 @@
 
     // ---------- CASE 9: iframe nested under THREE shadow roots ----------
     // <support-widget> (shadow L1) > <chat-panel> (shadow L2) > <chat-frame>
-    // (shadow L3) > iframe#chat. Expected boundary chain: >>> >>> >>> … ::doc
+    // (shadow L3) > iframe#chat. Expected boundary chain: >>> >>> >>> … ::document
 
     class SupportWidget extends HTMLElement {
         connectedCallback() {

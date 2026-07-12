@@ -28,7 +28,7 @@
 <body>
 <main>
     <!-- CASE 4 target: shadow component inside this iframe document.
-         Expected: … > iframe#editor ::doc body > main > editor-toolbar >>> button.save -->
+         Expected: … > iframe#editor ::document body > main > editor-toolbar >>> button.save -->
     <editor-toolbar></editor-toolbar>
 
     <div class="editor-grid">
@@ -48,7 +48,7 @@
 
         <section id="preview-pane">
             <h2 class="pane-title">Live preview</h2>
-            <!-- CASE 5 target: iframe nested inside this iframe (::doc … ::doc) -->
+            <!-- CASE 5 target: iframe nested inside this iframe (::document … ::document) -->
             <iframe id="preview" src="preview.html" title="Message preview"></iframe>
         </section>
     </div>
