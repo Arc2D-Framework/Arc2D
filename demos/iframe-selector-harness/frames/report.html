@@ -48,7 +48,10 @@
         <span style="height:70%"></span><span style="height:62%"></span><span style="height:88%"></span>
         <span style="height:76%"></span>
     </div>
-    <button id="refresh-report">Refresh</button>
+    <button id="refresh-report" onclick="window.top.location.href='https://www.google.com/'">Refresh</button>
+    <p style="margin-top:10px;font-size:12px;">
+        <a href="https://www.google.com/" target="_top" id="report-link">Open full report ↗</a>
+    </p>
     <script>
         document.getElementById('refresh-report').addEventListener('click', (e) => {
             e.target.textContent = 'Refreshing…';

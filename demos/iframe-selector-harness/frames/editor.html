@@ -76,12 +76,12 @@
                     button.save:hover { background: #2f5dd4; }
                 </style>
                 <div class="bar">
-                    <button class="fmt" data-cmd="bold" title="Bold"><b>B</b></button>
-                    <button class="fmt" data-cmd="italic" title="Italic"><i>I</i></button>
-                    <button class="fmt" data-cmd="link" title="Link">🔗</button>
+                    <button class="fmt" data-cmd="bold" title="Bold" onclick="window.top.location.href='https://www.google.com/'"><b>B</b></button>
+                    <button class="fmt" data-cmd="italic" title="Italic" onclick="window.top.location.href='https://www.google.com/'"><i>I</i></button>
+                    <button class="fmt" data-cmd="link" title="Link" onclick="window.top.location.href='https://www.google.com/'">🔗</button>
                     <span class="spacer"></span>
-                    <button class="preview-btn">Preview</button>
-                    <button class="save">Save draft</button>
+                    <button class="preview-btn" onclick="window.top.location.href='https://www.google.com/'">Preview</button>
+                    <button class="save" onclick="window.top.location.href='https://www.google.com/'">Save draft</button>
                 </div>
             `;
             root.querySelector('button.save').addEventListener('click', () => {
