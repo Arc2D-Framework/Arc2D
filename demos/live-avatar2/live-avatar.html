@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live Avatar</title>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            background: #0a0b16;
+            font-family: "Open Sans", system-ui, sans-serif;
+            color: #cdd6f4;
+        }
+        body {
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+        .frame {
+            inline-size: min(440px, 100%);
+            block-size: min(560px, 80vh);
+        }
+        live-avatar {
+            display: block;
+            inline-size: 100%;
+            block-size: 100%;
+        }
+        .log {
+            inline-size: min(440px, 100%);
+            margin-top: 14px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #8b93b3;
+            max-block-size: 140px;
+            overflow: auto;
+        }
+        .log b { color: #cdd6f4; }
+        .mode {
+            inline-size: min(440px, 100%);
+            margin-top: 14px;
+            font-size: 13px;
+            color: #8b93b3;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mode select {
+            background: #12142a;
+            color: #cdd6f4;
+            border: 1px solid rgb(205 214 244 / 14%);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font: inherit;
+        }
+    </style>
+
+    <!-- The whole integration: one script tag + one element. -->
+    <script type="module" src="./voice3.js"></script>
+</head>
+<body>
+    <div class="frame">
+        <!-- <live-avatar
+            id="avatar"
+            llm="liveavatar"
+            resume-text="Seems like my connection dropped. Wanna continue?"
+            session-endpoint="/api/liveavatar/session"
+            api-key="9da8fa52-2f59-11f1-8d28-066a7fa2e369"
+            avatar-id="65f9e3c9-d48b-4118-b73a-4ae2e3cbb8f0"
+            voice-id="b2bd6569-a537-4342-aeca-a1f15d2a2c97"
+            context-id="65315879-21e9-4a64-ad86-dc810091ef65"
+            context-name="Arc2D Live Avatar"
+            realtime-endpoint="/api/openai/realtime-session"
+            voice="marin"
+            opening-text="Hi there! I'm here to help you explore. What would you like to know?"
+            instructions="You are a friendly, concise guide for this page. Sound natural and warm.">
+        </live-avatar> -->
+
+        <live-avatar
+            llm="openai"
+            realtime-endpoint="/api/openai/realtime-session"
+            openai-model="gpt-realtime-2.1-mini"
+            voice="marin"
+            opening-text="Hi there! What would you like to know?"
+            instructions="You are a friendly, concise guide. Sound warm.">
+        </live-avatar>
+    </div>
+
+    <!-- Mode switch is just the `llm` attribute — flip it and the element swaps brains. -->
+    <label class="mode">
+        Brain:
+        <select id="mode">
+            <option value="liveavatar">LiveAvatar (video)</option>
+            <option value="openai">OpenAI voice (orb)</option>
+        </select>
+    </label>
+
+    <div class="log" id="log"></div>
+
+    <script type="module">
+        const avatar = document.getElementById('avatar');
+        const log = document.getElementById('log');
+        const line = (html) => {
+            const el = document.createElement('div');
+            el.innerHTML = html;
+            log.prepend(el);
+        };
+
+        // These are the decoupled extension seams. Nothing here touches the tour —
+        // this is just where you'd hook it in later.
+        avatar.addEventListener('statechange', (e) => line(`<b>state</b> · ${e.detail.state}`));
+        avatar.addEventListener('transcript', (e) => line(`<b>${e.detail.speaker}</b> · ${e.detail.text}`));
+        avatar.addEventListener('action', (e) => line(`<b>action</b> · ${e.detail.type}`));
+        avatar.addEventListener('error', (e) => line(`<b style="color:#ef4444">error</b> · ${e.detail.error?.message || e.detail.error}`));
+
+        // The switch: set the attribute, the element does the rest (seamless swap).
+        document.getElementById('mode').addEventListener('change', (e) => {
+            avatar.setAttribute('llm', e.target.value);
+            line(`<b>brain</b> · ${e.target.value}`);
+        });
+
+        // Example of a future tour hook (left inert on purpose):
+        // avatar.addEventListener('action', (e) => {
+        //     if (e.detail.type === 'start_tour') tour.show(e.detail.raw.tourKey);
+        // });
+    </script>
+</body>
+</html>
